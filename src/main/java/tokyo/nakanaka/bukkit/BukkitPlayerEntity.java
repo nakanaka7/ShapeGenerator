@@ -1,5 +1,7 @@
 package tokyo.nakanaka.bukkit;
 
+import java.util.UUID;
+
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
@@ -13,6 +15,11 @@ public class BukkitPlayerEntity implements PlayerEntity{
 	public BukkitPlayerEntity(Server server, Player player) {
 		this.server = server;
 		this.player = player;
+	}
+	
+	@Override
+	public UUID getUniqueID() {
+		return this.player.getUniqueId();
 	}
 
 	@Override

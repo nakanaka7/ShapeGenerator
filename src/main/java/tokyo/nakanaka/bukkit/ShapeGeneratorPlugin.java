@@ -1,37 +1,43 @@
 package tokyo.nakanaka.bukkit;
 
-import org.bukkit.Location;
+import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.world.World;
+import tokyo.nakanaka.shapeGenerator.Player;
+import tokyo.nakanaka.shapeGenerator.PlayerEntity;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
+	private Map<UUID, Player> playerMap = new HashMap<>(); 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Logger logger = new BukkitLogger(sender);
-		if(sender instanceof Player) {
-			Player p = (Player)sender;
-			Location loc = p.getLocation();
-			org.bukkit.World bworld = loc.getWorld();
-			int x = loc.getBlockX();
-			int y = loc.getBlockY();
-			int z = loc.getBlockZ();
-			World world = new BukkitWorld(this.getServer(), bworld);
-			String s = args[0];
-			Block b = Block.valueOf(s);
-			world.setBlock(x, y, z, b, false);
-			logger.print(HEAD_NORMAL + "set");
-			//"remote test"
-			//"remote test 2"
+		Player player = null;
+		if(sender instanceof org.bukkit.entity.Player) {
+			org.bukkit.entity.Player bplayer = (org.bukkit.entity.Player)sender;
+			PlayerEntity pe = new BukkitPlayerEntity(this.getServer(), bplayer);
+			player = this.playerMap.get(pe.getUniqueID());
+			player.setLogger(logger);
+			player.setWorld(pe.getWorld());
+			player.setX(pe.getX());
+			player.setY(pe.getY());
+			player.setZ(pe.getZ());
 		}
-		
-		
+		String s = args[0];
+		Block b = Block.valueOf(s);
+		int x = player.getX();
+		int y = player.getY();
+		int z = player.getZ();
+		player.getWorld().setBlock(x, y, z, b, false);
+		logger.print(HEAD_NORMAL + "set");
 		return true;
 	}
 }
