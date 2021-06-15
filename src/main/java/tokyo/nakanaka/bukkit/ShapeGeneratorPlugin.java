@@ -27,6 +27,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 			Block b = Block.valueOf(s);
 			world.setBlock(x, y, z, b, false);
 			logger.print(HEAD_NORMAL + "set");
+			//"remote test"
 		}
 		
 		
