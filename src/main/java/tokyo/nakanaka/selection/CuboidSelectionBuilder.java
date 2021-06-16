@@ -24,50 +24,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	private static String WIDTH = "width";
 	private static String HEIGHT = "height";
 	private static String LENGTH = "length";
-	
-	public Map<String, String> toMap(){
-		Map<String, String> map = new HashMap<>();
-		String vpos1 = "";
-		if(pos1 != null) {
-			vpos1 = pos1.getX() + "/ " + pos1.getY() + "/ " + pos1.getZ();
-		}
-		String vpos2 = "";
-		if(pos2 != null) {
-			vpos2 = pos2.getX() + "/ " + pos2.getY() + "/ " + pos2.getZ();
-		}
-		String voffset = "";
-		if(offset != null) {
-			voffset = offset.getX() + "/ " + offset.getY() + "/ " + offset.getZ();
-		}
-		map.put(POS1, vpos1);
-		map.put(POS2, vpos2);
-		map.put(OFFSET, voffset);
-		if(pos1 != null && pos2 != null) {
-			int dx = pos2.getX() - pos1.getX();
-			int dy = pos2.getY() - pos1.getY();
-			int dz = pos2.getZ() - pos1.getZ();
-			int sx = 1;
-			int sy = 1;
-			int sz = 1;
-			if(dx != 0) {
-				sx = dx / Math.abs(dx);
-			}
-			if(dy != 0) {
-				sy = dy / Math.abs(dy);
-			}
-			if(dz != 0) {
-				sz = dz / Math.abs(dz);
-			}
-			String vwidth = String.valueOf(dx + sx);
-			String vheight = String.valueOf(dy + sy);
-			String vlengh = String.valueOf(dz + sz);
-			map.put(WIDTH, vwidth);
-			map.put(HEIGHT, vheight);
-			map.put(LENGTH, vlengh);
-		}
-		return map;
-	}
-	
+		
 	private void setPos1(World world, int x, int y, int z) {
 		if(!world.equals(this.world)) {
 			pos2 = null;
