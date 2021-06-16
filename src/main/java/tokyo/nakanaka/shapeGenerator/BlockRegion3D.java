@@ -1,8 +1,12 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import region3D.Region3D;
+import java.util.HashSet;
+import java.util.Set;
 
-public class BlockRegion3D {
+import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.region3D.Region3D;
+
+public class BlockRegion3D{
 	private Region3D region;
 	private int upperBoundX;
 	private int upperBoundY;
@@ -27,5 +31,19 @@ public class BlockRegion3D {
 			return false;
 		}
 		return region.contains(x, y, z);
+	}
+	
+	public Set<Vector3D> asVectorSet(){
+		Set<Vector3D> set = new HashSet<>();
+		for(int x = this.lowerBoundX; x <= this.upperBoundX; ++x) {
+			for(int y = this.lowerBoundY; y <= this.upperBoundY; ++y) {
+				for(int z = this.lowerBoundZ; z <= this.upperBoundZ; ++z) {
+					if(this.region.contains(x, y, z)) {
+						set.add(new Vector3D(x, y, z));
+					}
+				}
+			}
+		}
+		return set;
 	}
 }
