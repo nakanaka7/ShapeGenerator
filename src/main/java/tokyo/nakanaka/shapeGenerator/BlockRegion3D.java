@@ -1,8 +1,8 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import region3D.Region3D;
+import tokyo.nakanaka.region3D.Region3D;
 
-public class BlockRegion3D {
+public class BlockRegion3D{
 	private Region3D region;
 	private int upperBoundX;
 	private int upperBoundY;
