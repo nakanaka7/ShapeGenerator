@@ -2,9 +2,7 @@ package tokyo.nakanaka.selection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
@@ -24,7 +22,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	private static String WIDTH = "width";
 	private static String HEIGHT = "height";
 	private static String LENGTH = "length";
-		
+	
 	private void setPos1(World world, int x, int y, int z) {
 		if(!world.equals(this.world)) {
 			pos2 = null;
@@ -219,7 +217,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		}
 		return new ArrayList<>();
 	}
-
+	
 	@Override
 	public Selection build() {
 		if(this.world == null || this.pos1 == null || this.pos2 == null || this.offset == null) {
