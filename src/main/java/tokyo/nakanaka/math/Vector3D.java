@@ -44,6 +44,11 @@ public class Vector3D {
 		return new Vector3D(a * x, a * y, a * z);
 	}
 	
+	/**
+	 * @param a
+	 * @return
+	 * @throws ArithmeticException
+	 */
 	public Vector3D divide(double a) {
 		return new Vector3D(x / a, y / a, z / a);
 	}
