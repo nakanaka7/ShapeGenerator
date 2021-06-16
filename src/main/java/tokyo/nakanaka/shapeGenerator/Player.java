@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator;
 import java.util.UUID;
 
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class Player {
@@ -13,6 +14,7 @@ public class Player {
 	private int x;
 	private int y;
 	private int z;
+	private SelectionBuilder builder;
 	
 	public Player(UUID uid, String name) {
 		this.uid = uid;
@@ -31,10 +33,14 @@ public class Player {
 		return name;
 	}
 	
+	public Logger getLogger() {
+		return logger;
+	}
+
 	public void setLogger(Logger logger) {
 		this.logger = logger;
 	}
-
+	
 	public World getWorld() {
 		return world;
 	}
@@ -67,8 +73,12 @@ public class Player {
 		this.z = z;
 	}
 
-	public void print(String msg) {
-		this.logger.print(msg);
+	public SelectionBuilder getSelectionBuilder() {
+		return builder;
+	}
+
+	public void setBuilder(SelectionBuilder builder) {
+		this.builder = builder;
 	}
 	
 }
