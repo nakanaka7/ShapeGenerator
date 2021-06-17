@@ -3,7 +3,7 @@ package tokyo.nakanaka.commandLine;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.shapeGenerator.Player;
+import tokyo.nakanaka.Player;
 
 public class SelShapeCommandLine implements CommandLine{
 

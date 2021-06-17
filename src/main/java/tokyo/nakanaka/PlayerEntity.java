@@ -1,14 +1,14 @@
-package tokyo.nakanaka.shapeGenerator;
+package tokyo.nakanaka;
 
 import java.util.UUID;
 
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.world.World;
 
-public interface PlayerEntity {
+public interface PlayerEntity extends Logger{
 	UUID getUniqueID();
 	World getWorld();
 	int getX();
 	int getY();
 	int getZ();
-	void print(String msg);
 }

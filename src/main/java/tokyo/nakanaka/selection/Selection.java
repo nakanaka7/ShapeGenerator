@@ -1,7 +1,7 @@
 package tokyo.nakanaka.selection;
 
+import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.world.World;
 
 public class Selection {

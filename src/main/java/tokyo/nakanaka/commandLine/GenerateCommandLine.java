@@ -5,12 +5,12 @@ import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 
+import tokyo.nakanaka.BlockRegion3D;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.command.FillCommand;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
-import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
-import tokyo.nakanaka.shapeGenerator.Player;
 import tokyo.nakanaka.world.World;
 
 public class GenerateCommandLine implements CommandLine{

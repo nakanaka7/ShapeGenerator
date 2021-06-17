@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import tokyo.nakanaka.shapeGenerator.MapHolder;
-import tokyo.nakanaka.shapeGenerator.NamespacedID;
+import tokyo.nakanaka.MapHolder;
+import tokyo.nakanaka.NamespacedID;
 
 public class Block {
 	private NamespacedID id;

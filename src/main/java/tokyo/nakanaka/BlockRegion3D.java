@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator;
+package tokyo.nakanaka;
 
 import java.util.HashSet;
 import java.util.Set;

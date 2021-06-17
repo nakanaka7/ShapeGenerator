@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator;
+package tokyo.nakanaka;
 
 public class NamespacedID {
 	private String namespace;

@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
-import tokyo.nakanaka.shapeGenerator.PlayerEntity;
+import tokyo.nakanaka.PlayerEntity;
 import tokyo.nakanaka.world.World;
 
 public class BukkitPlayerEntity implements PlayerEntity{
