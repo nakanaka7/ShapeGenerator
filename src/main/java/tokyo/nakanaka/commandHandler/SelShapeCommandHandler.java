@@ -1,11 +1,11 @@
-package tokyo.nakanaka.commandLine;
+package tokyo.nakanaka.commandHandler;
 
 import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
 
-public class SelShapeCommandLine implements CommandLine{
+public class SelShapeCommandHandler implements CommandHandler{
 
 	@Override
 	public String getLabel() {

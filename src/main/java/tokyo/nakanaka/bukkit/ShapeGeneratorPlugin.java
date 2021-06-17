@@ -11,22 +11,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import tokyo.nakanaka.CommandHandler;
+import tokyo.nakanaka.RootCommandHandler;
+import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
+import tokyo.nakanaka.commandHandler.SelCommandHandler;
+import tokyo.nakanaka.commandHandler.SelShapeCommandHandler;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commandLine.GenerateCommandLine;
-import tokyo.nakanaka.commandLine.SelCommandLine;
-import tokyo.nakanaka.commandLine.SelShapeCommandLine;
 import tokyo.nakanaka.logger.Logger;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private Map<UUID, Player> humanMap = new HashMap<>();
-	private CommandHandler cmdHandler = new CommandHandler();
+	private RootCommandHandler rootCmdHandler = new RootCommandHandler();
 	
 	@Override
 	public void onEnable() {
-		this.cmdHandler.register(new SelCommandLine());
-		this.cmdHandler.register(new SelShapeCommandLine());
-		this.cmdHandler.register(new GenerateCommandLine());
+		this.rootCmdHandler.register(new SelCommandHandler());
+		this.rootCmdHandler.register(new SelShapeCommandHandler());
+		this.rootCmdHandler.register(new GenerateCommandHandler());
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		String shiftAlias = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, shiftArgs.length);
-		this.cmdHandler.onCommand(player, shiftAlias, shiftArgs);
+		this.rootCmdHandler.onCommand(player, shiftAlias, shiftArgs);
 		return true;
 	}
 	

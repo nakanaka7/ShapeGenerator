@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandLine;
+package tokyo.nakanaka.commandHandler;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,7 @@ import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.world.World;
 
-public class GenerateCommandLine implements CommandLine{
+public class GenerateCommandHandler implements CommandHandler{
 
 	@Override
 	public String getLabel() {
