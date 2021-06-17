@@ -1,15 +1,15 @@
-package tokyo.nakanaka.commandLine;
+package tokyo.nakanaka.commandHandler;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class CommandLineRepository {
-	private Map<String, CommandLine> cmdMap = new HashMap<>();
+public class CommandHandlerRepository {
+	private Map<String, CommandHandler> cmdMap = new HashMap<>();
 	private Map<String, String> aliasMap = new HashMap<>();
 
-	public void register(CommandLine cmdLine) {
+	public void register(CommandHandler cmdLine) {
 		String label = cmdLine.getLabel();
 		this.cmdMap.put(label, cmdLine);
 		for(String alias : cmdLine.getAliases()) {
@@ -17,7 +17,7 @@ public class CommandLineRepository {
 		}
 	}
 	
-	public CommandLine findBy(String alias) {
+	public CommandHandler findBy(String alias) {
 		String label = this.aliasMap.get(alias);
 		if(label == null) {
 			return null;
@@ -25,7 +25,7 @@ public class CommandLineRepository {
 		return this.cmdMap.get(label);
 	}
 	
-	public Set<CommandLine> getAll(){
+	public Set<CommandHandler> getAll(){
 		return new HashSet<>(this.cmdMap.values());
 	}
 

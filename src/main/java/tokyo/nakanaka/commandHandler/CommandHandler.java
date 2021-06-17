@@ -1,10 +1,10 @@
-package tokyo.nakanaka.commandLine;
+package tokyo.nakanaka.commandHandler;
 
 import java.util.List;
 
 import tokyo.nakanaka.Player;
 
-public interface CommandLine {
+public interface CommandHandler {
 	String getLabel();
 	List<String> getAliases();
 	boolean onCommand(Player player, String[] args);
