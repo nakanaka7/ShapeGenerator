@@ -19,8 +19,8 @@ public class RootCommandHandler {
 		CommandHandler cmdHandler = this.cmdLineRepo.findBy(cmdLine.getAlias());
 		Player player = cmdLine.getPlayer();
 		if(cmdHandler != null) {
-			boolean printUsage = cmdHandler.onCommand(player, cmdLine.getArgs());
-			if(printUsage) {
+			boolean success = cmdHandler.onCommand(player, cmdLine.getArgs());
+			if(!success) {
 				player.getLogger().print("Usage");
 			}
 		}
