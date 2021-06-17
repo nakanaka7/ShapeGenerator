@@ -36,10 +36,9 @@ public class RootCommandHandler {
 	
 	public List<String> getAliases(){
 		List<String> aliasList = new ArrayList<>();
-		Set<CommandHandler> set = this.cmdLineRepo.getAll();
-		for(CommandHandler e : set) {
-			List<String> list = e.getAliases();
-			aliasList.addAll(list);
+		Set<CommandHandler> handlerSet = this.cmdLineRepo.getAll();
+		for(CommandHandler handler : handlerSet) {
+			aliasList.addAll(handler.getAliases());
 		}
 		return aliasList;
 	}
