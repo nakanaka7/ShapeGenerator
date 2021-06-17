@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.CoordinateArgument;
+import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
@@ -15,7 +15,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	private BlockVector3D pos1;
 	private BlockVector3D pos2;
 	private BlockVector3D offset;
-	private static CoordinateArgument coorArg = new CoordinateArgument();
+	private static CoordinateCommandArgument coorArg = new CoordinateCommandArgument();
 	private static String POS1 = "pos1";
 	private static String POS2 = "pos2";
 	private static String OFFSET = "offset";

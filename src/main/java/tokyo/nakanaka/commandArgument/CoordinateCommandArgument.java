@@ -1,9 +1,9 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.commandArgument;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class CoordinateArgument {
+public class CoordinateCommandArgument {
 	public int onParsing(String arg, int offset) {
 		int s;
 		try {

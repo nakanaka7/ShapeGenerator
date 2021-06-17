@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import org.bukkit.Material;
 
-import tokyo.nakanaka.BlockArgument;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.block.Block;
+import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 
-public class BukkitBlockArgument implements BlockArgument{
+public class BukkitBlockArgument implements BlockCommandArgument{
 
 	/**
 	 * @throws IllegalArgumentException
