@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandLine.CommandLine;
 
@@ -23,7 +24,7 @@ public class RootCommandHandler {
 				player.getLogger().print("Usage");
 			}
 		}
-		player.getLogger().print("Invalid command");
+		player.getLogger().print(HEAD_ERROR + "Unknown command");
 	}
 	
 	public List<String> onTabComplete(CommandLine cmdLine){
