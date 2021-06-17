@@ -1,5 +1,7 @@
 package tokyo.nakanaka.bukkit;
 
+import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -9,9 +11,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.PlayerEntity;
 import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.commandLine.CommandLineRepository;
 import tokyo.nakanaka.commandLine.GenerateCommandLine;
