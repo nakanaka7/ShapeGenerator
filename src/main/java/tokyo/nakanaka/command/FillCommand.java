@@ -43,6 +43,9 @@ public class FillCommand implements UndoableCommand{
 
 	}
 	
+	/**
+	 *@throws IllegalArgumentException
+	 */
 	@Override
 	public void execute() {
 		Set<BlockVector3D> vecSet = this.region.asVectorSet();

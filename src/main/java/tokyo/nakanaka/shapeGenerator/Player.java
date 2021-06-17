@@ -15,6 +15,7 @@ public class Player {
 	private int y;
 	private int z;
 	private SelectionBuilder builder;
+	private boolean blockPhysics;
 	
 	public Player(UUID uid, String name) {
 		this.uid = uid;
@@ -80,5 +81,13 @@ public class Player {
 	public void setBuilder(SelectionBuilder builder) {
 		this.builder = builder;
 	}
-	
+
+	public boolean getBlockPhysics() {
+		return blockPhysics;
+	}
+
+	public void setBlockPhysics(boolean blockPhysics) {
+		this.blockPhysics = blockPhysics;
+	}
+
 }
