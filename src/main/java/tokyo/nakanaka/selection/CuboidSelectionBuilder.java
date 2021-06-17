@@ -2,7 +2,9 @@ package tokyo.nakanaka.selection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tokyo.nakanaka.CoordinateArgument;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -216,6 +218,46 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}
 		}
 		return new ArrayList<>();
+	}
+	
+	@Override
+	public List<String> toStringList() {
+		String line1 = POS1 + ": ";
+		if(pos1 != null) {
+			line1 += pos1.getX() + "/ " + pos1.getY() + "/ " + pos1.getZ();
+		}
+		String line2 = POS2 + ": ";
+		if(pos2 != null) {
+			line2 += pos2.getX() + "/ " + pos2.getY() + "/ " + pos2.getZ();
+		}
+		String line3 = OFFSET + ": ";
+		if(offset != null) {
+			line3 += offset.getX() + "/ " + offset.getY() + "/ " + offset.getZ();
+		}
+		String line4 = WIDTH + ": ";
+		String line5 = HEIGHT + ": ";
+		String line6 = LENGTH + ": ";
+		if(pos1 != null && pos2 != null) {
+			int dx = pos2.getX() - pos1.getX();
+			int dy = pos2.getY() - pos1.getY();
+			int dz = pos2.getZ() - pos1.getZ();
+			int sx = 1;
+			int sy = 1;
+			int sz = 1;
+			if(dx != 0) {
+				sx = dx / Math.abs(dx);
+			}
+			if(dy != 0) {
+				sy = dy / Math.abs(dy);
+			}
+			if(dz != 0) {
+				sz = dz / Math.abs(dz);
+			}
+			WIDTH += String.valueOf(dx + sx);
+			HEIGHT += String.valueOf(dy + sy);
+			LENGTH += String.valueOf(dz + sz);
+		}
+		return Arrays.asList(line1, line2, line3, line4, line5, line6);
 	}
 	
 	@Override
