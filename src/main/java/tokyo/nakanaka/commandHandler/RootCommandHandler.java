@@ -23,16 +23,18 @@ public class RootCommandHandler {
 			if(!success) {
 				player.getLogger().print("Usage");
 			}
+		}else {
+			player.getLogger().print(HEAD_ERROR + "Unknown command");
 		}
-		player.getLogger().print(HEAD_ERROR + "Unknown command");
 	}
 	
 	public List<String> onTabComplete(CommandLine cmdLine){
 		CommandHandler cmdHandler = this.cmdLineRepo.findBy(cmdLine.getAlias());
 		if(cmdHandler != null) {
 			return cmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getArgs());
+		}else {
+			return new ArrayList<>();
 		}
-		return new ArrayList<>();
 	}
 	
 	public List<String> getAliases(){
