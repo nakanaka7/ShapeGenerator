@@ -1,11 +1,11 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import tokyo.nakanaka.commandHandler.CommandHandler;
-import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
+import tokyo.nakanaka.Player;
+import tokyo.nakanaka.commandLine.CommandLine;
 
 public class RootCommandHandler {
 	private CommandHandlerRepository cmdLineRepo = new CommandHandlerRepository();
@@ -14,10 +14,11 @@ public class RootCommandHandler {
 		this.cmdLineRepo.register(cmdHandler);
 	}
 	
-	public void onCommand(Player player, String alias, String[] args) {
-		CommandHandler cmdHandler = this.cmdLineRepo.findBy(alias);
+	public void onCommand(CommandLine cmdLine) {
+		CommandHandler cmdHandler = this.cmdLineRepo.findBy(cmdLine.getAlias());
+		Player player = cmdLine.getPlayer();
 		if(cmdHandler != null) {
-			boolean printUsage = cmdHandler.onCommand(player, args);
+			boolean printUsage = cmdHandler.onCommand(player, cmdLine.getArgs());
 			if(printUsage) {
 				player.getLogger().print("Usage");
 			}
@@ -25,10 +26,10 @@ public class RootCommandHandler {
 		player.getLogger().print("Invalid command");
 	}
 	
-	public List<String> onTabComplete(Player player, String alias, String[] args){
-		CommandHandler cmdHandler = this.cmdLineRepo.findBy(alias);
+	public List<String> onTabComplete(CommandLine cmdLine){
+		CommandHandler cmdHandler = this.cmdLineRepo.findBy(cmdLine.getAlias());
 		if(cmdHandler != null) {
-			return cmdHandler.onTabComplete(player, args);
+			return cmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getArgs());
 		}
 		return new ArrayList<>();
 	}
