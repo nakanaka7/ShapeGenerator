@@ -13,4 +13,5 @@ public interface World {
 	 * @throws IllegalArgumentException
 	 */
 	void setBlock(int x, int y, int z, Block block, boolean physics);
+	
 }
