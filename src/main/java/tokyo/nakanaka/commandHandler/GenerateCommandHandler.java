@@ -5,6 +5,7 @@ import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 
+import tokyo.nakanaka.BlockArgument;
 import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
@@ -14,6 +15,11 @@ import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class GenerateCommandHandler implements CommandHandler{
+	private BlockArgument blockArg;
+	
+	public GenerateCommandHandler(BlockArgument blockArg) {
+		this.blockArg = blockArg;
+	}
 
 	@Override
 	public String getLabel() {
@@ -40,7 +46,7 @@ public class GenerateCommandHandler implements CommandHandler{
 		}
 		Block block;
 		try {
-			block = Block.valueOf(args[0]);
+			block = this.blockArg.onParsing(args[0]);
 		}catch(IllegalArgumentException e) {
 			player.getLogger().print(HEAD_ERROR + "Invalid block specification");
 			return true;
@@ -61,8 +67,7 @@ public class GenerateCommandHandler implements CommandHandler{
 
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.blockArg.onTabComplete(args[0]);
 	}
 
 }
