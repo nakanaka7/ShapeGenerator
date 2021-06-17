@@ -2,9 +2,9 @@ package tokyo.nakanaka.command;
 
 import java.util.Set;
 
+import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.world.World;
 
 public class FillCommand implements UndoableCommand{

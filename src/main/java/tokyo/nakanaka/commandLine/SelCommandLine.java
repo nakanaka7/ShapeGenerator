@@ -3,8 +3,8 @@ package tokyo.nakanaka.commandLine;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
-import tokyo.nakanaka.shapeGenerator.Player;
 import tokyo.nakanaka.world.World;
 
 public class SelCommandLine implements CommandLine{

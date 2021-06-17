@@ -10,10 +10,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tokyo.nakanaka.Player;
+import tokyo.nakanaka.PlayerEntity;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.shapeGenerator.Player;
-import tokyo.nakanaka.shapeGenerator.PlayerEntity;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private Map<UUID, Player> playerMap = new HashMap<>(); 

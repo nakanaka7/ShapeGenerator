@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator;
+package tokyo.nakanaka;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.CoordinateArgument;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.CoordinateArgument;
 import tokyo.nakanaka.world.World;
 
 public class CuboidSelectionBuilder implements SelectionBuilder{

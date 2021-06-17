@@ -2,7 +2,7 @@ package tokyo.nakanaka.commandLine;
 
 import java.util.List;
 
-import tokyo.nakanaka.shapeGenerator.Player;
+import tokyo.nakanaka.Player;
 
 public interface CommandLine {
 	String getLabel();
