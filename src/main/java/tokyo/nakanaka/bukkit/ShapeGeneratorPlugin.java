@@ -13,11 +13,13 @@ import tokyo.nakanaka.commandHandler.SelShapeCommandHandler;
 import tokyo.nakanaka.commandLine.CommandLine;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
-	private CommandLineBuilder cmdLineBuilder = new CommandLineBuilder();
-	private RootCommandHandler rootCmdHandler = new RootCommandHandler();
+	private CommandLineBuilder cmdLineBuilder;
+	private RootCommandHandler rootCmdHandler;
 	
 	@Override
 	public void onEnable() {
+		this.cmdLineBuilder = new CommandLineBuilder(this.getServer());
+		this.rootCmdHandler = new RootCommandHandler();
 		this.rootCmdHandler.register(new SelCommandHandler());
 		this.rootCmdHandler.register(new SelShapeCommandHandler());
 		this.rootCmdHandler.register(new GenerateCommandHandler());
