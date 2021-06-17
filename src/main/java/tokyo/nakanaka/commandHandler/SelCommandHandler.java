@@ -6,9 +6,16 @@ import java.util.List;
 import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
+import tokyo.nakanaka.selection.SelectionManager;
+import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.world.World;
 
 public class SelCommandHandler implements CommandHandler{
+	private SelectionManager selManager;
+	
+	public SelCommandHandler(SelectionManager selManager) {
+		this.selManager = selManager;
+	}
 
 	@Override
 	public String getLabel() {
@@ -28,6 +35,8 @@ public class SelCommandHandler implements CommandHandler{
 		int offsetZ = player.getZ();
 		SelectionBuilder builder = player.getSelectionBuilder();
 		boolean success = builder.onCommand(world, offsetX, offsetY, offsetZ, args);
+		SelectionShape shape = this.selManager.getSelectionShape(builder);
+		player.getLogger().print(HEAD_NORMAL + shape.toString() + " selection");
 		List<String> lines = builder.getStateLines();
 		for(String line : lines) {
 			player.getLogger().print(INDENT_NORMAL + line);
