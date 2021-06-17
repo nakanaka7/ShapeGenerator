@@ -28,8 +28,8 @@ public class SelCommandHandler implements CommandHandler{
 		int offsetZ = player.getZ();
 		SelectionBuilder builder = player.getSelectionBuilder();
 		boolean success = builder.onCommand(world, offsetX, offsetY, offsetZ, args);
-		List<String> strList = builder.toStringList();
-		for(String line : strList) {
+		List<String> lines = builder.getStateLines();
+		for(String line : lines) {
 			player.getLogger().print(INDENT_NORMAL + line);
 		}
 		return success;

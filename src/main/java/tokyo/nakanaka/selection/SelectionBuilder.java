@@ -12,6 +12,6 @@ public interface SelectionBuilder {
 	/**
 	 * @throw IllegalStateException
 	 */
-	List<String> toStringList();
+	List<String> getStateLines();
 	Selection build();
 }

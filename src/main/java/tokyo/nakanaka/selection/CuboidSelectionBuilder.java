@@ -219,7 +219,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public List<String> toStringList() {
+	public List<String> getStateLines() {
 		String line1 = POS1 + ": ";
 		if(pos1 != null) {
 			line1 += pos1.getX() + "/ " + pos1.getY() + "/ " + pos1.getZ();
