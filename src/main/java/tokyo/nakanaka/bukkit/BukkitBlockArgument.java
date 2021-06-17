@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import org.bukkit.Material;
 
-import tokyo.nakanaka.BlockArgument;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.block.Block;
+import tokyo.nakanaka.commandArgument.BlockArgument;
 
 public class BukkitBlockArgument implements BlockArgument{
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.CoordinateArgument;
+import tokyo.nakanaka.commandArgument.CoordinateArgument;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;

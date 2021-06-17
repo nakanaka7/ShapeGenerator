@@ -1,4 +1,4 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.commandArgument;
 
 import java.util.List;
 

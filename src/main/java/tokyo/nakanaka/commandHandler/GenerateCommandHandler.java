@@ -6,11 +6,11 @@ import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 
-import tokyo.nakanaka.BlockArgument;
 import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.command.FillCommand;
+import tokyo.nakanaka.commandArgument.BlockArgument;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.world.World;
