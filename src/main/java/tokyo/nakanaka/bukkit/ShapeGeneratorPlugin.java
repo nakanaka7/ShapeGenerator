@@ -24,7 +24,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		SelectionManager selManager = new SelectionManager();
 		this.rootCmdHandler.register(new SelCommandHandler(selManager));
 		this.rootCmdHandler.register(new SelShapeCommandHandler());
-		this.rootCmdHandler.register(new GenerateCommandHandler());
+		this.rootCmdHandler.register(new GenerateCommandHandler(new BukkitBlockArgument()));
 	}
 	
 	@Override
