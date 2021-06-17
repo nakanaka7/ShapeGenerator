@@ -1,5 +1,6 @@
 package tokyo.nakanaka.commandHandler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,7 +68,11 @@ public class GenerateCommandHandler implements CommandHandler{
 
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
-		return this.blockArg.onTabComplete(args[0]);
+		if(args.length == 1) {
+			return this.blockArg.onTabComplete(args[0]);
+		}else {
+			return new ArrayList<>();
+		}
 	}
 
 }
