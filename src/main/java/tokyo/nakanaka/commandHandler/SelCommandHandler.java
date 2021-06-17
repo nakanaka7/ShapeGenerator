@@ -3,6 +3,7 @@ package tokyo.nakanaka.commandHandler;
 import java.util.Arrays;
 import java.util.List;
 
+import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.world.World;
@@ -27,6 +28,10 @@ public class SelCommandHandler implements CommandHandler{
 		int offsetZ = player.getZ();
 		SelectionBuilder builder = player.getSelectionBuilder();
 		boolean success = builder.onCommand(world, offsetX, offsetY, offsetZ, args);
+		List<String> strList = builder.toStringList();
+		for(String line : strList) {
+			player.getLogger().print(INDENT_NORMAL + line);
+		}
 		return success;
 	}
 
