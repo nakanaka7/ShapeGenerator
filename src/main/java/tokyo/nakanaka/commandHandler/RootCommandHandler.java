@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandLine.CommandLine;
 
@@ -18,28 +19,29 @@ public class RootCommandHandler {
 		CommandHandler cmdHandler = this.cmdLineRepo.findBy(cmdLine.getAlias());
 		Player player = cmdLine.getPlayer();
 		if(cmdHandler != null) {
-			boolean printUsage = cmdHandler.onCommand(player, cmdLine.getArgs());
-			if(printUsage) {
+			boolean success = cmdHandler.onCommand(player, cmdLine.getArgs());
+			if(!success) {
 				player.getLogger().print("Usage");
 			}
+		}else {
+			player.getLogger().print(HEAD_ERROR + "Unknown command");
 		}
-		player.getLogger().print("Invalid command");
 	}
 	
 	public List<String> onTabComplete(CommandLine cmdLine){
 		CommandHandler cmdHandler = this.cmdLineRepo.findBy(cmdLine.getAlias());
 		if(cmdHandler != null) {
 			return cmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getArgs());
+		}else {
+			return new ArrayList<>();
 		}
-		return new ArrayList<>();
 	}
 	
 	public List<String> getAliases(){
 		List<String> aliasList = new ArrayList<>();
-		Set<CommandHandler> set = this.cmdLineRepo.getAll();
-		for(CommandHandler e : set) {
-			List<String> list = e.getAliases();
-			aliasList.addAll(list);
+		Set<CommandHandler> handlerSet = this.cmdLineRepo.getAll();
+		for(CommandHandler handler : handlerSet) {
+			aliasList.addAll(handler.getAliases());
 		}
 		return aliasList;
 	}

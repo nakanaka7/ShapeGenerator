@@ -13,10 +13,13 @@ import tokyo.nakanaka.commandHandler.SelShapeCommandHandler;
 import tokyo.nakanaka.commandLine.CommandLine;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
-	private RootCommandHandler rootCmdHandler = new RootCommandHandler();
+	private CommandLineBuilder cmdLineBuilder;
+	private RootCommandHandler rootCmdHandler;
 	
 	@Override
 	public void onEnable() {
+		this.cmdLineBuilder = new CommandLineBuilder(this.getServer());
+		this.rootCmdHandler = new RootCommandHandler();
 		this.rootCmdHandler.register(new SelCommandHandler());
 		this.rootCmdHandler.register(new SelShapeCommandHandler());
 		this.rootCmdHandler.register(new GenerateCommandHandler());
@@ -24,17 +27,17 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		CommandLine cmdLine = new CommandLineBuilder().build(sender, label, args);
+		CommandLine cmdLine = this.cmdLineBuilder.build(sender, label, args);
 		this.rootCmdHandler.onCommand(cmdLine);
 		return true;
 	}
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args){
-		if(args.length == 0) {
+		if(args.length == 1) {
 			return this.rootCmdHandler.getAliases();
 		}
-		CommandLine cmdLine = new CommandLineBuilder().build(sender, alias, args);
+		CommandLine cmdLine = this.cmdLineBuilder.build(sender, alias, args);
 		return this.rootCmdHandler.onTabComplete(cmdLine);
 	}
 	

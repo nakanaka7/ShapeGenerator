@@ -16,6 +16,10 @@ public class CommandLineBuilder {
 	private Server server;
 	private Map<UUID, Player> humanMap = new HashMap<>();
 	
+	public CommandLineBuilder(Server server) {
+		this.server = server;
+	}
+	
 	public CommandLine build(CommandSender sender, String alias, String[] args) {
 		Logger logger = new BukkitLogger(sender);
 		Player player;
