@@ -2,9 +2,7 @@ package tokyo.nakanaka.selection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.CoordinateArgument;
 import tokyo.nakanaka.math.BlockVector3D;
