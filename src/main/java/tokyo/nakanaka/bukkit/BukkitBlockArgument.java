@@ -9,9 +9,9 @@ import org.bukkit.Material;
 
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.commandArgument.BlockArgument;
+import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 
-public class BukkitBlockArgument implements BlockArgument{
+public class BukkitBlockArgument implements BlockCommandArgument{
 
 	/**
 	 * @throws IllegalArgumentException

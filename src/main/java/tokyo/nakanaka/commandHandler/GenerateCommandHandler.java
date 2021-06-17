@@ -10,15 +10,15 @@ import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.command.FillCommand;
-import tokyo.nakanaka.commandArgument.BlockArgument;
+import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class GenerateCommandHandler implements CommandHandler{
-	private BlockArgument blockArg;
+	private BlockCommandArgument blockArg;
 	
-	public GenerateCommandHandler(BlockArgument blockArg) {
+	public GenerateCommandHandler(BlockCommandArgument blockArg) {
 		this.blockArg = blockArg;
 	}
 
