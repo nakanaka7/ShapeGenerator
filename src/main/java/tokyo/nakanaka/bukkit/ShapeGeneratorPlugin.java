@@ -1,7 +1,5 @@
 package tokyo.nakanaka.bukkit;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -11,9 +9,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commandLine.CommandLine;
-import tokyo.nakanaka.commandLine.CommandLineRepository;
 import tokyo.nakanaka.commandLine.GenerateCommandLine;
 import tokyo.nakanaka.commandLine.SelCommandLine;
 import tokyo.nakanaka.commandLine.SelShapeCommandLine;
@@ -21,13 +18,13 @@ import tokyo.nakanaka.logger.Logger;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private Map<UUID, Player> humanMap = new HashMap<>();
-	private CommandLineRepository cmdLineRepo = new CommandLineRepository();
+	private CommandHandler cmdHandler = new CommandHandler();
 	
 	@Override
 	public void onEnable() {
-		this.cmdLineRepo.register(new SelCommandLine());
-		this.cmdLineRepo.register(new SelShapeCommandLine());
-		this.cmdLineRepo.register(new GenerateCommandLine());
+		this.cmdHandler.register(new SelCommandLine());
+		this.cmdHandler.register(new SelShapeCommandLine());
+		this.cmdHandler.register(new GenerateCommandLine());
 	}
 	
 	@Override
@@ -57,17 +54,8 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		String shiftAlias = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, shiftArgs.length);
-		CommandLine cmdLine = this.cmdLineRepo.findBy(shiftAlias);
-		if(cmdLine != null) {
-			boolean success = cmdLine.onCommand(player, shiftArgs);
-			if(!success) {
-				player.getLogger().print(HEAD_ERROR + "Usage");
-			}
-			return true;
-		}else {
-			player.getLogger().print("Type " + "\"/" + "sg" + " help\" " + "for help");
-			return true;
-		}
+		this.cmdHandler.onCommand(player, shiftAlias, shiftArgs);
+		return true;
 	}
 	
 	
