@@ -1,11 +1,10 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import tokyo.nakanaka.commandHandler.CommandHandler;
-import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
+import tokyo.nakanaka.Player;
 
 public class RootCommandHandler {
 	private CommandHandlerRepository cmdLineRepo = new CommandHandlerRepository();

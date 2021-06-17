@@ -11,8 +11,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import tokyo.nakanaka.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
+import tokyo.nakanaka.commandHandler.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
 import tokyo.nakanaka.commandHandler.SelShapeCommandHandler;
 import tokyo.nakanaka.Player;
