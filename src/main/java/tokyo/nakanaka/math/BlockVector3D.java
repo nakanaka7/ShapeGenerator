@@ -1,7 +1,5 @@
 package tokyo.nakanaka.math;
 
-import com.gmail.q19570678.math.BlockVector3D;
-
 public class BlockVector3D {
 	private int x;
 	private int y;
