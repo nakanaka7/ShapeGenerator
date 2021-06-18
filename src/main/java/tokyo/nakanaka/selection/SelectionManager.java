@@ -3,6 +3,7 @@ package tokyo.nakanaka.selection;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class SelectionManager {
 	private Map<SelectionShape, Class<? extends SelectionBuilder>> shapeBuilderMap = new HashMap<>(); 
@@ -11,6 +12,10 @@ public class SelectionManager {
 	public void register(SelectionShape shape, Class<? extends SelectionBuilder> builderClass) {
 		this.shapeBuilderMap.put(shape, builderClass);
 		this.builderShapeMap.put(builderClass, shape);
+	}
+	
+	public Set<SelectionShape> getRegisterdShape(){
+		return this.shapeBuilderMap.keySet();
 	}
 	
 	public SelectionBuilder getNewSelectionBuilderInstance(SelectionShape shape) {
