@@ -213,7 +213,6 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		return new Selection(this.world, region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ, offset.getX(), offset.getY(), offset.getZ());
 	}
 
-	@Override
 	public void reset() {
 		this.world = null;
 		this.cuboidBuilder = new CuboidRegionBuilder();
