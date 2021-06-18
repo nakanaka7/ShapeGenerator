@@ -10,7 +10,11 @@ import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.UndoableCommand;
 
 public class UndoCommandHandler implements CommandHandler{
-
+	@Override
+	public String getDescription() {
+		return  "Undo a block changing command";
+	}
+	
 	@Override
 	public String getLabel() {
 		return "undo";

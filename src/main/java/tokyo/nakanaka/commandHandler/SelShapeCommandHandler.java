@@ -15,11 +15,16 @@ import static tokyo.nakanaka.logger.LogColor.*;
 
 public class SelShapeCommandHandler implements CommandHandler{
 	private SelectionManager selManager;
-	
+		
 	public SelShapeCommandHandler(SelectionManager selManager) {
 		this.selManager = selManager;
 	}
 
+	@Override
+	public String getDescription() {
+		return "Set selection shape";
+	}
+	
 	@Override
 	public String getLabel() {
 		return "selection_shape";

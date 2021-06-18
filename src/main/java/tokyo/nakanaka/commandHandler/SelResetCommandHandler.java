@@ -19,6 +19,11 @@ public class SelResetCommandHandler implements CommandHandler{
 	}
 
 	@Override
+	public String getDescription() {
+		return "Reset current selection";
+	}
+	
+	@Override
 	public String getLabel() {
 		return "selection_reset";
 	}

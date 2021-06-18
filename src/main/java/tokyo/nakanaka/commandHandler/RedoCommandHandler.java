@@ -12,7 +12,11 @@ import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.UndoableCommand;
 
 public class RedoCommandHandler implements CommandHandler{
-
+	@Override
+	public String getDescription() {
+		return "Redo a block changing command";
+	}
+	
 	@Override
 	public String getLabel() {
 		return "redo";
@@ -45,5 +49,5 @@ public class RedoCommandHandler implements CommandHandler{
 	public List<String> onTabComplete(Player player, String[] args) {
 		return new ArrayList<>();
 	}
-
+	
 }

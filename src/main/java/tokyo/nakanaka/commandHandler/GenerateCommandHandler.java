@@ -23,6 +23,11 @@ public class GenerateCommandHandler implements CommandHandler{
 	}
 
 	@Override
+	public String getDescription() {
+		return "Generate blocks in the selection";
+	}
+	
+	@Override
 	public String getLabel() {
 		return "generate";
 	}
