@@ -17,6 +17,7 @@ import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.selection.SphereSelectionBuilder;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
@@ -28,6 +29,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		this.rootCmdHandler = new RootCommandHandler();
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
+		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
 		this.rootCmdHandler.register(new SelCommandHandler(selManager));
 		this.rootCmdHandler.register(new SelResetCommandHandler(selManager));
 		this.rootCmdHandler.register(new SelShapeCommandHandler());

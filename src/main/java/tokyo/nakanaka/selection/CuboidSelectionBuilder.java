@@ -13,7 +13,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	private World world;
 	private CuboidRegionBuilder cuboidBuilder = new CuboidRegionBuilder();
 	private BlockVector3D offset;
-	private static final CoordinateCommandArgument coorArg = new CoordinateCommandArgument();
+	private static final CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 	private static final String OFFSET = "offset";
@@ -66,9 +66,9 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				int y;
 				int z;
 				try {
-					x = coorArg.onParsing(args[1], offsetX);
-					y = coorArg.onParsing(args[2], offsetY);
-					z = coorArg.onParsing(args[3], offsetZ);
+					x = coordArg.onParsing(args[1], offsetX);
+					y = coordArg.onParsing(args[2], offsetY);
+					z = coordArg.onParsing(args[3], offsetZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -85,9 +85,9 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				int y;
 				int z;
 				try {
-					x = coorArg.onParsing(args[1], offsetX);
-					y = coorArg.onParsing(args[2], offsetY);
-					z = coorArg.onParsing(args[3], offsetZ);
+					x = coordArg.onParsing(args[1], offsetX);
+					y = coordArg.onParsing(args[2], offsetY);
+					z = coordArg.onParsing(args[3], offsetZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -103,9 +103,9 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				int y;
 				int z;
 				try {
-					x = coorArg.onParsing(args[1], offsetX);
-					y = coorArg.onParsing(args[2], offsetY);
-					z = coorArg.onParsing(args[3], offsetZ);
+					x = coordArg.onParsing(args[1], offsetX);
+					y = coordArg.onParsing(args[2], offsetY);
+					z = coordArg.onParsing(args[3], offsetZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -213,7 +213,6 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		return new Selection(this.world, region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ, offset.getX(), offset.getY(), offset.getZ());
 	}
 
-	@Override
 	public void reset() {
 		this.world = null;
 		this.cuboidBuilder = new CuboidRegionBuilder();
