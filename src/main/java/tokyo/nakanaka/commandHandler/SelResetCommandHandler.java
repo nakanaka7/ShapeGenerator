@@ -6,6 +6,7 @@ import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.command.FillCommand.Builder;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
@@ -29,10 +30,8 @@ public class SelResetCommandHandler implements CommandHandler{
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {
-		SelectionBuilder buider = player.getSelectionBuilder();
-		SelectionShape shape = this.selManager.getSelectionShape(buider);
-		SelectionBuilder newBuilder = this.selManager.getNewSelectionBuilderInstance(shape);
-		player.setSelectionBuilder(newBuilder);
+		SelectionBuilder builder = player.getSelectionBuilder();
+		builder.reset();
 		player.getLogger().print(HEAD_NORMAL + "Reset selection build");
 		return true;
 	}
