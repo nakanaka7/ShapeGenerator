@@ -31,7 +31,7 @@ public class SelResetCommandHandler implements CommandHandler{
 		SelectionBuilder buider = player.getSelectionBuilder();
 		SelectionShape shape = this.selManager.getSelectionShape(buider);
 		SelectionBuilder newBuilder = this.selManager.getNewSelectionBuilderInstance(shape);
-		player.setBuilder(newBuilder);
+		player.setSelectionBuilder(newBuilder);
 		return true;
 	}
 
