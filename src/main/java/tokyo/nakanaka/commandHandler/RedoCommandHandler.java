@@ -25,7 +25,7 @@ public class RedoCommandHandler implements CommandHandler{
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {
-		if(args.length == 1) {
+		if(args.length == 0) {
 			UndoCommandManager undoManager = player.getUndoCommandManager();
 			UndoableCommand redoCmd = undoManager.getRedoCommand();
 			if(redoCmd == null) {
