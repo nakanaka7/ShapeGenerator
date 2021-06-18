@@ -1,5 +1,8 @@
 package tokyo.nakanaka.command;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import tokyo.nakanaka.BlockRegion3D;
@@ -12,6 +15,7 @@ public class FillCommand implements UndoableCommand{
 	private BlockRegion3D region;
 	private Block block;
 	private boolean physics;
+	private Map<BlockVector3D, Block> originalBlockMap = new HashMap<>();
 	
 	public FillCommand(Builder builder) {
 		this.world = builder.world;
@@ -50,20 +54,26 @@ public class FillCommand implements UndoableCommand{
 	public void execute() {
 		Set<BlockVector3D> vecSet = this.region.asVectorSet();
 		for(BlockVector3D v : vecSet) {
+			Block block = this.world.getBlock(v.getX(), v.getY(), v.getZ());
 			this.world.setBlock(v.getX(), v.getY(), v.getZ(), this.block, this.physics);
+			this.originalBlockMap.put(v, block);
 		}
 	}
 
 	@Override
 	public void undo() {
-		// TODO Auto-generated method stub
-		
+		for(Entry<BlockVector3D, Block> e : this.originalBlockMap.entrySet()) {
+			BlockVector3D pos = e.getKey();
+			this.world.setBlock(pos.getX(), pos.getY(), pos.getZ(), e.getValue(), false);
+		}
 	}
 
 	@Override
 	public void redo() {
-		// TODO Auto-generated method stub
-		
+		Set<BlockVector3D> vecSet = this.region.asVectorSet();
+		for(BlockVector3D v : vecSet) {
+			this.world.setBlock(v.getX(), v.getY(), v.getZ(), this.block, this.physics);
+		}
 	}
 
 }
