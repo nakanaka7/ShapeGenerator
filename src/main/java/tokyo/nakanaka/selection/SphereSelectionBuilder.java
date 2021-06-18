@@ -51,6 +51,10 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			return false;
 		}
 		if(args[0].equals(OFFSET)){
+			if(!world.equals(world)) {
+				this.reset();
+				return false;
+			}
 			if(args.length == 1) {
 				this.offset = new BlockVector3D(offsetX, offsetY, offsetZ);
 				return true;
@@ -90,10 +94,16 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			if(pos == null) {
 				return false;
 			}
+			this.world = world;
 			this.sphereBuilder.setCenter(pos);
+			this.offset = pos;
 			return true;
 		}else if(args[0].equals(R)) {
 			if(args.length != 2) {
+				return false;
+			}
+			if(!world.equals(this.world)) {
+				this.reset();
 				return false;
 			}
 			int r;
