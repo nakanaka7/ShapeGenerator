@@ -5,6 +5,7 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 
 public interface CommandHandler {
+	String getDescription();
 	String getLabel();
 	List<String> getAliases();
 	/**
