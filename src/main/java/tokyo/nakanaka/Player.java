@@ -79,7 +79,7 @@ public class Player {
 		return builder;
 	}
 
-	public void setBuilder(SelectionBuilder builder) {
+	public void setSelectionBuilder(SelectionBuilder builder) {
 		this.builder = builder;
 	}
 
