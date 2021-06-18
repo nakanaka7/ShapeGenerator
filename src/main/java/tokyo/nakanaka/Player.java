@@ -16,6 +16,7 @@ public class Player {
 	private int y;
 	private int z;
 	private SelectionBuilder builder = new CuboidSelectionBuilder();
+	private UndoCommandManager undoCmdManager;
 	private boolean blockPhysics = false;
 	
 	public Player(UUID uid, String name) {
@@ -81,6 +82,14 @@ public class Player {
 
 	public void setSelectionBuilder(SelectionBuilder builder) {
 		this.builder = builder;
+	}
+	
+	public UndoCommandManager getUndoCommandManager() {
+		return undoCmdManager;
+	}
+
+	public void setUndoCommandManager(UndoCommandManager undoCmdManager) {
+		this.undoCmdManager = undoCmdManager;
 	}
 
 	public boolean getBlockPhysics() {
