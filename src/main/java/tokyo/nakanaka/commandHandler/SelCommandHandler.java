@@ -34,14 +34,14 @@ public class SelCommandHandler implements CommandHandler{
 		int offsetY = player.getY();
 		int offsetZ = player.getZ();
 		SelectionBuilder builder = player.getSelectionBuilder();
-		boolean success = builder.onCommand(world, offsetX, offsetY, offsetZ, args);
+		builder.onCommand(world, offsetX, offsetY, offsetZ, args);
 		SelectionShape shape = this.selManager.getSelectionShape(builder);
 		player.getLogger().print(HEAD_NORMAL + shape.toString() + " selection");
 		List<String> lines = builder.getStateLines();
 		for(String line : lines) {
 			player.getLogger().print(INDENT_NORMAL + line);
 		}
-		return success;
+		return true;
 	}
 
 	@Override
