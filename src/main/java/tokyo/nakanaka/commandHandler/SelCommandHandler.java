@@ -18,6 +18,11 @@ public class SelCommandHandler implements CommandHandler{
 	}
 
 	@Override
+	public String getDescription() {
+		return "Specify a selection";
+	}
+	
+	@Override
 	public String getLabel() {
 		return "selection";
 	}
