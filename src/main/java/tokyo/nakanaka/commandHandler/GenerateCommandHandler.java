@@ -63,6 +63,7 @@ public class GenerateCommandHandler implements CommandHandler{
 			player.getLogger().print(HEAD_ERROR + "Unsettable block");
 			return true;
 		}
+		player.getUndoCommandManager().add(fillCmd);
 		return true;
 	}
 
