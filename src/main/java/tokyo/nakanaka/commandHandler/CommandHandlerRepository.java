@@ -28,5 +28,9 @@ public class CommandHandlerRepository {
 	public Set<CommandHandler> getAll(){
 		return new HashSet<>(this.cmdMap.values());
 	}
+	
+	public Set<String> getAliases(){
+		return this.aliasMap.keySet();
+	}
 
 }

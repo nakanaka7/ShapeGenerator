@@ -9,24 +9,19 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandLine.CommandLine;
 
 public class RootCommandHandler {
-	private CommandHandlerRepository cmdLineRepo = new CommandHandlerRepository();
+	private CommandHandlerRepository cmdLineRepo;
 	
-	public void register(CommandHandler cmdHandler) {
-		this.cmdLineRepo.register(cmdHandler);
+	public RootCommandHandler(CommandHandlerRepository cmdLineRepo) {
+		this.cmdLineRepo = cmdLineRepo;
+	}
+	
+	public Set<CommandHandler> getAllRegisterdCommandHandler(){
+		return this.cmdLineRepo.getAll();
 	}
 	
 	public void onCommand(CommandLine cmdLine) {
 		Player player = cmdLine.getPlayer();
 		String alias = cmdLine.getAlias();
-		if(alias.equals("help")) {
-			player.getLogger().print(HEAD_NORMAL + "Command Help");
-			Set<CommandHandler> cmdHandlerSet = this.cmdLineRepo.getAll();
-			for(CommandHandler cmdHandler : cmdHandlerSet) {
-				List<String> cmdAliasList = cmdHandler.getAliases();
-				player.getLogger().print(INDENT_NORMAL + String.join("/ ", cmdAliasList) + ": " + cmdHandler.getDescription());
-			}
-			return;
-		}
 		CommandHandler cmdHandler = this.cmdLineRepo.findBy(alias);
 		if(cmdHandler != null) {
 			boolean success = cmdHandler.onCommand(player, cmdLine.getArgs());
@@ -47,9 +42,9 @@ public class RootCommandHandler {
 		}
 	}
 	
+	@Deprecated
 	public List<String> getAliases(){
 		List<String> aliasList = new ArrayList<>();
-		aliasList.add("help");
 		Set<CommandHandler> handlerSet = this.cmdLineRepo.getAll();
 		for(CommandHandler handler : handlerSet) {
 			aliasList.addAll(handler.getAliases());

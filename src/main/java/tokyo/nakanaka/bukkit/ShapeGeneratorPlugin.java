@@ -1,12 +1,15 @@
 package tokyo.nakanaka.bukkit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
+import tokyo.nakanaka.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.commandHandler.RedoCommandHandler;
 import tokyo.nakanaka.commandHandler.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
@@ -21,21 +24,24 @@ import tokyo.nakanaka.selection.SphereSelectionBuilder;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
+	private CommandHandlerRepository cmdRepo;
 	private RootCommandHandler rootCmdHandler;
 	
 	@Override
 	public void onEnable() {
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer());
-		this.rootCmdHandler = new RootCommandHandler();
+		this.cmdRepo = new CommandHandlerRepository();
+		this.rootCmdHandler = new RootCommandHandler(this.cmdRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
-		this.rootCmdHandler.register(new SelCommandHandler(selManager));
-		this.rootCmdHandler.register(new SelResetCommandHandler(selManager));
-		this.rootCmdHandler.register(new SelShapeCommandHandler(selManager));
-		this.rootCmdHandler.register(new GenerateCommandHandler(new BukkitBlockArgument()));
-		this.rootCmdHandler.register(new UndoCommandHandler());
-		this.rootCmdHandler.register(new RedoCommandHandler());
+		cmdRepo.register(new HelpCommandHandler(this.cmdRepo));
+		cmdRepo.register(new SelCommandHandler(selManager));
+		cmdRepo.register(new SelResetCommandHandler(selManager));
+		cmdRepo.register(new SelShapeCommandHandler(selManager));
+		cmdRepo.register(new GenerateCommandHandler(new BukkitBlockArgument()));
+		cmdRepo.register(new UndoCommandHandler());
+		cmdRepo.register(new RedoCommandHandler());
 	}
 	
 	@Override
@@ -48,7 +54,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args){
 		if(args.length == 1) {
-			return this.rootCmdHandler.getAliases();
+			return new ArrayList<>(this.cmdRepo.getAliases());
 		}
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, alias, args);
 		return this.rootCmdHandler.onTabComplete(cmdLine);
