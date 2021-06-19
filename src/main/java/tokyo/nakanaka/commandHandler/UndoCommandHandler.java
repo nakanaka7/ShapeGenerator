@@ -24,6 +24,11 @@ public class UndoCommandHandler implements CommandHandler{
 	public List<String> getAliases() {
 		return Arrays.asList("undo");
 	}
+	
+	@Override
+	public String getUsage() {
+		return "undo";
+	}
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {

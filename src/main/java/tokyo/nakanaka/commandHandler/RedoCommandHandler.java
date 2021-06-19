@@ -26,6 +26,11 @@ public class RedoCommandHandler implements CommandHandler{
 	public List<String> getAliases() {
 		return Arrays.asList("redo");
 	}
+	
+	@Override
+	public String getUsage() {
+		return "redo";
+	}
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {

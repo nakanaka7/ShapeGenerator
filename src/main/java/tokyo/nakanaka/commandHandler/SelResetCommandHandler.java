@@ -32,6 +32,11 @@ public class SelResetCommandHandler implements CommandHandler{
 	public List<String> getAliases() {
 		return Arrays.asList("selreset");
 	}
+	
+	@Override
+	public String getUsage() {
+		return "selreset";
+	}
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {

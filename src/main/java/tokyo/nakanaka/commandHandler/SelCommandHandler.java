@@ -33,6 +33,11 @@ public class SelCommandHandler implements CommandHandler{
 	}
 
 	@Override
+	public String getUsage() {
+		return "See each shape usage";
+	}
+	
+	@Override
 	public boolean onCommand(Player player, String[] args) {
 		World world = player.getWorld();
 		int offsetX = player.getX();

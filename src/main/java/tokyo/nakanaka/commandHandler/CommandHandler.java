@@ -8,6 +8,7 @@ public interface CommandHandler {
 	String getDescription();
 	String getLabel();
 	List<String> getAliases();
+	String getUsage();
 	/**
 	 * @param player
 	 * @param args
