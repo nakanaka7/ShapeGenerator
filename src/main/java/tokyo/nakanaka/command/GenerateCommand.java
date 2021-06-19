@@ -8,6 +8,7 @@ import java.util.Set;
 import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.world.World;
 
 public class GenerateCommand implements UndoableCommand{
@@ -17,13 +18,20 @@ public class GenerateCommand implements UndoableCommand{
 	private boolean physics;
 	private Map<BlockVector3D, Block> originalBlockMap = new HashMap<>();
 	
+	public GenerateCommand(Selection sel, Block block, boolean physics) {
+		this.world = sel.getWorld();
+		this.region = sel.getBlockRegion3D();
+		this.block = block;
+		this.physics = physics;
+	}
+	
 	public GenerateCommand(Builder builder) {
 		this.world = builder.world;
 		this.region = builder.region;
 		this.block = builder.block;
 		this.physics = builder.physics;
 	}
-
+	
 	public static class Builder{
 		private World world;
 		private BlockRegion3D region;
