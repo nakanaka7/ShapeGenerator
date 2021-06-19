@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.UndoableCommand;
@@ -31,6 +32,11 @@ public class RedoCommandHandler implements CommandHandler{
 	public String getUsage() {
 		return "redo";
 	}
+	
+	@Override
+	public List<Pair<String, String>> getParameterDescriptionList() {
+		return new ArrayList<>();
+	}
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {
@@ -54,5 +60,5 @@ public class RedoCommandHandler implements CommandHandler{
 	public List<String> onTabComplete(Player player, String[] args) {
 		return new ArrayList<>();
 	}
-	
+
 }

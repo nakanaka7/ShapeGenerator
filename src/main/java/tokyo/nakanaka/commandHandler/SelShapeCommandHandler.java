@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
@@ -38,6 +39,12 @@ public class SelShapeCommandHandler implements CommandHandler{
 	@Override
 	public String getUsage() {
 		return "selshape <shape>";
+	}
+	
+	@Override
+	public List<Pair<String, String>> getParameterDescriptionList() {
+		Pair<String, String> desShape = new Pair<>("<shape>", "selection shape");
+		return Arrays.asList(desShape);
 	}
 	
 	@Override
