@@ -31,7 +31,7 @@ public class RootCommandHandler {
 		if(cmdHandler != null) {
 			boolean success = cmdHandler.onCommand(player, cmdLine.getArgs());
 			if(!success) {
-				player.getLogger().print("Usage");
+				player.getLogger().print("Usage: " + cmdHandler.getUsage());
 			}
 		}else {
 			player.getLogger().print(HEAD_ERROR + "Unknown command");
