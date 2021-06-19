@@ -42,6 +42,7 @@ public class RootCommandHandler {
 		}
 	}
 	
+	@Deprecated
 	public List<String> getAliases(){
 		List<String> aliasList = new ArrayList<>();
 		Set<CommandHandler> handlerSet = this.cmdLineRepo.getAll();
