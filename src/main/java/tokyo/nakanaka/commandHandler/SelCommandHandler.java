@@ -1,5 +1,6 @@
 package tokyo.nakanaka.commandHandler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,6 +45,13 @@ public class SelCommandHandler implements CommandHandler{
 		int offsetY = player.getY();
 		int offsetZ = player.getZ();
 		SelectionBuilder builder = player.getSelectionBuilder();
+		if(args.length == 1 && args[0].equals("reset")){
+			SelectionShape shape = this.selManager.getSelectionShape(builder);
+			SelectionBuilder newBuilder = this.selManager.getNewSelectionBuilderInstance(shape);
+			player.setSelectionBuilder(newBuilder);
+			player.getLogger().print(HEAD_NORMAL + "Reset selection build");
+			return true;
+		}
 		builder.onCommand(world, offsetX, offsetY, offsetZ, args);
 		SelectionShape shape = this.selManager.getSelectionShape(builder);
 		player.getLogger().print(HEAD_NORMAL + shape.toString() + " selection");
@@ -57,7 +65,11 @@ public class SelCommandHandler implements CommandHandler{
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		SelectionBuilder builder = player.getSelectionBuilder();
-		return builder.onTabComplete(args);
+		List<String> list = new ArrayList<>(builder.onTabComplete(args));
+		if(args.length == 1) {
+			list.add("reset");
+		}
+		return list;
 	}
 
 }
