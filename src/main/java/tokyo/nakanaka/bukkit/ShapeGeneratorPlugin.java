@@ -35,7 +35,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
-		cmdRepo.register(new HelpCommandHandler(this.rootCmdHandler));
+		cmdRepo.register(new HelpCommandHandler(this.cmdRepo));
 		cmdRepo.register(new SelCommandHandler(selManager));
 		cmdRepo.register(new SelResetCommandHandler(selManager));
 		cmdRepo.register(new SelShapeCommandHandler(selManager));

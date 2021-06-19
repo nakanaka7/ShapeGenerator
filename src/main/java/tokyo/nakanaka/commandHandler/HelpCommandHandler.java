@@ -11,10 +11,10 @@ import java.util.Set;
 import tokyo.nakanaka.Player;
 
 public class HelpCommandHandler implements CommandHandler{
-	private RootCommandHandler rootCmdHandler;
+	private CommandHandlerRepository cmdRepo;
 	
-	public HelpCommandHandler(RootCommandHandler rootCmdHandler) {
-		this.rootCmdHandler = rootCmdHandler;
+	public HelpCommandHandler(CommandHandlerRepository cmdRepo) {
+		this.cmdRepo = cmdRepo;
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class HelpCommandHandler implements CommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {
 			player.getLogger().print(HEAD_NORMAL + "Command Help");
-			Set<CommandHandler> cmdHandlerSet = this.rootCmdHandler.getAllRegisterdCommandHandler();
+			Set<CommandHandler> cmdHandlerSet = this.cmdRepo.getAll();
 			for(CommandHandler cmdHandler : cmdHandlerSet) {
 				List<String> cmdAliasList = cmdHandler.getAliases();
 				player.getLogger().print(INDENT_NORMAL + String.join("/ ", cmdAliasList) + ": " + cmdHandler.getDescription());
@@ -55,7 +55,7 @@ public class HelpCommandHandler implements CommandHandler{
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {
-			return this.rootCmdHandler.getAliases();
+			return new ArrayList<>(this.cmdRepo.getAliases());
 		}else {
 			return new ArrayList<>();
 		}
