@@ -47,14 +47,6 @@ public class GenerateCommand implements UndoableCommand{
 
 	}
 	
-	public World getWorld() {
-		return world;
-	}
-
-	public BlockRegion3D getRegion() {
-		return region;
-	}
-
 	public Block getBlock() {
 		return block;
 	}
