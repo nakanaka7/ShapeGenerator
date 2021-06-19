@@ -60,8 +60,8 @@ public class HelpCommandHandler implements CommandHandler{
 				return true;
 			}
 			player.getLogger().print(HEAD_NORMAL + "Help for " + args[0]);
-			player.getLogger().print(INDENT_NORMAL + cmdHandler.getDescription());
-			player.getLogger().print(INDENT_NORMAL + cmdHandler.getUsage());
+			player.getLogger().print(INDENT_NORMAL + "Description: " + cmdHandler.getDescription());
+			player.getLogger().print(INDENT_NORMAL + "Usage: " + cmdHandler.getUsage());
 			for(Pair<String, String> pair : cmdHandler.getParameterDescriptionList()) {
 				player.getLogger().print(INDENT_NORMAL + pair.getFirst() + ": " + pair.getSecond());	
 			}
