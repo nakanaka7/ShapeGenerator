@@ -17,6 +17,13 @@ public class UndoCommandManager {
 	/**
 	 * @return null if empty
 	 */
+	public UndoableCommand peekUndoCommand() {
+		return this.undoCmds.peekLast();
+	}
+	
+	/**
+	 * @return null if empty
+	 */
 	public UndoableCommand getUndoCommand() {
 		UndoableCommand cmd = undoCmds.pollLast();
 		if(cmd != null) {
