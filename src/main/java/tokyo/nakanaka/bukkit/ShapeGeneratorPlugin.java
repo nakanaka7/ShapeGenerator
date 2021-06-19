@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
 import tokyo.nakanaka.commandHandler.HelpCommandHandler;
+import tokyo.nakanaka.commandHandler.PhysicsCommandHandler;
 import tokyo.nakanaka.commandHandler.RedoCommandHandler;
 import tokyo.nakanaka.commandHandler.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
@@ -35,6 +36,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
 		cmdRepo.register(new HelpCommandHandler(this.cmdRepo));
+		cmdRepo.register(new PhysicsCommandHandler());
 		cmdRepo.register(new SelCommandHandler(selManager));
 		cmdRepo.register(new SelShapeCommandHandler(selManager));
 		cmdRepo.register(new GenerateCommandHandler(new BukkitBlockArgument()));
