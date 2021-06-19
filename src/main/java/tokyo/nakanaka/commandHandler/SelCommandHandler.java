@@ -8,6 +8,7 @@ import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
+import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.world.World;
 
@@ -53,12 +54,7 @@ public class SelCommandHandler implements CommandHandler{
 			return true;
 		}
 		builder.onCommand(world, offsetX, offsetY, offsetZ, args);
-		SelectionShape shape = this.selManager.getSelectionShape(builder);
-		player.getLogger().print(HEAD_NORMAL + shape.toString() + " selection");
-		List<String> lines = builder.getStateLines();
-		for(String line : lines) {
-			player.getLogger().print(INDENT_NORMAL + line);
-		}
+		new SelectionMessenger(this.selManager).sendMessage(player);
 		return true;
 	}
 
