@@ -63,7 +63,7 @@ public class HelpCommandHandler implements CommandHandler{
 			player.getLogger().print(INDENT_NORMAL + cmdHandler.getDescription());
 			player.getLogger().print(INDENT_NORMAL + cmdHandler.getUsage());
 			for(Pair<String, String> pair : cmdHandler.getParameterDescriptionList()) {
-				player.getLogger().print(INDENT_NORMAL + pair.getE1() + ": " + pair.getE2());	
+				player.getLogger().print(INDENT_NORMAL + pair.getFirst() + ": " + pair.getSecond());	
 			}
 			return true;
 		}else {
