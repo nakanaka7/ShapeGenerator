@@ -13,7 +13,6 @@ import tokyo.nakanaka.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.commandHandler.RedoCommandHandler;
 import tokyo.nakanaka.commandHandler.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
-import tokyo.nakanaka.commandHandler.SelResetCommandHandler;
 import tokyo.nakanaka.commandHandler.SelShapeCommandHandler;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
 import tokyo.nakanaka.commandLine.CommandLine;
@@ -37,7 +36,6 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
 		cmdRepo.register(new HelpCommandHandler(this.cmdRepo));
 		cmdRepo.register(new SelCommandHandler(selManager));
-		cmdRepo.register(new SelResetCommandHandler(selManager));
 		cmdRepo.register(new SelShapeCommandHandler(selManager));
 		cmdRepo.register(new GenerateCommandHandler(new BukkitBlockArgument()));
 		cmdRepo.register(new UndoCommandHandler());
