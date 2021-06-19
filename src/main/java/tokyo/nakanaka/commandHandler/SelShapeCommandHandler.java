@@ -36,6 +36,11 @@ public class SelShapeCommandHandler implements CommandHandler{
 	}
 
 	@Override
+	public String getUsage() {
+		return "selshape <shape>";
+	}
+	
+	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length != 1) {
 			return false;

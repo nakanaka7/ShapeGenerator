@@ -38,6 +38,11 @@ public class GenerateCommandHandler implements CommandHandler{
 	}
 
 	@Override
+	public String getUsage() {
+		return "generate <block>";
+	}
+	
+	@Override
 	public boolean onCommand(Player player, String[] args) {
 		SelectionBuilder builder = player.getSelectionBuilder();
 		Selection sel;
