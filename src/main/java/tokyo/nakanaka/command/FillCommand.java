@@ -76,7 +76,7 @@ public class FillCommand implements UndoableCommand{
 	public void undo() {
 		for(Entry<BlockVector3D, Block> e : this.originalBlockMap.entrySet()) {
 			BlockVector3D pos = e.getKey();
-			this.world.setBlock(pos.getX(), pos.getY(), pos.getZ(), e.getValue(), false);
+			this.world.setBlock(pos.getX(), pos.getY(), pos.getZ(), e.getValue(), this.physics);
 		}
 	}
 
