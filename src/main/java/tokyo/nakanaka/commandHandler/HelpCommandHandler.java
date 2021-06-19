@@ -1,7 +1,6 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
-import static tokyo.nakanaka.logger.LogConstant.INDENT_NORMAL;
+import static tokyo.nakanaka.logger.LogConstant.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +45,15 @@ public class HelpCommandHandler implements CommandHandler{
 				List<String> cmdAliasList = cmdHandler.getAliases();
 				player.getLogger().print(INDENT_NORMAL + String.join("/ ", cmdAliasList) + ": " + cmdHandler.getDescription());
 			}
+			return true;
+		}else if(args.length == 1) {
+			CommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
+			if(cmdHandler == null) {
+				player.getLogger().print(HEAD_ERROR + "Unknown command");
+				return true;
+			}
+			player.getLogger().print(HEAD_NORMAL + "Help for " + args[0]);
+			player.getLogger().print(INDENT_NORMAL + cmdHandler.getDescription());
 			return true;
 		}else {
 			return false;
