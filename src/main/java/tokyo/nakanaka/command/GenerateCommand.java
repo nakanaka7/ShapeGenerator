@@ -10,14 +10,14 @@ import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.world.World;
 
-public class FillCommand implements UndoableCommand{
+public class GenerateCommand implements UndoableCommand{
 	private World world;
 	private BlockRegion3D region;
 	private Block block;
 	private boolean physics;
 	private Map<BlockVector3D, Block> originalBlockMap = new HashMap<>();
 	
-	public FillCommand(Builder builder) {
+	public GenerateCommand(Builder builder) {
 		this.world = builder.world;
 		this.region = builder.region;
 		this.block = builder.block;
@@ -41,8 +41,8 @@ public class FillCommand implements UndoableCommand{
 			return this;
 		}
 		
-		public FillCommand build() {
-			return new FillCommand(this);
+		public GenerateCommand build() {
+			return new GenerateCommand(this);
 		}
 
 	}

@@ -10,7 +10,7 @@ import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.command.FillCommand;
+import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
@@ -71,16 +71,16 @@ public class GenerateCommandHandler implements CommandHandler{
 		}
 		World world = sel.getWorld();
 		BlockRegion3D region = sel.getBlockRegion3D();
-		FillCommand fillCmd = new FillCommand.Builder(world, region, block)
+		GenerateCommand generateCmd = new GenerateCommand.Builder(world, region, block)
 				.physics(player.getBlockPhysics())
 				.build();
 		try {
-			fillCmd.execute();
+			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
 			player.getLogger().print(HEAD_ERROR + "Unsettable block");
 			return true;
 		}
-		player.getUndoCommandManager().add(fillCmd);
+		player.getUndoCommandManager().add(generateCmd);
 		return true;
 	}
 
