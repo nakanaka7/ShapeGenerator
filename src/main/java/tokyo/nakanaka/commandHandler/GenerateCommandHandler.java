@@ -69,11 +69,7 @@ public class GenerateCommandHandler implements CommandHandler{
 			player.getLogger().print(HEAD_ERROR + "Invalid block specification");
 			return true;
 		}
-		World world = sel.getWorld();
-		BlockRegion3D region = sel.getBlockRegion3D();
-		GenerateCommand generateCmd = new GenerateCommand.Builder(world, region, block)
-				.physics(player.getBlockPhysics())
-				.build();
+		GenerateCommand generateCmd = new GenerateCommand(sel, block, player.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
