@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 
 public class HelpCommandHandler implements CommandHandler{
@@ -37,6 +38,12 @@ public class HelpCommandHandler implements CommandHandler{
 	}
 
 	@Override
+	public List<Pair<String, String>> getParameterDescriptionList() {
+		Pair<String, String> desCommand = new Pair<>("[command]", "command for help");
+		return Arrays.asList(desCommand);
+	}
+	
+	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {
 			player.getLogger().print(HEAD_NORMAL + "Command Help");
@@ -54,6 +61,10 @@ public class HelpCommandHandler implements CommandHandler{
 			}
 			player.getLogger().print(HEAD_NORMAL + "Help for " + args[0]);
 			player.getLogger().print(INDENT_NORMAL + cmdHandler.getDescription());
+			player.getLogger().print(INDENT_NORMAL + cmdHandler.getUsage());
+			for(Pair<String, String> pair : cmdHandler.getParameterDescriptionList()) {
+				player.getLogger().print(INDENT_NORMAL + pair.getE1() + ": " + pair.getE2());	
+			}
 			return true;
 		}else {
 			return false;

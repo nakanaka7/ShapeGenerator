@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
+
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.UndoableCommand;
@@ -30,6 +32,11 @@ public class UndoCommandHandler implements CommandHandler{
 		return "undo";
 	}
 
+	@Override
+	public List<Pair<String, String>> getParameterDescriptionList() {
+		return new ArrayList<>();
+	}
+	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {

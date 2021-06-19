@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
+
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
@@ -40,6 +42,11 @@ public class SelCommandHandler implements CommandHandler{
 	}
 	
 	@Override
+	public List<Pair<String, String>> getParameterDescriptionList() {
+		return new ArrayList<>();
+	}
+	
+	@Override
 	public boolean onCommand(Player player, String[] args) {
 		World world = player.getWorld();
 		int offsetX = player.getX();
@@ -67,5 +74,4 @@ public class SelCommandHandler implements CommandHandler{
 		}
 		return list;
 	}
-
 }

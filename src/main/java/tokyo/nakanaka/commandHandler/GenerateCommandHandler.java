@@ -7,6 +7,7 @@ import java.util.List;
 import static tokyo.nakanaka.logger.LogConstant.*;
 
 import tokyo.nakanaka.BlockRegion3D;
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.command.FillCommand;
@@ -40,6 +41,12 @@ public class GenerateCommandHandler implements CommandHandler{
 	@Override
 	public String getUsage() {
 		return "generate <block>";
+	}
+	
+	@Override
+	public List<Pair<String, String>> getParameterDescriptionList() {
+		Pair<String, String> desBlock = new Pair<>("<block>", "block to generate");
+		return Arrays.asList(desBlock);
 	}
 	
 	@Override
