@@ -16,7 +16,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	private static final CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
 	private static final String OFFSET = "offset";
 	private static final String CENTER = "center";
-	private static final String R = "r";
+	private static final String RADIUS = "radius";
 	
 	private void reset() {
 		this.world = null;
@@ -98,7 +98,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			this.sphereBuilder.setCenter(pos);
 			this.offset = pos;
 			return true;
-		}else if(args[0].equals(R)) {
+		}else if(args[0].equals(RADIUS)) {
 			if(args.length != 2) {
 				return false;
 			}
@@ -125,7 +125,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			return new ArrayList<>();
 		}
 		if(args.length == 1) {
-			return Arrays.asList(CENTER, R, OFFSET);
+			return Arrays.asList(CENTER, RADIUS, OFFSET);
 		}
 		if(args[0].equals(CENTER) || args[0].equals(OFFSET)) {
 			if(1 <= args.length && args.length <= 4) {
@@ -133,7 +133,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			}else {
 				return new ArrayList<>();
 			}
-		}else if(args[0].equals(R)) {
+		}else if(args[0].equals(RADIUS)) {
 			if(args.length == 2) {
 				return Arrays.asList("1","2","3","4","5","10","20");
 			}else {
@@ -151,7 +151,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		if(center != null) {
 			line1 += center.getX() + "/ " + center.getY() + "/ " + center.getZ();
 		}
-		String line2 = R + ": ";
+		String line2 = RADIUS + ": ";
 		Integer r = this.sphereBuilder.getRadius();
 		if(r != null) {
 			line2 += r;
