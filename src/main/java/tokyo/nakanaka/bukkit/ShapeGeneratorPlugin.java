@@ -28,18 +28,18 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer());
-		CommandHandlerRepository cmdLineRepo = new CommandHandlerRepository();
-		this.rootCmdHandler = new RootCommandHandler(cmdLineRepo);
+		CommandHandlerRepository cmdRepo = new CommandHandlerRepository();
+		this.rootCmdHandler = new RootCommandHandler(cmdRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
-		this.rootCmdHandler.register(new HelpCommandHandler(this.rootCmdHandler));
-		this.rootCmdHandler.register(new SelCommandHandler(selManager));
-		this.rootCmdHandler.register(new SelResetCommandHandler(selManager));
-		this.rootCmdHandler.register(new SelShapeCommandHandler(selManager));
-		this.rootCmdHandler.register(new GenerateCommandHandler(new BukkitBlockArgument()));
-		this.rootCmdHandler.register(new UndoCommandHandler());
-		this.rootCmdHandler.register(new RedoCommandHandler());
+		cmdRepo.register(new HelpCommandHandler(this.rootCmdHandler));
+		cmdRepo.register(new SelCommandHandler(selManager));
+		cmdRepo.register(new SelResetCommandHandler(selManager));
+		cmdRepo.register(new SelShapeCommandHandler(selManager));
+		cmdRepo.register(new GenerateCommandHandler(new BukkitBlockArgument()));
+		cmdRepo.register(new UndoCommandHandler());
+		cmdRepo.register(new RedoCommandHandler());
 	}
 	
 	@Override

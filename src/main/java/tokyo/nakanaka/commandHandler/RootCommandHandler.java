@@ -15,10 +15,6 @@ public class RootCommandHandler {
 		this.cmdLineRepo = cmdLineRepo;
 	}
 	
-	public void register(CommandHandler cmdHandler) {
-		this.cmdLineRepo.register(cmdHandler);
-	}
-	
 	public Set<CommandHandler> getAllRegisterdCommandHandler(){
 		return this.cmdLineRepo.getAll();
 	}
