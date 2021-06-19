@@ -55,8 +55,6 @@ public class HelpCommandHandler implements CommandHandler{
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList("help");
-		}else if(args.length == 2) {
 			return this.rootCmdHandler.getAliases();
 		}else {
 			return new ArrayList<>();
