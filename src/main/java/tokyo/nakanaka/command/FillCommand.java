@@ -47,6 +47,18 @@ public class FillCommand implements UndoableCommand{
 
 	}
 	
+	public World getWorld() {
+		return world;
+	}
+
+	public BlockRegion3D getRegion() {
+		return region;
+	}
+
+	public Block getBlock() {
+		return block;
+	}
+
 	/**
 	 *@throws IllegalArgumentException
 	 */
