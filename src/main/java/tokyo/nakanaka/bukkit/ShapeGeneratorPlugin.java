@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
 import tokyo.nakanaka.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.commandHandler.RedoCommandHandler;
@@ -27,7 +28,8 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer());
-		this.rootCmdHandler = new RootCommandHandler();
+		CommandHandlerRepository cmdLineRepo = new CommandHandlerRepository();
+		this.rootCmdHandler = new RootCommandHandler(cmdLineRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);

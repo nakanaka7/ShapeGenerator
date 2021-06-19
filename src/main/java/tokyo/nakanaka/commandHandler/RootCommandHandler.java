@@ -9,7 +9,11 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandLine.CommandLine;
 
 public class RootCommandHandler {
-	private CommandHandlerRepository cmdLineRepo = new CommandHandlerRepository();
+	private CommandHandlerRepository cmdLineRepo;
+	
+	public RootCommandHandler(CommandHandlerRepository cmdLineRepo) {
+		this.cmdLineRepo = cmdLineRepo;
+	}
 	
 	public void register(CommandHandler cmdHandler) {
 		this.cmdLineRepo.register(cmdHandler);
