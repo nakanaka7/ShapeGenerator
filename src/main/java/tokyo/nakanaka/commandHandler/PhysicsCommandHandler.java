@@ -32,7 +32,7 @@ public class PhysicsCommandHandler implements CommandHandler{
 
 	@Override
 	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desTF = new Pair<>("<true/false>", "option for physics when generating blocks");
+		Pair<String, String> desTF = new Pair<>("<true/false>", "option for physics when setting blocks");
 		return Arrays.asList(desTF);
 	}
 
