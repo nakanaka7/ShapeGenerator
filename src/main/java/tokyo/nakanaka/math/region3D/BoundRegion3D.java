@@ -2,7 +2,7 @@ package tokyo.nakanaka.math.region3D;
 
 import tokyo.nakanaka.BlockRegion3D;
 
-public class BoundRegion {
+public class BoundRegion3D {
 	private Region3D region;
 	private int upperBoundX;
 	private int upperBoundY;
@@ -10,8 +10,8 @@ public class BoundRegion {
 	private int lowerBoundX;
 	private int lowerBoundY;
 	private int lowerBoundZ;
-	
-	public BoundRegion(Region3D region, int upperBoundX, int upperBoundY, int upperBoundZ, int lowerBoundX,
+
+	public BoundRegion3D(Region3D region, int upperBoundX, int upperBoundY, int upperBoundZ, int lowerBoundX,
 			int lowerBoundY, int lowerBoundZ) {
 		this.region = region;
 		this.upperBoundX = upperBoundX;
@@ -22,7 +22,7 @@ public class BoundRegion {
 		this.lowerBoundZ = lowerBoundZ;
 	}
 
-	public BoundRegion getShiftedRegion(int dx,int dy, int dz) {
+	public BoundRegion3D getShiftedRegion(int dx, int dy, int dz) {
 		Region3D region = new ShiftedRegion3D(this.region, dx, dy, dz);
 		int ubx = this.upperBoundX + dx;
 		int uby = this.upperBoundY + dy;
@@ -30,12 +30,12 @@ public class BoundRegion {
 		int lbx = this.lowerBoundX + dx;
 		int lby = this.lowerBoundY + dy;
 		int lbz = this.lowerBoundZ + dz;
-		return new BoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
-	
+
 	public BlockRegion3D getBlockRegion3D() {
-		return new BlockRegion3D(this.region, this.upperBoundX, this.upperBoundY,
-				this.upperBoundZ, this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
+		return new BlockRegion3D(this.region, this.upperBoundX, this.upperBoundY, this.upperBoundZ, this.lowerBoundX,
+				this.lowerBoundY, this.lowerBoundZ);
 	}
 
 }
