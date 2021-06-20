@@ -32,15 +32,15 @@ public class LinearTransformation {
 		return new LinearTransformation(inv);
 	}
 	
-	public LinearTransformation getXRotation(double degree) {
+	public static LinearTransformation ofXRotation(double degree) {
 		return new LinearTransformation(Matrix3x3.ofXRotation(degree));
 	}
 	
-	public LinearTransformation getYRotation(double degree) {
+	public static LinearTransformation ofYRotation(double degree) {
 		return new LinearTransformation(Matrix3x3.ofYRotation(degree));
 	}
 	
-	public LinearTransformation getZRotation(double degree) {
+	public static LinearTransformation ofZRotation(double degree) {
 		return new LinearTransformation(Matrix3x3.ofZRotation(degree));
 	}
 
