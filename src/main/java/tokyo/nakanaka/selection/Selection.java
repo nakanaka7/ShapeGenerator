@@ -33,18 +33,6 @@ public class Selection {
 	public BoundRegion3D getBoundRegion3D() {
 		return region;
 	}
-
-	public int getOffsetX() {
-		return offset.getX();
-	}
-
-	public int getOffsetY() {
-		return offset.getY();
-	}
-
-	public int getOffsetZ() {
-		return offset.getZ();
-	}
 	
 	public Selection getShiftedSelection(int dx, int dy, int dz) {
 		BoundRegion3D region = this.region.getShiftedRegion(dx, dy, dz);
