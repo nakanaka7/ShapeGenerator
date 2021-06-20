@@ -60,9 +60,5 @@ public class Selection {
 		BoundRegion3D region = this.region.getTransformedRegion(trans, new Vector3D(x, y, z));
 		return new Selection(this.world, region, this.offset);
 	}
-	
-	public BlockRegion3D getBlockRegion3D() {
-		return this.region.getBlockRegion3D();
-	}
-	
+
 }
