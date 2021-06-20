@@ -17,10 +17,11 @@ public class Selection {
 		this.offset = offset;
 	}
 
+	
 	public Selection(World world, Region3D region, int upperBoundX, int upperBoundY, int upperBoundZ, int lowerBoundX,
 			int lowerBoundY, int lowerBoundZ, int offsetX, int offsetY, int offsetZ) {
 		this.world = world;
-		this.region = new BoundRegion3D(region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ); 
+		this.region = new BoundRegion3D(region, upperBoundX + 0.5, upperBoundY + 0.5, upperBoundZ + 0.5, lowerBoundX - 0.5, lowerBoundY -0.5, lowerBoundZ - 0.5); 
 		this.offset = new BlockVector3D(offsetX, offsetY, offsetZ);
 	}
 		

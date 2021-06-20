@@ -1,18 +1,20 @@
 package tokyo.nakanaka.math.region3D;
 
 import tokyo.nakanaka.BlockRegion3D;
+import tokyo.nakanaka.math.LinearTransformation;
+import tokyo.nakanaka.math.Vector3D;
 
 public class BoundRegion3D {
 	private Region3D region;
-	private int upperBoundX;
-	private int upperBoundY;
-	private int upperBoundZ;
-	private int lowerBoundX;
-	private int lowerBoundY;
-	private int lowerBoundZ;
+	private double upperBoundX;
+	private double upperBoundY;
+	private double upperBoundZ;
+	private double lowerBoundX;
+	private double lowerBoundY;
+	private double lowerBoundZ;
 
-	public BoundRegion3D(Region3D region, int upperBoundX, int upperBoundY, int upperBoundZ, int lowerBoundX,
-			int lowerBoundY, int lowerBoundZ) {
+	public BoundRegion3D(Region3D region, double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
+			double lowerBoundY, double lowerBoundZ) {
 		this.region = region;
 		this.upperBoundX = upperBoundX;
 		this.upperBoundY = upperBoundY;
@@ -22,20 +24,61 @@ public class BoundRegion3D {
 		this.lowerBoundZ = lowerBoundZ;
 	}
 
-	public BoundRegion3D getShiftedRegion(int dx, int dy, int dz) {
+	public BoundRegion3D getShiftedRegion(double dx, double dy, double dz) {
 		Region3D region = new ShiftedRegion3D(this.region, dx, dy, dz);
-		int ubx = this.upperBoundX + dx;
-		int uby = this.upperBoundY + dy;
-		int ubz = this.upperBoundZ + dz;
-		int lbx = this.lowerBoundX + dx;
-		int lby = this.lowerBoundY + dy;
-		int lbz = this.lowerBoundZ + dz;
+		double ubx = this.upperBoundX + dx;
+		double uby = this.upperBoundY + dy;
+		double ubz = this.upperBoundZ + dz;
+		double lbx = this.lowerBoundX + dx;
+		double lby = this.lowerBoundY + dy;
+		double lbz = this.lowerBoundZ + dz;
 		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
-
+	
+	public BoundRegion3D getTransformedRegion(LinearTransformation trans, Vector3D offset) {
+		Region3D region = new TransformedRegion3D(this.region, trans, offset);
+		Vector3D pos1 = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
+		Vector3D pos2 = new Vector3D(this.upperBoundX, this.upperBoundY, this.lowerBoundZ);
+		Vector3D pos3 = new Vector3D(this.upperBoundX, this.lowerBoundY, this.upperBoundZ);
+		Vector3D pos4 = new Vector3D(this.upperBoundX, this.lowerBoundY, this.lowerBoundZ);
+		Vector3D pos5 = new Vector3D(this.lowerBoundX, this.upperBoundY, this.upperBoundZ);
+		Vector3D pos6 = new Vector3D(this.lowerBoundX, this.upperBoundY, this.lowerBoundZ);
+		Vector3D pos7 = new Vector3D(this.lowerBoundX, this.lowerBoundY, this.upperBoundZ);
+		Vector3D pos8 = new Vector3D(this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
+		Vector3D q1 = pos1.negate(offset);
+		Vector3D q2 = pos2.negate(offset);
+		Vector3D q3 = pos3.negate(offset);
+		Vector3D q4 = pos4.negate(offset);
+		Vector3D q5 = pos5.negate(offset);
+		Vector3D q6 = pos6.negate(offset);
+		Vector3D q7 = pos7.negate(offset);
+		Vector3D q8 = pos8.negate(offset);
+		double r1 = q1.getAbsolute();
+		double r2 = q2.getAbsolute();
+		double r3 = q3.getAbsolute();
+		double r4 = q4.getAbsolute();
+		double r5 = q5.getAbsolute();
+		double r6 = q6.getAbsolute();
+		double r7 = q7.getAbsolute();
+		double r8 = q8.getAbsolute();
+		double radius = Math.max(r1, Math.max(r2, Math.max(r3, Math.max(r4, Math.max(r5, Math.max(r6, Math.max(r7, r8)))))));
+		double ubx = offset.getX() + radius;
+		double uby = offset.getY() + radius;
+		double ubz = offset.getZ() + radius;
+		double lbx = offset.getX() - radius;
+		double lby = offset.getY() - radius;
+		double lbz = offset.getZ() - radius;
+		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+	
 	public BlockRegion3D getBlockRegion3D() {
-		return new BlockRegion3D(this.region, this.upperBoundX, this.upperBoundY, this.upperBoundZ, this.lowerBoundX,
-				this.lowerBoundY, this.lowerBoundZ);
+		int ubx = (int)Math.floor(this.upperBoundX);
+		int uby = (int)Math.floor(this.upperBoundY);
+		int ubz = (int)Math.floor(this.upperBoundZ);
+		int lbx = - (int)Math.floor(- this.lowerBoundX);
+		int lby = - (int)Math.floor(- this.lowerBoundY);
+		int lbz = - (int)Math.floor(- this.lowerBoundZ);
+		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
 }
