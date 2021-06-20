@@ -2,6 +2,7 @@ package tokyo.nakanaka.math;
 
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.SingularMatrixException;
 
 public class Matrix3x3 {
 	public static Matrix3x3 IDENTITY = new Matrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1);
@@ -57,6 +58,9 @@ public class Matrix3x3 {
 				a[2][0], a[2][1], a[2][2]);
 	}
 	
+	/**
+	 * @throws SingularMatrixException
+	 */
 	public Matrix3x3 getInverse() {
 		Array2DRowRealMatrix matrix = new Array2DRowRealMatrix(new double[][] {{e00, e01, e02}, {e10, e11, e12}, {e20, e21, e22}});
 		double[][] a = MatrixUtils.inverse(matrix).getData();
