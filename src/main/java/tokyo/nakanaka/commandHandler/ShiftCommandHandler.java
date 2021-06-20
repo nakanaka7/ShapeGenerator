@@ -2,6 +2,7 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 
@@ -88,8 +89,12 @@ public class ShiftCommandHandler implements CommandHandler{
 
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
-		if(args.length <= 3) {
-			return Arrays.asList("-10", "-5", "0", "5", "10");
+		if(args.length == 1) {
+			return Arrays.asList(Direction.values()).stream()
+					.map(s -> s.toString().toLowerCase())
+					.collect(Collectors.toList());
+		}else if(args.length == 2) {
+			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}else {
 			return Arrays.asList();
 		}
