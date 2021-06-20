@@ -1,9 +1,17 @@
 package tokyo.nakanaka.math;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
+import org.apache.commons.math3.geometry.euclidean.threed.RotationConvention;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
+import org.apache.commons.math3.linear.SingularMatrixException;
 
 public class Matrix3x3 {
+	public static Matrix3x3 IDENTITY = new Matrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1);
+	public static Matrix3x3 X_MIRROR = new Matrix3x3(- 1, 0, 0, 0, 1, 0, 0, 0, 1);
+	public static Matrix3x3 Y_MIRROR = new Matrix3x3(1, 0, 0, 0, - 1, 0, 0, 0, 1);
+	public static Matrix3x3 Z_MIRROR = new Matrix3x3(1, 0, 0, 0, 1, 0, 0, 0, - 1);
+	
 	private double e00;
 	private double e01;
 	private double e02;
@@ -52,6 +60,9 @@ public class Matrix3x3 {
 				a[2][0], a[2][1], a[2][2]);
 	}
 	
+	/**
+	 * @throws SingularMatrixException
+	 */
 	public Matrix3x3 getInverse() {
 		Array2DRowRealMatrix matrix = new Array2DRowRealMatrix(new double[][] {{e00, e01, e02}, {e10, e11, e12}, {e20, e21, e22}});
 		double[][] a = MatrixUtils.inverse(matrix).getData();
@@ -59,7 +70,31 @@ public class Matrix3x3 {
 				a[1][0], a[1][1], a[1][2],
 				a[2][0], a[2][1], a[2][2]);
 	}
+	
+	public static Matrix3x3 ofXRotation(double degree) {
+		Rotation rot = new Rotation(org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
+		double[][] a = rot.getMatrix();
+		return new Matrix3x3(a[0][0], a[0][1], a[0][2],
+				a[1][0], a[1][1], a[1][2],
+				a[2][0], a[2][1], a[2][2]);
+	}
 
+	public static Matrix3x3 ofYRotation(double degree) {
+		Rotation rot = new Rotation(org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_J, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
+		double[][] a = rot.getMatrix();
+		return new Matrix3x3(a[0][0], a[0][1], a[0][2],
+				a[1][0], a[1][1], a[1][2],
+				a[2][0], a[2][1], a[2][2]);
+	}
+	
+	public static Matrix3x3 ofZRotation(double degree) {
+		Rotation rot = new Rotation(org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_K, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
+		double[][] a = rot.getMatrix();
+		return new Matrix3x3(a[0][0], a[0][1], a[0][2],
+				a[1][0], a[1][1], a[1][2],
+				a[2][0], a[2][1], a[2][2]);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
