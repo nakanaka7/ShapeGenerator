@@ -31,7 +31,7 @@ public class Selection {
 		return world;
 	}
 	
-	public BoundRegion3D getRegion() {
+	public BoundRegion3D getBoundRegion3D() {
 		return region;
 	}
 
