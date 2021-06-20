@@ -2,6 +2,7 @@ package tokyo.nakanaka.selection;
 
 import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
+import tokyo.nakanaka.math.region3D.ShiftedRegion3D;
 import tokyo.nakanaka.world.World;
 
 public class Selection {
@@ -48,9 +49,23 @@ public class Selection {
 		return offsetZ;
 	}
 	
+	public Selection getShiftedSelection(int dx, int dy, int dz) {
+		Region3D region = new ShiftedRegion3D(this.region, dx, dy, dz);
+		int ubx = this.upperBoundX + dx;
+		int uby = this.upperBoundY + dy;
+		int ubz = this.upperBoundZ + dz;
+		int lbx = this.lowerBoundX + dx;
+		int lby = this.lowerBoundY + dy;
+		int lbz = this.lowerBoundZ + dz;
+		int offsetX = this.offsetX + dx;
+		int offsetY = this.offsetY + dy;
+		int offsetZ = this.offsetZ + dz;
+		return new Selection(world, region, ubx, uby, ubz, lbx, lby, lbz, offsetX, offsetY, offsetZ);
+	}
+	
 	public BlockRegion3D getBlockRegion3D() {
 		return new BlockRegion3D(this.region, this.upperBoundX, this.upperBoundY,
 				this.upperBoundZ, this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
 	}
-
+	
 }
