@@ -32,7 +32,7 @@ public class Selection {
 		this.offsetY = offsetY;
 		this.offsetZ = offsetZ;
 	}
-			
+		
 	public World getWorld() {
 		return world;
 	}
