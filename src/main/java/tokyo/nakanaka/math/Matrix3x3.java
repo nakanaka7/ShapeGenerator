@@ -4,6 +4,11 @@ import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
 
 public class Matrix3x3 {
+	public static Matrix3x3 IDENTITY = new Matrix3x3(1, 0, 0, 0, 1, 0, 0, 0, 1);
+	public static Matrix3x3 X_MIRROR = new Matrix3x3(- 1, 0, 0, 0, 1, 0, 0, 0, 1);
+	public static Matrix3x3 Y_MIRROR = new Matrix3x3(1, 0, 0, 0, - 1, 0, 0, 0, 1);
+	public static Matrix3x3 Z_MIRROR = new Matrix3x3(1, 0, 0, 0, 1, 0, 0, 0, - 1);
+	
 	private double e00;
 	private double e01;
 	private double e02;
