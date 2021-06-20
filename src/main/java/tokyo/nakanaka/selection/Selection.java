@@ -2,6 +2,8 @@ package tokyo.nakanaka.selection;
 
 import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.LinearTransformation;
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.world.World;
@@ -45,6 +47,14 @@ public class Selection {
 		BoundRegion3D region = this.region.getShiftedRegion(dx, dy, dz);
 		BlockVector3D offset = this.offset.add(new BlockVector3D(dx, dy, dz));
 		return new Selection(world, region, offset);
+	}
+	
+	public Selection getTransformedSelection(LinearTransformation trans) {
+		int x = this.offset.getX();
+		int y = this.offset.getY();
+		int z = this.offset.getZ();
+		BoundRegion3D region = this.region.getTransformedRegion(trans, new Vector3D(x, y, z));
+		return new Selection(this.world, region, this.offset);
 	}
 	
 	public BlockRegion3D getBlockRegion3D() {
