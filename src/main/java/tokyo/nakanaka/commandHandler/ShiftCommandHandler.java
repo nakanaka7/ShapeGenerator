@@ -68,7 +68,7 @@ public class ShiftCommandHandler implements CommandHandler{
 		if(cmd instanceof GenerateCommand) {
 			originalCmd = (GenerateCommand) cmd;
 		}else if(cmd instanceof MoveCommand) {
-			originalCmd = ((MoveCommand)cmd).getOriginalCommand();
+			originalCmd = ((MoveCommand)cmd).getLastCommand();
 		}else {
 			player.getLogger().print(HEAD_ERROR + "Invalid Operation");
 			return true;

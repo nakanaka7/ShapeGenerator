@@ -49,17 +49,18 @@ public class Selection {
 		return offsetZ;
 	}
 	
-	public void shift(int dx, int dy, int dz) {
-		this.region = new ShiftedRegion3D(this.region, dx, dy, dz);
-		this.upperBoundX += dx;
-		this.upperBoundY += dy;
-		this.upperBoundZ += dz;
-		this.lowerBoundX += dx;
-		this.lowerBoundY += dy;
-		this.lowerBoundZ += dz;
-		this.offsetX += dx;
-		this.offsetY += dy;
-		this.offsetZ += dz;
+	public Selection getShiftedSelection(int dx, int dy, int dz) {
+		Region3D region = new ShiftedRegion3D(this.region, dx, dy, dz);
+		int ubx = this.upperBoundX + dx;
+		int uby = this.upperBoundY + dy;
+		int ubz = this.upperBoundZ + dz;
+		int lbx = this.lowerBoundX + dx;
+		int lby = this.lowerBoundY + dy;
+		int lbz = this.lowerBoundZ + dz;
+		int offsetX = this.offsetX + dx;
+		int offsetY = this.offsetY + dy;
+		int offsetZ = this.offsetZ + dz;
+		return new Selection(world, region, ubx, uby, ubz, lbx, lby, lbz, offsetX, offsetY, offsetZ);
 	}
 	
 	public BlockRegion3D getBlockRegion3D() {
