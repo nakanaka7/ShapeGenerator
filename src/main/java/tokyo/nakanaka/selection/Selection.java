@@ -1,6 +1,5 @@
 package tokyo.nakanaka.selection;
 
-import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
