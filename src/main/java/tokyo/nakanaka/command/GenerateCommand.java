@@ -26,10 +26,6 @@ public class GenerateCommand implements UndoableCommand{
 		return sel;
 	}
 	
-	public void setSel(Selection sel) {
-		this.sel = sel;
-	}
-
 	public Block getBlock() {
 		return block;
 	}
