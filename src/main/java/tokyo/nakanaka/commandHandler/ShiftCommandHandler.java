@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
+
+import tokyo.nakanaka.Direction;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
@@ -31,31 +33,33 @@ public class ShiftCommandHandler implements CommandHandler{
 
 	@Override
 	public String getUsage() {
-		return "shift <dx> <dy> <dz>";
+		return "shift <direction> <blocks>";
 	}
 
 	@Override
 	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desDx = new Pair<>("<dx>", "displacement for x axis");
-		Pair<String, String> desDy = new Pair<>("<dy>", "displacement for y axis");
-		Pair<String, String> desDz = new Pair<>("<dz>", "displacement for z axis");
-		return Arrays.asList(desDx, desDy, desDz);
+		Pair<String, String> desDir = new Pair<>("<direction>", "direction to shift");
+		Pair<String, String> desBlocks = new Pair<>("<blocks>", "block number to shift");
+		return Arrays.asList(desDir, desBlocks);
 	}
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {
-		if(args.length != 3) {
+		if(args.length != 2) {
 			return false;
 		}
-		int dx;
-		int dy;
-		int dz;
+		Direction dir;
+		int blocks;
 		try {
-			dx = Integer.parseInt(args[0]);
-			dy = Integer.parseInt(args[1]);
-			dz = Integer.parseInt(args[2]);
+			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Can not parse integer(s)");
+			player.getLogger().print(HEAD_ERROR + "Can not parse direction");
+			return true;
+		}
+		try {
+			blocks = Integer.parseInt(args[1]);
+		}catch(IllegalArgumentException e) {
+			player.getLogger().print(HEAD_ERROR + "Can not parse integer");
 			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -73,6 +77,9 @@ public class ShiftCommandHandler implements CommandHandler{
 			player.getLogger().print(HEAD_ERROR + "Invalid Operation");
 			return true;
 		}
+		int dx = dir.getX() * blocks;
+		int dy = dir.getY() * blocks;
+		int dz = dir.getZ() * blocks;
 		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, dx, dy, dz, player.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
