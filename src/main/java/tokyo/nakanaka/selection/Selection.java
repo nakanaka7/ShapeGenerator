@@ -30,6 +30,10 @@ public class Selection {
 	public World getWorld() {
 		return world;
 	}
+	
+	public BoundRegion3D getRegion() {
+		return region;
+	}
 
 	public int getOffsetX() {
 		return offset.getX();
