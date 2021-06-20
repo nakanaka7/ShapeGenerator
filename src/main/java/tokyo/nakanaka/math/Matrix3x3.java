@@ -2,7 +2,6 @@ package tokyo.nakanaka.math;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
 import org.apache.commons.math3.geometry.euclidean.threed.RotationConvention;
-import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.SingularMatrixException;
@@ -72,24 +71,24 @@ public class Matrix3x3 {
 				a[2][0], a[2][1], a[2][2]);
 	}
 	
-	public Matrix3x3 getXRotation(double degree) {
-		Rotation rot = new Rotation(Vector3D.PLUS_I, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
+	public static Matrix3x3 ofXRotation(double degree) {
+		Rotation rot = new Rotation(org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
 		double[][] a = rot.getMatrix();
 		return new Matrix3x3(a[0][0], a[0][1], a[0][2],
 				a[1][0], a[1][1], a[1][2],
 				a[2][0], a[2][1], a[2][2]);
 	}
 
-	public Matrix3x3 getYRotation(double degree) {
-		Rotation rot = new Rotation(Vector3D.PLUS_J, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
+	public static Matrix3x3 ofYRotation(double degree) {
+		Rotation rot = new Rotation(org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_J, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
 		double[][] a = rot.getMatrix();
 		return new Matrix3x3(a[0][0], a[0][1], a[0][2],
 				a[1][0], a[1][1], a[1][2],
 				a[2][0], a[2][1], a[2][2]);
 	}
 	
-	public Matrix3x3 getZRotation(double degree) {
-		Rotation rot = new Rotation(Vector3D.PLUS_K, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
+	public static Matrix3x3 ofZRotation(double degree) {
+		Rotation rot = new Rotation(org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_K, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
 		double[][] a = rot.getMatrix();
 		return new Matrix3x3(a[0][0], a[0][1], a[0][2],
 				a[1][0], a[1][1], a[1][2],
