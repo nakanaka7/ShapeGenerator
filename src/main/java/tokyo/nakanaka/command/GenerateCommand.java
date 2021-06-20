@@ -22,6 +22,14 @@ public class GenerateCommand implements UndoableCommand{
 		this.physics = physics;
 	}
 	
+	public Selection getSelection() {
+		return sel;
+	}
+	
+	public void setSel(Selection sel) {
+		this.sel = sel;
+	}
+
 	public Block getBlock() {
 		return block;
 	}
