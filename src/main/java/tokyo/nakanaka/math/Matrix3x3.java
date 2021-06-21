@@ -71,6 +71,27 @@ public class Matrix3x3 {
 				a[2][0], a[2][1], a[2][2]);
 	}
 	
+	public static Matrix3x3 ofXScale(double factor) {
+		return new Matrix3x3(
+				factor, 0, 0,
+				0, 1, 0,
+				0, 0, 1);
+	}
+	
+	public static Matrix3x3 ofYScale(double factor) {
+		return new Matrix3x3(
+				1, 0, 0,
+				0, factor, 0,
+				0, 0, 1);
+	}
+	
+	public static Matrix3x3 ofZScale(double factor) {
+		return new Matrix3x3(
+				1, 0, 0,
+				0, 1, 0,
+				0, 0, factor);
+	}
+	
 	public static Matrix3x3 ofXRotation(double degree) {
 		Rotation rot = new Rotation(org.apache.commons.math3.geometry.euclidean.threed.Vector3D.PLUS_I, degree * Math.PI / 180, RotationConvention.VECTOR_OPERATOR);
 		double[][] a = rot.getMatrix();

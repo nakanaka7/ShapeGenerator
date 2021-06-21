@@ -32,6 +32,18 @@ public class LinearTransformation {
 		return new LinearTransformation(inv);
 	}
 	
+	public static LinearTransformation ofXScale(double factor) {
+		return new LinearTransformation(Matrix3x3.ofXScale(factor));
+	}
+	
+	public static LinearTransformation ofYScale(double factor) {
+		return new LinearTransformation(Matrix3x3.ofYScale(factor));
+	}
+	
+	public static LinearTransformation ofZScale(double factor) {
+		return new LinearTransformation(Matrix3x3.ofZScale(factor));
+	}
+	
 	public static LinearTransformation ofXRotation(double degree) {
 		return new LinearTransformation(Matrix3x3.ofXRotation(degree));
 	}
@@ -43,7 +55,7 @@ public class LinearTransformation {
 	public static LinearTransformation ofZRotation(double degree) {
 		return new LinearTransformation(Matrix3x3.ofZRotation(degree));
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
