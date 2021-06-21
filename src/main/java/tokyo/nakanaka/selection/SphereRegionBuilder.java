@@ -1,8 +1,9 @@
 package tokyo.nakanaka.selection;
 
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.math.region3D.ShiftedRegion3D;
+import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.SphereRegion3D;
 
 public class SphereRegionBuilder {
@@ -36,7 +37,7 @@ public class SphereRegionBuilder {
 			throw new IllegalStateException();
 		}
 		Region3D region = new SphereRegion3D(this.radius - 0.5);
-		return new ShiftedRegion3D(region, center.getX(), center.getY(), center.getZ());
+		return Region3Ds.shift(region, new Vector3D(center.getX(), center.getY(), center.getZ()));
 	}
 	
 }

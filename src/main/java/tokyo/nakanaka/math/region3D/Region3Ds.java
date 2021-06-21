@@ -28,15 +28,7 @@ public class Region3Ds {
 	}
 	
 	public static Region3D linearTransform(Region3D original, LinearTransformation trans) {
-		if(original instanceof AffineTransformedRegion3D) {
-			AffineTransformedRegion3D affReg = (AffineTransformedRegion3D) original;
-			Region3D newOriginal = affReg.getOriginalRegion3D();
-			LinearTransformation newTrans = trans.multipy(affReg.getLinearTransformation());
-			Vector3D newOffset = affReg.getOffset();
-			return new AffineTransformedRegion3D(newOriginal, newTrans, newOffset);
-		}else {
-			return new AffineTransformedRegion3D(original, trans, Vector3D.ORIGIN);
-		}
+		return new AffineTransformedRegion3D(original, trans, Vector3D.ORIGIN);
 	}
 	
 }
