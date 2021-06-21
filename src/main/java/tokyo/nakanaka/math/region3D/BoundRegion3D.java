@@ -25,7 +25,7 @@ public class BoundRegion3D {
 	}
 
 	public BoundRegion3D getShiftedRegion(double dx, double dy, double dz) {
-		Region3D region = new ShiftedRegion3D(this.region, dx, dy, dz);
+		Region3D region = Region3Ds.shift(this.region, new Vector3D(dx, dy, dz));
 		double ubx = this.upperBoundX + dx;
 		double uby = this.upperBoundY + dy;
 		double ubz = this.upperBoundZ + dz;
@@ -36,7 +36,9 @@ public class BoundRegion3D {
 	}
 	
 	public BoundRegion3D getTransformedRegion(LinearTransformation trans, Vector3D offset) {
-		Region3D region = new TransformedRegion3D(this.region, trans, offset);
+		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
+		newRegion = Region3Ds.linearTransform(newRegion, trans);
+		newRegion = Region3Ds.shift(newRegion, offset);
 		Vector3D pos1 = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
 		Vector3D pos2 = new Vector3D(this.upperBoundX, this.upperBoundY, this.lowerBoundZ);
 		Vector3D pos3 = new Vector3D(this.upperBoundX, this.lowerBoundY, this.upperBoundZ);
@@ -68,7 +70,7 @@ public class BoundRegion3D {
 		double lbx = offset.getX() - radius;
 		double lby = offset.getY() - radius;
 		double lbz = offset.getZ() - radius;
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new BoundRegion3D(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 	public BlockRegion3D getBlockRegion3D() {
