@@ -1,11 +1,19 @@
 package tokyo.nakanaka.commandHandler;
 
+import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.command.GenerateCommand;
+import tokyo.nakanaka.command.MoveCommand;
+import tokyo.nakanaka.command.ScaleCommand;
+import tokyo.nakanaka.command.UndoableCommand;
 
 public class ScaleCommandHandler implements CommandHandler{
 
@@ -38,8 +46,38 @@ public class ScaleCommandHandler implements CommandHandler{
 
 	@Override
 	public boolean onCommand(Player player, String[] args) {
-		// TODO Auto-generated method stub
-		return false;
+		if(args.length != 2) {
+			return false;
+		}
+		Axis axis;
+		try{
+			axis = Axis.valueOf(args[0].toUpperCase());
+		}catch(IllegalArgumentException e) {
+			player.getLogger().print(HEAD_ERROR + "Can not parse axis");
+			return true;
+		}
+		double factor;
+		try {
+			factor = Double.valueOf(args[1]);
+		}catch(IllegalArgumentException e) {
+			player.getLogger().print(HEAD_ERROR + "Can not parse double");
+			return true;
+		}
+		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoableCommand cmd = undoManager.peekUndoCommand();
+		GenerateCommand originalCmd;
+		if(cmd instanceof GenerateCommand) {
+			originalCmd = (GenerateCommand) cmd;
+		}else if(cmd instanceof MoveCommand) {
+			originalCmd = ((MoveCommand)cmd).getLastCommand();
+		}else {
+			player.getLogger().print(HEAD_ERROR + "Generate blocks first");
+			return true;
+		}
+		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, player.getBlockPhysics());
+		scaleCmd.execute();
+		undoManager.add(scaleCmd);
+		return true;
 	}
 
 	@Override
