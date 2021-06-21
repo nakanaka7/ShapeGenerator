@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.world.World;
 
@@ -171,14 +172,14 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		Region3D region = this.sphereBuilder.build();
 		BlockVector3D center = this.sphereBuilder.getCenter();
 		int radius = this.sphereBuilder.getRadius();
-		return new Selection(this.world, region,
-				center.getX() + radius - 1,
-				center.getY() + radius - 1,
-				center.getZ() + radius - 1,
-				center.getX() - radius + 1,
-				center.getY() - radius + 1,
-				center.getZ() - radius + 1,
-				this.offset.getX(), this.offset.getY(), this.offset.getZ());
+		double ubx = center.getX() + radius - 0.5;
+		double uby = center.getY() + radius - 0.5;
+		double ubz = center.getZ() + radius - 0.5;
+		double lbx = center.getX() - radius + 0.5;
+		double lby = center.getY() - radius + 0.5;
+		double lbz = center.getZ() - radius + 0.5;
+		BoundRegion3D boundRegion = new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new Selection(this.world, boundRegion, this.offset);
 	}
 
 }

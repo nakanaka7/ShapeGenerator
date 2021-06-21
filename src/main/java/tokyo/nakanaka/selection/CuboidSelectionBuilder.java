@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.world.World;
 
@@ -204,13 +205,14 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		CuboidRegion3D region = this.cuboidBuilder.build();
 		BlockVector3D pos1 = this.cuboidBuilder.getPos1();
 		BlockVector3D pos2 = this.cuboidBuilder.getPos2();
-		int upperBoundX = Math.max(pos1.getX(), pos2.getX());
-		int upperBoundY = Math.max(pos1.getY(), pos2.getY());
-		int upperBoundZ = Math.max(pos1.getZ(), pos2.getZ());
-		int lowerBoundX = Math.min(pos1.getX(), pos2.getX());
-		int lowerBoundY = Math.min(pos1.getY(), pos2.getY());
-		int lowerBoundZ = Math.min(pos1.getZ(), pos2.getZ());
-		return new Selection(this.world, region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ, offset.getX(), offset.getY(), offset.getZ());
+		double ubx = Math.max(pos1.getX(), pos2.getX()) + 0.5;
+		double uby = Math.max(pos1.getY(), pos2.getY()) + 0.5;
+		double ubz = Math.max(pos1.getZ(), pos2.getZ()) + 0.5;
+		double lbx = Math.min(pos1.getX(), pos2.getX()) - 0.5;
+		double lby = Math.min(pos1.getY(), pos2.getY()) - 0.5;
+		double lbz = Math.min(pos1.getZ(), pos2.getZ()) - 0.5;
+		BoundRegion3D boundRegion = new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new Selection(this.world, boundRegion, this.offset);
 	}
 
 	public void reset() {
