@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -38,6 +39,7 @@ public class EventExecutor implements Listener{
 			player = new Player(bukkitPlayer.getUniqueId(), bukkitPlayer.getName());
 			this.playerRepo.registerHumanPlayer(player);
 		}
+		player.setLogger(new BukkitLogger(bukkitPlayer));
 		Location loc = e.getBlock().getLocation();
 		org.bukkit.World bukkitWorld = loc.getWorld();
 		int x = loc.getBlockX();
@@ -49,7 +51,28 @@ public class EventExecutor implements Listener{
 	
 	@EventHandler
 	public void onRightClickBlock(PlayerInteractEvent e) {
-		
+		if(e.getAction() != Action.RIGHT_CLICK_BLOCK) {
+			return;
+		}
+		org.bukkit.entity.Player bukkitPlayer = e.getPlayer();
+		ItemStack itemStack = bukkitPlayer.getInventory().getItemInMainHand();
+		Material type = itemStack.getType();
+		if(type == Material.BLAZE_ROD) {
+			e.setCancelled(true);
+		}
+		Player player = this.playerRepo.getHumanPlayer(bukkitPlayer.getUniqueId());
+		if(player == null) {
+			player = new Player(bukkitPlayer.getUniqueId(), bukkitPlayer.getName());
+			this.playerRepo.registerHumanPlayer(player);
+		}
+		player.setLogger(new BukkitLogger(bukkitPlayer));
+		Location loc = e.getClickedBlock().getLocation();
+		org.bukkit.World bukkitWorld = loc.getWorld();
+		int x = loc.getBlockX();
+		int y = loc.getBlockY();
+		int z = loc.getBlockZ();
+		World world = new BukkitWorld(this.server, bukkitWorld);
+		this.clickHandler.onRightClickBlock(player, world, x, y, z);
 	}
 	
 }
