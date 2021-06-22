@@ -104,10 +104,9 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 				return false;
 			}
 			if(!world.equals(this.world)) {
-				this.reset();
 				return false;
 			}
-			int r;
+			double r;
 			try {
 				r = Integer.parseInt(args[1]);
 			}catch(IllegalArgumentException e) {
