@@ -25,6 +25,27 @@ public class CoordinateCommandArgument {
 		return s;
 	}
 	
+	public double onParsingDouble(String arg, int offset) {
+		double s;
+		try {
+			s = Double.parseDouble(arg);
+		}catch (IllegalArgumentException e) {
+			if (!arg.startsWith("~")) {
+				throw new IllegalArgumentException();
+			}else {
+				arg = arg.substring(1);
+				double t;
+				if(arg.isEmpty()){
+					t = 0;
+				}else{
+					t = Double.parseDouble(arg);
+				}
+				s = offset + t;
+			}
+		}
+		return s;
+	}
+	
 	public List<String> onTabComplete(String arg) {
 		return Arrays.asList("~");
 	}
