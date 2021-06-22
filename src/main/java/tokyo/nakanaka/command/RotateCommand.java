@@ -1,6 +1,6 @@
 package tokyo.nakanaka.command;
 
-import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.selection.Selection;
 

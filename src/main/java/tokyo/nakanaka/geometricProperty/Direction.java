@@ -1,4 +1,4 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.geometricProperty;
 
 public enum Direction {
 	NORTH(0, 0, - 1),

@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.ScaleCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.player.Player;
 
 public class ScaleCommandHandler implements CommandHandler{
