@@ -1,5 +1,6 @@
 package tokyo.nakanaka.math.region3D;
 
+import static tokyo.nakanaka.MaxMinCalculator.*;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 
@@ -46,29 +47,20 @@ public class BoundRegion3D {
 		Vector3D pos6 = new Vector3D(this.lowerBoundX, this.upperBoundY, this.lowerBoundZ);
 		Vector3D pos7 = new Vector3D(this.lowerBoundX, this.lowerBoundY, this.upperBoundZ);
 		Vector3D pos8 = new Vector3D(this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
-		Vector3D q1 = pos1.negate(offset);
-		Vector3D q2 = pos2.negate(offset);
-		Vector3D q3 = pos3.negate(offset);
-		Vector3D q4 = pos4.negate(offset);
-		Vector3D q5 = pos5.negate(offset);
-		Vector3D q6 = pos6.negate(offset);
-		Vector3D q7 = pos7.negate(offset);
-		Vector3D q8 = pos8.negate(offset);
-		double r1 = q1.getAbsolute();
-		double r2 = q2.getAbsolute();
-		double r3 = q3.getAbsolute();
-		double r4 = q4.getAbsolute();
-		double r5 = q5.getAbsolute();
-		double r6 = q6.getAbsolute();
-		double r7 = q7.getAbsolute();
-		double r8 = q8.getAbsolute();
-		double radius = Math.max(r1, Math.max(r2, Math.max(r3, Math.max(r4, Math.max(r5, Math.max(r6, Math.max(r7, r8)))))));
-		double ubx = offset.getX() + radius;
-		double uby = offset.getY() + radius;
-		double ubz = offset.getZ() + radius;
-		double lbx = offset.getX() - radius;
-		double lby = offset.getY() - radius;
-		double lbz = offset.getZ() - radius;
+		Vector3D q1 = trans.apply(pos1.negate(offset)).add(offset);
+		Vector3D q2 = trans.apply(pos2.negate(offset)).add(offset);
+		Vector3D q3 = trans.apply(pos3.negate(offset)).add(offset);
+		Vector3D q4 = trans.apply(pos4.negate(offset)).add(offset);
+		Vector3D q5 = trans.apply(pos5.negate(offset)).add(offset);
+		Vector3D q6 = trans.apply(pos6.negate(offset)).add(offset);
+		Vector3D q7 = trans.apply(pos7.negate(offset)).add(offset);
+		Vector3D q8 = trans.apply(pos8.negate(offset)).add(offset);
+		double ubx = max(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
+		double uby = max(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
+		double ubz = max(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
+		double lbx = min(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
+		double lby = min(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
+		double lbz = min(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
 		return new BoundRegion3D(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
