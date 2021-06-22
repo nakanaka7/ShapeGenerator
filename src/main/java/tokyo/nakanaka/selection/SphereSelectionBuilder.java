@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
-import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
@@ -30,7 +29,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	public boolean onLeftClickBlock(World world, int x, int y, int z) {
 		this.reset();
 		this.world = world;
-		this.sphereBuilder.setCenter(new BlockVector3D(x, y, z));
+		this.sphereBuilder.setCenter(new Vector3D(x, y, z));
 		return true;
 	}
 
@@ -40,9 +39,9 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			this.reset();
 		}
 		this.world = world;
-		BlockVector3D pos = new BlockVector3D(x, y, z);
-		BlockVector3D center = this.sphereBuilder.getCenter();
-		int radius = (int)Math.floor(pos.negate(center).getAbsolute()) + 1;
+		Vector3D pos = new Vector3D(x, y, z);
+		Vector3D center = this.sphereBuilder.getCenter();
+		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
 		this.sphereBuilder.setRadius(radius);
 		return true;
 	}
@@ -77,9 +76,9 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 				return false;
 			}
 		}else if(args[0].equals(CENTER)) {
-			BlockVector3D pos = null;
+			Vector3D pos = null;
 			if(args.length == 1) {
-				pos = new BlockVector3D(offsetX, offsetY, offsetZ);
+				pos = new Vector3D(offsetX, offsetY, offsetZ);
 			}else if(args.length == 4) {
 				int x;
 				int y;
@@ -91,7 +90,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
-				pos = new BlockVector3D(x, y, z);
+				pos = new Vector3D(x, y, z);
 			}
 			if(pos == null) {
 				return false;
@@ -149,12 +148,12 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	@Override
 	public List<String> getStateLines() {
 		String line1 = CENTER + ": ";
-		BlockVector3D center = this.sphereBuilder.getCenter();
+		Vector3D center = this.sphereBuilder.getCenter();
 		if(center != null) {
 			line1 += center.getX() + "/ " + center.getY() + "/ " + center.getZ();
 		}
 		String line2 = RADIUS + ": ";
-		Integer r = this.sphereBuilder.getRadius();
+		Double r = this.sphereBuilder.getRadius();
 		if(r != null) {
 			line2 += r;
 		}
@@ -171,8 +170,8 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			throw new IllegalStateException();
 		}
 		Region3D region = this.sphereBuilder.build();
-		BlockVector3D center = this.sphereBuilder.getCenter();
-		int radius = this.sphereBuilder.getRadius();
+		Vector3D center = this.sphereBuilder.getCenter();
+		double radius = this.sphereBuilder.getRadius();
 		double ubx = center.getX() + radius - 0.5;
 		double uby = center.getY() + radius - 0.5;
 		double ubz = center.getZ() + radius - 0.5;
