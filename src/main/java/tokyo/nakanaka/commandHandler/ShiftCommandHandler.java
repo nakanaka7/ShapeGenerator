@@ -41,7 +41,7 @@ public class ShiftCommandHandler implements CommandHandler{
 	@Override
 	public List<Pair<String, String>> getParameterDescriptionList() {
 		Pair<String, String> desDir = new Pair<>("<direction>", "direction to shift");
-		Pair<String, String> desBlocks = new Pair<>("<blocks>", "block number to shift");
+		Pair<String, String> desBlocks = new Pair<>("<blocks>", "block number to shift (double type)");
 		return Arrays.asList(desDir, desBlocks);
 	}
 
