@@ -24,9 +24,9 @@ public class Selection {
 		return region;
 	}
 	
-	public Selection getShiftedSelection(int dx, int dy, int dz) {
-		BoundRegion3D region = this.region.getShiftedRegion(dx, dy, dz);
-		Vector3D offset = this.offset.add(new Vector3D(dx, dy, dz));
+	public Selection getShiftedSelection(Vector3D displacement) {
+		BoundRegion3D region = this.region.getShiftedRegion(displacement);
+		Vector3D offset = this.offset.add(displacement);
 		return new Selection(world, region, offset);
 	}
 	
