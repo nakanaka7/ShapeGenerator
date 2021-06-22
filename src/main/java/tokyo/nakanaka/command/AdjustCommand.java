@@ -1,5 +1,5 @@
 package tokyo.nakanaka.command;
 
-public interface MoveCommand extends UndoableCommand{
+public interface AdjustCommand extends UndoableCommand{
 	GenerateCommand getLastCommand();
 }

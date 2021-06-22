@@ -3,7 +3,7 @@ package tokyo.nakanaka.command;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.Selection;
 
-public class ShiftCommand implements MoveCommand{
+public class ShiftCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	

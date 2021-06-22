@@ -4,7 +4,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.selection.Selection;
 
-public class RotateCommand implements MoveCommand{
+public class RotateCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
