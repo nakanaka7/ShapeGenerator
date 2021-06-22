@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import tokyo.nakanaka.PlayerEntity;
 import tokyo.nakanaka.world.World;
-
+@Deprecated
 public class BukkitPlayerEntity implements PlayerEntity{
 	private Server server;
 	private Player player;
