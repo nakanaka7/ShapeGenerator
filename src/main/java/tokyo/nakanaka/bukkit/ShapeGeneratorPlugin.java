@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tokyo.nakanaka.PlayerRepository;
 import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.DeleteCommandHandler;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
@@ -33,7 +34,8 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	
 	@Override
 	public void onEnable() {
-		this.cmdLineBuilder = new CommandLineBuilder(this.getServer());
+		PlayerRepository playerRepo = new PlayerRepository();
+		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		this.cmdRepo = new CommandHandlerRepository();
 		this.rootCmdHandler = new RootCommandHandler(this.cmdRepo);
 		SelectionManager selManager = new SelectionManager();
