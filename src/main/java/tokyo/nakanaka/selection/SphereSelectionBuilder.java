@@ -6,13 +6,14 @@ import java.util.List;
 
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.world.World;
 
 public class SphereSelectionBuilder implements SelectionBuilder{
 	private World world;
-	private BlockVector3D offset;
+	private Vector3D offset;
 	private SphereRegionBuilder sphereBuilder = new SphereRegionBuilder();
 	private static final CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
 	private static final String OFFSET = "offset";
@@ -57,7 +58,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 				return false;
 			}
 			if(args.length == 1) {
-				this.offset = new BlockVector3D(offsetX, offsetY, offsetZ);
+				this.offset = new Vector3D(offsetX, offsetY, offsetZ);
 				return true;
 			}else if(args.length == 4) {
 				int x;
@@ -70,7 +71,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
-				this.offset = new BlockVector3D(x, y, z);
+				this.offset = new Vector3D(x, y, z);
 				return true;
 			}else {
 				return false;
@@ -97,7 +98,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			}
 			this.world = world;
 			this.sphereBuilder.setCenter(pos);
-			this.offset = pos;
+			this.offset = new Vector3D(pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}else if(args[0].equals(RADIUS)) {
 			if(args.length != 2) {
@@ -179,7 +180,8 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		double lby = center.getY() - radius + 0.5;
 		double lbz = center.getZ() - radius + 0.5;
 		BoundRegion3D boundRegion = new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
-		return new Selection(this.world, boundRegion, this.offset);
+		BlockVector3D bo = new BlockVector3D((int)this.offset.getX(), (int)this.offset.getY(), (int)this.offset.getZ());
+		return new Selection(this.world, boundRegion, bo);
 	}
 
 }
