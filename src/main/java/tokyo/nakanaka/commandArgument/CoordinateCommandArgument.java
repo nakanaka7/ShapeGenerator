@@ -25,8 +25,6 @@ public class CoordinateCommandArgument {
 		return s;
 	}
 	
-	
-	
 	public List<String> onTabComplete(String arg) {
 		return Arrays.asList("~");
 	}
