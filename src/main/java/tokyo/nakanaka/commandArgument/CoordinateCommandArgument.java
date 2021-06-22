@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CoordinateCommandArgument {
-	public int onParsing(String arg, int offset) {
+	public int onParsingInt(String arg, int offset) {
 		int s;
 		try {
 			s = Integer.parseInt(arg);
@@ -24,6 +24,8 @@ public class CoordinateCommandArgument {
 		}
 		return s;
 	}
+	
+	
 	
 	public List<String> onTabComplete(String arg) {
 		return Arrays.asList("~");

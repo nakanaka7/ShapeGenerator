@@ -64,9 +64,9 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsing(args[1], offsetX);
-					y = coordArg.onParsing(args[2], offsetY);
-					z = coordArg.onParsing(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], offsetX);
+					y = coordArg.onParsingInt(args[2], offsetY);
+					z = coordArg.onParsingInt(args[3], offsetZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -84,9 +84,9 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsing(args[1], offsetX);
-					y = coordArg.onParsing(args[2], offsetY);
-					z = coordArg.onParsing(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], offsetX);
+					y = coordArg.onParsingInt(args[2], offsetY);
+					z = coordArg.onParsingInt(args[3], offsetZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
