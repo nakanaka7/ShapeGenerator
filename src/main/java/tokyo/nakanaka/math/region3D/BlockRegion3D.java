@@ -1,10 +1,9 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.math.region3D;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.region3D.Region3D;
 
 public class BlockRegion3D{
 	private Region3D region;
