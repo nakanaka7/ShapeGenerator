@@ -58,7 +58,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		PluginManager plManager = getServer().getPluginManager();
 		SelectionMessenger messenger = new SelectionMessenger(selManager);
 		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(messenger);
-		plManager.registerEvents(new ClickBlockEventHandlerAdapter(this.getServer(), playerRepo, clickHandler), this);
+		plManager.registerEvents(new ClickBlockEventHandlerAdapter(this.getServer(), playerRepo, new BukkitScheduler(this),clickHandler), this);
 	}
 	
 	@Override
