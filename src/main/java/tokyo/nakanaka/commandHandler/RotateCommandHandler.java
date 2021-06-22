@@ -11,7 +11,7 @@ import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MoveCommand;
+import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.RotateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 
@@ -72,8 +72,8 @@ public class RotateCommandHandler implements CommandHandler{
 		GenerateCommand originalCmd;
 		if(cmd instanceof GenerateCommand) {
 			originalCmd = (GenerateCommand) cmd;
-		}else if(cmd instanceof MoveCommand) {
-			originalCmd = ((MoveCommand)cmd).getLastCommand();
+		}else if(cmd instanceof AdjustCommand) {
+			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
 			player.getLogger().print(HEAD_ERROR + "Invalid Operation");
 			return true;

@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
+import tokyo.nakanaka.commandHandler.DeleteCommandHandler;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
 import tokyo.nakanaka.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.commandHandler.PhysicsCommandHandler;
@@ -46,6 +47,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new ShiftCommandHandler());
 		cmdRepo.register(new ScaleCommandHandler());
 		cmdRepo.register(new RotateCommandHandler());
+		cmdRepo.register(new DeleteCommandHandler());
 		cmdRepo.register(new UndoCommandHandler());
 		cmdRepo.register(new RedoCommandHandler());
 	}

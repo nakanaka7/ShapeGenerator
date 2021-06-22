@@ -1,6 +1,5 @@
 package tokyo.nakanaka.math.region3D;
 
-import tokyo.nakanaka.BlockRegion3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 
@@ -24,14 +23,14 @@ public class BoundRegion3D {
 		this.lowerBoundZ = lowerBoundZ;
 	}
 
-	public BoundRegion3D getShiftedRegion(double dx, double dy, double dz) {
-		Region3D region = Region3Ds.shift(this.region, new Vector3D(dx, dy, dz));
-		double ubx = this.upperBoundX + dx;
-		double uby = this.upperBoundY + dy;
-		double ubz = this.upperBoundZ + dz;
-		double lbx = this.lowerBoundX + dx;
-		double lby = this.lowerBoundY + dy;
-		double lbz = this.lowerBoundZ + dz;
+	public BoundRegion3D getShiftedRegion(Vector3D displacement) {
+		Region3D region = Region3Ds.shift(this.region, displacement);
+		double ubx = this.upperBoundX + displacement.getX();
+		double uby = this.upperBoundY + displacement.getY();
+		double ubz = this.upperBoundZ + displacement.getZ();
+		double lbx = this.lowerBoundX + displacement.getX();
+		double lby = this.lowerBoundY + displacement.getY();
+		double lbz = this.lowerBoundZ + displacement.getZ();
 		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	

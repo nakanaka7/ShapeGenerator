@@ -11,9 +11,10 @@ import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MoveCommand;
+import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.math.Vector3D;
 
 public class ShiftCommandHandler implements CommandHandler{
 
@@ -40,7 +41,7 @@ public class ShiftCommandHandler implements CommandHandler{
 	@Override
 	public List<Pair<String, String>> getParameterDescriptionList() {
 		Pair<String, String> desDir = new Pair<>("<direction>", "direction to shift");
-		Pair<String, String> desBlocks = new Pair<>("<blocks>", "block number to shift");
+		Pair<String, String> desBlocks = new Pair<>("<blocks>", "block number to shift (double type)");
 		return Arrays.asList(desDir, desBlocks);
 	}
 
@@ -50,7 +51,7 @@ public class ShiftCommandHandler implements CommandHandler{
 			return false;
 		}
 		Direction dir;
-		int blocks;
+		double blocks;
 		try {
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
@@ -58,7 +59,7 @@ public class ShiftCommandHandler implements CommandHandler{
 			return true;
 		}
 		try {
-			blocks = Integer.parseInt(args[1]);
+			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
 			player.getLogger().print(HEAD_ERROR + "Can not parse integer");
 			return true;
@@ -72,16 +73,17 @@ public class ShiftCommandHandler implements CommandHandler{
 		GenerateCommand originalCmd;
 		if(cmd instanceof GenerateCommand) {
 			originalCmd = (GenerateCommand) cmd;
-		}else if(cmd instanceof MoveCommand) {
-			originalCmd = ((MoveCommand)cmd).getLastCommand();
+		}else if(cmd instanceof AdjustCommand) {
+			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
 			player.getLogger().print(HEAD_ERROR + "Invalid Operation");
 			return true;
 		}
-		int dx = dir.getX() * blocks;
-		int dy = dir.getY() * blocks;
-		int dz = dir.getZ() * blocks;
-		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, dx, dy, dz, player.getBlockPhysics());
+		double dx = dir.getX() * blocks;
+		double dy = dir.getY() * blocks;
+		double dz = dir.getZ() * blocks;
+		Vector3D displacement = new Vector3D(dx, dy, dz);
+		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, player.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
 		return true;

@@ -1,14 +1,15 @@
 package tokyo.nakanaka.command;
 
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.Selection;
 
-public class ShiftCommand implements MoveCommand{
+public class ShiftCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
-	public ShiftCommand(GenerateCommand originalCmd, int dx, int dy, int dz, boolean physics) {
+	public ShiftCommand(GenerateCommand originalCmd, Vector3D displacement, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getShiftedSelection(dx, dy, dz);
+		Selection sel = originalCmd.getSelection().getShiftedSelection(displacement);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 

@@ -4,7 +4,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.selection.Selection;
 
-public class ScaleCommand implements MoveCommand{
+public class ScaleCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
