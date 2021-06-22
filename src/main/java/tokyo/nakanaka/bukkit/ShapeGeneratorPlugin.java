@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import tokyo.nakanaka.PlayerRepository;
@@ -52,6 +53,8 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new DeleteCommandHandler());
 		cmdRepo.register(new UndoCommandHandler());
 		cmdRepo.register(new RedoCommandHandler());
+		PluginManager plManager = getServer().getPluginManager();
+		plManager.registerEvents(new EventExecutor(this.getServer(), playerRepo), this);
 	}
 	
 	@Override
