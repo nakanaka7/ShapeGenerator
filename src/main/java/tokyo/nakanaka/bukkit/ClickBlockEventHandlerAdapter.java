@@ -15,12 +15,12 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.PlayerRepository;
 import tokyo.nakanaka.world.World;
 
-public class EventExecutor implements Listener{
+public class ClickBlockEventHandlerAdapter implements Listener{
 	private Server server;
 	private PlayerRepository playerRepo;
 	private ClickBlockEventHandler clickHandler;
 	
-	public EventExecutor(Server server, PlayerRepository playerRepo, ClickBlockEventHandler clickHandler) {
+	public ClickBlockEventHandlerAdapter(Server server, PlayerRepository playerRepo, ClickBlockEventHandler clickHandler) {
 		this.server = server;
 		this.playerRepo = playerRepo;
 		this.clickHandler = clickHandler;
