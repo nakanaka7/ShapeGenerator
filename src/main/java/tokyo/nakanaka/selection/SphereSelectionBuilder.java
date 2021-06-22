@@ -180,8 +180,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		double lby = center.getY() - radius + 0.5;
 		double lbz = center.getZ() - radius + 0.5;
 		BoundRegion3D boundRegion = new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
-		BlockVector3D bo = new BlockVector3D((int)this.offset.getX(), (int)this.offset.getY(), (int)this.offset.getZ());
-		return new Selection(this.world, boundRegion, bo);
+		return new Selection(this.world, boundRegion, this.offset);
 	}
 
 }

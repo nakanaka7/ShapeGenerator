@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.world.World;
@@ -13,7 +14,7 @@ import tokyo.nakanaka.world.World;
 public class CuboidSelectionBuilder implements SelectionBuilder{
 	private World world;
 	private CuboidRegionBuilder cuboidBuilder = new CuboidRegionBuilder();
-	private BlockVector3D offset;
+	private Vector3D offset;
 	private static final CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
@@ -29,7 +30,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		this.world = world;
 		BlockVector3D pos = new BlockVector3D(x, y, z);
 		this.cuboidBuilder.setPos1(pos);
-		this.offset = pos;
+		this.offset = new Vector3D(x, y, z);
 		return true;
 	}
 	
@@ -60,7 +61,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		}
 		if(args[0].equals(OFFSET)){
 			if(args.length == 1) {
-				this.offset = new BlockVector3D(offsetX, offsetY, offsetZ);
+				this.offset = new Vector3D(offsetX, offsetY, offsetZ);
 				return true;
 			}else if(args.length == 4) {
 				int x;
@@ -73,7 +74,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
-				this.offset = new BlockVector3D(x, y, z);
+				this.offset = new Vector3D(x, y, z);
 				return true;
 			}else {
 				return false;
