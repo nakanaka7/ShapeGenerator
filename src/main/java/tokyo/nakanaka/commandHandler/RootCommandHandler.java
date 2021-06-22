@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
-import tokyo.nakanaka.Player;
+
 import tokyo.nakanaka.commandLine.CommandLine;
+import tokyo.nakanaka.player.Player;
 
 public class RootCommandHandler {
 	private CommandHandlerRepository cmdLineRepo;

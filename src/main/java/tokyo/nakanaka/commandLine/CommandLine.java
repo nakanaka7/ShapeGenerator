@@ -1,6 +1,6 @@
 package tokyo.nakanaka.commandLine;
 
-import tokyo.nakanaka.Player;
+import tokyo.nakanaka.player.Player;
 
 public class CommandLine {
 	private Player player;

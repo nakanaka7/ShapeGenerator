@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.player.Player;
 
 public class RedoCommandHandler implements CommandHandler{
 	@Override

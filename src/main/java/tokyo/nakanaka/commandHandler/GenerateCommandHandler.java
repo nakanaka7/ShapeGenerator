@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
 

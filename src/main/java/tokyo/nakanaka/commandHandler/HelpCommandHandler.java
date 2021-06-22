@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
+import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements CommandHandler{
 	private CommandHandlerRepository cmdRepo;

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;

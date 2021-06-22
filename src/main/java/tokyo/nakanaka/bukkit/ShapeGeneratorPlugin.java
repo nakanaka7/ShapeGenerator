@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.DeleteCommandHandler;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
@@ -21,8 +23,10 @@ import tokyo.nakanaka.commandHandler.SelShapeCommandHandler;
 import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
 import tokyo.nakanaka.commandLine.CommandLine;
+import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
+import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SphereSelectionBuilder;
 
@@ -33,7 +37,8 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	
 	@Override
 	public void onEnable() {
-		this.cmdLineBuilder = new CommandLineBuilder(this.getServer());
+		PlayerRepository playerRepo = new PlayerRepository();
+		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		this.cmdRepo = new CommandHandlerRepository();
 		this.rootCmdHandler = new RootCommandHandler(this.cmdRepo);
 		SelectionManager selManager = new SelectionManager();
@@ -50,6 +55,10 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new DeleteCommandHandler());
 		cmdRepo.register(new UndoCommandHandler());
 		cmdRepo.register(new RedoCommandHandler());
+		PluginManager plManager = getServer().getPluginManager();
+		SelectionMessenger messenger = new SelectionMessenger(selManager);
+		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(messenger);
+		plManager.registerEvents(new ClickBlockEventHandlerAdapter(this.getServer(), playerRepo, clickHandler), this);
 	}
 	
 	@Override
