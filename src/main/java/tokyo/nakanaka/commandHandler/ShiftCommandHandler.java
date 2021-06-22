@@ -8,13 +8,13 @@ import static tokyo.nakanaka.logger.LogConstant.*;
 
 import tokyo.nakanaka.Direction;
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.player.Player;
 
 public class ShiftCommandHandler implements CommandHandler{
 

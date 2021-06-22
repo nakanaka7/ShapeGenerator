@@ -5,7 +5,7 @@ import static tokyo.nakanaka.logger.LogConstant.INDENT_NORMAL;
 
 import java.util.List;
 
-import tokyo.nakanaka.Player;
+import tokyo.nakanaka.player.Player;
 
 public class SelectionMessenger {
 	private SelectionManager selManager;

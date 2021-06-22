@@ -11,8 +11,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import tokyo.nakanaka.ClickBlockEventHandler;
-import tokyo.nakanaka.Player;
-import tokyo.nakanaka.PlayerRepository;
+import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventHandlerAdapter implements Listener{

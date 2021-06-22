@@ -6,7 +6,7 @@ import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
+import tokyo.nakanaka.player.Player;
 
 public class PhysicsCommandHandler implements CommandHandler{
 

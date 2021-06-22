@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.player.Player;
 
 public class DeleteCommandHandler implements CommandHandler{
 

@@ -7,9 +7,9 @@ import java.util.List;
 import static tokyo.nakanaka.logger.LogConstant.*;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.player.Player;
 
 public class UndoCommandHandler implements CommandHandler{
 	@Override

@@ -1,4 +1,4 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.player;
 
 import java.util.HashMap;
 import java.util.Map;

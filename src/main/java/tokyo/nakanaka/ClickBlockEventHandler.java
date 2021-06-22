@@ -1,5 +1,6 @@
 package tokyo.nakanaka;
 
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.world.World;
 

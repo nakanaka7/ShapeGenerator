@@ -6,10 +6,10 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 
-import tokyo.nakanaka.Player;
-import tokyo.nakanaka.PlayerRepository;
 import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.PlayerRepository;
 
 public class CommandLineBuilder {
 	private Server server;

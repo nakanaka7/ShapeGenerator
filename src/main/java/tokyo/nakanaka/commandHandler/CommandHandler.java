@@ -3,7 +3,7 @@ package tokyo.nakanaka.commandHandler;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.Player;
+import tokyo.nakanaka.player.Player;
 
 public interface CommandHandler {
 	String getDescription();
