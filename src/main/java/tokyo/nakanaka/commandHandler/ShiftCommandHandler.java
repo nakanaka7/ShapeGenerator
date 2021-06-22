@@ -14,6 +14,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MoveCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.math.Vector3D;
 
 public class ShiftCommandHandler implements CommandHandler{
 
@@ -50,7 +51,7 @@ public class ShiftCommandHandler implements CommandHandler{
 			return false;
 		}
 		Direction dir;
-		int blocks;
+		double blocks;
 		try {
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
@@ -58,7 +59,7 @@ public class ShiftCommandHandler implements CommandHandler{
 			return true;
 		}
 		try {
-			blocks = Integer.parseInt(args[1]);
+			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
 			player.getLogger().print(HEAD_ERROR + "Can not parse integer");
 			return true;
@@ -78,10 +79,11 @@ public class ShiftCommandHandler implements CommandHandler{
 			player.getLogger().print(HEAD_ERROR + "Invalid Operation");
 			return true;
 		}
-		int dx = dir.getX() * blocks;
-		int dy = dir.getY() * blocks;
-		int dz = dir.getZ() * blocks;
-		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, dx, dy, dz, player.getBlockPhysics());
+		double dx = dir.getX() * blocks;
+		double dy = dir.getY() * blocks;
+		double dz = dir.getZ() * blocks;
+		Vector3D displacement = new Vector3D(dx, dy, dz);
+		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, player.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
 		return true;
