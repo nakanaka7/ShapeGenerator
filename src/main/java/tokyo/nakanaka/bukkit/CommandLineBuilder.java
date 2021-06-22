@@ -1,7 +1,5 @@
 package tokyo.nakanaka.bukkit;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Location;
@@ -9,15 +7,17 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.PlayerRepository;
 import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.logger.Logger;
 
 public class CommandLineBuilder {
 	private Server server;
-	private Map<UUID, Player> humanMap = new HashMap<>();
+	private PlayerRepository repo;
 	
-	public CommandLineBuilder(Server server) {
+	public CommandLineBuilder(Server server, PlayerRepository repo) {
 		this.server = server;
+		this.repo = repo;
 	}
 	
 	public CommandLine build(CommandSender sender, String alias, String[] args) {
@@ -26,10 +26,10 @@ public class CommandLineBuilder {
 		if(sender instanceof org.bukkit.entity.Player) {
 			org.bukkit.entity.Player bukkitPlayer = (org.bukkit.entity.Player)sender;
 			UUID uid = bukkitPlayer.getUniqueId();
-			player = this.humanMap.get(uid);
+			player = this.repo.getHumanPlayer(uid);
 			if(player == null) {
 				player = new Player(uid, bukkitPlayer.getName());
-				this.humanMap.put(uid, player);
+				this.repo.registerHumanPlayer(player);
 			}
 			Location loc = bukkitPlayer.getLocation();
 			player.setLogger(logger);
