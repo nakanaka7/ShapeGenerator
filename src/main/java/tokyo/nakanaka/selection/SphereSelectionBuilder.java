@@ -19,6 +19,11 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 	
+	@Override
+	public World getWorld() {
+		return this.world;
+	}
+	
 	private void reset() {
 		this.world = null;
 		this.offset = null;
