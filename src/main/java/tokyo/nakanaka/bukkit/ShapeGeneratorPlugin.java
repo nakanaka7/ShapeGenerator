@@ -1,6 +1,5 @@
 package tokyo.nakanaka.bukkit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.Command;
@@ -9,6 +8,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import tokyo.nakanaka.ClickBlockEventHandler;
+import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.DeleteCommandHandler;
 import tokyo.nakanaka.commandHandler.GenerateCommandHandler;
@@ -26,25 +26,23 @@ import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
-import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SphereSelectionBuilder;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
-	private CommandHandlerRepository cmdRepo;
 	private RootCommandHandler rootCmdHandler;
 	
 	@Override
 	public void onEnable() {
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
-		this.cmdRepo = new CommandHandlerRepository();
-		this.rootCmdHandler = new RootCommandHandler(this.cmdRepo);
+		CommandHandlerRepository cmdRepo = new CommandHandlerRepository();
+		this.rootCmdHandler = new RootCommandHandler(cmdRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
-		cmdRepo.register(new HelpCommandHandler(this.cmdRepo));
+		cmdRepo.register(new HelpCommandHandler(cmdRepo));
 		cmdRepo.register(new PhysicsCommandHandler());
 		cmdRepo.register(new SelCommandHandler(selManager));
 		cmdRepo.register(new SelShapeCommandHandler(selManager));
@@ -56,9 +54,9 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new UndoCommandHandler());
 		cmdRepo.register(new RedoCommandHandler());
 		PluginManager plManager = getServer().getPluginManager();
-		SelectionMessenger messenger = new SelectionMessenger(selManager);
-		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(messenger);
-		plManager.registerEvents(new ClickBlockEventHandlerAdapter(this.getServer(), playerRepo, new BukkitScheduler(this),clickHandler), this);
+		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(selManager);
+		Scheduler scheduler = new BukkitScheduler(this);
+		plManager.registerEvents(new ClickBlockEventHandlerAdapter(this.getServer(), playerRepo, scheduler, clickHandler), this);
 	}
 	
 	@Override
@@ -70,9 +68,6 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args){
-		if(args.length == 1) {
-			return new ArrayList<>(this.cmdRepo.getAliases());
-		}
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, alias, args);
 		return this.rootCmdHandler.onTabComplete(cmdLine);
 	}

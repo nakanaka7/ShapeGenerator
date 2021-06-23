@@ -19,39 +19,35 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 	
-	private void reset() {
-		this.world = null;
-		this.offset = null;
-		this.sphereBuilder = new SphereRegionBuilder();
+	public SphereSelectionBuilder(World world) {
+		this.world = world;
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(World world, int x, int y, int z) {
-		this.reset();
-		this.world = world;
+	public World getWorld() {
+		return this.world;
+	}
+	
+	@Override
+	public boolean onLeftClickBlock(int x, int y, int z) {
 		this.sphereBuilder.setCenter(new Vector3D(x, y, z));
 		return true;
 	}
 
 	@Override
-	public boolean onRightClickBlock(World world, int x, int y, int z) {
-		if(!world.equals(this.world)) {
-			this.reset();
-		}
-		this.world = world;
+	public boolean onRightClickBlock(int x, int y, int z) {
 		Vector3D pos = new Vector3D(x, y, z);
 		Vector3D center = this.sphereBuilder.getCenter();
+		if(center == null) {
+			return false;
+		}
 		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
 		this.sphereBuilder.setRadius(radius);
 		return true;
 	}
 
 	@Override
-	public boolean onCommand(World world, int offsetX, int offsetY, int offsetZ, String[] args) {
-		if(!world.equals(this.world)) {
-			this.reset();
-			this.world = world;
-		}
+	public boolean onCommand(int offsetX, int offsetY, int offsetZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}

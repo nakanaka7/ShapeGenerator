@@ -13,6 +13,7 @@ public class BlockRegion3D{
 	private int lowerBoundX;
 	private int lowerBoundY;
 	private int lowerBoundZ;
+	private Set<BlockVector3D> vectorSetCache;
 	
 	public BlockRegion3D(Region3D region, int upperBoundX, int upperBoundY, int upperBoundZ
 			, int lowerBoundX, int lowerBoundY, int lowerBoundZ) {
@@ -33,6 +34,9 @@ public class BlockRegion3D{
 	}
 	
 	public Set<BlockVector3D> asVectorSet(){
+		if(this.vectorSetCache != null) {
+			return this.vectorSetCache;
+		}
 		Set<BlockVector3D> set = new HashSet<>();
 		for(int x = this.lowerBoundX; x <= this.upperBoundX; ++x) {
 			for(int y = this.lowerBoundY; y <= this.upperBoundY; ++y) {
@@ -43,6 +47,7 @@ public class BlockRegion3D{
 				}
 			}
 		}
+		this.vectorSetCache = set;
 		return set;
 	}
 }

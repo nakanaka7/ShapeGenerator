@@ -10,10 +10,13 @@ import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
+import tokyo.nakanaka.selection.CuboidSelectionBuilder;
+import tokyo.nakanaka.world.World;
 
 public class CommandLineBuilder {
 	private Server server;
 	private PlayerRepository repo;
+	private BukkitPlayerFactory playerFactory = new BukkitPlayerFactory();
 	
 	public CommandLineBuilder(Server server, PlayerRepository repo) {
 		this.server = server;
@@ -28,15 +31,19 @@ public class CommandLineBuilder {
 			UUID uid = bukkitPlayer.getUniqueId();
 			player = this.repo.getHumanPlayer(uid);
 			if(player == null) {
-				player = new Player(uid, bukkitPlayer.getName());
+				player = this.playerFactory.createHumanPlayer(this.server, bukkitPlayer);
 				this.repo.registerHumanPlayer(player);
 			}
 			Location loc = bukkitPlayer.getLocation();
 			player.setLogger(logger);
-			player.setWorld(new BukkitWorld(server, loc.getWorld()));
+			World world = new BukkitWorld(this.server, loc.getWorld());
+			player.setWorld(world);
 			player.setX(loc.getBlockX());
 			player.setY(loc.getBlockY());
 			player.setZ(loc.getBlockZ());
+			if(player.getSelectionBuilder() == null) {
+				player.setSelectionBuilder(new CuboidSelectionBuilder(world));
+			}
 		}else {
 			throw new IllegalArgumentException();
 		}
