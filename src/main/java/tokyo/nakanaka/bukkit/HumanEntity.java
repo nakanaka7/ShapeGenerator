@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 
 import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class HumanEntity {
@@ -35,6 +36,7 @@ public class HumanEntity {
 		player.setY(y);
 		player.setZ(z);
 		player.setLogger(new BukkitLogger(this.bukkitPlayer));
+		player.setSelectionBuilder(new CuboidSelectionBuilder(world));
 		return player;
 	}
 	
