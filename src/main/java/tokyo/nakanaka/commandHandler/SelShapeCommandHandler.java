@@ -65,7 +65,7 @@ public class SelShapeCommandHandler implements CommandHandler{
 			player.getLogger().print(HEAD_WARN + "Already set : Nothing to change");
 			return true;
 		}else {
-			player.setSelectionBuilder(this.selManager.getNewSelectionBuilderInstance(shape));
+			player.setSelectionBuilder(this.selManager.newInstance(shape));
 			player.getLogger().print(HEAD_NORMAL + "Set the shape -> " + LIGHT_PURPLE + shape);
 			return true;
 		}

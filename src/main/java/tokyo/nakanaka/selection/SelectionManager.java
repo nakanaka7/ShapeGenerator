@@ -18,7 +18,7 @@ public class SelectionManager {
 		return this.shapeBuilderMap.keySet();
 	}
 	
-	public SelectionBuilder getNewSelectionBuilderInstance(SelectionShape shape) {
+	public SelectionBuilder newInstance(SelectionShape shape) {
 		Class<? extends SelectionBuilder> builderClass = this.shapeBuilderMap.get(shape);
 		if(builderClass == null) {
 			throw new IllegalArgumentException();
