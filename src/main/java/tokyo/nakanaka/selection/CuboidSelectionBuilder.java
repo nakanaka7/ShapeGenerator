@@ -23,6 +23,10 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	private static final String HEIGHT = "height";
 	private static final String LENGTH = "length";
 	
+	public CuboidSelectionBuilder(World world) {
+		this.world = world;
+	}
+
 	@Override
 	public World getWorld() {
 		return this.world;

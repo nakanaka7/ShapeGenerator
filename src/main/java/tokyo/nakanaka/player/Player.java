@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.world.World;
 
@@ -16,7 +15,7 @@ public class Player {
 	private int x;
 	private int y;
 	private int z;
-	private SelectionBuilder builder = new CuboidSelectionBuilder();
+	private SelectionBuilder builder;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	

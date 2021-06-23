@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import tokyo.nakanaka.world.World;
+
 public class SelectionManager {
 	private Map<SelectionShape, Class<? extends SelectionBuilder>> shapeBuilderMap = new HashMap<>(); 
 	private Map<Class<? extends SelectionBuilder>, SelectionShape> builderShapeMap = new HashMap<>();
@@ -18,13 +20,13 @@ public class SelectionManager {
 		return this.shapeBuilderMap.keySet();
 	}
 	
-	public SelectionBuilder newInstance(SelectionShape shape) {
+	public SelectionBuilder newInstance(SelectionShape shape, World world) {
 		Class<? extends SelectionBuilder> builderClass = this.shapeBuilderMap.get(shape);
 		if(builderClass == null) {
 			throw new IllegalArgumentException();
 		}
 		try {
-			return builderClass.getDeclaredConstructor().newInstance();
+			return builderClass.getDeclaredConstructor().newInstance(world);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();

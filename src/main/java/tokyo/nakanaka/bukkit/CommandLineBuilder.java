@@ -10,6 +10,8 @@ import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
+import tokyo.nakanaka.selection.CuboidSelectionBuilder;
+import tokyo.nakanaka.world.World;
 
 public class CommandLineBuilder {
 	private Server server;
@@ -33,10 +35,14 @@ public class CommandLineBuilder {
 			}
 			Location loc = bukkitPlayer.getLocation();
 			player.setLogger(logger);
-			player.setWorld(new BukkitWorld(server, loc.getWorld()));
+			World world = new BukkitWorld(server, loc.getWorld());
+			player.setWorld(world);
 			player.setX(loc.getBlockX());
 			player.setY(loc.getBlockY());
 			player.setZ(loc.getBlockZ());
+			if(player.getSelectionBuilder() == null) {
+				player.setSelectionBuilder(new CuboidSelectionBuilder(world));
+			}
 		}else {
 			throw new IllegalArgumentException();
 		}
