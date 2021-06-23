@@ -73,7 +73,7 @@ public class SelShapeCommandHandler implements CommandHandler{
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {
-			return this.selManager.getRegisterdShape().stream()
+			return this.selManager.getAllShape().stream()
 					.map(s -> s.toString().toLowerCase())
 					.collect(Collectors.toList());
 		}else {

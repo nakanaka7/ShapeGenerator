@@ -16,8 +16,12 @@ public class SelectionManager {
 		this.builderShapeMap.put(builderClass, shape);
 	}
 	
-	public Set<SelectionShape> getRegisterdShape(){
+	public Set<SelectionShape> getAllShape(){
 		return this.shapeBuilderMap.keySet();
+	}
+	
+	public SelectionShape getShape(SelectionBuilder builder) {
+		return this.builderShapeMap.get(builder.getClass());
 	}
 	
 	public SelectionBuilder newInstance(SelectionShape shape, World world) {
@@ -33,7 +37,4 @@ public class SelectionManager {
 		}
 	}
 	
-	public SelectionShape getShape(SelectionBuilder builder) {
-		return this.builderShapeMap.get(builder.getClass());
-	}
 }
