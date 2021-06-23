@@ -26,11 +26,10 @@ public class SelectionManager {
 			throw new IllegalArgumentException();
 		}
 		try {
-			return builderClass.getDeclaredConstructor().newInstance(world);
+			return builderClass.getDeclaredConstructor(World.class).newInstance(world);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-			return null;
+			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
 	
