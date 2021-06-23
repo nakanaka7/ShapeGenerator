@@ -16,7 +16,7 @@ public class SelectionMessenger {
 	
 	public void sendMessage(Player player) {
 		SelectionBuilder builder = player.getSelectionBuilder();
-		SelectionShape shape = this.selManager.getSelectionShape(builder);
+		SelectionShape shape = this.selManager.getShape(builder);
 		player.getLogger().print(HEAD_NORMAL + shape.toString() + " selection");
 		List<String> lines = builder.getStateLines();
 		for(String line : lines) {

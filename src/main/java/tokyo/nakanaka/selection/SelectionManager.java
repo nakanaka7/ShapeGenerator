@@ -32,7 +32,7 @@ public class SelectionManager {
 		}
 	}
 	
-	public SelectionShape getSelectionShape(SelectionBuilder builder) {
+	public SelectionShape getShape(SelectionBuilder builder) {
 		return this.builderShapeMap.get(builder.getClass());
 	}
 }

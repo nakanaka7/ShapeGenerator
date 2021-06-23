@@ -60,7 +60,7 @@ public class SelShapeCommandHandler implements CommandHandler{
 			return true;
 		}
 		SelectionBuilder builder = player.getSelectionBuilder();
-		SelectionShape original = this.selManager.getSelectionShape(builder);
+		SelectionShape original = this.selManager.getShape(builder);
 		if(shape == original) {
 			player.getLogger().print(HEAD_WARN + "Already set : Nothing to change");
 			return true;
