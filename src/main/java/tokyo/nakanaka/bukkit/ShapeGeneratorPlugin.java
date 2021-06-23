@@ -26,7 +26,6 @@ import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
-import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SphereSelectionBuilder;
 

@@ -35,7 +35,12 @@ public class RootCommandHandler {
 	}
 	
 	public List<String> onTabComplete(CommandLine cmdLine){
-		CommandHandler cmdHandler = this.cmdLineRepo.findBy(cmdLine.getAlias());
+		String alias = cmdLine.getAlias();
+		String[] args = cmdLine.getArgs();
+		if(args.length == 0) {
+			return new ArrayList<>(this.cmdLineRepo.getAliases());
+		}
+		CommandHandler cmdHandler = this.cmdLineRepo.findBy(alias);
 		if(cmdHandler != null) {
 			return cmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getArgs());
 		}else {
