@@ -25,6 +25,7 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 	private Scheduler scheduler;
 	private ClickBlockEventHandler clickHandler;
 	private Map<Player, Boolean> activateRightMap = new HashMap<>();
+	private BukkitPlayerFactory playerFactory = new BukkitPlayerFactory();
 	
 	public ClickBlockEventHandlerAdapter(Server server, PlayerRepository playerRepo, Scheduler scheduler, ClickBlockEventHandler clickHandler) {
 		this.server = server;
@@ -43,17 +44,17 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 		}
 		Player player = this.playerRepo.getHumanPlayer(bukkitPlayer.getUniqueId());
 		if(player == null) {
-			player = new Player(bukkitPlayer.getUniqueId(), bukkitPlayer.getName());
+			player = this.playerFactory.createHumanPlayer(this.server, bukkitPlayer);
 			this.playerRepo.registerHumanPlayer(player);
 		}
 		player.setLogger(new BukkitLogger(bukkitPlayer));
 		Location loc = e.getBlock().getLocation();
-		org.bukkit.World bukkitWorld = loc.getWorld();
+		World world = new BukkitWorld(this.server, loc.getWorld());
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
-		World world = new BukkitWorld(this.server, bukkitWorld);
-		this.clickHandler.onLeftClickBlock(player, world, x, y, z);
+		player.setWorld(world);
+		this.clickHandler.onLeftClickBlock(player, x, y, z);
 	}
 	
 	@EventHandler
@@ -69,7 +70,7 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 		}
 		Player player = this.playerRepo.getHumanPlayer(bukkitPlayer.getUniqueId());
 		if(player == null) {
-			player = new Player(bukkitPlayer.getUniqueId(), bukkitPlayer.getName());
+			player = this.playerFactory.createHumanPlayer(this.server, bukkitPlayer);
 			this.playerRepo.registerHumanPlayer(player);
 		}
 		player.setLogger(new BukkitLogger(bukkitPlayer));
@@ -81,12 +82,12 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 			return;
 		}
 		Location loc = e.getClickedBlock().getLocation();
-		org.bukkit.World bukkitWorld = loc.getWorld();
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
-		World world = new BukkitWorld(this.server, bukkitWorld);
-		this.clickHandler.onRightClickBlock(player, world, x, y, z);
+		World world = new BukkitWorld(this.server, loc.getWorld());
+		player.setWorld(world);
+		this.clickHandler.onRightClickBlock(player, x, y, z);
 		this.activateRightMap.put(player, false);
 		Player finalPlayer = player;//final or effectively final
 		Runnable activate = new Runnable() {

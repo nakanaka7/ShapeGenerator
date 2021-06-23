@@ -16,6 +16,7 @@ import tokyo.nakanaka.world.World;
 public class CommandLineBuilder {
 	private Server server;
 	private PlayerRepository repo;
+	private BukkitPlayerFactory playerFactory = new BukkitPlayerFactory();
 	
 	public CommandLineBuilder(Server server, PlayerRepository repo) {
 		this.server = server;
@@ -30,12 +31,12 @@ public class CommandLineBuilder {
 			UUID uid = bukkitPlayer.getUniqueId();
 			player = this.repo.getHumanPlayer(uid);
 			if(player == null) {
-				player = new Player(uid, bukkitPlayer.getName());
+				player = this.playerFactory.createHumanPlayer(this.server, bukkitPlayer);
 				this.repo.registerHumanPlayer(player);
 			}
 			Location loc = bukkitPlayer.getLocation();
 			player.setLogger(logger);
-			World world = new BukkitWorld(server, loc.getWorld());
+			World world = new BukkitWorld(this.server, loc.getWorld());
 			player.setWorld(world);
 			player.setX(loc.getBlockX());
 			player.setY(loc.getBlockY());
