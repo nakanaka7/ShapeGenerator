@@ -24,6 +24,10 @@ public class HumanEntity {
 		return this.uid;
 	}
 	
+	public World getWorld() {
+		return new BukkitWorld(this.server, this.bukkitPlayer.getWorld());
+	}
+	
 	public Player toNewPlayer() {
 		Player player = new Player(this.uid);
 		Location loc = this.bukkitPlayer.getLocation();
