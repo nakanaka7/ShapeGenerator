@@ -16,7 +16,8 @@ public class ClickBlockEventHandler {
 		this.messenger = new SelectionMessenger(selManager);
 	}
 
-	public void onLeftClickBlock(Player player, World world, int x, int y, int z) {
+	public void onLeftClickBlock(Player player, int x, int y, int z) {
+		World world = player.getWorld();
 		SelectionBuilder builder = player.getSelectionBuilder();
 		if(builder == null) {
 			builder = new CuboidSelectionBuilder(world);
@@ -29,7 +30,8 @@ public class ClickBlockEventHandler {
 		this.messenger.sendMessage(player);
 	}
 	
-	public void onRightClickBlock(Player player, World world, int x, int y, int z) {
+	public void onRightClickBlock(Player player, int x, int y, int z) {
+		World world = player.getWorld();
 		SelectionBuilder builder = player.getSelectionBuilder();
 		if(builder == null) {
 			builder = new CuboidSelectionBuilder(world);
