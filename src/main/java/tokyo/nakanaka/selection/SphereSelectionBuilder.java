@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
@@ -46,52 +47,48 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		return true;
 	}
 
+	private static Vector3D toVector3D(BlockVector3D offset, String[] args) {
+		int offsetX = offset.getX();
+		int offsetY = offset.getY();
+		int offsetZ = offset.getZ();
+		if(args.length == 0) {
+			return new Vector3D(offsetX, offsetY, offsetZ);
+		}else if(args.length == 3) {
+			double x = coordArg.onParsingDouble(args[0], offsetX);
+			double y = coordArg.onParsingDouble(args[1], offsetY);
+			double z = coordArg.onParsingDouble(args[2], offsetZ);
+			return new Vector3D(x, y, z);
+		}else {
+			throw new IllegalArgumentException();
+		}
+	}
+	
 	@Override
 	public boolean onCommand(int offsetX, int offsetY, int offsetZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}
 		if(args[0].equals(OFFSET)){
+			String[] shiftedArgs = new String[args.length - 1];
+			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
 			Vector3D offset;
-			if(args.length == 1) {
-				offset = new Vector3D(offsetX, offsetY, offsetZ);
-			}else if(args.length == 4) {
-				double x;
-				double y;
-				double z;
-				try {
-					x = coordArg.onParsingDouble(args[1], offsetX);
-					y = coordArg.onParsingDouble(args[2], offsetY);
-					z = coordArg.onParsingDouble(args[3], offsetZ);
-				}catch(IllegalArgumentException e) {
-					return false;
-				}
-				offset = new Vector3D(x, y, z);
-			}else {
+			try {
+				offset = toVector3D(new BlockVector3D(offsetX, offsetY, offsetZ), shiftedArgs);
+			}catch(IllegalArgumentException e) {
 				return false;
 			}
 			this.offset = offset;
 			return true;
 		}else if(args[0].equals(CENTER)) {
-			Vector3D pos;
-			if(args.length == 1) {
-				pos = new Vector3D(offsetX, offsetY, offsetZ);
-			}else if(args.length == 4) {
-				double x;
-				double y;
-				double z;
-				try {
-					x = coordArg.onParsingDouble(args[1], offsetX);
-					y = coordArg.onParsingDouble(args[2], offsetY);
-					z = coordArg.onParsingDouble(args[3], offsetZ);
-				}catch(IllegalArgumentException e) {
-					return false;
-				}
-				pos = new Vector3D(x, y, z);
-			}else {
+			String[] shiftedArgs = new String[args.length - 1];
+			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
+			Vector3D center;
+			try {
+				center = toVector3D(new BlockVector3D(offsetX, offsetY, offsetZ), shiftedArgs);
+			}catch(IllegalArgumentException e) {
 				return false;
 			}
-			this.sphereBuilder.setCenter(pos);
+			this.sphereBuilder.setCenter(center);
 			return true;
 		}else if(args[0].equals(RADIUS)) {
 			if(args.length != 2) {
