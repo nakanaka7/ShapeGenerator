@@ -68,9 +68,9 @@ public class BoundRegion3D {
 		int ubx = (int)Math.floor(this.upperBoundX);
 		int uby = (int)Math.floor(this.upperBoundY);
 		int ubz = (int)Math.floor(this.upperBoundZ);
-		int lbx = - (int)Math.floor(- this.lowerBoundX);
-		int lby = - (int)Math.floor(- this.lowerBoundY);
-		int lbz = - (int)Math.floor(- this.lowerBoundZ);
+		int lbx = (int)Math.floor(this.lowerBoundX);
+		int lby = (int)Math.floor(this.lowerBoundY);
+		int lbz = (int)Math.floor(this.lowerBoundZ);
 		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
