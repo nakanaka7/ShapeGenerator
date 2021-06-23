@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
-
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
@@ -65,7 +63,7 @@ public class SelCommandHandler implements CommandHandler{
 			SelectionBuilder newBuilder = this.selManager.getNewSelectionBuilderInstance(shape);
 			player.setSelectionBuilder(newBuilder);
 		}
-		builder.onCommand(world, offsetX, offsetY, offsetZ, args);
+		builder.onCommand(offsetX, offsetY, offsetZ, args);
 		new SelectionMessenger(this.selManager).sendMessage(player);
 		return true;
 	}
