@@ -28,39 +28,31 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		return this.world;
 	}
 	
-	private boolean setPos1(World world, int x, int y, int z) {
-		if(!world.equals(this.world)) {
-			this.reset();
-		}
-		this.world = world;
+	private boolean setPos1(int x, int y, int z) {
 		BlockVector3D pos = new BlockVector3D(x, y, z);
 		this.cuboidBuilder.setPos1(pos);
 		this.offset = new Vector3D(x, y, z);
 		return true;
 	}
 	
-	private boolean setPos2(World world, int x, int y, int z) {
-		if(!world.equals(this.world)) {
-			this.reset();
-		}
-		this.world = world;
+	private boolean setPos2(int x, int y, int z) {
 		BlockVector3D pos = new BlockVector3D(x, y, z);
 		this.cuboidBuilder.setPos2(pos);
 		return true;
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(World world, int x, int y, int z) {
-		return this.setPos1(world, x, y, z);
+	public boolean onLeftClickBlock(int x, int y, int z) {
+		return this.setPos1(x, y, z);
 	}
 
 	@Override
-	public boolean onRightClickBlock(World world, int x, int y, int z) {
-		return this.setPos2(world, x, y, z);
+	public boolean onRightClickBlock(int x, int y, int z) {
+		return this.setPos2(x, y, z);
 	}
 	
 	@Override
-	public boolean onCommand(World world, int offsetX, int offsetY, int offsetZ, String[] args) {
+	public boolean onCommand(int offsetX, int offsetY, int offsetZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}
@@ -86,7 +78,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}
 		}else if(args[0].equals(POS1)) {
 			if(args.length == 1) {
-				return this.setPos1(world, offsetX, offsetY, offsetZ);
+				return this.setPos1(offsetX, offsetY, offsetZ);
 			}else if(args.length == 4) {
 				int x;
 				int y;
@@ -98,13 +90,13 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
-				return this.setPos1(world, x, y, z);
+				return this.setPos1(x, y, z);
 			}else {
 				return false;
 			}
 		}else if(args[0].equals(POS2)) {
 			if(args.length == 1) {
-				return this.setPos2(world, offsetX, offsetY, offsetZ);
+				return this.setPos2(offsetX, offsetY, offsetZ);
 			}else if(args.length == 4) {
 				int x;
 				int y;
@@ -116,7 +108,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
-				return this.setPos2(world, x, y, z);
+				return this.setPos2(x, y, z);
 			}else {
 				return false;
 			}
@@ -221,6 +213,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		return new Selection(this.world, boundRegion, this.offset);
 	}
 
+	@Deprecated
 	public void reset() {
 		this.world = null;
 		this.cuboidBuilder = new CuboidRegionBuilder();
