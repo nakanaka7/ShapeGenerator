@@ -20,10 +20,6 @@ public class HumanEntity {
 		this.uid = bukkitPlayer.getUniqueId();
 	}
 	
-	public UUID getUniqueID() {
-		return this.uid;
-	}
-	
 	public World getWorld() {
 		return new BukkitWorld(this.server, this.bukkitPlayer.getWorld());
 	}
