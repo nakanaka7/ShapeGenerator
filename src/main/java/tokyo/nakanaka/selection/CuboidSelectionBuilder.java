@@ -93,6 +93,11 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	}
 
 	@Override
+	public List<String> onLabelList() {
+		return Arrays.asList(POS1, POS2, OFFSET);
+	}
+	
+	@Override
 	public List<String> onTabComplete(String[] args) {
 		if(args.length == 0) {
 			return new ArrayList<>();

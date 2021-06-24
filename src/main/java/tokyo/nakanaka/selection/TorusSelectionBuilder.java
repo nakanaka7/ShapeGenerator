@@ -110,6 +110,11 @@ public class TorusSelectionBuilder implements SelectionBuilder{
 			return false;
 		}
 	}
+	
+	@Override
+	public List<String> onLabelList() {
+		return Arrays.asList(CENTER, RADIUS_MAIN, RADIUS_SUB, OFFSET);
+	}
 
 	@Override
 	public List<String> onTabComplete(String[] args) {

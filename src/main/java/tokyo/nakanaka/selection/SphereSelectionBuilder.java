@@ -107,7 +107,12 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			return false;
 		}
 	}
-
+	
+	@Override
+	public List<String> onLabelList() {
+		return Arrays.asList(CENTER, RADIUS, OFFSET);
+	}
+	
 	@Override
 	public List<String> onTabComplete(String[] args) {
 		if(args.length == 0) {

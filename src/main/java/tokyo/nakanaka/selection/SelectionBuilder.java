@@ -18,6 +18,7 @@ public interface SelectionBuilder {
 	 * @return
 	 */
 	boolean onCommand(Logger logger, BlockVector3D playerPos, String[] args);
+	List<String> onLabelList();
 	List<String> onTabComplete(String[] args);
 	List<String> getStateLines();
 	/**
