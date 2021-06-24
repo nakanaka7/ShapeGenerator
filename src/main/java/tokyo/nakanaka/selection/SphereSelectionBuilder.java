@@ -105,22 +105,16 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public List<String> onTabComplete(String[] args) {
-		if(args.length == 0) {
-			return new ArrayList<>();
-		}
-		if(args.length == 1) {
-			return Arrays.asList(CENTER, RADIUS, OFFSET);
-		}
-		String label = args[0];
-		String[] shiftArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+	public List<String> onTabComplete(String label, String[] args) {
 		if(label.equals(CENTER)){
-			return this.centerArg.onTabComplete(shiftArgs);
+			return this.centerArg.onTabComplete(args);
 		}else if(label.equals(RADIUS)) {
-			return this.radiusArg.onTabComplete(shiftArgs[0]);
+			if(args.length != 1) {
+				return new ArrayList<>();
+			}
+			return this.radiusArg.onTabComplete(args[0]);
 		}else if(label.equals(OFFSET)) {
-			return this.offsetArg.onTabComplete(shiftArgs);
+			return this.offsetArg.onTabComplete(args);
 		}else {
 			return new ArrayList<>();
 		}

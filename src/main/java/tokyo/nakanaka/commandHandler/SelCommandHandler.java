@@ -15,6 +15,7 @@ import tokyo.nakanaka.world.World;
 
 public class SelCommandHandler implements CommandHandler{
 	private SelectionManager selManager;
+	private static final String RESET = "reset";
 	
 	public SelCommandHandler(SelectionManager selManager) {
 		this.selManager = selManager;
@@ -56,7 +57,7 @@ public class SelCommandHandler implements CommandHandler{
 		World world = player.getWorld();
 		BlockVector3D playerPos = new BlockVector3D(player.getX(), player.getY(), player.getZ());
 		SelectionBuilder builder = player.getSelectionBuilder();
-		if(label.equals("reset")){
+		if(label.equals(RESET)){
 			SelectionShape shape = this.selManager.getShape(builder);
 			SelectionBuilder newBuilder = this.selManager.newInstance(shape, world);
 			player.setSelectionBuilder(newBuilder);
@@ -76,10 +77,14 @@ public class SelCommandHandler implements CommandHandler{
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		SelectionBuilder builder = player.getSelectionBuilder();
-		List<String> list = new ArrayList<>(builder.onTabComplete(args));
-		if(args.length == 1) {
-			list.add("reset");
+		if(args.length == 0) {
+			List<String> list = new ArrayList<>(builder.onLabelList());
+			list.add(RESET);
+			return list;
 		}
-		return list;
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		return builder.onTabComplete(label, shiftArgs);
 	}
 }

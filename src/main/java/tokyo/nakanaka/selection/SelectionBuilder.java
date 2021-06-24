@@ -19,7 +19,7 @@ public interface SelectionBuilder {
 	 */
 	boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args);
 	List<String> onLabelList();
-	List<String> onTabComplete(String[] args);
+	List<String> onTabComplete(String label, String[] args);
 	List<String> getStateLines();
 	/**
 	 * @throw IllegalStateException
