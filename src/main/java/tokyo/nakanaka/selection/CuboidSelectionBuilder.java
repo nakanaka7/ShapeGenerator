@@ -56,22 +56,22 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onCommand(int offsetX, int offsetY, int offsetZ, String[] args) {
+	public boolean onCommand(int posX, int posY, int posZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}
 		if(args[0].equals(OFFSET)){
 			if(args.length == 1) {
-				this.offset = new Vector3D(offsetX, offsetY, offsetZ);
+				this.offset = new Vector3D(posX, posY, posZ);
 				return true;
 			}else if(args.length == 4) {
 				int x;
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsingInt(args[1], offsetX);
-					y = coordArg.onParsingInt(args[2], offsetY);
-					z = coordArg.onParsingInt(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], posX);
+					y = coordArg.onParsingInt(args[2], posY);
+					z = coordArg.onParsingInt(args[3], posZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -82,15 +82,15 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}
 		}else if(args[0].equals(POS1)) {
 			if(args.length == 1) {
-				return this.setPos1(offsetX, offsetY, offsetZ);
+				return this.setPos1(posX, posY, posZ);
 			}else if(args.length == 4) {
 				int x;
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsingInt(args[1], offsetX);
-					y = coordArg.onParsingInt(args[2], offsetY);
-					z = coordArg.onParsingInt(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], posX);
+					y = coordArg.onParsingInt(args[2], posY);
+					z = coordArg.onParsingInt(args[3], posZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -100,15 +100,15 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}
 		}else if(args[0].equals(POS2)) {
 			if(args.length == 1) {
-				return this.setPos2(offsetX, offsetY, offsetZ);
+				return this.setPos2(posX, posY, posZ);
 			}else if(args.length == 4) {
 				int x;
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsingInt(args[1], offsetX);
-					y = coordArg.onParsingInt(args[2], offsetY);
-					z = coordArg.onParsingInt(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], posX);
+					y = coordArg.onParsingInt(args[2], posY);
+					z = coordArg.onParsingInt(args[3], posZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -177,16 +177,16 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		String line1 = POS1 + ": ";
 		BlockVector3D pos1 = this.cuboidBuilder.getPos1();
 		if(pos1 != null) {
-			line1 += pos1.getX() + "/ " + pos1.getY() + "/ " + pos1.getZ();
+			line1 += pos1.toString();
 		}
 		String line2 = POS2 + ": ";
 		BlockVector3D pos2 = this.cuboidBuilder.getPos2();
 		if(pos2 != null) {
-			line2 += pos2.getX() + "/ " + pos2.getY() + "/ " + pos2.getZ();
+			line2 += pos2.toString();
 		}
 		String line3 = OFFSET + ": ";
 		if(offset != null) {
-			line3 += offset.getX() + "/ " + offset.getY() + "/ " + offset.getZ();
+			line3 += offset.toString();
 		}
 		String line4 = WIDTH + ": ";
 		String line5 = HEIGHT + ": ";
