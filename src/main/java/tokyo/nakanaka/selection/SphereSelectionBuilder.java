@@ -39,6 +39,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	@Override
 	public boolean onLeftClickBlock(Logger logger, int x, int y, int z) {
 		this.center = new Vector3D(x, y, z);
+		this.radius = 0;
 		return true;
 	}
 
