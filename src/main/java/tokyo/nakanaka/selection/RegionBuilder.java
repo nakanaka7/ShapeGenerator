@@ -10,7 +10,7 @@ public interface RegionBuilder {
 	boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos);
 	boolean onRightClickBlock(Logger logger, BlockVector3D blockPos);
 	boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args);
-	List<String> getLabelList();
+	List<String> onLabelList();
 	List<String> onTabComplete(String label, String[] args);
 	List<String> getStateLines();
 	BoundRegion3D build();
