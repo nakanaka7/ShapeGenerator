@@ -63,7 +63,7 @@ public class SelCommandHandler implements CommandHandler{
 			SelectionBuilder newBuilder = this.selManager.newInstance(shape, world);
 			player.setSelectionBuilder(newBuilder);
 		}
-		builder.onCommand(offsetX, offsetY, offsetZ, args);
+		builder.onCommand(player.getLogger(), offsetX, offsetY, offsetZ, args);
 		new SelectionMessenger(this.selManager).sendMessage(player);
 		return true;
 	}
