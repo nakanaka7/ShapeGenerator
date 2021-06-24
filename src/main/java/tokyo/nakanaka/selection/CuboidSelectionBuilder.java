@@ -33,37 +33,38 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		return this.world;
 	}
 	
-	private boolean setPos1(int x, int y, int z) {
-		BlockVector3D pos = new BlockVector3D(x, y, z);
+	private boolean setPos1(BlockVector3D pos) {
 		this.cuboidBuilder.setPos1(pos);
-		this.offset = new Vector3D(x, y, z);
+		this.offset = new Vector3D(pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 	
-	private boolean setPos2(int x, int y, int z) {
-		BlockVector3D pos = new BlockVector3D(x, y, z);
+	private boolean setPos2(BlockVector3D pos) {
 		this.cuboidBuilder.setPos2(pos);
 		return true;
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(Logger logger, int x, int y, int z) {
-		return this.setPos1(x, y, z);
+	public boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+		return this.setPos1(blockPos);
 	}
 
 	@Override
-	public boolean onRightClickBlock(Logger logger, int x, int y, int z) {
-		return this.setPos2(x, y, z);
+	public boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
+		return this.setPos2(blockPos);
 	}
 	
 	@Override
-	public boolean onCommand(Logger logger, int posX, int posY, int posZ, String[] args) {
+	public boolean onCommand(Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}
+		int posX = playerPos.getX();
+		int posY = playerPos.getY();
+		int posZ = playerPos.getZ();
 		if(args[0].equals(OFFSET)){
 			if(args.length == 1) {
-				this.offset = new Vector3D(posX, posY, posZ);
+				this.offset = new Vector3D(playerPos.getX(), playerPos.getY(), playerPos.getZ());
 				return true;
 			}else if(args.length == 4) {
 				int x;
@@ -83,7 +84,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}
 		}else if(args[0].equals(POS1)) {
 			if(args.length == 1) {
-				return this.setPos1(posX, posY, posZ);
+				return this.setPos1(playerPos);
 			}else if(args.length == 4) {
 				int x;
 				int y;
@@ -95,13 +96,13 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
-				return this.setPos1(x, y, z);
+				return this.setPos1(new BlockVector3D(x, y, z));
 			}else {
 				return false;
 			}
 		}else if(args[0].equals(POS2)) {
 			if(args.length == 1) {
-				return this.setPos2(posX, posY, posZ);
+				return this.setPos2(playerPos);
 			}else if(args.length == 4) {
 				int x;
 				int y;
@@ -113,7 +114,7 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
-				return this.setPos2(x, y, z);
+				return this.setPos2(new BlockVector3D(x, y, z));
 			}else {
 				return false;
 			}

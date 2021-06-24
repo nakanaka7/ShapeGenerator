@@ -3,12 +3,13 @@ package tokyo.nakanaka.selection;
 import java.util.List;
 
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.world.World;
 
 public interface SelectionBuilder {
 	World getWorld();
-	boolean onLeftClickBlock(Logger logger, int x, int y, int z);
-	boolean onRightClickBlock(Logger logger, int x, int y, int z);
+	boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos);
+	boolean onRightClickBlock(Logger logger, BlockVector3D blockPos);
 	/**
 	 * @param posX player position x
 	 * @param posY player position y
@@ -16,7 +17,7 @@ public interface SelectionBuilder {
 	 * @param args
 	 * @return
 	 */
-	boolean onCommand(Logger logger, int posX, int posY, int posZ, String[] args);
+	boolean onCommand(Logger logger, BlockVector3D playerPos, String[] args);
 	List<String> onTabComplete(String[] args);
 	List<String> getStateLines();
 	/**

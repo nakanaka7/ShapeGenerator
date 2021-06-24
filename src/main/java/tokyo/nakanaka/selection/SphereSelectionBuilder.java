@@ -38,14 +38,20 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(Logger logger, int x, int y, int z) {
+	public boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+		int x = blockPos.getX();
+		int y = blockPos.getY();
+		int z = blockPos.getZ();
 		this.center = new Vector3D(x, y, z);
 		this.radius = 0;
 		return true;
 	}
 
 	@Override
-	public boolean onRightClickBlock(Logger logger, int x, int y, int z) {
+	public boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
+		int x = blockPos.getX();
+		int y = blockPos.getY();
+		int z = blockPos.getZ();
 		Vector3D pos = new Vector3D(x, y, z);
 		if(this.center == null) {
 			logger.print(HEAD_ERROR + "Set center first");
@@ -57,7 +63,10 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	}
 
 	@Override
-	public boolean onCommand(Logger logger, int posX, int posY, int posZ, String[] args) {
+	public boolean onCommand(Logger logger, BlockVector3D playerPos, String[] args) {
+		int posX = playerPos.getX();
+		int posY = playerPos.getY();
+		int posZ = playerPos.getZ();
 		if(args.length == 0) {
 			return false;
 		}
