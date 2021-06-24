@@ -1,11 +1,11 @@
 package tokyo.nakanaka.selection;
 
-import static tokyo.nakanaka.selection.SelectionUtils.toVector3D;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.commandArgument.LengthArgument;
+import tokyo.nakanaka.commandArgument.PositionArgument;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
@@ -16,12 +16,15 @@ import tokyo.nakanaka.world.World;
 
 public class SphereSelectionBuilder implements SelectionBuilder{
 	private World world;
-	private Vector3D offset;
 	private Vector3D center;
 	private double radius;
-	private static final String OFFSET = "offset";
+	private Vector3D offset;
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
+	private static final String OFFSET = "offset";
+	private PositionArgument centerArg = new PositionArgument();
+	private LengthArgument radiusArg = new LengthArgument();
+	private PositionArgument offsetArg = new PositionArgument();
 	
 	public SphereSelectionBuilder(World world) {
 		this.world = world;
@@ -54,42 +57,38 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		if(args.length == 0) {
 			return false;
 		}
-		if(args[0].equals(OFFSET)){
-			String[] shiftedArgs = new String[args.length - 1];
-			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
-			Vector3D offset;
-			try {
-				offset = toVector3D(new BlockVector3D(posX, posY, posZ), shiftedArgs);
-			}catch(IllegalArgumentException e) {
-				return false;
-			}
-			this.offset = offset;
-			return true;
-		}else if(args[0].equals(CENTER)) {
-			String[] shiftedArgs = new String[args.length - 1];
-			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		if(label.equals(CENTER)) {
 			Vector3D center;
 			try {
-				center = toVector3D(new BlockVector3D(posX, posY, posZ), shiftedArgs);
+				center = this.centerArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
 			this.center = center;
 			return true;
-		}else if(args[0].equals(RADIUS)) {
-			if(args.length != 2) {
+		}else if(label.equals(RADIUS)) {
+			if(shiftArgs.length != 1) {
 				return false;
 			}
 			double r;
 			try {
-				r = Double.parseDouble(args[1]);
+				r = this.radiusArg.onParse(shiftArgs[0]);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}	
-			if(r < 0) {
+			this.radius = r;
+			return true;
+		}else if(label.equals(OFFSET)){
+			Vector3D offset;
+			try {
+				offset = this.offsetArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+			}catch(IllegalArgumentException e) {
 				return false;
 			}
-			this.radius = r;
+			this.offset = offset;
 			return true;
 		}else {
 			return false;
@@ -104,19 +103,15 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		if(args.length == 1) {
 			return Arrays.asList(CENTER, RADIUS, OFFSET);
 		}
-		if(args[0].equals(CENTER) || args[0].equals(OFFSET)) {
-			if(1 <= args.length && args.length <= 4) {
-				return Arrays.asList("~");
-			}else {
-				return new ArrayList<>();
-			}
-		}else if(args[0].equals(RADIUS)) {
-			if(args.length == 2) {
-				return Arrays.asList("0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0",
-						"5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0", "9.5", "10.0");
-			}else {
-				return new ArrayList<>();
-			}
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		if(label.equals(CENTER)){
+			return this.centerArg.onTabComplete(shiftArgs);
+		}else if(label.equals(RADIUS)) {
+			return this.radiusArg.onTabComplete(shiftArgs[0]);
+		}else if(label.equals(OFFSET)) {
+			return this.offsetArg.onTabComplete(shiftArgs);
 		}else {
 			return new ArrayList<>();
 		}
