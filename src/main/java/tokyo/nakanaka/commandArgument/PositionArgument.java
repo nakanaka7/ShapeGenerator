@@ -7,7 +7,7 @@ import java.util.List;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 
-public class PositionArgumentList{
+public class PositionArgument{
 
 	public Vector3D onParse(BlockVector3D offset, String[] args) {
 		int offsetX = offset.getX();
