@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
+import tokyo.nakanaka.commandArgument.PositionArgument;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
@@ -18,13 +18,15 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	private Vector3D pos1;
 	private Vector3D pos2;
 	private Vector3D offset;
-	private static final CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 	private static final String OFFSET = "offset";
 	private static final String WIDTH = "width";
 	private static final String HEIGHT = "height";
 	private static final String LENGTH = "length";
+	private PositionArgument pos1Arg = new PositionArgument();
+	private PositionArgument pos2Arg = new PositionArgument();
+	private PositionArgument offsetArg = new PositionArgument();
 	
 	public CuboidSelectionBuilder(World world) {
 		this.world = world;
@@ -55,66 +57,36 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		int posX = playerPos.getX();
 		int posY = playerPos.getY();
 		int posZ = playerPos.getZ();
-		if(args[0].equals(OFFSET)){
-			if(args.length == 1) {
-				this.offset = new Vector3D(playerPos.getX(), playerPos.getY(), playerPos.getZ());
-				return true;
-			}else if(args.length == 4) {
-				int x;
-				int y;
-				int z;
-				try {
-					x = coordArg.onParsingInt(args[1], posX);
-					y = coordArg.onParsingInt(args[2], posY);
-					z = coordArg.onParsingInt(args[3], posZ);
-				}catch(IllegalArgumentException e) {
-					return false;
-				}
-				this.offset = new Vector3D(x, y, z);
-				return true;
-			}else {
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		if(label.equals(OFFSET)){
+			Vector3D offset;
+			try {
+				offset = this.offsetArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+			}catch(IllegalArgumentException e) {
 				return false;
 			}
+			this.offset = offset;
+			return true;
 		}else if(args[0].equals(POS1)) {
-			if(args.length == 1) {
-				this.pos1 = new Vector3D(playerPos.getX(), playerPos.getY(), playerPos.getZ());
-				return true;
-			}else if(args.length == 4) {
-				int x;
-				int y;
-				int z;
-				try {
-					x = coordArg.onParsingInt(args[1], posX);
-					y = coordArg.onParsingInt(args[2], posY);
-					z = coordArg.onParsingInt(args[3], posZ);
-				}catch(IllegalArgumentException e) {
-					return false;
-				}
-				this.pos1 = new Vector3D(x, y, z);
-				return true;
-			}else {
+			Vector3D pos1;
+			try {
+				pos1 = this.pos1Arg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+			}catch(IllegalArgumentException e) {
 				return false;
 			}
+			this.pos1 = pos1;
+			return true;
 		}else if(args[0].equals(POS2)) {
-			if(args.length == 1) {
-				this.pos2 = new Vector3D(playerPos.getX(), playerPos.getY(), playerPos.getZ());
-				return true;
-			}else if(args.length == 4) {
-				int x;
-				int y;
-				int z;
-				try {
-					x = coordArg.onParsingInt(args[1], posX);
-					y = coordArg.onParsingInt(args[2], posY);
-					z = coordArg.onParsingInt(args[3], posZ);
-				}catch(IllegalArgumentException e) {
-					return false;
-				}
-				this.pos2 = new Vector3D(x, y, z);
-				return true;
-			}else {
+			Vector3D pos2;
+			try {
+				pos2 = this.pos2Arg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+			}catch(IllegalArgumentException e) {
 				return false;
 			}
+			this.pos2 = pos2;
+			return true;
 		}else {
 			return false;
 		}
@@ -124,14 +96,22 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	public List<String> onTabComplete(String[] args) {
 		if(args.length == 0) {
 			return new ArrayList<>();
-		}else if(args.length == 1) {
-			return Arrays.asList(POS1, POS2, OFFSET);
-		}else if((args[0].equals(POS1) || args[0].equals(POS2) || args[0].equals(OFFSET))) {
-			if(args.length <= 4) {
-				return Arrays.asList("~");
-			}
 		}
-		return new ArrayList<>();
+		if(args.length == 1) {
+			return Arrays.asList(POS1, POS2, OFFSET);
+		}
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		if(label.equals(POS1)){
+			return this.pos1Arg.onTabComplete(shiftArgs);
+		}else if(label.equals(POS2)) {
+			return this.pos2Arg.onTabComplete(shiftArgs);
+		}else if(label.equals(OFFSET)) {
+			return this.offsetArg.onTabComplete(shiftArgs);
+		}else {
+			return new ArrayList<>();
+		}
 	}
 	
 	@Override
