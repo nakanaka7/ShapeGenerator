@@ -56,22 +56,22 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onCommand(int offsetX, int offsetY, int offsetZ, String[] args) {
+	public boolean onCommand(int posX, int posY, int posZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}
 		if(args[0].equals(OFFSET)){
 			if(args.length == 1) {
-				this.offset = new Vector3D(offsetX, offsetY, offsetZ);
+				this.offset = new Vector3D(posX, posY, posZ);
 				return true;
 			}else if(args.length == 4) {
 				int x;
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsingInt(args[1], offsetX);
-					y = coordArg.onParsingInt(args[2], offsetY);
-					z = coordArg.onParsingInt(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], posX);
+					y = coordArg.onParsingInt(args[2], posY);
+					z = coordArg.onParsingInt(args[3], posZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -82,15 +82,15 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}
 		}else if(args[0].equals(POS1)) {
 			if(args.length == 1) {
-				return this.setPos1(offsetX, offsetY, offsetZ);
+				return this.setPos1(posX, posY, posZ);
 			}else if(args.length == 4) {
 				int x;
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsingInt(args[1], offsetX);
-					y = coordArg.onParsingInt(args[2], offsetY);
-					z = coordArg.onParsingInt(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], posX);
+					y = coordArg.onParsingInt(args[2], posY);
+					z = coordArg.onParsingInt(args[3], posZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}
@@ -100,15 +100,15 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}
 		}else if(args[0].equals(POS2)) {
 			if(args.length == 1) {
-				return this.setPos2(offsetX, offsetY, offsetZ);
+				return this.setPos2(posX, posY, posZ);
 			}else if(args.length == 4) {
 				int x;
 				int y;
 				int z;
 				try {
-					x = coordArg.onParsingInt(args[1], offsetX);
-					y = coordArg.onParsingInt(args[2], offsetY);
-					z = coordArg.onParsingInt(args[3], offsetZ);
+					x = coordArg.onParsingInt(args[1], posX);
+					y = coordArg.onParsingInt(args[2], posY);
+					z = coordArg.onParsingInt(args[3], posZ);
 				}catch(IllegalArgumentException e) {
 					return false;
 				}

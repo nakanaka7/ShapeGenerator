@@ -64,7 +64,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onCommand(int offsetX, int offsetY, int offsetZ, String[] args) {
+	public boolean onCommand(int posX, int posY, int posZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}
@@ -73,7 +73,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
 			Vector3D offset;
 			try {
-				offset = toVector3D(new BlockVector3D(offsetX, offsetY, offsetZ), shiftedArgs);
+				offset = toVector3D(new BlockVector3D(posX, posY, posZ), shiftedArgs);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
@@ -84,7 +84,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
 			Vector3D center;
 			try {
-				center = toVector3D(new BlockVector3D(offsetX, offsetY, offsetZ), shiftedArgs);
+				center = toVector3D(new BlockVector3D(posX, posY, posZ), shiftedArgs);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
