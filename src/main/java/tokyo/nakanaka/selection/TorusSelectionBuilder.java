@@ -12,7 +12,6 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
-import tokyo.nakanaka.math.region3D.SphereRegion3D;
 import tokyo.nakanaka.math.region3D.TorusRegion3D;
 import tokyo.nakanaka.world.World;
 
