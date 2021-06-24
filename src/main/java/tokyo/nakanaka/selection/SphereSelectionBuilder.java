@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.commandArgument.LengthArgument;
 import tokyo.nakanaka.commandArgument.PositionArgument;
 import tokyo.nakanaka.logger.Logger;
@@ -47,7 +48,8 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	public boolean onRightClickBlock(Logger logger, int x, int y, int z) {
 		Vector3D pos = new Vector3D(x, y, z);
 		if(this.center == null) {
-			return false;
+			logger.print(HEAD_ERROR + "Set center first");
+			return true;
 		}
 		double radius = Math.floor(pos.negate(this.center).getAbsolute()) + 0.5;
 		this.radius = radius;
