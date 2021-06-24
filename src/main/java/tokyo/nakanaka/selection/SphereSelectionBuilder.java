@@ -16,15 +16,15 @@ import tokyo.nakanaka.world.World;
 
 public class SphereSelectionBuilder implements SelectionBuilder{
 	private World world;
-	private Vector3D offset;
 	private Vector3D center;
 	private double radius;
-	private static final String OFFSET = "offset";
+	private Vector3D offset;
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
-	private PositionArgument offsetArg = new PositionArgument();
+	private static final String OFFSET = "offset";
 	private PositionArgument centerArg = new PositionArgument();
 	private LengthArgument radiusArg = new LengthArgument();
+	private PositionArgument offsetArg = new PositionArgument();
 	
 	public SphereSelectionBuilder(World world) {
 		this.world = world;
@@ -60,16 +60,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
-		if(label.equals(OFFSET)){
-			Vector3D offset;
-			try {
-				offset = this.offsetArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
-			}catch(IllegalArgumentException e) {
-				return false;
-			}
-			this.offset = offset;
-			return true;
-		}else if(label.equals(CENTER)) {
+		if(label.equals(CENTER)) {
 			Vector3D center;
 			try {
 				center = this.centerArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
@@ -90,6 +81,15 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			}	
 			this.radius = r;
 			return true;
+		}else if(label.equals(OFFSET)){
+			Vector3D offset;
+			try {
+				offset = this.offsetArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+			}catch(IllegalArgumentException e) {
+				return false;
+			}
+			this.offset = offset;
+			return true;
 		}else {
 			return false;
 		}
@@ -108,10 +108,10 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
 		if(label.equals(CENTER)){
 			return this.centerArg.onTabComplete(shiftArgs);
-		}else if(label.equals(OFFSET)) {
-			return this.offsetArg.onTabComplete(shiftArgs);
 		}else if(label.equals(RADIUS)) {
 			return this.radiusArg.onTabComplete(shiftArgs[0]);
+		}else if(label.equals(OFFSET)) {
+			return this.offsetArg.onTabComplete(shiftArgs);
 		}else {
 			return new ArrayList<>();
 		}
