@@ -177,16 +177,16 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		String line1 = POS1 + ": ";
 		BlockVector3D pos1 = this.cuboidBuilder.getPos1();
 		if(pos1 != null) {
-			line1 += pos1.getX() + "/ " + pos1.getY() + "/ " + pos1.getZ();
+			line1 += pos1.toString();
 		}
 		String line2 = POS2 + ": ";
 		BlockVector3D pos2 = this.cuboidBuilder.getPos2();
 		if(pos2 != null) {
-			line2 += pos2.getX() + "/ " + pos2.getY() + "/ " + pos2.getZ();
+			line2 += pos2.toString();
 		}
 		String line3 = OFFSET + ": ";
 		if(offset != null) {
-			line3 += offset.getX() + "/ " + offset.getY() + "/ " + offset.getZ();
+			line3 += offset.toString();
 		}
 		String line4 = WIDTH + ": ";
 		String line5 = HEIGHT + ": ";

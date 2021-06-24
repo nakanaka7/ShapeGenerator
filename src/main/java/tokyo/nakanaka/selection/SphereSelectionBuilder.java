@@ -122,7 +122,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		String line1 = CENTER + ": ";
 		Vector3D center = this.sphereBuilder.getCenter();
 		if(center != null) {
-			line1 += center.getX() + "/ " + center.getY() + "/ " + center.getZ();
+			line1 += center.toString();
 		}
 		String line2 = RADIUS + ": ";
 		Double r = this.sphereBuilder.getRadius();
@@ -133,7 +133,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		if(offset == null) {
 			line3 += "= center";
 		}else {
-			line3 += offset.getX() + "/ " + offset.getY() + "/ " + offset.getZ();
+			line3 += offset.toString();
 		}
 		return Arrays.asList(line1, line2, line3);
 	}
