@@ -9,6 +9,9 @@ import tokyo.nakanaka.math.Vector3D;
 
 public class PositionArgument{
 
+	/**
+	 * @throw IllegalArgumentException
+	 */
 	public Vector3D onParse(BlockVector3D offset, String[] args) {
 		int offsetX = offset.getX();
 		int offsetY = offset.getY();
