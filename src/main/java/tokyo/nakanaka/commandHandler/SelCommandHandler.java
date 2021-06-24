@@ -47,10 +47,16 @@ public class SelCommandHandler implements CommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		if(args.length == 0) {
+			return false;
+		}
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
 		World world = player.getWorld();
 		BlockVector3D playerPos = new BlockVector3D(player.getX(), player.getY(), player.getZ());
 		SelectionBuilder builder = player.getSelectionBuilder();
-		if(args.length == 1 && args[0].equals("reset")){
+		if(label.equals("reset")){
 			SelectionShape shape = this.selManager.getShape(builder);
 			SelectionBuilder newBuilder = this.selManager.newInstance(shape, world);
 			player.setSelectionBuilder(newBuilder);
@@ -62,7 +68,7 @@ public class SelCommandHandler implements CommandHandler{
 			SelectionBuilder newBuilder = this.selManager.newInstance(shape, world);
 			player.setSelectionBuilder(newBuilder);
 		}
-		builder.onCommand(player.getLogger(), playerPos, args);
+		builder.onCommand(player.getLogger(), playerPos, label, shiftArgs);
 		new SelectionMessenger(this.selManager).sendMessage(player);
 		return true;
 	}

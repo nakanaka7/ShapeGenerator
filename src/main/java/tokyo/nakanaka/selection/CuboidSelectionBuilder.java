@@ -50,38 +50,29 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onCommand(Logger logger, BlockVector3D playerPos, String[] args) {
-		if(args.length == 0) {
-			return false;
-		}
-		int posX = playerPos.getX();
-		int posY = playerPos.getY();
-		int posZ = playerPos.getZ();
-		String label = args[0];
-		String[] shiftArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+	public boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
 		if(label.equals(OFFSET)){
 			Vector3D offset;
 			try {
-				offset = this.offsetArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+				offset = this.offsetArg.onParse(playerPos, args);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
 			this.offset = offset;
 			return true;
-		}else if(args[0].equals(POS1)) {
+		}else if(label.equals(POS1)) {
 			Vector3D pos1;
 			try {
-				pos1 = this.pos1Arg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+				pos1 = this.pos1Arg.onParse(playerPos, args);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
 			this.pos1 = pos1;
 			return true;
-		}else if(args[0].equals(POS2)) {
+		}else if(label.equals(POS2)) {
 			Vector3D pos2;
 			try {
-				pos2 = this.pos2Arg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+				pos2 = this.pos2Arg.onParse(playerPos, args);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}

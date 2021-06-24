@@ -54,44 +54,35 @@ public class TorusSelectionBuilder implements SelectionBuilder{
 	}
 
 	@Override
-	public boolean onCommand(Logger logger, BlockVector3D playerPos, String[] args) {
-		int posX = playerPos.getX();
-		int posY = playerPos.getY();
-		int posZ = playerPos.getZ();
-		if(args.length == 0) {
-			return false;
-		}
-		String label = args[0];
-		String[] shiftArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+	public boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
 		if(label.equals(CENTER)) {
 			Vector3D center;
 			try {
-				center = this.centerArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+				center = this.centerArg.onParse(playerPos, args);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
 			this.center = center;
 			return true;
 		}else if(label.equals(RADIUS_MAIN)) {
-			if(shiftArgs.length != 1) {
+			if(args.length != 1) {
 				return false;
 			}
 			double radiusMain;
 			try {
-				radiusMain = this.radiusMainArg.onParse(shiftArgs[0]);
+				radiusMain = this.radiusMainArg.onParse(args[0]);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}	
 			this.radiusMain = radiusMain;
 			return true;
 		}else if(label.equals(RADIUS_SUB)) {
-			if(shiftArgs.length != 1) {
+			if(args.length != 1) {
 				return false;
 			}
 			double radiusSub;
 			try {
-				radiusSub = this.radiusSubArg.onParse(shiftArgs[0]);
+				radiusSub = this.radiusSubArg.onParse(args[0]);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}	
@@ -100,7 +91,7 @@ public class TorusSelectionBuilder implements SelectionBuilder{
 		}else if(label.equals(OFFSET)){
 			Vector3D offset;
 			try {
-				offset = this.offsetArg.onParse(new BlockVector3D(posX, posY, posZ), shiftArgs);
+				offset = this.offsetArg.onParse(playerPos, args);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
