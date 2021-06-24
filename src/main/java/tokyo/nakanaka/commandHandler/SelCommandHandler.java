@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
@@ -47,9 +48,7 @@ public class SelCommandHandler implements CommandHandler{
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		World world = player.getWorld();
-		int offsetX = player.getX();
-		int offsetY = player.getY();
-		int offsetZ = player.getZ();
+		BlockVector3D playerPos = new BlockVector3D(player.getX(), player.getY(), player.getZ());
 		SelectionBuilder builder = player.getSelectionBuilder();
 		if(args.length == 1 && args[0].equals("reset")){
 			SelectionShape shape = this.selManager.getShape(builder);
@@ -63,7 +62,7 @@ public class SelCommandHandler implements CommandHandler{
 			SelectionBuilder newBuilder = this.selManager.newInstance(shape, world);
 			player.setSelectionBuilder(newBuilder);
 		}
-		builder.onCommand(player.getLogger(), offsetX, offsetY, offsetZ, args);
+		builder.onCommand(player.getLogger(), playerPos, args);
 		new SelectionMessenger(this.selManager).sendMessage(player);
 		return true;
 	}
