@@ -54,30 +54,29 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		if(args.length == 0) {
 			return false;
 		}
-		if(args[0].equals(OFFSET)){
-			String[] shiftedArgs = new String[args.length - 1];
-			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		if(label.equals(OFFSET)){
 			Vector3D offset;
 			try {
-				offset = toVector3D(new BlockVector3D(posX, posY, posZ), shiftedArgs);
+				offset = toVector3D(new BlockVector3D(posX, posY, posZ), shiftArgs);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
 			this.offset = offset;
 			return true;
-		}else if(args[0].equals(CENTER)) {
-			String[] shiftedArgs = new String[args.length - 1];
-			System.arraycopy(args, 1, shiftedArgs, 0, args.length - 1);
+		}else if(label.equals(CENTER)) {
 			Vector3D center;
 			try {
-				center = toVector3D(new BlockVector3D(posX, posY, posZ), shiftedArgs);
+				center = toVector3D(new BlockVector3D(posX, posY, posZ), shiftArgs);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
 			this.center = center;
 			return true;
-		}else if(args[0].equals(RADIUS)) {
-			if(args.length != 2) {
+		}else if(label.equals(RADIUS)) {
+			if(shiftArgs.length != 1) {
 				return false;
 			}
 			double r;
