@@ -118,39 +118,6 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 			}else {
 				return false;
 			}
-		}else if(args[0].equals(WIDTH)) {
-			if(args.length != 2) {
-				return false;
-			}
-			int width;
-			try {
-				width = Integer.parseInt(args[1]);
-			}catch(IllegalArgumentException e) {
-				return false;
-			}	
-			return this.cuboidBuilder.setWidth(width);
-		}else if(args[0].equals(HEIGHT)) {
-			if(args.length != 2) {
-				return false;
-			}
-			int height;
-			try {
-				height = Integer.parseInt(args[1]);
-			}catch(IllegalArgumentException e) {
-				return false;
-			}	
-			return this.cuboidBuilder.setHeight(height);
-		}else if(args[0].equals(LENGTH)) {
-			if(args.length != 2) {
-				return false;
-			}
-			int length;
-			try {
-				length = Integer.parseInt(args[1]);
-			}catch(IllegalArgumentException e) {
-				return false;
-			}
-			return this.cuboidBuilder.setLength(length);
 		}else {
 			return false;
 		}
@@ -161,14 +128,10 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 		if(args.length == 0) {
 			return new ArrayList<>();
 		}else if(args.length == 1) {
-			return Arrays.asList(POS1, POS2, OFFSET, WIDTH, LENGTH, HEIGHT);
+			return Arrays.asList(POS1, POS2, OFFSET);
 		}else if((args[0].equals(POS1) || args[0].equals(POS2) || args[0].equals(OFFSET))) {
 			if(args.length <= 4) {
 				return Arrays.asList("~");
-			}
-		}else if(args[0].equals(HEIGHT) || args[0].equals(LENGTH) || args[0].equals(WIDTH)) {
-			if(args.length == 2) {
-				return Arrays.asList("-10", "-20", "-30", "10", "20", "30");
 			}
 		}
 		return new ArrayList<>();
