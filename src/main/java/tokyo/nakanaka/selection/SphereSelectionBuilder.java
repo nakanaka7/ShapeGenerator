@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.commandArgument.LengthArgument;
 import tokyo.nakanaka.commandArgument.PositionArgument;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
@@ -36,16 +38,18 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(int x, int y, int z) {
+	public boolean onLeftClickBlock(Logger logger, int x, int y, int z) {
 		this.center = new Vector3D(x, y, z);
+		this.radius = 0;
 		return true;
 	}
 
 	@Override
-	public boolean onRightClickBlock(int x, int y, int z) {
+	public boolean onRightClickBlock(Logger logger, int x, int y, int z) {
 		Vector3D pos = new Vector3D(x, y, z);
 		if(this.center == null) {
-			return false;
+			logger.print(HEAD_ERROR + "Set center first");
+			return true;
 		}
 		double radius = Math.floor(pos.negate(this.center).getAbsolute()) + 0.5;
 		this.radius = radius;
@@ -53,7 +57,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	}
 
 	@Override
-	public boolean onCommand(int posX, int posY, int posZ, String[] args) {
+	public boolean onCommand(Logger logger, int posX, int posY, int posZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}

@@ -26,7 +26,7 @@ public class ClickBlockEventHandler {
 			builder = this.selManager.newInstance(this.selManager.getShape(builder), world);
 		}
 		player.setSelectionBuilder(builder);
-		builder.onLeftClickBlock(x, y, z);
+		builder.onLeftClickBlock(player.getLogger(), x, y, z);
 		this.messenger.sendMessage(player);
 	}
 	
@@ -40,7 +40,7 @@ public class ClickBlockEventHandler {
 			builder = this.selManager.newInstance(this.selManager.getShape(builder), world);
 		}
 		player.setSelectionBuilder(builder);
-		builder.onRightClickBlock(x, y, z);
+		builder.onRightClickBlock(player.getLogger(), x, y, z);
 		this.messenger.sendMessage(player);
 	}
 }

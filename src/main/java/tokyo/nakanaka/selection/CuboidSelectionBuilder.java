@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
@@ -46,17 +47,17 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(int x, int y, int z) {
+	public boolean onLeftClickBlock(Logger logger, int x, int y, int z) {
 		return this.setPos1(x, y, z);
 	}
 
 	@Override
-	public boolean onRightClickBlock(int x, int y, int z) {
+	public boolean onRightClickBlock(Logger logger, int x, int y, int z) {
 		return this.setPos2(x, y, z);
 	}
 	
 	@Override
-	public boolean onCommand(int posX, int posY, int posZ, String[] args) {
+	public boolean onCommand(Logger logger, int posX, int posY, int posZ, String[] args) {
 		if(args.length == 0) {
 			return false;
 		}
