@@ -24,15 +24,15 @@ public class SelectionBuilderNew {
 		return this.world;
 	}
 
-	boolean onLeftClickBlock(Logger logger, int x, int y, int z) {
-		return this.regionBuilder.onLeftClickBlock(logger, x, y, z);
+	boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+		return this.regionBuilder.onLeftClickBlock(logger, blockPos);
 	}
-	boolean onRightClickBlock(Logger logger, int x, int y, int z) {
-		return this.regionBuilder.onRightClickBlock(logger, x, y, z);
+	boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
+		return this.regionBuilder.onRightClickBlock(logger, blockPos);
 	}
 	
-	boolean onCommand(Logger logger, BlockVector3D pos, String label, String[] args) {
-		return this.regionBuilder.onCommand(logger, pos, label, args);
+	boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
+		return this.regionBuilder.onCommand(logger, playerPos, label, args);
 	}
 	
 	List<String> onTabComplete(String label, String[] args){
