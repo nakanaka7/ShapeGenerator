@@ -139,9 +139,6 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 
 	@Override
 	public Selection build() {
-		if(this.world == null) {
-			throw new IllegalStateException();
-		}
 		Region3D region = new SphereRegion3D(this.radius);
 		if(this.center == null) {
 			throw new IllegalStateException();
