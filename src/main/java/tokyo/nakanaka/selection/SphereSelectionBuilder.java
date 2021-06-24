@@ -1,10 +1,11 @@
 package tokyo.nakanaka.selection;
 
+import static tokyo.nakanaka.selection.SelectionUtils.toVector3D;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
@@ -15,7 +16,6 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	private World world;
 	private Vector3D offset;
 	private SphereRegionBuilder sphereBuilder = new SphereRegionBuilder();
-	private static final CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
 	private static final String OFFSET = "offset";
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
@@ -47,22 +47,6 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		return true;
 	}
 
-	private static Vector3D toVector3D(BlockVector3D offset, String[] args) {
-		int offsetX = offset.getX();
-		int offsetY = offset.getY();
-		int offsetZ = offset.getZ();
-		if(args.length == 0) {
-			return new Vector3D(offsetX, offsetY, offsetZ);
-		}else if(args.length == 3) {
-			double x = coordArg.onParsingDouble(args[0], offsetX);
-			double y = coordArg.onParsingDouble(args[1], offsetY);
-			double z = coordArg.onParsingDouble(args[2], offsetZ);
-			return new Vector3D(x, y, z);
-		}else {
-			throw new IllegalArgumentException();
-		}
-	}
-	
 	@Override
 	public boolean onCommand(int posX, int posY, int posZ, String[] args) {
 		if(args.length == 0) {
