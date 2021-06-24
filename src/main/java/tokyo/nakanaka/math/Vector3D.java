@@ -74,6 +74,11 @@ public class Vector3D {
 	public double distance(Vector3D other) {
 		return this.negate(other).getAbsolute();
 	}
+	
+	@Override
+	public String toString() {
+		return x + "/ " + y + "/ " + z;
+	}
 
 	@Override
 	public int hashCode() {
