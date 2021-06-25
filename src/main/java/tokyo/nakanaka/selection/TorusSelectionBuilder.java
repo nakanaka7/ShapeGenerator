@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.commandArgument.LengthArgument;
 import tokyo.nakanaka.commandArgument.PositionArgument;
 import tokyo.nakanaka.logger.Logger;
@@ -13,50 +12,43 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
-import tokyo.nakanaka.math.region3D.SphereRegion3D;
+import tokyo.nakanaka.math.region3D.TorusRegion3D;
 import tokyo.nakanaka.world.World;
 
-public class SphereSelectionBuilder implements SelectionBuilder{
+public class TorusSelectionBuilder implements SelectionBuilder{
 	private World world;
 	private Vector3D center;
-	private double radius;
+	private double radiusMain;
+	private double radiusSub;
 	private Vector3D offset;
 	private static final String CENTER = "center";
-	private static final String RADIUS = "radius";
+	private static final String RADIUS_MAIN = "radius_main";
+	private static final String RADIUS_SUB = "radius_sub";
 	private static final String OFFSET = "offset";
 	private PositionArgument centerArg = new PositionArgument();
-	private LengthArgument radiusArg = new LengthArgument();
+	private LengthArgument radiusMainArg = new LengthArgument();
+	private LengthArgument radiusSubArg = new LengthArgument();
 	private PositionArgument offsetArg = new PositionArgument();
 	
-	public SphereSelectionBuilder(World world) {
+	public TorusSelectionBuilder(World world) {
 		this.world = world;
 	}
-	
+
 	@Override
 	public World getWorld() {
 		return this.world;
 	}
-	
+
 	@Override
 	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
 		int x = blockPos.getX();
 		int y = blockPos.getY();
 		int z = blockPos.getZ();
 		this.center = new Vector3D(x, y, z);
-		this.radius = 0;
 	}
 
 	@Override
 	public void onRightClickBlock(Logger logger, BlockVector3D blockPos) {
-		int x = blockPos.getX();
-		int y = blockPos.getY();
-		int z = blockPos.getZ();
-		Vector3D pos = new Vector3D(x, y, z);
-		if(this.center == null) {
-			logger.print(HEAD_ERROR + "Set center first");
-		}
-		double radius = Math.floor(pos.negate(this.center).getAbsolute()) + 0.5;
-		this.radius = radius;
 	}
 
 	@Override
@@ -70,17 +62,29 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 			}
 			this.center = center;
 			return true;
-		}else if(label.equals(RADIUS)) {
+		}else if(label.equals(RADIUS_MAIN)) {
 			if(args.length != 1) {
 				return false;
 			}
-			double r;
+			double radiusMain;
 			try {
-				r = this.radiusArg.onParse(args[0]);
+				radiusMain = this.radiusMainArg.onParse(args[0]);
 			}catch(IllegalArgumentException e) {
 				return false;
 			}	
-			this.radius = r;
+			this.radiusMain = radiusMain;
+			return true;
+		}else if(label.equals(RADIUS_SUB)) {
+			if(args.length != 1) {
+				return false;
+			}
+			double radiusSub;
+			try {
+				radiusSub = this.radiusSubArg.onParse(args[0]);
+			}catch(IllegalArgumentException e) {
+				return false;
+			}	
+			this.radiusSub = radiusSub;
 			return true;
 		}else if(label.equals(OFFSET)){
 			Vector3D offset;
@@ -98,18 +102,23 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	
 	@Override
 	public List<String> onLabelList() {
-		return Arrays.asList(CENTER, RADIUS, OFFSET);
+		return Arrays.asList(CENTER, RADIUS_MAIN, RADIUS_SUB, OFFSET);
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(String label, String[] args) {
 		if(label.equals(CENTER)){
 			return this.centerArg.onTabComplete(args);
-		}else if(label.equals(RADIUS)) {
+		}else if(label.equals(RADIUS_MAIN)) {
 			if(args.length != 1) {
 				return new ArrayList<>();
 			}
-			return this.radiusArg.onTabComplete(args[0]);
+			return this.radiusMainArg.onTabComplete(args[0]);
+		}else if(label.equals(RADIUS_SUB)) {
+			if(args.length != 1) {
+				return new ArrayList<>();
+			}
+			return this.radiusSubArg.onTabComplete(args[0]);
 		}else if(label.equals(OFFSET)) {
 			return this.offsetArg.onTabComplete(args);
 		}else {
@@ -123,29 +132,30 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 		if(this.center != null) {
 			line1 += center.toString();
 		}
-		String line2 = RADIUS + ": " + this.radius;
-		String line3 = OFFSET + ": ";
+		String line2 = RADIUS_MAIN + ": " + this.radiusMain;
+		String line3 = RADIUS_SUB + ": " + this.radiusSub;
+		String line4 = OFFSET + ": ";
 		if(offset != null) {
-			line3 += offset.toString();
+			line4 += offset.toString();
 		}else {
-			line3 += "= center";
+			line4 += "= center";
 		}
-		return Arrays.asList(line1, line2, line3);
+		return Arrays.asList(line1, line2, line3, line4);
 	}
 
 	@Override
 	public Selection build() {
-		Region3D region = new SphereRegion3D(this.radius);
+		Region3D region = new TorusRegion3D(this.radiusMain, this.radiusSub);
 		if(this.center == null) {
 			throw new IllegalStateException();
 		}
 		region = Region3Ds.shift(region, this.center);
-		double ubx = center.getX() + radius;
-		double uby = center.getY() + radius;
-		double ubz = center.getZ() + radius;
-		double lbx = center.getX() - radius;
-		double lby = center.getY() - radius;
-		double lbz = center.getZ() - radius;
+		double ubx = center.getX() + radiusMain + radiusSub;
+		double uby = center.getY() + radiusMain + radiusSub;
+		double ubz = center.getZ() + radiusMain + radiusSub;
+		double lbx = center.getX() - radiusMain - radiusSub;
+		double lby = center.getY() - radiusMain - radiusSub;
+		double lbz = center.getZ() - radiusMain - radiusSub;
 		BoundRegion3D boundRegion = new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
 		if(this.offset == null) {
 			this.offset = center;

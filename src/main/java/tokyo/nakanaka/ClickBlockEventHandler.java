@@ -1,5 +1,6 @@
 package tokyo.nakanaka;
 
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionBuilder;
@@ -26,7 +27,7 @@ public class ClickBlockEventHandler {
 			builder = this.selManager.newInstance(this.selManager.getShape(builder), world);
 		}
 		player.setSelectionBuilder(builder);
-		builder.onLeftClickBlock(player.getLogger(), x, y, z);
+		builder.onLeftClickBlock(player.getLogger(), new BlockVector3D(x, y, z));
 		this.messenger.sendMessage(player);
 	}
 	
@@ -40,7 +41,7 @@ public class ClickBlockEventHandler {
 			builder = this.selManager.newInstance(this.selManager.getShape(builder), world);
 		}
 		player.setSelectionBuilder(builder);
-		builder.onRightClickBlock(player.getLogger(), x, y, z);
+		builder.onRightClickBlock(player.getLogger(), new BlockVector3D(x, y, z));
 		this.messenger.sendMessage(player);
 	}
 }
