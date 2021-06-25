@@ -16,7 +16,7 @@ import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.SphereRegion3D;
 import tokyo.nakanaka.world.World;
 
-public class SphereSelectionBuilder implements SelectionBuilder{
+public class SphereSelectionBuilderOld implements SelectionBuilder{
 	private World world;
 	private Vector3D center;
 	private double radius;
@@ -28,7 +28,7 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	private LengthArgument radiusArg = new LengthArgument();
 	private PositionArgument offsetArg = new PositionArgument();
 	
-	public SphereSelectionBuilder(World world) {
+	public SphereSelectionBuilderOld(World world) {
 		this.world = world;
 	}
 	
