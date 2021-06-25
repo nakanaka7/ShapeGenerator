@@ -12,7 +12,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.world.World;
 
-public abstract class AbstractSelectionBuilderNew {
+public abstract class AbstractSelectionBuilderNew implements SelectionBuilder{
 	private World world;
 	private Vector3D offset;
 	private static final String OFFSET = "offset";
