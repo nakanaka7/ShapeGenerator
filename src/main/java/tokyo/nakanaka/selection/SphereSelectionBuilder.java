@@ -3,7 +3,7 @@ package tokyo.nakanaka.selection;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.world.World;
 
-public class SphereSelectionBuilder extends AbstractSelectionBuilder{
+public class SphereSelectionBuilder extends AbstractSelectionBuilderOld{
 
 	public SphereSelectionBuilder(World world) {
 		super(world, new SphereRegionBuilder());

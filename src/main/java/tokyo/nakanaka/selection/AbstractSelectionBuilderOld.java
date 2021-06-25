@@ -11,14 +11,15 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.world.World;
 
-public abstract class AbstractSelectionBuilder implements SelectionBuilder{
+@Deprecated
+public abstract class AbstractSelectionBuilderOld implements SelectionBuilder{
 	private World world;
 	protected RegionBuilder builder;
 	private Vector3D offset;
 	private static final String OFFSET = "offset";
 	private PositionArgument offsetArg = new PositionArgument();
 	
-	public AbstractSelectionBuilder(World world, RegionBuilder builder) {
+	public AbstractSelectionBuilderOld(World world, RegionBuilder builder) {
 		this.world = world;
 		this.builder = builder;
 	}
