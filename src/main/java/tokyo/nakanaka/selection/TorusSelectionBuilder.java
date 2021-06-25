@@ -40,17 +40,15 @@ public class TorusSelectionBuilder implements SelectionBuilder{
 	}
 
 	@Override
-	public boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
 		int x = blockPos.getX();
 		int y = blockPos.getY();
 		int z = blockPos.getZ();
 		this.center = new Vector3D(x, y, z);
-		return true;
 	}
 
 	@Override
-	public boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
-		return false;
+	public void onRightClickBlock(Logger logger, BlockVector3D blockPos) {
 	}
 
 	@Override

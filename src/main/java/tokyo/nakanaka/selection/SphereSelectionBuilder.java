@@ -38,28 +38,25 @@ public class SphereSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
 		int x = blockPos.getX();
 		int y = blockPos.getY();
 		int z = blockPos.getZ();
 		this.center = new Vector3D(x, y, z);
 		this.radius = 0;
-		return true;
 	}
 
 	@Override
-	public boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
+	public void onRightClickBlock(Logger logger, BlockVector3D blockPos) {
 		int x = blockPos.getX();
 		int y = blockPos.getY();
 		int z = blockPos.getZ();
 		Vector3D pos = new Vector3D(x, y, z);
 		if(this.center == null) {
 			logger.print(HEAD_ERROR + "Set center first");
-			return true;
 		}
 		double radius = Math.floor(pos.negate(this.center).getAbsolute()) + 0.5;
 		this.radius = radius;
-		return true;
 	}
 
 	@Override

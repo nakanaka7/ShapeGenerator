@@ -38,15 +38,13 @@ public class CuboidSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
 		this.pos1 = new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-		return true;
 	}
 
 	@Override
-	public boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
+	public void onRightClickBlock(Logger logger, BlockVector3D blockPos) {
 		this.pos2 = new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ());
-		return true;
 	}
 	
 	@Override

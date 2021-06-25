@@ -8,8 +8,8 @@ import tokyo.nakanaka.world.World;
 
 public interface SelectionBuilder {
 	World getWorld();
-	boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos);
-	boolean onRightClickBlock(Logger logger, BlockVector3D blockPos);
+	void onLeftClickBlock(Logger logger, BlockVector3D blockPos);
+	void onRightClickBlock(Logger logger, BlockVector3D blockPos);
 	/**
 	 * @param posX player position x
 	 * @param posY player position y
