@@ -23,6 +23,9 @@ public abstract class AbstractSelectionBuilder implements SelectionBuilder{
 		this.builder = builder;
 	}
 	
+	abstract Vector3D getDefaultOffset();
+	abstract String getDefaultOffsetName();
+	
 	public World getWorld() {
 		return world;
 	}
@@ -75,9 +78,6 @@ public abstract class AbstractSelectionBuilder implements SelectionBuilder{
 		list.add(lineOffset);
 		return list;
 	}
-	
-	abstract String getDefaultOffsetName();
-	abstract Vector3D getDefaultOffset();
 	
 	/**
 	 * @throw IllegalStateException
