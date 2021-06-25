@@ -1,132 +1,116 @@
 package tokyo.nakanaka.selection;
 
-import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.region3D.CuboidRegion3D;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class CuboidRegionBuilder {
-	private BlockVector3D pos1;
-	private BlockVector3D pos2;
+import static tokyo.nakanaka.logger.LogConstant.*;
+import tokyo.nakanaka.commandArgument.PositionArgument;
+import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.math.region3D.CuboidRegion3D;
+import tokyo.nakanaka.math.region3D.Region3D;
+
+public class CuboidRegionBuilder implements RegionBuilder{
+	private Vector3D pos1;
+	private Vector3D pos2;
+	private static final String POS1 = "pos1";
+	private static final String POS2 = "pos2";
+	private static final String WIDTH = "width";
+	private static final String HEIGHT = "height";
+	private static final String LENGTH = "length";
+	private PositionArgument pos1Arg = new PositionArgument();
+	private PositionArgument pos2Arg = new PositionArgument();
 	
-	public BlockVector3D getPos1() {
-		return pos1;
+	@Override
+	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+		this.pos1 = new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ());
 	}
-	
-	public void setPos1(BlockVector3D pos1) {
-		this.pos1 = pos1;
+
+	@Override
+	public void onRightClickBlock(Logger logger, BlockVector3D blockPos) {
+		this.pos2 = new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ());
 	}
-	
-	public BlockVector3D getPos2() {
-		return pos2;
-	}
-	
-	public void setPos2(BlockVector3D pos2) {
-		this.pos2 = pos2;
-	}
-	
-	public boolean setWidth(int width) {
-		if(this.pos1 == null || width == 0) {
+
+	@Override
+	public boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
+		if(label.equals(POS1)) {
+			Vector3D pos1;
+			try {
+				pos1 = this.pos1Arg.onParse(playerPos, args);
+			}catch(IllegalArgumentException e) {
+				logger.print(HEAD_ERROR + "Can not parse the coordinates");
+				return true;
+			}
+			this.pos1 = pos1;
+			return true;
+		}else if(label.equals(POS2)) {
+			Vector3D pos2;
+			try {
+				pos2 = this.pos2Arg.onParse(playerPos, args);
+			}catch(IllegalArgumentException e) {
+				logger.print(HEAD_ERROR + "Can not parse the coordinates");
+				return true;
+			}
+			this.pos2 = pos2;
+			return true;
+		}else {
 			return false;
 		}
-		BlockVector3D pos2a = this.pos2;
-		if(pos2a == null) {
-			pos2a = this.pos1;
-		}
-		if(width > 0) {
-			this.pos2 = new BlockVector3D(this.pos1.getX() + width - 1, pos2a.getY(), pos2a.getZ());
-		}else if(width < 0) {
-			this.pos2 = new BlockVector3D(this.pos1.getX() + width + 1, pos2a.getY(), pos2a.getZ());
-		}
-		return true;
 	}
-	
-	public Integer getWidth() {
-		if(this.pos1 == null || this.pos2 == null) {
-			return null;
-		}
-		int dx = this.pos2.getX() - this.pos1.getX();
-		int sx = 1;
-		if(dx != 0) {
-			sx = dx / Math.abs(dx);
-		}
-		return dx + sx;
+
+	@Override
+	public List<String> onLabelList() {
+		return Arrays.asList(POS1, POS2);
 	}
-	
-	public boolean setHeight(int height) {
-		if(this.pos1 == null || height == 0) {
-			return false;
+
+	@Override
+	public List<String> onTabComplete(String label, String[] args) {
+		if(label.equals(POS1)){
+			return this.pos1Arg.onTabComplete(args);
+		}else if(label.equals(POS2)) {
+			return this.pos2Arg.onTabComplete(args);
+		}else {
+			return new ArrayList<>();
 		}
-		BlockVector3D pos2a = this.pos2;
-		if(pos2a == null) {
-			pos2a = this.pos1;
-		}
-		if(height > 0) {
-			this.pos2 = new BlockVector3D(pos2a.getX(), this.pos1.getY() + height - 1, pos2a.getZ());
-		}else if(height < 0) {
-			this.pos2 = new BlockVector3D(pos2a.getX(), this.pos1.getY() + height + 1, pos2a.getZ());
-		}
-		return true;
 	}
-	
-	public Integer getHight() {
-		if(this.pos1 == null || this.pos2 == null) {
-			return null;
+
+	@Override
+	public List<String> getStateLines() {
+		String line1 = POS1 + ": ";
+		if(this.pos1 != null) {
+			line1 += pos1.toString();
 		}
-		int dy = this.pos2.getY() - this.pos1.getY();
-		int sy = 1;
-		if(dy != 0) {
-			sy = dy / Math.abs(dy);
+		String line2 = POS2 + ": ";
+		if(this.pos2 != null) {
+			line2 += pos2.toString();
 		}
-		return dy + sy;
+		String line3 = WIDTH + ": ";
+		String line4 = HEIGHT + ": ";
+		String line5 = LENGTH + ": ";
+		if(pos1 != null && pos2 != null) {
+			double width = pos2.getX() - pos1.getX();
+			double height = pos2.getY() - pos1.getY();
+			double length = pos2.getZ() - pos1.getZ();
+			line3 += String.valueOf(width);
+			line4 += String.valueOf(height);
+			line5 += String.valueOf(length);
+		}
+		return Arrays.asList(line1, line2, line3, line4, line5);
 	}
-	
-	public boolean setLength(int length) {
-		if(this.pos1 == null || length == 0) {
-			return false;
-		}
-		BlockVector3D pos2a = this.pos2;
-		if(pos2a == null) {
-			pos2a = this.pos1;
-		}
-		if(length > 0) {
-			this.pos2 = new BlockVector3D(pos2a.getX(), pos2a.getY(), this.pos1.getZ() + length - 1);
-		}else if(length < 0) {
-			this.pos2 = new BlockVector3D(pos2a.getX(), pos2a.getY(), this.pos1.getY() + length + 1);
-		}
-		return true;
+
+	@Override
+	public BoundRegion3D build() {
+		Region3D region = new CuboidRegion3D(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ());
+		double ubx = Math.max(pos1.getX(), pos2.getX());
+		double uby = Math.max(pos1.getY(), pos2.getY());
+		double ubz = Math.max(pos1.getZ(), pos2.getZ());
+		double lbx = Math.min(pos1.getX(), pos2.getX());
+		double lby = Math.min(pos1.getY(), pos2.getY());
+		double lbz = Math.min(pos1.getZ(), pos2.getZ());
+		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
-	
-	public Integer getLength() {
-		if(this.pos1 == null || this.pos2 == null) {
-			return null;
-		}
-		int dz = this.pos2.getZ() - this.pos1.getZ();
-		int sz = 1;
-		if(dz != 0) {
-			sz = dz / Math.abs(dz);
-		}
-		return dz + sz;
-	}
-	
-	/**
-	 * @throws IllegalStateException
-	 */
-	public CuboidRegion3D build() {
-		if(this.pos1 == null || this.pos2 == null) {
-			throw new IllegalStateException();
-		}
-		int intMinX = Math.min(pos1.getX(), pos2.getX());
-		int intMinY = Math.min(pos1.getY(), pos2.getY());
-		int intMinZ = Math.min(pos1.getZ(), pos2.getZ());
-		int intMaxX = Math.max(pos1.getX(), pos2.getX());
-		int intMaxY = Math.max(pos1.getY(), pos2.getY());
-		int intMaxZ = Math.max(pos1.getZ(), pos2.getZ());
-		double minX = intMinX - 0.5;
-		double minY = intMinY - 0.5;
-		double minZ = intMinZ - 0.5;
-		double maxX = intMaxX + 0.5;
-		double maxY = intMaxY + 0.5;
-		double maxZ = intMaxZ + 0.5;
-		return new CuboidRegion3D(minX, minY, minZ, maxX, maxY, maxZ);
-	}
-	
+
 }
