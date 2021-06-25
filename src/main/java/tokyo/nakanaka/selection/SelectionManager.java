@@ -27,7 +27,7 @@ public class SelectionManager {
 		return this.builderShapeMap.get(builder.getClass());
 	}
 	
-	public SelectionBuilder newInstanceOld(SelectionShape shape, World world) {
+	public SelectionBuilder newInstance(SelectionShape shape, World world) {
 		Class<? extends SelectionBuilder> builderClass = this.shapeBuilderMap.get(shape);
 		if(builderClass == null) {
 			throw new IllegalArgumentException();
@@ -37,15 +37,6 @@ public class SelectionManager {
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			throw new IllegalArgumentException(e.getMessage());
-		}
-	}
-	
-	public SelectionBuilder newInstance(SelectionShape shape, World world) {
-		switch(shape) {
-		case CUBOID:
-			return new SelectionBuilderNew(world, new CuboidRegionBuilder());
-		default:
-			return this.newInstanceOld(shape, world);
 		}
 	}
 	
