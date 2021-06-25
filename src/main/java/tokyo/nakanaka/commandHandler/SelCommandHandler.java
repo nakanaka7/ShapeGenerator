@@ -78,7 +78,7 @@ public class SelCommandHandler implements CommandHandler{
 	public List<String> onTabComplete(Player player, String[] args) {
 		SelectionBuilder builder = player.getSelectionBuilder();
 		if(args.length == 1) {
-			List<String> list = new ArrayList<>(builder.onLabelList());
+			List<String> list = new ArrayList<>(builder.getLabelList());
 			list.add(RESET);
 			return list;
 		}

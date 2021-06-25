@@ -101,7 +101,7 @@ public class TorusSelectionBuilder implements SelectionBuilder{
 	}
 	
 	@Override
-	public List<String> onLabelList() {
+	public List<String> getLabelList() {
 		return Arrays.asList(CENTER, RADIUS_MAIN, RADIUS_SUB, OFFSET);
 	}
 

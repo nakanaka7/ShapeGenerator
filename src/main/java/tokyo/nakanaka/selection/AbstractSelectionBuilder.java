@@ -53,7 +53,7 @@ public abstract class AbstractSelectionBuilder implements SelectionBuilder{
 		return this.builder.onCommand(logger, playerPos, label, args);
 	}
 	
-	public List<String> onLabelList(){
+	public List<String> getLabelList(){
 		List<String> list = new ArrayList<>(this.builder.onLabelList());
 		list.add(OFFSET);
 		return list;
