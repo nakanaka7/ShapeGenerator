@@ -62,7 +62,7 @@ public abstract class AbstractSelectionBuilderNew implements SelectionBuilder{
 		return this.onRegionCommand(logger, playerPos, label, args);
 	}
 	
-	public List<String> onLabelList(){
+	public List<String> getLabelList(){
 		List<String> list = new ArrayList<>(this.getRegionCommandLabelList());
 		list.add(OFFSET);
 		return list;
