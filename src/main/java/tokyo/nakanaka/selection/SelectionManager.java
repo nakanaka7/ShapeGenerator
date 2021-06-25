@@ -21,9 +21,6 @@ public class SelectionManager {
 	}
 	
 	public SelectionShape getShape(SelectionBuilder builder) {
-		if(builder instanceof SelectionBuilderNew) {
-			return SelectionShape.SHAPE;
-		}
 		return this.builderShapeMap.get(builder.getClass());
 	}
 	
