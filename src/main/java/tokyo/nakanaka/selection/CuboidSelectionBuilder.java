@@ -13,7 +13,7 @@ import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.world.World;
 
-public class CuboidSelectionBuilder extends AbstractSelectionBuilderNew{
+public class CuboidSelectionBuilder extends SelectionBuilder{
 	private Vector3D pos1;
 	private Vector3D pos2;
 	private static final String POS1 = "pos1";

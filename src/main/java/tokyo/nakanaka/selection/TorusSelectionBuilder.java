@@ -15,7 +15,7 @@ import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.TorusRegion3D;
 import tokyo.nakanaka.world.World;
 
-public class TorusSelectionBuilder extends AbstractSelectionBuilderNew{
+public class TorusSelectionBuilder extends SelectionBuilder{
 	private Vector3D center;
 	private double radiusMain;
 	private double radiusSub;
