@@ -23,6 +23,14 @@ public class CuboidRegionBuilder implements RegionBuilder{
 	private PositionArgument pos1Arg = new PositionArgument();
 	private PositionArgument pos2Arg = new PositionArgument();
 	
+	public Vector3D getPos1() {
+		return pos1;
+	}
+
+	public static String getStringPos1() {
+		return POS1;
+	}
+
 	@Override
 	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
 		this.pos1 = new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ());
