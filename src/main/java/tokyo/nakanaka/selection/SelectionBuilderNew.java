@@ -9,7 +9,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.world.World;
 
-public class SelectionBuilderNew {
+public class SelectionBuilderNew implements SelectionBuilder{
 	private World world;
 	private RegionBuilder regionBuilder;
 	private Vector3D offset;
@@ -24,20 +24,21 @@ public class SelectionBuilderNew {
 		return this.world;
 	}
 
-	boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
+	public boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
 		this.regionBuilder.onLeftClickBlock(logger, blockPos);
 		return true;
 	}
-	boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
+	
+	public boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
 		this.regionBuilder.onRightClickBlock(logger, blockPos);
 		return true;
 	}
 	
-	boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
+	public boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
 		return this.regionBuilder.onCommand(logger, playerPos, label, args);
 	}
 	
-	List<String> onTabComplete(String label, String[] args){
+	public List<String> onTabComplete(String label, String[] args){
 		if(label.equals(OFFSET)) {
 			if(args.length <= 3) {
 				return Arrays.asList("~");
@@ -49,7 +50,7 @@ public class SelectionBuilderNew {
 		}
 	}
 	
-	List<String> getStateLines(){
+	public List<String> getStateLines(){
 		List<String> list = new ArrayList<>(this.regionBuilder.getStateLines());
 		String line = OFFSET + ": ";
 		if(this.offset != null) {
@@ -61,7 +62,14 @@ public class SelectionBuilderNew {
 	/**
 	 * @throw IllegalStateException
 	 */
-	Selection build() {
+	public Selection build() {
 		return new Selection(this.world, this.regionBuilder.build(), this.offset);
+	}
+
+	@Override
+	public List<String> onLabelList() {
+		List<String> list = new ArrayList<>(this.regionBuilder.onLabelList());
+		list.add(OFFSET);
+		return list;
 	}
 }
