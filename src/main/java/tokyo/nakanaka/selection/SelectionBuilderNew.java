@@ -25,10 +25,12 @@ public class SelectionBuilderNew {
 	}
 
 	boolean onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
-		return this.regionBuilder.onLeftClickBlock(logger, blockPos);
+		this.regionBuilder.onLeftClickBlock(logger, blockPos);
+		return true;
 	}
 	boolean onRightClickBlock(Logger logger, BlockVector3D blockPos) {
-		return this.regionBuilder.onRightClickBlock(logger, blockPos);
+		this.regionBuilder.onRightClickBlock(logger, blockPos);
+		return true;
 	}
 	
 	boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
