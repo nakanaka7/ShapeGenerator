@@ -11,7 +11,7 @@ import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 
-public class PhysicsCommandHandler implements CommandHandler{
+public class PhyCommandHandler implements CommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {

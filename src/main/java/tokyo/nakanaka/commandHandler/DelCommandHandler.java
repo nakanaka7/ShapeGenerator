@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.player.Player;
 
-public class DeleteCommandHandler implements CommandHandler{
+public class DelCommandHandler implements CommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {

@@ -17,7 +17,7 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.player.Player;
 
-public class RotateCommandHandler implements CommandHandler{
+public class RotCommandHandler implements CommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {

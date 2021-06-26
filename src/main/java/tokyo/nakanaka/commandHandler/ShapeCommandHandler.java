@@ -17,10 +17,10 @@ import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
 
-public class SelShapeCommandHandler implements CommandHandler{
+public class ShapeCommandHandler implements CommandHandler{
 	private SelectionManager selManager;
 		
-	public SelShapeCommandHandler(SelectionManager selManager) {
+	public ShapeCommandHandler(SelectionManager selManager) {
 		this.selManager = selManager;
 	}
 
