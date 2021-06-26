@@ -20,7 +20,7 @@ public class CommandHelp {
 	public static class Builder{
 		private String label;
 		private String description;
-		private List<Pair<Parameter, String>> paramList;
+		private List<Pair<Parameter, String>> paramList = new ArrayList<>();
 		
 		public Builder(String label) {
 			this.label = label;
