@@ -1,13 +1,13 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
+import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
+import static tokyo.nakanaka.logger.LogConstant.INDENT_NORMAL;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
@@ -26,32 +26,6 @@ public class HelpCommandHandler implements CommandHandler{
 				.description("Print command help")
 				.addParameter(new Parameter(Type.OPTIONAL, "command"), "command for help")
 				.build();
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Print command help";
-	}
-
-	@Override
-	public String getLabel() {
-		return "help";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("help");
-	}
-
-	@Override
-	public String getUsage() {
-		return "help [command]";
-	}
-
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desCommand = new Pair<>("[command]", "command for help");
-		return Arrays.asList(desCommand);
 	}
 	
 	@Override

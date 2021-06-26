@@ -1,12 +1,11 @@
 package tokyo.nakanaka.commandHandler;
 
+import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
-
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.UndoableCommand;
@@ -19,31 +18,6 @@ public class UndoCommandHandler implements CommandHandler{
 		return new CommandHelp.Builder("undo")
 				.description("Undo a block changing command")
 				.build();
-	}
-	
-	@Override
-	public String getDescription() {
-		return  "Undo a block changing command";
-	}
-	
-	@Override
-	public String getLabel() {
-		return "undo";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("undo");
-	}
-	
-	@Override
-	public String getUsage() {
-		return "undo";
-	}
-
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		return new ArrayList<>();
 	}
 	
 	@Override

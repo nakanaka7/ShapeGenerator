@@ -1,10 +1,8 @@
 package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
@@ -27,31 +25,6 @@ public class SelCommandHandler implements CommandHandler{
 		return new CommandHelp.Builder("sel")
 				.description("Specify a selection/ See each shape help")
 				.build();
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Specify a selection";
-	}
-	
-	@Override
-	public String getLabel() {
-		return "selection";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("sel");
-	}
-
-	@Override
-	public String getUsage() {
-		return "See each shape usage";
-	}
-	
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		return new ArrayList<>();
 	}
 	
 	@Override

@@ -1,11 +1,11 @@
 package tokyo.nakanaka.commandHandler;
 
+import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
@@ -21,32 +21,6 @@ public class PhysicsCommandHandler implements CommandHandler{
 				.build();
 	}
 	
-	@Override
-	public String getDescription() {
-		return "Toggle physics option for generating block";
-	}
-
-	@Override
-	public String getLabel() {
-		return "physics";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("phy", "physics");
-	}
-
-	@Override
-	public String getUsage() {
-		return "phy/physics <true/false>";
-	}
-
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desTF = new Pair<>("<true/false>", "option for physics when setting blocks");
-		return Arrays.asList(desTF);
-	}
-
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length != 1) {

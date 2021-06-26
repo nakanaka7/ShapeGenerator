@@ -6,6 +6,7 @@ import java.util.Set;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.player.Player;
 
@@ -27,7 +28,10 @@ public class RootCommandHandler {
 		if(cmdHandler != null) {
 			boolean success = cmdHandler.onCommand(player, cmdLine.getArgs());
 			if(!success) {
-				player.getLogger().print(HEAD_ERROR + "Usage: " + cmdHandler.getUsage());
+				CommandHelp help = cmdHandler.getCommandHelp();
+				for(String line : help.getHelp()) {
+					player.getLogger().print(line);
+				}
 			}
 		}else {
 			player.getLogger().print(HEAD_ERROR + "Unknown command");

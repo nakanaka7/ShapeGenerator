@@ -1,18 +1,17 @@
 package tokyo.nakanaka.commandHandler;
 
+import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static tokyo.nakanaka.logger.LogConstant.*;
-
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
-import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.AdjustCommand;
+import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Direction;
@@ -34,33 +33,6 @@ public class ShiftCommandHandler implements CommandHandler{
 				.build();
 	}
 	
-	@Override
-	public String getDescription() {
-		return "Shift the generated blocks";
-	}
-
-	@Override
-	public String getLabel() {
-		return "shift";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("shift");
-	}
-
-	@Override
-	public String getUsage() {
-		return "shift <direction> <blocks>";
-	}
-
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desDir = new Pair<>("<direction>", "direction to shift");
-		Pair<String, String> desBlocks = new Pair<>("<blocks>", "block number to shift (double type)");
-		return Arrays.asList(desDir, desBlocks);
-	}
-
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length != 2) {
