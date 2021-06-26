@@ -7,10 +7,16 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
 public class SgCommandHandler implements CommandHandler{
-private CommandHandlerRepository cmdHandlerRepo;
+	private String label;
+	private CommandHandlerRepository cmdHandlerRepo;
 	
-	public SgCommandHandler(CommandHandlerRepository cmdHandlerRepo) {
+	public SgCommandHandler(String label, CommandHandlerRepository cmdHandlerRepo) {
+		this.label = label;
 		this.cmdHandlerRepo = cmdHandlerRepo;
+	}
+	
+	public String getLabel() {
+		return label;
 	}
 	
 	@Override
