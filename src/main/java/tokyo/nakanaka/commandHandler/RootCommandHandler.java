@@ -2,7 +2,9 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
@@ -17,6 +19,16 @@ public class RootCommandHandler implements CommandHandler{
 	
 	public String getLabel() {
 		return label;
+	}
+	
+	public List<Pair<String, String>> getSubCommmandDescriptions(){
+		Set<SubCommandHandler> set = this.cmdHandlerRepo.getAll();
+		List<Pair<String, String>> list = new ArrayList<>();
+		for(SubCommandHandler handler : set) {
+			CommandHelp help = handler.getCommandHelp();
+			list.add(new Pair<>(help.getLabel(), help.getDescription()));
+		}
+		return list;
 	}
 	
 	@Override
