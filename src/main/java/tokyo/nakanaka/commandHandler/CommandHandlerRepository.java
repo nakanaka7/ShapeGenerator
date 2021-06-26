@@ -5,23 +5,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import tokyo.nakanaka.commadHelp.CommandHelp;
+
 public class CommandHandlerRepository {
 	private Map<String, CommandHandler> cmdMap = new HashMap<>();
-	private Map<String, String> aliasMap = new HashMap<>();
 
 	public void register(CommandHandler cmdLine) {
-		String label = cmdLine.getLabel();
+		CommandHelp help = cmdLine.getCommandHelp();
+		String label = help.getLabel();
 		this.cmdMap.put(label, cmdLine);
-		for(String alias : cmdLine.getAliases()) {
-			this.aliasMap.put(alias, label);
-		}
 	}
 	
-	public CommandHandler findBy(String alias) {
-		String label = this.aliasMap.get(alias);
-		if(label == null) {
-			return null;
-		}
+	public CommandHandler findBy(String label) {
 		return this.cmdMap.get(label);
 	}
 	
@@ -30,7 +25,7 @@ public class CommandHandlerRepository {
 	}
 	
 	public Set<String> getAliases(){
-		return this.aliasMap.keySet();
+		return this.cmdMap.keySet();
 	}
 
 }

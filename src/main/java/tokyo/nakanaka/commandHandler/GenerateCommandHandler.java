@@ -3,11 +3,12 @@ package tokyo.nakanaka.commandHandler;
 import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.block.Block;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.player.Player;
@@ -22,29 +23,11 @@ public class GenerateCommandHandler implements CommandHandler{
 	}
 
 	@Override
-	public String getDescription() {
-		return "Generate blocks in the selection";
-	}
-	
-	@Override
-	public String getLabel() {
-		return "generate";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("generate");
-	}
-
-	@Override
-	public String getUsage() {
-		return "generate <block>";
-	}
-	
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desBlock = new Pair<>("<block>", "block to generate");
-		return Arrays.asList(desBlock);
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("genr")
+				.description("Generate blocks in the selection")
+				.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
+				.build();
 	}
 	
 	@Override

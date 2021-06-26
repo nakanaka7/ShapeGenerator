@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.command.GenerateCommand;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.AdjustCommand;
+import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
@@ -18,32 +20,14 @@ import tokyo.nakanaka.player.Player;
 public class ScaleCommandHandler implements CommandHandler{
 
 	@Override
-	public String getDescription() {
-		return "Change scale the generated blocks";
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("scale")
+				.description("Change scale the generated blocks")
+				.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "scale axis")
+				.addParameter(new Parameter(Type.REQUIRED, "scale factor"), "scale factor (double data type)")
+				.build();
 	}
-
-	@Override
-	public String getLabel() {
-		return "scale";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("scale");
-	}
-
-	@Override
-	public String getUsage() {
-		return "scale x|y|z <scale factor>";
-	}
-
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desAxis = new Pair<>("x|y|z", "scale axis");
-		Pair<String, String> desDegree = new Pair<>("<scale factor>", "scale factor (double data type)");
-		return Arrays.asList(desAxis, desDegree);
-	}
-
+	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length != 2) {

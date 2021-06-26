@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.command.GenerateCommand;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.AdjustCommand;
+import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.RotateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
@@ -18,32 +20,14 @@ import tokyo.nakanaka.player.Player;
 public class RotateCommandHandler implements CommandHandler{
 
 	@Override
-	public String getDescription() {
-		return "Rotate the generated blocks";
-	}
-
-	@Override
-	public String getLabel() {
-		return "rotate";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("rotate");
-	}
-
-	@Override
-	public String getUsage() {
-		return "rotate x|y|z <degree>";
-	}
-
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desAxis = new Pair<>("x|y|z", "rotation axis");
-		Pair<String, String> desDegree = new Pair<>("<degree>", "angle of rotation (right-hand rule)");
-		return Arrays.asList(desAxis, desDegree);
-	}
-
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("rot")
+				.description("Rotate the generated blocks")
+				.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "rotation axis")
+				.addParameter(new Parameter(Type.REQUIRED, "degree"), "angle of rotation (right-hand rule)")
+				.build();
+	}	
+	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length != 2) {

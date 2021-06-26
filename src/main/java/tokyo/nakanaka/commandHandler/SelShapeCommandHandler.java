@@ -1,18 +1,21 @@
 package tokyo.nakanaka.commandHandler;
 
+import static tokyo.nakanaka.logger.LogColor.LIGHT_PURPLE;
+import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
+import static tokyo.nakanaka.logger.LogConstant.HEAD_WARN;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
-
-import static tokyo.nakanaka.logger.LogConstant.*;
-import static tokyo.nakanaka.logger.LogColor.*;
 
 public class SelShapeCommandHandler implements CommandHandler{
 	private SelectionManager selManager;
@@ -22,29 +25,11 @@ public class SelShapeCommandHandler implements CommandHandler{
 	}
 
 	@Override
-	public String getDescription() {
-		return "Set selection shape";
-	}
-	
-	@Override
-	public String getLabel() {
-		return "selection_shape";
-	}
-
-	@Override
-	public List<String> getAliases() {
-		return Arrays.asList("selshape");
-	}
-
-	@Override
-	public String getUsage() {
-		return "selshape <shape>";
-	}
-	
-	@Override
-	public List<Pair<String, String>> getParameterDescriptionList() {
-		Pair<String, String> desShape = new Pair<>("<shape>", "selection shape");
-		return Arrays.asList(desShape);
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("selshape")
+				.description("Set selection shape")
+				.addParameter(new Parameter(Type.REQUIRED, "shape"), "selection shape")
+				.build();
 	}
 	
 	@Override
