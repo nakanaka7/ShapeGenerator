@@ -32,14 +32,14 @@ import tokyo.nakanaka.selection.TorusSelectionBuilder;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
-	private SgCommandHandler rootCmdHandler;
+	private SgCommandHandler sgCmdHandler;
 	
 	@Override
 	public void onEnable() {
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		CommandHandlerRepository cmdRepo = new CommandHandlerRepository();
-		this.rootCmdHandler = new SgCommandHandler(cmdRepo);
+		this.sgCmdHandler = new SgCommandHandler(cmdRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
@@ -64,14 +64,14 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, label, args);
-		this.rootCmdHandler.onCommand(cmdLine.getPlayer(), cmdLine.getAlias(), cmdLine.getArgs());
+		this.sgCmdHandler.onCommand(cmdLine.getPlayer(), cmdLine.getAlias(), cmdLine.getArgs());
 		return true;
 	}
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args){
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, alias, args);
-		return this.rootCmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getAlias(), cmdLine.getArgs());
+		return this.sgCmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getAlias(), cmdLine.getArgs());
 	}
 	
 }
