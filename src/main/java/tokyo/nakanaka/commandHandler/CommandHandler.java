@@ -3,9 +3,11 @@ package tokyo.nakanaka.commandHandler;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
 public interface CommandHandler {
+	CommandHelp getCommandHelp();
 	String getDescription();
 	String getLabel();
 	List<String> getAliases();

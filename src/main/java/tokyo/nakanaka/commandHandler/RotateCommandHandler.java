@@ -8,6 +8,9 @@ import java.util.List;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.RotateCommand;
@@ -17,6 +20,15 @@ import tokyo.nakanaka.player.Player;
 
 public class RotateCommandHandler implements CommandHandler{
 
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("rotate")
+				.description("Rotate the generated blocks")
+				.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "rotation axis")
+				.addParameter(new Parameter(Type.REQUIRED, "degree"), "angle of rotation (right-hand rule)")
+				.build();
+	}	
+	
 	@Override
 	public String getDescription() {
 		return "Rotate the generated blocks";

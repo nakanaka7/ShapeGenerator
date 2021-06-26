@@ -8,10 +8,19 @@ import static tokyo.nakanaka.logger.LogConstant.*;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.player.Player;
 
 public class UndoCommandHandler implements CommandHandler{
+	
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("undo")
+				.description("Undo a block changing command")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return  "Undo a block changing command";

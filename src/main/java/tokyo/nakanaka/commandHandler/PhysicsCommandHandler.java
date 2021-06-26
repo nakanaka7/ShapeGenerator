@@ -6,10 +6,21 @@ import java.util.List;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 
 public class PhysicsCommandHandler implements CommandHandler{
 
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("phy")
+				.description("Toggle physics option for generating block")
+				.addParameter(new Parameter(Type.REQUIRED, "true", "false"), "option for physics when setting blocks")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Toggle physics option for generating block";

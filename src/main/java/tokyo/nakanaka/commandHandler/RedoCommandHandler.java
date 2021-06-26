@@ -9,10 +9,19 @@ import java.util.List;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.player.Player;
 
 public class RedoCommandHandler implements CommandHandler{
+	
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("redo")
+				.description("Redo a block changing command")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Redo a block changing command";

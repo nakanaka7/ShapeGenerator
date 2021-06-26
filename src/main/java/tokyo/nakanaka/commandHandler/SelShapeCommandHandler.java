@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
@@ -21,6 +24,14 @@ public class SelShapeCommandHandler implements CommandHandler{
 		this.selManager = selManager;
 	}
 
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("selshape")
+				.description("Set selection shape")
+				.addParameter(new Parameter(Type.REQUIRED, "shape"), "selection shape")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Set selection shape";

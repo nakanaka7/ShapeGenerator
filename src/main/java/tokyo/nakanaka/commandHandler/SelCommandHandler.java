@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
@@ -21,6 +22,13 @@ public class SelCommandHandler implements CommandHandler{
 		this.selManager = selManager;
 	}
 
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("sel")
+				.description("Specify a selection/ See each shape help")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Specify a selection";

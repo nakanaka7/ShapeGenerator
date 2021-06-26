@@ -8,6 +8,9 @@ import java.util.List;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.ScaleCommand;
@@ -17,6 +20,15 @@ import tokyo.nakanaka.player.Player;
 
 public class ScaleCommandHandler implements CommandHandler{
 
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("scale")
+				.description("Change scale the generated blocks")
+				.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "scale axis")
+				.addParameter(new Parameter(Type.REQUIRED, "scale factor"), "scale factor (double data type)")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Change scale the generated blocks";
