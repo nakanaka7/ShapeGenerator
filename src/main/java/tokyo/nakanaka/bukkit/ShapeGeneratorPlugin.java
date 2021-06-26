@@ -7,8 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import static tokyo.nakanaka.logger.LogColor.*;
 import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.CommandLine;
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.DelCommandHandler;
@@ -23,6 +25,7 @@ import tokyo.nakanaka.commandHandler.SelCommandHandler;
 import tokyo.nakanaka.commandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
@@ -64,7 +67,14 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, label, args);
-		this.sgCmdHandler.onCommand(cmdLine.getPlayer(), args);
+		Player player = cmdLine.getPlayer();
+		boolean success = this.sgCmdHandler.onCommand(player, args);
+		if(!success) {
+			List<Pair<String, String>> list = this.sgCmdHandler.getSubCommmandDescriptions();
+			for(Pair<String, String> pair : list) {
+				player.getLogger().print(GOLD + pair.getFirst() + ": " + RESET + pair.getSecond());
+			}
+		}
 		return true;
 	}
 	
