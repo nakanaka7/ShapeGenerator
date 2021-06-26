@@ -11,7 +11,7 @@ public class CommandHelp {
 	private String description;
 	private List<Pair<Parameter, String>> paramList;
 	
-	public CommandHelp(Builder builder) {
+	private CommandHelp(Builder builder) {
 		this.label = builder.label;
 		this.description = builder.description;
 		this.paramList = builder.paramList;
@@ -34,6 +34,10 @@ public class CommandHelp {
 		public Builder addParameter(Parameter param, String description) {
 			this.paramList.add(new Pair<>(param, description));
 			return this;
+		}
+		
+		public CommandHelp build() {
+			return new CommandHelp(this);
 		}
 	}
 
