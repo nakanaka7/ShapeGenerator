@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,31 +13,40 @@ private CommandHandlerRepository cmdHandlerRepo;
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
 	
-	public void onCommand(Player player, String alias, String[] args) {
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(alias);
-		if(cmdHandler != null) {
-			boolean success = cmdHandler.onCommand(player, args);
-			if(!success) {
-				CommandHelp help = cmdHandler.getCommandHelp();
-				for(String line : help.getHelp()) {
-					player.getLogger().print(line);
-				}
-			}
-		}else {
-			player.getLogger().print(HEAD_ERROR + "Unknown command");
+	public boolean onCommand(Player player, String[] args) {
+		if(args.length == 0) {
+			return false;
 		}
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
+		if(cmdHandler == null) {
+			return false;
+		}
+		boolean success = cmdHandler.onCommand(player, shiftArgs);
+		if(!success) {
+			CommandHelp help = cmdHandler.getCommandHelp();
+			for(String line : help.getHelp()) {
+				player.getLogger().print(line);
+			}
+		}
+		return true;
 	}
 	
-	public List<String> onTabComplete(Player player, String alias, String[] args){
-		if(args.length == 0) {
+	public List<String> onTabComplete(Player player, String[] args){
+		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHandlerRepo.getAliases());
 		}
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(alias);
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
 		if(cmdHandler != null) {
-			return cmdHandler.onTabComplete(player, args);
+			return cmdHandler.onTabComplete(player, shiftArgs);
 		}else {
 			return new ArrayList<>();
 		}
 	}
-	
+		
 }
