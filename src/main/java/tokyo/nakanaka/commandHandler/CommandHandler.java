@@ -5,6 +5,11 @@ import java.util.List;
 import tokyo.nakanaka.player.Player;
 
 public interface CommandHandler {
+	/**
+	 * @param player
+	 * @param args
+	 * @return false if it should print usage, otherwise true
+	 */
 	boolean onCommand(Player player, String[] args);
 	List<String> onTabComplete(Player player, String[] args);
 }
