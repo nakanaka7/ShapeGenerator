@@ -7,7 +7,7 @@ import java.util.Set;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
 
-public class CommandHandlerRepository {
+public class SubCommandHandlerRepository {
 	private Map<String, SubCommandHandler> cmdMap = new HashMap<>();
 
 	public void register(SubCommandHandler cmdLine) {

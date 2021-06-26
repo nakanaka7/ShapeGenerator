@@ -7,22 +7,25 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import static tokyo.nakanaka.logger.LogColor.*;
 import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.CommandLine;
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Scheduler;
-import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
+import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.DelCommandHandler;
 import tokyo.nakanaka.commandHandler.GenrCommandHandler;
 import tokyo.nakanaka.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.commandHandler.PhyCommandHandler;
 import tokyo.nakanaka.commandHandler.RedoCommandHandler;
-import tokyo.nakanaka.commandHandler.SgCommandHandler;
+import tokyo.nakanaka.commandHandler.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.RotCommandHandler;
 import tokyo.nakanaka.commandHandler.ScaleCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
 import tokyo.nakanaka.commandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
@@ -32,14 +35,14 @@ import tokyo.nakanaka.selection.TorusSelectionBuilder;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
-	private SgCommandHandler sgCmdHandler;
+	private RootCommandHandler sgCmdHandler;
 	
 	@Override
 	public void onEnable() {
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
-		CommandHandlerRepository cmdRepo = new CommandHandlerRepository();
-		this.sgCmdHandler = new SgCommandHandler(cmdRepo);
+		SubCommandHandlerRepository cmdRepo = new SubCommandHandlerRepository();
+		this.sgCmdHandler = new RootCommandHandler("sg" ,cmdRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
@@ -64,7 +67,14 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, label, args);
-		this.sgCmdHandler.onCommand(cmdLine.getPlayer(), args);
+		Player player = cmdLine.getPlayer();
+		boolean success = this.sgCmdHandler.onCommand(player, args);
+		if(!success) {
+			List<Pair<String, String>> list = this.sgCmdHandler.getSubCommmandDescriptions();
+			for(Pair<String, String> pair : list) {
+				player.getLogger().print(GOLD + pair.getFirst() + ": " + RESET + pair.getSecond());
+			}
+		}
 		return true;
 	}
 	

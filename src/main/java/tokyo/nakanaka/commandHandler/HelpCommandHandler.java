@@ -14,9 +14,9 @@ import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements SubCommandHandler{
-	private CommandHandlerRepository cmdRepo;
+	private SubCommandHandlerRepository cmdRepo;
 	
-	public HelpCommandHandler(CommandHandlerRepository cmdRepo) {
+	public HelpCommandHandler(SubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
 	}
 
