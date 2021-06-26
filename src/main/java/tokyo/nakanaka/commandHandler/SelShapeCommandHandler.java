@@ -26,7 +26,7 @@ public class SelShapeCommandHandler implements CommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("selshape")
+		return new CommandHelp.Builder("shape")
 				.description("Set selection shape")
 				.addParameter(new Parameter(Type.REQUIRED, "shape"), "selection shape")
 				.build();
