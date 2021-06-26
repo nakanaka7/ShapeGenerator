@@ -3,25 +3,24 @@ package tokyo.nakanaka.commandHandler;
 import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
 public class SgCommandHandlerNew {
-private CommandHandlerRepository cmdHandlerRepo;
-	
-	public SgCommandHandlerNew(CommandHandlerRepository cmdHandlerRepo) {
-		this.cmdHandlerRepo = cmdHandlerRepo;
+	private Map<String, CommandHandler> cmdMap = new HashMap<>();
+
+	public void register(CommandHandler cmdLine) {
+		CommandHelp help = cmdLine.getCommandHelp();
+		String label = help.getLabel();
+		this.cmdMap.put(label, cmdLine);
 	}
-	
-	public Set<CommandHandler> getAllRegisterdCommandHandler(){
-		return this.cmdHandlerRepo.getAll();
-	}
-	
+		
 	public void onCommand(Player player, String alias, String[] args) {
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(alias);
+		CommandHandler cmdHandler = this.cmdMap.get(alias);
 		if(cmdHandler != null) {
 			boolean success = cmdHandler.onCommand(player, args);
 			if(!success) {
@@ -37,14 +36,14 @@ private CommandHandlerRepository cmdHandlerRepo;
 	
 	public List<String> onTabComplete(Player player, String alias, String[] args){
 		if(args.length == 0) {
-			return new ArrayList<>(this.cmdHandlerRepo.getAliases());
+			return new ArrayList<>(this.cmdMap.keySet());
 		}
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(alias);
+		CommandHandler cmdHandler = this.cmdMap.get(alias);
 		if(cmdHandler != null) {
 			return cmdHandler.onTabComplete(player, args);
 		}else {
 			return new ArrayList<>();
 		}
 	}
-	
+
 }

@@ -10,7 +10,7 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
 public class SgCommandHandler {
-	private CommandHandlerRepository cmdHandlerRepo;
+private CommandHandlerRepository cmdHandlerRepo;
 	
 	public SgCommandHandler(CommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
@@ -46,5 +46,5 @@ public class SgCommandHandler {
 			return new ArrayList<>();
 		}
 	}
-
+	
 }
