@@ -60,8 +60,8 @@ public class HelpCommandHandler implements CommandHandler{
 			player.getLogger().print(HEAD_NORMAL + "Command Help");
 			Set<CommandHandler> cmdHandlerSet = this.cmdRepo.getAll();
 			for(CommandHandler cmdHandler : cmdHandlerSet) {
-				List<String> cmdAliasList = cmdHandler.getAliases();
-				player.getLogger().print(INDENT_NORMAL + String.join("/ ", cmdAliasList) + ": " + cmdHandler.getDescription());
+				CommandHelp help = cmdHandler.getCommandHelp();
+				player.getLogger().print(INDENT_NORMAL + help.getLabel() + ": " + help.getDescription());
 			}
 			return true;
 		}else if(args.length == 1) {
@@ -70,11 +70,9 @@ public class HelpCommandHandler implements CommandHandler{
 				player.getLogger().print(HEAD_ERROR + "Unknown command");
 				return true;
 			}
-			player.getLogger().print(HEAD_NORMAL + "Help for " + args[0]);
-			player.getLogger().print(INDENT_NORMAL + "Description: " + cmdHandler.getDescription());
-			player.getLogger().print(INDENT_NORMAL + "Usage: " + cmdHandler.getUsage());
-			for(Pair<String, String> pair : cmdHandler.getParameterDescriptionList()) {
-				player.getLogger().print(INDENT_NORMAL + pair.getFirst() + ": " + pair.getSecond());	
+			List<String> lineList = cmdHandler.getCommandHelp().getHelp();
+			for(String line : lineList) {
+				player.getLogger().print(line);
 			}
 			return true;
 		}else {
