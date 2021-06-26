@@ -64,14 +64,14 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, label, args);
-		this.rootCmdHandler.onCommand(cmdLine);
+		this.rootCmdHandler.onCommand(cmdLine.getPlayer(), cmdLine.getAlias(), cmdLine.getArgs());
 		return true;
 	}
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args){
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, alias, args);
-		return this.rootCmdHandler.onTabComplete(cmdLine);
+		return this.rootCmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getAlias(), cmdLine.getArgs());
 	}
 	
 }
