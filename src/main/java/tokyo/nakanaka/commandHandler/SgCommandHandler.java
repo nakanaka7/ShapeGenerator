@@ -10,10 +10,10 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.player.Player;
 
-public class RootCommandHandler {
+public class SgCommandHandler {
 	private CommandHandlerRepository cmdHandlerRepo;
 	
-	public RootCommandHandler(CommandHandlerRepository cmdHandlerRepo) {
+	public SgCommandHandler(CommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
 	
