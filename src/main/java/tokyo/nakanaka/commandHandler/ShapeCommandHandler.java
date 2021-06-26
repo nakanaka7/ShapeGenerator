@@ -17,7 +17,7 @@ import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
 
-public class ShapeCommandHandler implements CommandHandler{
+public class ShapeCommandHandler implements SubCommandHandler{
 	private SelectionManager selManager;
 		
 	public ShapeCommandHandler(SelectionManager selManager) {

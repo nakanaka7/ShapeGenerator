@@ -13,7 +13,7 @@ import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 
-public class HelpCommandHandler implements CommandHandler{
+public class HelpCommandHandler implements SubCommandHandler{
 	private CommandHandlerRepository cmdRepo;
 	
 	public HelpCommandHandler(CommandHandlerRepository cmdRepo) {
@@ -32,14 +32,14 @@ public class HelpCommandHandler implements CommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {
 			player.getLogger().print(HEAD_NORMAL + "Command Help");
-			Set<CommandHandler> cmdHandlerSet = this.cmdRepo.getAll();
-			for(CommandHandler cmdHandler : cmdHandlerSet) {
+			Set<SubCommandHandler> cmdHandlerSet = this.cmdRepo.getAll();
+			for(SubCommandHandler cmdHandler : cmdHandlerSet) {
 				CommandHelp help = cmdHandler.getCommandHelp();
 				player.getLogger().print(INDENT_NORMAL + help.getLabel() + ": " + help.getDescription());
 			}
 			return true;
 		}else if(args.length == 1) {
-			CommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
+			SubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
 			if(cmdHandler == null) {
 				player.getLogger().print(HEAD_ERROR + "Unknown command");
 				return true;

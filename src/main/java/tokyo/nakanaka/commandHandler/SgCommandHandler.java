@@ -20,7 +20,7 @@ private CommandHandlerRepository cmdHandlerRepo;
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
+		SubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
 		if(cmdHandler == null) {
 			return false;
 		}
@@ -41,7 +41,7 @@ private CommandHandlerRepository cmdHandlerRepo;
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
+		SubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
 		if(cmdHandler != null) {
 			return cmdHandler.onTabComplete(player, shiftArgs);
 		}else {

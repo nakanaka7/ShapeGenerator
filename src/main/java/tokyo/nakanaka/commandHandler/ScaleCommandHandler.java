@@ -17,7 +17,7 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.player.Player;
 
-public class ScaleCommandHandler implements CommandHandler{
+public class ScaleCommandHandler implements SubCommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {

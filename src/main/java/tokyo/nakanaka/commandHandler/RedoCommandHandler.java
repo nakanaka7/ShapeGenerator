@@ -11,7 +11,7 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.player.Player;
 
-public class RedoCommandHandler implements CommandHandler{
+public class RedoCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public CommandHelp getCommandHelp() {

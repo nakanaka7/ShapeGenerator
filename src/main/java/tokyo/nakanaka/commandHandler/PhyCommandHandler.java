@@ -11,7 +11,7 @@ import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 
-public class PhyCommandHandler implements CommandHandler{
+public class PhyCommandHandler implements SubCommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
