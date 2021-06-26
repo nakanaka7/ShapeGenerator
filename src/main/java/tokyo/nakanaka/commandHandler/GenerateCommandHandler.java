@@ -8,6 +8,9 @@ import java.util.List;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.block.Block;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.player.Player;
@@ -21,6 +24,14 @@ public class GenerateCommandHandler implements CommandHandler{
 		this.blockArg = blockArg;
 	}
 
+	public CommandHelp getCommandHelp() {
+		CommandHelp help = new CommandHelp.Builder("generate")
+				.description("Generate blocks in the selection")
+				.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
+				.build();
+		return help;
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Generate blocks in the selection";
