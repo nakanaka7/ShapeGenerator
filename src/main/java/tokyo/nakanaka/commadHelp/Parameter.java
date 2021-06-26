@@ -1,15 +1,20 @@
 package tokyo.nakanaka.commadHelp;
 
 public class Parameter {
-	private ParameterType type;
+	private Type type;
 	private String[] labels;
 	
-	public Parameter(ParameterType type, String... labels)  {
+	public Parameter(Type type, String... labels)  {
 		this.type = type;
 		this.labels = labels;
 	}
 	
-	public ParameterType getType() {
+	public static enum Type {
+		REQUIRED,
+		OPTIONAL;
+	}
+	
+	public Type getType() {
 		return type;
 	}
 
