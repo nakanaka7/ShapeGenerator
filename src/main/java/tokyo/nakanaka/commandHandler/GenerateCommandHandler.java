@@ -25,11 +25,10 @@ public class GenerateCommandHandler implements CommandHandler{
 	}
 
 	public CommandHelp getCommandHelp() {
-		CommandHelp help = new CommandHelp.Builder("generate")
+		return new CommandHelp.Builder("generate")
 				.description("Generate blocks in the selection")
 				.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
 				.build();
-		return help;
 	}
 	
 	@Override
