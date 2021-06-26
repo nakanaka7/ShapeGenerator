@@ -21,7 +21,7 @@ public class RotateCommandHandler implements CommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("rotate")
+		return new CommandHelp.Builder("rot")
 				.description("Rotate the generated blocks")
 				.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "rotation axis")
 				.addParameter(new Parameter(Type.REQUIRED, "degree"), "angle of rotation (right-hand rule)")
