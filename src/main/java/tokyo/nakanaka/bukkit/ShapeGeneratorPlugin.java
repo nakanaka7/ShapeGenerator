@@ -39,7 +39,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		CommandHandlerRepository cmdRepo = new CommandHandlerRepository();
-		this.sgCmdHandler = new SgCommandHandler(cmdRepo);
+		this.sgCmdHandler = new SgCommandHandler("sg" ,cmdRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
 		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
