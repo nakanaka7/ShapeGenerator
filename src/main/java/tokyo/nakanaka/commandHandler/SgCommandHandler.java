@@ -6,13 +6,14 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
-public class SgCommandHandler {
+public class SgCommandHandler implements CommandHandler{
 private CommandHandlerRepository cmdHandlerRepo;
 	
 	public SgCommandHandler(CommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
 	
+	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {
 			return false;
@@ -34,6 +35,7 @@ private CommandHandlerRepository cmdHandlerRepo;
 		return true;
 	}
 	
+	@Override
 	public List<String> onTabComplete(Player player, String[] args){
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHandlerRepo.getAliases());
