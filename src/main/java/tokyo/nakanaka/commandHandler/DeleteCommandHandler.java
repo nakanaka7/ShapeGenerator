@@ -8,6 +8,7 @@ import java.util.List;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -16,6 +17,13 @@ import tokyo.nakanaka.player.Player;
 
 public class DeleteCommandHandler implements CommandHandler{
 
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("del")
+				.description("Delete the generated blocks")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Delete the generated blocks";

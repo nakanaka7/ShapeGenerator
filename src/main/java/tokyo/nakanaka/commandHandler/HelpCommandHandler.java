@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.Parameter;
+import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements CommandHandler{
@@ -17,6 +20,14 @@ public class HelpCommandHandler implements CommandHandler{
 		this.cmdRepo = cmdRepo;
 	}
 
+	@Override
+	public CommandHelp getCommandHelp() {
+		return new CommandHelp.Builder("help")
+				.description("Print command help")
+				.addParameter(new Parameter(Type.OPTIONAL, "command"), "command for help")
+				.build();
+	}
+	
 	@Override
 	public String getDescription() {
 		return "Print command help";
