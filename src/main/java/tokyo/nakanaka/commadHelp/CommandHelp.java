@@ -1,10 +1,12 @@
 package tokyo.nakanaka.commadHelp;
 
+import static tokyo.nakanaka.logger.LogColor.GOLD;
+import static tokyo.nakanaka.logger.LogColor.RESET;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import static tokyo.nakanaka.logger.LogColor.*;
 
 public class CommandHelp {
 	private String label;
@@ -41,6 +43,10 @@ public class CommandHelp {
 		}
 	}
 
+	public String getLabel() {
+		return this.label;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -60,4 +66,5 @@ public class CommandHelp {
 		}
 		return list;
 	}
+
 }
