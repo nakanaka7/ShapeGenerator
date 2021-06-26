@@ -4,7 +4,6 @@ import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
@@ -14,10 +13,6 @@ private CommandHandlerRepository cmdHandlerRepo;
 	
 	public SgCommandHandler(CommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
-	}
-	
-	public Set<CommandHandler> getAllRegisterdCommandHandler(){
-		return this.cmdHandlerRepo.getAll();
 	}
 	
 	public void onCommand(Player player, String alias, String[] args) {
