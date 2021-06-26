@@ -6,11 +6,11 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
-public class SgCommandHandler implements CommandHandler{
+public class RootCommandHandler implements CommandHandler{
 	private String label;
 	private CommandHandlerRepository cmdHandlerRepo;
 	
-	public SgCommandHandler(String label, CommandHandlerRepository cmdHandlerRepo) {
+	public RootCommandHandler(String label, CommandHandlerRepository cmdHandlerRepo) {
 		this.label = label;
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
