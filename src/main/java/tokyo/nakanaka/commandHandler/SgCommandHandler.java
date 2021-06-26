@@ -6,8 +6,8 @@ import java.util.Set;
 
 import static tokyo.nakanaka.logger.LogConstant.*;
 
+import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.commadHelp.CommandHelp;
-import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.player.Player;
 
 public class SgCommandHandler {

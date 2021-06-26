@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandLine;
+package tokyo.nakanaka;
 
 import tokyo.nakanaka.player.Player;
 
