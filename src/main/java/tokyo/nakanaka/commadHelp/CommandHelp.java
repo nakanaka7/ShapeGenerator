@@ -48,7 +48,7 @@ public class CommandHelp {
 	public List<String> getHelp(){
 		List<String> list = new ArrayList<>();
 		list.add("Help for " + this.label);
-		String usage = "Usage: " + this.label;
+		String usage = "Usage: " + this.label + " ";
 		for(Pair<Parameter, String> e : this.paramList) {
 			usage += e.getFirst().toString() + " ";
 		}
