@@ -24,7 +24,7 @@ public class GenerateCommandHandler implements CommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("generate")
+		return new CommandHelp.Builder("genr")
 				.description("Generate blocks in the selection")
 				.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
 				.build();
