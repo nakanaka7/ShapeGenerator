@@ -12,7 +12,7 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandler implements CommandHandler{
+public class SelCommandHandler implements SubCommandHandler{
 	private SelectionManager selManager;
 	private static final String RESET = "reset";
 	

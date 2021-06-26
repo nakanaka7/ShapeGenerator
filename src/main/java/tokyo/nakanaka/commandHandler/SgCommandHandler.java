@@ -2,54 +2,53 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import static tokyo.nakanaka.logger.LogConstant.*;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
-import tokyo.nakanaka.commandLine.CommandLine;
 import tokyo.nakanaka.player.Player;
 
-public class SgCommandHandler {
-	private CommandHandlerRepository cmdHandlerRepo;
+public class SgCommandHandler implements CommandHandler{
+private CommandHandlerRepository cmdHandlerRepo;
 	
 	public SgCommandHandler(CommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
 	
-	public Set<CommandHandler> getAllRegisterdCommandHandler(){
-		return this.cmdHandlerRepo.getAll();
-	}
-	
-	public void onCommand(CommandLine cmdLine) {
-		Player player = cmdLine.getPlayer();
-		String alias = cmdLine.getAlias();
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(alias);
-		if(cmdHandler != null) {
-			boolean success = cmdHandler.onCommand(player, cmdLine.getArgs());
-			if(!success) {
-				CommandHelp help = cmdHandler.getCommandHelp();
-				for(String line : help.getHelp()) {
-					player.getLogger().print(line);
-				}
-			}
-		}else {
-			player.getLogger().print(HEAD_ERROR + "Unknown command");
-		}
-	}
-	
-	public List<String> onTabComplete(CommandLine cmdLine){
-		String alias = cmdLine.getAlias();
-		String[] args = cmdLine.getArgs();
+	@Override
+	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {
+			return false;
+		}
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		SubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
+		if(cmdHandler == null) {
+			return false;
+		}
+		boolean success = cmdHandler.onCommand(player, shiftArgs);
+		if(!success) {
+			CommandHelp help = cmdHandler.getCommandHelp();
+			for(String line : help.getHelp()) {
+				player.getLogger().print(line);
+			}
+		}
+		return true;
+	}
+	
+	@Override
+	public List<String> onTabComplete(Player player, String[] args){
+		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHandlerRepo.getAliases());
 		}
-		CommandHandler cmdHandler = this.cmdHandlerRepo.findBy(alias);
+		String label = args[0];
+		String[] shiftArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		SubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
 		if(cmdHandler != null) {
-			return cmdHandler.onTabComplete(cmdLine.getPlayer(), cmdLine.getArgs());
+			return cmdHandler.onTabComplete(player, shiftArgs);
 		}else {
 			return new ArrayList<>();
 		}
 	}
-	
+		
 }

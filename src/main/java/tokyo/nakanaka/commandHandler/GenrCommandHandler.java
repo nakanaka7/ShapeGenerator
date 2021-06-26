@@ -15,7 +15,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
 
-public class GenrCommandHandler implements CommandHandler{
+public class GenrCommandHandler implements SubCommandHandler{
 	private BlockCommandArgument blockArg;
 	
 	public GenrCommandHandler(BlockCommandArgument blockArg) {

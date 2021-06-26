@@ -18,7 +18,7 @@ import tokyo.nakanaka.geometricProperty.Direction;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
-public class ShiftCommandHandler implements CommandHandler{
+public class ShiftCommandHandler implements SubCommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
