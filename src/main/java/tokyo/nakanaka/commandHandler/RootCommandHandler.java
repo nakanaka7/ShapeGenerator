@@ -10,9 +10,9 @@ import tokyo.nakanaka.player.Player;
 
 public class RootCommandHandler implements CommandHandler{
 	private String label;
-	private CommandHandlerRepository cmdHandlerRepo;
+	private SubCommandHandlerRepository cmdHandlerRepo;
 	
-	public RootCommandHandler(String label, CommandHandlerRepository cmdHandlerRepo) {
+	public RootCommandHandler(String label, SubCommandHandlerRepository cmdHandlerRepo) {
 		this.label = label;
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}

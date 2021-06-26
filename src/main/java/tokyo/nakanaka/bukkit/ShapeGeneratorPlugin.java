@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.Scheduler;
-import tokyo.nakanaka.commandHandler.CommandHandlerRepository;
+import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.DelCommandHandler;
 import tokyo.nakanaka.commandHandler.GenrCommandHandler;
 import tokyo.nakanaka.commandHandler.HelpCommandHandler;
@@ -38,7 +38,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	public void onEnable() {
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
-		CommandHandlerRepository cmdRepo = new CommandHandlerRepository();
+		SubCommandHandlerRepository cmdRepo = new SubCommandHandlerRepository();
 		this.sgCmdHandler = new RootCommandHandler("sg" ,cmdRepo);
 		SelectionManager selManager = new SelectionManager();
 		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
