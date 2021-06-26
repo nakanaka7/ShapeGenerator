@@ -15,10 +15,10 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuilder;
 
-public class GenerateCommandHandler implements CommandHandler{
+public class GenrCommandHandler implements CommandHandler{
 	private BlockCommandArgument blockArg;
 	
-	public GenerateCommandHandler(BlockCommandArgument blockArg) {
+	public GenrCommandHandler(BlockCommandArgument blockArg) {
 		this.blockArg = blockArg;
 	}
 
