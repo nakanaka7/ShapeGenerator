@@ -27,11 +27,11 @@ import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
-import tokyo.nakanaka.selection.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SphereSelectionBuilder;
 import tokyo.nakanaka.selection.TorusSelectionBuilder;
+import tokyo.nakanaka.selection.cuboid.CuboidSelectionBuilder;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.cuboid;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +11,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
+import tokyo.nakanaka.selection.AbstractSelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
