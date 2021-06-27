@@ -14,6 +14,7 @@ import tokyo.nakanaka.world.World;
 
 public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	private CuboidRegionBuilder cuboidBuilder = new CuboidRegionBuilder();
+	private CuboidClickBlockHandler clickHandler = new CuboidClickBlockHandler();
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 	private static final String WIDTH = "width";
@@ -28,12 +29,12 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	
 	@Override
 	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
-		this.cuboidBuilder.setPos1(new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
+		this.clickHandler.onLeftClickBlock(this.cuboidBuilder, logger, blockPos);
 	}
 
 	@Override
 	public void onRightClickBlock(Logger logger, BlockVector3D blockPos) {
-		this.cuboidBuilder.setPos1(new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
+		this.clickHandler.onRightClickBlock(cuboidBuilder, logger, blockPos);
 	}
 	
 	@Override
