@@ -1,5 +1,7 @@
 package tokyo.nakanaka.selection;
 
-public interface RegionBuilder {
+import tokyo.nakanaka.math.region3D.BoundRegion3D;
 
+public interface RegionBuilder {
+	BoundRegion3D buildRegion();
 }
