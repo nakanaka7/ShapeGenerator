@@ -51,6 +51,10 @@ public class CommandHelp {
 		return description;
 	}
 
+	public List<Pair<Parameter, String>> getParameterList() {
+		return paramList;
+	}
+
 	public List<String> getHelp(){
 		List<String> list = new ArrayList<>();
 		list.add("Help for " + this.label);
