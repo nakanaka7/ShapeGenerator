@@ -11,9 +11,9 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuilder;
-import tokyo.nakanaka.selection.SelCommandHandler;
+import tokyo.nakanaka.selection.SelSubCommandHandler;
 
-public class Pos1CommandHandler implements SelCommandHandler{
+public class Pos1CommandHandler implements SelSubCommandHandler{
 	private PositionArgument pos1Arg = new PositionArgument();
 
 	@Override

@@ -10,11 +10,20 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.selection.AbstractSelectionBuilder;
+import tokyo.nakanaka.selection.SelSubCommandHandler;
+import tokyo.nakanaka.selection.SelSubCommandHandlerRepository;
 import tokyo.nakanaka.world.World;
 
 public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	private CuboidRegionBuilder cuboidBuilder = new CuboidRegionBuilder();
 	private CuboidClickBlockHandler clickHandler = new CuboidClickBlockHandler();
+	private static SelSubCommandHandlerRepository cmdHandlerRepo = new SelSubCommandHandlerRepository(); 
+	static {
+		cmdHandlerRepo.register(new Pos1CommandHandler());
+		cmdHandlerRepo.register(new Pos2CommandHandler());
+	}
+	
+	
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 	private static final String WIDTH = "width";
@@ -39,27 +48,12 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	
 	@Override
 	public boolean onRegionCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
-		if(label.equals(POS1)) {
-			Vector3D pos1;
-			try {
-				pos1 = this.pos1Arg.onParse(playerPos, args);
-			}catch(IllegalArgumentException e) {
-				return false;
-			}
-			this.cuboidBuilder.setPos1(pos1);
-			return true;
-		}else if(label.equals(POS2)) {
-			Vector3D pos2;
-			try {
-				pos2 = this.pos2Arg.onParse(playerPos, args);
-			}catch(IllegalArgumentException e) {
-				return false;
-			}
-			this.cuboidBuilder.setPos2(pos2);
-			return true;
-		}else {
+		SelSubCommandHandler handler = cmdHandlerRepo.findBy(label);
+		if(handler == null) {
 			return false;
 		}
+		handler.onCommand(this.cuboidBuilder, logger, playerPos, args);
+		return true;
 	}
 
 	@Override
