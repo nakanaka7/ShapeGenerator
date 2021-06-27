@@ -17,7 +17,7 @@ import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.SphereRegion3D;
 import tokyo.nakanaka.world.World;
 
-public class SphereSelectionBuilder extends SelectionBuilder{
+public class SphereSelectionBuilder extends AbstractSelectionBuilder{
 	private Vector3D center;
 	private double radius;
 	private static final String CENTER = "center";
