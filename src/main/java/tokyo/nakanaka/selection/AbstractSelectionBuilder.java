@@ -47,19 +47,19 @@ public abstract class AbstractSelectionBuilder implements SelectionBuilder{
 		return world;
 	}
 	
-	public boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
+	public void onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
 		if(label.equals(OFFSET)){
 			Vector3D offset;
 			try {
 				offset = this.offsetArg.onParse(playerPos, args);
 			}catch(IllegalArgumentException e) {
 				logger.print(HEAD_ERROR + "Can not parse coordinates");
-				return true;
+				return;
 			}
 			this.offset = offset;
-			return true;
+			return;
 		}
-		return this.onRegionCommand(logger, playerPos, label, args);
+		this.onRegionCommand(logger, playerPos, label, args);
 	}
 	
 	public List<String> getLabelList(){

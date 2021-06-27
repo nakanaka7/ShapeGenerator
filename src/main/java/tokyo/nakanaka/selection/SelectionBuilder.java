@@ -11,7 +11,7 @@ public interface SelectionBuilder {
 	void onLeftClickBlock(Logger logger, BlockVector3D blockPos);
 	void onRightClickBlock(Logger logger, BlockVector3D blockPos);
 	List<String> getLabelList();
-	boolean onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args);
+	void onCommand(Logger logger, BlockVector3D playerPos, String label, String[] args);
 	List<String> onTabComplete(String label, String[] args);
 	List<String> getStateLines();
 	Selection build();
