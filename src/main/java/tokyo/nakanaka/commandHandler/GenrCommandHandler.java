@@ -17,6 +17,10 @@ import tokyo.nakanaka.selection.SelectionBuilder;
 
 public class GenrCommandHandler implements SubCommandHandler{
 	private BlockCommandArgument blockArg;
+	private CommandHelp help = new CommandHelp.Builder("genr")
+			.description("Generate blocks in the selection")
+			.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
+			.build();
 	
 	public GenrCommandHandler(BlockCommandArgument blockArg) {
 		this.blockArg = blockArg;
@@ -24,10 +28,7 @@ public class GenrCommandHandler implements SubCommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("genr")
-				.description("Generate blocks in the selection")
-				.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
-				.build();
+		return this.help;
 	}
 	
 	@Override

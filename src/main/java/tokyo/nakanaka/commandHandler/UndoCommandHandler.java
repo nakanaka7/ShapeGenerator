@@ -12,12 +12,13 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.player.Player;
 
 public class UndoCommandHandler implements SubCommandHandler{
+	private CommandHelp help = new CommandHelp.Builder("undo")
+			.description("Undo a block changing command")
+			.build();
 	
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("undo")
-				.description("Undo a block changing command")
-				.build();
+		return this.help;
 	}
 	
 	@Override

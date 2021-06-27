@@ -14,12 +14,13 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.player.Player;
 
 public class DelCommandHandler implements SubCommandHandler{
+	private CommandHelp help = new CommandHelp.Builder("del")
+			.description("Delete the generated blocks")
+			.build();
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("del")
-				.description("Delete the generated blocks")
-				.build();
+		return this.help;
 	}
 	
 	@Override

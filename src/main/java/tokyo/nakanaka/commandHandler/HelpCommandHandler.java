@@ -15,6 +15,10 @@ import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements SubCommandHandler{
 	private SubCommandHandlerRepository cmdRepo;
+	private CommandHelp help = new CommandHelp.Builder("help")
+			.description("Print command help")
+			.addParameter(new Parameter(Type.OPTIONAL, "command"), "command for help")
+			.build();
 	
 	public HelpCommandHandler(SubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
@@ -22,10 +26,7 @@ public class HelpCommandHandler implements SubCommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("help")
-				.description("Print command help")
-				.addParameter(new Parameter(Type.OPTIONAL, "command"), "command for help")
-				.build();
+		return this.help;
 	}
 	
 	@Override

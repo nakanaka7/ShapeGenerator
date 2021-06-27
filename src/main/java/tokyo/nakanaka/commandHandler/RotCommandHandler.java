@@ -18,14 +18,15 @@ import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.player.Player;
 
 public class RotCommandHandler implements SubCommandHandler{
-
+	private CommandHelp help = new CommandHelp.Builder("rot")
+			.description("Rotate the generated blocks")
+			.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "rotation axis")
+			.addParameter(new Parameter(Type.REQUIRED, "degree"), "angle of rotation (right-hand rule)")
+			.build();
+	
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("rot")
-				.description("Rotate the generated blocks")
-				.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "rotation axis")
-				.addParameter(new Parameter(Type.REQUIRED, "degree"), "angle of rotation (right-hand rule)")
-				.build();
+		return this.help;
 	}	
 	
 	@Override

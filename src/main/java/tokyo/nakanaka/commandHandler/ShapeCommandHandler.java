@@ -19,6 +19,10 @@ import tokyo.nakanaka.selection.SelectionShape;
 
 public class ShapeCommandHandler implements SubCommandHandler{
 	private SelectionManager selManager;
+	private CommandHelp help = new CommandHelp.Builder("shape")
+			.description("Set selection shape")
+			.addParameter(new Parameter(Type.REQUIRED, "shape"), "selection shape")
+			.build();
 		
 	public ShapeCommandHandler(SelectionManager selManager) {
 		this.selManager = selManager;
@@ -26,10 +30,7 @@ public class ShapeCommandHandler implements SubCommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("shape")
-				.description("Set selection shape")
-				.addParameter(new Parameter(Type.REQUIRED, "shape"), "selection shape")
-				.build();
+		return this.help;
 	}
 	
 	@Override

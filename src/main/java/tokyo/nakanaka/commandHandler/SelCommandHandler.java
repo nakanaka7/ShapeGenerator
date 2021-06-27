@@ -15,6 +15,9 @@ import tokyo.nakanaka.world.World;
 public class SelCommandHandler implements SubCommandHandler{
 	private SelectionManager selManager;
 	private static final String RESET = "reset";
+	private CommandHelp help = new CommandHelp.Builder("sel")
+			.description("Specify a selection/ See each shape help")
+			.build();
 	
 	public SelCommandHandler(SelectionManager selManager) {
 		this.selManager = selManager;
@@ -22,9 +25,7 @@ public class SelCommandHandler implements SubCommandHandler{
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("sel")
-				.description("Specify a selection/ See each shape help")
-				.build();
+		return this.help;
 	}
 	
 	@Override
