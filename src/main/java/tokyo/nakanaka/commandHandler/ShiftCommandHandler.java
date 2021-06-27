@@ -19,18 +19,22 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
 public class ShiftCommandHandler implements SubCommandHandler{
-
-	@Override
-	public CommandHelp getCommandHelp() {
+	private CommandHelp help;
+	{
 		List<String> dirList = Arrays.asList(Direction.values()).stream()
 				.map(s -> s.toString().toLowerCase())
 				.collect(Collectors.toList());
 		String[] dirs = dirList.toArray(new String[dirList.size()]);
-		return new CommandHelp.Builder("shift")
+		this.help = new CommandHelp.Builder("shift")
 				.description("Shift the generated blocks")
 				.addParameter(new Parameter(Type.REQUIRED, dirs), "direction to shift")
 				.addParameter(new Parameter(Type.REQUIRED, "blocks"), "block number to shift (double type)")
 				.build();
+	}
+	
+	@Override
+	public CommandHelp getCommandHelp() {
+		return this.help;
 	}
 	
 	@Override

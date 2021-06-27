@@ -12,13 +12,14 @@ import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
 
 public class PhyCommandHandler implements SubCommandHandler{
-
+	private CommandHelp help = new CommandHelp.Builder("phy")
+			.description("Toggle physics option for generating block")
+			.addParameter(new Parameter(Type.REQUIRED, "true", "false"), "option for physics when setting blocks")
+			.build();
+	
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("phy")
-				.description("Toggle physics option for generating block")
-				.addParameter(new Parameter(Type.REQUIRED, "true", "false"), "option for physics when setting blocks")
-				.build();
+		return this.help;
 	}
 	
 	@Override

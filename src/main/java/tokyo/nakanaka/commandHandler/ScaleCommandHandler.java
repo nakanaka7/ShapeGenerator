@@ -18,14 +18,15 @@ import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.player.Player;
 
 public class ScaleCommandHandler implements SubCommandHandler{
+	private CommandHelp help = new CommandHelp.Builder("scale")
+			.description("Change scale the generated blocks")
+			.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "scale axis")
+			.addParameter(new Parameter(Type.REQUIRED, "scale factor"), "scale factor (double data type)")
+			.build();
 
 	@Override
 	public CommandHelp getCommandHelp() {
-		return new CommandHelp.Builder("scale")
-				.description("Change scale the generated blocks")
-				.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "scale axis")
-				.addParameter(new Parameter(Type.REQUIRED, "scale factor"), "scale factor (double data type)")
-				.build();
+		return this.help;
 	}
 	
 	@Override
