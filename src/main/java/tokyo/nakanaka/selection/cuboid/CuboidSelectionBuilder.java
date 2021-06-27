@@ -15,8 +15,7 @@ import tokyo.nakanaka.selection.AbstractSelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
-	private Vector3D pos1;
-	private Vector3D pos2;
+	private CuboidRegionBuilder cuboidBuilder = new CuboidRegionBuilder();
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 	private static final String WIDTH = "width";
@@ -31,12 +30,12 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	
 	@Override
 	public void onLeftClickBlock(Logger logger, BlockVector3D blockPos) {
-		this.pos1 = new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+		this.cuboidBuilder.setPos1(new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
 	}
 
 	@Override
 	public void onRightClickBlock(Logger logger, BlockVector3D blockPos) {
-		this.pos2 = new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+		this.cuboidBuilder.setPos1(new Vector3D(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
 	}
 	
 	@Override
@@ -48,7 +47,7 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
-			this.pos1 = pos1;
+			this.cuboidBuilder.setPos1(pos1);
 			return true;
 		}else if(label.equals(POS2)) {
 			Vector3D pos2;
@@ -57,7 +56,7 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 			}catch(IllegalArgumentException e) {
 				return false;
 			}
-			this.pos2 = pos2;
+			this.cuboidBuilder.setPos2(pos2);
 			return true;
 		}else {
 			return false;
@@ -82,12 +81,14 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	
 	@Override
 	public List<String> getRegionStateLines() {
+		Vector3D pos1 = this.cuboidBuilder.getPos1();
+		Vector3D pos2 = this.cuboidBuilder.getPos2();
 		String line1 = POS1 + ": ";
-		if(this.pos1 != null) {
+		if(pos1 != null) {
 			line1 += pos1.toString();
 		}
 		String line2 = POS2 + ": ";
-		if(this.pos2 != null) {
+		if(pos2 != null) {
 			line2 += pos2.toString();
 		}
 		String line3 = WIDTH + ": ";
@@ -111,19 +112,12 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 
 	@Override
 	public Vector3D getDefaultOffset() {
-		return this.pos1;
+		return this.cuboidBuilder.getPos1();
 	}
 	
 	@Override
 	public BoundRegion3D buildRegion() {
-		Region3D region = new CuboidRegion3D(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ());
-		double ubx = Math.max(pos1.getX(), pos2.getX());
-		double uby = Math.max(pos1.getY(), pos2.getY());
-		double ubz = Math.max(pos1.getZ(), pos2.getZ());
-		double lbx = Math.min(pos1.getX(), pos2.getX());
-		double lby = Math.min(pos1.getY(), pos2.getY());
-		double lbz = Math.min(pos1.getZ(), pos2.getZ());
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return this.cuboidBuilder.buildRegion();
 	}
 
 }
