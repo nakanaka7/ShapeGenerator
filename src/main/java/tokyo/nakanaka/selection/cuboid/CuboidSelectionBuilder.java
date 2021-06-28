@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commandArgument.PositionArgument;
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
@@ -22,16 +22,8 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 		cmdHandlerRepo.register(new Pos1CommandHandler());
 		cmdHandlerRepo.register(new Pos2CommandHandler());
 	}
-	
-	
-	private static final String POS1 = "pos1";
-	private static final String POS2 = "pos2";
-	private static final String WIDTH = "width";
-	private static final String HEIGHT = "height";
-	private static final String LENGTH = "length";
-	private PositionArgument pos1Arg = new PositionArgument();
-	private PositionArgument pos2Arg = new PositionArgument();
-	
+	private CuboidStateMessageHandler msgHandler = new CuboidStateMessageHandler();
+
 	public CuboidSelectionBuilder(World world) {
 		super(world);
 	}
@@ -58,49 +50,31 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 
 	@Override
 	public List<String> getRegionCommandLabelList() {
-		return Arrays.asList(POS1, POS2);
+		return Arrays.asList("pos1", "pos2");
 	}
 	
 	@Override
 	public List<String> onRegionCommandTabComplete(String label, String[] args) {
-		if(label.equals(POS1)){
-			return this.pos1Arg.onTabComplete(args);
-		}else if(label.equals(POS2)) {
-			return this.pos2Arg.onTabComplete(args);
-		}else {
+		SelSubCommandHandler handler = cmdHandlerRepo.findBy(label);
+		if(handler == null) {
 			return new ArrayList<>();
 		}
+		return handler.onTabComplete(args);
 	}
 	
 	@Override
 	public List<String> getRegionStateLines() {
-		Vector3D pos1 = this.cuboidBuilder.getPos1();
-		Vector3D pos2 = this.cuboidBuilder.getPos2();
-		String line1 = POS1 + ": ";
-		if(pos1 != null) {
-			line1 += pos1.toString();
+		List<Pair<String, String>> pairList = this.msgHandler.onMessage(this.cuboidBuilder);
+		List<String> list = new ArrayList<>();
+		for(Pair<String, String> pair : pairList) {
+			list.add(pair.getFirst() + ": " + pair.getSecond());
 		}
-		String line2 = POS2 + ": ";
-		if(pos2 != null) {
-			line2 += pos2.toString();
-		}
-		String line3 = WIDTH + ": ";
-		String line4 = HEIGHT + ": ";
-		String line5 = LENGTH + ": ";
-		if(pos1 != null && pos2 != null) {
-			double width = pos2.getX() - pos1.getX();
-			double height = pos2.getY() - pos1.getY();
-			double length = pos2.getZ() - pos1.getZ();
-			line3 += String.valueOf(width);
-			line4 += String.valueOf(height);
-			line5 += String.valueOf(length);
-		}
-		return Arrays.asList(line1, line2, line3, line4, line5);
+		return list;
 	}
 	
 	@Override
 	public String getDefaultOffsetName() {
-		return POS1;
+		return "pos1";
 	}
 
 	@Override
