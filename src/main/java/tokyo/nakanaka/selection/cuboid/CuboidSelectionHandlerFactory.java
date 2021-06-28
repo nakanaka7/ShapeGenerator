@@ -1,7 +1,7 @@
 package tokyo.nakanaka.selection.cuboid;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tokyo.nakanaka.selection.ClickBlockHandler;
 import tokyo.nakanaka.selection.DefaultOffsetHandler;
@@ -17,8 +17,11 @@ public class CuboidSelectionHandlerFactory implements SelectionHandlerFactory{
 	}
 
 	@Override
-	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new Pos1CommandHandler(), new Pos2CommandHandler());
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlers() {
+		Map<String, SelSubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new Pos1CommandHandler());
+		map.put("pos2", new Pos2CommandHandler());
+		return map;
 	}
 
 	@Override

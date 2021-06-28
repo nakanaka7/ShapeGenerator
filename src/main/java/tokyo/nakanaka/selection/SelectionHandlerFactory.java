@@ -1,10 +1,10 @@
 package tokyo.nakanaka.selection;
 
-import java.util.List;
+import java.util.Map;
 
 public interface SelectionHandlerFactory {
 	ClickBlockHandler getClickBlockHandler();
-	List<SelSubCommandHandler> getSelSubCommandHandlers();
+	Map<String, SelSubCommandHandler> getSelSubCommandHandlers();
 	DefaultOffsetHandler getDefaultOffsetHandler();
 	RegionStateMessageHandler getRegionStateMessageHandler();
 }

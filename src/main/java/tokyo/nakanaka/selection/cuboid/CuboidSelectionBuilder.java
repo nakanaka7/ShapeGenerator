@@ -1,7 +1,6 @@
 package tokyo.nakanaka.selection.cuboid;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,15 +18,11 @@ import tokyo.nakanaka.world.World;
 public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	private RegionBuilder regionBuilder;
 	private SelectionHandlerFactory handlerFactory;
-	private Map<String, SelSubCommandHandler> cmdMap = new HashMap<>();
 	
 	public CuboidSelectionBuilder(World world) {
 		super(world);
 		this.regionBuilder = new CuboidRegionBuilder();
 		this.handlerFactory = new CuboidSelectionHandlerFactory();
-		for(SelSubCommandHandler handler : this.handlerFactory.getSelSubCommandHandlers()) {
-			cmdMap.put(handler.getCommandHelp().getLabel(), handler);
-		}
 	}
 	
 	@Override
@@ -42,7 +37,7 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	
 	@Override
 	public boolean onRegionCommand(Logger logger, BlockVector3D playerPos, String label, String[] args) {
-		SelSubCommandHandler handler = this.cmdMap.get(label);
+		SelSubCommandHandler handler = this.handlerFactory.getSelSubCommandHandlers().get(label);
 		if(handler == null) {
 			return false;
 		}
@@ -52,12 +47,14 @@ public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 
 	@Override
 	public List<String> getRegionCommandLabelList() {
-		return new ArrayList<>(this.cmdMap.keySet());
+		Map<String, SelSubCommandHandler> cmdHandlerMap = this.handlerFactory.getSelSubCommandHandlers();
+		return new ArrayList<>(cmdHandlerMap.keySet());
 	}
 	
 	@Override
 	public List<String> onRegionCommandTabComplete(String label, String[] args) {
-		SelSubCommandHandler handler = this.cmdMap.get(label);
+		Map<String, SelSubCommandHandler> cmdHandlerMap = this.handlerFactory.getSelSubCommandHandlers();
+		SelSubCommandHandler handler = cmdHandlerMap.get(label);
 		if(handler == null) {
 			return new ArrayList<>();
 		}
