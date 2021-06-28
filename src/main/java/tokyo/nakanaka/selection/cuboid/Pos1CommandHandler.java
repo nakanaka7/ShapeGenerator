@@ -14,15 +14,16 @@ public class Pos1CommandHandler implements SelSubCommandHandler{
 	private PositionArgument pos1Arg = new PositionArgument();
 
 	@Override
-	public void onCommand(RegionBuilder builder, Logger logger, BlockVector3D playerPos, String[] args) {
+	public boolean onCommand(RegionBuilder builder, Logger logger, BlockVector3D playerPos, String[] args) {
 		Vector3D pos1;
 		try {
 			pos1 = this.pos1Arg.onParse(playerPos, args);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogConstant.HEAD_ERROR + "Can not parse coodinate");
-			return;
+			return true;
 		}
 		((CuboidRegionBuilder)builder).setPos1(pos1);
+		return true;
 	}
 
 	@Override
