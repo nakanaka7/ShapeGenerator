@@ -6,6 +6,6 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 
 public interface SelSubCommandHandler {
-	void onCommand(RegionBuilder builder, Logger logger, BlockVector3D playerPos, String[] args);
+	boolean onCommand(RegionBuilder builder, Logger logger, BlockVector3D playerPos, String[] args);
 	List<String> onTabComplete(String[] args);
 }
