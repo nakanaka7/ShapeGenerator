@@ -2,7 +2,6 @@ package tokyo.nakanaka.selection.cuboid;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.selection.ClickBlockHandler;
 import tokyo.nakanaka.selection.DefaultOffsetHandler;
