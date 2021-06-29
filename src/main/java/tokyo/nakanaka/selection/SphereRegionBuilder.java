@@ -1,8 +1,12 @@
 package tokyo.nakanaka.selection;
 
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.math.region3D.Region3D;
+import tokyo.nakanaka.math.region3D.Region3Ds;
+import tokyo.nakanaka.math.region3D.SphereRegion3D;
 
-public class SphereRegionBuilder {
+public class SphereRegionBuilder implements RegionBuilder{
 	private Vector3D center;
 	private double radius;
 	
@@ -23,6 +27,22 @@ public class SphereRegionBuilder {
 			throw new IllegalArgumentException();
 		}
 		this.radius = radius;
+	}
+
+	@Override
+	public BoundRegion3D buildRegion() {
+		if(this.center == null) {
+			throw new IllegalStateException();
+		}
+		Region3D region = new SphereRegion3D(this.radius);
+		region = Region3Ds.shift(region, this.center);
+		double ubx = center.getX() + radius;
+		double uby = center.getY() + radius;
+		double ubz = center.getZ() + radius;
+		double lbx = center.getX() - radius;
+		double lby = center.getY() - radius;
+		double lbz = center.getZ() - radius;
+		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 }
