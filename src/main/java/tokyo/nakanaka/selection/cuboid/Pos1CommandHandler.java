@@ -45,4 +45,9 @@ public class Pos1CommandHandler implements SelSubCommandHandler{
 		return true;
 	}
 
+	@Override
+	public String getLabel() {
+		return "pos1";
+	}
+
 }
