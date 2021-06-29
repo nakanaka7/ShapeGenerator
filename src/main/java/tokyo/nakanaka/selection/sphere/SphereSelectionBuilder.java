@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.sphere;
 
 import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
 
@@ -15,6 +15,7 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.SphereRegion3D;
+import tokyo.nakanaka.selection.AbstractSelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class SphereSelectionBuilder extends AbstractSelectionBuilder{
