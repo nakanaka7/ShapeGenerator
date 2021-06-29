@@ -5,6 +5,7 @@ import java.util.UUID;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuilder;
+import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.world.World;
 
 public class Player {
@@ -16,6 +17,7 @@ public class Player {
 	private int y;
 	private int z;
 	private SelectionBuilder builder;
+	private SelectionBuildingData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	
@@ -84,6 +86,14 @@ public class Player {
 		this.builder = builder;
 	}
 	
+	public SelectionBuildingData getSelectionBuildingData() {
+		return selData;
+	}
+
+	public void setSelectionBuildingData(SelectionBuildingData selData) {
+		this.selData = selData;
+	}
+
 	public UndoCommandManager getUndoCommandManager() {
 		return undoCmdManager;
 	}
