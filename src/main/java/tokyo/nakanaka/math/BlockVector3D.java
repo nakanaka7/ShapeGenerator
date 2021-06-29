@@ -38,6 +38,10 @@ public class BlockVector3D {
 	public double getAbsolute() {
 		return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
 	}
+	
+	public Vector3D toVector3D() {
+		return new Vector3D(this.x, this.y, this.z);
+	}
 
 	@Override
 	public String toString() {
