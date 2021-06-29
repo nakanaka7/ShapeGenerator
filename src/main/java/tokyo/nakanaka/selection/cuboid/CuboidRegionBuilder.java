@@ -4,8 +4,9 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
+import tokyo.nakanaka.selection.RegionBuilder;
 
-public class CuboidRegionBuilder {
+public class CuboidRegionBuilder implements RegionBuilder{
 	private Vector3D pos1;
 	private Vector3D pos2;
 		
@@ -25,6 +26,7 @@ public class CuboidRegionBuilder {
 		this.pos2 = pos2;
 	}
 
+	@Override
 	public BoundRegion3D buildRegion() {
 		if(pos1 == null || pos2 == null) {
 			throw new IllegalStateException();
