@@ -30,4 +30,5 @@ public class Pos2CommandHandler implements SelSubCommandHandler{
 	public List<String> onTabComplete(String[] args) {
 		return this.pos2Arg.onTabComplete(args);
 	}
+
 }
