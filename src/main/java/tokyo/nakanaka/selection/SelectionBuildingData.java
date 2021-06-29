@@ -4,13 +4,19 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.world.World;
 
 public class SelectionBuildingData {
+	private SelectionShape shape;
 	private World world;
 	private RegionBuildingData regionData;
 	private Vector3D offset;
 	
-	public SelectionBuildingData(World world, RegionBuildingData regionData) {
+	public SelectionBuildingData(SelectionShape shape, World world, RegionBuildingData regionData) {
+		this.shape = shape;
 		this.world = world;
 		this.regionData = regionData;
+	}
+	
+	public SelectionShape getSelectionShape() {
+		return shape;
 	}
 
 	public World getWorld() {
