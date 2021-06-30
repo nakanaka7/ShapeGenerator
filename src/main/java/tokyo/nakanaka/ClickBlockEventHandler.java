@@ -5,7 +5,6 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionMessenger;
-import tokyo.nakanaka.selection.cuboid.CuboidSelectionBuilder;
 import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventHandler {
@@ -20,9 +19,6 @@ public class ClickBlockEventHandler {
 	public void onLeftClickBlock(Player player, int x, int y, int z) {
 		World world = player.getWorld();
 		SelectionBuilder builder = player.getSelectionBuilder();
-		if(builder == null) {
-			builder = new CuboidSelectionBuilder(world);
-		}
 		if(!world.equals(builder.getWorld())) {
 			builder = this.selManager.newInstance(this.selManager.getShape(builder), world);
 		}
@@ -34,9 +30,6 @@ public class ClickBlockEventHandler {
 	public void onRightClickBlock(Player player, int x, int y, int z) {
 		World world = player.getWorld();
 		SelectionBuilder builder = player.getSelectionBuilder();
-		if(builder == null) {
-			builder = new CuboidSelectionBuilder(world);
-		}
 		if(!world.equals(builder.getWorld())) {
 			builder = this.selManager.newInstance(this.selManager.getShape(builder), world);
 		}
