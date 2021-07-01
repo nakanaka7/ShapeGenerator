@@ -8,7 +8,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
-import tokyo.nakanaka.selection.SelectionMessenger;
+import tokyo.nakanaka.selection.SelectionMessengerOld;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.world.World;
 
@@ -43,7 +43,7 @@ public class SelCommandHandlerOld implements SubCommandHandler{
 			SelectionShape shape = this.selManager.getShape(builder);
 			SelectionBuilder newBuilder = this.selManager.newInstance(shape, world);
 			player.setSelectionBuilder(newBuilder);
-			new SelectionMessenger(this.selManager).sendMessage(player);
+			new SelectionMessengerOld(this.selManager).sendMessage(player);
 			return true;
 		}
 		if(!world.equals(builder.getWorld())) {
@@ -52,7 +52,7 @@ public class SelCommandHandlerOld implements SubCommandHandler{
 			player.setSelectionBuilder(newBuilder);
 		}
 		builder.onCommand(player.getLogger(), playerPos, label, shiftArgs);
-		new SelectionMessenger(this.selManager).sendMessage(player);
+		new SelectionMessengerOld(this.selManager).sendMessage(player);
 		return true;
 	}
 

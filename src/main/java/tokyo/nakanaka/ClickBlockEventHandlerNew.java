@@ -7,14 +7,14 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
-import tokyo.nakanaka.selection.SelectionMessengerNew;
+import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
 import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventHandlerNew {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
-	private SelectionMessengerNew selMessenger = new SelectionMessengerNew();
+	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	public ClickBlockEventHandlerNew(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;

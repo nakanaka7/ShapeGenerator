@@ -11,7 +11,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelSubCommandHandler;
 import tokyo.nakanaka.selection.SelectionBuildingData;
-import tokyo.nakanaka.selection.SelectionMessengerNew;
+import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
 import tokyo.nakanaka.world.World;
@@ -46,7 +46,7 @@ public class SelCommandHandler implements SubCommandHandler{
 		SelectionShape shape = player.getSelectionShape();
 		SelectionStrategy strategy = this.strategyMap.get(shape);
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
-		SelectionMessengerNew selMessenger = new SelectionMessengerNew();
+		SelectionMessenger selMessenger = new SelectionMessenger();
 		if(label.equals(RESET)){
 			SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
 			player.setSelectionBuildingData(newSelData);

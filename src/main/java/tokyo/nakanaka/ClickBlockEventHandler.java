@@ -4,16 +4,16 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
-import tokyo.nakanaka.selection.SelectionMessenger;
+import tokyo.nakanaka.selection.SelectionMessengerOld;
 import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventHandler {
 	private SelectionManager selManager;
-	private SelectionMessenger messenger;
+	private SelectionMessengerOld messenger;
 	
 	public ClickBlockEventHandler(SelectionManager selManager) {
 		this.selManager = selManager;
-		this.messenger = new SelectionMessenger(selManager);
+		this.messenger = new SelectionMessengerOld(selManager);
 	}
 
 	public void onLeftClickBlock(Player player, int x, int y, int z) {
