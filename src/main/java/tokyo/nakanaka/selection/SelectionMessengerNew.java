@@ -13,7 +13,12 @@ public class SelectionMessengerNew {
 		RegionBuildingData regionData = selData.getRegionData();
 		List<String> labelList = regionData.getLabels();
 		for(String label : labelList) {
-			logger.print(LogColor.GOLD + "label: " + LogColor.RESET + regionData.get(label).toString());
+			Object value = regionData.get(label);
+			String valueStr = "";
+			if(value != null) {
+				valueStr = value.toString();
+			}
+			logger.print(LogColor.GOLD + label + ": " + LogColor.RESET + valueStr);
 		}
 		String offsetStr = defaultOffsetLabel;
 		Vector3D offset = selData.getOffset();
