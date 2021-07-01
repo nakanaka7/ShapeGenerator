@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import tokyo.nakanaka.ClickBlockEventHandlerNew;
+import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Scheduler;
@@ -67,7 +67,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new UndoCommandHandler());
 		cmdRepo.register(new RedoCommandHandler());
 		PluginManager plManager = getServer().getPluginManager();
-		ClickBlockEventHandlerNew clickHandler = new ClickBlockEventHandlerNew(strategyMap);
+		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(strategyMap);
 		Scheduler scheduler = new BukkitScheduler(this);
 		plManager.registerEvents(new ClickBlockEventHandlerAdapter(this.getServer(), playerRepo, scheduler, clickHandler), this);
 	}

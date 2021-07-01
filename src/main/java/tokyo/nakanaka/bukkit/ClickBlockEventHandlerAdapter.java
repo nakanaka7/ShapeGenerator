@@ -14,7 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import tokyo.nakanaka.ClickBlockEventHandlerNew;
+import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
@@ -28,10 +28,10 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 	private Server server;
 	private PlayerRepository playerRepo;
 	private Scheduler scheduler;
-	private ClickBlockEventHandlerNew clickHandler;
+	private ClickBlockEventHandler clickHandler;
 	private Map<Player, Boolean> activateRightMap = new HashMap<>();
 	
-	public ClickBlockEventHandlerAdapter(Server server, PlayerRepository playerRepo, Scheduler scheduler, ClickBlockEventHandlerNew clickHandler) {
+	public ClickBlockEventHandlerAdapter(Server server, PlayerRepository playerRepo, Scheduler scheduler, ClickBlockEventHandler clickHandler) {
 		this.server = server;
 		this.playerRepo = playerRepo;
 		this.scheduler = scheduler;
