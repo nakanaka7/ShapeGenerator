@@ -13,6 +13,7 @@ import tokyo.nakanaka.selection.SelSubCommandHandler;
 
 public class Pos1CommandHandler implements SelSubCommandHandler{
 	private PositionArgument pos1Arg = new PositionArgument();
+	private LengthCalculator lengthCalc = new LengthCalculator();
 
 	@Deprecated
 	@Override
@@ -43,6 +44,12 @@ public class Pos1CommandHandler implements SelSubCommandHandler{
 			return true;
 		}
 		data.putVector3D("pos1", pos1);
+		Vector3D pos2 = data.getVector3D("pos2");
+		if(pos2 != null) {
+			data.putDouble("width", this.lengthCalc.calcWidth(pos1, pos2));
+			data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
+			data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
+		}
 		return true;
 	}
 
