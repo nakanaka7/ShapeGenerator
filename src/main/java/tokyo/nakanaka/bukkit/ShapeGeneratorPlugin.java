@@ -59,7 +59,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new PhyCommandHandler());
 		cmdRepo.register(new SelCommandHandler(strategyMap));
 		cmdRepo.register(new ShapeCommandHandler(selManager));
-		cmdRepo.register(new GenrCommandHandler(new BukkitBlockArgument()));
+		cmdRepo.register(new GenrCommandHandler(new BukkitBlockArgument(), strategyMap));
 		cmdRepo.register(new ShiftCommandHandler());
 		cmdRepo.register(new ScaleCommandHandler());
 		cmdRepo.register(new RotCommandHandler());
