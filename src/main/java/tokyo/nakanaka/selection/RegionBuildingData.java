@@ -47,6 +47,16 @@ public class RegionBuildingData {
 		return this.labelList;
 	}
 	
+	public Object get(String label) {
+		if(this.vectorMap.containsKey(label)) {
+			return this.vectorMap.get(label);
+		}else if(this.doubleMap.containsKey(label)) {
+			return this.doubleMap.get(label);
+		}else {
+			return null;
+		}
+	}
+	
 	public DataType getDataType(String label) {
 		return this.typeMap.get(label);
 	}
