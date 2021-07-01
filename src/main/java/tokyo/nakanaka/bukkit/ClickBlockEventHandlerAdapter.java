@@ -2,6 +2,7 @@ package tokyo.nakanaka.bukkit;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,21 +14,23 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import tokyo.nakanaka.ClickBlockEventHandler;
+import tokyo.nakanaka.ClickBlockEventHandlerNew;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
+import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.selection.SelectionBuildingData;
+import tokyo.nakanaka.selection.cuboid.CuboidSelectionStrategy;
 import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventHandlerAdapter implements Listener{
 	private Server server;
 	private PlayerRepository playerRepo;
 	private Scheduler scheduler;
-	private ClickBlockEventHandler clickHandler;
+	private ClickBlockEventHandlerNew clickHandler;
 	private Map<Player, Boolean> activateRightMap = new HashMap<>();
-	private BukkitPlayerFactory playerFactory = new BukkitPlayerFactory();
 	
-	public ClickBlockEventHandlerAdapter(Server server, PlayerRepository playerRepo, Scheduler scheduler, ClickBlockEventHandler clickHandler) {
+	public ClickBlockEventHandlerAdapter(Server server, PlayerRepository playerRepo, Scheduler scheduler, ClickBlockEventHandlerNew clickHandler) {
 		this.server = server;
 		this.playerRepo = playerRepo;
 		this.scheduler = scheduler;
@@ -42,18 +45,22 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 		if(type == Material.BLAZE_ROD) {
 			e.setCancelled(true);
 		}
-		Player player = this.playerRepo.getHumanPlayer(bukkitPlayer.getUniqueId());
+		UUID uid = bukkitPlayer.getUniqueId();
+		Player player = this.playerRepo.getHumanPlayer(uid);
+		Location loc = e.getBlock().getLocation();
+		World world = new BukkitWorld(this.server, loc.getWorld());
 		if(player == null) {
-			player = this.playerFactory.createHumanPlayer(this.server, bukkitPlayer);
+			player = new Player(uid);
+			RegionBuildingData regionData = new CuboidSelectionStrategy().newRegionBuildingData();
+			SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
+			player.setSelectionBuildingData(selData);
 			this.playerRepo.registerHumanPlayer(player);
 		}
 		player.setLogger(new BukkitLogger(bukkitPlayer));
-		Location loc = e.getBlock().getLocation();
-		World world = new BukkitWorld(this.server, loc.getWorld());
+		player.setWorld(world);
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
-		player.setWorld(world);
 		this.clickHandler.onLeftClickBlock(player, x, y, z);
 	}
 	
@@ -68,9 +75,15 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 		if(type == Material.BLAZE_ROD) {
 			e.setCancelled(true);
 		}
+		UUID uid = bukkitPlayer.getUniqueId();
 		Player player = this.playerRepo.getHumanPlayer(bukkitPlayer.getUniqueId());
+		Location loc = e.getClickedBlock().getLocation();
+		World world = new BukkitWorld(this.server, loc.getWorld());
 		if(player == null) {
-			player = this.playerFactory.createHumanPlayer(this.server, bukkitPlayer);
+			player = new Player(uid);
+			RegionBuildingData regionData = new CuboidSelectionStrategy().newRegionBuildingData();
+			SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
+			player.setSelectionBuildingData(selData);		
 			this.playerRepo.registerHumanPlayer(player);
 		}
 		player.setLogger(new BukkitLogger(bukkitPlayer));
@@ -81,12 +94,10 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 		if(!canActivate) {
 			return;
 		}
-		Location loc = e.getClickedBlock().getLocation();
+		player.setWorld(world);
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
-		World world = new BukkitWorld(this.server, loc.getWorld());
-		player.setWorld(world);
 		this.clickHandler.onRightClickBlock(player, x, y, z);
 		this.activateRightMap.put(player, false);
 		Player finalPlayer = player;//final or effectively final
