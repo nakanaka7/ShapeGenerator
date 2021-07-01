@@ -8,6 +8,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuilder;
 import tokyo.nakanaka.selection.RegionStateMessageHandler;
 
+@Deprecated
 public class CuboidStateMessageHandler implements RegionStateMessageHandler{
 	
 	@Override

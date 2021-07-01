@@ -3,7 +3,7 @@ package tokyo.nakanaka.selection.cuboid;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.DefaultOffsetHandler;
 import tokyo.nakanaka.selection.RegionBuilder;
-
+@Deprecated
 public class CuboidDefaultOffsetHandler implements DefaultOffsetHandler{
 
 	@Override

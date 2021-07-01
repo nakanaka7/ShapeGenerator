@@ -7,6 +7,7 @@ import tokyo.nakanaka.selection.ClickBlockHandler;
 import tokyo.nakanaka.selection.RegionBuilder;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
+@Deprecated
 public class CuboidClickBlockHandler implements ClickBlockHandler {
 	
 	public void onLeftClickBlock(RegionBuilder builder, Logger logger, BlockVector3D blockPos) {

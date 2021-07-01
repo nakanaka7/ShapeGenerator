@@ -18,6 +18,7 @@ import tokyo.nakanaka.selection.RegionStateMessageHandler;
 import tokyo.nakanaka.selection.SelSubCommandHandler;
 import tokyo.nakanaka.world.World;
 
+@Deprecated
 public class CuboidSelectionBuilder extends AbstractSelectionBuilder{
 	private RegionBuilder regionBuilder = new CuboidRegionBuilder();
 	private ClickBlockHandler clickHandler = new CuboidClickBlockHandler();

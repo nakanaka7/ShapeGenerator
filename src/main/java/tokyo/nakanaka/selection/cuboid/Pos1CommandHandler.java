@@ -14,6 +14,7 @@ import tokyo.nakanaka.selection.SelSubCommandHandler;
 public class Pos1CommandHandler implements SelSubCommandHandler{
 	private PositionArgument pos1Arg = new PositionArgument();
 
+	@Deprecated
 	@Override
 	public boolean onCommand(RegionBuilder builder, Logger logger, BlockVector3D playerPos, String[] args) {
 		Vector3D pos1;

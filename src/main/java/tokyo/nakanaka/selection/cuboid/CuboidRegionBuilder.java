@@ -6,6 +6,7 @@ import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.selection.RegionBuilder;
 
+@Deprecated
 public class CuboidRegionBuilder implements RegionBuilder{
 	private Vector3D pos1;
 	private Vector3D pos2;
