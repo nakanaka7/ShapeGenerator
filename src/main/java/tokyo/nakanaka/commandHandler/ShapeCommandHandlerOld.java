@@ -17,14 +17,14 @@ import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
 
-public class ShapeCommandHandler implements SubCommandHandler{
+public class ShapeCommandHandlerOld implements SubCommandHandler{
 	private SelectionManager selManager;
 	private CommandHelp help = new CommandHelp.Builder("shape")
 			.description("Set selection shape")
 			.addParameter(new Parameter(Type.REQUIRED, "shape"), "selection shape")
 			.build();
 		
-	public ShapeCommandHandler(SelectionManager selManager) {
+	public ShapeCommandHandlerOld(SelectionManager selManager) {
 		this.selManager = selManager;
 	}
 

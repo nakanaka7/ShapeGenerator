@@ -25,7 +25,7 @@ import tokyo.nakanaka.commandHandler.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.RotCommandHandler;
 import tokyo.nakanaka.commandHandler.ScaleCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
-import tokyo.nakanaka.commandHandler.ShapeCommandHandler;
+import tokyo.nakanaka.commandHandler.ShapeCommandHandlerOld;
 import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
@@ -58,7 +58,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new HelpCommandHandler(cmdRepo));
 		cmdRepo.register(new PhyCommandHandler());
 		cmdRepo.register(new SelCommandHandler(strategyMap));
-		cmdRepo.register(new ShapeCommandHandler(selManager));
+		cmdRepo.register(new ShapeCommandHandlerOld(selManager));
 		cmdRepo.register(new GenrCommandHandler(new BukkitBlockArgument(), strategyMap));
 		cmdRepo.register(new ShiftCommandHandler());
 		cmdRepo.register(new ScaleCommandHandler());
