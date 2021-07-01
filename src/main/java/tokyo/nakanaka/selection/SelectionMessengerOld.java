@@ -6,7 +6,7 @@ import static tokyo.nakanaka.logger.LogConstant.INDENT_NORMAL;
 import java.util.List;
 
 import tokyo.nakanaka.player.Player;
-
+@Deprecated
 public class SelectionMessengerOld {
 	private SelectionManager selManager;
 
