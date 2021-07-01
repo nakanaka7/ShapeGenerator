@@ -43,9 +43,10 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 		org.bukkit.entity.Player bukkitPlayer = e.getPlayer();
 		ItemStack itemStack = bukkitPlayer.getInventory().getItemInMainHand();
 		Material type = itemStack.getType();
-		if(type == Material.BLAZE_ROD) {
-			e.setCancelled(true);
+		if(type != Material.BLAZE_ROD) {
+			return;
 		}
+		e.setCancelled(true);
 		UUID uid = bukkitPlayer.getUniqueId();
 		Player player = this.playerRepo.getHumanPlayer(uid);
 		Location loc = e.getBlock().getLocation();
@@ -74,9 +75,10 @@ public class ClickBlockEventHandlerAdapter implements Listener{
 		org.bukkit.entity.Player bukkitPlayer = e.getPlayer();
 		ItemStack itemStack = bukkitPlayer.getInventory().getItemInMainHand();
 		Material type = itemStack.getType();
-		if(type == Material.BLAZE_ROD) {
-			e.setCancelled(true);
+		if(type != Material.BLAZE_ROD) {
+			return;
 		}
+		e.setCancelled(true);
 		UUID uid = bukkitPlayer.getUniqueId();
 		Player player = this.playerRepo.getHumanPlayer(bukkitPlayer.getUniqueId());
 		Location loc = e.getClickedBlock().getLocation();
