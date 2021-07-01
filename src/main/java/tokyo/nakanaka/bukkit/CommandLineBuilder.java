@@ -12,6 +12,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
+import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.cuboid.CuboidSelectionBuilder;
 import tokyo.nakanaka.selection.cuboid.CuboidSelectionStrategy;
 import tokyo.nakanaka.world.World;
@@ -36,6 +37,7 @@ public class CommandLineBuilder {
 			World world = new BukkitWorld(this.server, loc.getWorld());
 			if(player == null) {
 				player = new Player(uid);
+				player.setSelectionShape(SelectionShape.CUBOID);
 				RegionBuildingData regionData = new CuboidSelectionStrategy().newRegionBuildingData();
 				SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
 				player.setSelectionBuildingData(selData);		
