@@ -15,8 +15,8 @@ public class Pos2CommandHandler implements SelSubCommandHandler{
 	private LengthCalculator lengthCalc = new LengthCalculator();
 
 	@Override
-	public List<String> onTabComplete(String[] args) {
-		return this.pos2Arg.onTabComplete(args);
+	public String getLabel() {
+		return "pos2";
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class Pos2CommandHandler implements SelSubCommandHandler{
 	}
 
 	@Override
-	public String getLabel() {
-		return "pos2";
+	public List<String> onTabComplete(String[] args) {
+		return this.pos2Arg.onTabComplete(args);
 	}
-
+	
 }
