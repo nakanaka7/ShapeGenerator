@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import tokyo.nakanaka.world.World;
-
+@Deprecated
 public class SelectionManager {
 	private Map<SelectionShape, Class<? extends SelectionBuilder>> shapeBuilderMap = new HashMap<>(); 
 	private Map<Class<? extends SelectionBuilder>, SelectionShape> builderShapeMap = new HashMap<>();

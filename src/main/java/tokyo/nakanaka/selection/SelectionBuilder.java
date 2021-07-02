@@ -5,7 +5,7 @@ import java.util.List;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.world.World;
-
+@Deprecated
 public interface SelectionBuilder {
 	World getWorld();
 	void onLeftClickBlock(Logger logger, BlockVector3D blockPos);
