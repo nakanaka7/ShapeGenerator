@@ -13,6 +13,7 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.TorusRegion3D;
+import tokyo.nakanaka.selection.NonNegativeDoubleCommandHandler;
 import tokyo.nakanaka.selection.PosCommandHandler;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelSubCommandHandler;
@@ -73,8 +74,8 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
 		return Arrays.asList(new PosCommandHandler("center"),
-				new RadiusMainCommandHandler(),
-				new RadiusSubCommandHandler(),
+				new NonNegativeDoubleCommandHandler("radius_main"),
+				new NonNegativeDoubleCommandHandler("radius_sub"),
 				new AxisCommandHandler());
 	}
 
