@@ -1,7 +1,10 @@
 package tokyo.nakanaka.selection.torus;
 
+import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.geometricProperty.Axis;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -11,20 +14,26 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
+		return "axis";
 	}
 
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
-		// TODO Auto-generated method stub
-		return false;
+		if(args.length != 1) {
+			return false;
+		}
+		try{
+			Axis.valueOf(args[0].toUpperCase());
+		}catch(IllegalArgumentException e) {
+			logger.print(LogColor.RED + "Invalid axis");
+		}
+		data.putString("axis", args[0]);
+		return true;
 	}
 
 	@Override
 	public List<String> onTabComplete(String[] args) {
-		// TODO Auto-generated method stub
-		return null;
+		return Arrays.asList("x", "y", "z");
 	}
 
 }
