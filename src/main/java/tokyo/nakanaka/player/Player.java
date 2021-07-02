@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.world.World;
@@ -17,7 +16,6 @@ public class Player {
 	private int x;
 	private int y;
 	private int z;
-	private SelectionBuilder builder;
 	private SelectionShape shape;
 	private SelectionBuildingData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
@@ -80,10 +78,6 @@ public class Player {
 		this.z = z;
 	}
 
-	public SelectionBuilder getSelectionBuilder() {
-		return builder;
-	}
-	
 	public SelectionShape getSelectionShape() {
 		return shape;
 	}
@@ -92,10 +86,6 @@ public class Player {
 		this.shape = shape;
 	}
 
-	public void setSelectionBuilder(SelectionBuilder builder) {
-		this.builder = builder;
-	}
-	
 	public SelectionBuildingData getSelectionBuildingData() {
 		return selData;
 	}
