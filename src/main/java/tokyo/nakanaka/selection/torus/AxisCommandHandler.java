@@ -7,7 +7,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelSubCommandHandler;
 
-public class RadiusMainSelSubCommandHandler implements SelSubCommandHandler {
+public class AxisCommandHandler implements SelSubCommandHandler{
 
 	@Override
 	public String getLabel() {

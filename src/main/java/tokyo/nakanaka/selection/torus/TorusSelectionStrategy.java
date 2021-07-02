@@ -71,10 +71,10 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new CenterSelSubCommandHandler(),
-				new RadiusMainSelSubCommandHandler(),
-				new RadiusSubSelSubCommandHandler(),
-				new AxisSelSubCommandHandler());
+		return Arrays.asList(new CenterCommandHandler(),
+				new RadiusMainCommandHandler(),
+				new RadiusSubCommandHandler(),
+				new AxisCommandHandler());
 	}
 
 	@Override
