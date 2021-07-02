@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.torus;
+package tokyo.nakanaka.selection;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,11 +13,6 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.TorusRegion3D;
-import tokyo.nakanaka.selection.NonNegativeDoubleCommandHandler;
-import tokyo.nakanaka.selection.PosCommandHandler;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.SelSubCommandHandler;
-import tokyo.nakanaka.selection.SelectionStrategy;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 
 public class TorusSelectionStrategy implements SelectionStrategy {

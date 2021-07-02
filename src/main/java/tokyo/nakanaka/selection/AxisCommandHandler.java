@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.torus;
+package tokyo.nakanaka.selection;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,8 +7,6 @@ import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.SelSubCommandHandler;
 
 public class AxisCommandHandler implements SelSubCommandHandler{
 

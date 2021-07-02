@@ -33,9 +33,9 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
+import tokyo.nakanaka.selection.SphereSelectionStrategy;
+import tokyo.nakanaka.selection.TorusSelectionStrategy;
 import tokyo.nakanaka.selection.cuboid.CuboidSelectionStrategy;
-import tokyo.nakanaka.selection.sphere.SphereSelectionStrategy;
-import tokyo.nakanaka.selection.torus.TorusSelectionStrategy;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
