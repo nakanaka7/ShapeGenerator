@@ -67,7 +67,7 @@ public class RegionBuildingData {
 		return this.typeMap.get(label);
 	}
 	
-	public void putDouble(String label, double value) {
+	public void putDouble(String label, Double value) {
 		if(!this.labelList.contains(label) || this.typeMap.get(label) != DataType.DOUBLE) {
 			throw new IllegalArgumentException();
 		}
