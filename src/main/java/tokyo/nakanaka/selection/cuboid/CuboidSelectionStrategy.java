@@ -27,61 +27,31 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 				.addDataTag("length", DataType.DOUBLE)
 				.build();
 	}
-	
+
 	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D pos1 = blockPos.toVector3D();
+		data.putVector3D("pos1", pos1);
 		Vector3D pos2 = data.getVector3D("pos2");
-		if(pos2 == null) {
-			data.putVector3D("pos1", pos1);
-			return;
+		if(pos2 != null) {
+			data.putDouble("width", this.lengthCalc.calcWidth(pos1, pos2));
+			data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
+			data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
 		}
-		this.adjustPos1Pos2(data);
 	}
 
 	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D pos2 = blockPos.toVector3D();
+		data.putVector3D("pos2", pos2);
 		Vector3D pos1 = data.getVector3D("pos1");
-		if(pos1 == null) {
-			data.putVector3D("pos2", pos2);
-			return;
+		if(pos1 != null) {
+			data.putDouble("width", this.lengthCalc.calcWidth(pos1, pos2));
+			data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
+			data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
 		}
-		this.adjustPos1Pos2(data);
 	}
 
-	//used in onLeftClickBlock(), onRightClickBlock() 
-	private void adjustPos1Pos2(RegionBuildingData data) {
-		Vector3D pos1 = data.getVector3D("pos1");
-		Vector3D pos2 = data.getVector3D("pos2");
-		if(pos1.getX() - pos2.getX() >= 0) {
-			pos1 = pos1.add(new Vector3D(0.5, 0, 0));
-			pos2 = pos2.negate(new Vector3D(0.5, 0, 0));
-		}else {
-			pos1 = pos1.negate(new Vector3D(0.5, 0, 0));
-			pos2 = pos2.add(new Vector3D(0.5, 0, 0));
-		}
-		if(pos1.getY() - pos2.getY() >= 0) {
-			pos1 = pos1.add(new Vector3D(0, 0.5, 0));
-			pos2 = pos2.negate(new Vector3D(0, 0.5, 0));
-		}else {
-			pos1 = pos1.negate(new Vector3D(0, 0.5, 0));
-			pos2 = pos2.add(new Vector3D(0, 0.5, 0));
-		}
-		if(pos1.getZ() - pos2.getZ() >= 0) {
-			pos1 = pos1.add(new Vector3D(0, 0, 0.5));
-			pos2 = pos2.negate(new Vector3D(0, 0, 0.5));
-		}else {
-			pos1 = pos1.negate(new Vector3D(0, 0, 0.5));
-			pos2 = pos2.add(new Vector3D(0, 0, 0.5));
-		}
-		data.putVector3D("pos1", pos1);
-		data.putVector3D("pos2", pos2);
-		data.putDouble("width", this.lengthCalc.calcWidth(pos1, pos2));
-		data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
-		data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
-	}
-	
 	@Override
 	public String getDefaultOffsetLabel() {
 		return "pos1";
