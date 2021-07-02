@@ -1,26 +1,30 @@
 package tokyo.nakanaka.selection;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
-import static tokyo.nakanaka.logger.LogConstant.INDENT_NORMAL;
-
 import java.util.List;
 
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.math.Vector3D;
 
 public class SelectionMessenger {
-	private SelectionManager selManager;
-
-	public SelectionMessenger(SelectionManager selManager) {
-		this.selManager = selManager;
-	}
-	
-	public void sendMessage(Player player) {
-		SelectionBuilder builder = player.getSelectionBuilder();
-		SelectionShape shape = this.selManager.getShape(builder);
-		player.getLogger().print(HEAD_NORMAL + shape.toString() + " selection");
-		List<String> lines = builder.getStateLines();
-		for(String line : lines) {
-			player.getLogger().print(INDENT_NORMAL + line);
+	public void sendMessage(Logger logger, SelectionShape shape, 
+			SelectionBuildingData selData, String defaultOffsetLabel) {
+		logger.print(LogColor.LIGHT_PURPLE + shape.toString() + LogColor.RESET + " Selection");
+		RegionBuildingData regionData = selData.getRegionData();
+		List<String> labelList = regionData.getLabels();
+		for(String label : labelList) {
+			Object value = regionData.get(label);
+			String valueStr = "";
+			if(value != null) {
+				valueStr = value.toString();
+			}
+			logger.print(LogColor.GOLD + label + ": " + LogColor.RESET + valueStr);
 		}
+		String offsetStr = defaultOffsetLabel;
+		Vector3D offset = selData.getOffset();
+		if(offset != null) {
+			offsetStr = offset.toString();
+		}
+		logger.print(LogColor.GOLD + "offset: " + LogColor.RESET + offsetStr);
 	}
 }

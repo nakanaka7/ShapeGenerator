@@ -1,18 +1,21 @@
 package tokyo.nakanaka.bukkit;
 
+import static tokyo.nakanaka.logger.LogColor.GOLD;
+import static tokyo.nakanaka.logger.LogColor.RESET;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import static tokyo.nakanaka.logger.LogColor.*;
 import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Scheduler;
-import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.DelCommandHandler;
 import tokyo.nakanaka.commandHandler.GenrCommandHandler;
 import tokyo.nakanaka.commandHandler.HelpCommandHandler;
@@ -24,14 +27,14 @@ import tokyo.nakanaka.commandHandler.ScaleCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
 import tokyo.nakanaka.commandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
+import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
-import tokyo.nakanaka.selection.SelectionManager;
 import tokyo.nakanaka.selection.SelectionShape;
-import tokyo.nakanaka.selection.TorusSelectionBuilder;
-import tokyo.nakanaka.selection.cuboid.CuboidSelectionBuilder;
-import tokyo.nakanaka.selection.sphere.SphereSelectionBuilder;
+import tokyo.nakanaka.selection.SelectionStrategy;
+import tokyo.nakanaka.selection.cuboid.CuboidSelectionStrategy;
+import tokyo.nakanaka.selection.sphere.SphereSelectionStrategy;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
@@ -43,15 +46,14 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		SubCommandHandlerRepository cmdRepo = new SubCommandHandlerRepository();
 		this.sgCmdHandler = new RootCommandHandler("sg" ,cmdRepo);
-		SelectionManager selManager = new SelectionManager();
-		selManager.register(SelectionShape.CUBOID, CuboidSelectionBuilder.class);
-		selManager.register(SelectionShape.SPHERE, SphereSelectionBuilder.class);
-		selManager.register(SelectionShape.TORUS, TorusSelectionBuilder.class);
+		Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
+		strategyMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());
+		strategyMap.put(SelectionShape.SPHERE, new SphereSelectionStrategy());
 		cmdRepo.register(new HelpCommandHandler(cmdRepo));
 		cmdRepo.register(new PhyCommandHandler());
-		cmdRepo.register(new SelCommandHandler(selManager));
-		cmdRepo.register(new ShapeCommandHandler(selManager));
-		cmdRepo.register(new GenrCommandHandler(new BukkitBlockArgument()));
+		cmdRepo.register(new SelCommandHandler(strategyMap));
+		cmdRepo.register(new ShapeCommandHandler(strategyMap));
+		cmdRepo.register(new GenrCommandHandler(new BukkitBlockArgument(), strategyMap));
 		cmdRepo.register(new ShiftCommandHandler());
 		cmdRepo.register(new ScaleCommandHandler());
 		cmdRepo.register(new RotCommandHandler());
@@ -59,7 +61,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new UndoCommandHandler());
 		cmdRepo.register(new RedoCommandHandler());
 		PluginManager plManager = getServer().getPluginManager();
-		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(selManager);
+		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(strategyMap);
 		Scheduler scheduler = new BukkitScheduler(this);
 		plManager.registerEvents(new ClickBlockEventHandlerAdapter(this.getServer(), playerRepo, scheduler, clickHandler), this);
 	}

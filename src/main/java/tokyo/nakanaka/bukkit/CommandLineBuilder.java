@@ -10,14 +10,15 @@ import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
-import tokyo.nakanaka.selection.cuboid.CuboidSelectionBuilder;
+import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.selection.SelectionBuildingData;
+import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.selection.cuboid.CuboidSelectionStrategy;
 import tokyo.nakanaka.world.World;
 
 public class CommandLineBuilder {
 	private Server server;
 	private PlayerRepository repo;
-	private BukkitPlayerFactory playerFactory = new BukkitPlayerFactory();
-	
 	public CommandLineBuilder(Server server, PlayerRepository repo) {
 		this.server = server;
 		this.repo = repo;
@@ -30,20 +31,24 @@ public class CommandLineBuilder {
 			org.bukkit.entity.Player bukkitPlayer = (org.bukkit.entity.Player)sender;
 			UUID uid = bukkitPlayer.getUniqueId();
 			player = this.repo.getHumanPlayer(uid);
+			Location loc = bukkitPlayer.getLocation();
+			World world = new BukkitWorld(this.server, loc.getWorld());
 			if(player == null) {
-				player = this.playerFactory.createHumanPlayer(this.server, bukkitPlayer);
+				player = new Player(uid);
+				player.setSelectionShape(SelectionShape.CUBOID);
+				RegionBuildingData regionData = new CuboidSelectionStrategy().newRegionBuildingData();
+				SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
+				player.setSelectionBuildingData(selData);		
 				this.repo.registerHumanPlayer(player);
 			}
-			Location loc = bukkitPlayer.getLocation();
 			player.setLogger(logger);
-			World world = new BukkitWorld(this.server, loc.getWorld());
 			player.setWorld(world);
-			player.setX(loc.getBlockX());
-			player.setY(loc.getBlockY());
-			player.setZ(loc.getBlockZ());
-			if(player.getSelectionBuilder() == null) {
-				player.setSelectionBuilder(new CuboidSelectionBuilder(world));
-			}
+			int x = loc.getBlockX();
+			int y = loc.getBlockY();
+			int z = loc.getBlockZ();
+			player.setX(x);
+			player.setY(y);
+			player.setZ(z);
 		}else {
 			throw new IllegalArgumentException();
 		}
@@ -59,4 +64,5 @@ public class CommandLineBuilder {
 		}
 		return new CommandLine(player, shiftAlias, shiftArgs);
 	}
+	
 }
