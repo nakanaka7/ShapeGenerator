@@ -35,7 +35,9 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D center = blockPos.toVector3D();
-		data.putVector3D("center", center);	
+		data.putVector3D("center", center);
+		data.putDouble("radius_main", null);
+		data.putDouble("radius_sub", null);
 	}
 
 	@Override
@@ -52,23 +54,12 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 			radiusMain = pos.negate(center).getAbsolute();
 			data.putDouble("radius_main", radiusMain);
 		}else {
-			Vector3D e;
-			switch(axis) {
-			case X:
-				e = new Vector3D(0, 1, 0);
-				break;
-			case Y:
-				e = new Vector3D(0, 0, 1);
-				break;
-			case Z:
-				e = new Vector3D(1, 0, 0);
-				break;
-			default:
-				return;
-			}
-			Vector3D radiusMainVec = e.multiply(radiusMain);
-			Vector3D posFromCenter = pos.negate(center);
-			radiusSub = posFromCenter.negate(radiusMainVec).getAbsolute() + 0.5;
+			Vector3D e1 = axis.toVector3D();
+			Vector3D p = pos.negate(center);
+			double p1 = p.innerProduct(e1);
+			Vector3D p2e2 = p.negate(e1.multiply(p1));
+			Vector3D e2 = p2e2.divide(p2e2.getAbsolute());
+			radiusSub = p.negate(e2.multiply(radiusMain)).getAbsolute() + 0.5;
 			data.putDouble("radius_sub", radiusSub);
 		}
 	}
