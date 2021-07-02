@@ -3,6 +3,9 @@ package tokyo.nakanaka.math.region3D;
 import tokyo.nakanaka.math.PolarVector2D;
 import tokyo.nakanaka.math.Vector3D;
 
+/**
+ * Represents a torus shape region, which center is the origin, and which axis is z.
+ */
 public class TorusRegion3D implements Region3D{
 	private double radiusMain;
 	private double radiusSub;

@@ -17,7 +17,6 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.Selection;
-import tokyo.nakanaka.selection.SelectionBuilder;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
@@ -78,36 +77,6 @@ public class GenrCommandHandler implements SubCommandHandler{
 		return true;
 	}
 	
-	public boolean onCommandOld(Player player, String[] args) {
-		SelectionBuilder builder = player.getSelectionBuilder();
-		Selection sel;
-		try {
-			sel = builder.build();
-		}catch(IllegalStateException e) {
-			player.getLogger().print(HEAD_ERROR + "Incomplete selection");
-			return true;
-		}
-		if(args.length != 1) {
-			return false;
-		}
-		Block block;
-		try {
-			block = this.blockArg.onParsing(args[0]);
-		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Invalid block specification");
-			return true;
-		}
-		GenerateCommand generateCmd = new GenerateCommand(sel, block, player.getBlockPhysics());	
-		try {
-			generateCmd.execute();
-		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Unsettable block");
-			return true;
-		}
-		player.getUndoCommandManager().add(generateCmd);
-		return true;
-	}
-
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {

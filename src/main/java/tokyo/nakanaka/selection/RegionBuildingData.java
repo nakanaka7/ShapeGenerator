@@ -10,26 +10,30 @@ import tokyo.nakanaka.math.Vector3D;
 public class RegionBuildingData {
 	private List<String> labelList;
 	private Map<String, DataType> typeMap;
-	private Map<String, Vector3D> vectorMap;
 	private Map<String, Double> doubleMap;
+	private Map<String, String> stringMap;
+	private Map<String, Vector3D> vectorMap;
 	
 	public static enum DataType{
-		VECTOR3D,
-		DOUBLE;
+		DOUBLE,
+		STRING,
+		VECTOR3D;
 	}
 	
 	public RegionBuildingData(Builder builder) {
 		this.labelList = builder.labelList;
 		this.typeMap = builder.typeMap;
-		this.vectorMap = builder.vectorMap;
 		this.doubleMap = builder.doubleMap;
+		this.stringMap = builder.stringMap;
+		this.vectorMap = builder.vectorMap;
 	}
 	
 	public static class Builder{
 		private List<String> labelList = new ArrayList<>();
 		private Map<String, DataType> typeMap = new HashMap<>();
-		private Map<String, Vector3D> vectorMap = new HashMap<>();
 		private Map<String, Double> doubleMap = new HashMap<>();
+		private Map<String, String> stringMap = new HashMap<>();
+		private Map<String, Vector3D> vectorMap = new HashMap<>();
 		
 		public Builder addDataTag(String label, DataType type) {
 			this.labelList.add(label);
@@ -48,10 +52,12 @@ public class RegionBuildingData {
 	}
 	
 	public Object get(String label) {
-		if(this.vectorMap.containsKey(label)) {
-			return this.vectorMap.get(label);
-		}else if(this.doubleMap.containsKey(label)) {
+		if(this.doubleMap.containsKey(label)) {
 			return this.doubleMap.get(label);
+		}else if(this.stringMap.containsKey(label)) {
+			return this.stringMap.get(label);
+		}else if(this.vectorMap.containsKey(label)) {
+			return this.vectorMap.get(label);
 		}else {
 			return null;
 		}
@@ -59,6 +65,28 @@ public class RegionBuildingData {
 	
 	public DataType getDataType(String label) {
 		return this.typeMap.get(label);
+	}
+	
+	public void putDouble(String label, Double value) {
+		if(!this.labelList.contains(label) || this.typeMap.get(label) != DataType.DOUBLE) {
+			throw new IllegalArgumentException();
+		}
+		this.doubleMap.put(label, value);
+	}
+	
+	public Double getDouble(String label) {
+		return this.doubleMap.get(label);
+	}
+	
+	public void putString(String label, String value) {
+		if(!this.labelList.contains(label) || this.typeMap.get(label) != DataType.STRING) {
+			throw new IllegalArgumentException();
+		}
+		this.stringMap.put(label, value);
+	}
+	
+	public String getString(String label) {
+		return this.stringMap.get(label);
 	}
 	
 	public void putVector3D(String label, Vector3D value) {
@@ -70,17 +98,6 @@ public class RegionBuildingData {
 	
 	public Vector3D getVector3D(String label) {
 		return this.vectorMap.get(label);
-	}
-	
-	public void putDouble(String label, double value) {
-		if(!this.labelList.contains(label) || this.typeMap.get(label) != DataType.DOUBLE) {
-			throw new IllegalArgumentException();
-		}
-		this.doubleMap.put(label, value);
-	}
-	
-	public Double getDouble(String label) {
-		return this.doubleMap.get(label);
 	}
 	
 }

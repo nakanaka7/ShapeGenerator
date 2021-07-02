@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.sphere;
+package tokyo.nakanaka.selection;
 
 import java.util.List;
 
@@ -7,15 +7,18 @@ import tokyo.nakanaka.logger.LogConstant;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.SelSubCommandHandler;
 
-public class CenterCommandHandler implements SelSubCommandHandler{
+public class PosCommandHandler implements SelSubCommandHandler {
 	private PositionArgument posArg = new PositionArgument();
+	private String label;
 	
+	public PosCommandHandler(String label) {
+		this.label = label;
+	}
+
 	@Override
 	public String getLabel() {
-		return "center";
+		return this.label;
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class CenterCommandHandler implements SelSubCommandHandler{
 			logger.print(LogConstant.HEAD_ERROR + "Can not parse coodinate");
 			return true;
 		}
-		data.putVector3D("center", pos);
+		data.putVector3D(this.label, pos);
 		return true;
 	}
 
@@ -35,5 +38,5 @@ public class CenterCommandHandler implements SelSubCommandHandler{
 	public List<String> onTabComplete(String[] args) {
 		return this.posArg.onTabComplete(args);
 	}
-
+	
 }
