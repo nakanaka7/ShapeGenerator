@@ -14,7 +14,7 @@ import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.TorusRegion3D;
 import tokyo.nakanaka.world.World;
-
+@Deprecated
 public class TorusSelectionBuilder extends AbstractSelectionBuilder{
 	private Vector3D center;
 	private double radiusMain;
