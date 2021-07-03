@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.cuboid;
+package tokyo.nakanaka.selection;
 
 import tokyo.nakanaka.math.Vector3D;
 
