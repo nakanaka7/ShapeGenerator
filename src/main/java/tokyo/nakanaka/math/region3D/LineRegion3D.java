@@ -39,10 +39,10 @@ public class LineRegion3D implements Region3D {
 	
 	@Override
 	public boolean contains(double x, double y, double z) {
-		x = x - this.x1;
-		y = y - this.y1;
-		z = z - this.z1;
-		Vector3D p = new Vector3D(x, y, z);
+		double px = x - this.x1;
+		double py = y - this.y1;
+		double pz = z - this.z1;
+		Vector3D p = new Vector3D(px, py, pz);
 		Vector3D a = new Vector3D(this.dx, this.dy, this.dz);
 		if(p.getAbsolute() <= this.thickness / 2) {
 			return true;
@@ -54,7 +54,7 @@ public class LineRegion3D implements Region3D {
 		double l = p.innerProduct(e);
 		Vector3D ppara = e.multiply(l);
 		double distance = p.negate(ppara).getAbsolute();
-		return 0 <= l && l <= 1 && distance <= this.thickness / 2;
+		return 0 <= l && l <= a.getAbsolute() && distance <= this.thickness / 2;
 	}
 	
 	public boolean containsOld(double x, double y, double z) {
