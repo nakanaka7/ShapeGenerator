@@ -5,7 +5,7 @@ import tokyo.nakanaka.math.Vector3D;
 /**
  * Represents a line between 2 points. It has thickness, and its ends are sphere. 
  */
-public class LineRegion3D implements Region3D {
+public class Line implements Region3D {
 	private double x1;
 	private double y1;
 	private double z1;
@@ -24,7 +24,7 @@ public class LineRegion3D implements Region3D {
 	 * @param thickness must be positive
 	 */
 	
-	public LineRegion3D(double x1, double y1, double z1, double x2, double y2, double z2, double thickness) {
+	public Line(double x1, double y1, double z1, double x2, double y2, double z2, double thickness) {
 		this.x1 = x1;
 		this.y1 = y1;
 		this.z1 = z1;

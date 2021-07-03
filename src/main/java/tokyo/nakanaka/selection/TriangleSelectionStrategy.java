@@ -11,7 +11,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.math.region3D.TriangleRegion3D;
+import tokyo.nakanaka.math.region3D.Triangle;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 
 public class TriangleSelectionStrategy implements SelectionStrategy {
@@ -72,7 +72,7 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 		if(pos1 == null || pos2 == null || pos3 == null || thickness == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new TriangleRegion3D(pos1.getX(), pos1.getY(), pos1.getZ(),
+		Region3D region = new Triangle(pos1.getX(), pos1.getY(), pos1.getZ(),
 				pos2.getX(), pos2.getY(), pos2.getZ(),
 				pos3.getX(), pos3.getY(), pos3.getZ(), thickness);
 		double ubx = max(pos1.getX(), pos2.getX(), pos3.getX()) + thickness / 2;
