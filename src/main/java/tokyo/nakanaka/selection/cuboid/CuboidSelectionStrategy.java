@@ -9,7 +9,6 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.CuboidRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.selection.PosCommandHandler;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelSubCommandHandler;
 import tokyo.nakanaka.selection.SelectionStrategy;
@@ -60,7 +59,7 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("pos1"), new PosCommandHandler("pos2"));
+		return Arrays.asList(new Pos1CommandHandler(), new Pos2CommandHandler());
 	}
 
 	@Override
