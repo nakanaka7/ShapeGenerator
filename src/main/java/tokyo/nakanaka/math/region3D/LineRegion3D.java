@@ -21,7 +21,7 @@ public class LineRegion3D implements Region3D {
 	 * @param x2
 	 * @param y2
 	 * @param z2
-	 * @param thickness
+	 * @param thickness must be positive
 	 */
 	
 	public LineRegion3D(double x1, double y1, double z1, double x2, double y2, double z2, double thickness) {
