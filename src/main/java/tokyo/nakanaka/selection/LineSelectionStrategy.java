@@ -20,7 +20,7 @@ public class LineSelectionStrategy implements SelectionStrategy {
 				.addDataTag("pos2", DataType.VECTOR3D)
 				.addDataTag("thickness", DataType.DOUBLE)
 				.build();
-		data.putDouble("thickness", 0.5);
+		data.putDouble("thickness", 1.0);
 		return data;
 	}
 

@@ -21,7 +21,7 @@ public class LineRegion3D implements Region3D {
 	 * @param x2
 	 * @param y2
 	 * @param z2
-	 * @param thickness
+	 * @param thickness must be positive
 	 */
 	
 	public LineRegion3D(double x1, double y1, double z1, double x2, double y2, double z2, double thickness) {
@@ -31,29 +31,30 @@ public class LineRegion3D implements Region3D {
 		this.dx = x2 - x1;
 		this.dy = y2 - y1;
 		this.dz = z2 - z1;
+		if(thickness <= 0) {
+			throw new IllegalArgumentException();
+		}
 		this.thickness = thickness;
 	}
 	
 	@Override
 	public boolean contains(double x, double y, double z) {
-		x = x - this.x1;
-		y = y - this.y1;
-		z = z - this.z1;
-		Vector3D p = new Vector3D(x, y, z);
+		double px = x - this.x1;
+		double py = y - this.y1;
+		double pz = z - this.z1;
+		Vector3D p = new Vector3D(px, py, pz);
 		Vector3D a = new Vector3D(this.dx, this.dy, this.dz);
-		Vector3D pa = p.negate(a);
 		if(p.getAbsolute() <= this.thickness / 2) {
 			return true;
 		}
-		if(pa.getAbsolute() <= this.thickness / 2) {
+		if(p.negate(a).getAbsolute() <= this.thickness / 2) {
 			return true;
 		}
-		if(a.getAbsolute() == 0) {
-			return false;
-		}
-		double t = p.innerProduct(a) / Math.pow(a.getAbsolute(), 2);
-		double distance = p.negate(a.multiply(t)).getAbsolute();
-		return 0 <= t && t <= 1 && distance <= this.thickness / 2;
+		Vector3D e = a.divide(a.getAbsolute());//when |a| = 0, all points are included in the above 2 case
+		double l = p.innerProduct(e);
+		Vector3D ppara = e.multiply(l);
+		double distance = p.negate(ppara).getAbsolute();
+		return 0 <= l && l <= a.getAbsolute() && distance <= this.thickness / 2;
 	}
-
+	
 }
