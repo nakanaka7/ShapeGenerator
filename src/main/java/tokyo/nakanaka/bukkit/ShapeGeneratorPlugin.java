@@ -36,6 +36,7 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
 import tokyo.nakanaka.selection.SphereSelectionStrategy;
 import tokyo.nakanaka.selection.TorusSelectionStrategy;
+import tokyo.nakanaka.selection.TriangleSelectionStrategy;
 import tokyo.nakanaka.selection.cuboid.CuboidSelectionStrategy;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
@@ -53,6 +54,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		strategyMap.put(SelectionShape.SPHERE, new SphereSelectionStrategy());
 		strategyMap.put(SelectionShape.TORUS, new TorusSelectionStrategy());
 		strategyMap.put(SelectionShape.LINE, new LineSelectionStrategy());
+		strategyMap.put(SelectionShape.TRIANGLE, new TriangleSelectionStrategy());
 		cmdRepo.register(new HelpCommandHandler(cmdRepo));
 		cmdRepo.register(new PhyCommandHandler());
 		cmdRepo.register(new SelCommandHandler(strategyMap));
