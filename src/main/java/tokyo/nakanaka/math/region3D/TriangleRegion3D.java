@@ -9,6 +9,9 @@ public class TriangleRegion3D implements Region3D {
 	private TriangleElement element;
 	
 	public TriangleRegion3D(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3, double thickness) {
+		if(thickness < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.pos1 = new Vector3D(x1, y1, z1);
 		Vector3D vec1 = new Vector3D(x2 - x1, y2 - y1, z2 - z1);
 		Vector3D vec2 = new Vector3D(x3 - x1, y3 - y1, z3 - z1);
