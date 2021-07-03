@@ -31,6 +31,9 @@ public class LineRegion3D implements Region3D {
 		this.dx = x2 - x1;
 		this.dy = y2 - y1;
 		this.dz = z2 - z1;
+		if(thickness <= 0) {
+			throw new IllegalStateException();
+		}
 		this.thickness = thickness;
 	}
 	
@@ -47,9 +50,6 @@ public class LineRegion3D implements Region3D {
 		}
 		if(pa.getAbsolute() <= this.thickness / 2) {
 			return true;
-		}
-		if(a.getAbsolute() == 0) {
-			return false;
 		}
 		double t = p.innerProduct(a) / Math.pow(a.getAbsolute(), 2);
 		double distance = p.negate(a.multiply(t)).getAbsolute();
