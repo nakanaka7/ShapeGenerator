@@ -12,7 +12,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
-import tokyo.nakanaka.math.region3D.TorusRegion3D;
+import tokyo.nakanaka.math.region3D.Torus;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 
 public class TorusSelectionStrategy implements SelectionStrategy {
@@ -83,7 +83,7 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 			throw new IllegalStateException();
 		}
 		Axis axis = Axis.valueOf(data.getString("axis").toUpperCase());
-		Region3D region = new TorusRegion3D(radiusMain, radiusSub);
+		Region3D region = new Torus(radiusMain, radiusSub);
 		switch(axis) {
 		case X:
 			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));

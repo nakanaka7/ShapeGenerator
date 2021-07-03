@@ -4,11 +4,11 @@ import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Matrix3x3;
 import tokyo.nakanaka.math.Vector3D;
 
-public class TriangleRegion3D implements Region3D {
+public class Triangle implements Region3D {
 	private Vector3D pos1;
 	private TriangleElement element;
 	
-	public TriangleRegion3D(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3, double thickness) {
+	public Triangle(double x1, double y1, double z1, double x2, double y2, double z2, double x3, double y3, double z3, double thickness) {
 		if(thickness < 0) {
 			throw new IllegalArgumentException();
 		}

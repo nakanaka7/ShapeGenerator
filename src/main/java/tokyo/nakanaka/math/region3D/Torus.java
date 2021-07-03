@@ -6,14 +6,14 @@ import tokyo.nakanaka.math.Vector3D;
 /**
  * Represents a torus shape region, which center is the origin, and which axis is z.
  */
-public class TorusRegion3D implements Region3D{
+public class Torus implements Region3D{
 	private double radiusMain;
 	private double radiusSub;
 	
 	/**
 	 * @throws IllegalArgumentException
 	 */
-	public TorusRegion3D(double radiusMain, double radiusSub) {
+	public Torus(double radiusMain, double radiusSub) {
 		if(radiusMain < 0 || radiusSub < 0) {
 			throw new IllegalArgumentException();
 		}

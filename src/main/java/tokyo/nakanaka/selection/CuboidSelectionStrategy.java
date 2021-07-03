@@ -7,7 +7,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
-import tokyo.nakanaka.math.region3D.CuboidRegion3D;
+import tokyo.nakanaka.math.region3D.Cuboid;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 
@@ -66,7 +66,7 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 		if(pos1 == null || pos2 == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new CuboidRegion3D(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ());
+		Region3D region = new Cuboid(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ());
 		double ubx = Math.max(pos1.getX(), pos2.getX());
 		double uby = Math.max(pos1.getY(), pos2.getY());
 		double ubz = Math.max(pos1.getZ(), pos2.getZ());

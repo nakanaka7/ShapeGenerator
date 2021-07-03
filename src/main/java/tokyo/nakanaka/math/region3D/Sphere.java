@@ -2,12 +2,12 @@ package tokyo.nakanaka.math.region3D;
 
 import tokyo.nakanaka.math.Vector3D;
 
-public class SphereRegion3D implements Region3D{
+public class Sphere implements Region3D{
 	private double r;
 	/**
 	 * Represents sphere which center is (0, 0, 0), and its radius is r
 	 */	
-	public SphereRegion3D(double r) {
+	public Sphere(double r) {
 		if(r < 0) {
 			throw new IllegalArgumentException();
 		}

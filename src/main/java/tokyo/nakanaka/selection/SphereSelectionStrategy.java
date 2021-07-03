@@ -11,7 +11,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
-import tokyo.nakanaka.math.region3D.SphereRegion3D;
+import tokyo.nakanaka.math.region3D.Sphere;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 
 public class SphereSelectionStrategy implements SelectionStrategy{
@@ -58,7 +58,7 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 		if(center == null || radius == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new SphereRegion3D(radius);
+		Region3D region = new Sphere(radius);
 		region = Region3Ds.shift(region, center);
 		double ubx = center.getX() + radius;
 		double uby = center.getY() + radius;
