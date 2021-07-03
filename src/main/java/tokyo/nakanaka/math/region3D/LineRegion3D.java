@@ -32,7 +32,7 @@ public class LineRegion3D implements Region3D {
 		this.dy = y2 - y1;
 		this.dz = z2 - z1;
 		if(thickness <= 0) {
-			throw new IllegalStateException();
+			throw new IllegalArgumentException();
 		}
 		this.thickness = thickness;
 	}
