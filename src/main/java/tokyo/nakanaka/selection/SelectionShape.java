@@ -5,5 +5,6 @@ public enum SelectionShape {
 	SPHERE,
 	TORUS,
 	LINE,
-	TRIANGLE;
+	TRIANGLE,
+	TETRAHEDRON;
 }
