@@ -57,21 +57,4 @@ public class LineRegion3D implements Region3D {
 		return 0 <= l && l <= a.getAbsolute() && distance <= this.thickness / 2;
 	}
 	
-	public boolean containsOld(double x, double y, double z) {
-		x = x - this.x1;
-		y = y - this.y1;
-		z = z - this.z1;
-		Vector3D p = new Vector3D(x, y, z);
-		Vector3D a = new Vector3D(this.dx, this.dy, this.dz);
-		if(p.getAbsolute() <= this.thickness / 2) {
-			return true;
-		}
-		if(p.negate(a).getAbsolute() <= this.thickness / 2) {
-			return true;
-		}
-		double t = p.innerProduct(a) / Math.pow(a.getAbsolute(), 2);
-		double distance = p.negate(a.multiply(t)).getAbsolute();
-		return 0 <= t && t <= 1 && distance <= this.thickness / 2;
-	}
-
 }
