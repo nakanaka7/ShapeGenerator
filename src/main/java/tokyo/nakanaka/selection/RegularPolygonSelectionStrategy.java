@@ -17,7 +17,7 @@ import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.ThickenedRegion3D;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 
-public class RegularPolygonsSelectionStrategy implements SelectionStrategy {
+public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 
 	@Override
 	public RegionBuildingData newRegionBuildingData() {
