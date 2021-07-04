@@ -35,6 +35,7 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 		Vector3D center = data.getVector3D("center");
 		if(center == null) {
 			logger.print(HEAD_ERROR + "Set center first");
+			return;
 		}
 		Vector3D pos = blockPos.toVector3D();
 		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
