@@ -6,5 +6,6 @@ public enum SelectionShape {
 	TORUS,
 	LINE,
 	TRIANGLE,
-	TETRAHEDRON;
+	TETRAHEDRON,
+	REGULAR_POLYGON;
 }
