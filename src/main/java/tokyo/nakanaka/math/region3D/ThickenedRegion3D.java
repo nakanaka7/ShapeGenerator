@@ -17,7 +17,7 @@ public class ThickenedRegion3D implements Region3D {
 
 	@Override
 	public boolean contains(double x, double y, double z) {
-		if(z < thickness/ 2 || thickness/ 2 < z) {
+		if(z < - thickness/ 2 || thickness/ 2 < z) {
 			return false;
 		}
 		return this.region2D.contains(x, y);
