@@ -9,6 +9,8 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelpMessenger;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements SubCommandHandler{
@@ -17,6 +19,7 @@ public class HelpCommandHandler implements SubCommandHandler{
 			.description("Print command help")
 			.addParameter(new Parameter(Type.OPTIONAL, "command"), "command for help")
 			.build();
+	private String usage = "/sg help [command]";
 	
 	public HelpCommandHandler(SubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
@@ -29,6 +32,7 @@ public class HelpCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		if(args.length == 0) {
 			new CommandHelpMessenger().onSgHelp(player.getLogger(), this.cmdRepo);
 			return true;
@@ -44,7 +48,8 @@ public class HelpCommandHandler implements SubCommandHandler{
 			}
 			return true;
 		}else {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + this.usage);
+			return true;
 		}
 	}
 
