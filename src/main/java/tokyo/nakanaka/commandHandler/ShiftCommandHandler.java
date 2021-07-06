@@ -15,11 +15,14 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Direction;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
 public class ShiftCommandHandler implements SubCommandHandler{
 	private CommandHelp help;
+	private String usage = "/sg shift <direction> <length>";
 	{
 		List<String> dirList = Arrays.asList(Direction.values()).stream()
 				.map(s -> s.toString().toLowerCase())
@@ -39,8 +42,10 @@ public class ShiftCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + this.usage);
+			return true;
 		}
 		Direction dir;
 		double blocks;
