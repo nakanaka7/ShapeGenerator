@@ -17,7 +17,7 @@ import tokyo.nakanaka.commandHandler.GenrCommandHandler;
 import tokyo.nakanaka.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.commandHandler.PhyCommandHandler;
 import tokyo.nakanaka.commandHandler.RedoCommandHandler;
-import tokyo.nakanaka.commandHandler.SgCommandHandler;
+import tokyo.nakanaka.commandHandler.RootCommandHandler;
 import tokyo.nakanaka.commandHandler.RotCommandHandler;
 import tokyo.nakanaka.commandHandler.ScaleCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
@@ -39,14 +39,14 @@ import tokyo.nakanaka.selection.TriangleSelectionStrategy;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
-	private SgCommandHandler sgCmdHandler;
+	private RootCommandHandler sgCmdHandler;
 	
 	@Override
 	public void onEnable() {
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		SubCommandHandlerRepository cmdRepo = new SubCommandHandlerRepository();
-		this.sgCmdHandler = new SgCommandHandler("sg" ,cmdRepo);
+		this.sgCmdHandler = new RootCommandHandler("sg" ,cmdRepo);
 		Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 		strategyMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());
 		strategyMap.put(SelectionShape.SPHERE, new SphereSelectionStrategy());
