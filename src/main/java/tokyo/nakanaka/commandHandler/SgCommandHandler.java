@@ -8,7 +8,8 @@ import tokyo.nakanaka.commadHelp.CommandHelpMessenger;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class SgCommandHandler implements CommandHandler{
+public class SgCommandHandler {
+	@Deprecated
 	private String label;
 	private SubCommandHandlerRepository cmdHandlerRepo;
 	
@@ -25,7 +26,6 @@ public class SgCommandHandler implements CommandHandler{
 		new CommandHelpMessenger().onSgHelp(logger, this.cmdHandlerRepo);
 	}
 	
-	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {
 			return false;
@@ -47,7 +47,6 @@ public class SgCommandHandler implements CommandHandler{
 		return true;
 	}
 	
-	@Override
 	public List<String> onTabComplete(Player player, String[] args){
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHandlerRepo.getAliases());
