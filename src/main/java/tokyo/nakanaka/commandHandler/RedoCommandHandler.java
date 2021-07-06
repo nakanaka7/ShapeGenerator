@@ -10,7 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class RedoCommandHandler implements SubCommandHandler{
+public class RedoCommandHandler implements SgSubCommandHandler{
 	private CommandHelp help = new CommandHelp.Builder("redo")
 			.description("Redo a block changing command")
 			.build();

@@ -18,7 +18,7 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandler implements SubCommandHandler{
+public class SelCommandHandler implements SgSubCommandHandler{
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private static final String RESET = "reset";
 	private CommandHelp help = new CommandHelp.Builder("sel")

@@ -11,7 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class PhyCommandHandler implements SubCommandHandler{
+public class PhyCommandHandler implements SgSubCommandHandler{
 	private CommandHelp help = new CommandHelp.Builder("phy")
 			.description("Toggle physics option for generating block")
 			.addParameter(new Parameter(Type.REQUIRED, "true", "false"), "option for physics when setting blocks")

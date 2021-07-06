@@ -8,19 +8,19 @@ import java.util.Set;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 
 public class SubCommandHandlerRepository {
-	private Map<String, SubCommandHandler> cmdMap = new HashMap<>();
+	private Map<String, SgSubCommandHandler> cmdMap = new HashMap<>();
 
-	public void register(SubCommandHandler cmdLine) {
+	public void register(SgSubCommandHandler cmdLine) {
 		CommandHelp help = cmdLine.getCommandHelp();
 		String label = help.getLabel();
 		this.cmdMap.put(label, cmdLine);
 	}
 	
-	public SubCommandHandler findBy(String label) {
+	public SgSubCommandHandler findBy(String label) {
 		return this.cmdMap.get(label);
 	}
 	
-	public Set<SubCommandHandler> getAll(){
+	public Set<SgSubCommandHandler> getAll(){
 		return new HashSet<>(this.cmdMap.values());
 	}
 	

@@ -18,7 +18,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
 
-public class ShapeCommandHandler implements SubCommandHandler {
+public class ShapeCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
 	private CommandHelp help = new CommandHelp.Builder("shape")
 			.description("Set selection shape")

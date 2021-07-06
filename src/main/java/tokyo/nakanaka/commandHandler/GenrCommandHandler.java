@@ -21,7 +21,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
 
-public class GenrCommandHandler implements SubCommandHandler{
+public class GenrCommandHandler implements SgSubCommandHandler{
 	private BlockCommandArgument blockArg;
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
 	private CommandHelp help = new CommandHelp.Builder("genr")

@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class ScaleCommandHandler implements SubCommandHandler{
+public class ScaleCommandHandler implements SgSubCommandHandler{
 	private CommandHelp help = new CommandHelp.Builder("scale")
 			.description("Change scale the generated blocks")
 			.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "scale axis")

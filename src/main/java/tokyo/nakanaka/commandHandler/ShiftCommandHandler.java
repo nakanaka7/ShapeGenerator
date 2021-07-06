@@ -18,7 +18,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
-public class ShiftCommandHandler implements SubCommandHandler{
+public class ShiftCommandHandler implements SgSubCommandHandler{
 	private CommandHelp help;
 	private String usage = "/sg shift <direction> <length>";
 	{

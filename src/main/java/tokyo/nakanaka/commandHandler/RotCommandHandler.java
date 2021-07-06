@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class RotCommandHandler implements SubCommandHandler{
+public class RotCommandHandler implements SgSubCommandHandler{
 	private CommandHelp help = new CommandHelp.Builder("rot")
 			.description("Rotate the generated blocks")
 			.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "rotation axis")

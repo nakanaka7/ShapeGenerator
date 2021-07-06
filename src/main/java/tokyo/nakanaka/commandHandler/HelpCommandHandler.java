@@ -11,7 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class HelpCommandHandler implements SubCommandHandler{
+public class HelpCommandHandler implements SgSubCommandHandler{
 	private SubCommandHandlerRepository cmdRepo;
 	private CommandHelp help = new CommandHelp.Builder("help")
 			.description("Print command help")
@@ -35,7 +35,7 @@ public class HelpCommandHandler implements SubCommandHandler{
 			new CommandHelpMessenger().onSgHelp(player.getLogger(), this.cmdRepo);
 			return true;
 		}else if(args.length == 1) {
-			SubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
+			SgSubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
 			if(cmdHandler == null) {
 				logger.print(LogColor.RED + "Unknown command");
 				return true;
