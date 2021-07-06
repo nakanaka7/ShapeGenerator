@@ -9,6 +9,8 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class PhyCommandHandler implements SubCommandHandler{
@@ -16,6 +18,7 @@ public class PhyCommandHandler implements SubCommandHandler{
 			.description("Toggle physics option for generating block")
 			.addParameter(new Parameter(Type.REQUIRED, "true", "false"), "option for physics when setting blocks")
 			.build();
+	private String usage = "/sg phy <true|false>";
 	
 	@Override
 	public CommandHelp getCommandHelp() {
@@ -24,8 +27,10 @@ public class PhyCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + this.usage);
+			return true;
 		}
 		boolean physics;
 		String bool = args[0];
@@ -34,7 +39,8 @@ public class PhyCommandHandler implements SubCommandHandler{
 		}else if(bool.equals("false")) {
 			physics = false;
 		}else {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + this.usage);
+			return true;
 		}
 		player.setBlockPhysics(physics);
 		player.getLogger().print(HEAD_NORMAL + "Set physics -> " + bool);

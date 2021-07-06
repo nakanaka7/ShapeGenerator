@@ -31,7 +31,7 @@ public class DelCommandHandler implements SubCommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + usage);
+			logger.print(LogColor.RED + "Usage: " + this.usage);
 			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();

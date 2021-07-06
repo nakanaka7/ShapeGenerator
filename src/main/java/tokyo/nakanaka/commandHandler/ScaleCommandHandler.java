@@ -15,6 +15,8 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class ScaleCommandHandler implements SubCommandHandler{
@@ -23,7 +25,8 @@ public class ScaleCommandHandler implements SubCommandHandler{
 			.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "scale axis")
 			.addParameter(new Parameter(Type.REQUIRED, "scale factor"), "scale factor (double data type)")
 			.build();
-
+	private String usage = "/sg scale <x|y|z> <factor>";
+	
 	@Override
 	public CommandHelp getCommandHelp() {
 		return this.help;
@@ -31,8 +34,10 @@ public class ScaleCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + this.usage);
+			return true;
 		}
 		Axis axis;
 		try{
