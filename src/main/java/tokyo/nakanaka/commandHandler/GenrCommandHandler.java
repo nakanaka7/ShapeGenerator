@@ -57,7 +57,7 @@ public class GenrCommandHandler implements SubCommandHandler{
 			return true;
 		}
 		if(args.length != 1) {
-			logger.print(LogColor.RED + this.usage);
+			logger.print(LogColor.RED + "Usage: "+ this.usage);
 			return true;
 		}
 		Vector3D offset = selData.getOffset();
