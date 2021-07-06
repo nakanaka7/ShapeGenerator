@@ -1,17 +1,17 @@
 package tokyo.nakanaka.commandHandlerNew;
 
-public class ParameterNew {
+public class Parameter {
 	private Type type;
 	private String[] labels;
 	private String description;
 	
-	public ParameterNew(Type type, String[] labels, String description)  {
+	public Parameter(Type type, String[] labels, String description)  {
 		this.type = type;
 		this.labels = labels;
 		this.description = description;
 	}
 	
-	public ParameterNew(Type type, String label, String description)  {
+	public Parameter(Type type, String label, String description)  {
 		this.type = type;
 		this.labels = new String[] {label};
 		this.description = description;
