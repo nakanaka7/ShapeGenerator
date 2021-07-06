@@ -2,9 +2,7 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelpMessenger;
 import tokyo.nakanaka.logger.Logger;
@@ -25,17 +23,6 @@ public class RootCommandHandler implements CommandHandler{
 	
 	public void onHelp(Logger logger) {
 		new CommandHelpMessenger().onSgHelp(logger, this.cmdHandlerRepo);
-	}
-	
-	@Deprecated
-	public List<Pair<String, String>> getSubCommmandDescriptions(){
-		Set<SubCommandHandler> set = this.cmdHandlerRepo.getAll();
-		List<Pair<String, String>> list = new ArrayList<>();
-		for(SubCommandHandler handler : set) {
-			CommandHelp help = handler.getCommandHelp();
-			list.add(new Pair<>(help.getLabel(), help.getDescription()));
-		}
-		return list;
 	}
 	
 	@Override
