@@ -1,10 +1,12 @@
 package tokyo.nakanaka.commandHandler;
 
+import static tokyo.nakanaka.logger.LogColor.GOLD;
+import static tokyo.nakanaka.logger.LogColor.RESET;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelpMessenger;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.logger.LogColor;
@@ -42,7 +44,9 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length == 0) {
-			new CommandHelpMessenger().onSgHelp(player.getLogger(), this.cmdRepo);
+			for(SgSubCommandHandler handler : this.cmdRepo.getAll()) {
+				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getDescription());
+			}
 			return;
 		}else if(args.length == 1) {
 			SgSubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
