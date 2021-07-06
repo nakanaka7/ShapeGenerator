@@ -49,10 +49,10 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length == 0) {
-			logger.print(LogColor.YELLOW + "---------" + LogColor.RESET
-					+ "Help for " 
+			logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
+					+ "Help: " 
 					+ LogColor.GOLD + "/sg" + LogColor.RESET
-					+ LogColor.YELLOW + "---------");
+					+ LogColor.YELLOW + " |-----------------");
 			for(SgSubCommandHandler handler : this.cmdRepo.getAll()) {
 				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getDescription());
 			}
@@ -63,10 +63,10 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 				logger.print(LogColor.RED + "Unknown command");
 				return;
 			}
-			logger.print(LogColor.YELLOW + "---------" + LogColor.RESET
-					+ "Help for " 
+			logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
+					+ "Help: " 
 					+ LogColor.GOLD + "/sg " + cmdHandler.getLabel() + LogColor.RESET
-					+ LogColor.YELLOW + "---------");
+					+ LogColor.YELLOW + " |---------------");
 			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getDescription());
 			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getUsage());
 			return;
