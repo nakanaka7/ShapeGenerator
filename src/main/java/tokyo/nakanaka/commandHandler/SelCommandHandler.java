@@ -39,6 +39,7 @@ public class SelCommandHandler implements SubCommandHandler{
 		Logger logger = player.getLogger();
 		if(args.length == 0) {
 			logger.print(LogColor.RED + "Empty sub command");
+			return true;
 		}
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
