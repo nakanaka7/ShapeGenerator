@@ -8,11 +8,11 @@ import tokyo.nakanaka.commadHelp.CommandHelpMessenger;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class RootCommandHandler implements CommandHandler{
+public class SgCommandHandler implements CommandHandler{
 	private String label;
 	private SubCommandHandlerRepository cmdHandlerRepo;
 	
-	public RootCommandHandler(String label, SubCommandHandlerRepository cmdHandlerRepo) {
+	public SgCommandHandler(String label, SubCommandHandlerRepository cmdHandlerRepo) {
 		this.label = label;
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
