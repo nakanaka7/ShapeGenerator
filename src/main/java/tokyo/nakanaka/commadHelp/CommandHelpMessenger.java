@@ -5,7 +5,6 @@ import static tokyo.nakanaka.logger.LogColor.RESET;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commandHandler.SgSubCommandHandler;
@@ -34,9 +33,9 @@ public class CommandHelpMessenger {
 	}
 	
 	public void onSgHelp(Logger logger, SgSubCommandHandlerRepository cmdRepo) {
-		Set<SgSubCommandHandler> set = cmdRepo.getAll();
+		List<SgSubCommandHandler> handlerList = cmdRepo.getAll();
 		List<Pair<String, String>> list = new ArrayList<>();
-		for(SgSubCommandHandler handler : set) {
+		for(SgSubCommandHandler handler : handlerList) {
 			CommandHelp help = handler.getCommandHelp();
 			list.add(new Pair<>(help.getLabel(), help.getDescription()));
 		}
