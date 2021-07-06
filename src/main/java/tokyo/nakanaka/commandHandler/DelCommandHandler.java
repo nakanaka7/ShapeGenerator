@@ -11,6 +11,8 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class DelCommandHandler implements SubCommandHandler{
@@ -18,6 +20,8 @@ public class DelCommandHandler implements SubCommandHandler{
 			.description("Delete the generated blocks")
 			.build();
 
+	private String usage = "/sg del";
+	
 	@Override
 	public CommandHelp getCommandHelp() {
 		return this.help;
@@ -25,8 +29,10 @@ public class DelCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + usage);
+			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand cmd = undoManager.peekUndoCommand();
