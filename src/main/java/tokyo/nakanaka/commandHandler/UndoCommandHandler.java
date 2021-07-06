@@ -22,6 +22,11 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getLabel() {
+		return "undo";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {

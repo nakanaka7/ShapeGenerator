@@ -41,6 +41,11 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getLabel() {
+		return "genr";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {

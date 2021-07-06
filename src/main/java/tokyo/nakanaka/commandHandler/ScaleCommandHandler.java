@@ -31,6 +31,11 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getLabel() {
+		return "scale";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {

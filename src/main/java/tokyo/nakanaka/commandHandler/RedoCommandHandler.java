@@ -23,6 +23,11 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getLabel() {
+		return "redo";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
