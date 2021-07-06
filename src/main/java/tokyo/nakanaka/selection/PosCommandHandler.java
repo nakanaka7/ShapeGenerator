@@ -16,7 +16,7 @@ public class PosCommandHandler implements SelSubCommandHandler {
 	
 	public PosCommandHandler(String label) {
 		this.label = label;
-		this.usage = "/sg sel " + label + "[x] [y] [z]";
+		this.usage = "/sg sel " + label + " [x] [y] [z]";
 	}
 
 	@Override
