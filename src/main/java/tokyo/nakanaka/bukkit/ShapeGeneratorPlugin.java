@@ -76,10 +76,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CommandLine cmdLine = this.cmdLineBuilder.build(sender, label, args);
 		Player player = cmdLine.getPlayer();
-		boolean success = this.sgCmdHandler.onCommand(player, args);
-		if(!success) {
-			this.sgCmdHandler.onHelp(player.getLogger());
-		}
+		this.sgCmdHandler.onCommand(player, args);
 		return true;
 	}
 	
