@@ -12,6 +12,8 @@ import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.player.Player;
@@ -29,6 +31,8 @@ public class GenrCommandHandler implements SubCommandHandler{
 			.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
 			.build();
 	
+	private String usage = "/sg genr <block>";
+	
 	public GenrCommandHandler(BlockCommandArgument blockArg, Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.blockArg = blockArg;
 		this.strategyMap = strategyMap;
@@ -41,6 +45,7 @@ public class GenrCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
 		SelectionStrategy selStrategy = this.strategyMap.get(player.getSelectionShape());
@@ -52,7 +57,8 @@ public class GenrCommandHandler implements SubCommandHandler{
 			return true;
 		}
 		if(args.length != 1) {
-			return false;
+			logger.print(LogColor.RED + this.usage);
+			return true;
 		}
 		Vector3D offset = selData.getOffset();
 		if(offset == null) {
