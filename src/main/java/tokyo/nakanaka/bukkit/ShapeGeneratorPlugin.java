@@ -1,8 +1,5 @@
 package tokyo.nakanaka.bukkit;
 
-import static tokyo.nakanaka.logger.LogColor.GOLD;
-import static tokyo.nakanaka.logger.LogColor.RESET;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +11,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.CommandLine;
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.commandHandler.DelCommandHandler;
 import tokyo.nakanaka.commandHandler.GenrCommandHandler;
@@ -82,10 +78,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		Player player = cmdLine.getPlayer();
 		boolean success = this.sgCmdHandler.onCommand(player, args);
 		if(!success) {
-			List<Pair<String, String>> list = this.sgCmdHandler.getSubCommmandDescriptions();
-			for(Pair<String, String> pair : list) {
-				player.getLogger().print(GOLD + pair.getFirst() + ": " + RESET + pair.getSecond());
-			}
+			this.sgCmdHandler.onHelp(player.getLogger());
 		}
 		return true;
 	}

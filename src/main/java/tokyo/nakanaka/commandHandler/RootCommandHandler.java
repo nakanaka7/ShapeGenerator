@@ -1,11 +1,15 @@
 package tokyo.nakanaka.commandHandler;
 
+import static tokyo.nakanaka.logger.LogColor.GOLD;
+import static tokyo.nakanaka.logger.LogColor.RESET;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RootCommandHandler implements CommandHandler{
@@ -21,6 +25,14 @@ public class RootCommandHandler implements CommandHandler{
 		return label;
 	}
 	
+	public void onHelp(Logger logger) {
+		List<Pair<String, String>> list = this.getSubCommmandDescriptions();
+		for(Pair<String, String> pair : list) {
+			logger.print(GOLD + pair.getFirst() + ": " + RESET + pair.getSecond());
+		}
+	}
+	
+	@Deprecated
 	public List<Pair<String, String>> getSubCommmandDescriptions(){
 		Set<SubCommandHandler> set = this.cmdHandlerRepo.getAll();
 		List<Pair<String, String>> list = new ArrayList<>();
