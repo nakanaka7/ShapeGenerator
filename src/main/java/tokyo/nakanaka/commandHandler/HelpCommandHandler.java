@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class HelpCommandHandler implements SubCommandHandler{
 		}else if(args.length == 1) {
 			SubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
 			if(cmdHandler == null) {
-				player.getLogger().print(HEAD_ERROR + "Unknown command");
+				logger.print(LogColor.RED + "Unknown command");
 				return true;
 			}
 			List<String> lineList = cmdHandler.getCommandHelp().getHelp();

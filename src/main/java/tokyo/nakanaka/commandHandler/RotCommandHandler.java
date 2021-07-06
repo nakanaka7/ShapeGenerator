@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,20 +41,20 @@ public class RotCommandHandler implements SubCommandHandler{
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Can not parse axis");
+			logger.print(LogColor.RED + "Can not parse axis");
 			return true;
 		}
 		double degree;
 		try {
 			degree = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Can not parse double");
+			logger.print(LogColor.RED + "Can not parse double");
 			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand cmd = undoManager.peekUndoCommand();
 		if(cmd == null) {
-			player.getLogger().print(HEAD_ERROR + "Generate blocks first");
+			logger.print(LogColor.RED + "Generate blocks first");
 			return true;
 		}
 		GenerateCommand originalCmd;
@@ -65,7 +63,7 @@ public class RotCommandHandler implements SubCommandHandler{
 		}else if(cmd instanceof AdjustCommand) {
 			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
-			player.getLogger().print(HEAD_ERROR + "Invalid Operation");
+			logger.print(LogColor.RED + "Invalid Operation");
 			return true;
 		}
 		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, player.getBlockPhysics());

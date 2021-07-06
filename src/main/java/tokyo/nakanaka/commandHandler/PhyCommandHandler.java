@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +41,7 @@ public class PhyCommandHandler implements SubCommandHandler{
 			return true;
 		}
 		player.setBlockPhysics(physics);
-		player.getLogger().print(HEAD_NORMAL + "Set physics -> " + bool);
+		logger.print("Set physics -> " + bool);
 		return true;
 	}
 

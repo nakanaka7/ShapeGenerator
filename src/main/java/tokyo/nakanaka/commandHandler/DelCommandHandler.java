@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class DelCommandHandler implements SubCommandHandler{
 		}else if(cmd instanceof AdjustCommand) {
 			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
-			player.getLogger().print(HEAD_ERROR + "Generate blocks first");
+			logger.print(LogColor.RED + "Generate blocks first");
 			return true;
 		}
 		DeleteCommand deleteCmd = new DeleteCommand(originalCmd);

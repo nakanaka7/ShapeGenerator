@@ -1,8 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,11 +32,11 @@ public class RedoCommandHandler implements SubCommandHandler{
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand redoCmd = undoManager.getRedoCommand();
 		if(redoCmd == null) {
-			player.getLogger().print(HEAD_ERROR + "Nothing to redo");
+			logger.print(LogColor.RED + "Nothing to redo");
 			return true;
 		}else {
 			redoCmd.redo();
-			player.getLogger().print(HEAD_NORMAL + "Redid 1 command");
+			logger.print("Redid 1 command");
 			return true;
 		}
 	}
