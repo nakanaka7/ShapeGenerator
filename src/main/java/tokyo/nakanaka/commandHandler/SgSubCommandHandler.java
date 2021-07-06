@@ -9,6 +9,7 @@ public interface SgSubCommandHandler {
 	CommandHelp getCommandHelp();
 	String getLabel();
 	String getDescription();
+	String getUsage();
 	void onCommand(Player player, String[] args);
 	List<String> onTabComplete(Player player, String[] args);
 }

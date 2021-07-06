@@ -45,6 +45,11 @@ public class SelCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getUsage() {
+		return "/sg sel <reset|offset|...>";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length == 0) {
@@ -110,5 +115,5 @@ public class SelCommandHandler implements SgSubCommandHandler{
 		}
 		return new ArrayList<>();
 	}
-
+	
 }

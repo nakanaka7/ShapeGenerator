@@ -41,6 +41,11 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getUsage() {
+		return this.usage;
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length == 0) {
