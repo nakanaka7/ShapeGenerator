@@ -81,12 +81,10 @@ public class SelCommandHandler implements SgSubCommandHandler{
 		for(SelSubCommandHandler cmdHandler : cmdHandlerList) {
 			if(cmdHandler.getLabel().equals(label)) {
 				boolean success = cmdHandler.onCommand(regionData, player.getLogger(), playerPos, shiftArgs);
-				if(!success) {
-					//help
+				if(success) {
+					selMessenger.sendMessage(player.getLogger(), shape, selData, defaultOffsetLabel);
 					return;
 				}
-				selMessenger.sendMessage(player.getLogger(), shape, selData, defaultOffsetLabel);
-				return;
 			}
 		}
 		//help
