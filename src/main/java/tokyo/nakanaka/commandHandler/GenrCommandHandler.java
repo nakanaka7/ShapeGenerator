@@ -57,7 +57,7 @@ public class GenrCommandHandler implements SubCommandHandler{
 		try {
 			region = selStrategy.buildBoundRegion3D(regionData);
 		}catch(IllegalStateException e) {
-			player.getLogger().print(HEAD_ERROR + "Incomplete selection");
+			logger.print(LogColor.RED + "Incomplete selection");
 			return true;
 		}
 		Vector3D offset = selData.getOffset();
@@ -69,14 +69,14 @@ public class GenrCommandHandler implements SubCommandHandler{
 		try {
 			block = this.blockArg.onParsing(args[0]);
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Invalid block specification");
+			logger.print(LogColor.RED + "Invalid block specification");
 			return true;
 		}
 		GenerateCommand generateCmd = new GenerateCommand(sel, block, player.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Unsettable block");
+			logger.print(LogColor.RED + "Unsettable block");
 			return true;
 		}
 		player.getUndoCommandManager().add(generateCmd);
