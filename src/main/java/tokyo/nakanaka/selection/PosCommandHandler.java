@@ -36,12 +36,19 @@ public class PosCommandHandler implements SelSubCommandHandler {
 			pos = playerPos.toVector3D();
 		}else if(args.length == 3) {
 			CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
-			double x = coordArg.onParsingDouble(args[0], playerPos.getX());
-			double y = coordArg.onParsingDouble(args[1], playerPos.getY());
-			double z = coordArg.onParsingDouble(args[2], playerPos.getZ());
+			double x;
+			double y;
+			double z;
+			try {
+				x = coordArg.onParsingDouble(args[0], playerPos.getX());
+				y = coordArg.onParsingDouble(args[1], playerPos.getY());
+				z = coordArg.onParsingDouble(args[2], playerPos.getZ());
+			}catch(IllegalArgumentException e) {
+				logger.print(LogColor.RED + "Can not parse the coordinates");
+				return false;
+			}
 			pos = new Vector3D(x, y, z);
 		}else {
-			logger.print(LogColor.RED + "Can not parse the coordinates");
 			return false;
 		}
 		data.putVector3D(this.label, pos);
