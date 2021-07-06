@@ -1,9 +1,6 @@
 package tokyo.nakanaka.commandHandler;
 
 import static tokyo.nakanaka.logger.LogColor.LIGHT_PURPLE;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_WARN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,24 +46,24 @@ public class ShapeCommandHandler implements SubCommandHandler {
 		try{
 			shape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Invalid shape");
+			logger.print(LogColor.RED + "Invalid shape");
 			return true;
 		}
 		SelectionStrategy selStrategy = this.strategyMap.get(shape);
 		if(selStrategy == null) {
-			player.getLogger().print(HEAD_ERROR + "Unsupported shape");
+			logger.print(LogColor.RED + "Unsupported shape");
 			return true;
 		}	
 		SelectionShape original = player.getSelectionShape();
 		if(shape == original) {
-			player.getLogger().print(HEAD_WARN + "Already set : Nothing to change");
+			logger.print(LogColor.YELLOW + "Already set : Nothing to change");
 			return true;
 		}else {
 			player.setSelectionShape(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
 			player.setSelectionBuildingData(selData);
-			player.getLogger().print(HEAD_NORMAL + "Set the shape -> " + LIGHT_PURPLE + shape);
+			logger.print("Set the shape -> " + LIGHT_PURPLE + shape);
 			return true;
 		}
 	}

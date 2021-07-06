@@ -3,7 +3,6 @@ package tokyo.nakanaka.commandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -30,13 +29,7 @@ public class SgCommandHandler {
 			logger.print(helpMsg);
 			return;
 		}
-		boolean success = cmdHandler.onCommand(player, shiftArgs);
-		if(!success) {
-			CommandHelp help = cmdHandler.getCommandHelp();
-			for(String line : help.getHelp()) {
-				player.getLogger().print(line);
-			}
-		}
+		cmdHandler.onCommand(player, shiftArgs);
 	}
 	
 	public List<String> onTabComplete(Player player, String[] args){

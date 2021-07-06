@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,19 +50,19 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		try {
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Can not parse direction");
+			logger.print(LogColor.RED + "Can not parse direction");
 			return true;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Can not parse integer");
+			logger.print(LogColor.RED + "Can not parse integer");
 			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand cmd = undoManager.peekUndoCommand();
 		if(cmd == null) {
-			player.getLogger().print(HEAD_ERROR + "Generate blocks first");
+			logger.print(LogColor.RED + "Generate blocks first");
 			return true;
 		}
 		GenerateCommand originalCmd;
@@ -73,7 +71,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		}else if(cmd instanceof AdjustCommand) {
 			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
-			player.getLogger().print(HEAD_ERROR + "Invalid Operation");
+			logger.print(LogColor.RED + "Invalid Operation");
 			return true;
 		}
 		double dx = dir.getX() * blocks;

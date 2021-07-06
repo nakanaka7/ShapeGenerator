@@ -22,7 +22,7 @@ public class SelCommandHandler implements SubCommandHandler{
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private static final String RESET = "reset";
 	private CommandHelp help = new CommandHelp.Builder("sel")
-			.description("Specify a selection/ See each shape help")
+			.description("Specify a selection")
 			.build();
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
