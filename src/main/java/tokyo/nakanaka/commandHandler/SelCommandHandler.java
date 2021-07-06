@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -34,8 +36,9 @@ public class SelCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		if(args.length == 0) {
-			return false;
+			logger.print(LogColor.RED + "Empty sub command");
 		}
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
