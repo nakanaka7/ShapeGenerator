@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.commandHandler.SgSubCommandHandler;
-import tokyo.nakanaka.commandHandler.SgSubCommandHandlerRepository;
 import tokyo.nakanaka.logger.Logger;
 
 public class CommandHelpMessenger {
@@ -32,15 +30,4 @@ public class CommandHelpMessenger {
 		}
 	}
 	
-	public void onSgHelp(Logger logger, SgSubCommandHandlerRepository cmdRepo) {
-		List<SgSubCommandHandler> handlerList = cmdRepo.getAll();
-		List<Pair<String, String>> list = new ArrayList<>();
-		for(SgSubCommandHandler handler : handlerList) {
-			CommandHelp help = handler.getCommandHelp();
-			list.add(new Pair<>(help.getLabel(), help.getDescription()));
-		}
-		for(Pair<String, String> pair : list) {
-			logger.print(GOLD + "/sg " + pair.getFirst() + ": " + RESET + pair.getSecond());
-		}
-	}
 }
