@@ -1,33 +1,34 @@
 package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import tokyo.nakanaka.commadHelp.CommandHelp;
 
 public class SgSubCommandHandlerRepository {
-	private Map<String, SgSubCommandHandler> cmdMap = new HashMap<>();
-	private List<String> labelList = new ArrayList<>();
+	private List<SgSubCommandHandler> handlerList = new ArrayList<>();
 
 	public void register(SgSubCommandHandler cmdLine) {
-		CommandHelp help = cmdLine.getCommandHelp();
-		String label = help.getLabel();
-		this.cmdMap.put(label, cmdLine);
-		this.labelList.add(label);
+		this.handlerList.add(cmdLine);
 	}
 	
 	public SgSubCommandHandler findBy(String label) {
-		return this.cmdMap.get(label);
+		for(SgSubCommandHandler e : this.handlerList) {
+			if(e.getCommandHelp().getLabel().equals(label)) {
+				return e;
+			}
+		}
+		return null;
 	}
 	
 	public List<SgSubCommandHandler> getAll(){
-		return new ArrayList<>(this.cmdMap.values());
+		return new ArrayList<>(this.handlerList);
 	}
 	
 	public List<String> getAliases(){
-		return new ArrayList<>(this.cmdMap.keySet());
+		List<String> list = new ArrayList<>();
+		for(SgSubCommandHandler e : this.handlerList) {
+			list.add(e.getCommandHelp().getLabel());
+		}
+		return list;
 	}
 
 }
