@@ -14,6 +14,11 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	public String getLabel() {
 		return "axis";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Set axis";
+	}
 
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {

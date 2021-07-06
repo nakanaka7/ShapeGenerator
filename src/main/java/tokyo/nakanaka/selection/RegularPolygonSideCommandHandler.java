@@ -16,6 +16,11 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	}
 
 	@Override
+	public String getDescription() {
+		return "Set the side numbers, must be larger than 3 (inclusive)";
+	}
+	
+	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 1) {
 			throw new IllegalArgumentException();

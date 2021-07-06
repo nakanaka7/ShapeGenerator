@@ -18,6 +18,11 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Set pos1";
+	}
+	
+	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		Vector3D pos1;
 		try {
@@ -40,5 +45,5 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 	public List<String> onTabComplete(String[] args) {
 		return this.pos1Arg.onTabComplete(args);
 	}
-	
+
 }
