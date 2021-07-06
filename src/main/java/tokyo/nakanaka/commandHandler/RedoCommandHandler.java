@@ -28,6 +28,11 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Redo a block changing command";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {

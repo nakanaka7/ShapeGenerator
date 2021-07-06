@@ -46,6 +46,11 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Generate blocks in the selection";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {

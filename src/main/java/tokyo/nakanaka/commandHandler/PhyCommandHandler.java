@@ -29,6 +29,11 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Toggle physics option for generating block";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {

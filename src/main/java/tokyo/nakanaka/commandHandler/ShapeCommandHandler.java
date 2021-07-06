@@ -41,6 +41,11 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Set selection shape";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
@@ -83,5 +88,5 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 			return new ArrayList<>();
 		}
 	}
-	
+
 }

@@ -31,6 +31,11 @@ public class DelCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Delete the generated blocks";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {

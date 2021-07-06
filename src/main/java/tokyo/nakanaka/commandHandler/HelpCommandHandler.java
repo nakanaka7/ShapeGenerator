@@ -34,6 +34,11 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Print command help";
+	}
+	
+	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length == 0) {

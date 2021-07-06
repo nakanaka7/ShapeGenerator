@@ -38,6 +38,11 @@ public class SelCommandHandler implements SgSubCommandHandler{
 	public String getLabel() {
 		return "sel";
 	}
+
+	@Override
+	public String getDescription() {
+		return "Specify a selection";
+	}
 	
 	@Override
 	public void onCommand(Player player, String[] args) {
@@ -105,4 +110,5 @@ public class SelCommandHandler implements SgSubCommandHandler{
 		}
 		return new ArrayList<>();
 	}
+
 }
