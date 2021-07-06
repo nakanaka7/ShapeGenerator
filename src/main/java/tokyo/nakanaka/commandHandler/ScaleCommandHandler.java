@@ -31,25 +31,25 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogColor.RED + "Can not parse axis");
-			return true;
+			return;
 		}
 		double factor;
 		try {
 			factor = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogColor.RED + "Can not parse double");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand cmd = undoManager.peekUndoCommand();
@@ -60,12 +60,12 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
 			logger.print(LogColor.RED + "Generate blocks first");
-			return true;
+			return;
 		}
 		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, player.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
-		return true;
+		return;
 	}
 
 	@Override

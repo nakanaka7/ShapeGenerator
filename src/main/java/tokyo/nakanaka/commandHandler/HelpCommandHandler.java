@@ -29,25 +29,25 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length == 0) {
 			new CommandHelpMessenger().onSgHelp(player.getLogger(), this.cmdRepo);
-			return true;
+			return;
 		}else if(args.length == 1) {
 			SgSubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
 			if(cmdHandler == null) {
 				logger.print(LogColor.RED + "Unknown command");
-				return true;
+				return;
 			}
 			List<String> lineList = cmdHandler.getCommandHelp().getHelp();
 			for(String line : lineList) {
 				player.getLogger().print(line);
 			}
-			return true;
+			return;
 		}else {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 	}
 

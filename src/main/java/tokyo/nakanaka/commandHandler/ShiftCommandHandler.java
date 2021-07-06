@@ -39,11 +39,11 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		Direction dir;
 		double blocks;
@@ -51,19 +51,19 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogColor.RED + "Can not parse direction");
-			return true;
+			return;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogColor.RED + "Can not parse integer");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand cmd = undoManager.peekUndoCommand();
 		if(cmd == null) {
 			logger.print(LogColor.RED + "Generate blocks first");
-			return true;
+			return;
 		}
 		GenerateCommand originalCmd;
 		if(cmd instanceof GenerateCommand) {
@@ -72,7 +72,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
 			logger.print(LogColor.RED + "Invalid Operation");
-			return true;
+			return;
 		}
 		double dx = dir.getX() * blocks;
 		double dy = dir.getY() * blocks;
@@ -81,7 +81,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, player.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
-		return true;
+		return;
 	}
 
 	@Override

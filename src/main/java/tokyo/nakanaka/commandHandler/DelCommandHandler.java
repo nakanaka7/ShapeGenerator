@@ -26,11 +26,11 @@ public class DelCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand cmd = undoManager.peekUndoCommand();
@@ -41,12 +41,12 @@ public class DelCommandHandler implements SgSubCommandHandler{
 			originalCmd = ((AdjustCommand)cmd).getLastCommand();
 		}else {
 			logger.print(LogColor.RED + "Generate blocks first");
-			return true;
+			return;
 		}
 		DeleteCommand deleteCmd = new DeleteCommand(originalCmd);
 		deleteCmd.execute();
 		undoManager.add(deleteCmd);
-		return true;
+		return;
 	}
 
 	@Override

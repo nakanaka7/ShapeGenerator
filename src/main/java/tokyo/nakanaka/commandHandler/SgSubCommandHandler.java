@@ -7,6 +7,6 @@ import tokyo.nakanaka.player.Player;
 
 public interface SgSubCommandHandler {
 	CommandHelp getCommandHelp();
-	boolean onCommand(Player player, String[] args);
+	void onCommand(Player player, String[] args);
 	List<String> onTabComplete(Player player, String[] args);
 }

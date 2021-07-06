@@ -22,21 +22,21 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand undoCmd = undoManager.getUndoCommand();
 		if(undoCmd == null) {
 			logger.print(LogColor.RED + "Nothing to undo");
-			return true;
+			return;
 		}else {
 			undoCmd.undo();
 			logger.print("Undid 1 command");
-			return true;
+			return;
 		}
 	}
 

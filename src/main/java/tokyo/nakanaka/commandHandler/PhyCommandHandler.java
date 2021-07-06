@@ -24,11 +24,11 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		boolean physics;
 		String bool = args[0];
@@ -38,11 +38,11 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 			physics = false;
 		}else {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		player.setBlockPhysics(physics);
 		logger.print("Set physics -> " + bool);
-		return true;
+		return;
 	}
 
 	@Override

@@ -36,35 +36,35 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		SelectionShape shape;
 		try{
 			shape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogColor.RED + "Invalid shape");
-			return true;
+			return;
 		}
 		SelectionStrategy selStrategy = this.strategyMap.get(shape);
 		if(selStrategy == null) {
 			logger.print(LogColor.RED + "Unsupported shape");
-			return true;
+			return;
 		}	
 		SelectionShape original = player.getSelectionShape();
 		if(shape == original) {
 			logger.print(LogColor.YELLOW + "Already set : Nothing to change");
-			return true;
+			return;
 		}else {
 			player.setSelectionShape(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
 			player.setSelectionBuildingData(selData);
 			logger.print("Set the shape -> " + LIGHT_PURPLE + shape);
-			return true;
+			return;
 		}
 	}
 	

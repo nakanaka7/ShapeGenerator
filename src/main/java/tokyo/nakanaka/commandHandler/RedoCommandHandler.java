@@ -23,21 +23,21 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		UndoableCommand redoCmd = undoManager.getRedoCommand();
 		if(redoCmd == null) {
 			logger.print(LogColor.RED + "Nothing to redo");
-			return true;
+			return;
 		}else {
 			redoCmd.redo();
 			logger.print("Redid 1 command");
-			return true;
+			return;
 		}
 	}
 

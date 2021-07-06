@@ -35,11 +35,11 @@ public class SelCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length == 0) {
 			logger.print(LogColor.RED + "Empty sub command");
-			return true;
+			return;
 		}
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
@@ -55,7 +55,7 @@ public class SelCommandHandler implements SgSubCommandHandler{
 			SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
 			player.setSelectionBuildingData(newSelData);
 			selMessenger.sendMessage(player.getLogger(), shape, newSelData, defaultOffsetLabel);
-			return true;
+			return;
 		}
 		if(!world.equals(selData.getWorld())) {
 			SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
@@ -68,14 +68,14 @@ public class SelCommandHandler implements SgSubCommandHandler{
 				boolean success = cmdHandler.onCommand(regionData, player.getLogger(), playerPos, shiftArgs);
 				if(!success) {
 					//help
-					return true;
+					return;
 				}
 				selMessenger.sendMessage(player.getLogger(), shape, selData, defaultOffsetLabel);
-				return true;
+				return;
 			}
 		}
 		//help
-		return true;
+		return;
 	}
 
 	@Override
