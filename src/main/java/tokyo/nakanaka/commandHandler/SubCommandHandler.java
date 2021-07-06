@@ -1,7 +1,12 @@
 package tokyo.nakanaka.commandHandler;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import java.util.List;
 
-public interface SubCommandHandler extends CommandHandler{
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.player.Player;
+
+public interface SubCommandHandler {
 	CommandHelp getCommandHelp();
+	boolean onCommand(Player player, String[] args);
+	List<String> onTabComplete(Player player, String[] args);
 }
