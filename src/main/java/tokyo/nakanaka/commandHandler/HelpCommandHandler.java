@@ -12,14 +12,14 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements SgSubCommandHandler{
-	private SubCommandHandlerRepository cmdRepo;
+	private SgSubCommandHandlerRepository cmdRepo;
 	private CommandHelp help = new CommandHelp.Builder("help")
 			.description("Print command help")
 			.addParameter(new Parameter(Type.OPTIONAL, "command"), "command for help")
 			.build();
 	private String usage = "/sg help [command]";
 	
-	public HelpCommandHandler(SubCommandHandlerRepository cmdRepo) {
+	public HelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
 	}
 

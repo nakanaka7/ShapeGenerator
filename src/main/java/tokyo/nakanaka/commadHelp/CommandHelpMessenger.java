@@ -9,7 +9,7 @@ import java.util.Set;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commandHandler.SgSubCommandHandler;
-import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
+import tokyo.nakanaka.commandHandler.SgSubCommandHandlerRepository;
 import tokyo.nakanaka.logger.Logger;
 
 public class CommandHelpMessenger {
@@ -33,7 +33,7 @@ public class CommandHelpMessenger {
 		}
 	}
 	
-	public void onSgHelp(Logger logger, SubCommandHandlerRepository cmdRepo) {
+	public void onSgHelp(Logger logger, SgSubCommandHandlerRepository cmdRepo) {
 		Set<SgSubCommandHandler> set = cmdRepo.getAll();
 		List<Pair<String, String>> list = new ArrayList<>();
 		for(SgSubCommandHandler handler : set) {

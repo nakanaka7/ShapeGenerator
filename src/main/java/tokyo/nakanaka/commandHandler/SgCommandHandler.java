@@ -8,9 +8,9 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class SgCommandHandler {
-	private SubCommandHandlerRepository cmdHandlerRepo;
+	private SgSubCommandHandlerRepository cmdHandlerRepo;
 	
-	public SgCommandHandler(SubCommandHandlerRepository cmdHandlerRepo) {
+	public SgCommandHandler(SgSubCommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
 	
