@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelpMessenger;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -14,10 +13,6 @@ public class SgCommandHandler {
 	
 	public SgCommandHandler(SubCommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
-	}
-	
-	public void onHelp(Logger logger) {
-		new CommandHelpMessenger().onSgHelp(logger, this.cmdHandlerRepo);
 	}
 	
 	public void onCommand(Player player, String[] args) {
