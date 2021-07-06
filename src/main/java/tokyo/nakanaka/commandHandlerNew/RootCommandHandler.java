@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RootCommandHandler implements CommandHandler {
@@ -45,6 +46,10 @@ public class RootCommandHandler implements CommandHandler {
 		}
 	}
 	
+	public void onHelp(Player player, String[] parentLabels, String[] args) {
+		
+	}
+	
 	@Override
 	public void onCommand(Player player, String[] parentLabels, String[] args) {
 		if(args.length != 0) {
@@ -60,8 +65,9 @@ public class RootCommandHandler implements CommandHandler {
 				}
 			}
 		}
-		//help sub cmd list;
-		return;
+		Logger logger = player.getLogger();
+		
+		
 	}
 
 	@Override
