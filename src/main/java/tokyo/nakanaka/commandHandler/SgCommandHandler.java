@@ -9,17 +9,10 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class SgCommandHandler {
-	@Deprecated
-	private String label;
 	private SubCommandHandlerRepository cmdHandlerRepo;
 	
-	public SgCommandHandler(String label, SubCommandHandlerRepository cmdHandlerRepo) {
-		this.label = label;
+	public SgCommandHandler(SubCommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
-	}
-	
-	public String getLabel() {
-		return label;
 	}
 	
 	public void onHelp(Logger logger) {

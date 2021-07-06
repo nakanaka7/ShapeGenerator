@@ -46,7 +46,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		SubCommandHandlerRepository cmdRepo = new SubCommandHandlerRepository();
-		this.sgCmdHandler = new SgCommandHandler("sg" ,cmdRepo);
+		this.sgCmdHandler = new SgCommandHandler(cmdRepo);
 		Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 		strategyMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());
 		strategyMap.put(SelectionShape.SPHERE, new SphereSelectionStrategy());
