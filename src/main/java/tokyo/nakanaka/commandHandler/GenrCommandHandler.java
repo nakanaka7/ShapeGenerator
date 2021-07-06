@@ -46,6 +46,10 @@ public class GenrCommandHandler implements SubCommandHandler{
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
+		if(args.length != 1) {
+			logger.print(LogColor.RED + "Usage: "+ this.usage);
+			return true;
+		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
 		SelectionStrategy selStrategy = this.strategyMap.get(player.getSelectionShape());
@@ -54,10 +58,6 @@ public class GenrCommandHandler implements SubCommandHandler{
 			region = selStrategy.buildBoundRegion3D(regionData);
 		}catch(IllegalStateException e) {
 			player.getLogger().print(HEAD_ERROR + "Incomplete selection");
-			return true;
-		}
-		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: "+ this.usage);
 			return true;
 		}
 		Vector3D offset = selData.getOffset();
