@@ -2,46 +2,33 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class RootCommandHandler implements CommandHandler{
-	private String label;
+public class SgCommandHandler {
 	private SubCommandHandlerRepository cmdHandlerRepo;
 	
-	public RootCommandHandler(String label, SubCommandHandlerRepository cmdHandlerRepo) {
-		this.label = label;
+	public SgCommandHandler(SubCommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
 	
-	public String getLabel() {
-		return label;
-	}
-	
-	public List<Pair<String, String>> getSubCommmandDescriptions(){
-		Set<SubCommandHandler> set = this.cmdHandlerRepo.getAll();
-		List<Pair<String, String>> list = new ArrayList<>();
-		for(SubCommandHandler handler : set) {
-			CommandHelp help = handler.getCommandHelp();
-			list.add(new Pair<>(help.getLabel(), help.getDescription()));
-		}
-		return list;
-	}
-	
-	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public void onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
+		String helpMsg = "See help by " + LogColor.GOLD + "/sg help";
 		if(args.length == 0) {
-			return false;
+			logger.print(helpMsg);
+			return;
 		}
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
 		SubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
 		if(cmdHandler == null) {
-			return false;
+			logger.print(helpMsg);
+			return;
 		}
 		boolean success = cmdHandler.onCommand(player, shiftArgs);
 		if(!success) {
@@ -50,10 +37,8 @@ public class RootCommandHandler implements CommandHandler{
 				player.getLogger().print(line);
 			}
 		}
-		return true;
 	}
 	
-	@Override
 	public List<String> onTabComplete(Player player, String[] args){
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHandlerRepo.getAliases());

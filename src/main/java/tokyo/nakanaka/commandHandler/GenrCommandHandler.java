@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +10,8 @@ import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.player.Player;
@@ -29,6 +29,8 @@ public class GenrCommandHandler implements SubCommandHandler{
 			.addParameter(new Parameter(Type.REQUIRED, "block"), "block to generate")
 			.build();
 	
+	private String usage = "/sg genr <block>";
+	
 	public GenrCommandHandler(BlockCommandArgument blockArg, Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.blockArg = blockArg;
 		this.strategyMap = strategyMap;
@@ -41,6 +43,11 @@ public class GenrCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public boolean onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
+		if(args.length != 1) {
+			logger.print(LogColor.RED + "Usage: "+ this.usage);
+			return true;
+		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
 		SelectionStrategy selStrategy = this.strategyMap.get(player.getSelectionShape());
@@ -48,11 +55,8 @@ public class GenrCommandHandler implements SubCommandHandler{
 		try {
 			region = selStrategy.buildBoundRegion3D(regionData);
 		}catch(IllegalStateException e) {
-			player.getLogger().print(HEAD_ERROR + "Incomplete selection");
+			logger.print(LogColor.RED + "Incomplete selection");
 			return true;
-		}
-		if(args.length != 1) {
-			return false;
 		}
 		Vector3D offset = selData.getOffset();
 		if(offset == null) {
@@ -63,14 +67,14 @@ public class GenrCommandHandler implements SubCommandHandler{
 		try {
 			block = this.blockArg.onParsing(args[0]);
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Invalid block specification");
+			logger.print(LogColor.RED + "Invalid block specification");
 			return true;
 		}
 		GenerateCommand generateCmd = new GenerateCommand(sel, block, player.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Unsettable block");
+			logger.print(LogColor.RED + "Unsettable block");
 			return true;
 		}
 		player.getUndoCommandManager().add(generateCmd);

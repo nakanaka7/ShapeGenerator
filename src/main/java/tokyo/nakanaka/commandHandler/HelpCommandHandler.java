@@ -1,14 +1,12 @@
 package tokyo.nakanaka.commandHandler;
 
 import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
-import static tokyo.nakanaka.logger.LogConstant.INDENT_NORMAL;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.CommandHelpMessenger;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.player.Player;
@@ -32,12 +30,7 @@ public class HelpCommandHandler implements SubCommandHandler{
 	@Override
 	public boolean onCommand(Player player, String[] args) {
 		if(args.length == 0) {
-			player.getLogger().print(HEAD_NORMAL + "Command Help");
-			Set<SubCommandHandler> cmdHandlerSet = this.cmdRepo.getAll();
-			for(SubCommandHandler cmdHandler : cmdHandlerSet) {
-				CommandHelp help = cmdHandler.getCommandHelp();
-				player.getLogger().print(INDENT_NORMAL + help.getLabel() + ": " + help.getDescription());
-			}
+			new CommandHelpMessenger().onSgHelp(player.getLogger(), this.cmdRepo);
 			return true;
 		}else if(args.length == 1) {
 			SubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
