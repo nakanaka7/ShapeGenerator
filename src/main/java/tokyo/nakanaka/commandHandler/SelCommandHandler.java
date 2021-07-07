@@ -55,8 +55,24 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		return list;
 	}
 	
-	public CommandHelp getSubCommandHelp(String label) {
-		
+	public CommandHelp getSubCommandHelp(Player player, String label) {
+		if(label.equals("reset")) {
+			return null;
+		}else if(label.equals("offset")) {
+			return null;
+		}else {
+			SelectionShape shape = player.getSelectionShape();
+			SelectionStrategy strategy = this.strategyMap.get(shape);
+			List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
+			for(SelSubCommandHandler e : cmdHandlerList) {
+				if(e.getLabel().equals(label)) {
+					String des = e.getDescription();
+					String usage = e.getUsage();
+					return new CommandHelp(des, usage);
+				}
+			}
+			return null;
+		}
 	}
 	
 	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
