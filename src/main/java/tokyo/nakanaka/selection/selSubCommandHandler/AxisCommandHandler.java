@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selSubCommandHandler;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +7,7 @@ import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class AxisCommandHandler implements SelSubCommandHandler{
 	private String usage = "/sg sel axis <x|y|z>";

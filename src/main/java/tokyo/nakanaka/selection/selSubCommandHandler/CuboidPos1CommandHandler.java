@@ -1,13 +1,14 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selSubCommandHandler;
 
 import java.util.List;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.selection.RegionBuildingData;
 
-public class CuboidPos2CommandHandler implements SelSubCommandHandler{
-	private PosCommandHandler posHandler = new PosCommandHandler("pos2");
+public class CuboidPos1CommandHandler implements SelSubCommandHandler{
+	private PosCommandHandler posHandler = new PosCommandHandler("pos1");
 	private LengthCalculator lengthCalc = new LengthCalculator();
 
 	@Override
@@ -33,7 +34,7 @@ public class CuboidPos2CommandHandler implements SelSubCommandHandler{
 		}
 		Vector3D pos1 = data.getVector3D("pos1");
 		Vector3D pos2 = data.getVector3D("pos2");
-		if(pos1 != null) {
+		if(pos2 != null) {
 			data.putDouble("width", this.lengthCalc.calcWidth(pos1, pos2));
 			data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
 			data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
@@ -45,5 +46,5 @@ public class CuboidPos2CommandHandler implements SelSubCommandHandler{
 	public List<String> onTabComplete(String[] args) {
 		return this.posHandler.onTabComplete(args);
 	}
-	
+
 }

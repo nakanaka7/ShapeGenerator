@@ -14,6 +14,10 @@ import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.Torus;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.selection.selSubCommandHandler.AxisCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 
 public class TorusSelectionStrategy implements SelectionStrategy {
 
