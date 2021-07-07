@@ -16,7 +16,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
-import tokyo.nakanaka.selection.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
 public class ShapeCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;

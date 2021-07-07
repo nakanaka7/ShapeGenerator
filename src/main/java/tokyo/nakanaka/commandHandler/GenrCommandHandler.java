@@ -19,7 +19,7 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
-import tokyo.nakanaka.selection.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
 public class GenrCommandHandler implements SgSubCommandHandler{
 	private BlockCommandArgument blockArg;

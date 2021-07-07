@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selectionStrategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +13,8 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.Torus;
+import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.selection.RegionBuildingData.Builder;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.selection.selSubCommandHandler.AxisCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
