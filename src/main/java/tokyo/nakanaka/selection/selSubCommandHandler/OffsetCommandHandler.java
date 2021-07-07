@@ -58,7 +58,7 @@ public class OffsetCommandHandler {
 		this.selMessenger.sendMessage(logger, player.getSelectionShape(), selData, "");
 	}
 	
-	public List<String> onTabComplete(String args) {
+	public List<String> onTabComplete(String[] args) {
 		return new ArrayList<>();
 	}
 }
