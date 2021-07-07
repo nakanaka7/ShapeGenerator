@@ -15,6 +15,7 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.selection.selSubCommandHandler.OffsetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
@@ -22,8 +23,8 @@ import tokyo.nakanaka.world.World;
 
 public class SelCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
-	private static final String RESET = "reset";
 	private ResetCommandHandler resetCmdHandler;
+	private OffsetCommandHandler offsetCmdHandler;
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
@@ -108,8 +109,11 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		SelectionStrategy strategy = this.strategyMap.get(shape);
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
 		SelectionMessenger selMessenger = new SelectionMessenger();
-		if(label.equals(RESET)){
+		if(label.equals("reset")){
 			this.resetCmdHandler.onCommand(player, shiftArgs);
+			return;
+		}else if(label.equals("offset")) {
+			this.offsetCmdHandler.onCommand(player, shiftArgs);
 			return;
 		}
 		if(!world.equals(selData.getWorld())) {
@@ -140,12 +144,18 @@ public class SelCommandHandler implements SgSubCommandHandler {
 			for(SelSubCommandHandler handler : cmdHandlerList) {
 				list.add(handler.getLabel());
 			}
-			list.add(RESET);
+			list.add("reset");
+			list.add("offset");
 			return list;
 		}
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
+		if(label.equals("reset")) {
+			return this.resetCmdHandler.onTabComplete(shiftArgs);
+		}else if(label.equals("offset")) {
+			return this.offsetCmdHandler.onTabComplete(shiftArgs);
+		}
 		for(SelSubCommandHandler handler : cmdHandlerList) {
 			if(handler.getLabel().equals(label)) {
 				return handler.onTabComplete(shiftArgs);
