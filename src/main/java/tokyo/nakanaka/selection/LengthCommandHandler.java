@@ -3,7 +3,7 @@ package tokyo.nakanaka.selection;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.logger.LogConstant;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 
@@ -34,17 +34,18 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 1) {
+			logger.print(LogColor.RED + "Usage: " + this.usage);
 			return false;
 		}
 		double value;
 		try {
 			value = Double.parseDouble(args[0]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogConstant.HEAD_ERROR + "Can not parse double");
+			logger.print(LogColor.RED + "Can not parse double");
 			return true;
 		}
-		if(value < 0) {
-			logger.print(LogConstant.HEAD_ERROR + "Radius must be larger than 0");
+		if(value <= 0) {
+			logger.print(LogColor.RED + "The value must be larger than 0");
 			return true;
 		}
 		data.putDouble(this.label, value);
