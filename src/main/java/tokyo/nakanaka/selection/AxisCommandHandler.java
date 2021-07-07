@@ -9,7 +9,8 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 
 public class AxisCommandHandler implements SelSubCommandHandler{
-
+	private String usage = "/sg sel axis <x|y|z>";
+	
 	@Override
 	public String getLabel() {
 		return "axis";
@@ -23,14 +24,17 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 1) {
+			logger.print(LogColor.RED + "Usage: " + this.usage);
 			return false;
 		}
+		Axis axis;
 		try{
-			Axis.valueOf(args[0].toUpperCase());
+			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogColor.RED + "Invalid axis");
+			return false;
 		}
-		data.putString("axis", args[0]);
+		data.putString("axis", axis.toString().toLowerCase());
 		return true;
 	}
 
