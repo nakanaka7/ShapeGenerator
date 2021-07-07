@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -14,16 +13,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class DelCommandHandler implements SgSubCommandHandler{
-	private CommandHelp help = new CommandHelp.Builder("del")
-			.description("Delete the generated blocks")
-			.build();
-
 	private String usage = "/sg del";
-	
-	@Override
-	public CommandHelp getCommandHelp() {
-		return this.help;
-	}
 	
 	@Override
 	public String getLabel() {

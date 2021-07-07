@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
-import tokyo.nakanaka.commadHelp.Parameter;
-import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.RotateCommand;
@@ -18,17 +15,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RotCommandHandler implements SgSubCommandHandler{
-	private CommandHelp help = new CommandHelp.Builder("rot")
-			.description("Rotate the generated blocks")
-			.addParameter(new Parameter(Type.REQUIRED, "x", "y", "z"), "rotation axis")
-			.addParameter(new Parameter(Type.REQUIRED, "degree"), "angle of rotation (right-hand rule)")
-			.build();
 	private String usage = "/sg rot <x|y|z> <degree>";
-	
-	@Override
-	public CommandHelp getCommandHelp() {
-		return this.help;
-	}	
 	
 	@Override
 	public String getLabel() {

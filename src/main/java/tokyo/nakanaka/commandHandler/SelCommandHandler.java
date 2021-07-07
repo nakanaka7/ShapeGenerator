@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -22,19 +21,11 @@ import tokyo.nakanaka.world.World;
 public class SelCommandHandler implements SgSubRootCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private static final String RESET = "reset";
-	private CommandHelp help = new CommandHelp.Builder("sel")
-			.description("Specify a selection")
-			.build();
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 	}
 
-	@Override
-	public CommandHelp getCommandHelp() {
-		return this.help;
-	}
-	
 	@Override
 	public String getLabel() {
 		return "sel";

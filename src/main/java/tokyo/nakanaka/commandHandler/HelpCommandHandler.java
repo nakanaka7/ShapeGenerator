@@ -7,30 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.commadHelp.CommandHelp;
-import tokyo.nakanaka.commadHelp.Parameter;
-import tokyo.nakanaka.commadHelp.Parameter.Type;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements SgSubCommandHandler{
 	private SgSubCommandHandlerRepository cmdRepo;
-	private CommandHelp help = new CommandHelp.Builder("help")
-			.description("Print command help")
-			.addParameter(new Parameter(Type.OPTIONAL, "command"), "command for help")
-			.build();
 	private String usage = "/sg help [command]";
 	
 	public HelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
 	}
 
-	@Override
-	public CommandHelp getCommandHelp() {
-		return this.help;
-	}
-	
 	@Override
 	public String getLabel() {
 		return "help";
@@ -82,7 +70,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 		}else {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
 			return;
-		}
+		}	
 	}
 
 	@Override
