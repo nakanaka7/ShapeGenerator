@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -52,6 +53,10 @@ public class SelCommandHandler implements SgSubCommandHandler {
 			list.add(cmdHandler.getLabel());
 		}
 		return list;
+	}
+	
+	public CommandHelp getSubCommandHelp(String label) {
+		
 	}
 	
 	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
