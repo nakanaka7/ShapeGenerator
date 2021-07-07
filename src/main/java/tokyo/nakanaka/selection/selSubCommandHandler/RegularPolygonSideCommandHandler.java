@@ -10,7 +10,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
-	private String usage = "/sg sel side <num>";
+	private String usage = "/sg sel side <number>";
 	
 	@Override
 	public String getLabel() {
@@ -19,7 +19,7 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 
 	@Override
 	public String getDescription() {
-		return "Set the side numbers, must be larger than or equal to 3";
+		return "Set the side number, must be larger than or equal to 3";
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 		}
 		Integer side = Integer.parseInt(args[0]);
 		if(side < 3) {
-			logger.print(LogColor.RED + "Must be larger than or equal to 3");
+			logger.print(LogColor.RED + "The number must be larger than or equal to 3");
 			return false;
 		}
 		data.putInteger("side", side);
