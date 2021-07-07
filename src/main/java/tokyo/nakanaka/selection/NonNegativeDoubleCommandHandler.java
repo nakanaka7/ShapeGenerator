@@ -9,9 +9,11 @@ import tokyo.nakanaka.math.BlockVector3D;
 
 public class NonNegativeDoubleCommandHandler implements SelSubCommandHandler {
 	private String label;
+	private String usage;
 	
 	public NonNegativeDoubleCommandHandler(String label) {
 		this.label = label;
+		this.usage = "/sg sel " + label + "<length>";
 	}
 
 	@Override
@@ -22,6 +24,11 @@ public class NonNegativeDoubleCommandHandler implements SelSubCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Set " + this.label + " (positive double value)";
+	}
+	
+	@Override
+	public String getUsage() {
+		return this.usage;
 	}
 	
 	@Override

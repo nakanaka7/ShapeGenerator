@@ -9,7 +9,8 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
-
+	private String usage = "/sg sel side <num>";
+	
 	@Override
 	public String getLabel() {
 		return "side";
@@ -18,6 +19,11 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Set the side numbers, must be larger than 3 (inclusive)";
+	}
+	
+	@Override
+	public String getUsage() {
+		return this.usage;
 	}
 	
 	@Override
@@ -38,5 +44,5 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	public List<String> onTabComplete(String[] args) {
 		return Arrays.asList("3", "4", "5", "6", "7", "8", "9", "10");
 	}
-
+	
 }

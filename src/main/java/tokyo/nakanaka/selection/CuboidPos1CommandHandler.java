@@ -21,6 +21,11 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 	}
 	
 	@Override
+	public String getUsage() {
+		return this.posHandler.getUsage();
+	}
+	
+	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		boolean success = this.posHandler.onCommand(data, logger, playerPos, args);
 		if(!success) {

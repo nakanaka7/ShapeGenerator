@@ -30,6 +30,11 @@ public class PosCommandHandler implements SelSubCommandHandler {
 	}
 	
 	@Override
+	public String getUsage() {
+		return this.usage;
+	}
+	
+	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 0 && args.length != 3) {
 			logger.print(LogColor.RED + "Usage: " + this.usage);

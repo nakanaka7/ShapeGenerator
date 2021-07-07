@@ -8,6 +8,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 public interface SelSubCommandHandler {
 	String getLabel();
 	String getDescription();
+	String getUsage();
 	/**
 	 * @return true if data changed else false
 	 */
