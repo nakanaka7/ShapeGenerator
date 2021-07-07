@@ -19,7 +19,7 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.SelectionStrategy;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandler implements SgSubCommandHandler{
+public class SelCommandHandler implements SgSubRootCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private static final String RESET = "reset";
 	private CommandHelp help = new CommandHelp.Builder("sel")
@@ -47,9 +47,10 @@ public class SelCommandHandler implements SgSubCommandHandler{
 	
 	@Override
 	public String getUsage() {
-		return "/sg sel <reset|offset|...>";
+		return "/sg sel ...";
 	}
 	
+	@Override
 	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
 		List<Pair<String, String>> list = new ArrayList<>();
 		list.add(new Pair<>("reset", "Reset the selection"));
