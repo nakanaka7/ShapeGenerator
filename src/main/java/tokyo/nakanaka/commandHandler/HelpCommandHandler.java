@@ -58,9 +58,9 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					+ LogColor.YELLOW + " |---------------");
 			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getDescription());
 			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getUsage());
-			if(cmdHandler instanceof SgSubRootCommandHandler) {
+			if(cmdHandler instanceof SelCommandHandler) {
 				logger.print(LogColor.GOLD + "SubCommands:");
-				SgSubRootCommandHandler selHandler = (SgSubRootCommandHandler)cmdHandler;
+				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
 				List<Pair<String, String>> desList = selHandler.getSubCommandDescriptions(player);
 				for(Pair<String, String> pair : desList) {
 					logger.print(LogColor.GOLD + " /sg sel " +  pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());

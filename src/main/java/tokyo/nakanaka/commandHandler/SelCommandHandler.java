@@ -18,7 +18,7 @@ import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandler implements SgSubRootCommandHandler {
+public class SelCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private static final String RESET = "reset";
 	
@@ -41,7 +41,6 @@ public class SelCommandHandler implements SgSubRootCommandHandler {
 		return "/sg sel ...";
 	}
 	
-	@Override
 	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
 		List<Pair<String, String>> list = new ArrayList<>();
 		list.add(new Pair<>("reset", "Reset the selection"));
