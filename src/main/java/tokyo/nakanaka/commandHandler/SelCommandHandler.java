@@ -15,6 +15,7 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.selection.selSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.world.World;
@@ -22,9 +23,11 @@ import tokyo.nakanaka.world.World;
 public class SelCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private static final String RESET = "reset";
+	private ResetCommandHandler resetCmdHandler;
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
+		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
 	}
 
 	@Override
@@ -57,7 +60,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	
 	public CommandHelp getSubCommandHelp(Player player, String label) {
 		if(label.equals("reset")) {
-			return null;
+			return this.resetCmdHandler.getCommandHelp();
 		}else if(label.equals("offset")) {
 			return null;
 		}else {
@@ -106,9 +109,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
 		SelectionMessenger selMessenger = new SelectionMessenger();
 		if(label.equals(RESET)){
-			SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
-			player.setSelectionBuildingData(newSelData);
-			selMessenger.sendMessage(player.getLogger(), shape, newSelData, defaultOffsetLabel);
+			this.resetCmdHandler.onCommand(player, shiftArgs);
 			return;
 		}
 		if(!world.equals(selData.getWorld())) {
