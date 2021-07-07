@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -47,6 +48,19 @@ public class SelCommandHandler implements SgSubCommandHandler{
 	@Override
 	public String getUsage() {
 		return "/sg sel <reset|offset|...>";
+	}
+	
+	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
+		List<Pair<String, String>> list = new ArrayList<>();
+		list.add(new Pair<>("reset", "Reset the selection"));
+		list.add(new Pair<>("offset", "Set offset"));
+		SelectionShape shape = player.getSelectionShape();
+		SelectionStrategy strategy = this.strategyMap.get(shape);
+		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
+		for(SelSubCommandHandler cmdHandler : cmdHandlerList) {
+			list.add(new Pair<>(cmdHandler.getLabel(), cmdHandler.getDescription()));
+		}
+		return list;
 	}
 	
 	@Override
