@@ -8,6 +8,9 @@ import tokyo.nakanaka.math.BlockVector3D;
 public interface SelSubCommandHandler {
 	String getLabel();
 	String getDescription();
+	/**
+	 * @return true if data changed else false
+	 */
 	boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args);
 	List<String> onTabComplete(String[] args);
 }
