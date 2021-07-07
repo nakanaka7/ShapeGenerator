@@ -49,7 +49,7 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("center"), new NonNegativeDoubleCommandHandler("radius"));
+		return Arrays.asList(new PosCommandHandler("center"), new LengthCommandHandler("radius"));
 	}
 
 	@Override

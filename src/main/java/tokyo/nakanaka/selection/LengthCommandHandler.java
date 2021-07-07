@@ -7,11 +7,11 @@ import tokyo.nakanaka.logger.LogConstant;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 
-public class NonNegativeDoubleCommandHandler implements SelSubCommandHandler {
+public class LengthCommandHandler implements SelSubCommandHandler {
 	private String label;
 	private String usage;
 	
-	public NonNegativeDoubleCommandHandler(String label) {
+	public LengthCommandHandler(String label) {
 		this.label = label;
 		this.usage = "/sg sel " + label + "<length>";
 	}

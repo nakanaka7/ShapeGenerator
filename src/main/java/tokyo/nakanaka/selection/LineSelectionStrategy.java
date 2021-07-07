@@ -45,7 +45,7 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
 		return Arrays.asList(new PosCommandHandler("pos1"),
 				new PosCommandHandler("pos2"),
-				new NonNegativeDoubleCommandHandler("thickness"));
+				new LengthCommandHandler("thickness"));
 	}
 
 	@Override

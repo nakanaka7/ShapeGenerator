@@ -60,9 +60,9 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
 		return Arrays.asList(new PosCommandHandler("center"),
-				new NonNegativeDoubleCommandHandler("radius"),
+				new LengthCommandHandler("radius"),
 				new RegularPolygonSideCommandHandler(),
-				new NonNegativeDoubleCommandHandler("thickness"),
+				new LengthCommandHandler("thickness"),
 				new AxisCommandHandler());
 	}
 

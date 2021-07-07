@@ -60,7 +60,7 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 		return Arrays.asList(new PosCommandHandler("pos1"),
 				new PosCommandHandler("pos2"),
 				new PosCommandHandler("pos3"),
-				new NonNegativeDoubleCommandHandler("thickness"));
+				new LengthCommandHandler("thickness"));
 	}
 
 	@Override
