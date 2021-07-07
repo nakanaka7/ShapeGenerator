@@ -64,24 +64,20 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 				logger.print(LogColor.RED + "Unknown command");
 				return;
 			}
-			if(cmdHandler instanceof SelCommandHandler) {
-				logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
-						+ "Help: " 
-						+ LogColor.GOLD + "/sg sel" + LogColor.RESET
-						+ LogColor.YELLOW + " |---------------");
-				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
-				List<Pair<String, String>> desList = selHandler.getSubCommandDescriptions(player);
-				for(Pair<String, String> pair : desList) {
-					logger.print(LogColor.GOLD + pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());
-				}
-				return;
-			}
 			logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
 					+ "Help: " 
 					+ LogColor.GOLD + "/sg " + cmdHandler.getLabel() + LogColor.RESET
 					+ LogColor.YELLOW + " |---------------");
 			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getDescription());
 			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getUsage());
+			if(cmdHandler instanceof SgSubRootCommandHandler) {
+				logger.print(LogColor.GOLD + "SubCommands:");
+				SgSubRootCommandHandler selHandler = (SgSubRootCommandHandler)cmdHandler;
+				List<Pair<String, String>> desList = selHandler.getSubCommandDescriptions(player);
+				for(Pair<String, String> pair : desList) {
+					logger.print(LogColor.GOLD + " /sg sel " +  pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());
+				}
+			}
 			return;
 		}else {
 			logger.print(LogColor.RED + "Usage: " + this.usage);
