@@ -19,7 +19,7 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 
 	@Override
 	public String getDescription() {
-		return "Set the side numbers, must be larger than 3 (inclusive)";
+		return "Set the side numbers, must be larger than or equal to 3";
 	}
 	
 	@Override
@@ -30,12 +30,13 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 1) {
-			throw new IllegalArgumentException();
+			logger.print(LogColor.RED + "Usage: " + this.usage);
+			return false;
 		}
 		Integer side = Integer.parseInt(args[0]);
 		if(side < 3) {
-			logger.print(LogColor.RED + "Must be 3, 4, 5...");
-			return true;
+			logger.print(LogColor.RED + "Must be larger than or equal to 3");
+			return false;
 		}
 		data.putInteger("side", side);
 		return true;
