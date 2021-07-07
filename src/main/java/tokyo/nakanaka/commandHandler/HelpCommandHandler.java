@@ -6,6 +6,7 @@ import static tokyo.nakanaka.logger.LogColor.RESET;
 import java.util.ArrayList;
 import java.util.List;
 
+import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.Parameter;
 import tokyo.nakanaka.commadHelp.Parameter.Type;
@@ -61,6 +62,18 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 			SgSubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
 			if(cmdHandler == null) {
 				logger.print(LogColor.RED + "Unknown command");
+				return;
+			}
+			if(cmdHandler instanceof SelCommandHandler) {
+				logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
+						+ "Help: " 
+						+ LogColor.GOLD + "/sg sel" + LogColor.RESET
+						+ LogColor.YELLOW + " |---------------");
+				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
+				List<Pair<String, String>> desList = selHandler.getSubCommandDescriptions(player);
+				for(Pair<String, String> pair : desList) {
+					logger.print(LogColor.GOLD + pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());
+				}
 				return;
 			}
 			logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
