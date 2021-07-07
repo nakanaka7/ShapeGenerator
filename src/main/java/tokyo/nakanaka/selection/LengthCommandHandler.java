@@ -46,7 +46,7 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 		}
 		if(value <= 0) {
 			logger.print(LogColor.RED + "The value must be larger than 0");
-			return true;
+			return false;
 		}
 		data.putDouble(this.label, value);
 		return true;
