@@ -13,7 +13,7 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 	
 	public LengthCommandHandler(String label) {
 		this.label = label;
-		this.usage = "/sg sel " + label + "<length>";
+		this.usage = "/sg sel " + label + " <length>";
 	}
 
 	@Override
