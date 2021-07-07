@@ -41,6 +41,19 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		return "/sg sel ...";
 	}
 	
+	public List<String> getSubCommandLabels(Player player){
+		List<String> list = new ArrayList<>();
+		list.add("reset");
+		list.add("offset");
+		SelectionShape shape = player.getSelectionShape();
+		SelectionStrategy strategy = this.strategyMap.get(shape);
+		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
+		for(SelSubCommandHandler cmdHandler : cmdHandlerList) {
+			list.add(cmdHandler.getLabel());
+		}
+		return list;
+	}
+	
 	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
 		List<Pair<String, String>> list = new ArrayList<>();
 		list.add(new Pair<>("reset", "Reset the selection"));
