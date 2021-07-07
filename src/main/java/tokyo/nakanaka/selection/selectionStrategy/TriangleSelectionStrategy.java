@@ -1,9 +1,10 @@
 package tokyo.nakanaka.selection.selectionStrategy;
 
+import static tokyo.nakanaka.MaxMinCalculator.max;
+import static tokyo.nakanaka.MaxMinCalculator.min;
+
 import java.util.Arrays;
 import java.util.List;
-
-import static tokyo.nakanaka.MaxMinCalculator.*;
 
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -13,7 +14,6 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Triangle;
 import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.RegionBuildingData.Builder;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
