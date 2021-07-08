@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -58,7 +59,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					+ LogColor.YELLOW + " |---------------");
 			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getDescription());
 			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getUsage());
-			if(cmdHandler instanceof SelCommandHandler) {
+			if(args[0].equals("sel")) {
 				logger.print(LogColor.GOLD + "SubCommands:");
 				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
 				List<Pair<String, String>> desList = selHandler.getSubCommandDescriptions(player);
@@ -66,17 +67,35 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					logger.print(LogColor.GOLD + " /sg sel " +  pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());
 				}
 			}
-			return;
-		}else {
-			logger.print(LogColor.RED + "Usage: " + this.usage);
-			return;
-		}	
+		}else if(args.length == 2) {
+			if(args[0].equals("sel")) {
+				SelCommandHandler selHandler = (SelCommandHandler) this.cmdRepo.findBy("sel");
+				List<String> subLabels = selHandler.getSubCommandLabels(player);
+				if(subLabels.contains(args[1])) {
+					CommandHelp cmdHelp = selHandler.getSubCommandHelp(player, args[1]);
+					logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
+							+ "Help: " 
+							+ LogColor.GOLD + "/sg sel " + args[1] + LogColor.RESET
+							+ LogColor.YELLOW + " |---------------");
+					logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHelp.getDescription());
+					logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHelp.getUsage());
+				}else {
+					logger.print(LogColor.RED + "Unkonwn command");
+				}
+				return;
+			}
+		}
+		logger.print(LogColor.RED + "Usage: " + this.usage);
 	}
 
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdRepo.getAliases());
+		}else if(args.length == 2 && args[0].equals("sel")) {
+			SelCommandHandler selHandler = (SelCommandHandler) this.cmdRepo.findBy("sel");
+			List<String> subLabels = selHandler.getSubCommandLabels(player);
+			return subLabels;
 		}else {
 			return new ArrayList<>();
 		}
