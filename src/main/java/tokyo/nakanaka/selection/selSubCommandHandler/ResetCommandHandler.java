@@ -23,7 +23,7 @@ public class ResetCommandHandler {
 		this.strategyMap = strategyMap;
 		String description = "Reset the selection";
 		String usage = "/reset";
-		this.cmdHelp = new BranchCommandHelp(description, usage);
+		this.cmdHelp = new BranchCommandHelp("reset", description, usage);
 	}
 	
 	public BranchCommandHelp getCommandHelp() {

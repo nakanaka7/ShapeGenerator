@@ -20,7 +20,7 @@ public class OffsetCommandHandler {
 	public OffsetCommandHandler() {
 		String desc = "Set offset";
 		String usage = "/offset [x] [y] [z]";
-		this.cmdHelp = new BranchCommandHelp(desc, usage);
+		this.cmdHelp = new BranchCommandHelp("offset", desc, usage);
 	}
 	
 	public BranchCommandHelp getCommandHelp() {
