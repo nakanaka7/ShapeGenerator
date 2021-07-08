@@ -44,6 +44,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 			for(SgSubCommandHandler handler : this.cmdRepo.getAll()) {
 				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getCommandHelp().getDescription());
 			}
+			logger.print("Type /sg help " + "<SubCommand> " + "for detail");
 			return;
 		}else if(args.length == 1) {
 			SgSubCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
@@ -58,12 +59,13 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getCommandHelp().getDescription());
 			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getCommandHelp().getUsage());
 			if(args[0].equals("sel")) {
-				logger.print(LogColor.GOLD + "SubCommands:");
+				logger.print(LogColor.GOLD + "SubCommand:");
 				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
 				List<Pair<String, String>> desList = selHandler.getSubCommandDescriptions(player);
 				for(Pair<String, String> pair : desList) {
-					logger.print(LogColor.GOLD + " /sg sel " +  pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());
+					logger.print(LogColor.GOLD + " " + pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());
 				}
+				logger.print("Type /sg help " + "sel " + "<SubCommand> " + "for detail");
 			}
 			return;
 		}else if(args.length == 2) {
