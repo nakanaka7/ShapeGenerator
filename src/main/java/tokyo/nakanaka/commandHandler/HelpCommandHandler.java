@@ -67,6 +67,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					logger.print(LogColor.GOLD + " /sg sel " +  pair.getFirst() + ": " + LogColor.RESET + pair.getSecond());
 				}
 			}
+			return;
 		}else if(args.length == 2) {
 			if(args[0].equals("sel")) {
 				SelCommandHandler selHandler = (SelCommandHandler) this.cmdRepo.findBy("sel");
