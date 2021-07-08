@@ -3,15 +3,14 @@ package tokyo.nakanaka.commandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class SgCommandHandler {
-	private SubCommandHandlerRepository cmdHandlerRepo;
+	private SgSubCommandHandlerRepository cmdHandlerRepo;
 	
-	public SgCommandHandler(SubCommandHandlerRepository cmdHandlerRepo) {
+	public SgCommandHandler(SgSubCommandHandlerRepository cmdHandlerRepo) {
 		this.cmdHandlerRepo = cmdHandlerRepo;
 	}
 	
@@ -25,18 +24,12 @@ public class SgCommandHandler {
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
-		SubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
+		SgSubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
 		if(cmdHandler == null) {
 			logger.print(helpMsg);
 			return;
 		}
-		boolean success = cmdHandler.onCommand(player, shiftArgs);
-		if(!success) {
-			CommandHelp help = cmdHandler.getCommandHelp();
-			for(String line : help.getHelp()) {
-				player.getLogger().print(line);
-			}
-		}
+		cmdHandler.onCommand(player, shiftArgs);
 	}
 	
 	public List<String> onTabComplete(Player player, String[] args){
@@ -46,7 +39,7 @@ public class SgCommandHandler {
 		String label = args[0];
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
-		SubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
+		SgSubCommandHandler cmdHandler = this.cmdHandlerRepo.findBy(label);
 		if(cmdHandler != null) {
 			return cmdHandler.onTabComplete(player, shiftArgs);
 		}else {

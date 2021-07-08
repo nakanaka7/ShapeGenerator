@@ -23,19 +23,19 @@ import tokyo.nakanaka.commandHandler.ScaleCommandHandler;
 import tokyo.nakanaka.commandHandler.SelCommandHandler;
 import tokyo.nakanaka.commandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
-import tokyo.nakanaka.commandHandler.SubCommandHandlerRepository;
+import tokyo.nakanaka.commandHandler.SgSubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
-import tokyo.nakanaka.selection.CuboidSelectionStrategy;
-import tokyo.nakanaka.selection.LineSelectionStrategy;
-import tokyo.nakanaka.selection.RegularPolygonSelectionStrategy;
 import tokyo.nakanaka.selection.SelectionShape;
-import tokyo.nakanaka.selection.SelectionStrategy;
-import tokyo.nakanaka.selection.SphereSelectionStrategy;
-import tokyo.nakanaka.selection.TetrahedronSelectionStrategy;
-import tokyo.nakanaka.selection.TorusSelectionStrategy;
-import tokyo.nakanaka.selection.TriangleSelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.CuboidSelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.LineSelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.RegularPolygonSelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SphereSelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.TetrahedronSelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.TorusSelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.TriangleSelectionStrategy;
 
 public class ShapeGeneratorPlugin extends JavaPlugin{
 	private CommandLineBuilder cmdLineBuilder;
@@ -45,7 +45,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 	public void onEnable() {
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
-		SubCommandHandlerRepository cmdRepo = new SubCommandHandlerRepository();
+		SgSubCommandHandlerRepository cmdRepo = new SgSubCommandHandlerRepository();
 		this.sgCmdHandler = new SgCommandHandler(cmdRepo);
 		Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 		strategyMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());

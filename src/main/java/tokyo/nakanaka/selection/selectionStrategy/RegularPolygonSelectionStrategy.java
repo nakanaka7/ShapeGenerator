@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selectionStrategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,13 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.ThickenedRegion3D;
+import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.selection.selSubCommandHandler.AxisCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.RegularPolygonSideCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 
 public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 
@@ -60,9 +66,9 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
 		return Arrays.asList(new PosCommandHandler("center"),
-				new NonNegativeDoubleCommandHandler("radius"),
+				new LengthCommandHandler("radius"),
 				new RegularPolygonSideCommandHandler(),
-				new NonNegativeDoubleCommandHandler("thickness"),
+				new LengthCommandHandler("thickness"),
 				new AxisCommandHandler());
 	}
 

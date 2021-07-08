@@ -1,10 +1,12 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selectionStrategy;
 
 import java.util.List;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 
 public interface SelectionStrategy {
 	RegionBuildingData newRegionBuildingData();

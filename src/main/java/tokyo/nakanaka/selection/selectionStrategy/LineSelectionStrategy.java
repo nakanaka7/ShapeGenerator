@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selectionStrategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,11 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Line;
 import tokyo.nakanaka.math.region3D.Region3D;
+import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 
 public class LineSelectionStrategy implements SelectionStrategy {
 	
@@ -45,7 +49,7 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
 		return Arrays.asList(new PosCommandHandler("pos1"),
 				new PosCommandHandler("pos2"),
-				new NonNegativeDoubleCommandHandler("thickness"));
+				new LengthCommandHandler("thickness"));
 	}
 
 	@Override

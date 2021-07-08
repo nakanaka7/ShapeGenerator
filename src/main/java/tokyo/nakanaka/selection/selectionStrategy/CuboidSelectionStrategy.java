@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selectionStrategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,12 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Cuboid;
 import tokyo.nakanaka.math.region3D.Region3D;
+import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.selection.selSubCommandHandler.CuboidPos1CommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.CuboidPos2CommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.LengthCalculator;
+import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 
 public class CuboidSelectionStrategy implements SelectionStrategy{
 	private LengthCalculator lengthCalc = new LengthCalculator();

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.selection.selectionStrategy;
 
 import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
 
@@ -12,7 +12,11 @@ import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.Sphere;
+import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
+import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 
 public class SphereSelectionStrategy implements SelectionStrategy{
 
@@ -49,7 +53,7 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("center"), new NonNegativeDoubleCommandHandler("radius"));
+		return Arrays.asList(new PosCommandHandler("center"), new LengthCommandHandler("radius"));
 	}
 
 	@Override

@@ -10,10 +10,10 @@ import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
-import tokyo.nakanaka.selection.CuboidSelectionStrategy;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.selection.selectionStrategy.CuboidSelectionStrategy;
 import tokyo.nakanaka.world.World;
 
 public class CommandLineBuilder {

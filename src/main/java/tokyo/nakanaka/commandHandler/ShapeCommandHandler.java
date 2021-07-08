@@ -1,68 +1,73 @@
 package tokyo.nakanaka.commandHandler;
 
 import static tokyo.nakanaka.logger.LogColor.LIGHT_PURPLE;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_NORMAL;
-import static tokyo.nakanaka.logger.LogConstant.HEAD_WARN;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
-import tokyo.nakanaka.commadHelp.Parameter;
-import tokyo.nakanaka.commadHelp.Parameter.Type;
+import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
-import tokyo.nakanaka.selection.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
-public class ShapeCommandHandler implements SubCommandHandler {
+public class ShapeCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
-	private CommandHelp help = new CommandHelp.Builder("shape")
-			.description("Set selection shape")
-			.addParameter(new Parameter(Type.REQUIRED, "shape"), "selection shape")
-			.build();
+	private String usage = "/sg shape <shape>";
 	
 	public ShapeCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 	}
 
 	@Override
-	public CommandHelp getCommandHelp() {
-		return this.help;
+	public String getLabel() {
+		return "shape";
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public String getDescription() {
+		return "Set selection shape";
+	}
+	
+	@Override
+	public String getUsage() {
+		return this.usage;
+	}
+	
+	@Override
+	public void onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + this.usage);
+			return;
 		}
 		SelectionShape shape;
 		try{
 			shape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.getLogger().print(HEAD_ERROR + "Invalid shape");
-			return true;
+			logger.print(LogColor.RED + "Invalid shape");
+			return;
 		}
 		SelectionStrategy selStrategy = this.strategyMap.get(shape);
 		if(selStrategy == null) {
-			player.getLogger().print(HEAD_ERROR + "Unsupported shape");
-			return true;
+			logger.print(LogColor.RED + "Unsupported shape");
+			return;
 		}	
 		SelectionShape original = player.getSelectionShape();
 		if(shape == original) {
-			player.getLogger().print(HEAD_WARN + "Already set : Nothing to change");
-			return true;
+			logger.print(LogColor.YELLOW + "Already set : Nothing to change");
+			return;
 		}else {
 			player.setSelectionShape(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
 			player.setSelectionBuildingData(selData);
-			player.getLogger().print(HEAD_NORMAL + "Set the shape -> " + LIGHT_PURPLE + shape);
-			return true;
+			logger.print("Set the shape -> " + LIGHT_PURPLE + shape);
+			return;
 		}
 	}
 	
@@ -76,5 +81,5 @@ public class ShapeCommandHandler implements SubCommandHandler {
 			return new ArrayList<>();
 		}
 	}
-	
+
 }
