@@ -4,34 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class UndoCommandHandler implements SgSubCommandHandler{
-	private String usage = "/sg undo";
+	private CommandHelp cmdHelp;
+	
+	public UndoCommandHandler() {
+		String desc = "Undo a block changing command";
+		String usage = "/sg undo";
+		this.cmdHelp = new CommandHelp(desc, usage);
+	}
 	
 	@Override
 	public String getLabel() {
 		return "undo";
 	}
 	
+	public CommandHelp getCommandHelp() {
+		return this.cmdHelp;
+	}
+	
 	@Override
 	public String getDescription() {
-		return "Undo a block changing command";
+		return this.cmdHelp.getDescription();
 	}
 	
 	@Override
 	public String getUsage() {
-		return this.usage;
+		return this.cmdHelp.getUsage();
 	}
 	
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + this.usage);
+			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();

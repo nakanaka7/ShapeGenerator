@@ -25,10 +25,14 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
+	private CommandHelp cmdHelp;
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
+		String desc = "Specify a selection";
+		String usage = "/sg sel <SubCommand>";
+		this.cmdHelp = new CommandHelp(desc, usage);
 	}
 
 	@Override
@@ -36,14 +40,18 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		return "sel";
 	}
 
+	public CommandHelp getCommandHelp() {
+		return this.cmdHelp;
+	}
+	
 	@Override
 	public String getDescription() {
-		return "Specify a selection";
+		return this.cmdHelp.getDescription();
 	}
 	
 	@Override
 	public String getUsage() {
-		return "/sg sel ...";
+		return this.cmdHelp.getUsage();
 	}
 	
 	public List<String> getSubCommandLabels(Player player){
