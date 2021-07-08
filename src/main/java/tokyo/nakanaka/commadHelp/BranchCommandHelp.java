@@ -39,10 +39,16 @@ public class BranchCommandHelp implements CommandHelp {
 			this.paramDataList.add(new ParameterData(type, labels));
 			return this;
 		}
+
+		public Builder addParameter(ParameterType type, String label) {
+			this.paramDataList.add(new ParameterData(type, new String[] {label}));
+			return this;
+		}
 		
 		public BranchCommandHelp build() {
 			return new BranchCommandHelp(this);
 		}
+
 	}
 	
 	@Override
