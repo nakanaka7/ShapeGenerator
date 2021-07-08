@@ -41,11 +41,11 @@ public class RootCommandHelp implements CommandHelp {
 		return description;
 	}
 
-	public void register(CommandHelp cmdHelp) {
+	public void addSub(CommandHelp cmdHelp) {
 		this.subList.add(cmdHelp);
 	}
 	
-	public List<CommandHelp> getSubCommandHelp() {
+	public List<CommandHelp> getSubList() {
 		return new ArrayList<>(this.subList);
 	}
 }
