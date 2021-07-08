@@ -52,7 +52,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					+ LogColor.GOLD + "/sg" + LogColor.RESET
 					+ LogColor.YELLOW + " |-----------------");
 			for(SgSubCommandHandler handler : this.cmdRepo.getAll()) {
-				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getDescription());
+				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getCommandHelp().getDescription());
 			}
 			return;
 		}else if(args.length == 1) {
@@ -65,8 +65,8 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					+ "Help: " 
 					+ LogColor.GOLD + "/sg " + cmdHandler.getLabel() + LogColor.RESET
 					+ LogColor.YELLOW + " |---------------");
-			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getDescription());
-			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getUsage());
+			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getCommandHelp().getDescription());
+			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getCommandHelp().getUsage());
 			if(args[0].equals("sel")) {
 				logger.print(LogColor.GOLD + "SubCommands:");
 				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
