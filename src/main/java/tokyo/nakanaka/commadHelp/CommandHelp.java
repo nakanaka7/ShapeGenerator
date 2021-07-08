@@ -1,6 +1,7 @@
 package tokyo.nakanaka.commadHelp;
 
 public class CommandHelp {
+	private String label;
 	private String description;
 	private String usage;
 	
@@ -9,8 +10,13 @@ public class CommandHelp {
 		this.usage = usage;
 	}
 	
+	public CommandHelp(String label, String description, String usage) {
+		this(description, usage);
+		this.label = label;
+	}
+	
 	public String getLabel() {
-		return "";
+		return this.label;
 	}
 
 	public String getDescription() {
