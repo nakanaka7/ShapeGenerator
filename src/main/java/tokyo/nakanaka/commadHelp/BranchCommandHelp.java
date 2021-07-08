@@ -5,14 +5,10 @@ public class BranchCommandHelp implements CommandHelp {
 	private String description;
 	private String usage;
 	
-	public BranchCommandHelp(String description, String usage) {
+	public BranchCommandHelp(String label, String description, String usage) {
+		this.label = label;
 		this.description = description;
 		this.usage = usage;
-	}
-	
-	public BranchCommandHelp(String label, String description, String usage) {
-		this(description, usage);
-		this.label = label;
 	}
 	
 	@Override
