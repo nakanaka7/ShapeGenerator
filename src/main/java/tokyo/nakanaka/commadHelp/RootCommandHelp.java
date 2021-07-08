@@ -1,6 +1,6 @@
 package tokyo.nakanaka.commadHelp;
 
-public class RootCommandHelp {
+public class RootCommandHelp implements CommandHelp {
 	private String label;
 	private String description;
 	
@@ -27,10 +27,12 @@ public class RootCommandHelp {
 		}
 	}
 	
+	@Override
 	public String getLabel() {
 		return label;
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
