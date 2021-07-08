@@ -1,8 +1,12 @@
 package tokyo.nakanaka.commadHelp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RootCommandHelp implements CommandHelp {
 	private String label;
 	private String description;
+	private List<CommandHelp> subList = new ArrayList<>();
 	
 	public RootCommandHelp(Builder builder) {
 		this.label = builder.label;
@@ -37,7 +41,7 @@ public class RootCommandHelp implements CommandHelp {
 		return description;
 	}
 
-	public void register(BranchCommandHelp cmdHelp) {
-		
+	public void register(CommandHelp cmdHelp) {
+		this.subList.add(cmdHelp);
 	}
 }
