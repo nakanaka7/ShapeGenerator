@@ -44,4 +44,8 @@ public class RootCommandHelp implements CommandHelp {
 	public void register(CommandHelp cmdHelp) {
 		this.subList.add(cmdHelp);
 	}
+	
+	public List<CommandHelp> getSubCommandHelp() {
+		return new ArrayList<>(this.subList);
+	}
 }
