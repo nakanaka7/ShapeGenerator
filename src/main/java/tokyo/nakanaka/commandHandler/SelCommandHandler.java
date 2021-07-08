@@ -24,7 +24,7 @@ import tokyo.nakanaka.world.World;
 public class SelCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private ResetCommandHandler resetCmdHandler;
-	private OffsetCommandHandler offsetCmdHandler;
+	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
