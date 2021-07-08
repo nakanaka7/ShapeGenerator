@@ -30,18 +30,9 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 		return "shift";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
-	}
-	
-	@Override
-	public String getDescription() {
-		return this.cmdHelp.getDescription();
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.cmdHelp.getUsage();
 	}
 	
 	@Override

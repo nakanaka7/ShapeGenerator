@@ -24,18 +24,9 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 		return "undo";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
-	}
-	
-	@Override
-	public String getDescription() {
-		return this.cmdHelp.getDescription();
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.cmdHelp.getUsage();
 	}
 	
 	@Override

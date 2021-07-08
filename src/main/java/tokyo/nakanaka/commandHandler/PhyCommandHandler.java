@@ -23,18 +23,9 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 		return "phy";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
-	}
-	
-	@Override
-	public String getDescription() {
-		return this.cmdHelp.getDescription();
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.cmdHelp.getUsage();
 	}
 	
 	@Override
