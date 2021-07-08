@@ -87,6 +87,7 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 			logger.print(LogColor.RED + "Unsettable block");
 			return;
 		}
+		logger.print("Generated block(s)");
 		player.getUndoCommandManager().add(generateCmd);
 		return;
 	}
