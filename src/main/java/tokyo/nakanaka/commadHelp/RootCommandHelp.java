@@ -9,7 +9,6 @@ public class RootCommandHelp implements CommandHelp {
 	private List<CommandHelp> subList = new ArrayList<>();
 	
 	public RootCommandHelp(String label, String description) {
-		super();
 		this.label = label;
 		this.description = description;
 	}
