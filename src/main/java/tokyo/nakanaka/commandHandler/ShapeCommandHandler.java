@@ -41,7 +41,7 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
 			return;
 		}
 		SelectionShape shape;

@@ -57,7 +57,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					+ LogColor.GOLD + "/sg " + cmdHandler.getLabel() + LogColor.RESET
 					+ LogColor.YELLOW + " |---------------");
 			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getCommandHelp().getDescription());
-			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getCommandHelp().getUsage());
+			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHandler.getCommandHelp().getUsageOld());
 			if(args[0].equals("sel")) {
 				logger.print(LogColor.GOLD + "SubCommand:");
 				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
@@ -79,14 +79,14 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 							+ LogColor.GOLD + "/sg sel " + args[1] + LogColor.RESET
 							+ LogColor.YELLOW + " |---------------");
 					logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHelp.getDescription());
-					logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHelp.getUsage());
+					logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + cmdHelp.getUsageOld());
 				}else {
 					logger.print(LogColor.RED + "Unkonwn command");
 				}
 				return;
 			}
 		}
-		logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
+		logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
 	}
 
 	@Override

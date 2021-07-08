@@ -33,7 +33,7 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();

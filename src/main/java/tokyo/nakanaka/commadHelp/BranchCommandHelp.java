@@ -9,6 +9,7 @@ public class BranchCommandHelp implements CommandHelp {
 	private List<ParameterData> paramDataList = new ArrayList<>();
 	private String usage = "";
 	
+	@Deprecated
 	public BranchCommandHelp(String label, String description, String usage) {
 		this.label = label;
 		this.description = description;
@@ -61,11 +62,12 @@ public class BranchCommandHelp implements CommandHelp {
 		return description;
 	}
 	
-	public String getUsage() {
+	@Deprecated
+	public String getUsageOld() {
 		return usage;
 	}
 	
-	public String getUsageNew() {
+	public String getUsage() {
 		String usage = this.label;
 		for(ParameterData data : this.paramDataList) {
 			switch(data.getType()) {
