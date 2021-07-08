@@ -15,7 +15,7 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 	public PhyCommandHandler() {
 		String desc = "Toggle physics option for generating block";
 		String usage = "/sg phy <true|false>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("phy" ,desc, usage);
 	}
 
 	@Override

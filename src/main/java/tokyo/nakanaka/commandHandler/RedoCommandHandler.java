@@ -16,7 +16,7 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 	public RedoCommandHandler() {
 		String desc = "Redo a block changing command";
 		String usage = "/sg redo";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("redo", desc, usage);
 	}
 	
 	@Override

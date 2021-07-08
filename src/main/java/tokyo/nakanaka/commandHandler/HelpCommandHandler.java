@@ -20,7 +20,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 		this.cmdRepo = cmdRepo;
 		String desc = "Print command help";
 		String usage = "/sg help [command]";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("help", desc, usage);
 	}
 
 	@Override

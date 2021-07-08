@@ -32,7 +32,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
 		String desc = "Specify a selection";
 		String usage = "/sg sel <SubCommand>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("sel", desc, usage);
 	}
 
 	@Override

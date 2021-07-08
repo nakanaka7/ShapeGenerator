@@ -24,7 +24,7 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 		this.strategyMap = strategyMap;
 		String desc = "Set selection shape";
 		String usage = "/sg shape <shape>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("shape", desc, usage);
 	}
 
 	@Override

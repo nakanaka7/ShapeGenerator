@@ -16,7 +16,7 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 	public UndoCommandHandler() {
 		String desc = "Undo a block changing command";
 		String usage = "/sg undo";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("undo", desc, usage);
 	}
 	
 	@Override

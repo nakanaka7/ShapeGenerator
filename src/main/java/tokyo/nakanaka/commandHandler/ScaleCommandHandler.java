@@ -21,7 +21,7 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 	public ScaleCommandHandler() {
 		String desc = "Change scale the generated blocks";
 		String usage = "/sg scale <x|y|z> <factor>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("scale", desc, usage);
 	}
 	@Override
 	public String getLabel() {

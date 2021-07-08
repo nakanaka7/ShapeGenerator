@@ -22,7 +22,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	public ShiftCommandHandler() {
 		String desc = "Shift the generated blocks";
 		String usage = "/sg shift <direction> <length>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("shift", desc, usage);
 	}
 
 	@Override

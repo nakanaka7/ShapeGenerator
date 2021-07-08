@@ -21,7 +21,7 @@ public class RotCommandHandler implements SgSubCommandHandler{
 	public RotCommandHandler() {
 		String desc = "Rotate the generated blocks";
 		String usage = "/sg rot <x|y|z> <degree>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("rot", desc, usage);
 	}
 	
 	@Override

@@ -29,7 +29,7 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 		this.strategyMap = strategyMap;
 		String desc = "Generate blocks in the selection";
 		String usage = "/sg genr <block>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new CommandHelp("genr", desc, usage);
 	}
 
 	@Override
