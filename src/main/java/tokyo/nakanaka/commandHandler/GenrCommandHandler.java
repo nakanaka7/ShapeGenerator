@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
@@ -22,14 +22,14 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 public class GenrCommandHandler implements SgSubCommandHandler{
 	private BlockCommandArgument blockArg;
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public GenrCommandHandler(BlockCommandArgument blockArg, Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.blockArg = blockArg;
 		this.strategyMap = strategyMap;
 		String desc = "Generate blocks in the selection";
 		String usage = "/sg genr <block>";
-		this.cmdHelp = new CommandHelp("genr", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("genr", desc, usage);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	

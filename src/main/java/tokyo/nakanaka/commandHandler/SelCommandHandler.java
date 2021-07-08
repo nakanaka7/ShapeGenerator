@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -25,14 +25,14 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
 		String desc = "Specify a selection";
 		String usage = "/sg sel <SubCommand>";
-		this.cmdHelp = new CommandHelp("sel", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("sel", desc, usage);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	}
 
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	
@@ -58,7 +58,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		return list;
 	}
 	
-	public CommandHelp getSubCommandHelp(Player player, String label) {
+	public BranchCommandHelp getSubCommandHelp(Player player, String label) {
 		if(label.equals("reset")) {
 			return this.resetCmdHandler.getCommandHelp();
 		}else if(label.equals("offset")) {
@@ -71,7 +71,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 				if(e.getLabel().equals(label)) {
 					String des = e.getDescription();
 					String usage = e.getUsage();
-					return new CommandHelp(des, usage);
+					return new BranchCommandHelp(des, usage);
 				}
 			}
 			return null;

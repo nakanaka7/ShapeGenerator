@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.RotateCommand;
@@ -16,12 +16,12 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RotCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public RotCommandHandler() {
 		String desc = "Rotate the generated blocks";
 		String usage = "/sg rot <x|y|z> <degree>";
-		this.cmdHelp = new CommandHelp("rot", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("rot", desc, usage);
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class RotCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	

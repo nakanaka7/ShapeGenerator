@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
@@ -17,12 +17,12 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
 public class ShiftCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 		
 	public ShiftCommandHandler() {
 		String desc = "Shift the generated blocks";
 		String usage = "/sg shift <direction> <length>";
-		this.cmdHelp = new CommandHelp("shift", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("shift", desc, usage);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	

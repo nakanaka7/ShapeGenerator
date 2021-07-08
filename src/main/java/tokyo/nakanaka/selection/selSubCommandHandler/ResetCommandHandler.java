@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -17,16 +17,16 @@ import tokyo.nakanaka.world.World;
 public class ResetCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public ResetCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 		String description = "Reset the selection";
 		String usage = "/reset";
-		this.cmdHelp = new CommandHelp(description, usage);
+		this.cmdHelp = new BranchCommandHelp(description, usage);
 	}
 	
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 

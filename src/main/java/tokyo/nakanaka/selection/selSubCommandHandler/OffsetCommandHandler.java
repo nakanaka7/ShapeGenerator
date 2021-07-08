@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -14,16 +14,16 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 
 public class OffsetCommandHandler {
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	public OffsetCommandHandler() {
 		String desc = "Set offset";
 		String usage = "/offset [x] [y] [z]";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new BranchCommandHelp(desc, usage);
 	}
 	
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return cmdHelp;
 	}
 

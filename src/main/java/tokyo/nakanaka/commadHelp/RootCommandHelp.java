@@ -35,7 +35,7 @@ public class RootCommandHelp {
 		return description;
 	}
 
-	public void register(CommandHelp cmdHelp) {
+	public void register(BranchCommandHelp cmdHelp) {
 		
 	}
 }

@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RedoCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public RedoCommandHandler() {
 		String desc = "Redo a block changing command";
 		String usage = "/sg redo";
-		this.cmdHelp = new CommandHelp("redo", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("redo", desc, usage);
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	

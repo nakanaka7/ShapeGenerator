@@ -1,16 +1,16 @@
 package tokyo.nakanaka.commadHelp;
 
-public class CommandHelp {
+public class BranchCommandHelp {
 	private String label;
 	private String description;
 	private String usage;
 	
-	public CommandHelp(String description, String usage) {
+	public BranchCommandHelp(String description, String usage) {
 		this.description = description;
 		this.usage = usage;
 	}
 	
-	public CommandHelp(String label, String description, String usage) {
+	public BranchCommandHelp(String label, String description, String usage) {
 		this(description, usage);
 		this.label = label;
 	}

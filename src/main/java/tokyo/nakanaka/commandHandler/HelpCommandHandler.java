@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.Pair;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements SgSubCommandHandler{
 	private SgSubCommandHandlerRepository cmdRepo;
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public HelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
 		String desc = "Print command help";
 		String usage = "/sg help [command]";
-		this.cmdHelp = new CommandHelp("help", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("help", desc, usage);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	
@@ -73,7 +73,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 				SelCommandHandler selHandler = (SelCommandHandler) this.cmdRepo.findBy("sel");
 				List<String> subLabels = selHandler.getSubCommandLabels(player);
 				if(subLabels.contains(args[1])) {
-					CommandHelp cmdHelp = selHandler.getSubCommandHelp(player, args[1]);
+					BranchCommandHelp cmdHelp = selHandler.getSubCommandHelp(player, args[1]);
 					logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
 							+ "Help: " 
 							+ LogColor.GOLD + "/sg sel " + args[1] + LogColor.RESET

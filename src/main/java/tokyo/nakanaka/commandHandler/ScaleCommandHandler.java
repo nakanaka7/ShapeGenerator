@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
@@ -16,12 +16,12 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class ScaleCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public ScaleCommandHandler() {
 		String desc = "Change scale the generated blocks";
 		String usage = "/sg scale <x|y|z> <factor>";
-		this.cmdHelp = new CommandHelp("scale", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("scale", desc, usage);
 	}
 	@Override
 	public String getLabel() {
@@ -29,7 +29,7 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	

@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class PhyCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public PhyCommandHandler() {
 		String desc = "Toggle physics option for generating block";
 		String usage = "/sg phy <true|false>";
-		this.cmdHelp = new CommandHelp("phy" ,desc, usage);
+		this.cmdHelp = new BranchCommandHelp("phy" ,desc, usage);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	

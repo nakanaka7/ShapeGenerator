@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class UndoCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public UndoCommandHandler() {
 		String desc = "Undo a block changing command";
 		String usage = "/sg undo";
-		this.cmdHelp = new CommandHelp("undo", desc, usage);
+		this.cmdHelp = new BranchCommandHelp("undo", desc, usage);
 	}
 	
 	@Override
@@ -25,7 +25,7 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
 	
