@@ -6,6 +6,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
@@ -30,6 +31,9 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 		String desc = "Generate blocks in the selection";
 		String usage = "/sg genr <block>";
 		this.cmdHelp = new BranchCommandHelp("genr", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("genr").description(desc)
+				.addParameter(ParameterType.REQUIRED, "block")
+				.build();
 	}
 
 	@Override
@@ -46,7 +50,7 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: "+ this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: "+ "/sg " + this.cmdHelp.getUsageNew());
 			return;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
