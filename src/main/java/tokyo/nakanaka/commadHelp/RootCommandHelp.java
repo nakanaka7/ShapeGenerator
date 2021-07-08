@@ -23,11 +23,11 @@ public class RootCommandHelp implements CommandHelp {
 		return description;
 	}
 
-	public void addSub(CommandHelp cmdHelp) {
+	public void register(CommandHelp cmdHelp) {
 		this.subList.add(cmdHelp);
 	}
 	
-	public List<CommandHelp> getSubList() {
+	public List<CommandHelp> getSubCommandHelp() {
 		return new ArrayList<>(this.subList);
 	}
 }
