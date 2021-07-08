@@ -45,16 +45,6 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		return this.cmdHelp;
 	}
 	
-	@Override
-	public String getDescription() {
-		return this.cmdHelp.getDescription();
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.cmdHelp.getUsage();
-	}
-	
 	public List<String> getSubCommandLabels(Player player){
 		List<String> list = new ArrayList<>();
 		list.add("reset");

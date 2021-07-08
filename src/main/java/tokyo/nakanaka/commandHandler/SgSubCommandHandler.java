@@ -8,10 +8,6 @@ import tokyo.nakanaka.player.Player;
 public interface SgSubCommandHandler {
 	String getLabel();
 	CommandHelp getCommandHelp();
-	@Deprecated
-	String getDescription();
-	@Deprecated
-	String getUsage();
 	void onCommand(Player player, String[] args);
 	List<String> onTabComplete(Player player, String[] args);
 }

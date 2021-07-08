@@ -36,16 +36,6 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public String getDescription() {
-		return this.cmdHelp.getDescription();
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.cmdHelp.getUsage();
-	}
-	
-	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
