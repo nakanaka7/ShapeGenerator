@@ -71,7 +71,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 				if(e.getLabel().equals(label)) {
 					String des = e.getDescription();
 					String usage = e.getUsage();
-					return new BranchCommandHelp(des, usage);
+					return new BranchCommandHelp(e.getLabel(), des, usage);
 				}
 			}
 			return null;
