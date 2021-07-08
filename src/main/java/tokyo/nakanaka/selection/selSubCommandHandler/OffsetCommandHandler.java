@@ -1,6 +1,7 @@
 package tokyo.nakanaka.selection.selSubCommandHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
@@ -59,6 +60,10 @@ public class OffsetCommandHandler {
 	}
 	
 	public List<String> onTabComplete(String[] args) {
-		return new ArrayList<>();
+		if(args.length <= 3) {
+			return Arrays.asList("~");
+		}else {
+			return new ArrayList<>();
+		}
 	}
 }
