@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.block.Block;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
@@ -21,11 +22,14 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 public class GenrCommandHandler implements SgSubCommandHandler{
 	private BlockCommandArgument blockArg;
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
-	private String usage = "/sg genr <block>";
+	private CommandHelp cmdHelp;
 	
 	public GenrCommandHandler(BlockCommandArgument blockArg, Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.blockArg = blockArg;
 		this.strategyMap = strategyMap;
+		String desc = "Generate blocks in the selection";
+		String usage = "/sg genr <block>";
+		this.cmdHelp = new CommandHelp(desc, usage);
 	}
 
 	@Override
@@ -33,21 +37,25 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 		return "genr";
 	}
 	
+	public CommandHelp getCommandHelp() {
+		return this.cmdHelp;
+	}
+	
 	@Override
 	public String getDescription() {
-		return "Generate blocks in the selection";
+		return this.cmdHelp.getDescription();
 	}
 	
 	@Override
 	public String getUsage() {
-		return this.usage;
+		return this.cmdHelp.getUsage();
 	}
 	
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: "+ this.usage);
+			logger.print(LogColor.RED + "Usage: "+ this.cmdHelp.getUsage());
 			return;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();

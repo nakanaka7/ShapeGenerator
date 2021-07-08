@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
@@ -15,28 +16,37 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class ScaleCommandHandler implements SgSubCommandHandler{
-	private String usage = "/sg scale <x|y|z> <factor>";
-
+	private CommandHelp cmdHelp;
+	
+	public ScaleCommandHandler() {
+		String desc = "Change scale the generated blocks";
+		String usage = "/sg scale <x|y|z> <factor>";
+		this.cmdHelp = new CommandHelp(desc, usage);
+	}
 	@Override
 	public String getLabel() {
 		return "scale";
 	}
 	
+	public CommandHelp getCommandHelp() {
+		return this.cmdHelp;
+	}
+	
 	@Override
 	public String getDescription() {
-		return "Change scale the generated blocks";
+		return this.cmdHelp.getDescription();
 	}
 	
 	@Override
 	public String getUsage() {
-		return this.usage;
+		return this.cmdHelp.getUsage();
 	}
 	
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + this.usage);
+			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
 			return;
 		}
 		Axis axis;

@@ -14,10 +14,13 @@ import tokyo.nakanaka.player.Player;
 
 public class HelpCommandHandler implements SgSubCommandHandler{
 	private SgSubCommandHandlerRepository cmdRepo;
-	private String usage = "/sg help [command]";
+	private CommandHelp cmdHelp;
 	
 	public HelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
+		String desc = "Print command help";
+		String usage = "/sg help [command]";
+		this.cmdHelp = new CommandHelp(desc, usage);
 	}
 
 	@Override
@@ -25,14 +28,18 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 		return "help";
 	}
 	
+	public CommandHelp getCommandHelp() {
+		return this.cmdHelp;
+	}
+	
 	@Override
 	public String getDescription() {
-		return "Print command help";
+		return this.cmdHelp.getDescription();
 	}
 	
 	@Override
 	public String getUsage() {
-		return this.usage;
+		return this.cmdHelp.getUsage();
 	}
 	
 	@Override
@@ -86,7 +93,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 				return;
 			}
 		}
-		logger.print(LogColor.RED + "Usage: " + this.usage);
+		logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
 	}
 
 	@Override
