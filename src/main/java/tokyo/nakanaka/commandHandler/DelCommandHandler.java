@@ -27,6 +27,7 @@ public class DelCommandHandler implements SgSubCommandHandler {
 		return "del";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

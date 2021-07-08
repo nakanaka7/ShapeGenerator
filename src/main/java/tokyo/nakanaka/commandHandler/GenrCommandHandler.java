@@ -37,6 +37,7 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 		return "genr";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

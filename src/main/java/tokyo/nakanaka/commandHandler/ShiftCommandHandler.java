@@ -30,6 +30,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 		return "shift";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

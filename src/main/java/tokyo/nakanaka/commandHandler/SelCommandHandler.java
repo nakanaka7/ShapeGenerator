@@ -40,6 +40,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		return "sel";
 	}
 
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

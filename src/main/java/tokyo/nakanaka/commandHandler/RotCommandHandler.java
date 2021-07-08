@@ -29,6 +29,7 @@ public class RotCommandHandler implements SgSubCommandHandler{
 		return "rot";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

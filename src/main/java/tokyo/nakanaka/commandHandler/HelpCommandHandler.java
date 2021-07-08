@@ -28,6 +28,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 		return "help";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

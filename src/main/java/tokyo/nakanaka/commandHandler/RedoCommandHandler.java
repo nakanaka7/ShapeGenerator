@@ -24,6 +24,7 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 		return "redo";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

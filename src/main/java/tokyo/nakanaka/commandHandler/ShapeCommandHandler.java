@@ -32,6 +32,7 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 		return "shape";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

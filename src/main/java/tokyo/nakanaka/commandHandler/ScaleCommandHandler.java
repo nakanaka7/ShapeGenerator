@@ -28,6 +28,7 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 		return "scale";
 	}
 	
+	@Override
 	public CommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}
