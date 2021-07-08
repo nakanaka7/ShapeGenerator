@@ -55,7 +55,11 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 			return;
 		}
 		player.setBlockPhysics(physics);
-		logger.print("Set physics -> " + bool);
+		if(physics) {
+			logger.print("Set physics -> " + LogColor.GREEN + bool);
+		}else {
+			logger.print("Set physics -> " + LogColor.RED + bool);
+		}
 		return;
 	}
 
