@@ -8,6 +8,10 @@ public class CommandHelp {
 		this.description = description;
 		this.usage = usage;
 	}
+	
+	public String getLabel() {
+		return "";
+	}
 
 	public String getDescription() {
 		return description;
