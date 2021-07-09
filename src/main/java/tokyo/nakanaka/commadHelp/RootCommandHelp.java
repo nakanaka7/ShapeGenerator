@@ -49,4 +49,29 @@ public class RootCommandHelp implements CommandHelp {
 	public List<CommandHelp> getSubCommandHelp() {
 		return new ArrayList<>(this.subList);
 	}
+	
+	@Override
+	public CommandHelp getSubHelp(String... subLabels) {
+		if(subLabels.length == 0) {
+			return this;
+		}
+		String subLabel = subLabels[0];
+		CommandHelp subCmdHelp = null;
+		for(CommandHelp e : this.subList) {
+			if(e.getLabel().equals(subLabel)) {
+				subCmdHelp = e;
+				break;
+			}
+		}
+		if(subLabels.length == 1) {
+			return subCmdHelp;
+		}
+		if(subCmdHelp == null) {
+			return null;
+		}
+		String[] shiftedSubLabels = new String[subLabels.length - 1];
+		System.arraycopy(subLabels, 1, shiftedSubLabels, 0, subLabels.length - 1);	
+		return subCmdHelp.getSubHelp(shiftedSubLabels);
+	}
+	
 }

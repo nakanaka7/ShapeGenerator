@@ -54,6 +54,14 @@ public class BranchCommandHelp implements CommandHelp {
 		return description;
 	}
 	
+	@Override
+	public CommandHelp getSubHelp(String... subLabels) {
+		if(subLabels.length == 0) {
+			return this;
+		}
+		return null;
+	}
+	
 	public String getUsage() {
 		String usage = this.label;
 		for(ParameterData data : this.paramDataList) {
