@@ -71,9 +71,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 			List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 			for(SelSubCommandHandler e : cmdHandlerList) {
 				if(e.getLabel().equals(label)) {
-					String des = e.getDescription();
-					String usage = e.getUsage();
-					return new BranchCommandHelp(e.getLabel(), des, usage);
+					return e.getCommandHelp();
 				}
 			}
 			return null;
