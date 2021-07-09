@@ -81,19 +81,6 @@ public class SelCommandHandler implements CommandHandler {
 		}
 	}
 	
-	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
-		List<Pair<String, String>> list = new ArrayList<>();
-		list.add(new Pair<>("reset", "Reset the selection"));
-		list.add(new Pair<>("offset", "Set offset"));
-		SelectionShape shape = player.getSelectionShape();
-		SelectionStrategy strategy = this.strategyMap.get(shape);
-		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
-		for(SelSubCommandHandler cmdHandler : cmdHandlerList) {
-			list.add(new Pair<>(cmdHandler.getLabel(), cmdHandler.getCommandHelp().getDescription()));
-		}
-		return list;
-	}
-	
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
