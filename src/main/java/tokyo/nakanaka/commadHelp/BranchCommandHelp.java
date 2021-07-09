@@ -7,7 +7,6 @@ public class BranchCommandHelp implements CommandHelp {
 	private String label;
 	private String description;
 	private List<ParameterData> paramDataList = new ArrayList<>();
-	private String usage = "";
 	
 	private BranchCommandHelp(Builder builder) {
 		this.label = builder.label;
