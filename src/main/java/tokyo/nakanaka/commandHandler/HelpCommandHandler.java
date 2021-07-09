@@ -9,6 +9,7 @@ import java.util.List;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -33,6 +34,17 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 	@Override
 	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
+	}
+	
+	private RootCommandHelp getSgCommandHelp() {
+		RootCommandHelp rootCmdHelp = new RootCommandHelp.Builder("sg")
+				.description("Root command for ShapeGenerator")
+				.build();
+		List<String> subLabelList = cmdRepo.getAliases();
+		for(String subLabel : subLabelList) {
+			rootCmdHelp.register(this.cmdRepo.findBy(subLabel).getCommandHelp());
+		}
+		return rootCmdHelp;
 	}
 	
 	@Override
