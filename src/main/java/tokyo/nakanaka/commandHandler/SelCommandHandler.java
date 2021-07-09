@@ -7,7 +7,8 @@ import java.util.Map;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -26,14 +27,13 @@ public class SelCommandHandler implements CommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
-	private BranchCommandHelp cmdHelp;
+	private CommandHelp cmdHelp;
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
-		this.cmdHelp = new BranchCommandHelp.Builder("sel")
+		this.cmdHelp = new RootCommandHelp.Builder("sel")
 				.description("Specify a selection")
-				.addParameter(ParameterType.REQUIRED, "subcommand")
 				.build();
 	}
 
@@ -43,7 +43,7 @@ public class SelCommandHandler implements CommandHandler {
 	}
 
 	@Override
-	public BranchCommandHelp getCommandHelp(Player player) {
+	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
