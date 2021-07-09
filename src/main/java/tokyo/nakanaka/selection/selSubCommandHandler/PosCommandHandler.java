@@ -34,7 +34,7 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		return this.label;
 	}
 
-	public BranchCommandHelp getBranchCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return cmdHelp;
 	}
 

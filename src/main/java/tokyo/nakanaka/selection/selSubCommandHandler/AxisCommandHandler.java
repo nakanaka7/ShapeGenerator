@@ -27,7 +27,7 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 		return "axis";
 	}
 	
-	public BranchCommandHelp getBranchCommandHelp() {
+	public BranchCommandHelp getCommandHelp() {
 		return cmdHelp;
 	}
 	
