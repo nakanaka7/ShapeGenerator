@@ -27,14 +27,10 @@ public class SelCommandHandler implements CommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
-	private CommandHelp cmdHelp;
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
-		this.cmdHelp = new RootCommandHelp.Builder("sel")
-				.description("Specify a selection")
-				.build();
 	}
 
 	@Override
@@ -44,7 +40,14 @@ public class SelCommandHandler implements CommandHandler {
 
 	@Override
 	public CommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
+		RootCommandHelp cmdHelp = new RootCommandHelp.Builder("sel")
+				.description("Specify a selection")
+				.build();
+		List<String> subLabels = this.getSubCommandLabels(player);
+		for(String subLabel : subLabels) {
+			cmdHelp.register(this.getSubCommandHelp(player, subLabel));
+		}
+		return cmdHelp;
 	}
 	
 	public List<String> getSubCommandLabels(Player player){
