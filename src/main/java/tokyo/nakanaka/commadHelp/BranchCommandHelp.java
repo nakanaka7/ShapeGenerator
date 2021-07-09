@@ -55,11 +55,6 @@ public class BranchCommandHelp implements CommandHelp {
 		return description;
 	}
 	
-	@Deprecated
-	public String getUsageOld() {
-		return usage;
-	}
-	
 	public String getUsage() {
 		String usage = this.label;
 		for(ParameterData data : this.paramDataList) {
