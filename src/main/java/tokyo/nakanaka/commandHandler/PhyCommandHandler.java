@@ -10,7 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class PhyCommandHandler implements SgSubCommandHandler{
+public class PhyCommandHandler implements BranchCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public PhyCommandHandler() {

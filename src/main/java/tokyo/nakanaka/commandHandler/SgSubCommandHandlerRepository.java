@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SgSubCommandHandlerRepository {
-	private List<SgSubCommandHandler> handlerList = new ArrayList<>();
+	private List<BranchCommandHandler> handlerList = new ArrayList<>();
 
-	public void register(SgSubCommandHandler cmdHandler) {
+	public void register(BranchCommandHandler cmdHandler) {
 		this.handlerList.add(cmdHandler);
 	}
 	
-	public SgSubCommandHandler findBy(String label) {
-		for(SgSubCommandHandler e : this.handlerList) {
+	public BranchCommandHandler findBy(String label) {
+		for(BranchCommandHandler e : this.handlerList) {
 			if(e.getLabel().equals(label)) {
 				return e;
 			}
@@ -19,13 +19,13 @@ public class SgSubCommandHandlerRepository {
 		return null;
 	}
 	
-	public List<SgSubCommandHandler> getAll(){
+	public List<BranchCommandHandler> getAll(){
 		return new ArrayList<>(this.handlerList);
 	}
 	
 	public List<String> getAliases(){
 		List<String> list = new ArrayList<>();
-		for(SgSubCommandHandler e : this.handlerList) {
+		for(BranchCommandHandler e : this.handlerList) {
 			list.add(e.getLabel());
 		}
 		return list;

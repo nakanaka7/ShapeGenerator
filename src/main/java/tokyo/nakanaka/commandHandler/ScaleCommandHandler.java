@@ -16,7 +16,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class ScaleCommandHandler implements SgSubCommandHandler{
+public class ScaleCommandHandler implements BranchCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public ScaleCommandHandler() {

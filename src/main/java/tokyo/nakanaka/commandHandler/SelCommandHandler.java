@@ -22,7 +22,7 @@ import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandler implements SgSubCommandHandler {
+public class SelCommandHandler implements BranchCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
