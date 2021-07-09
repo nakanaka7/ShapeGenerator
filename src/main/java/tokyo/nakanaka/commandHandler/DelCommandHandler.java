@@ -13,7 +13,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class DelCommandHandler implements BranchCommandHandler {
+public class DelCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp;
 	
 	public DelCommandHandler() {

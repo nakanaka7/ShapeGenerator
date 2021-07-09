@@ -17,7 +17,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
-public class ShapeCommandHandler implements BranchCommandHandler {
+public class ShapeCommandHandler implements CommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
 	private BranchCommandHelp cmdHelp;
 	

@@ -10,7 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class RedoCommandHandler implements BranchCommandHandler{
+public class RedoCommandHandler implements CommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public RedoCommandHandler() {

@@ -15,7 +15,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class HelpCommandHandler implements BranchCommandHandler{
+public class HelpCommandHandler implements CommandHandler{
 	private SgSubCommandHandlerRepository cmdRepo;
 	private BranchCommandHelp cmdHelp;
 	
@@ -56,13 +56,13 @@ public class HelpCommandHandler implements BranchCommandHandler{
 					+ "Help: " 
 					+ LogColor.GOLD + "/sg" + LogColor.RESET
 					+ LogColor.YELLOW + " |-----------------");
-			for(BranchCommandHandler handler : this.cmdRepo.getAll()) {
+			for(CommandHandler handler : this.cmdRepo.getAll()) {
 				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getCommandHelp(player).getDescription());
 			}
 			logger.print("Type /sg help " + "<SubCommand> " + "for detail");
 			return;
 		}else if(args.length == 1) {
-			BranchCommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
+			CommandHandler cmdHandler = this.cmdRepo.findBy(args[0]);
 			if(cmdHandler == null) {
 				logger.print(LogColor.RED + "Unknown command");
 				return;
