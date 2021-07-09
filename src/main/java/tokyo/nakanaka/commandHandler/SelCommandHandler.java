@@ -64,7 +64,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		if(label.equals("reset")) {
 			return this.resetCmdHandler.getCommandHelp();
 		}else if(label.equals("offset")) {
-			return null;
+			return this.offsetCmdHandler.getCommandHelp();
 		}else {
 			SelectionShape shape = player.getSelectionShape();
 			SelectionStrategy strategy = this.strategyMap.get(shape);
