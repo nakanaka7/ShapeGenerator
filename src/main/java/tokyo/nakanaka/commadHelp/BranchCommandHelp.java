@@ -78,5 +78,22 @@ public class BranchCommandHelp implements CommandHelp {
 		}
 		return usage;
 	}
+	
+	public String getParameterUsage() {
+		String usage = "";
+		for(ParameterData data : this.paramDataList) {
+			switch(data.getType()) {
+			case OPTIONAL:
+				usage += "[" + String.join("|", data.getLabels()) + "] ";
+				break;
+			case REQUIRED:
+				usage += "<" + String.join("|", data.getLabels()) + "> ";
+				break;
+			default:
+				break;
+			}
+		}
+		return usage;
+	}
 		
 }
