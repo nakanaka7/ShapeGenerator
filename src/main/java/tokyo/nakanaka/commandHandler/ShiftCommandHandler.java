@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
@@ -20,9 +21,11 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	private BranchCommandHelp cmdHelp;
 		
 	public ShiftCommandHandler() {
-		String desc = "Shift the generated blocks";
-		String usage = "/sg shift <direction> <length>";
-		this.cmdHelp = new BranchCommandHelp("shift", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("shift")
+				.description("Shift the generated blocks")
+				.addParameter(ParameterType.REQUIRED, "direction")
+				.addParameter(ParameterType.REQUIRED, "length")
+				.build();
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		Direction dir;

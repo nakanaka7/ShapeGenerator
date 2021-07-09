@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.RotateCommand;
@@ -19,9 +20,11 @@ public class RotCommandHandler implements SgSubCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public RotCommandHandler() {
-		String desc = "Rotate the generated blocks";
-		String usage = "/sg rot <x|y|z> <degree>";
-		this.cmdHelp = new BranchCommandHelp("rot", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("rot")
+				.description("Rotate the generated blocks")
+				.addParameter(ParameterType.REQUIRED, new String[] {"x", "y", "z"})
+				.addParameter(ParameterType.REQUIRED, "degree")
+				.build();
 	}
 	
 	@Override
@@ -38,7 +41,7 @@ public class RotCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
 			return;
 		}
 		Axis axis;

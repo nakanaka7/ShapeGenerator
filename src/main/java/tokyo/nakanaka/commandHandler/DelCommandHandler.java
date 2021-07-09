@@ -17,10 +17,9 @@ public class DelCommandHandler implements SgSubCommandHandler {
 	private BranchCommandHelp cmdHelp;
 	
 	public DelCommandHandler() {
-		String desc = "Delete the generated blocks";
-		String usage = "/sg del";
-		this.cmdHelp = new BranchCommandHelp("del", desc, usage);
-		this.cmdHelp = new BranchCommandHelp.Builder("del").description(desc).build();
+		this.cmdHelp = new BranchCommandHelp.Builder("del")
+				.description("Delete the generated blocks")
+				.build();
 	}
 
 	@Override

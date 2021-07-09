@@ -14,9 +14,9 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public UndoCommandHandler() {
-		String desc = "Undo a block changing command";
-		String usage = "/sg undo";
-		this.cmdHelp = new BranchCommandHelp("undo", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("undo")
+				.description("Undo a block changing command")
+				.build();
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class UndoCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();

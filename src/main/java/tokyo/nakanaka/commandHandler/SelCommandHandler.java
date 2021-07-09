@@ -7,6 +7,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -30,9 +31,10 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
-		String desc = "Specify a selection";
-		String usage = "/sg sel <SubCommand>";
-		this.cmdHelp = new BranchCommandHelp("sel", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("sel")
+				.description("Specify a selection")
+				.addParameter(ParameterType.REQUIRED, "subcommand")
+				.build();
 	}
 
 	@Override

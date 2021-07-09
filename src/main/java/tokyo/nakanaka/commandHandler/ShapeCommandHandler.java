@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -22,9 +23,10 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 	
 	public ShapeCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
-		String desc = "Set selection shape";
-		String usage = "/sg shape <shape>";
-		this.cmdHelp = new BranchCommandHelp("shape", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("shape")
+				.description("Set selection shape")
+				.addParameter(ParameterType.REQUIRED, "shape")
+				.build();
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		SelectionShape shape;

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -13,9 +14,10 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public PhyCommandHandler() {
-		String desc = "Toggle physics option for generating block";
-		String usage = "/sg phy <true|false>";
-		this.cmdHelp = new BranchCommandHelp("phy" ,desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("phy")
+				.description("Toggle physics option for generating block")
+				.addParameter(ParameterType.REQUIRED, new String[] {"true", "false"})
+				.build();
 	}
 
 	@Override
@@ -32,7 +34,7 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		boolean physics;
@@ -42,7 +44,7 @@ public class PhyCommandHandler implements SgSubCommandHandler{
 		}else if(bool.equals("false")) {
 			physics = false;
 		}else {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		player.setBlockPhysics(physics);

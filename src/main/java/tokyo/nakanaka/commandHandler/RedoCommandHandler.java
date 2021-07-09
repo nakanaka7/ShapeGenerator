@@ -14,9 +14,9 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public RedoCommandHandler() {
-		String desc = "Redo a block changing command";
-		String usage = "/sg redo";
-		this.cmdHelp = new BranchCommandHelp("redo", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("redo")
+				.description("Redo a block changing command")
+				.build();
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class RedoCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();

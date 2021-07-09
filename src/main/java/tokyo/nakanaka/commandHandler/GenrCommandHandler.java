@@ -28,10 +28,8 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 	public GenrCommandHandler(BlockCommandArgument blockArg, Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.blockArg = blockArg;
 		this.strategyMap = strategyMap;
-		String desc = "Generate blocks in the selection";
-		String usage = "/sg genr <block>";
-		this.cmdHelp = new BranchCommandHelp("genr", desc, usage);
-		this.cmdHelp = new BranchCommandHelp.Builder("genr").description(desc)
+		this.cmdHelp = new BranchCommandHelp.Builder("genr")
+				.description("Generate blocks in the selection")
 				.addParameter(ParameterType.REQUIRED, "block")
 				.build();
 	}
