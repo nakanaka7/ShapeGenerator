@@ -81,7 +81,7 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 							+ LogColor.GOLD + "/sg sel " + args[1] + LogColor.RESET
 							+ LogColor.YELLOW + " |---------------");
 					logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHelp.getDescription());
-					logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + "/sg " + cmdHelp.getUsage());
+					logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + "/sg sel " + cmdHelp.getUsage());
 				}else {
 					logger.print(LogColor.RED + "Unkonwn command");
 				}
