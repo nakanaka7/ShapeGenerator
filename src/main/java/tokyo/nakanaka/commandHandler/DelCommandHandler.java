@@ -15,7 +15,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class DelCommandHandler implements CommandHandler {
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public DelCommandHandler() {
 		this.cmdHelp = new BranchCommandHelp.Builder("del")
