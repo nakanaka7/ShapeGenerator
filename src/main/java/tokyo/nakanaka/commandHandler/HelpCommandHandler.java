@@ -8,6 +8,7 @@ import java.util.List;
 
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
@@ -71,7 +72,10 @@ public class HelpCommandHandler implements SgSubCommandHandler{
 					+ LogColor.GOLD + "/sg " + cmdHandler.getLabel() + LogColor.RESET
 					+ LogColor.YELLOW + " |---------------");
 			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getCommandHelp().getDescription());
-			logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + "/sg " + cmdHandler.getCommandHelp().getUsage());
+			CommandHelp cmdHelp = cmdHandler.getCommandHelp();
+			if(cmdHelp instanceof BranchCommandHelp) {
+				logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + "/sg " + ((BranchCommandHelp)cmdHelp).getUsage());	
+			}
 			if(args[0].equals("sel")) {
 				logger.print(LogColor.GOLD + "SubCommand:");
 				SelCommandHandler selHandler = (SelCommandHandler)cmdHandler;
