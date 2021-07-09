@@ -86,7 +86,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		SelectionStrategy strategy = this.strategyMap.get(shape);
 		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 		for(SelSubCommandHandler cmdHandler : cmdHandlerList) {
-			list.add(new Pair<>(cmdHandler.getLabel(), cmdHandler.getDescription()));
+			list.add(new Pair<>(cmdHandler.getLabel(), cmdHandler.getCommandHelp().getDescription()));
 		}
 		return list;
 	}
