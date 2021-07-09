@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -18,9 +19,12 @@ public class OffsetCommandHandler {
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	public OffsetCommandHandler() {
-		String desc = "Set offset";
-		String usage = "/offset [x] [y] [z]";
-		this.cmdHelp = new BranchCommandHelp("offset", desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("offset")
+				.description("Set offset")
+				.addParameter(ParameterType.OPTIONAL, "x")
+				.addParameter(ParameterType.OPTIONAL, "y")
+				.addParameter(ParameterType.OPTIONAL, "z")
+				.build();
 	}
 	
 	public BranchCommandHelp getCommandHelp() {
@@ -30,7 +34,7 @@ public class OffsetCommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0 && args.length != 3) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
 			logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
 			return;
 		}

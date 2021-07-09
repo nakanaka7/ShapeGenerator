@@ -21,9 +21,9 @@ public class ResetCommandHandler {
 	
 	public ResetCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
-		String description = "Reset the selection";
-		String usage = "/reset";
-		this.cmdHelp = new BranchCommandHelp("reset", description, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("reset")
+				.description("Reset the selection")
+				.build();
 	}
 	
 	public BranchCommandHelp getCommandHelp() {
@@ -33,7 +33,7 @@ public class ResetCommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsageOld());
+			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
 			return;
 		}
 		World world = player.getWorld();
