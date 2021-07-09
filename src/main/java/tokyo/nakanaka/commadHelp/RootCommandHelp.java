@@ -75,7 +75,7 @@ public class RootCommandHelp implements CommandHelp {
 	}
 	
 	public String getUsage() {
-		return this.label + "<subcommand>";
+		return this.label + " <subcommand>";
 	}
 	
 }
