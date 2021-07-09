@@ -10,7 +10,9 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 public interface SelSubCommandHandler {
 	String getLabel();
 	BranchCommandHelp getCommandHelp();
+	@Deprecated
 	String getDescription();
+	@Deprecated
 	String getUsage();
 	/**
 	 * @return true if data changed else false
