@@ -1,7 +1,13 @@
 package tokyo.nakanaka.commandHandler;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import java.util.List;
 
-public interface BranchCommandHandler extends CommandHandler {
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.player.Player;
+
+public interface BranchCommandHandler {
+	String getLabel();
 	BranchCommandHelp getCommandHelp();
+	void onCommand(Player player, String[] args);
+	List<String> onTabComplete(Player player, String[] args);
 }
