@@ -5,6 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -14,7 +15,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class DelCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp;
+	private CommandHelp cmdHelp;
 	
 	public DelCommandHandler() {
 		this.cmdHelp = new BranchCommandHelp.Builder("del")
@@ -28,7 +29,7 @@ public class DelCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public BranchCommandHelp getCommandHelp(Player player) {
+	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
