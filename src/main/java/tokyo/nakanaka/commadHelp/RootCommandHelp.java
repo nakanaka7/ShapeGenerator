@@ -74,4 +74,8 @@ public class RootCommandHelp implements CommandHelp {
 		return subCmdHelp.getSubHelp(shiftedSubLabels);
 	}
 	
+	public String getUsage() {
+		return this.label + "<subcommand>";
+	}
+	
 }

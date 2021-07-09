@@ -48,6 +48,22 @@ public class HelpCommandHandler implements CommandHandler{
 		return rootCmdHelp;
 	}
 	
+	public void onCommandNew(Player player, String[] args) {
+		Logger logger = player.getLogger();
+		RootCommandHelp sgHelp = this.getSgCommandHelp(player);
+		CommandHelp help = sgHelp.getSubHelp(args);
+		if(help == null) {
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			return;
+		}
+		logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
+				+ "Help: " 
+				+ LogColor.GOLD + "/sg " + String.join(" ", args) + LogColor.RESET
+				+ LogColor.YELLOW + " |-----------------");
+		logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + help.getDescription());
+		
+	}
+	
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
