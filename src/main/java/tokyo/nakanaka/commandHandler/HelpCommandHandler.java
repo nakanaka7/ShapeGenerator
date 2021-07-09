@@ -58,11 +58,11 @@ public class HelpCommandHandler implements CommandHandler{
 				+ LogColor.GOLD + "/sg " + String.join(" ", args) + LogColor.RESET
 				+ LogColor.YELLOW + " |-----------------");
 		logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + help.getDescription());
-		String usage = "/sg <subcommand>" ;
-		if(args.length != 0) {
-			String[] s = new String[args.length - 1];
-			System.arraycopy(args, 0, s, 0, args.length - 1);
-			usage = "/sg " + String.join(" ", s) + help.getUsage();
+		String usage = "/sg " + String.join(" ", args);
+		if(help instanceof RootCommandHelp) {
+			usage += " " + "<subcommand>"; 
+		}else if(help instanceof BranchCommandHelp) {
+			usage += " " + ((BranchCommandHelp) help).getParameterUsage(); 
 		}
 		logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + usage);
 		if(help instanceof RootCommandHelp) {
