@@ -7,7 +7,7 @@ import tokyo.nakanaka.player.Player;
 
 public interface BranchCommandHandler {
 	String getLabel();
-	BranchCommandHelp getCommandHelp();
+	BranchCommandHelp getCommandHelp(Player player);
 	void onCommand(Player player, String[] args);
 	List<String> onTabComplete(Player player, String[] args);
 }

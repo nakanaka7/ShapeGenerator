@@ -33,17 +33,17 @@ public class HelpCommandHandler implements BranchCommandHandler{
 	}
 	
 	@Override
-	public BranchCommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
-	private RootCommandHelp getSgCommandHelp() {
+	private RootCommandHelp getSgCommandHelp(Player player) {
 		RootCommandHelp rootCmdHelp = new RootCommandHelp.Builder("sg")
 				.description("Root command for ShapeGenerator")
 				.build();
 		List<String> subLabelList = cmdRepo.getAliases();
 		for(String subLabel : subLabelList) {
-			rootCmdHelp.register(this.cmdRepo.findBy(subLabel).getCommandHelp());
+			rootCmdHelp.register(this.cmdRepo.findBy(subLabel).getCommandHelp(player));
 		}
 		return rootCmdHelp;
 	}
@@ -57,7 +57,7 @@ public class HelpCommandHandler implements BranchCommandHandler{
 					+ LogColor.GOLD + "/sg" + LogColor.RESET
 					+ LogColor.YELLOW + " |-----------------");
 			for(BranchCommandHandler handler : this.cmdRepo.getAll()) {
-				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getCommandHelp().getDescription());
+				logger.print(GOLD + "/sg " + handler.getLabel() + ": " + RESET + handler.getCommandHelp(player).getDescription());
 			}
 			logger.print("Type /sg help " + "<SubCommand> " + "for detail");
 			return;
@@ -71,8 +71,8 @@ public class HelpCommandHandler implements BranchCommandHandler{
 					+ "Help: " 
 					+ LogColor.GOLD + "/sg " + cmdHandler.getLabel() + LogColor.RESET
 					+ LogColor.YELLOW + " |---------------");
-			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getCommandHelp().getDescription());
-			CommandHelp cmdHelp = cmdHandler.getCommandHelp();
+			logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + cmdHandler.getCommandHelp(player).getDescription());
+			CommandHelp cmdHelp = cmdHandler.getCommandHelp(player);
 			if(cmdHelp instanceof BranchCommandHelp) {
 				logger.print(LogColor.GOLD + "Usage: " + LogColor.RESET + "/sg " + ((BranchCommandHelp)cmdHelp).getUsage());	
 			}

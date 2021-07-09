@@ -43,7 +43,7 @@ public class SelCommandHandler implements BranchCommandHandler {
 	}
 
 	@Override
-	public BranchCommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
