@@ -9,13 +9,6 @@ public class BranchCommandHelp implements CommandHelp {
 	private List<ParameterData> paramDataList = new ArrayList<>();
 	private String usage = "";
 	
-	@Deprecated
-	public BranchCommandHelp(String label, String description, String usage) {
-		this.label = label;
-		this.description = description;
-		this.usage = usage;
-	}
-	
 	private BranchCommandHelp(Builder builder) {
 		this.label = builder.label;
 		this.description = builder.description;
