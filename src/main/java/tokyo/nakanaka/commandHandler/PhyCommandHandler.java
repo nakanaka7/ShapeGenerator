@@ -49,9 +49,9 @@ public class PhyCommandHandler implements CommandHandler{
 		}
 		player.setBlockPhysics(physics);
 		if(physics) {
-			logger.print("Set physics -> " + LogColor.GREEN + bool);
+			logger.print(LogColor.DARK_AQUA + "Set physics" + LogColor.RESET + " -> " + LogColor.GREEN + bool);
 		}else {
-			logger.print("Set physics -> " + LogColor.RED + bool);
+			logger.print(LogColor.DARK_AQUA + "Set physics" + LogColor.RESET + " -> " + LogColor.RED + bool);
 		}
 		return;
 	}

@@ -81,6 +81,7 @@ public class ShiftCommandHandler implements CommandHandler{
 		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, player.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
+		logger.print(LogColor.DARK_AQUA + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
 		return;
 	}
 

@@ -70,7 +70,7 @@ public class ShapeCommandHandler implements CommandHandler {
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
 			player.setSelectionBuildingData(selData);
-			logger.print("Set the shape -> " + LogColor.GREEN + shape);
+			logger.print(LogColor.DARK_AQUA + "Set the shape" + LogColor.RESET + " -> " + LogColor.GREEN + shape);
 			return;
 		}
 	}
