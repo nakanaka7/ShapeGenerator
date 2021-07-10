@@ -34,7 +34,7 @@ public class CommandLineBuilder {
 			Location loc = bukkitPlayer.getLocation();
 			World world = new BukkitWorld(this.server, loc.getWorld());
 			if(player == null) {
-				player = new Player(uid);
+				player = new BukkitHumanPlayer(bukkitPlayer);
 				player.setSelectionShape(SelectionShape.CUBOID);
 				RegionBuildingData regionData = new CuboidSelectionStrategy().newRegionBuildingData();
 				SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
