@@ -5,9 +5,10 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
 public class SelectionMessenger {
-	public void sendMessage(Logger logger, SelectionShape shape, 
+	public void printSelection(Logger logger, SelectionShape shape, 
 			SelectionBuildingData selData, String defaultOffsetLabel) {
 		logger.print(LogColor.GREEN + "---["
 				+ shape.toString()
@@ -29,5 +30,10 @@ public class SelectionMessenger {
 			offsetStr = offset.toString();
 		}
 		logger.print(LogColor.GOLD + "offset: " + LogColor.RESET + offsetStr);
+	}
+	
+	public void printClickDescription(Logger logger, SelectionStrategy strategy) {
+		logger.print(LogColor.GOLD + "Left click: " + LogColor.RESET + strategy.getLeftClickDescription()
+		+ LogColor.GRAY + " / " + LogColor.RESET + LogColor.GOLD + "Right click: " + LogColor.RESET + strategy.getRightClickDescription());
 	}
 }

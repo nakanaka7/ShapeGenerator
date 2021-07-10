@@ -30,6 +30,16 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
+	public String getLeftClickDescription() {
+		return "Set pos1";
+	}
+
+	@Override
+	public String getRightClickDescription() {
+		return "Set pos2, pos3, pos4";
+	}
+	
+	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		data.putVector3D("pos1", blockPos.toVector3D());
 		data.putVector3D("pos2", null);

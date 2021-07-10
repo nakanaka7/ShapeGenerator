@@ -60,7 +60,7 @@ public class OffsetCommandHandler {
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		selData.setOffset(pos);
-		this.selMessenger.sendMessage(logger, player.getSelectionShape(), selData, "");
+		this.selMessenger.printSelection(logger, player.getSelectionShape(), selData, "");
 	}
 	
 	public List<String> onTabComplete(String[] args) {

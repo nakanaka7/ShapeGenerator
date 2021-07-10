@@ -29,6 +29,16 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 	}
 
 	@Override
+	public String getLeftClickDescription() {
+		return "Set center";
+	}
+
+	@Override
+	public String getRightClickDescription() {
+		return "Set radius by the center coordinates";
+	}
+	
+	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D center = blockPos.toVector3D();
 		data.putVector3D("center", center);

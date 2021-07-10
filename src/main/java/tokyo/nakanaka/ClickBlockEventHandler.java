@@ -34,7 +34,7 @@ public class ClickBlockEventHandler {
 		RegionBuildingData regionData = selData.getRegionData();
 		Logger logger = player.getLogger();
 		selStrategy.onLeftClickBlock(regionData, logger, blockPos);
-		this.selMessenger.sendMessage(logger, selShape, selData, selStrategy.getDefaultOffsetLabel());
+		this.selMessenger.printSelection(logger, selShape, selData, selStrategy.getDefaultOffsetLabel());
 	}
 	
 	public void onRightClickBlock(Player player, int x, int y, int z) {
@@ -51,6 +51,6 @@ public class ClickBlockEventHandler {
 		RegionBuildingData regionData = selData.getRegionData();
 		Logger logger = player.getLogger();
 		selStrategy.onRightClickBlock(regionData, logger, blockPos);
-		this.selMessenger.sendMessage(logger, selShape, selData, selStrategy.getDefaultOffsetLabel());
+		this.selMessenger.printSelection(logger, selShape, selData, selStrategy.getDefaultOffsetLabel());
 	}
 }

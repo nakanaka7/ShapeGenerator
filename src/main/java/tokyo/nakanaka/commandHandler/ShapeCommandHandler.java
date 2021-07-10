@@ -12,6 +12,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
+import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
@@ -71,6 +72,7 @@ public class ShapeCommandHandler implements CommandHandler {
 			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
 			player.setSelectionBuildingData(selData);
 			logger.print(LogColor.DARK_AQUA + "Set the shape" + LogColor.RESET + " -> " + LogColor.GREEN + shape);
+			new SelectionMessenger().printClickDescription(logger, selStrategy);
 			return;
 		}
 	}

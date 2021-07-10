@@ -114,7 +114,7 @@ public class SelCommandHandler implements CommandHandler {
 			if(cmdHandler.getLabel().equals(label)) {
 				boolean success = cmdHandler.onCommand(regionData, player.getLogger(), playerPos, shiftArgs);
 				if(success) {
-					selMessenger.sendMessage(player.getLogger(), shape, selData, defaultOffsetLabel);
+					selMessenger.printSelection(player.getLogger(), shape, selData, defaultOffsetLabel);
 					return;
 				}
 			}

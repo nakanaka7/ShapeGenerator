@@ -42,7 +42,7 @@ public class ResetCommandHandler {
 		SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
 		player.setSelectionBuildingData(newSelData);
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
-		this.selMessenger.sendMessage(logger, shape, newSelData, defaultOffsetLabel);
+		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
 		return;
 	}
 	
