@@ -9,7 +9,10 @@ import tokyo.nakanaka.math.Vector3D;
 public class SelectionMessenger {
 	public void sendMessage(Logger logger, SelectionShape shape, 
 			SelectionBuildingData selData, String defaultOffsetLabel) {
-		logger.print(LogColor.LIGHT_PURPLE + shape.toString() + LogColor.RESET + " Selection");
+		logger.print(LogColor.GREEN + "---["
+				+ shape.toString()
+				+ " Selection"
+				+ "]---------");
 		RegionBuildingData regionData = selData.getRegionData();
 		List<String> labelList = regionData.getLabels();
 		for(String label : labelList) {
