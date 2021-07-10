@@ -21,7 +21,7 @@ public class ScaleCommandHandler implements CommandHandler{
 	
 	public ScaleCommandHandler() {
 		this.cmdHelp = new BranchCommandHelp.Builder("scale")
-				.description("Change scale the generated blocks")
+				.description("Change scale of the generated blocks")
 				.addParameter(ParameterType.REQUIRED, new String[] {"x", "y", "z"})
 				.addParameter(ParameterType.REQUIRED, "factor")
 				.build();

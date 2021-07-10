@@ -40,7 +40,7 @@ public class SelCommandHandler implements CommandHandler {
 	@Override
 	public CommandHelp getCommandHelp(Player player) {
 		RootCommandHelp cmdHelp = new RootCommandHelp.Builder("sel")
-				.description("Specify a selection")
+				.description("Specify the selection")
 				.build();
 		List<String> subLabels = this.getSubCommandLabels(player);
 		for(String subLabel : subLabels) {

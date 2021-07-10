@@ -1,7 +1,5 @@
 package tokyo.nakanaka.commandHandler;
 
-import static tokyo.nakanaka.logger.LogColor.LIGHT_PURPLE;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +21,14 @@ public class ShapeCommandHandler implements CommandHandler {
 	
 	public ShapeCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
+		SelectionShape[] shapes = SelectionShape.values();
+		String[] shapeStrs = new String[shapes.length];
+		for(int i = 0; i < shapes.length; i++) {
+			shapeStrs[i] = shapes[i].toString().toLowerCase();
+		}
 		this.cmdHelp = new BranchCommandHelp.Builder("shape")
 				.description("Set selection shape")
-				.addParameter(ParameterType.REQUIRED, "shape")
+				.addParameter(ParameterType.REQUIRED, shapeStrs)
 				.build();
 	}
 
@@ -67,7 +70,7 @@ public class ShapeCommandHandler implements CommandHandler {
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
 			player.setSelectionBuildingData(selData);
-			logger.print("Set the shape -> " + LIGHT_PURPLE + shape);
+			logger.print("Set the shape -> " + LogColor.GREEN + shape);
 			return;
 		}
 	}

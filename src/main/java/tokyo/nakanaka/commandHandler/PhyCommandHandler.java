@@ -15,7 +15,7 @@ public class PhyCommandHandler implements CommandHandler{
 	
 	public PhyCommandHandler() {
 		this.cmdHelp = new BranchCommandHelp.Builder("phy")
-				.description("Toggle physics option for generating block")
+				.description("Toggle physics option for generating blocks")
 				.addParameter(ParameterType.REQUIRED, new String[] {"true", "false"})
 				.build();
 	}
