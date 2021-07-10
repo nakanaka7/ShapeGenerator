@@ -45,7 +45,7 @@ public class HelpCommandHandler implements CommandHandler{
 		return rootCmdHelp;
 	}
 	
-	public void onCommand(RootCommandHelp help, Player player, String[] args) {
+	public void onCommand(CommandHelp help, Player player, String[] args) {
 		Logger logger = player.getLogger();
 		String label = help.getLabel();
 		CommandHelp subHelp = help.getSubHelp(args);
