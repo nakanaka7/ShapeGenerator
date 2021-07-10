@@ -3,6 +3,8 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -10,11 +12,14 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class LengthCommandHandler implements SelSubCommandHandler {
 	private String label;
-	private String usage;
+	private BranchCommandHelp cmdHelp;
 	
 	public LengthCommandHandler(String label) {
 		this.label = label;
-		this.usage = "/sg sel " + label + " <length>";
+		this.cmdHelp = new BranchCommandHelp.Builder(label)
+				.description("Set " + label + " (positive double value)")
+				.addParameter(ParameterType.REQUIRED, "length")
+				.build();
 	}
 
 	@Override
@@ -22,20 +27,14 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 		return this.label;
 	}
 
-	@Override
-	public String getDescription() {
-		return "Set " + this.label + " (positive double value)";
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.usage;
+	public BranchCommandHelp getCommandHelp() {
+		return cmdHelp;
 	}
 	
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + this.usage);
+			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
 			return false;
 		}
 		double value;

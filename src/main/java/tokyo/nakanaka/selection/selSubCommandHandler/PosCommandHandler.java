@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -13,11 +15,16 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class PosCommandHandler implements SelSubCommandHandler {
 	private String label;
-	private String usage;
+	private BranchCommandHelp cmdHelp;
 	
 	public PosCommandHandler(String label) {
 		this.label = label;
-		this.usage = "/sg sel " + label + " [x] [y] [z]";
+		this.cmdHelp = new BranchCommandHelp.Builder(label)
+				.description("Set position of " + label)
+				.addParameter(ParameterType.OPTIONAL, "x")
+				.addParameter(ParameterType.OPTIONAL, "y")
+				.addParameter(ParameterType.OPTIONAL, "z")
+				.build();
 	}
 
 	@Override
@@ -25,20 +32,14 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		return this.label;
 	}
 
-	@Override
-	public String getDescription() {
-		return "Set position of " + this.label;
+	public BranchCommandHelp getCommandHelp() {
+		return cmdHelp;
 	}
-	
-	@Override
-	public String getUsage() {
-		return this.usage;
-	}
-	
+
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 0 && args.length != 3) {
-			logger.print(LogColor.RED + "Usage: " + this.usage);
+			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
 			logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
 			return false;
 		}

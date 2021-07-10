@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tokyo.nakanaka.Pair;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -21,18 +22,14 @@ import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandler implements SgSubCommandHandler {
+public class SelCommandHandler implements CommandHandler {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
-	private CommandHelp cmdHelp;
 	
 	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.strategyMap = strategyMap;
 		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
-		String desc = "Specify a selection";
-		String usage = "/sg sel <SubCommand>";
-		this.cmdHelp = new CommandHelp(desc, usage);
 	}
 
 	@Override
@@ -41,8 +38,15 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	}
 
 	@Override
-	public CommandHelp getCommandHelp() {
-		return this.cmdHelp;
+	public CommandHelp getCommandHelp(Player player) {
+		RootCommandHelp cmdHelp = new RootCommandHelp.Builder("sel")
+				.description("Specify a selection")
+				.build();
+		List<String> subLabels = this.getSubCommandLabels(player);
+		for(String subLabel : subLabels) {
+			cmdHelp.register(this.getSubCommandHelp(player, subLabel));
+		}
+		return cmdHelp;
 	}
 	
 	public List<String> getSubCommandLabels(Player player){
@@ -58,37 +62,22 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		return list;
 	}
 	
-	public CommandHelp getSubCommandHelp(Player player, String label) {
+	public BranchCommandHelp getSubCommandHelp(Player player, String label) {
 		if(label.equals("reset")) {
 			return this.resetCmdHandler.getCommandHelp();
 		}else if(label.equals("offset")) {
-			return null;
+			return this.offsetCmdHandler.getCommandHelp();
 		}else {
 			SelectionShape shape = player.getSelectionShape();
 			SelectionStrategy strategy = this.strategyMap.get(shape);
 			List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 			for(SelSubCommandHandler e : cmdHandlerList) {
 				if(e.getLabel().equals(label)) {
-					String des = e.getDescription();
-					String usage = e.getUsage();
-					return new CommandHelp(des, usage);
+					return e.getCommandHelp();
 				}
 			}
 			return null;
 		}
-	}
-	
-	public List<Pair<String, String>> getSubCommandDescriptions(Player player) {
-		List<Pair<String, String>> list = new ArrayList<>();
-		list.add(new Pair<>("reset", "Reset the selection"));
-		list.add(new Pair<>("offset", "Set offset"));
-		SelectionShape shape = player.getSelectionShape();
-		SelectionStrategy strategy = this.strategyMap.get(shape);
-		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
-		for(SelSubCommandHandler cmdHandler : cmdHandlerList) {
-			list.add(new Pair<>(cmdHandler.getLabel(), cmdHandler.getDescription()));
-		}
-		return list;
 	}
 	
 	@Override

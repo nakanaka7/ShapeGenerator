@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
@@ -19,17 +20,18 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
-public class GenrCommandHandler implements SgSubCommandHandler{
+public class GenrCommandHandler implements CommandHandler{
 	private BlockCommandArgument blockArg;
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
-	private CommandHelp cmdHelp;
+	private BranchCommandHelp cmdHelp;
 	
 	public GenrCommandHandler(BlockCommandArgument blockArg, Map<SelectionShape, SelectionStrategy> strategyMap) {
 		this.blockArg = blockArg;
 		this.strategyMap = strategyMap;
-		String desc = "Generate blocks in the selection";
-		String usage = "/sg genr <block>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("genr")
+				.description("Generate blocks in the selection")
+				.addParameter(ParameterType.REQUIRED, "block")
+				.build();
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
@@ -46,7 +48,7 @@ public class GenrCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: "+ this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: "+ "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();

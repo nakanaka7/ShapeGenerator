@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
@@ -15,13 +16,15 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class ScaleCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+public class ScaleCommandHandler implements CommandHandler{
+	private BranchCommandHelp cmdHelp;
 	
 	public ScaleCommandHandler() {
-		String desc = "Change scale the generated blocks";
-		String usage = "/sg scale <x|y|z> <factor>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("scale")
+				.description("Change scale the generated blocks")
+				.addParameter(ParameterType.REQUIRED, new String[] {"x", "y", "z"})
+				.addParameter(ParameterType.REQUIRED, "factor")
+				.build();
 	}
 	@Override
 	public String getLabel() {
@@ -29,7 +32,7 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
@@ -37,7 +40,7 @@ public class ScaleCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		Axis axis;

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
@@ -16,13 +17,15 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
-public class ShiftCommandHandler implements SgSubCommandHandler{
-	private CommandHelp cmdHelp;
+public class ShiftCommandHandler implements CommandHandler{
+	private BranchCommandHelp cmdHelp;
 		
 	public ShiftCommandHandler() {
-		String desc = "Shift the generated blocks";
-		String usage = "/sg shift <direction> <length>";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("shift")
+				.description("Shift the generated blocks")
+				.addParameter(ParameterType.REQUIRED, "direction")
+				.addParameter(ParameterType.REQUIRED, "length")
+				.build();
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
@@ -39,7 +42,7 @@ public class ShiftCommandHandler implements SgSubCommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		Direction dir;

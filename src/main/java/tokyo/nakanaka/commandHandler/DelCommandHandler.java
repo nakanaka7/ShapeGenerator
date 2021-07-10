@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
@@ -13,13 +14,13 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class DelCommandHandler implements SgSubCommandHandler {
-	private CommandHelp cmdHelp;
+public class DelCommandHandler implements CommandHandler {
+	private BranchCommandHelp cmdHelp;
 	
 	public DelCommandHandler() {
-		String desc = "Delete the generated blocks";
-		String usage = "/sg del";
-		this.cmdHelp = new CommandHelp(desc, usage);
+		this.cmdHelp = new BranchCommandHelp.Builder("del")
+				.description("Delete the generated blocks")
+				.build();
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public class DelCommandHandler implements SgSubCommandHandler {
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp() {
+	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
 	
@@ -36,7 +37,7 @@ public class DelCommandHandler implements SgSubCommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
