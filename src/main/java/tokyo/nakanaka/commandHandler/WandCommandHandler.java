@@ -11,6 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.HumanPlayer;
 import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 
@@ -46,8 +47,7 @@ public class WandCommandHandler implements CommandHandler {
 		SelectionStrategy strategy = this.strategyMap.get(shape);
 		Logger logger = player.getLogger();
 		logger.print(LogColor.DARK_AQUA + "Gave wand to " + hp.getName());
-		logger.print(LogColor.GOLD + "Left click: " + LogColor.RESET + strategy.getLeftClickDescription()
-		+ LogColor.GRAY + " / " + LogColor.RESET + LogColor.GOLD + "Right click: " + LogColor.RESET + strategy.getRightClickDescription());
+		new SelectionMessenger().sendClickDescription(logger, strategy);
 	}
 
 	@Override
