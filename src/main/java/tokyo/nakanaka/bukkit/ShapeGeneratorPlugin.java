@@ -14,7 +14,7 @@ import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.commandHandler.DelCommandHandler;
 import tokyo.nakanaka.commandHandler.GenrCommandHandler;
-import tokyo.nakanaka.commandHandler.HelpCommandHandler;
+import tokyo.nakanaka.commandHandler.SgHelpCommandHandler;
 import tokyo.nakanaka.commandHandler.PhyCommandHandler;
 import tokyo.nakanaka.commandHandler.RedoCommandHandler;
 import tokyo.nakanaka.commandHandler.SgCommandHandler;
@@ -55,7 +55,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		strategyMap.put(SelectionShape.TRIANGLE, new TriangleSelectionStrategy());
 		strategyMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionStrategy());
 		strategyMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionStrategy());
-		cmdRepo.register(new HelpCommandHandler(cmdRepo));
+		cmdRepo.register(new SgHelpCommandHandler(cmdRepo));
 		cmdRepo.register(new PhyCommandHandler());
 		cmdRepo.register(new SelCommandHandler(strategyMap));
 		cmdRepo.register(new ShapeCommandHandler(strategyMap));

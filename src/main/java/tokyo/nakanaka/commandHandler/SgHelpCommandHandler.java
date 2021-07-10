@@ -12,11 +12,11 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class HelpCommandHandler implements CommandHandler{
+public class SgHelpCommandHandler implements CommandHandler{
 	private SgSubCommandHandlerRepository cmdRepo;
 	private BranchCommandHelp cmdHelp;
 	
-	public HelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
+	public SgHelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
 		this.cmdRepo = cmdRepo;
 		this.cmdHelp = new BranchCommandHelp.Builder("help")
 				.description("Print command help")
