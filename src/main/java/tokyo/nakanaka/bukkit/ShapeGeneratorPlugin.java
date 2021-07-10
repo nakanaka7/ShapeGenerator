@@ -25,6 +25,7 @@ import tokyo.nakanaka.commandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.commandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.commandHandler.SgSubCommandHandlerRepository;
 import tokyo.nakanaka.commandHandler.UndoCommandHandler;
+import tokyo.nakanaka.commandHandler.WandCommandHandler;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.SelectionShape;
@@ -56,6 +57,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		strategyMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionStrategy());
 		strategyMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionStrategy());
 		cmdRepo.register(new SgHelpCommandHandler(cmdRepo));
+		cmdRepo.register(new WandCommandHandler());
 		cmdRepo.register(new ShapeCommandHandler(strategyMap));
 		cmdRepo.register(new SelCommandHandler(strategyMap));
 		cmdRepo.register(new GenrCommandHandler(new BukkitBlockArgument(), strategyMap));
