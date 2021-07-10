@@ -17,7 +17,7 @@ public class RedoCommandHandler implements CommandHandler{
 	
 	public RedoCommandHandler() {
 		this.cmdHelp = new BranchCommandHelp.Builder("redo")
-				.description("Redo block changing command")
+				.description("Redo block changing command(s)")
 				.addParameter(ParameterType.OPTIONAL, "number")
 				.build();
 	}
