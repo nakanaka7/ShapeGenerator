@@ -54,6 +54,7 @@ public class DelCommandHandler implements CommandHandler {
 		DeleteCommand deleteCmd = new DeleteCommand(originalCmd);
 		deleteCmd.execute();
 		undoManager.add(deleteCmd);
+		logger.print(LogColor.DARK_AQUA + "Deleted block(s)");
 		return;
 	}
 

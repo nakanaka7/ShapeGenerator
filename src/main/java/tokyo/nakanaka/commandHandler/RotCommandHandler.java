@@ -76,6 +76,7 @@ public class RotCommandHandler implements CommandHandler{
 		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, player.getBlockPhysics());
 		rotateCmd.execute();
 		undoManager.add(rotateCmd);
+		logger.print(LogColor.DARK_AQUA + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
 

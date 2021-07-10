@@ -43,7 +43,7 @@ public class RedoCommandHandler implements CommandHandler{
 			return;
 		}else {
 			redoCmd.redo();
-			logger.print("Redid 1 command");
+			logger.print(LogColor.DARK_AQUA + "Redid 1 command");
 			return;
 		}
 	}

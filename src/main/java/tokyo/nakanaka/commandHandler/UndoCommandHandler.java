@@ -43,7 +43,7 @@ public class UndoCommandHandler implements CommandHandler{
 			return;
 		}else {
 			undoCmd.undo();
-			logger.print("Undid 1 command");
+			logger.print(LogColor.DARK_AQUA + "Undid 1 command");
 			return;
 		}
 	}

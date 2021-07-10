@@ -80,7 +80,7 @@ public class GenrCommandHandler implements CommandHandler{
 			logger.print(LogColor.RED + "Unsettable block");
 			return;
 		}
-		logger.print("Generated block(s)");
+		logger.print(LogColor.DARK_AQUA + "Generated block(s)");
 		player.getUndoCommandManager().add(generateCmd);
 		return;
 	}

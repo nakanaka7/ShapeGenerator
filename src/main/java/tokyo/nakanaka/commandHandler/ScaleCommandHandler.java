@@ -71,6 +71,7 @@ public class ScaleCommandHandler implements CommandHandler{
 		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, player.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
+		logger.print(LogColor.DARK_AQUA + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
 
