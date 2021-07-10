@@ -1,10 +1,12 @@
 package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -15,7 +17,8 @@ public class RedoCommandHandler implements CommandHandler{
 	
 	public RedoCommandHandler() {
 		this.cmdHelp = new BranchCommandHelp.Builder("redo")
-				.description("Redo block changing command")
+				.description("Redo block changing command(s)")
+				.addParameter(ParameterType.OPTIONAL, "number")
 				.build();
 	}
 	
@@ -32,24 +35,51 @@ public class RedoCommandHandler implements CommandHandler{
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
-		if(args.length != 0) {
+		if(args.length > 1) {
 			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
+		int num = 1;
+		if(args.length == 1) {
+			try {
+				num = Integer.parseInt(args[0]);
+			}catch(IllegalArgumentException e) {
+				logger.print(LogColor.RED + "Can not parse the number");
+				return;
+			}
+			if(num <= 0) {
+				logger.print(LogColor.RED + "The number must be larger than 0");
+				return;
+			}
+		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
-		UndoableCommand redoCmd = undoManager.getRedoCommand();
-		if(redoCmd == null) {
+		int i = 0;
+		int totalNum = 0;
+		while(i < num) {
+			UndoableCommand redoCmd = undoManager.getRedoCommand();
+			if(redoCmd == null) {
+				break;
+			}
+			redoCmd.redo();
+			++i;
+			++totalNum;
+		}
+		if(totalNum == 0) {
 			logger.print(LogColor.RED + "Nothing to redo");
 			return;
-		}else {
-			redoCmd.redo();
-			logger.print(LogColor.DARK_AQUA + "Redid 1 command");
-			return;
 		}
+		logger.print(LogColor.DARK_AQUA + "Redid " + totalNum + " command(s)");
+		if(totalNum < num) {
+			logger.print(LogColor.RED + "Reached the end command");
+		}
+		return;
 	}
 
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
+		if(args.length == 1) {
+			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+		}
 		return new ArrayList<>();
 	}
 
