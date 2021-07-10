@@ -56,10 +56,10 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		strategyMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionStrategy());
 		strategyMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionStrategy());
 		cmdRepo.register(new SgHelpCommandHandler(cmdRepo));
-		cmdRepo.register(new PhyCommandHandler());
-		cmdRepo.register(new SelCommandHandler(strategyMap));
 		cmdRepo.register(new ShapeCommandHandler(strategyMap));
+		cmdRepo.register(new SelCommandHandler(strategyMap));
 		cmdRepo.register(new GenrCommandHandler(new BukkitBlockArgument(), strategyMap));
+		cmdRepo.register(new PhyCommandHandler());
 		cmdRepo.register(new ShiftCommandHandler());
 		cmdRepo.register(new ScaleCommandHandler());
 		cmdRepo.register(new RotCommandHandler());
