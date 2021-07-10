@@ -48,7 +48,7 @@ public class UndoCommandHandler implements CommandHandler{
 				return;
 			}
 			if(num <= 0) {
-				logger.print(LogColor.RED + "Undo number must be larger than 0");
+				logger.print(LogColor.RED + "The number must be larger than 0");
 				return;
 			}
 		}
