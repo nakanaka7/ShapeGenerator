@@ -15,7 +15,7 @@ public class UndoCommandHandler implements CommandHandler{
 	
 	public UndoCommandHandler() {
 		this.cmdHelp = new BranchCommandHelp.Builder("undo")
-				.description("Undo a block changing command")
+				.description("Undo block changing command")
 				.build();
 	}
 	

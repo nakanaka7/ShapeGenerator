@@ -36,7 +36,7 @@ public class SgHelpCommandHandler implements CommandHandler {
 	
 	private RootCommandHelp getSgCommandHelp(Player player) {
 		RootCommandHelp rootCmdHelp = new RootCommandHelp.Builder("sg")
-				.description("Root command for ShapeGenerator")
+				.description("Root command of ShapeGenerator")
 				.build();
 		List<String> subLabelList = cmdRepo.getAliases();
 		for(String subLabel : subLabelList) {
