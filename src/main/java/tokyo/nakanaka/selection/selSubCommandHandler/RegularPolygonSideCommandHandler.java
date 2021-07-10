@@ -12,7 +12,6 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
-	private String usage = "/sg sel side <number>";
 	private BranchCommandHelp cmdHelp;
 	
 	public RegularPolygonSideCommandHandler() {
@@ -31,16 +30,6 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 		return cmdHelp;
 	}
 
-	@Override
-	public String getDescription() {
-		return "Set the side number, must be larger than or equal to 3";
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.usage;
-	}
-	
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 1) {

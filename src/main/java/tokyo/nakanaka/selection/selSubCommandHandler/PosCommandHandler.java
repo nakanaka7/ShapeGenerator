@@ -15,12 +15,10 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class PosCommandHandler implements SelSubCommandHandler {
 	private String label;
-	private String usage;
 	private BranchCommandHelp cmdHelp;
 	
 	public PosCommandHandler(String label) {
 		this.label = label;
-		this.usage = "/sg sel " + label + " [x] [y] [z]";
 		this.cmdHelp = new BranchCommandHelp.Builder(label)
 				.description("Set position of " + label)
 				.addParameter(ParameterType.OPTIONAL, "x")
@@ -38,16 +36,6 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		return cmdHelp;
 	}
 
-	@Override
-	public String getDescription() {
-		return "Set position of " + this.label;
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.usage;
-	}
-	
 	@Override
 	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
 		if(args.length != 0 && args.length != 3) {

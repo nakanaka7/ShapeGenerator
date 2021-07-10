@@ -12,7 +12,6 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class AxisCommandHandler implements SelSubCommandHandler{
-	private String usage = "/sg sel axis <x|y|z>";
 	private BranchCommandHelp cmdHelp;
 	
 	public AxisCommandHandler() {
@@ -29,16 +28,6 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	
 	public BranchCommandHelp getCommandHelp() {
 		return cmdHelp;
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Set axis";
-	}
-
-	@Override
-	public String getUsage() {
-		return this.usage;
 	}
 	
 	@Override

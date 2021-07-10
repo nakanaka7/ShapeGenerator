@@ -12,12 +12,10 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class LengthCommandHandler implements SelSubCommandHandler {
 	private String label;
-	private String usage;
 	private BranchCommandHelp cmdHelp;
 	
 	public LengthCommandHandler(String label) {
 		this.label = label;
-		this.usage = "/sg sel " + label + " <length>";
 		this.cmdHelp = new BranchCommandHelp.Builder("label")
 				.description("Set " + label + " (positive double value)")
 				.addParameter(ParameterType.REQUIRED, "length")
@@ -31,16 +29,6 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 
 	public BranchCommandHelp getCommandHelp() {
 		return cmdHelp;
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Set " + this.label + " (positive double value)";
-	}
-	
-	@Override
-	public String getUsage() {
-		return this.usage;
 	}
 	
 	@Override
