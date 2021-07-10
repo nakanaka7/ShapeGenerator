@@ -53,10 +53,12 @@ public class SgHelpCommandHandler implements CommandHandler {
 			logger.print(LogColor.RED + "Usage: " + "/" + label + " " + this.cmdHelp.getUsage());
 			return;
 		}
-		logger.print(LogColor.YELLOW + "---------| " + LogColor.RESET
-				+ "Help: " 
-				+ LogColor.GOLD + "/" + label + " " + String.join(" ", args) + LogColor.RESET
-				+ LogColor.YELLOW + " |-----------------");
+		String head = LogColor.YELLOW + "---[Help for /" + label;
+		if(args.length != 0) {
+			head += " " + String.join(" ", args);
+		}
+		head += "]---------------";
+		logger.print(head);
 		logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + subHelp.getDescription());
 		String usage = "/" + label + " " + String.join(" ", args);
 		if(subHelp instanceof RootCommandHelp) {
@@ -69,9 +71,11 @@ public class SgHelpCommandHandler implements CommandHandler {
 			logger.print(LogColor.GOLD + "SubCommand:");
 			List<CommandHelp> subList = ((RootCommandHelp) subHelp).getSubCommandHelp();
 			for(CommandHelp e : subList) {
-				logger.print(" " + LogColor.GOLD +e.getLabel() + ": " + LogColor.RESET + e.getDescription());
+				logger.print("  " + LogColor.GOLD +e.getLabel() + ": " + LogColor.RESET + e.getDescription());
 			}
-			logger.print(LogColor.GREEN + "Type " + "/" + label + " " + "help " + String.join(" ", args) + " <subcommand> " + "for detail");
+			logger.print("Type " 
+			+ LogColor.YELLOW +"\"/" + label + " " + "help " + String.join(" ", args) + " <subcommand>\"" 
+			+ LogColor.RESET + " for the subcommand detail");
 		}
 	}
 	

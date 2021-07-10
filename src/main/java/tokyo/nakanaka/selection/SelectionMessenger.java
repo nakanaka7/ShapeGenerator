@@ -12,7 +12,7 @@ public class SelectionMessenger {
 		logger.print(LogColor.GREEN + "---["
 				+ shape.toString()
 				+ " Selection"
-				+ "]---------");
+				+ "]---------------");
 		RegionBuildingData regionData = selData.getRegionData();
 		List<String> labelList = regionData.getLabels();
 		for(String label : labelList) {
