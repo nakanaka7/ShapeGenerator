@@ -16,7 +16,7 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 	
 	public LengthCommandHandler(String label) {
 		this.label = label;
-		this.cmdHelp = new BranchCommandHelp.Builder("label")
+		this.cmdHelp = new BranchCommandHelp.Builder(label)
 				.description("Set " + label + " (positive double value)")
 				.addParameter(ParameterType.REQUIRED, "length")
 				.build();

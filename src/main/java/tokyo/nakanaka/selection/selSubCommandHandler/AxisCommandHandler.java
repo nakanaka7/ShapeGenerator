@@ -15,7 +15,7 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public AxisCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("label")
+		this.cmdHelp = new BranchCommandHelp.Builder("axis")
 				.description("Set axis")
 				.addParameter(ParameterType.REQUIRED, new String[] {"x", "y", "z"})
 				.build();
