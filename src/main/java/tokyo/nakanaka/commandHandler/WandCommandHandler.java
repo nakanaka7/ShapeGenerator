@@ -45,7 +45,7 @@ public class WandCommandHandler implements CommandHandler {
 		SelectionShape shape = player.getSelectionShape();
 		SelectionStrategy strategy = this.strategyMap.get(shape);
 		Logger logger = player.getLogger();
-		logger.print(LogColor.DARK_AQUA + "Gave wand to " + player.getName());
+		logger.print(LogColor.DARK_AQUA + "Gave wand to " + hp.getName());
 		logger.print(LogColor.GOLD + "Left click: " + LogColor.RESET + strategy.getLeftClickDescription()
 		+ LogColor.GRAY + " / " + LogColor.RESET + LogColor.GOLD + "Right click: " + LogColor.RESET + strategy.getRightClickDescription());
 	}
