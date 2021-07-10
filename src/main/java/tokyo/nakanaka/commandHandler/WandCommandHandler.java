@@ -47,7 +47,7 @@ public class WandCommandHandler implements CommandHandler {
 		SelectionStrategy strategy = this.strategyMap.get(shape);
 		Logger logger = player.getLogger();
 		logger.print(LogColor.DARK_AQUA + "Gave wand to " + hp.getName());
-		new SelectionMessenger().sendClickDescription(logger, strategy);
+		new SelectionMessenger().printClickDescription(logger, strategy);
 	}
 
 	@Override
