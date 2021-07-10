@@ -57,7 +57,7 @@ public class SgHelpCommandHandler implements CommandHandler {
 		if(args.length != 0) {
 			head += " " + String.join(" ", args);
 		}
-		head += "]---------------";
+		head += "]--------------------";
 		logger.print(head);
 		logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + subHelp.getDescription());
 		String usage = "/" + label + " " + String.join(" ", args);
