@@ -35,6 +35,16 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
+	public String getLeftClickDescription() {
+		return "Set center";
+	}
+
+	@Override
+	public String getRightClickDescription() {
+		return "Set radius_main, radius_sub";
+	}
+	
+	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D center = blockPos.toVector3D();
 		data.putVector3D("center", center);

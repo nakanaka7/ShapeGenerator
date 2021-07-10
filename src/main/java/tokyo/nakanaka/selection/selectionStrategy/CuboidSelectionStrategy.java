@@ -29,6 +29,16 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 				.addDataTag("length", DataType.DOUBLE)
 				.build();
 	}
+	
+	@Override
+	public String getLeftClickDescription() {
+		return "Set pos1";
+	}
+
+	@Override
+	public String getRightClickDescription() {
+		return "Set pos2";
+	}
 
 	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {

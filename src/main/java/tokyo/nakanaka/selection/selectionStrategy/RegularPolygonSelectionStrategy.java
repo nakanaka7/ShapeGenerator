@@ -41,6 +41,16 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
+	public String getLeftClickDescription() {
+		return "Set center";
+	}
+
+	@Override
+	public String getRightClickDescription() {
+		return "Set radius by the center coordinates";
+	}
+	
+	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		data.putVector3D("center", blockPos.toVector3D());
 		data.putDouble("radius", null);

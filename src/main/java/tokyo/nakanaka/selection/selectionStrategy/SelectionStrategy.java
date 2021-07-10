@@ -10,6 +10,8 @@ import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 
 public interface SelectionStrategy {
 	RegionBuildingData newRegionBuildingData();
+	String getLeftClickDescription();
+	String getRightClickDescription();
 	void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	String getDefaultOffsetLabel();
