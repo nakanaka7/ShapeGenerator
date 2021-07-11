@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import tokyo.nakanaka.command.UndoableCommand;
 
 public class UndoCommandManager {
-	private Deque<UndoableCommand> undoCmds = new LinkedList<>();
+	private LinkedList<UndoableCommand> undoCmds = new LinkedList<>();
 	private Deque<UndoableCommand> redoCmds = new LinkedList<>();
 	
 	public void add(UndoableCommand cmd) {
@@ -19,6 +19,14 @@ public class UndoCommandManager {
 	 */
 	public UndoableCommand peekUndoCommand() {
 		return this.undoCmds.peekLast();
+	}
+	
+	/**
+	 * @param index from last
+	 * @return
+	 */
+	public UndoableCommand peekUndoCommand(int index) {
+		return this.undoCmds.get(this.undoCmds.size() - index - 1);
 	}
 	
 	/**
