@@ -7,7 +7,6 @@ import java.util.List;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -53,15 +52,12 @@ public class RedoCommandHandler implements CommandHandler{
 			}
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
-		int i = 0;
 		int totalNum = 0;
-		while(i < num) {
-			UndoableCommand redoCmd = undoManager.getRedoCommand();
-			if(redoCmd == null) {
+		for(int i = 0; i < num; ++i) {
+			boolean success = undoManager.redo();
+			if(!success) {
 				break;
 			}
-			redoCmd.redo();
-			++i;
 			++totalNum;
 		}
 		if(totalNum == 0) {
