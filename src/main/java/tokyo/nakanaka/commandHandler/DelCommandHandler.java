@@ -41,8 +41,8 @@ public class DelCommandHandler implements CommandHandler {
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
-		for(int i = 0; i < undoManager.undoSize(); ++i) {
-			UndoableCommand cmd = undoManager.peekUndoCommand(i);
+		for(int i = undoManager.undoSize() - 1; 0 <= i; --i) {
+			UndoableCommand cmd = undoManager.getUndoCommand(i);
 			if(cmd instanceof GenerateCommand) {
 				originalCmd = (GenerateCommand) cmd;
 				break;
@@ -69,7 +69,7 @@ public class DelCommandHandler implements CommandHandler {
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
-		UndoableCommand cmd = undoManager.peekUndoCommand();
+		UndoableCommand cmd = undoManager.getLastUndoCommand();
 		GenerateCommand originalCmd;
 		if(cmd instanceof GenerateCommand) {
 			originalCmd = (GenerateCommand) cmd;

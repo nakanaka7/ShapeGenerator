@@ -58,7 +58,7 @@ public class ScaleCommandHandler implements CommandHandler{
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
-		UndoableCommand cmd = undoManager.peekUndoCommand();
+		UndoableCommand cmd = undoManager.getLastUndoCommand();
 		GenerateCommand originalCmd;
 		if(cmd instanceof GenerateCommand) {
 			originalCmd = (GenerateCommand) cmd;

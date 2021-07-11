@@ -41,14 +41,15 @@ public class UndoCommandManager {
 	public UndoableCommand getUndoCommand(int index) {
 		return this.undoCmds.get(index);
 	}
-	
+
 	/**
 	 * @return null if empty
 	 */
-	public UndoableCommand peekUndoCommand() {
+	public UndoableCommand getLastUndoCommand() {
 		return this.undoCmds.peekLast();
 	}
 	
+	@Deprecated
 	/**
 	 * @param index from last
 	 * @return
