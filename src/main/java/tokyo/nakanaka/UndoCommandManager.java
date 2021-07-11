@@ -33,26 +33,24 @@ public class UndoCommandManager {
 		return this.undoCmds.get(this.undoCmds.size() - index - 1);
 	}
 	
-	/**
-	 * @return null if empty
-	 */
-	public UndoableCommand getUndoCommand() {
+	public boolean undo() {
 		UndoableCommand cmd = undoCmds.pollLast();
-		if(cmd != null) {
-			redoCmds.offerFirst(cmd);
+		if(cmd == null) {
+			return false;
 		}
-		return cmd;
+		cmd.undo();	
+		redoCmds.offerFirst(cmd);
+		return true;
 	}
 	
-	/**
-	 * @return null if empty
-	 */
-	public UndoableCommand getRedoCommand() {
+	public boolean redo() {
 		UndoableCommand cmd = redoCmds.pollFirst();
-		if(cmd != null) {
-			undoCmds.offerLast(cmd);
+		if(cmd == null) {
+			return false;
 		}
-		return cmd;
+		cmd.redo();
+		undoCmds.offerLast(cmd);
+		return true;
 	}
 	
 }
