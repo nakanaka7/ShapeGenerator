@@ -13,26 +13,7 @@ public class UndoCommandManager {
 		undoCmds.offerLast(cmd);
 		redoCmds.clear();
 	}
-	
-	public int undoSize() {
-		return this.undoCmds.size();
-	}
-	
-	/**
-	 * @return null if empty
-	 */
-	public UndoableCommand peekUndoCommand() {
-		return this.undoCmds.peekLast();
-	}
-	
-	/**
-	 * @param index from last
-	 * @return
-	 */
-	public UndoableCommand peekUndoCommand(int index) {
-		return this.undoCmds.get(this.undoCmds.size() - index - 1);
-	}
-	
+
 	public boolean undo() {
 		UndoableCommand cmd = undoCmds.pollLast();
 		if(cmd == null) {
@@ -53,4 +34,27 @@ public class UndoCommandManager {
 		return true;
 	}
 	
+	public int undoSize() {
+		return this.undoCmds.size();
+	}
+	
+	public UndoableCommand getUndoCommand(int index) {
+		return this.undoCmds.get(index);
+	}
+	
+	/**
+	 * @return null if empty
+	 */
+	public UndoableCommand peekUndoCommand() {
+		return this.undoCmds.peekLast();
+	}
+	
+	/**
+	 * @param index from last
+	 * @return
+	 */
+	public UndoableCommand peekUndoCommand(int index) {
+		return this.undoCmds.get(this.undoCmds.size() - index - 1);
+	}
+
 }
