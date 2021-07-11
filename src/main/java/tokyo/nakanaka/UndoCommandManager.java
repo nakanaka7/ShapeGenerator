@@ -38,6 +38,9 @@ public class UndoCommandManager {
 		return this.undoCmds.size();
 	}
 	
+	/**
+	 * @return null if empty
+	 */
 	public UndoableCommand getUndoCommand(int index) {
 		return this.undoCmds.get(index);
 	}
@@ -49,13 +52,4 @@ public class UndoCommandManager {
 		return this.undoCmds.peekLast();
 	}
 	
-	@Deprecated
-	/**
-	 * @param index from last
-	 * @return
-	 */
-	public UndoableCommand peekUndoCommand(int index) {
-		return this.undoCmds.get(this.undoCmds.size() - index - 1);
-	}
-
 }
