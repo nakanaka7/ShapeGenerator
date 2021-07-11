@@ -14,6 +14,10 @@ public class UndoCommandManager {
 		redoCmds.clear();
 	}
 	
+	public int undoSize() {
+		return this.undoCmds.size();
+	}
+	
 	/**
 	 * @return null if empty
 	 */
