@@ -6,41 +6,50 @@ import java.util.LinkedList;
 import tokyo.nakanaka.command.UndoableCommand;
 
 public class UndoCommandManager {
-	private Deque<UndoableCommand> undoCmds = new LinkedList<>();
+	private LinkedList<UndoableCommand> undoCmds = new LinkedList<>();
 	private Deque<UndoableCommand> redoCmds = new LinkedList<>();
 	
 	public void add(UndoableCommand cmd) {
 		undoCmds.offerLast(cmd);
 		redoCmds.clear();
 	}
-	
-	/**
-	 * @return null if empty
-	 */
-	public UndoableCommand peekUndoCommand() {
-		return this.undoCmds.peekLast();
-	}
-	
-	/**
-	 * @return null if empty
-	 */
-	public UndoableCommand getUndoCommand() {
+
+	public boolean undo() {
 		UndoableCommand cmd = undoCmds.pollLast();
-		if(cmd != null) {
-			redoCmds.offerFirst(cmd);
+		if(cmd == null) {
+			return false;
 		}
-		return cmd;
+		cmd.undo();	
+		redoCmds.offerFirst(cmd);
+		return true;
+	}
+	
+	public boolean redo() {
+		UndoableCommand cmd = redoCmds.pollFirst();
+		if(cmd == null) {
+			return false;
+		}
+		cmd.redo();
+		undoCmds.offerLast(cmd);
+		return true;
+	}
+	
+	public int undoSize() {
+		return this.undoCmds.size();
 	}
 	
 	/**
 	 * @return null if empty
 	 */
-	public UndoableCommand getRedoCommand() {
-		UndoableCommand cmd = redoCmds.pollFirst();
-		if(cmd != null) {
-			undoCmds.offerLast(cmd);
-		}
-		return cmd;
+	public UndoableCommand getUndoCommand(int index) {
+		return this.undoCmds.get(index);
+	}
+
+	/**
+	 * @return null if empty
+	 */
+	public UndoableCommand getLastUndoCommand() {
+		return this.undoCmds.peekLast();
 	}
 	
 }

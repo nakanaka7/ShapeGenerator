@@ -7,7 +7,6 @@ import java.util.List;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -53,15 +52,12 @@ public class UndoCommandHandler implements CommandHandler{
 			}
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
-		int i = 0;
 		int totalNum = 0;
-		while(i < num) {
-			UndoableCommand undoCmd = undoManager.getUndoCommand();
-			if(undoCmd == null) {
+		for(int i = 0; i < num; ++i) {
+			boolean success = undoManager.undo();
+			if(!success) {
 				break;
 			}
-			undoCmd.undo();
-			++i;
 			++totalNum;
 		}
 		if(totalNum == 0) {
@@ -74,7 +70,7 @@ public class UndoCommandHandler implements CommandHandler{
 		}
 		return;
 	}
-
+	
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {

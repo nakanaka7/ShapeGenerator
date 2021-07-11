@@ -51,7 +51,7 @@ public class MirrorCommandHandler implements CommandHandler {
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
-		UndoableCommand cmd = undoManager.peekUndoCommand();
+		UndoableCommand cmd = undoManager.getLastUndoCommand();
 		if(cmd == null) {
 			logger.print(LogColor.RED + "Generate blocks first");
 			return;

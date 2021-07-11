@@ -15,6 +15,7 @@ public class GenerateCommand implements UndoableCommand{
 	private Block block;
 	private boolean physics;
 	private Map<BlockVector3D, Block> originalBlockMap = new HashMap<>();
+	private boolean havingUndone;
 	
 	public GenerateCommand(Selection sel, Block block, boolean physics) {
 		this.sel = sel;
@@ -28,6 +29,10 @@ public class GenerateCommand implements UndoableCommand{
 	
 	public Block getBlock() {
 		return block;
+	}
+
+	public boolean hasUndone() {
+		return havingUndone;
 	}
 
 	/**
@@ -51,6 +56,7 @@ public class GenerateCommand implements UndoableCommand{
 			BlockVector3D pos = e.getKey();
 			world.setBlock(pos.getX(), pos.getY(), pos.getZ(), e.getValue(), this.physics);
 		}
+		this.havingUndone = true;
 	}
 
 	@Override
@@ -60,6 +66,7 @@ public class GenerateCommand implements UndoableCommand{
 		for(BlockVector3D v : vecSet) {
 			world.setBlock(v.getX(), v.getY(), v.getZ(), this.block, this.physics);
 		}
+		this.havingUndone = false;
 	}
 
 }
