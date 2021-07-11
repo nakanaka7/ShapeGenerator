@@ -33,7 +33,35 @@ public class DelCommandHandler implements CommandHandler {
 		return this.cmdHelp;
 	}
 	
-	@Override
+	public void onCommandNew(Player player, String[] args) {
+		Logger logger = player.getLogger();
+		if(args.length != 0) {
+			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			return;
+		}
+		UndoCommandManager undoManager = player.getUndoCommandManager();
+		GenerateCommand originalCmd = null;
+		for(int i = 0; i < undoManager.undoSize(); ++i) {
+			UndoableCommand cmd = undoManager.peekUndoCommand(i);
+			if(cmd instanceof GenerateCommand) {
+				originalCmd = (GenerateCommand) cmd;
+				break;
+			}else if(cmd instanceof AdjustCommand) {
+				originalCmd = ((AdjustCommand)cmd).getLastCommand();
+				break;
+			}
+		}
+		if(originalCmd == null) {
+			logger.print(LogColor.RED + "Generate blocks first");
+			return;
+		}
+		DeleteCommand deleteCmd = new DeleteCommand(originalCmd);
+		deleteCmd.execute();
+		undoManager.add(deleteCmd);
+		logger.print(LogColor.DARK_AQUA + "Deleted block(s)");
+		return;
+	}
+	
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
