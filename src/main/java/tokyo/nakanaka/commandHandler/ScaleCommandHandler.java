@@ -58,13 +58,21 @@ public class ScaleCommandHandler implements CommandHandler{
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
-		UndoableCommand cmd = undoManager.getLastUndoCommand();
-		GenerateCommand originalCmd;
-		if(cmd instanceof GenerateCommand) {
-			originalCmd = (GenerateCommand) cmd;
-		}else if(cmd instanceof AdjustCommand) {
-			originalCmd = ((AdjustCommand)cmd).getLastCommand();
-		}else {
+		GenerateCommand originalCmd = null;
+		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
+			UndoableCommand cmd = undoManager.getUndoCommand(i);
+			GenerateCommand genrCmd = null;
+			if(cmd instanceof GenerateCommand) {
+				genrCmd = (GenerateCommand) cmd;	
+			}else if(cmd instanceof AdjustCommand) {
+				genrCmd = ((AdjustCommand)cmd).getLastCommand();
+			}
+			if(genrCmd != null && !genrCmd.hasUndone()) {
+				originalCmd = genrCmd;
+				break;
+			}
+		}
+		if(originalCmd == null) {
 			logger.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
@@ -74,7 +82,7 @@ public class ScaleCommandHandler implements CommandHandler{
 		logger.print(LogColor.DARK_AQUA + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
-
+	
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {
