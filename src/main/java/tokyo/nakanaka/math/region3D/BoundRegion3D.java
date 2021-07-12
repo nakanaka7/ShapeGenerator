@@ -74,4 +74,9 @@ public class BoundRegion3D {
 		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
+	public BoundRegion3D changeUpperBoundX(double maxX) {
+		return new BoundRegion3D(this.region, maxX, this.upperBoundY, this.upperBoundZ,
+				this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
+	}
+
 }
