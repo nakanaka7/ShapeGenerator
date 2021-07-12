@@ -2,6 +2,7 @@ package tokyo.nakanaka.selection;
 
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.math.region3D.BlockRegion3D;
 import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.world.World;
 
@@ -18,6 +19,10 @@ public class Selection {
 		
 	public World getWorld() {
 		return world;
+	}
+	
+	public BlockRegion3D getBlockRegion3D() {
+		return this.region.getBlockRegion3D();
 	}
 	
 	public BoundRegion3D getBoundRegion3D() {
