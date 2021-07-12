@@ -8,7 +8,8 @@ public class MaxXCommand implements AdjustCommand {
 	
 	public MaxXCommand(GenerateCommand originalCmd, double maxX, boolean physics){
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getXLimitedSelection(maxX);
+		Selection originalSel = originalCmd.getSelection();
+		Selection sel = originalSel.getXLimitedSelection(maxX);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	
