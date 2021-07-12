@@ -7,7 +7,7 @@ import tokyo.nakanaka.math.region3D.BlockRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 
-public class CuboidBoundRegion {
+public class CuboidBoundRegion implements BoundRegion3D {
 	private Region3D region;
 	private double upperBoundX;
 	private double upperBoundY;
@@ -28,20 +28,11 @@ public class CuboidBoundRegion {
 	}
 	
 	@Override
-	public CuboidBoundRegion clone() {
-		return new CuboidBoundRegion(region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ);
-	}
-
-	public void shift(Vector3D displacement) {
-		this.region = Region3Ds.shift(this.region, displacement);
-		this.upperBoundX += displacement.getX();
-		this.upperBoundY += displacement.getY();
-		this.upperBoundZ += displacement.getZ();
-		this.lowerBoundX += displacement.getX();
-		this.lowerBoundY += displacement.getY();
-		this.lowerBoundZ += displacement.getZ();
+	public Region3D getRegion3D() {
+		return this.region;
 	}
 	
+	@Override
 	public CuboidBoundRegion createShiftedRegion(Vector3D displacement) {
 		Region3D region = Region3Ds.shift(this.region, displacement);
 		double ubx = this.upperBoundX + displacement.getX();
@@ -53,6 +44,7 @@ public class CuboidBoundRegion {
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
+	@Override
 	public CuboidBoundRegion createTransformedRegion(LinearTransformation trans, Vector3D offset) {
 		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
 		newRegion = Region3Ds.linearTransform(newRegion, trans);
@@ -82,6 +74,7 @@ public class CuboidBoundRegion {
 		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
+	@Override
 	public BlockRegion3D toBlockRegion3D() {
 		int ubx = (int)Math.floor(this.upperBoundX);
 		int uby = (int)Math.floor(this.upperBoundY);
@@ -92,6 +85,7 @@ public class CuboidBoundRegion {
 		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
+	@Deprecated
 	public CuboidBoundRegion changeUpperBoundX(double maxX) {
 		return new CuboidBoundRegion(this.region, maxX, this.upperBoundY, this.upperBoundZ,
 				this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
