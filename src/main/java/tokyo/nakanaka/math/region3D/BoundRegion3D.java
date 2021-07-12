@@ -23,7 +23,22 @@ public class BoundRegion3D {
 		this.lowerBoundY = lowerBoundY;
 		this.lowerBoundZ = lowerBoundZ;
 	}
+	
+	@Override
+	public BoundRegion3D clone() {
+		return new BoundRegion3D(region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ);
+	}
 
+	public void shift(Vector3D displacement) {
+		this.region = Region3Ds.shift(this.region, displacement);
+		this.upperBoundX += displacement.getX();
+		this.upperBoundY += displacement.getY();
+		this.upperBoundZ += displacement.getZ();
+		this.lowerBoundX += displacement.getX();
+		this.lowerBoundY += displacement.getY();
+		this.lowerBoundZ += displacement.getZ();
+	}
+	
 	public BoundRegion3D getShiftedRegion(Vector3D displacement) {
 		Region3D region = Region3Ds.shift(this.region, displacement);
 		double ubx = this.upperBoundX + displacement.getX();
