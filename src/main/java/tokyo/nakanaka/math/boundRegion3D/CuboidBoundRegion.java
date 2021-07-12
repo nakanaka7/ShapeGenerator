@@ -1,8 +1,11 @@
-package tokyo.nakanaka.math.region3D;
+package tokyo.nakanaka.math.boundRegion3D;
 
 import static tokyo.nakanaka.MaxMinCalculator.*;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.math.region3D.BlockRegion3D;
+import tokyo.nakanaka.math.region3D.Region3D;
+import tokyo.nakanaka.math.region3D.Region3Ds;
 
 public class CuboidBoundRegion {
 	private Region3D region;

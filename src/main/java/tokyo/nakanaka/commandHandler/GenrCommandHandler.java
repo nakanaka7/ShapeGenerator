@@ -12,7 +12,7 @@ import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.region3D.CuboidBoundRegion;
+import tokyo.nakanaka.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.Selection;
