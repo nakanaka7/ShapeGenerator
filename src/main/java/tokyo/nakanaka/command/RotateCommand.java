@@ -24,7 +24,7 @@ public class RotateCommand implements AdjustCommand{
 		default:
 			return;
 		}
-		Selection sel = originalCmd.getSelection().getTransformedSelection(trans);
+		Selection sel = originalCmd.getSelection().transform(trans);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	

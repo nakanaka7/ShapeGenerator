@@ -33,13 +33,13 @@ public class Selection {
 		return offset;
 	}
 
-	public Selection getShiftedSelection(Vector3D displacement) {
+	public Selection shift(Vector3D displacement) {
 		BoundRegion3D region = this.region.getShiftedRegion(displacement);
 		Vector3D offset = this.offset.add(displacement);
 		return new Selection(world, region, offset);
 	}
 	
-	public Selection getTransformedSelection(LinearTransformation trans) {
+	public Selection transform(LinearTransformation trans) {
 		BoundRegion3D region = this.region.getTransformedRegion(trans, this.offset);
 		return new Selection(this.world, region, this.offset);
 	}

@@ -9,7 +9,7 @@ public class ShiftCommand implements AdjustCommand{
 	
 	public ShiftCommand(GenerateCommand originalCmd, Vector3D displacement, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getShiftedSelection(displacement);
+		Selection sel = originalCmd.getSelection().shift(displacement);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 
