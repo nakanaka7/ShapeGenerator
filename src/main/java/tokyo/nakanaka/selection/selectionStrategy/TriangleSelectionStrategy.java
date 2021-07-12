@@ -10,7 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.math.region3D.CuboidBoundRegion;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Triangle;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -79,7 +79,7 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(RegionBuildingData data) {
+	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
 		Vector3D pos1 = data.getVector3D("pos1");
 		Vector3D pos2 = data.getVector3D("pos2");
 		Vector3D pos3 = data.getVector3D("pos3");
@@ -96,7 +96,7 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX()) - thickness / 2;
 		double lby = min(pos1.getY(), pos2.getY(), pos3.getY()) - thickness / 2;
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ()) - thickness / 2;
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
 }

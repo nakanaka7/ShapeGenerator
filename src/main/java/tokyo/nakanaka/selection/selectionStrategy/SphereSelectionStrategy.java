@@ -8,7 +8,7 @@ import java.util.List;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.math.region3D.CuboidBoundRegion;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.Sphere;
@@ -67,7 +67,7 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(RegionBuildingData data) {
+	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
 		Vector3D center = data.getVector3D("center");
 		Double radius = data.getDouble("radius");
 		if(center == null || radius == null) {
@@ -81,7 +81,7 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 		double lbx = center.getX() - radius;
 		double lby = center.getY() - radius;
 		double lbz = center.getZ() - radius;
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
 }

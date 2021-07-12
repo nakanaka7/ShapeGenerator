@@ -9,7 +9,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.math.region3D.CuboidBoundRegion;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.Torus;
@@ -90,7 +90,7 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(RegionBuildingData data) {
+	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
 		Vector3D center = data.getVector3D("center");
 		Double radiusMain = data.getDouble("radius_main");
 		Double radiusSub = data.getDouble("radius_sub");
@@ -116,7 +116,7 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 		double lbx = center.getX() - radiusMain - radiusSub;
 		double lby = center.getY() - radiusMain - radiusSub;
 		double lbz = center.getZ() - radiusMain - radiusSub;
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
 }

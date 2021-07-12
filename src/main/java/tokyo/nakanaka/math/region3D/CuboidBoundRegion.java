@@ -4,7 +4,7 @@ import static tokyo.nakanaka.MaxMinCalculator.*;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 
-public class BoundRegion3D {
+public class CuboidBoundRegion {
 	private Region3D region;
 	private double upperBoundX;
 	private double upperBoundY;
@@ -13,7 +13,7 @@ public class BoundRegion3D {
 	private double lowerBoundY;
 	private double lowerBoundZ;
 
-	public BoundRegion3D(Region3D region, double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
+	public CuboidBoundRegion(Region3D region, double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
 			double lowerBoundY, double lowerBoundZ) {
 		this.region = region;
 		this.upperBoundX = upperBoundX;
@@ -25,8 +25,8 @@ public class BoundRegion3D {
 	}
 	
 	@Override
-	public BoundRegion3D clone() {
-		return new BoundRegion3D(region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ);
+	public CuboidBoundRegion clone() {
+		return new CuboidBoundRegion(region, upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ);
 	}
 
 	public void shift(Vector3D displacement) {
@@ -39,7 +39,7 @@ public class BoundRegion3D {
 		this.lowerBoundZ += displacement.getZ();
 	}
 	
-	public BoundRegion3D getShiftedRegion(Vector3D displacement) {
+	public CuboidBoundRegion getShiftedRegion(Vector3D displacement) {
 		Region3D region = Region3Ds.shift(this.region, displacement);
 		double ubx = this.upperBoundX + displacement.getX();
 		double uby = this.upperBoundY + displacement.getY();
@@ -47,10 +47,10 @@ public class BoundRegion3D {
 		double lbx = this.lowerBoundX + displacement.getX();
 		double lby = this.lowerBoundY + displacement.getY();
 		double lbz = this.lowerBoundZ + displacement.getZ();
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
-	public BoundRegion3D getTransformedRegion(LinearTransformation trans, Vector3D offset) {
+	public CuboidBoundRegion getTransformedRegion(LinearTransformation trans, Vector3D offset) {
 		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
 		newRegion = Region3Ds.linearTransform(newRegion, trans);
 		newRegion = Region3Ds.shift(newRegion, offset);
@@ -76,7 +76,7 @@ public class BoundRegion3D {
 		double lbx = min(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
 		double lby = min(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
 		double lbz = min(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
-		return new BoundRegion3D(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 	public BlockRegion3D getBlockRegion3D() {
@@ -89,8 +89,8 @@ public class BoundRegion3D {
 		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
-	public BoundRegion3D changeUpperBoundX(double maxX) {
-		return new BoundRegion3D(this.region, maxX, this.upperBoundY, this.upperBoundZ,
+	public CuboidBoundRegion changeUpperBoundX(double maxX) {
+		return new CuboidBoundRegion(this.region, maxX, this.upperBoundY, this.upperBoundZ,
 				this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
 	}
 
