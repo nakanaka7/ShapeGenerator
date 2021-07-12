@@ -123,7 +123,7 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 			break;
 		}
 		CuboidBoundRegion bound = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return bound.getShiftedRegion(center);
+		return bound.createShiftedRegion(center);
 	}
 
 }

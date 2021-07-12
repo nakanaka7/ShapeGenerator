@@ -22,7 +22,7 @@ public class Selection {
 	}
 	
 	public BlockRegion3D getBlockRegion3D() {
-		return this.region.getBlockRegion3D();
+		return this.region.toBlockRegion3D();
 	}
 	
 	public CuboidBoundRegion getBoundRegion3D() {
@@ -34,13 +34,13 @@ public class Selection {
 	}
 
 	public Selection shift(Vector3D displacement) {
-		CuboidBoundRegion region = this.region.getShiftedRegion(displacement);
+		CuboidBoundRegion region = this.region.createShiftedRegion(displacement);
 		Vector3D offset = this.offset.add(displacement);
 		return new Selection(world, region, offset);
 	}
 	
 	public Selection transform(LinearTransformation trans) {
-		CuboidBoundRegion region = this.region.getTransformedRegion(trans, this.offset);
+		CuboidBoundRegion region = this.region.createTransformedRegion(trans, this.offset);
 		return new Selection(this.world, region, this.offset);
 	}
 

@@ -42,7 +42,7 @@ public class CuboidBoundRegion {
 		this.lowerBoundZ += displacement.getZ();
 	}
 	
-	public CuboidBoundRegion getShiftedRegion(Vector3D displacement) {
+	public CuboidBoundRegion createShiftedRegion(Vector3D displacement) {
 		Region3D region = Region3Ds.shift(this.region, displacement);
 		double ubx = this.upperBoundX + displacement.getX();
 		double uby = this.upperBoundY + displacement.getY();
@@ -53,7 +53,7 @@ public class CuboidBoundRegion {
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
-	public CuboidBoundRegion getTransformedRegion(LinearTransformation trans, Vector3D offset) {
+	public CuboidBoundRegion createTransformedRegion(LinearTransformation trans, Vector3D offset) {
 		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
 		newRegion = Region3Ds.linearTransform(newRegion, trans);
 		newRegion = Region3Ds.shift(newRegion, offset);
@@ -82,7 +82,7 @@ public class CuboidBoundRegion {
 		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
-	public BlockRegion3D getBlockRegion3D() {
+	public BlockRegion3D toBlockRegion3D() {
 		int ubx = (int)Math.floor(this.upperBoundX);
 		int uby = (int)Math.floor(this.upperBoundY);
 		int ubz = (int)Math.floor(this.upperBoundZ);
