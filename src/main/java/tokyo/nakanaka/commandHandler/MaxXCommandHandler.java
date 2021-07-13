@@ -39,7 +39,7 @@ public class MaxXCommandHandler implements CommandHandler {
 		}
 		double value;
 		try {
-			value = Double.valueOf(args[1]);
+			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogColor.RED + "Can not parse double");
 			return;
@@ -66,7 +66,7 @@ public class MaxXCommandHandler implements CommandHandler {
 		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, player.getBlockPhysics());
 		maxxCmd.execute();
 		undoManager.add(maxxCmd);
-		logger.print(LogColor.DARK_AQUA + "Set maxX -> " + value + " (relative to the offset)");
+		logger.print(LogColor.DARK_AQUA + "Set maxX -> " + value);
 		return;
 	}
 

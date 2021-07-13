@@ -14,6 +14,7 @@ import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.commandHandler.DelCommandHandler;
 import tokyo.nakanaka.commandHandler.GenrCommandHandler;
+import tokyo.nakanaka.commandHandler.MaxXCommandHandler;
 import tokyo.nakanaka.commandHandler.MirrorCommandHandler;
 import tokyo.nakanaka.commandHandler.SgHelpCommandHandler;
 import tokyo.nakanaka.commandHandler.PhyCommandHandler;
@@ -67,6 +68,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		cmdRepo.register(new ScaleCommandHandler());
 		cmdRepo.register(new MirrorCommandHandler());
 		cmdRepo.register(new RotCommandHandler());
+		cmdRepo.register(new MaxXCommandHandler());
 		cmdRepo.register(new DelCommandHandler());
 		cmdRepo.register(new UndoCommandHandler());
 		cmdRepo.register(new RedoCommandHandler());
