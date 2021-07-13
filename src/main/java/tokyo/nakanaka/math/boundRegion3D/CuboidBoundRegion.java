@@ -44,7 +44,6 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
-	@Override
 	public CuboidBoundRegion createTransformedRegion(LinearTransformation trans, Vector3D offset) {
 		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
 		newRegion = Region3Ds.linearTransform(newRegion, trans);
