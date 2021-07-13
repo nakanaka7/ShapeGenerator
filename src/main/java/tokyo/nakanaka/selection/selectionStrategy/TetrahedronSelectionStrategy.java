@@ -9,7 +9,7 @@ import java.util.List;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Tetrahedron;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -72,7 +72,7 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(RegionBuildingData data) {
+	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
 		Vector3D pos1 = data.getVector3D("pos1");
 		Vector3D pos2 = data.getVector3D("pos2");
 		Vector3D pos3 = data.getVector3D("pos3");
@@ -87,7 +87,7 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX(), pos4.getX());
 		double lby = min(pos1.getY(), pos2.getY(), pos3.getY(), pos4.getY());
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
 }

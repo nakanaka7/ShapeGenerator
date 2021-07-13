@@ -1,5 +1,7 @@
 package tokyo.nakanaka.math;
 
+import tokyo.nakanaka.geometricProperty.Axis;
+
 public class LinearTransformation {
 	public static final LinearTransformation IDENTITY = new LinearTransformation(Matrix3x3.IDENTITY);
 	public static final LinearTransformation X_MIRROR = new LinearTransformation(Matrix3x3.X_MIRROR);
@@ -32,6 +34,32 @@ public class LinearTransformation {
 		return new LinearTransformation(inv);
 	}
 	
+	public static LinearTransformation ofMirror(Axis axis) {
+		switch(axis) {
+		case X:
+			return X_MIRROR;
+		case Y:
+			return Y_MIRROR;
+		case Z:
+			return Z_MIRROR;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+	
+	public static LinearTransformation ofScale(Axis axis, double factor) {
+		switch(axis) {
+		case X:
+			return ofXScale(factor);
+		case Y:
+			return ofYScale(factor);
+		case Z:
+			return ofZScale(factor);
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+	
 	public static LinearTransformation ofXScale(double factor) {
 		return new LinearTransformation(Matrix3x3.ofXScale(factor));
 	}
@@ -42,6 +70,19 @@ public class LinearTransformation {
 	
 	public static LinearTransformation ofZScale(double factor) {
 		return new LinearTransformation(Matrix3x3.ofZScale(factor));
+	}
+	
+	public static LinearTransformation ofRotation(Axis axis, double degree) {
+		switch(axis) {
+		case X:
+			return LinearTransformation.ofXRotation(degree);
+		case Y:
+			return LinearTransformation.ofYRotation(degree);
+		case Z:
+			return LinearTransformation.ofZRotation(degree);
+		default:
+			throw new UnsupportedOperationException();
+		}
 	}
 	
 	public static LinearTransformation ofXRotation(double degree) {

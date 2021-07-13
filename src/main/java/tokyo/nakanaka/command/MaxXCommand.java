@@ -1,15 +1,15 @@
 package tokyo.nakanaka.command;
 
-import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.selection.Selection;
 
-public class MirrorCommand implements AdjustCommand {
+public class MaxXCommand implements AdjustCommand {
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
-	public MirrorCommand(GenerateCommand originalCmd, Axis axis, boolean physics) {
+	public MaxXCommand(GenerateCommand originalCmd, double maxX, boolean physics){
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getMirroedSelection(axis);
+		Selection originalSel = originalCmd.getSelection();
+		Selection sel = originalSel.getXLimitedSelection(maxX);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	
@@ -35,5 +35,5 @@ public class MirrorCommand implements AdjustCommand {
 	public GenerateCommand getLastCommand() {
 		return this.lastCmd;
 	}
-	
+
 }

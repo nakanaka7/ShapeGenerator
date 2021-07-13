@@ -1,7 +1,6 @@
 package tokyo.nakanaka.command;
 
 import tokyo.nakanaka.geometricProperty.Axis;
-import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.selection.Selection;
 
 public class RotateCommand implements AdjustCommand{
@@ -10,21 +9,7 @@ public class RotateCommand implements AdjustCommand{
 	
 	public RotateCommand(GenerateCommand originalCmd, Axis axis, double degree, boolean physics) {
 		this.originalCmd = originalCmd;
-		LinearTransformation trans;
-		switch(axis) {
-		case X:
-			trans = LinearTransformation.ofXRotation(degree);
-			break;
-		case Y:
-			trans = LinearTransformation.ofYRotation(degree);
-			break;
-		case Z:
-			trans = LinearTransformation.ofZRotation(degree);
-			break;
-		default:
-			return;
-		}
-		Selection sel = originalCmd.getSelection().getTransformedSelection(trans);
+		Selection sel = originalCmd.getSelection().getRotatedSelection(axis, degree);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	

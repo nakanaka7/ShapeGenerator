@@ -26,6 +26,17 @@ public class BlockRegion3D{
 		this.lowerBoundZ = lowerBoundZ;
 	}
 	
+	public BlockRegion3D(Region3D region, double upperBoundX, double upperBoundY, double upperBoundZ
+			, double lowerBoundX, double lowerBoundY, double lowerBoundZ) {
+		this.region = region;
+		this.upperBoundX = (int)Math.floor(upperBoundX);
+		this.upperBoundY = (int)Math.floor(upperBoundY);
+		this.upperBoundZ = (int)Math.floor(upperBoundZ);
+		this.lowerBoundX = (int)Math.floor(lowerBoundX);
+		this.lowerBoundY = (int)Math.floor(lowerBoundY);
+		this.lowerBoundZ = (int)Math.floor(lowerBoundZ);
+	}
+	
 	public boolean contains(int x, int y, int z) {
 		if(x < lowerBoundX || upperBoundX < x || y < lowerBoundY || upperBoundY < y || z < lowerBoundZ || upperBoundZ < z) {
 			return false;

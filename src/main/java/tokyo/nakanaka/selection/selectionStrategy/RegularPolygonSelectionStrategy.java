@@ -9,9 +9,9 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.math.region2D.Region2D;
 import tokyo.nakanaka.math.region2D.RegularPolygon;
-import tokyo.nakanaka.math.region3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.math.region3D.Region3Ds;
 import tokyo.nakanaka.math.region3D.ThickenedRegion3D;
@@ -83,7 +83,7 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(RegionBuildingData data) {
+	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
 		Vector3D center = data.getVector3D("center");
 		Double radius = data.getDouble("radius");
 		Integer side = data.getInteger("side");
@@ -122,8 +122,8 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 		default:
 			break;
 		}
-		BoundRegion3D bound = new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
-		return bound.getShiftedRegion(center);
+		CuboidBoundRegion bound = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+		return bound.createShiftedRegion(center);
 	}
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.region3D.BoundRegion3D;
+import tokyo.nakanaka.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.math.region3D.Line;
 import tokyo.nakanaka.math.region3D.Region3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -63,7 +63,7 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(RegionBuildingData data) {
+	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
 		Vector3D pos1 = data.getVector3D("pos1");
 		Vector3D pos2 = data.getVector3D("pos2");
 		Double thickness = data.getDouble("thickness");
@@ -77,7 +77,7 @@ public class LineSelectionStrategy implements SelectionStrategy {
 		double lbx = Math.min(pos1.getX(), pos2.getX()) - thickness;
 		double lby = Math.min(pos1.getY(), pos2.getY()) - thickness;
 		double lbz = Math.min(pos1.getZ(), pos2.getZ()) - thickness;
-		return new BoundRegion3D(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
 }
