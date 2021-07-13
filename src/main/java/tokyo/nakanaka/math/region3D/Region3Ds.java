@@ -40,4 +40,10 @@ public class Region3Ds {
 		return new AffineTransformedRegion3D(original, trans, Vector3D.ORIGIN);
 	}
 	
+	public static Region3D linearTransform(Region3D original, LinearTransformation trans, Vector3D offset) {
+		Region3D region = Region3Ds.shift(original, offset.multiply(-1));
+		region = Region3Ds.linearTransform(region, trans);
+		return Region3Ds.shift(region, offset);
+	}
+	
 }
