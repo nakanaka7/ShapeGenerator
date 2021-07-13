@@ -16,7 +16,7 @@ public class MinXCommand implements AdjustCommand {
 		Selection originalSel = originalCmd.getSelection();
 		BoundRegion3D bound = originalSel.getBoundRegion3D();
 		Region3D region = bound.getRegion3D();
-		double ubx = bound.getUpperBoundY();
+		double ubx = bound.getUpperBoundX();
 		double uby = bound.getUpperBoundY();
 		double ubz = bound.getUpperBoundZ();
 		double lbx = minX;
