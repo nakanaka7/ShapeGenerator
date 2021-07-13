@@ -47,6 +47,64 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	}
 	
 	@Override
+	public BoundRegion3D createScaledRegion(Axis axis, double factor, Vector3D offset) {
+		LinearTransformation trans = LinearTransformation.ofScale(axis, factor);
+		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
+		double ubx = this.upperBoundX;
+		double uby = this.upperBoundY;
+		double ubz = this.upperBoundZ;
+		double lbx = this.lowerBoundX;
+		double lby = this.lowerBoundY;
+		double lbz = this.lowerBoundZ;
+		switch(axis) {
+		case X:
+			ubx = factor * (ubx - offset.getX()) + offset.getX();
+			lbx = factor * (lbx - offset.getX()) + offset.getX();
+			break;
+		case Y:
+			uby = factor * (uby - offset.getY()) + offset.getY();
+			lby = factor * (lby - offset.getY()) + offset.getY();	
+			break;
+		case Z:
+			ubz = factor * (ubz - offset.getZ()) + offset.getZ();
+			lbz = factor * (lbz - offset.getZ()) + offset.getZ();
+			break;
+		default:
+			throw new UnsupportedOperationException();
+		}
+		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+	}
+	
+	@Override
+	public BoundRegion3D createMirroredRegion(Axis axis, Vector3D offset) {
+		LinearTransformation trans = LinearTransformation.ofMirror(axis);
+		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
+		double ubx = this.upperBoundX;
+		double uby = this.upperBoundY;
+		double ubz = this.upperBoundZ;
+		double lbx = this.lowerBoundX;
+		double lby = this.lowerBoundY;
+		double lbz = this.lowerBoundZ;
+		switch(axis) {
+		case X:
+			ubx = - (ubx - offset.getX()) + offset.getX();
+			lbx = - (lbx - offset.getX()) + offset.getX();
+			break;
+		case Y:
+			uby = - (uby - offset.getY()) + offset.getY();
+			lby = - (lby - offset.getY()) + offset.getY();
+			break;
+		case Z:
+			ubz = - (ubz - offset.getZ()) + offset.getZ();
+			lbz = - (lbz - offset.getZ()) + offset.getZ();
+			break;
+		default:
+			throw new UnsupportedOperationException();
+		}
+		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+	}
+	
+	@Override
 	public BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset) {
 		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
 		double cy = (this.upperBoundY + this.lowerBoundY) / 2.0;
