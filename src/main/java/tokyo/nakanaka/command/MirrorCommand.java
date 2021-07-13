@@ -1,7 +1,6 @@
 package tokyo.nakanaka.command;
 
 import tokyo.nakanaka.geometricProperty.Axis;
-import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.selection.Selection;
 
 public class MirrorCommand implements AdjustCommand {
@@ -10,21 +9,7 @@ public class MirrorCommand implements AdjustCommand {
 	
 	public MirrorCommand(GenerateCommand originalCmd, Axis axis, boolean physics) {
 		this.originalCmd = originalCmd;
-		LinearTransformation trans;
-		switch(axis) {
-		case X:
-			trans = LinearTransformation.X_MIRROR;
-			break;
-		case Y:
-			trans = LinearTransformation.Y_MIRROR;
-			break;
-		case Z:
-			trans = LinearTransformation.Z_MIRROR;
-			break;
-		default:
-			return;
-		}
-		Selection sel = originalCmd.getSelection().transform(trans);
+		Selection sel = originalCmd.getSelection().getMirroedSelection(axis);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	

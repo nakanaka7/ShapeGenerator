@@ -1,7 +1,6 @@
 package tokyo.nakanaka.command;
 
 import tokyo.nakanaka.geometricProperty.Axis;
-import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.selection.Selection;
 
 public class ScaleCommand implements AdjustCommand{
@@ -10,21 +9,7 @@ public class ScaleCommand implements AdjustCommand{
 	
 	public ScaleCommand(GenerateCommand originalCmd, Axis axis, double factor, boolean physics) {
 		this.originalCmd = originalCmd;
-		LinearTransformation trans;
-		switch(axis) {
-		case X:
-			trans = LinearTransformation.ofXScale(factor);
-			break;
-		case Y:
-			trans = LinearTransformation.ofYScale(factor);
-			break;
-		case Z:
-			trans = LinearTransformation.ofZScale(factor);
-			break;
-		default:
-			return;
-		}
-		Selection sel = originalCmd.getSelection().transform(trans);
+		Selection sel = originalCmd.getSelection().getScaledSelection(axis, factor);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	
