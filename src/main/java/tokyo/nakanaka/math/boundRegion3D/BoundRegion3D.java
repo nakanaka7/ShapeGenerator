@@ -7,6 +7,12 @@ import tokyo.nakanaka.math.region3D.Region3D;
 
 public interface BoundRegion3D {
 	Region3D getRegion3D();
+	double getUpperBoundX();
+	double getUpperBoundY();
+	double getUpperBoundZ();
+	double getLowerBoundX();
+	double getLowerBoundY();
+	double getLowerBoundZ();
 	BoundRegion3D createShiftedRegion(Vector3D displacement);
 	BoundRegion3D createScaledRegion(Axis axis, double factor, Vector3D offset);
 	BoundRegion3D createMirroredRegion(Axis axis, Vector3D offset);
