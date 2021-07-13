@@ -1,6 +1,7 @@
 package tokyo.nakanaka.math.boundRegion3D;
 
 import tokyo.nakanaka.geometricProperty.Axis;
+import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BlockRegion3D;
 import tokyo.nakanaka.math.region3D.Region3D;
@@ -17,18 +18,24 @@ public class SphereBoundRegion implements BoundRegion3D {
 		this.radius = radius;
 	}
 	
+	@Override
 	public Region3D getRegion3D() {
 		return this.region;
 	}
 	
+	@Override
 	public BoundRegion3D createShiftedRegion(Vector3D displacement) {
 		Region3D newRegion = Region3Ds.shift(this.region, displacement);
 		Vector3D newCenter = this.center.add(displacement);
 		return new SphereBoundRegion(newRegion, newCenter, this.radius);
 	}
 
-	public BoundRegion3D createRotatedRegion(Vector3D offset, Axis axis, double degree) {
-		return null;
+	
+	public BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset) {
+		LinearTransformation trans = LinearTransformation.ofRotation(axis, degree);
+		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
+		Vector3D newCenter = trans.apply(this.center.negate(offset)).add(offset);
+		return new SphereBoundRegion(newRegion, newCenter, this.radius);
 	}
 	
 	
