@@ -34,6 +34,32 @@ public class LinearTransformation {
 		return new LinearTransformation(inv);
 	}
 	
+	public static LinearTransformation ofMirror(Axis axis) {
+		switch(axis) {
+		case X:
+			return X_MIRROR;
+		case Y:
+			return Y_MIRROR;
+		case Z:
+			return Z_MIRROR;
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+	
+	public static LinearTransformation ofScale(Axis axis, double factor) {
+		switch(axis) {
+		case X:
+			return ofXScale(factor);
+		case Y:
+			return ofYScale(factor);
+		case Z:
+			return ofZScale(factor);
+		default:
+			throw new UnsupportedOperationException();
+		}
+	}
+	
 	public static LinearTransformation ofXScale(double factor) {
 		return new LinearTransformation(Matrix3x3.ofXScale(factor));
 	}
