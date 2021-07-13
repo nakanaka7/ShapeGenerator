@@ -30,7 +30,7 @@ public class SphereBoundRegion implements BoundRegion3D {
 		return new SphereBoundRegion(newRegion, newCenter, this.radius);
 	}
 
-	
+	@Override
 	public BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofRotation(axis, degree);
 		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);

@@ -1,6 +1,8 @@
 package tokyo.nakanaka.math.boundRegion3D;
 
 import static tokyo.nakanaka.MaxMinCalculator.*;
+
+import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BlockRegion3D;
@@ -42,6 +44,18 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		double lby = this.lowerBoundY + displacement.getY();
 		double lbz = this.lowerBoundZ + displacement.getZ();
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+	
+	@Override
+	public BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset) {
+		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
+		double cy = (this.upperBoundY + this.lowerBoundY) / 2.0;
+		double cz = (this.upperBoundZ + this.lowerBoundZ) / 2.0;
+		Vector3D center = new Vector3D(cx, cy, cz);
+		Vector3D maxPos = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
+		double radius = maxPos.negate(center).getAbsolute();
+		SphereBoundRegion spbound = new SphereBoundRegion(this.region, center, radius);
+		return spbound.createRotatedRegion(axis, degree, offset);
 	}
 	
 	public CuboidBoundRegion createTransformedRegion(LinearTransformation trans, Vector3D offset) {
