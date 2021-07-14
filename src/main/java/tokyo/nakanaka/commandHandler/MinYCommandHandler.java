@@ -1,5 +1,6 @@
 package tokyo.nakanaka.commandHandler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import tokyo.nakanaka.player.Player;
 
 public class MinYCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("miny")
+			.description("Set min y of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")
 			.build();
 	
@@ -72,8 +74,11 @@ public class MinYCommandHandler implements CommandHandler {
 
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
-		return Arrays.asList("0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0",
-				"5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0", "9.5", "10.0");
+		if(args.length == 1) {
+			return Arrays.asList(String.valueOf(player.getY()));
+		}else {
+			return new ArrayList<>();
+		}
 	}
 	
 }
