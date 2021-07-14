@@ -1,27 +1,31 @@
 package tokyo.nakanaka.selection.selectionStrategy;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import tokyo.nakanaka.selection.SelectionShape;
 
 public class SelectionStrategySource {
+	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
+	
+	public SelectionStrategySource() {
+		strategyMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());
+		strategyMap.put(SelectionShape.SPHERE, new SphereSelectionStrategy());
+		strategyMap.put(SelectionShape.TORUS, new TorusSelectionStrategy());
+		strategyMap.put(SelectionShape.LINE, new LineSelectionStrategy());
+		strategyMap.put(SelectionShape.TRIANGLE, new TriangleSelectionStrategy());
+		strategyMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionStrategy());
+		strategyMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionStrategy());
+	}
+	
 	public SelectionStrategy get(SelectionShape shape) {
-		switch(shape) {
-		case CUBOID:
-			return new CuboidSelectionStrategy();
-		case LINE:
-			return new LineSelectionStrategy();
-		case REGULAR_POLYGON:
-			return new RegularPolygonSelectionStrategy();
-		case SPHERE:
-			return new SphereSelectionStrategy();
-		case TETRAHEDRON:
-			return new TetrahedronSelectionStrategy();
-		case TORUS:
-			return new TorusSelectionStrategy();
-		case TRIANGLE:
-			return new TriangleSelectionStrategy();
-		default:
-			return null;
-		}
+		return this.strategyMap.get(shape);
+	}
+	
+	public List<SelectionShape> getShapeList() {
+		return new ArrayList<>(this.strategyMap.keySet());
 	}
 	
 }
