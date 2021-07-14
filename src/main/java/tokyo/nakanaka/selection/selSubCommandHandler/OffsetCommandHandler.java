@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.commandHandler.BranchCommandHandler;
@@ -37,6 +38,15 @@ public class OffsetCommandHandler implements BranchCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Set offset";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.OPTIONAL, "x", ""));
+		list.add(new ParameterHelp(ParameterType.OPTIONAL, "y", ""));
+		list.add(new ParameterHelp(ParameterType.OPTIONAL, "z", ""));
+		return list;
 	}
 
 	@Override
