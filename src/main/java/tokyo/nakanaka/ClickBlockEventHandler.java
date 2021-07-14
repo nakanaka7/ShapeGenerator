@@ -1,7 +1,5 @@
 package tokyo.nakanaka;
 
-import java.util.Map;
-
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
@@ -10,14 +8,15 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventHandler {
-	private Map<SelectionShape, SelectionStrategy> strategyMap;
+	private SelectionStrategySource selStraSource;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
-	public ClickBlockEventHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
-		this.strategyMap = strategyMap;
+	public ClickBlockEventHandler(SelectionStrategySource selStraSource) {
+		this.selStraSource = selStraSource;
 	}
 
 	public void onLeftClickBlock(Player player, int x, int y, int z) {
@@ -25,7 +24,7 @@ public class ClickBlockEventHandler {
 		World world = player.getWorld();
 		SelectionShape selShape = player.getSelectionShape();
 		SelectionBuildingData selData = player.getSelectionBuildingData();
-		SelectionStrategy selStrategy = this.strategyMap.get(selShape);
+		SelectionStrategy selStrategy = this.selStraSource.get(selShape);
 		if(!world.equals(selData.getWorld())) {
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			selData = new SelectionBuildingData(world, regionData);
@@ -42,7 +41,7 @@ public class ClickBlockEventHandler {
 		World world = player.getWorld();
 		SelectionShape selShape = player.getSelectionShape();
 		SelectionBuildingData selData = player.getSelectionBuildingData();
-		SelectionStrategy selStrategy = this.strategyMap.get(selShape);
+		SelectionStrategy selStrategy = this.selStraSource.get(selShape);
 		if(!world.equals(selData.getWorld())) {
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			selData = new SelectionBuildingData(world, regionData);
