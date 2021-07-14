@@ -20,7 +20,7 @@ public class SelectionStrategySource {
 		case TRIANGLE:
 			return new TriangleSelectionStrategy();
 		default:
-			throw new IllegalArgumentException();
+			return null;
 		}
 	}
 	
