@@ -35,8 +35,8 @@ public class SelCommandHandlerNew implements CommandDirectory {
 	}
 	
 	@Override
-	public List<CommandHandler> getSubList(Player player) {
-		List<CommandHandler> handlerList = new ArrayList<>();
+	public List<CommandEntry> getSubList(Player player) {
+		List<CommandEntry> handlerList = new ArrayList<>();
 		handlerList.add(new ResetCommandHandler(this.selStraSource));
 		handlerList.add(new OffsetCommandHandler());
 		SelectionShape shape = player.getSelectionShape();
