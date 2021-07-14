@@ -2,7 +2,6 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
@@ -14,16 +13,17 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class WandCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp;
-	private Map<SelectionShape, SelectionStrategy> strategyMap;
+	private SelectionStrategySource selStraSource;
 	
-	public WandCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
+	public WandCommandHandler(SelectionStrategySource selStraSource) {
 		this.cmdHelp = new BranchCommandHelp.Builder("wand")
 				.description("Give player a wand")
 				.build();
-		this.strategyMap = strategyMap;
+		this.selStraSource = selStraSource;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class WandCommandHandler implements CommandHandler {
 		HumanPlayer hp = (HumanPlayer) player;
 		hp.giveItem(Item.BLAZE_ROD, 1);
 		SelectionShape shape = player.getSelectionShape();
-		SelectionStrategy strategy = this.strategyMap.get(shape);
+		SelectionStrategy strategy = this.selStraSource.get(shape);
 		Logger logger = player.getLogger();
 		logger.print(LogColor.DARK_AQUA + "Gave wand to " + hp.getName());
 		new SelectionMessenger().printClickDescription(logger, strategy);
