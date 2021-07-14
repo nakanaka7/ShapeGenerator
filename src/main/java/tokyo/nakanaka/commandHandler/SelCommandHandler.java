@@ -139,9 +139,9 @@ public class SelCommandHandler implements CommandHandler {
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
 		if(label.equals("reset")) {
-			return this.resetCmdHandler.onTabComplete(shiftArgs);
+			return this.resetCmdHandler.onTabComplete(player, shiftArgs);
 		}else if(label.equals("offset")) {
-			return this.offsetCmdHandler.onTabComplete(shiftArgs);
+			return this.offsetCmdHandler.onTabComplete(player, shiftArgs);
 		}
 		for(SelSubCommandHandler handler : cmdHandlerList) {
 			if(handler.getLabel().equals(label)) {
