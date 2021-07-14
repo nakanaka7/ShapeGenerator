@@ -12,7 +12,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class SgHelpCommandHandler implements CommandHandler {
+public class SgHelpCommandHandler implements BranchCommandHandler {
 	private SgSubCommandHandlerRepository cmdRepo;
 	private BranchCommandHelp cmdHelp;
 	

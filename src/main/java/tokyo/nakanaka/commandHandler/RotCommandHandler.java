@@ -16,7 +16,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class RotCommandHandler implements CommandHandler{
+public class RotCommandHandler implements BranchCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public RotCommandHandler() {

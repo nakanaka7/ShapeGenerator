@@ -5,7 +5,7 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.player.Player;
 
-public interface CommandHandler {
+public interface BranchCommandHandler {
 	String getLabel();
 	CommandHelp getCommandHelp(Player player);
 	void onCommand(Player player, String[] args);

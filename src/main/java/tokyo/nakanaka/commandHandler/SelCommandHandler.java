@@ -21,7 +21,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandler implements CommandHandler {
+public class SelCommandHandler implements BranchCommandHandler {
 	private SelectionStrategySource selStraSource;
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();

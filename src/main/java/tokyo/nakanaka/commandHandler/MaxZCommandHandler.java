@@ -16,7 +16,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxZCommandHandler implements CommandHandler {
+public class MaxZCommandHandler implements BranchCommandHandler {
 	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxz")
 			.description("Set max z of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")

@@ -16,7 +16,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxYCommandHandler implements CommandHandler {
+public class MaxYCommandHandler implements BranchCommandHandler {
 	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxy")
 			.description("Set max y of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")

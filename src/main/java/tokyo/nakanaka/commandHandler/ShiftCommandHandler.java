@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
-public class ShiftCommandHandler implements CommandHandler{
+public class ShiftCommandHandler implements BranchCommandHandler{
 	private BranchCommandHelp cmdHelp;
 		
 	public ShiftCommandHandler() {

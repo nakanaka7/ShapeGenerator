@@ -11,7 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class UndoCommandHandler implements CommandHandler{
+public class UndoCommandHandler implements BranchCommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public UndoCommandHandler() {

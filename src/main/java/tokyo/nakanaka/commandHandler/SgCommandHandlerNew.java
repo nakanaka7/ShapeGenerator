@@ -8,7 +8,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class SgCommandHandlerNew {
-	private List<CommandHandler> subList = new ArrayList<>();
+	private List<BranchCommandHandler> subList = new ArrayList<>();
 	
 	public SgCommandHandlerNew(BlockCommandArgument blockArg, SelectionStrategySource selStraSource) {
 		this.subList.add(new WandCommandHandler(selStraSource));
@@ -35,7 +35,7 @@ public class SgCommandHandlerNew {
 		return "sg";
 	}
 	
-	public List<CommandHandler> getSubList(Player player) {
+	public List<BranchCommandHandler> getSubList(Player player) {
 		return this.subList;
 	}
 	
