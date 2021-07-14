@@ -10,21 +10,21 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxXCommand;
+import tokyo.nakanaka.command.MinXCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxXCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxx")
-			.description("Set max x of the generated blocks")
+public class MinXCommandHandler implements CommandHandler {
+	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("minx")
+			.description("Set min x of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")
 			.build();
 	
 	@Override
 	public String getLabel() {
-		return "maxx";
+		return "minx";
 	}
 
 	@Override
@@ -65,10 +65,10 @@ public class MaxXCommandHandler implements CommandHandler {
 			logger.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
-		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, player.getBlockPhysics());
-		maxxCmd.execute();
-		undoManager.add(maxxCmd);
-		logger.print(LogColor.DARK_AQUA + "Set maxX -> " + value);
+		MinXCommand minxCmd = new MinXCommand(originalCmd, value, player.getBlockPhysics());
+		minxCmd.execute();
+		undoManager.add(minxCmd);
+		logger.print(LogColor.DARK_AQUA + "Set minX -> " + value);
 		return;
 	}
 
@@ -80,5 +80,4 @@ public class MaxXCommandHandler implements CommandHandler {
 			return new ArrayList<>();
 		}
 	}
-	
 }

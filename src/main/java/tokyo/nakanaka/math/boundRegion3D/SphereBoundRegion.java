@@ -24,6 +24,36 @@ public class SphereBoundRegion implements BoundRegion3D {
 	}
 	
 	@Override
+	public double getUpperBoundX() {
+		return this.center.getX() + this.radius;
+	}
+	
+	@Override
+	public double getUpperBoundY() {
+		return this.center.getY() + this.radius;
+	}
+	
+	@Override
+	public double getUpperBoundZ() {
+		return this.center.getZ() + this.radius;
+	}
+	
+	@Override
+	public double getLowerBoundX() {
+		return this.center.getX() - this.radius;
+	}
+	
+	@Override
+	public double getLowerBoundY() {
+		return this.center.getY() - this.radius;
+	}
+	
+	@Override
+	public double getLowerBoundZ() {
+		return this.center.getZ() - this.radius;
+	}
+	
+	@Override
 	public BoundRegion3D createShiftedRegion(Vector3D displacement) {
 		Region3D newRegion = Region3Ds.shift(this.region, displacement);
 		Vector3D newCenter = this.center.add(displacement);

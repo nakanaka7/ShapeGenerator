@@ -10,21 +10,21 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxXCommand;
+import tokyo.nakanaka.command.MaxZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxXCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxx")
-			.description("Set max x of the generated blocks")
+public class MaxZCommandHandler implements CommandHandler {
+	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxz")
+			.description("Set max z of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")
 			.build();
 	
 	@Override
 	public String getLabel() {
-		return "maxx";
+		return "maxz";
 	}
 
 	@Override
@@ -65,20 +65,19 @@ public class MaxXCommandHandler implements CommandHandler {
 			logger.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
-		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, player.getBlockPhysics());
-		maxxCmd.execute();
-		undoManager.add(maxxCmd);
-		logger.print(LogColor.DARK_AQUA + "Set maxX -> " + value);
+		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, player.getBlockPhysics());
+		maxzCmd.execute();
+		undoManager.add(maxzCmd);
+		logger.print(LogColor.DARK_AQUA + "Set maxY -> " + value);
 		return;
 	}
 
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(player.getX()));
+			return Arrays.asList(String.valueOf(player.getZ()));
 		}else {
 			return new ArrayList<>();
 		}
 	}
-	
 }

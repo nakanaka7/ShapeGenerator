@@ -35,6 +35,36 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	}
 	
 	@Override
+	public double getUpperBoundX() {
+		return upperBoundX;
+	}
+	
+	@Override
+	public double getUpperBoundY() {
+		return upperBoundY;
+	}
+	
+	@Override
+	public double getUpperBoundZ() {
+		return upperBoundZ;
+	}
+	
+	@Override
+	public double getLowerBoundX() {
+		return lowerBoundX;
+	}
+	
+	@Override
+	public double getLowerBoundY() {
+		return lowerBoundY;
+	}
+	
+	@Override
+	public double getLowerBoundZ() {
+		return lowerBoundZ;
+	}
+
+	@Override
 	public CuboidBoundRegion createShiftedRegion(Vector3D displacement) {
 		Region3D region = Region3Ds.shift(this.region, displacement);
 		double ubx = this.upperBoundX + displacement.getX();
