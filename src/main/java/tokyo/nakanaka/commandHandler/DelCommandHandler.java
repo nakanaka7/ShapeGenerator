@@ -36,6 +36,11 @@ public class DelCommandHandler implements BranchCommandHandler {
 		return this.cmdHelp;
 	}
 	
+	@Override
+	public String getDescription() {
+		return "Delete the generated blocks";
+	}
+	
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {

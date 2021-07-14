@@ -26,6 +26,11 @@ public class MinYCommandHandler implements BranchCommandHandler {
 	public String getLabel() {
 		return "miny";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Set min y of the generated blocks";
+	}
 
 	@Override
 	public CommandHelp getCommandHelp(Player player) {
@@ -80,5 +85,5 @@ public class MinYCommandHandler implements BranchCommandHandler {
 			return new ArrayList<>();
 		}
 	}
-	
+
 }

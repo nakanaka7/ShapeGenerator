@@ -32,6 +32,11 @@ public class ScaleCommandHandler implements BranchCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Change scale of the generated blocks";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

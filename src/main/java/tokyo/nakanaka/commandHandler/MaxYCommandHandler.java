@@ -28,6 +28,11 @@ public class MaxYCommandHandler implements BranchCommandHandler {
 	}
 
 	@Override
+	public String getDescription() {
+		return "Set max y of the generated blocks";
+	}
+	
+	@Override
 	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
@@ -80,5 +85,5 @@ public class MaxYCommandHandler implements BranchCommandHandler {
 			return new ArrayList<>();
 		}
 	}
-	
+
 }

@@ -28,6 +28,11 @@ public class MaxZCommandHandler implements BranchCommandHandler {
 	}
 
 	@Override
+	public String getDescription() {
+		return "Set max z of the generated blocks";
+	}
+	
+	@Override
 	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
@@ -80,4 +85,5 @@ public class MaxZCommandHandler implements BranchCommandHandler {
 			return new ArrayList<>();
 		}
 	}
+
 }

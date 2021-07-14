@@ -30,6 +30,11 @@ public class SgHelpCommandHandler implements BranchCommandHandler {
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Print command help";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
@@ -111,5 +116,5 @@ public class SgHelpCommandHandler implements BranchCommandHandler {
 		RootCommandHelp help = this.getSgCommandHelp(player);
 		return onTabComplete(help, player, args);
 	}
-	
+
 }

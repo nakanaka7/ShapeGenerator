@@ -27,6 +27,11 @@ public class RedoCommandHandler implements BranchCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Redo block changing command(s)";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

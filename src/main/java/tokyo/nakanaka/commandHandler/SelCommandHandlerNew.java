@@ -70,6 +70,11 @@ public class SelCommandHandlerNew implements RootCommandHandler {
 				public List<String> onTabComplete(Player player, String[] args) {
 					return selSubCmdHandler.onTabComplete(args);
 				}
+
+				@Override
+				public String getDescription() {
+					return selSubCmdHandler.getCommandHelp().getDescription();
+				}
 			};
 			handlerList.add(cmdHandler);
 		}

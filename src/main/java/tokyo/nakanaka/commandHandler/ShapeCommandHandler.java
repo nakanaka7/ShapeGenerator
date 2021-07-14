@@ -39,6 +39,11 @@ public class ShapeCommandHandler implements BranchCommandHandler {
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Set selection shape";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

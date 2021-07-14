@@ -27,6 +27,11 @@ public class UndoCommandHandler implements BranchCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Undo block changing command(s)";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

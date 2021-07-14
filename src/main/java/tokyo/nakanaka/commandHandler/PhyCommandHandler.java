@@ -26,6 +26,12 @@ public class PhyCommandHandler implements BranchCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Toggle physics option for generating blocks";
+	}
+
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

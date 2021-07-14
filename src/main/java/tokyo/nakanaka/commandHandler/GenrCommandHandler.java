@@ -39,6 +39,11 @@ public class GenrCommandHandler implements BranchCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Generate blocks in the selection";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

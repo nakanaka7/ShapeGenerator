@@ -26,6 +26,11 @@ public class MinZCommandHandler implements BranchCommandHandler {
 	public String getLabel() {
 		return "minz";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Set min z of the generated blocks";
+	}
 
 	@Override
 	public CommandHelp getCommandHelp(Player player) {
@@ -80,4 +85,5 @@ public class MinZCommandHandler implements BranchCommandHandler {
 			return new ArrayList<>();
 		}
 	}
+
 }

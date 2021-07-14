@@ -32,6 +32,11 @@ public class MirrorCommandHandler implements BranchCommandHandler {
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Mirror the generated blocks";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

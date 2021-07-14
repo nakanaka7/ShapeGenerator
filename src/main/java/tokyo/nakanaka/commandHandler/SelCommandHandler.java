@@ -35,6 +35,11 @@ public class SelCommandHandler implements BranchCommandHandler {
 	public String getLabel() {
 		return "sel";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Specify the selection";
+	}
 
 	@Override
 	public CommandHelp getCommandHelp(Player player) {
@@ -150,5 +155,5 @@ public class SelCommandHandler implements BranchCommandHandler {
 		}
 		return new ArrayList<>();
 	}
-	
+
 }

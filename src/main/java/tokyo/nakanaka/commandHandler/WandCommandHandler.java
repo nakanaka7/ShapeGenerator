@@ -32,6 +32,11 @@ public class WandCommandHandler implements BranchCommandHandler {
 	}
 
 	@Override
+	public String getDescription() {
+		return "Give player a wand";
+	}
+	
+	@Override
 	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}

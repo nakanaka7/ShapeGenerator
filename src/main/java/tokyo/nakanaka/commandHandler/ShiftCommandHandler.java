@@ -34,6 +34,11 @@ public class ShiftCommandHandler implements BranchCommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Shift the generated blocks";
+	}
+	
+	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
 	}
@@ -101,5 +106,5 @@ public class ShiftCommandHandler implements BranchCommandHandler{
 			return Arrays.asList();
 		}
 	}
-
+	
 }
