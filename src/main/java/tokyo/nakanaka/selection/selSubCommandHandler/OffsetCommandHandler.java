@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
+import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
@@ -14,7 +16,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 
-public class OffsetCommandHandler {
+public class OffsetCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
@@ -25,6 +27,16 @@ public class OffsetCommandHandler {
 				.addParameter(ParameterType.OPTIONAL, "y")
 				.addParameter(ParameterType.OPTIONAL, "z")
 				.build();
+	}
+	
+	@Override
+	public String getLabel() {
+		return "offset";
+	}
+
+	@Override
+	public CommandHelp getCommandHelp(Player player) {
+		return this.cmdHelp;
 	}
 	
 	public BranchCommandHelp getCommandHelp() {
@@ -63,11 +75,12 @@ public class OffsetCommandHandler {
 		this.selMessenger.printSelection(logger, player.getSelectionShape(), selData, "");
 	}
 	
-	public List<String> onTabComplete(String[] args) {
+	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length <= 3) {
 			return Arrays.asList("~");
 		}else {
 			return new ArrayList<>();
 		}
 	}
+
 }

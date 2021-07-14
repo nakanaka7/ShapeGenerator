@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -14,7 +16,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
-public class ResetCommandHandler {
+public class ResetCommandHandler implements CommandHandler {
 	private SelectionStrategySource selStraSource;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	private BranchCommandHelp cmdHelp;
@@ -24,6 +26,16 @@ public class ResetCommandHandler {
 		this.cmdHelp = new BranchCommandHelp.Builder("reset")
 				.description("Reset the selection")
 				.build();
+	}
+	
+	@Override
+	public String getLabel() {
+		return "reset";
+	}
+
+	@Override
+	public CommandHelp getCommandHelp(Player player) {
+		return this.cmdHelp;
 	}
 	
 	public BranchCommandHelp getCommandHelp() {
@@ -46,7 +58,8 @@ public class ResetCommandHandler {
 		return;
 	}
 	
-	public List<String> onTabComplete(String[] args) {
+	public List<String> onTabComplete(Player player, String[] args) {
 		return new ArrayList<>();
 	}
+
 }
