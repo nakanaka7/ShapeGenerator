@@ -3,13 +3,13 @@ package tokyo.nakanaka;
 import java.util.List;
 
 import tokyo.nakanaka.commandHandler.BranchCommandHandler;
-import tokyo.nakanaka.commandHandler.RootCommandHandler;
+import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.player.Player;
 
 public class CommandHandleExecutor {
-	private RootCommandHandler root;
+	private CommandDirectory root;
 	
-	public CommandHandleExecutor(RootCommandHandler root) {
+	public CommandHandleExecutor(CommandDirectory root) {
 		this.root = root;
 	}
 

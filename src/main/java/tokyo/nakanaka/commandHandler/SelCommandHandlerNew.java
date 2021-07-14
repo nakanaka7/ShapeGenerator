@@ -17,7 +17,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandlerNew implements RootCommandHandler {
+public class SelCommandHandlerNew implements CommandDirectory {
 	private SelectionStrategySource selStraSource;
 	
 	public SelCommandHandlerNew(SelectionStrategySource selStraSource) {

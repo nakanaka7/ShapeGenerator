@@ -7,7 +7,7 @@ import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
-public class SgCommandHandlerNew implements RootCommandHandler {
+public class SgCommandHandlerNew implements CommandDirectory {
 	private List<BranchCommandHandler> subList = new ArrayList<>();
 	
 	@Override
