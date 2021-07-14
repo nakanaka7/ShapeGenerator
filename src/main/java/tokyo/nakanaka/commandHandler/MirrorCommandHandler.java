@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MirrorCommandHandler implements BranchCommandHandler {
+public class MirrorCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp;
 	
 	public MirrorCommandHandler() {

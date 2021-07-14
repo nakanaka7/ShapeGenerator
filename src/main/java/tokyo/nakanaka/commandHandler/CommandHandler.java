@@ -6,7 +6,7 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.player.Player;
 
-public interface BranchCommandHandler extends CommandEntry {
+public interface CommandHandler extends CommandEntry {
 	String getLabel();
 	String getDescription();
 	List<ParameterHelp> getParameterHelpList();

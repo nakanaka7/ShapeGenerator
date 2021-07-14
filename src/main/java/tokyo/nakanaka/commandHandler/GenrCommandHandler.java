@@ -20,7 +20,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
-public class GenrCommandHandler implements BranchCommandHandler{
+public class GenrCommandHandler implements CommandHandler{
 	private BlockCommandArgument blockArg;
 	private SelectionStrategySource selStraSource;
 	private BranchCommandHelp cmdHelp;

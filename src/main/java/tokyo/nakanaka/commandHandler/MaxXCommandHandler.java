@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxXCommandHandler implements BranchCommandHandler {
+public class MaxXCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxx")
 			.description("Set max x of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")

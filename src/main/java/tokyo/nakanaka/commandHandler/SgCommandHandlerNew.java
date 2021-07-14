@@ -8,7 +8,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class SgCommandHandlerNew implements CommandDirectory {
-	private List<BranchCommandHandler> subList = new ArrayList<>();
+	private List<CommandHandler> subList = new ArrayList<>();
 	
 	@Override
 	public String getDescription() {
@@ -42,7 +42,7 @@ public class SgCommandHandlerNew implements CommandDirectory {
 	}
 	
 	@Override
-	public List<BranchCommandHandler> getSubList(Player player) {
+	public List<CommandHandler> getSubList(Player player) {
 		return this.subList;
 	}
 

@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MinZCommandHandler implements BranchCommandHandler {
+public class MinZCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("minz")
 			.description("Set min z of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")

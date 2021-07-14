@@ -35,15 +35,15 @@ public class SelCommandHandlerNew implements CommandDirectory {
 	}
 	
 	@Override
-	public List<BranchCommandHandler> getSubList(Player player) {
-		List<BranchCommandHandler> handlerList = new ArrayList<>();
+	public List<CommandHandler> getSubList(Player player) {
+		List<CommandHandler> handlerList = new ArrayList<>();
 		handlerList.add(new ResetCommandHandler(this.selStraSource));
 		handlerList.add(new OffsetCommandHandler());
 		SelectionShape shape = player.getSelectionShape();
 		SelectionStrategy strategy = this.selStraSource.get(shape);
 		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 		for(SelSubCommandHandler selSubCmdHandler : cmdHandlerList) {
-			BranchCommandHandler cmdHandler = new BranchCommandHandler() {
+			CommandHandler cmdHandler = new CommandHandler() {
 				@Override
 				public String getLabel() {
 					return selSubCmdHandler.getLabel();

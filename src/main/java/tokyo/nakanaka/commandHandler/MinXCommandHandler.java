@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MinXCommandHandler implements BranchCommandHandler {
+public class MinXCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("minx")
 			.description("Set min x of the generated blocks")
 			.addParameter(ParameterType.REQUIRED, "value")

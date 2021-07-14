@@ -9,7 +9,7 @@ import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
-import tokyo.nakanaka.commandHandler.BranchCommandHandler;
+import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
@@ -17,7 +17,7 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 
-public class OffsetCommandHandler implements BranchCommandHandler {
+public class OffsetCommandHandler implements CommandHandler {
 	private BranchCommandHelp cmdHelp;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	

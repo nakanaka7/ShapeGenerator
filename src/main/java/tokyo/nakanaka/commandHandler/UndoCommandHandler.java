@@ -12,7 +12,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class UndoCommandHandler implements BranchCommandHandler{
+public class UndoCommandHandler implements CommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public UndoCommandHandler() {

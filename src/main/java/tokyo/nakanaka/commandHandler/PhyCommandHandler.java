@@ -11,7 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class PhyCommandHandler implements BranchCommandHandler{
+public class PhyCommandHandler implements CommandHandler{
 	private BranchCommandHelp cmdHelp;
 	
 	public PhyCommandHandler() {

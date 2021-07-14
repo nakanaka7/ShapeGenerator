@@ -2,7 +2,7 @@ package tokyo.nakanaka;
 
 import java.util.List;
 
-import tokyo.nakanaka.commandHandler.BranchCommandHandler;
+import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.player.Player;
 
@@ -20,7 +20,7 @@ public class CommandHandleExecutor {
 		}
 		String subLabel = args[0];
 		String[] shiftArg = new String[args.length - 1];
-		List<BranchCommandHandler> subList = this.root.getSubList(player);
+		List<CommandHandler> subList = this.root.getSubList(player);
 		
 	}
 	
