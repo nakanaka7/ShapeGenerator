@@ -33,6 +33,11 @@ public class OffsetCommandHandler implements BranchCommandHandler {
 	public String getLabel() {
 		return "offset";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Set offset";
+	}
 
 	@Override
 	public CommandHelp getCommandHelp(Player player) {

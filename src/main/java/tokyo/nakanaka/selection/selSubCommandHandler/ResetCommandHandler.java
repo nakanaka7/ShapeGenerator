@@ -32,6 +32,11 @@ public class ResetCommandHandler implements BranchCommandHandler {
 	public String getLabel() {
 		return "reset";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Reset the selection";
+	}
 
 	@Override
 	public CommandHelp getCommandHelp(Player player) {
