@@ -11,6 +11,12 @@ public class ParameterHelp {
 		this.description = description;
 	}
 
+	public ParameterHelp(ParameterType type, String label, String description) {
+		this.type = type;
+		this.labels = new String[] {label};
+		this.description = description;
+	}
+	
 	public ParameterType getType() {
 		return type;
 	}
