@@ -7,8 +7,13 @@ import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
-public class SgCommandHandlerNew {
+public class SgCommandHandlerNew implements RootCommandHandler {
 	private List<BranchCommandHandler> subList = new ArrayList<>();
+	
+	@Override
+	public String getDescription() {
+		return "Root command of ShapeGenerator";
+	}
 	
 	public SgCommandHandlerNew(BlockCommandArgument blockArg, SelectionStrategySource selStraSource) {
 		this.subList.add(new WandCommandHandler(selStraSource));
@@ -31,12 +36,14 @@ public class SgCommandHandlerNew {
 		this.subList.add(new RedoCommandHandler());
 	}
 	
+	@Override
 	public String getLabel() {
 		return "sg";
 	}
 	
+	@Override
 	public List<BranchCommandHandler> getSubList(Player player) {
 		return this.subList;
 	}
-	
+
 }

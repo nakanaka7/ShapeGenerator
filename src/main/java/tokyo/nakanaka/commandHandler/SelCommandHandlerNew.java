@@ -16,17 +16,24 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandlerNew {
+public class SelCommandHandlerNew implements RootCommandHandler {
 	private SelectionStrategySource selStraSource;
 	
 	public SelCommandHandlerNew(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
 	}
 
+	@Override
 	public String getLabel() {
 		return "sel";
 	}
 	
+	@Override
+	public String getDescription() {
+		return "Specify the selection";
+	}
+	
+	@Override
 	public List<BranchCommandHandler> getSubList(Player player) {
 		List<BranchCommandHandler> handlerList = new ArrayList<>();
 		handlerList.add(new ResetCommandHandler(this.selStraSource));
@@ -68,5 +75,5 @@ public class SelCommandHandlerNew {
 		}
 		return handlerList;
 	}
-	
+
 }
