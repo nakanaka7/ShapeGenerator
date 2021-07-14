@@ -5,6 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commandHandler.BranchCommandHandler;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -36,6 +37,11 @@ public class ResetCommandHandler implements BranchCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Reset the selection";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		return new ArrayList<>();
 	}
 
 	@Override
