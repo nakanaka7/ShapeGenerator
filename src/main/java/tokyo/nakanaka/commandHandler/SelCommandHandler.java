@@ -5,6 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -39,6 +40,12 @@ public class SelCommandHandler implements BranchCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Specify the selection";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		return list;
 	}
 
 	@Override

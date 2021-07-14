@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -29,6 +30,13 @@ public class UndoCommandHandler implements BranchCommandHandler{
 	@Override
 	public String getDescription() {
 		return "Undo block changing command(s)";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.OPTIONAL, "number", ""));
+		return list;
 	}
 	
 	@Override

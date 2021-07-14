@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -74,6 +75,11 @@ public class SelCommandHandlerNew implements RootCommandHandler {
 				@Override
 				public String getDescription() {
 					return selSubCmdHandler.getCommandHelp().getDescription();
+				}
+
+				@Override
+				public List<ParameterHelp> getParameterHelpList() {
+					return new ArrayList<>();
 				}
 			};
 			handlerList.add(cmdHandler);

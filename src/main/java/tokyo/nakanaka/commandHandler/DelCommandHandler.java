@@ -7,6 +7,7 @@ import java.util.List;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
@@ -29,6 +30,13 @@ public class DelCommandHandler implements BranchCommandHandler {
 	@Override
 	public String getLabel() {
 		return "del";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.OPTIONAL, "number", ""));
+		return list;
 	}
 	
 	@Override
@@ -100,5 +108,5 @@ public class DelCommandHandler implements BranchCommandHandler {
 		}
 		return new ArrayList<>();
 	}
-
+	
 }

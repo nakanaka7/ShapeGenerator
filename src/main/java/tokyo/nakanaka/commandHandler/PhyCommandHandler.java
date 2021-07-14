@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -30,6 +31,12 @@ public class PhyCommandHandler implements BranchCommandHandler{
 		return "Toggle physics option for generating blocks";
 	}
 
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"true", "false"}, ""));
+		return list;
+	}
 	
 	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -34,6 +35,14 @@ public class ScaleCommandHandler implements BranchCommandHandler{
 	@Override
 	public String getDescription() {
 		return "Change scale of the generated blocks";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"x", "y", "z"}, ""));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "factor", ""));
+		return list;
 	}
 	
 	@Override

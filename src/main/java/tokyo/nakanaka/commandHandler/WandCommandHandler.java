@@ -6,6 +6,7 @@ import java.util.List;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.HumanPlayer;
@@ -34,6 +35,11 @@ public class WandCommandHandler implements BranchCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Give player a wand";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		return new ArrayList<>();
 	}
 	
 	@Override
