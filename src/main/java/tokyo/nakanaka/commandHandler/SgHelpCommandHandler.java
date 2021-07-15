@@ -47,13 +47,21 @@ public class SgHelpCommandHandler implements CommandHandler {
 		return this.cmdHelp;
 	}
 	
+	private SgSubCommandHandlerRepository getCommandRepository() {
+		SgSubCommandHandlerRepository cmdRepo = new SgSubCommandHandlerRepository();
+		for(CommandEntry cmdEntry : this.sgCmdHandler.getSubList(null)) {
+			cmdRepo.register((CommandHandler)cmdEntry);
+		}
+		return cmdRepo;
+	}
+	
 	private RootCommandHelp getSgCommandHelp(Player player) {
 		RootCommandHelp rootCmdHelp = new RootCommandHelp.Builder("sg")
 				.description("Root command of ShapeGenerator")
 				.build();
-		List<String> subLabelList = this.sgCmdHandler.getCommandRepository().getAliases();
+		List<String> subLabelList = this.getCommandRepository().getAliases();
 		for(String subLabel : subLabelList) {
-			rootCmdHelp.register(this.sgCmdHandler.getCommandRepository().findBy(subLabel).getCommandHelp(player));
+			rootCmdHelp.register(this.getCommandRepository().findBy(subLabel).getCommandHelp(player));
 		}
 		return rootCmdHelp;
 	}
