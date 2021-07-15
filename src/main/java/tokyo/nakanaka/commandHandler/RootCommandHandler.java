@@ -2,54 +2,60 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RootCommandHandler {
-	private SgCommandDirectory sgCmdHandler;
+	private CommandEntry cmdEntry;
 
-	public RootCommandHandler(SgCommandDirectory sgCmdHandler) {
-		this.sgCmdHandler = sgCmdHandler;
-	}
-	
-	private SgSubCommandHandlerRepository getCommandRepository() {
-		SgSubCommandHandlerRepository cmdRepo = new SgSubCommandHandlerRepository();
-		for(CommandEntry cmdEntry : this.sgCmdHandler.getSubList(null)) {
-			cmdRepo.register((CommandHandler)cmdEntry);
-		}
-		return cmdRepo;
+	public RootCommandHandler(CommandEntry cmdEntry) {
+		this.cmdEntry = cmdEntry;
 	}
 	
 	public void onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
-		String helpMsg = "See help by " + LogColor.GOLD + "/sg help";
-		if(args.length == 0) {
-			logger.print(helpMsg);
-			return;
+		if(cmdEntry instanceof CommandHandler) {
+			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
+			cmdHandler.onCommand(player, args);
+		}else if(cmdEntry instanceof CommandDirectory) {
+			CommandDirectory cmdDirectory = (CommandDirectory)cmdEntry;
+			List<CommandEntry> subEntryList = cmdDirectory.getSubList(player);
+			String subLabel = args[0];
+			String[] subArgs = new String[args.length - 1];
+			System.arraycopy(args, 1, subArgs, 0, args.length - 1);
+			for(CommandEntry subEntry : subEntryList) {
+				if(subEntry.getLabel().equals(subLabel)) {
+					new RootCommandHandler(subEntry).onCommand(player, subArgs);
+					return;
+				}
+			}
+			Logger logger = player.getLogger();
+			logger.print(LogColor.RED + "Unkown command");
 		}
-		String label = args[0];
-		String[] shiftArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
-		CommandHandler cmdHandler = this.getCommandRepository().findBy(label);
-		if(cmdHandler == null) {
-			logger.print(helpMsg);
-			return;
-		}
-		cmdHandler.onCommand(player, shiftArgs);
 	}
-	
+
 	public List<String> onTabComplete(Player player, String[] args){
-		if(args.length == 1) {
-			return new ArrayList<>(this.getCommandRepository().getAliases());
-		}
-		String label = args[0];
-		String[] shiftArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
-		CommandHandler cmdHandler = this.getCommandRepository().findBy(label);
-		if(cmdHandler != null) {
-			return cmdHandler.onTabComplete(player, shiftArgs);
+		if(cmdEntry instanceof CommandHandler) {
+			return ((CommandHandler)cmdEntry).onTabComplete(player, args);
+		}else if(cmdEntry instanceof CommandDirectory) {
+			CommandDirectory cmdDirectory = (CommandDirectory)cmdEntry;
+			List<CommandEntry> subEntryList = cmdDirectory.getSubList(player);
+			String subLabel = args[0];
+			String[] subArgs = new String[args.length - 1];
+			System.arraycopy(args, 1, subArgs, 0, args.length - 1);
+			if(args.length == 1) {
+				return subEntryList.stream()
+						.map(s-> s.getLabel())
+						.collect(Collectors.toList());
+			}
+			for(CommandEntry subEntry : subEntryList) {
+				if(subEntry.getLabel().equals(subLabel)) {
+					return new RootCommandHandler(subEntry).onTabComplete(player, subArgs);
+				}
+			}
+			return new ArrayList<>();
 		}else {
 			return new ArrayList<>();
 		}
