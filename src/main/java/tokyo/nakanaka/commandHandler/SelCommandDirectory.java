@@ -17,10 +17,10 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
-public class SelCommandHandlerNew implements CommandDirectory {
+public class SelCommandDirectory implements CommandDirectory {
 	private SelectionStrategySource selStraSource;
 	
-	public SelCommandHandlerNew(SelectionStrategySource selStraSource) {
+	public SelCommandDirectory(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
 	}
 
