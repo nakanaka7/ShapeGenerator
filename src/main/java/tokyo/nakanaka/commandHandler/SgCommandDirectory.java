@@ -9,10 +9,10 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
-public class SgCommandHandler implements CommandDirectory {
+public class SgCommandDirectory implements CommandDirectory {
 	private List<CommandEntry> subList = new ArrayList<>();
 	
-	public SgCommandHandler(BlockCommandArgument blockArg, SelectionStrategySource selStraSource) {
+	public SgCommandDirectory(BlockCommandArgument blockArg, SelectionStrategySource selStraSource) {
 		subList.add(new SgHelpCommandHandler(this));
 		subList.add(new WandCommandHandler(selStraSource));
 		subList.add(new ShapeCommandHandler(selStraSource));

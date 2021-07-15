@@ -11,7 +11,7 @@ import tokyo.nakanaka.ClickBlockEventHandler;
 import tokyo.nakanaka.CommandLine;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.commandHandler.RootCommandHandler;
-import tokyo.nakanaka.commandHandler.SgCommandHandler;
+import tokyo.nakanaka.commandHandler.SgCommandDirectory;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.player.PlayerRepository;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
@@ -25,7 +25,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		SelectionStrategySource selStraSource = new SelectionStrategySource();
-		SgCommandHandler sgCmdHandler = new SgCommandHandler(new BukkitBlockArgument(), selStraSource);	
+		SgCommandDirectory sgCmdHandler = new SgCommandDirectory(new BukkitBlockArgument(), selStraSource);	
 		this.rootCmdHandler = new RootCommandHandler(sgCmdHandler);
 		PluginManager plManager = getServer().getPluginManager();
 		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(selStraSource);

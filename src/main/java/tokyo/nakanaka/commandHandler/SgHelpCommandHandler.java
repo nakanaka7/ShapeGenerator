@@ -14,10 +14,10 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class SgHelpCommandHandler implements CommandHandler {
-	private SgCommandHandler sgCmdHandler;
+	private SgCommandDirectory sgCmdHandler;
 	private BranchCommandHelp cmdHelp;
 	
-	public SgHelpCommandHandler(SgCommandHandler sgCmdHandler) {
+	public SgHelpCommandHandler(SgCommandDirectory sgCmdHandler) {
 		this.sgCmdHandler = sgCmdHandler;
 		this.cmdHelp = new BranchCommandHelp.Builder("help")
 				.description("Print command help")

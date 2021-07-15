@@ -8,9 +8,9 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RootCommandHandler {
-	private SgCommandHandler sgCmdHandler;
+	private SgCommandDirectory sgCmdHandler;
 
-	public RootCommandHandler(SgCommandHandler sgCmdHandler) {
+	public RootCommandHandler(SgCommandDirectory sgCmdHandler) {
 		this.sgCmdHandler = sgCmdHandler;
 	}
 	
