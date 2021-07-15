@@ -14,17 +14,17 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class SgHelpCommandHandler implements CommandHandler {
-	private SgSubCommandHandlerRepository cmdRepo;
+	private SgCommandHandler sgCmdHandler;
 	private BranchCommandHelp cmdHelp;
 	
-	public SgHelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
-		this.cmdRepo = cmdRepo;
+	public SgHelpCommandHandler(SgCommandHandler sgCmdHandler) {
+		this.sgCmdHandler = sgCmdHandler;
 		this.cmdHelp = new BranchCommandHelp.Builder("help")
 				.description("Print command help")
 				.addParameter(ParameterType.OPTIONAL, "subcommand")
 				.build();
 	}
-
+	
 	@Override
 	public String getLabel() {
 		return "help";
@@ -51,9 +51,9 @@ public class SgHelpCommandHandler implements CommandHandler {
 		RootCommandHelp rootCmdHelp = new RootCommandHelp.Builder("sg")
 				.description("Root command of ShapeGenerator")
 				.build();
-		List<String> subLabelList = cmdRepo.getAliases();
+		List<String> subLabelList = this.sgCmdHandler.getCommandRepository().getAliases();
 		for(String subLabel : subLabelList) {
-			rootCmdHelp.register(this.cmdRepo.findBy(subLabel).getCommandHelp(player));
+			rootCmdHelp.register(this.sgCmdHandler.getCommandRepository().findBy(subLabel).getCommandHelp(player));
 		}
 		return rootCmdHelp;
 	}
