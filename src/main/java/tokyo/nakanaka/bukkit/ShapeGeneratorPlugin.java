@@ -25,8 +25,8 @@ public class ShapeGeneratorPlugin extends JavaPlugin{
 		PlayerRepository playerRepo = new PlayerRepository();
 		this.cmdLineBuilder = new CommandLineBuilder(this.getServer(), playerRepo);
 		SelectionStrategySource selStraSource = new SelectionStrategySource();
-		SgCommandDirectory sgCmdHandler = new SgCommandDirectory(new BukkitBlockArgument(), selStraSource);	
-		this.rootCmdHandler = new RootCommandHandler(sgCmdHandler);
+		SgCommandDirectory sgCmdDir = new SgCommandDirectory(new BukkitBlockArgument(), selStraSource);	
+		this.rootCmdHandler = new RootCommandHandler(sgCmdDir);
 		PluginManager plManager = getServer().getPluginManager();
 		ClickBlockEventHandler clickHandler = new ClickBlockEventHandler(selStraSource);
 		Scheduler scheduler = new BukkitScheduler(this);
