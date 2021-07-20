@@ -16,7 +16,7 @@ public class Diamond implements Region3D {
 		double sx = x / radiusX;
 		double sy = y / radiusY;
 		double sz = z / radiusZ;
-		return Math.abs(sx + sy + sz) <= 1;
+		return Math.abs(sx) + Math.abs(sy) + Math.abs(sz) <= 1;
 	}
 
 }
