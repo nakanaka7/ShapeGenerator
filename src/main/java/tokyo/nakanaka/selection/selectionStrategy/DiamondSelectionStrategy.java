@@ -1,5 +1,7 @@
 package tokyo.nakanaka.selection.selectionStrategy;
 
+import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +45,27 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D center = blockPos.toVector3D();
 		data.putVector3D("center", center);
+		data.putDouble("radius_x", null);
+		data.putDouble("radius_y", null);
+		data.putDouble("radius_z", null);
 	}
 
 	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		
+		Vector3D center = data.getVector3D("center");
+		if(center == null) {
+			logger.print(HEAD_ERROR + "Set center first");
+			return;
+		}
+		Vector3D pos = blockPos.toVector3D();
+		double radius = pos.negate(center).getAbsolute() + 0.5;
+		if(data.get("radius_x") == null) {
+			data.putDouble("radius_x", radius);
+		}else if(data.get("radius_y") == null) {
+			data.putDouble("radius_y", radius);
+		}else {
+			data.putDouble("radius_z", radius);
+		}	
 	}
 
 	@Override
