@@ -7,6 +7,7 @@ import java.util.List;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -27,6 +28,18 @@ public class MaxZCommandHandler implements CommandHandler {
 		return "maxz";
 	}
 
+	@Override
+	public String getDescription() {
+		return "Set max z of the generated blocks";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The z coordinate"));
+		return list;
+	}
+	
 	@Override
 	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
@@ -80,4 +93,5 @@ public class MaxZCommandHandler implements CommandHandler {
 			return new ArrayList<>();
 		}
 	}
+
 }

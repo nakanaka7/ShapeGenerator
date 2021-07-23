@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
@@ -13,20 +14,32 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class SgHelpCommandHandler implements CommandHandler {
-	private SgSubCommandHandlerRepository cmdRepo;
+	private SgCommandDirectory sgCmdHandler;
 	private BranchCommandHelp cmdHelp;
 	
-	public SgHelpCommandHandler(SgSubCommandHandlerRepository cmdRepo) {
-		this.cmdRepo = cmdRepo;
+	public SgHelpCommandHandler(SgCommandDirectory sgCmdHandler) {
+		this.sgCmdHandler = sgCmdHandler;
 		this.cmdHelp = new BranchCommandHelp.Builder("help")
 				.description("Print command help")
 				.addParameter(ParameterType.OPTIONAL, "subcommand")
 				.build();
 	}
-
+	
 	@Override
 	public String getLabel() {
 		return "help";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Print command help";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.OPTIONAL, "subcommand", ""));
+		return list;
 	}
 	
 	@Override
@@ -34,13 +47,21 @@ public class SgHelpCommandHandler implements CommandHandler {
 		return this.cmdHelp;
 	}
 	
+	private SgSubCommandHandlerRepository getCommandRepository() {
+		SgSubCommandHandlerRepository cmdRepo = new SgSubCommandHandlerRepository();
+		for(CommandEntry cmdEntry : this.sgCmdHandler.getSubList(null)) {
+			cmdRepo.register((CommandHandler)cmdEntry);
+		}
+		return cmdRepo;
+	}
+	
 	private RootCommandHelp getSgCommandHelp(Player player) {
 		RootCommandHelp rootCmdHelp = new RootCommandHelp.Builder("sg")
 				.description("Root command of ShapeGenerator")
 				.build();
-		List<String> subLabelList = cmdRepo.getAliases();
+		List<String> subLabelList = this.getCommandRepository().getAliases();
 		for(String subLabel : subLabelList) {
-			rootCmdHelp.register(this.cmdRepo.findBy(subLabel).getCommandHelp(player));
+			rootCmdHelp.register(this.getCommandRepository().findBy(subLabel).getCommandHelp(player));
 		}
 		return rootCmdHelp;
 	}
@@ -111,5 +132,5 @@ public class SgHelpCommandHandler implements CommandHandler {
 		RootCommandHelp help = this.getSgCommandHelp(player);
 		return onTabComplete(help, player, args);
 	}
-	
+
 }

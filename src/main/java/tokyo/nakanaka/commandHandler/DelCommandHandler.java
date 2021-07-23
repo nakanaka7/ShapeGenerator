@@ -7,6 +7,7 @@ import java.util.List;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
@@ -32,8 +33,20 @@ public class DelCommandHandler implements CommandHandler {
 	}
 	
 	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.OPTIONAL, "number", ""));
+		return list;
+	}
+	
+	@Override
 	public CommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Delete the generated blocks";
 	}
 	
 	public void onCommand(Player player, String[] args) {
@@ -95,5 +108,5 @@ public class DelCommandHandler implements CommandHandler {
 		}
 		return new ArrayList<>();
 	}
-
+	
 }

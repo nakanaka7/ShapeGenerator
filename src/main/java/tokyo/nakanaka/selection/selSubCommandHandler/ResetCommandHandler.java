@@ -2,9 +2,11 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
+import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -12,18 +14,39 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
-public class ResetCommandHandler {
-	private Map<SelectionShape, SelectionStrategy> strategyMap;
+public class ResetCommandHandler implements CommandHandler {
+	private SelectionStrategySource selStraSource;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	private BranchCommandHelp cmdHelp;
 	
-	public ResetCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
-		this.strategyMap = strategyMap;
+	public ResetCommandHandler(SelectionStrategySource selStraSource) {
+		this.selStraSource = selStraSource;
 		this.cmdHelp = new BranchCommandHelp.Builder("reset")
 				.description("Reset the selection")
 				.build();
+	}
+	
+	@Override
+	public String getLabel() {
+		return "reset";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Reset the selection";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		return new ArrayList<>();
+	}
+
+	@Override
+	public CommandHelp getCommandHelp(Player player) {
+		return this.cmdHelp;
 	}
 	
 	public BranchCommandHelp getCommandHelp() {
@@ -38,7 +61,7 @@ public class ResetCommandHandler {
 		}
 		World world = player.getWorld();
 		SelectionShape shape = player.getSelectionShape();
-		SelectionStrategy strategy = this.strategyMap.get(shape);
+		SelectionStrategy strategy = this.selStraSource.get(shape);
 		SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
 		player.setSelectionBuildingData(newSelData);
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
@@ -46,7 +69,8 @@ public class ResetCommandHandler {
 		return;
 	}
 	
-	public List<String> onTabComplete(String[] args) {
+	public List<String> onTabComplete(Player player, String[] args) {
 		return new ArrayList<>();
 	}
+
 }

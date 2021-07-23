@@ -2,10 +2,10 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -15,13 +15,14 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class ShapeCommandHandler implements CommandHandler {
-	private Map<SelectionShape, SelectionStrategy> strategyMap;
+	private SelectionStrategySource selStraSource;
 	private BranchCommandHelp cmdHelp;
 	
-	public ShapeCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
-		this.strategyMap = strategyMap;
+	public ShapeCommandHandler(SelectionStrategySource selStraSource) {
+		this.selStraSource = selStraSource;
 		SelectionShape[] shapes = SelectionShape.values();
 		String[] shapeStrs = new String[shapes.length];
 		for(int i = 0; i < shapes.length; i++) {
@@ -36,6 +37,23 @@ public class ShapeCommandHandler implements CommandHandler {
 	@Override
 	public String getLabel() {
 		return "shape";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Set selection shape";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		SelectionShape[] shapes = SelectionShape.values();
+		String[] shapeStrs = new String[shapes.length];
+		for(int i = 0; i < shapes.length; i++) {
+			shapeStrs[i] = shapes[i].toString().toLowerCase();
+		}
+		list.add(new ParameterHelp(ParameterType.REQUIRED, shapeStrs, ""));
+		return list;
 	}
 	
 	@Override
@@ -57,7 +75,7 @@ public class ShapeCommandHandler implements CommandHandler {
 			logger.print(LogColor.RED + "Invalid shape");
 			return;
 		}
-		SelectionStrategy selStrategy = this.strategyMap.get(shape);
+		SelectionStrategy selStrategy = this.selStraSource.get(shape);
 		if(selStrategy == null) {
 			logger.print(LogColor.RED + "Unsupported shape");
 			return;
@@ -80,7 +98,7 @@ public class ShapeCommandHandler implements CommandHandler {
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length == 1) {
-			return this.strategyMap.keySet().stream()
+			return this.selStraSource.getShapeList().stream()
 					.map(s -> s.toString().toLowerCase())
 					.collect(Collectors.toList());
 		}else {

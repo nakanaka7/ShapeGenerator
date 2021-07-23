@@ -2,10 +2,10 @@ package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
@@ -17,17 +17,17 @@ import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuildingData;
-import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class GenrCommandHandler implements CommandHandler{
 	private BlockCommandArgument blockArg;
-	private Map<SelectionShape, SelectionStrategy> strategyMap;
+	private SelectionStrategySource selStraSource;
 	private BranchCommandHelp cmdHelp;
 	
-	public GenrCommandHandler(BlockCommandArgument blockArg, Map<SelectionShape, SelectionStrategy> strategyMap) {
+	public GenrCommandHandler(BlockCommandArgument blockArg, SelectionStrategySource selStraSource) {
 		this.blockArg = blockArg;
-		this.strategyMap = strategyMap;
+		this.selStraSource = selStraSource;
 		this.cmdHelp = new BranchCommandHelp.Builder("genr")
 				.description("Generate blocks in the selection")
 				.addParameter(ParameterType.REQUIRED, "block")
@@ -39,6 +39,18 @@ public class GenrCommandHandler implements CommandHandler{
 		return "genr";
 	}
 	
+	@Override
+	public String getDescription() {
+		return "Generate blocks in the selection";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "block", "The block to generate"));
+		return list;
+	}
+
 	@Override
 	public BranchCommandHelp getCommandHelp(Player player) {
 		return this.cmdHelp;
@@ -53,7 +65,7 @@ public class GenrCommandHandler implements CommandHandler{
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
-		SelectionStrategy selStrategy = this.strategyMap.get(player.getSelectionShape());
+		SelectionStrategy selStrategy = this.selStraSource.get(player.getSelectionShape());
 		BoundRegion3D region;
 		try {
 			region = selStrategy.buildBoundRegion3D(regionData);

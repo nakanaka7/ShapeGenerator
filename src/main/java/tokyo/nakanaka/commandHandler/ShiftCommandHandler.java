@@ -1,11 +1,13 @@
 package tokyo.nakanaka.commandHandler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -31,6 +33,19 @@ public class ShiftCommandHandler implements CommandHandler{
 	@Override
 	public String getLabel() {
 		return "shift";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Shift the generated blocks";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "direction", ""));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "length", ""));
+		return list;
 	}
 	
 	@Override
@@ -101,5 +116,5 @@ public class ShiftCommandHandler implements CommandHandler{
 			return Arrays.asList();
 		}
 	}
-
+	
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -25,6 +26,18 @@ public class MinZCommandHandler implements CommandHandler {
 	@Override
 	public String getLabel() {
 		return "minz";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Set min z of the generated blocks";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The z coordinate"));
+		return list;
 	}
 
 	@Override
@@ -80,4 +93,5 @@ public class MinZCommandHandler implements CommandHandler {
 			return new ArrayList<>();
 		}
 	}
+
 }

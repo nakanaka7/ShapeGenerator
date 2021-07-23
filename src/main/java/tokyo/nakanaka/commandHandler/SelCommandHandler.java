@@ -1,12 +1,11 @@
 package tokyo.nakanaka.commandHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.CommandHelp;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -20,21 +19,33 @@ import tokyo.nakanaka.selection.selSubCommandHandler.OffsetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
 public class SelCommandHandler implements CommandHandler {
-	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
+	private SelectionStrategySource selStraSource;
 	private ResetCommandHandler resetCmdHandler;
 	private OffsetCommandHandler offsetCmdHandler = new OffsetCommandHandler();
 	
-	public SelCommandHandler(Map<SelectionShape, SelectionStrategy> strategyMap) {
-		this.strategyMap = strategyMap;
-		this.resetCmdHandler = new ResetCommandHandler(strategyMap);
+	public SelCommandHandler(SelectionStrategySource selStraSource) {
+		this.selStraSource = selStraSource;
+		this.resetCmdHandler = new ResetCommandHandler(selStraSource);
 	}
 
 	@Override
 	public String getLabel() {
 		return "sel";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "Specify the selection";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		List<ParameterHelp> list = new ArrayList<>();
+		return list;
 	}
 
 	@Override
@@ -54,7 +65,7 @@ public class SelCommandHandler implements CommandHandler {
 		list.add("reset");
 		list.add("offset");
 		SelectionShape shape = player.getSelectionShape();
-		SelectionStrategy strategy = this.strategyMap.get(shape);
+		SelectionStrategy strategy = this.selStraSource.get(shape);
 		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 		for(SelSubCommandHandler cmdHandler : cmdHandlerList) {
 			list.add(cmdHandler.getLabel());
@@ -69,7 +80,7 @@ public class SelCommandHandler implements CommandHandler {
 			return this.offsetCmdHandler.getCommandHelp();
 		}else {
 			SelectionShape shape = player.getSelectionShape();
-			SelectionStrategy strategy = this.strategyMap.get(shape);
+			SelectionStrategy strategy = this.selStraSource.get(shape);
 			List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 			for(SelSubCommandHandler e : cmdHandlerList) {
 				if(e.getLabel().equals(label)) {
@@ -94,7 +105,7 @@ public class SelCommandHandler implements CommandHandler {
 		BlockVector3D playerPos = new BlockVector3D(player.getX(), player.getY(), player.getZ());
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		SelectionShape shape = player.getSelectionShape();
-		SelectionStrategy strategy = this.strategyMap.get(shape);
+		SelectionStrategy strategy = this.selStraSource.get(shape);
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
 		SelectionMessenger selMessenger = new SelectionMessenger();
 		if(label.equals("reset")){
@@ -126,7 +137,7 @@ public class SelCommandHandler implements CommandHandler {
 	@Override
 	public List<String> onTabComplete(Player player, String[] args) {
 		SelectionShape shape = player.getSelectionShape();
-		List<SelSubCommandHandler> cmdHandlerList = this.strategyMap.get(shape).getSelSubCommandHandlers();
+		List<SelSubCommandHandler> cmdHandlerList = this.selStraSource.get(shape).getSelSubCommandHandlers();
 		if(args.length == 1) {
 			List<String> list = new ArrayList<>();
 			for(SelSubCommandHandler handler : cmdHandlerList) {
@@ -140,9 +151,9 @@ public class SelCommandHandler implements CommandHandler {
 		String[] shiftArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, shiftArgs, 0, args.length - 1);
 		if(label.equals("reset")) {
-			return this.resetCmdHandler.onTabComplete(shiftArgs);
+			return this.resetCmdHandler.onTabComplete(player, shiftArgs);
 		}else if(label.equals("offset")) {
-			return this.offsetCmdHandler.onTabComplete(shiftArgs);
+			return this.offsetCmdHandler.onTabComplete(player, shiftArgs);
 		}
 		for(SelSubCommandHandler handler : cmdHandlerList) {
 			if(handler.getLabel().equals(label)) {
@@ -151,5 +162,5 @@ public class SelCommandHandler implements CommandHandler {
 		}
 		return new ArrayList<>();
 	}
-	
+
 }
