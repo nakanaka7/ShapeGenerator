@@ -18,6 +18,7 @@ public class SgCommandHandler {
 	}
 	
 	public void onCommand(Player player, String[] args) {
+		Logger logger = player.getLogger();
 		List<CommandEntry> subEntryList = sgCmdDir.getSubList(player);
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
@@ -29,11 +30,23 @@ public class SgCommandHandler {
 					subHandler.onCommand(player, subArgs);
 					return;
 				}else if(subEntry instanceof SelCommandDirectory) {
-					
+					SelCommandDirectory selCmdDir = (SelCommandDirectory)subEntry;
+					List<CommandEntry> selSubList = selCmdDir.getSubList(player);
+					if(subArgs.length == 0) {
+						return;
+					}
+					String[] selSubArgs = new String[subArgs.length - 1];
+					System.arraycopy(subArgs, 1, selSubArgs, 0, subArgs.length - 1);
+					for(CommandEntry selEntry : selSubList) {
+						CommandHandler cmdHandler = (CommandHandler)selEntry;
+						cmdHandler.onCommand(player, selSubArgs);
+					}
+				}else {
+					//unreachable
+					return;
 				}
 			}
 		}
-		Logger logger = player.getLogger();
 		logger.print(LogColor.RED + "See help by " + LogColor.GOLD + "/sg help");
 	}
 	
