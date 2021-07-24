@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MirrorCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
@@ -53,14 +53,14 @@ public class MirrorCommandHandler implements CommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse axis");
+			logger.print(LogDesignColor.ERROR + "Can not parse axis");
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -79,13 +79,13 @@ public class MirrorCommandHandler implements CommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogColor.RED + "Generate blocks first");
+			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}	
 		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, player.getBlockPhysics());
 		mirrorCmd.execute();
 		undoManager.add(mirrorCmd);
-		logger.print(LogColor.DARK_AQUA + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
+		logger.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
 	

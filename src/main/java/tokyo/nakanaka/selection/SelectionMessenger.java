@@ -3,6 +3,7 @@ package tokyo.nakanaka.selection;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
@@ -10,10 +11,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 public class SelectionMessenger {
 	public void printSelection(Logger logger, SelectionShape shape, 
 			SelectionBuildingData selData, String defaultOffsetLabel) {
-		logger.print(LogColor.GREEN + "---["
-				+ shape.toString()
-				+ " Selection"
-				+ "]--------------------");
+		logger.print(LogTemplate.ofLine(shape.toString() + " Selection"));
 		RegionBuildingData regionData = selData.getRegionData();
 		List<String> labelList = regionData.getLabels();
 		for(String label : labelList) {

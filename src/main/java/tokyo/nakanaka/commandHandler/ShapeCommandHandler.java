@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -65,31 +65,31 @@ public class ShapeCommandHandler implements CommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		SelectionShape shape;
 		try{
 			shape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Invalid shape");
+			logger.print(LogDesignColor.ERROR + "Invalid shape");
 			return;
 		}
 		SelectionStrategy selStrategy = this.selStraSource.get(shape);
 		if(selStrategy == null) {
-			logger.print(LogColor.RED + "Unsupported shape");
+			logger.print(LogDesignColor.ERROR + "Unsupported shape");
 			return;
 		}	
 		SelectionShape original = player.getSelectionShape();
 		if(shape == original) {
-			logger.print(LogColor.YELLOW + "Already set : Nothing to change");
+			logger.print(LogDesignColor.ERROR + "Already set : Nothing to change");
 			return;
 		}else {
 			player.setSelectionShape(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
 			player.setSelectionBuildingData(selData);
-			logger.print(LogColor.DARK_AQUA + "Set the shape" + LogColor.RESET + " -> " + LogColor.GREEN + shape);
+			logger.print(LogDesignColor.NORMAL + "Set the shape -> " + shape);
 			new SelectionMessenger().printClickDescription(logger, selStrategy);
 			return;
 		}
