@@ -10,6 +10,8 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
+import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
@@ -71,15 +73,15 @@ public class SgHelpCommandHandler implements CommandHandler {
 		String label = help.getLabel();
 		CommandHelp subHelp = help.getSubHelp(args);
 		if(subHelp == null) {
-			logger.print(LogColor.RED + "Usage: " + "/" + label + " " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/" + label + " " + this.cmdHelp.getUsage());
 			return;
 		}
-		String head = LogColor.YELLOW + "---[Help for /" + label;
+		
+		String title = "Help for /" + label;
 		if(args.length != 0) {
-			head += " " + String.join(" ", args);
+			title += " " + String.join(" ", args);
 		}
-		head += "]--------------------";
-		logger.print(head);
+		logger.print(LogTemplate.ofLine(title));
 		logger.print(LogColor.GOLD + "Description: " + LogColor.RESET + subHelp.getDescription());
 		String usage = "/" + label + " " + String.join(" ", args);
 		if(subHelp instanceof RootCommandHelp) {
@@ -94,9 +96,9 @@ public class SgHelpCommandHandler implements CommandHandler {
 			for(CommandHelp e : subList) {
 				logger.print("  " + LogColor.GOLD +e.getLabel() + ": " + LogColor.RESET + e.getDescription());
 			}
-			logger.print("Type " 
-			+ LogColor.YELLOW +"\"/" + label + " " + "help " + String.join(" ", args) + " <subcommand>\"" 
-			+ LogColor.RESET + " for the subcommand detail");
+			logger.print(LogDesignColor.NORMAL + "Type " 
+			+ "\"/" + label + " " + "help " + String.join(" ", args) + " <subcommand>\"" 
+			+ " for the subcommand detail");
 		}
 	}
 	
