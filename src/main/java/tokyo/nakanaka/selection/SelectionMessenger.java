@@ -3,6 +3,7 @@ package tokyo.nakanaka.selection;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
@@ -31,7 +32,7 @@ public class SelectionMessenger {
 	}
 	
 	public void printClickDescription(Logger logger, SelectionStrategy strategy) {
-		logger.print(LogColor.GOLD + "Left click: " + LogColor.RESET + strategy.getLeftClickDescription()
-		+ LogColor.GRAY + " / " + LogColor.RESET + LogColor.GOLD + "Right click: " + LogColor.RESET + strategy.getRightClickDescription());
+		logger.print(LogDesignColor.NORMAL + "Left click: " + strategy.getLeftClickDescription()
+		+ " / " + "Right click: " + strategy.getRightClickDescription());
 	}
 }
