@@ -96,7 +96,7 @@ public class DelCommandHandler implements CommandHandler {
 		}
 		logger.print(LogDesignColor.NORMAL + "Deleted " + delNum + " chunk(s)");
 		if(delNum < num) {
-			logger.print(LogDesignColor.NORMAL + "reached the first generation");
+			logger.print(LogDesignColor.ERROR + "reached the first generation");
 		}
 		return;
 	}
