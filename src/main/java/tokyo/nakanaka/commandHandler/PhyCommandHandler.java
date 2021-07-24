@@ -7,7 +7,6 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
@@ -63,9 +62,9 @@ public class PhyCommandHandler implements CommandHandler{
 		}
 		player.setBlockPhysics(physics);
 		if(physics) {
-			logger.print(LogColor.DARK_AQUA + "Set physics" + LogColor.RESET + " -> " + LogColor.GREEN + bool);
+			logger.print(LogDesignColor.NORMAL + "Set physics -> " + bool);
 		}else {
-			logger.print(LogColor.DARK_AQUA + "Set physics" + LogColor.RESET + " -> " + LogColor.RED + bool);
+			logger.print(LogDesignColor.NORMAL+ "Set physics -> " + bool);
 		}
 		return;
 	}
