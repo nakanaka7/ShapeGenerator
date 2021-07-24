@@ -8,6 +8,7 @@ import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
@@ -47,7 +48,7 @@ public class PhyCommandHandler implements CommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		boolean physics;
@@ -57,7 +58,7 @@ public class PhyCommandHandler implements CommandHandler{
 		}else if(bool.equals("false")) {
 			physics = false;
 		}else {
-			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		player.setBlockPhysics(physics);

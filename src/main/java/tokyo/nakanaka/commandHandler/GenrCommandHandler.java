@@ -9,7 +9,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.boundRegion3D.BoundRegion3D;
@@ -60,7 +60,7 @@ public class GenrCommandHandler implements CommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: "+ "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: "+ "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
@@ -70,7 +70,7 @@ public class GenrCommandHandler implements CommandHandler{
 		try {
 			region = selStrategy.buildBoundRegion3D(regionData);
 		}catch(IllegalStateException e) {
-			logger.print(LogColor.RED + "Incomplete selection");
+			logger.print(LogDesignColor.ERROR + "Incomplete selection");
 			return;
 		}
 		Vector3D offset = selData.getOffset();
@@ -82,17 +82,17 @@ public class GenrCommandHandler implements CommandHandler{
 		try {
 			block = this.blockArg.onParsing(args[0]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Invalid block specification");
+			logger.print(LogDesignColor.ERROR + "Invalid block specification");
 			return;
 		}
 		GenerateCommand generateCmd = new GenerateCommand(sel, block, player.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Unsettable block");
+			logger.print(LogDesignColor.ERROR + "Unsettable block");
 			return;
 		}
-		logger.print(LogColor.DARK_AQUA + "Generated block(s)");
+		logger.print(LogDesignColor.NORMAL + "Generated block(s)");
 		player.getUndoCommandManager().add(generateCmd);
 		return;
 	}

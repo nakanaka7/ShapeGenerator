@@ -8,7 +8,7 @@ import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
@@ -48,7 +48,7 @@ public class UndoCommandHandler implements CommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {
-			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		int num = 1;
@@ -56,11 +56,11 @@ public class UndoCommandHandler implements CommandHandler{
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				logger.print(LogColor.RED + "Can not parse the number");
+				logger.print(LogDesignColor.ERROR + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				logger.print(LogColor.RED + "The number must be larger than 0");
+				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -74,12 +74,12 @@ public class UndoCommandHandler implements CommandHandler{
 			++totalNum;
 		}
 		if(totalNum == 0) {
-			logger.print(LogColor.RED + "Nothing to undo");
+			logger.print(LogDesignColor.ERROR + "Nothing to undo");
 			return;
 		}
-		logger.print(LogColor.DARK_AQUA + "Undid " + totalNum + " command(s)");
+		logger.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
 		if(totalNum < num) {
-			logger.print(LogColor.RED + "Reached the beginning command");
+			logger.print(LogDesignColor.ERROR + "Reached the beginning command");
 		}
 		return;
 	}

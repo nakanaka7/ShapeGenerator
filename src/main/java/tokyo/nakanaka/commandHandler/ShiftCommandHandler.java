@@ -14,7 +14,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Direction;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
@@ -57,7 +57,7 @@ public class ShiftCommandHandler implements CommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		Direction dir;
@@ -65,13 +65,13 @@ public class ShiftCommandHandler implements CommandHandler{
 		try {
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse direction");
+			logger.print(LogDesignColor.ERROR + "Can not parse direction");
 			return;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse integer");
+			logger.print(LogDesignColor.ERROR + "Can not parse integer");
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -90,7 +90,7 @@ public class ShiftCommandHandler implements CommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogColor.RED + "Generate blocks first");
+			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
 		double dx = dir.getX() * blocks;
@@ -100,7 +100,7 @@ public class ShiftCommandHandler implements CommandHandler{
 		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, player.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
-		logger.print(LogColor.DARK_AQUA + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
+		logger.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
 		return;
 	}
 	

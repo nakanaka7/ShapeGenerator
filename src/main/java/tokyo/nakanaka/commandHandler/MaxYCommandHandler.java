@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MaxYCommand;
 import tokyo.nakanaka.command.UndoableCommand;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
@@ -49,14 +49,14 @@ public class MaxYCommandHandler implements CommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
 			return;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse double");
+			logger.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -75,13 +75,13 @@ public class MaxYCommandHandler implements CommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogColor.RED + "Generate blocks first");
+			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
 		MaxYCommand maxyCmd = new MaxYCommand(originalCmd, value, player.getBlockPhysics());
 		maxyCmd.execute();
 		undoManager.add(maxyCmd);
-		logger.print(LogColor.DARK_AQUA + "Set maxY -> " + value);
+		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
 		return;
 	}
 

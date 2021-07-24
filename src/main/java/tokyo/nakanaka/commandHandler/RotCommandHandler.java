@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.RotateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
@@ -55,21 +55,21 @@ public class RotCommandHandler implements CommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse axis");
+			logger.print(LogDesignColor.ERROR + "Can not parse axis");
 			return;
 		}
 		double degree;
 		try {
 			degree = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse double");
+			logger.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -88,13 +88,13 @@ public class RotCommandHandler implements CommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogColor.RED + "Generate blocks first");
+			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
 		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, player.getBlockPhysics());
 		rotateCmd.execute();
 		undoManager.add(rotateCmd);
-		logger.print(LogColor.DARK_AQUA + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
+		logger.print(LogDesignColor.NORMAL + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
 

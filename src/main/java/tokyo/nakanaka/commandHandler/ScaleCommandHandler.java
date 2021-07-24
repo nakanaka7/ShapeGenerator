@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
@@ -54,21 +54,21 @@ public class ScaleCommandHandler implements CommandHandler{
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse axis");
+			logger.print(LogDesignColor.ERROR + "Can not parse axis");
 			return;
 		}
 		double factor;
 		try {
 			factor = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Can not parse double");
+			logger.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -87,13 +87,13 @@ public class ScaleCommandHandler implements CommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogColor.RED + "Generate blocks first");
+			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
 		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, player.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
-		logger.print(LogColor.DARK_AQUA + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
+		logger.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
 	
