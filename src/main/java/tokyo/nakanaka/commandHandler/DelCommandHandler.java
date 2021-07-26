@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -18,15 +16,6 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class DelCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp;
-	
-	public DelCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("del")
-				.description("Delete the generated blocks")
-				.addParameter(ParameterType.OPTIONAL, "number")
-				.build();
-	}
-
 	@Override
 	public String getLabel() {
 		return "del";
@@ -40,11 +29,6 @@ public class DelCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public CommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-	
-	@Override
 	public String getDescription() {
 		return "Delete the generated blocks";
 	}
@@ -52,7 +36,7 @@ public class DelCommandHandler implements CommandHandler {
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
+			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg del [number]");
 			return;
 		}
 		int num = 1;

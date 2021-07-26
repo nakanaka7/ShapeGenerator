@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
@@ -44,11 +43,6 @@ public class ResetCommandHandler implements CommandHandler {
 		return new ArrayList<>();
 	}
 
-	@Override
-	public CommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-	
 	public BranchCommandHelp getCommandHelp() {
 		return this.cmdHelp;
 	}

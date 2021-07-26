@@ -3,7 +3,6 @@ package tokyo.nakanaka.commandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
@@ -49,12 +48,7 @@ public class SelCommandDirectory implements CommandDirectory {
 				public String getLabel() {
 					return selSubCmdHandler.getLabel();
 				}
-
-				@Override
-				public CommandHelp getCommandHelp(Player player) {
-					return selSubCmdHandler.getCommandHelp();
-				}
-
+	
 				@Override
 				public void onCommand(Player player, String[] args) {
 					World world = player.getWorld();

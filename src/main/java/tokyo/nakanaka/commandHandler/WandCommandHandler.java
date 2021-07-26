@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.Item;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
@@ -17,13 +15,9 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class WandCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp;
 	private SelectionStrategySource selStraSource;
 	
 	public WandCommandHandler(SelectionStrategySource selStraSource) {
-		this.cmdHelp = new BranchCommandHelp.Builder("wand")
-				.description("Give player a wand")
-				.build();
 		this.selStraSource = selStraSource;
 	}
 
@@ -42,11 +36,6 @@ public class WandCommandHandler implements CommandHandler {
 		return new ArrayList<>();
 	}
 	
-	@Override
-	public CommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-
 	@Override
 	public void onCommand(Player player, String[] args) {
 		if(!(player instanceof HumanPlayer)) {

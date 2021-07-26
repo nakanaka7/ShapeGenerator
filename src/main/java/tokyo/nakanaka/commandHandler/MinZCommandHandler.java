@@ -6,7 +6,6 @@ import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -39,12 +38,7 @@ public class MinZCommandHandler implements CommandHandler {
 		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The z coordinate"));
 		return list;
 	}
-
-	@Override
-	public CommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-
+	
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();

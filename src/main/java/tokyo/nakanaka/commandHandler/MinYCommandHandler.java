@@ -6,7 +6,6 @@ import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -38,11 +37,6 @@ public class MinYCommandHandler implements CommandHandler {
 		List<ParameterHelp> list = new ArrayList<>();
 		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The y coordinate"));
 		return list;
-	}
-
-	@Override
-	public CommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
 	}
 
 	@Override
