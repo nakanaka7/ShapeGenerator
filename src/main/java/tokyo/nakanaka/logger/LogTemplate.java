@@ -7,4 +7,9 @@ public class LogTemplate {
 			+ LogColor.RESET + LogColor.GRAY + " ---------------------";		
 	}
 	
+	public static String ofKeyValue(String key, String value) {
+		return LogColor.GOLD + key + ": "
+			+ LogColor.RESET + LogColor.WHITE + value;
+	}
+	
 }
