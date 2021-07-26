@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -48,18 +46,6 @@ public class SelCommandHandler implements CommandHandler {
 		return list;
 	}
 
-	@Override
-	public CommandHelp getCommandHelp(Player player) {
-		RootCommandHelp cmdHelp = new RootCommandHelp.Builder("sel")
-				.description("Specify the selection")
-				.build();
-		List<String> subLabels = this.getSubCommandLabels(player);
-		for(String subLabel : subLabels) {
-			cmdHelp.register(this.getSubCommandHelp(player, subLabel));
-		}
-		return cmdHelp;
-	}
-	
 	public List<String> getSubCommandLabels(Player player){
 		List<String> list = new ArrayList<>();
 		list.add("reset");

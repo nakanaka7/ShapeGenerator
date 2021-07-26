@@ -45,12 +45,7 @@ public class RotCommandHandler implements CommandHandler{
 		list.add(new ParameterHelp(ParameterType.REQUIRED, "degree", ""));
 		return list;
 	}
-	
-	@Override
-	public BranchCommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-	
+		
 	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();

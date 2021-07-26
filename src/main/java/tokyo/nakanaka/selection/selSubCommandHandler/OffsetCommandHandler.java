@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
-import tokyo.nakanaka.commadHelp.CommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
@@ -49,11 +48,6 @@ public class OffsetCommandHandler implements CommandHandler {
 		return list;
 	}
 
-	@Override
-	public CommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-	
 	public BranchCommandHelp getCommandHelp() {
 		return cmdHelp;
 	}

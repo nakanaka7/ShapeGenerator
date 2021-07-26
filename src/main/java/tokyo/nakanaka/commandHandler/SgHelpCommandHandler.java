@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.BranchCommandHelpNew;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
@@ -16,14 +15,9 @@ import tokyo.nakanaka.player.Player;
 
 public class SgHelpCommandHandler implements CommandHandler {
 	private SgCommandDirectory sgCmdDir;
-	private BranchCommandHelp cmdHelp;
 	
 	public SgHelpCommandHandler(SgCommandDirectory sgCmdDir) {
 		this.sgCmdDir = sgCmdDir;
-		this.cmdHelp = new BranchCommandHelp.Builder("help")
-				.description("Print command help")
-				.addParameter(ParameterType.OPTIONAL, "subcommand")
-				.build();
 	}
 	
 	@Override
@@ -42,12 +36,7 @@ public class SgHelpCommandHandler implements CommandHandler {
 		list.add(new ParameterHelp(ParameterType.OPTIONAL, "subcommand", ""));
 		return list;
 	}
-	
-	@Override
-	public BranchCommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-		
+			
 	public void onCommand(Player player, String[] args) {
 		onRecursiveCommand(new String[0], this.sgCmdDir, player, args);
 	}

@@ -40,11 +40,6 @@ public class RedoCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public BranchCommandHelp getCommandHelp(Player player) {
-		return this.cmdHelp;
-	}
-	
-	@Override
 	public void onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {
