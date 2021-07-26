@@ -13,10 +13,10 @@ import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class SgHelpCommandHandler implements CommandHandler {
+public class HelpCommandHandler implements CommandHandler {
 	private SgCommandDirectory sgCmdDir;
 	
-	public SgHelpCommandHandler(SgCommandDirectory sgCmdDir) {
+	public HelpCommandHandler(SgCommandDirectory sgCmdDir) {
 		this.sgCmdDir = sgCmdDir;
 	}
 	
