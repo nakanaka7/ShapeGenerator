@@ -9,7 +9,7 @@ public class LogTemplate {
 	
 	public static String ofKeyValue(String key, String value) {
 		return LogColor.GOLD + key + ": "
-			+ LogColor.RESET + LogColor.WHITE + "value";
+			+ LogColor.RESET + LogColor.WHITE + value;
 	}
 	
 }
