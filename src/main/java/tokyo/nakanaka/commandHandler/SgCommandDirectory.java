@@ -14,7 +14,7 @@ public class SgCommandDirectory implements CommandDirectory {
 		subList.add(new SgHelpCommandHandler(this));
 		subList.add(new WandCommandHandler(selStraSource));
 		subList.add(new ShapeCommandHandler(selStraSource));
-		subList.add(new SelCommandHandler(selStraSource));
+		subList.add(new SelCommandDirectory(selStraSource));
 		subList.add(new GenrCommandHandler(blockArg, selStraSource));
 		subList.add(new PhyCommandHandler());
 		subList.add(new ShiftCommandHandler());
