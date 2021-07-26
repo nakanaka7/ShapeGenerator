@@ -9,6 +9,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
+import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selSubCommandHandler.OffsetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.ResetCommandHandler;
@@ -65,6 +66,7 @@ public class SelCommandDirectory implements CommandDirectory {
 					}
 					RegionBuildingData regionData = selData.getRegionData();
 					selSubCmdHandler.onCommand(regionData, player.getLogger(), playerPos, args);
+					new SelectionMessenger().printSelection(player.getLogger(), shape, selData, strategy.getDefaultOffsetLabel());
 				}
 
 				@Override
