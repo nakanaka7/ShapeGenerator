@@ -1,7 +1,5 @@
 package tokyo.nakanaka.logger;
 
-import tokyo.nakanaka.Pair;
-
 public class LogTemplate {
 	public static String ofLine(String title) {
 		return LogColor.GRAY + "--- " 
@@ -9,9 +7,9 @@ public class LogTemplate {
 			+ LogColor.RESET + LogColor.GRAY + " ---------------------";		
 	}
 	
-	public static String ofPair(Pair<?, ?> pair) {
-		return LogColor.GOLD + pair.getFirst().toString() + ": " 
-			+ LogColor.RESET + LogColor.WHITE + pair.getSecond();
+	public static String ofKeyValue(String key, String value) {
+		return LogColor.GOLD + key + ": "
+			+ LogColor.RESET + LogColor.WHITE + "value";
 	}
 	
 }
