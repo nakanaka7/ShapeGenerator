@@ -40,18 +40,18 @@ public class MaxXCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
 			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
-			return;
+			return true;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return;
+			return false;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -70,13 +70,13 @@ public class MaxXCommandHandler implements CommandHandler {
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return;
+			return false;
 		}
 		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, player.getBlockPhysics());
 		maxxCmd.execute();
 		undoManager.add(maxxCmd);
 		logger.print(LogDesignColor.NORMAL + "Set maxX -> " + value);
-		return;
+		return false;
 	}
 
 	@Override

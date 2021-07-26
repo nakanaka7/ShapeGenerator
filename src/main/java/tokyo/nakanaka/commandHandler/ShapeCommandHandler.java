@@ -57,28 +57,28 @@ public class ShapeCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
 			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		SelectionShape shape;
 		try{
 			shape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Invalid shape");
-			return;
+			return true;
 		}
 		SelectionStrategy selStrategy = this.selStraSource.get(shape);
 		if(selStrategy == null) {
 			logger.print(LogDesignColor.ERROR + "Unsupported shape");
-			return;
+			return true;
 		}	
 		SelectionShape original = player.getSelectionShape();
 		if(shape == original) {
 			logger.print(LogDesignColor.ERROR + "Already set : Nothing to change");
-			return;
+			return true;
 		}else {
 			player.setSelectionShape(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
@@ -86,7 +86,7 @@ public class ShapeCommandHandler implements CommandHandler {
 			player.setSelectionBuildingData(selData);
 			logger.print(LogDesignColor.NORMAL + "Set the shape -> " + shape);
 			new SelectionMessenger().printClickDescription(logger, selStrategy);
-			return;
+			return true;
 		}
 	}
 	

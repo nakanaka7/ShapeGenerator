@@ -46,25 +46,25 @@ public class ScaleCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
 			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse axis");
-			return;
+			return true;
 		}
 		double factor;
 		try {
 			factor = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return;
+			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -83,13 +83,13 @@ public class ScaleCommandHandler implements CommandHandler{
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return;
+			return true;
 		}
 		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, player.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
 		logger.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
-		return;
+		return true;
 	}
 	
 	@Override

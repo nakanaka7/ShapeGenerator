@@ -37,8 +37,8 @@ public class HelpCommandHandler implements CommandHandler {
 		return list;
 	}
 			
-	public void onCommand(Player player, String[] args) {
-		onRecursiveCommand(new String[0], this.sgCmdDir, player, args);
+	public boolean onCommand(Player player, String[] args) {
+		return onRecursiveCommand(new String[0], this.sgCmdDir, player, args);
 	}
 	
 	private static boolean onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, Player player, String[] args) {

@@ -40,18 +40,18 @@ public class MinXCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
 			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return;
+			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -70,13 +70,13 @@ public class MinXCommandHandler implements CommandHandler {
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return;
+			return true;
 		}
 		MinXCommand minxCmd = new MinXCommand(originalCmd, value, player.getBlockPhysics());
 		minxCmd.execute();
 		undoManager.add(minxCmd);
 		logger.print(LogDesignColor.NORMAL + "Set minX -> " + value);
-		return;
+		return true;
 	}
 
 	@Override

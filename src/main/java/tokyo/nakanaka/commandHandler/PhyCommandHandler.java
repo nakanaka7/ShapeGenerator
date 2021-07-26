@@ -39,11 +39,11 @@ public class PhyCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
 			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		boolean physics;
 		String bool = args[0];
@@ -53,7 +53,7 @@ public class PhyCommandHandler implements CommandHandler{
 			physics = false;
 		}else {
 			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		player.setBlockPhysics(physics);
 		if(physics) {
@@ -61,7 +61,7 @@ public class PhyCommandHandler implements CommandHandler{
 		}else {
 			logger.print(LogDesignColor.NORMAL+ "Set physics -> " + bool);
 		}
-		return;
+		return true;
 	}
 
 	@Override

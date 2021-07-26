@@ -40,11 +40,11 @@ public class UndoCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {
 			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		int num = 1;
 		if(args.length == 1) {
@@ -52,11 +52,11 @@ public class UndoCommandHandler implements CommandHandler{
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
 				logger.print(LogDesignColor.ERROR + "Can not parse the number");
-				return;
+				return false;
 			}
 			if(num <= 0) {
 				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
-				return;
+				return false;
 			}
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -70,13 +70,13 @@ public class UndoCommandHandler implements CommandHandler{
 		}
 		if(totalNum == 0) {
 			logger.print(LogDesignColor.ERROR + "Nothing to undo");
-			return;
+			return false;
 		}
 		logger.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
 		if(totalNum < num) {
 			logger.print(LogDesignColor.ERROR + "Reached the beginning command");
 		}
-		return;
+		return false;
 	}
 	
 	@Override
