@@ -47,11 +47,11 @@ public class ResetCommandHandler implements CommandHandler {
 		return this.cmdHelp;
 	}
 
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		World world = player.getWorld();
 		SelectionShape shape = player.getSelectionShape();
@@ -60,7 +60,7 @@ public class ResetCommandHandler implements CommandHandler {
 		player.setSelectionBuildingData(newSelData);
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
 		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
-		return;
+		return true;
 	}
 	
 	public List<String> onTabComplete(Player player, String[] args) {

@@ -52,12 +52,12 @@ public class OffsetCommandHandler implements CommandHandler {
 		return cmdHelp;
 	}
 
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0 && args.length != 3) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
 			logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
-			return;
+			return false;
 		}
 		Vector3D pos;
 		if(args.length == 0) {
@@ -73,15 +73,16 @@ public class OffsetCommandHandler implements CommandHandler {
 				z = coordArg.onParsingDouble(args[2], player.getZ());
 			}catch(IllegalArgumentException e) {
 				logger.print(LogColor.RED + "Can not parse the coordinates");
-				return;
+				return true;
 			}
 			pos = new Vector3D(x, y, z);
 		}else {
-			return;
+			return true;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		selData.setOffset(pos);
 		this.selMessenger.printSelection(logger, player.getSelectionShape(), selData, "");
+		return false;
 	}
 	
 	public List<String> onTabComplete(Player player, String[] args) {
