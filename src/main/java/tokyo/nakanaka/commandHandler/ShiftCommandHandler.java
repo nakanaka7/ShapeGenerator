@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -20,15 +19,6 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
 public class ShiftCommandHandler implements CommandHandler{
-	private BranchCommandHelp cmdHelp;
-		
-	public ShiftCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("shift")
-				.description("Shift the generated blocks")
-				.addParameter(ParameterType.REQUIRED, "direction")
-				.addParameter(ParameterType.REQUIRED, "length")
-				.build();
-	}
 
 	@Override
 	public String getLabel() {
@@ -52,7 +42,6 @@ public class ShiftCommandHandler implements CommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return false;
 		}
 		Direction dir;

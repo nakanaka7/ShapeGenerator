@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -16,12 +15,7 @@ import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxZCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxz")
-			.description("Set max z of the generated blocks")
-			.addParameter(ParameterType.REQUIRED, "value")
-			.build();
-	
+public class MaxZCommandHandler implements CommandHandler {	
 	@Override
 	public String getLabel() {
 		return "maxz";
@@ -43,7 +37,6 @@ public class MaxZCommandHandler implements CommandHandler {
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
 			return false;
 		}
 		double value;

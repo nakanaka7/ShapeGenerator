@@ -36,7 +36,6 @@ public class DelCommandHandler implements CommandHandler {
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg del [number]");
 			return false;
 		}
 		int num = 1;

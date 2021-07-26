@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -17,10 +16,6 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class MinXCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("minx")
-			.description("Set min x of the generated blocks")
-			.addParameter(ParameterType.REQUIRED, "value")
-			.build();
 	
 	@Override
 	public String getLabel() {
@@ -43,7 +38,6 @@ public class MinXCommandHandler implements CommandHandler {
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
 			return false;
 		}
 		double value;

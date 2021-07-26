@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import tokyo.nakanaka.commadHelp.BranchCommandHelpNew;
 import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.commandHandler.CommandEntry;
 import tokyo.nakanaka.commandHandler.CommandHandler;
@@ -27,7 +28,12 @@ public class SgCommandHandler {
 		Logger logger = player.getLogger();
 		if(cmdEntry instanceof CommandHandler) {
 			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
-			cmdHandler.onCommand(player, args);
+			boolean success = cmdHandler.onCommand(player, args);
+			if(!success) {
+				BranchCommandHelpNew help = new BranchCommandHelpNew(parentLabels, cmdHandler);
+				logger.print(LogDesignColor.ERROR + "Usage: " + help.getUsage());
+				return;
+			}
 		}else if(cmdEntry instanceof CommandDirectory) {
 			CommandDirectory cmdDir = (CommandDirectory)cmdEntry;
 			List<CommandEntry> subEntryList = cmdDir.getSubList(player);

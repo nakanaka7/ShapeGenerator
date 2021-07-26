@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -23,15 +22,10 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 public class GenrCommandHandler implements CommandHandler{
 	private BlockCommandArgument blockArg;
 	private SelectionStrategySource selStraSource;
-	private BranchCommandHelp cmdHelp;
 	
 	public GenrCommandHandler(BlockCommandArgument blockArg, SelectionStrategySource selStraSource) {
 		this.blockArg = blockArg;
 		this.selStraSource = selStraSource;
-		this.cmdHelp = new BranchCommandHelp.Builder("genr")
-				.description("Generate blocks in the selection")
-				.addParameter(ParameterType.REQUIRED, "block")
-				.build();
 	}
 
 	@Override
@@ -55,7 +49,6 @@ public class GenrCommandHandler implements CommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: "+ "/sg " + this.cmdHelp.getUsage());
 			return false;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();

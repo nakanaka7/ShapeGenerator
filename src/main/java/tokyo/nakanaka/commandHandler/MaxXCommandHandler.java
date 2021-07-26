@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -16,12 +15,7 @@ import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxXCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxx")
-			.description("Set max x of the generated blocks")
-			.addParameter(ParameterType.REQUIRED, "value")
-			.build();
-	
+public class MaxXCommandHandler implements CommandHandler {	
 	@Override
 	public String getLabel() {
 		return "maxx";
@@ -43,15 +37,14 @@ public class MaxXCommandHandler implements CommandHandler {
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
-			return true;
+			return false;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return false;
+			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -70,13 +63,13 @@ public class MaxXCommandHandler implements CommandHandler {
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return false;
+			return true;
 		}
 		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, player.getBlockPhysics());
 		maxxCmd.execute();
 		undoManager.add(maxxCmd);
 		logger.print(LogDesignColor.NORMAL + "Set maxX -> " + value);
-		return false;
+		return true;
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogDesignColor;
@@ -13,14 +12,6 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class UndoCommandHandler implements CommandHandler{
-	private BranchCommandHelp cmdHelp;
-	
-	public UndoCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("undo")
-				.description("Undo block changing command(s)")
-				.addParameter(ParameterType.OPTIONAL, "number")
-				.build();
-	}
 	
 	@Override
 	public String getLabel() {
@@ -43,7 +34,6 @@ public class UndoCommandHandler implements CommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return false;
 		}
 		int num = 1;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogDesignColor;
@@ -12,14 +11,6 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class PhyCommandHandler implements CommandHandler{
-	private BranchCommandHelp cmdHelp;
-	
-	public PhyCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("phy")
-				.description("Toggle physics option for generating blocks")
-				.addParameter(ParameterType.REQUIRED, new String[] {"true", "false"})
-				.build();
-	}
 
 	@Override
 	public String getLabel() {
@@ -42,7 +33,6 @@ public class PhyCommandHandler implements CommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return false;
 		}
 		boolean physics;
@@ -52,7 +42,6 @@ public class PhyCommandHandler implements CommandHandler{
 		}else if(bool.equals("false")) {
 			physics = false;
 		}else {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return false;
 		}
 		player.setBlockPhysics(physics);

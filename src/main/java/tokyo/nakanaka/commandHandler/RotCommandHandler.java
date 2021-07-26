@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -18,16 +17,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RotCommandHandler implements CommandHandler{
-	private BranchCommandHelp cmdHelp;
-	
-	public RotCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("rot")
-				.description("Rotate the generated blocks")
-				.addParameter(ParameterType.REQUIRED, new String[] {"x", "y", "z"})
-				.addParameter(ParameterType.REQUIRED, "degree")
-				.build();
-	}
-	
+		
 	@Override
 	public String getLabel() {
 		return "rot";
@@ -50,7 +40,6 @@ public class RotCommandHandler implements CommandHandler{
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
 			return false;
 		}
 		Axis axis;

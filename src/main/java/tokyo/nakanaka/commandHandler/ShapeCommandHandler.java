@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogDesignColor;
@@ -19,7 +18,6 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class ShapeCommandHandler implements CommandHandler {
 	private SelectionStrategySource selStraSource;
-	private BranchCommandHelp cmdHelp;
 	
 	public ShapeCommandHandler(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
@@ -28,10 +26,6 @@ public class ShapeCommandHandler implements CommandHandler {
 		for(int i = 0; i < shapes.length; i++) {
 			shapeStrs[i] = shapes[i].toString().toLowerCase();
 		}
-		this.cmdHelp = new BranchCommandHelp.Builder("shape")
-				.description("Set selection shape")
-				.addParameter(ParameterType.REQUIRED, shapeStrs)
-				.build();
 	}
 
 	@Override
@@ -60,7 +54,6 @@ public class ShapeCommandHandler implements CommandHandler {
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
 			return false;
 		}
 		SelectionShape shape;
