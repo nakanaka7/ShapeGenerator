@@ -76,7 +76,7 @@ public class SelCommandDirectory implements CommandDirectory {
 
 				@Override
 				public List<ParameterHelp> getParameterHelpList() {
-					return new ArrayList<>();
+					return selSubCmdHandler.getParameterHelpList();
 				}
 			};
 			handlerList.add(cmdHandler);
