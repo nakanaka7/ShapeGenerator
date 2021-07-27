@@ -1,10 +1,12 @@
 package tokyo.nakanaka.selection.selSubCommandHandler;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -31,6 +33,12 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 		return "Set the side number, must be larger than or equal to 3";
 	}
 
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<>();
+	}
+	
 	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;
 	}

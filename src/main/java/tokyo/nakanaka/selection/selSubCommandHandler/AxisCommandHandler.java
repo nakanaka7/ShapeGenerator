@@ -1,9 +1,11 @@
 package tokyo.nakanaka.selection.selSubCommandHandler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.logger.LogColor;
@@ -29,6 +31,12 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	@Override
 	public String getDescription() {
 		return "Set axis";
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<>();
 	}
 	
 	public BranchCommandHelpOld getCommandHelp() {
