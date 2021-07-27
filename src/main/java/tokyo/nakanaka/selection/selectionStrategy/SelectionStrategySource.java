@@ -12,6 +12,7 @@ public class SelectionStrategySource {
 	
 	public SelectionStrategySource() {
 		strategyMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());
+		strategyMap.put(SelectionShape.DIAMOND, new DiamondSelectionStrategy());
 		strategyMap.put(SelectionShape.SPHERE, new SphereSelectionStrategy());
 		strategyMap.put(SelectionShape.TORUS, new TorusSelectionStrategy());
 		strategyMap.put(SelectionShape.LINE, new LineSelectionStrategy());
