@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
@@ -17,11 +17,11 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 
 public class OffsetCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp;
+	private BranchCommandHelpOld cmdHelp;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	public OffsetCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("offset")
+		this.cmdHelp = new BranchCommandHelpOld.Builder("offset")
 				.description("Set offset")
 				.addParameter(ParameterType.OPTIONAL, "x")
 				.addParameter(ParameterType.OPTIONAL, "y")
@@ -48,16 +48,16 @@ public class OffsetCommandHandler implements CommandHandler {
 		return list;
 	}
 
-	public BranchCommandHelp getCommandHelp() {
+	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;
 	}
 
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0 && args.length != 3) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
 			logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
-			return;
+			return false;
 		}
 		Vector3D pos;
 		if(args.length == 0) {
@@ -73,15 +73,16 @@ public class OffsetCommandHandler implements CommandHandler {
 				z = coordArg.onParsingDouble(args[2], player.getZ());
 			}catch(IllegalArgumentException e) {
 				logger.print(LogColor.RED + "Can not parse the coordinates");
-				return;
+				return true;
 			}
 			pos = new Vector3D(x, y, z);
 		}else {
-			return;
+			return true;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		selData.setOffset(pos);
 		this.selMessenger.printSelection(logger, player.getSelectionShape(), selData, "");
+		return false;
 	}
 	
 	public List<String> onTabComplete(Player player, String[] args) {

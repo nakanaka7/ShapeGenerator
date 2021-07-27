@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -16,12 +15,7 @@ import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class MaxZCommandHandler implements CommandHandler {
-	private BranchCommandHelp cmdHelp = new BranchCommandHelp.Builder("maxz")
-			.description("Set max z of the generated blocks")
-			.addParameter(ParameterType.REQUIRED, "value")
-			.build();
-	
+public class MaxZCommandHandler implements CommandHandler {	
 	@Override
 	public String getLabel() {
 		return "maxz";
@@ -40,18 +34,17 @@ public class MaxZCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg "+ this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return;
+			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -70,13 +63,13 @@ public class MaxZCommandHandler implements CommandHandler {
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return;
+			return true;
 		}
 		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, player.getBlockPhysics());
 		maxzCmd.execute();
 		undoManager.add(maxzCmd);
 		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
-		return;
+		return true;
 	}
 
 	@Override

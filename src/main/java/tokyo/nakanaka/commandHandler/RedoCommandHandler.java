@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogDesignColor;
@@ -13,15 +12,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
 public class RedoCommandHandler implements CommandHandler{
-	private BranchCommandHelp cmdHelp;
-	
-	public RedoCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("redo")
-				.description("Redo block changing command(s)")
-				.addParameter(ParameterType.OPTIONAL, "number")
-				.build();
-	}
-	
+		
 	@Override
 	public String getLabel() {
 		return "redo";
@@ -40,11 +31,10 @@ public class RedoCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length > 1) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		int num = 1;
 		if(args.length == 1) {
@@ -52,11 +42,11 @@ public class RedoCommandHandler implements CommandHandler{
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
 				logger.print(LogDesignColor.ERROR + "Can not parse the number");
-				return;
+				return false;
 			}
 			if(num <= 0) {
 				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
-				return;
+				return false;
 			}
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -70,13 +60,13 @@ public class RedoCommandHandler implements CommandHandler{
 		}
 		if(totalNum == 0) {
 			logger.print(LogDesignColor.ERROR + "Nothing to redo");
-			return;
+			return false;
 		}
 		logger.print(LogDesignColor.NORMAL + "Redid " + totalNum + " command(s)");
 		if(totalNum < num) {
 			logger.print(LogDesignColor.ERROR + "Reached the end command");
 		}
-		return;
+		return false;
 	}
 
 	@Override

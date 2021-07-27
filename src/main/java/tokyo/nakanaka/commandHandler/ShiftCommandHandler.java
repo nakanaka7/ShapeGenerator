@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.UndoCommandManager;
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -20,15 +19,6 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.player.Player;
 
 public class ShiftCommandHandler implements CommandHandler{
-	private BranchCommandHelp cmdHelp;
-		
-	public ShiftCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("shift")
-				.description("Shift the generated blocks")
-				.addParameter(ParameterType.REQUIRED, "direction")
-				.addParameter(ParameterType.REQUIRED, "length")
-				.build();
-	}
 
 	@Override
 	public String getLabel() {
@@ -49,11 +39,10 @@ public class ShiftCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public void onCommand(Player player, String[] args) {
+	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
-			logger.print(LogDesignColor.ERROR + "Usage: " + "/sg " + this.cmdHelp.getUsage());
-			return;
+			return false;
 		}
 		Direction dir;
 		double blocks;
@@ -61,13 +50,13 @@ public class ShiftCommandHandler implements CommandHandler{
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse direction");
-			return;
+			return true;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse integer");
-			return;
+			return true;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -86,7 +75,7 @@ public class ShiftCommandHandler implements CommandHandler{
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return;
+			return true;
 		}
 		double dx = dir.getX() * blocks;
 		double dy = dir.getY() * blocks;
@@ -96,7 +85,7 @@ public class ShiftCommandHandler implements CommandHandler{
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
 		logger.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
-		return;
+		return true;
 	}
 	
 	@Override

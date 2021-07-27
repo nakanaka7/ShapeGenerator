@@ -1,8 +1,10 @@
 package tokyo.nakanaka.selection.selSubCommandHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
@@ -17,7 +19,18 @@ public class CuboidPos2CommandHandler implements SelSubCommandHandler{
 		return this.posHandler.getLabel();
 	}
 	
-	public BranchCommandHelp getCommandHelp() {
+	@Override
+	public String getDescription() {
+		return this.posHandler.getDescription();
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<>();
+	}
+	
+	public BranchCommandHelpOld getCommandHelp() {
 		return this.posHandler.getCommandHelp();
 	}
 	

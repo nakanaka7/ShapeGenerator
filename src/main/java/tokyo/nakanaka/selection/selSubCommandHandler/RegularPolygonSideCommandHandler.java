@@ -1,10 +1,12 @@
 package tokyo.nakanaka.selection.selSubCommandHandler;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
@@ -12,10 +14,10 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
-	private BranchCommandHelp cmdHelp;
+	private BranchCommandHelpOld cmdHelp;
 	
 	public RegularPolygonSideCommandHandler() {
-		this.cmdHelp = new BranchCommandHelp.Builder("side")
+		this.cmdHelp = new BranchCommandHelpOld.Builder("side")
 				.description("Set the side number, must be larger than or equal to 3")
 				.addParameter(ParameterType.REQUIRED, "number")
 				.build();
@@ -25,8 +27,19 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	public String getLabel() {
 		return "side";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Set the side number, must be larger than or equal to 3";
+	}
 
-	public BranchCommandHelp getCommandHelp() {
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<>();
+	}
+	
+	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;
 	}
 

@@ -50,7 +50,7 @@ public class SelCommandDirectory implements CommandDirectory {
 				}
 	
 				@Override
-				public void onCommand(Player player, String[] args) {
+				public boolean onCommand(Player player, String[] args) {
 					World world = player.getWorld();
 					BlockVector3D playerPos = new BlockVector3D(player.getX(), player.getY(), player.getZ());
 					SelectionBuildingData selData = player.getSelectionBuildingData();
@@ -61,6 +61,7 @@ public class SelCommandDirectory implements CommandDirectory {
 					RegionBuildingData regionData = selData.getRegionData();
 					selSubCmdHandler.onCommand(regionData, player.getLogger(), playerPos, args);
 					new SelectionMessenger().printSelection(player.getLogger(), shape, selData, strategy.getDefaultOffsetLabel());
+					return true;
 				}
 
 				@Override
@@ -70,12 +71,12 @@ public class SelCommandDirectory implements CommandDirectory {
 
 				@Override
 				public String getDescription() {
-					return selSubCmdHandler.getCommandHelp().getDescription();
+					return selSubCmdHandler.getDescription();
 				}
 
 				@Override
 				public List<ParameterHelp> getParameterHelpList() {
-					return new ArrayList<>();
+					return selSubCmdHandler.getParameterHelpList();
 				}
 			};
 			handlerList.add(cmdHandler);

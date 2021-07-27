@@ -13,10 +13,10 @@ import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
 
-public class SgHelpCommandHandler implements CommandHandler {
+public class HelpCommandHandler implements CommandHandler {
 	private SgCommandDirectory sgCmdDir;
 	
-	public SgHelpCommandHandler(SgCommandDirectory sgCmdDir) {
+	public HelpCommandHandler(SgCommandDirectory sgCmdDir) {
 		this.sgCmdDir = sgCmdDir;
 	}
 	
@@ -37,8 +37,8 @@ public class SgHelpCommandHandler implements CommandHandler {
 		return list;
 	}
 			
-	public void onCommand(Player player, String[] args) {
-		onRecursiveCommand(new String[0], this.sgCmdDir, player, args);
+	public boolean onCommand(Player player, String[] args) {
+		return onRecursiveCommand(new String[0], this.sgCmdDir, player, args);
 	}
 	
 	private static boolean onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, Player player, String[] args) {

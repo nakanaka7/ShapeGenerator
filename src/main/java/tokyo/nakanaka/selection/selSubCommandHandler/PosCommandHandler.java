@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
@@ -15,11 +16,11 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class PosCommandHandler implements SelSubCommandHandler {
 	private String label;
-	private BranchCommandHelp cmdHelp;
+	private BranchCommandHelpOld cmdHelp;
 	
 	public PosCommandHandler(String label) {
 		this.label = label;
-		this.cmdHelp = new BranchCommandHelp.Builder(label)
+		this.cmdHelp = new BranchCommandHelpOld.Builder(label)
 				.description("Set position of " + label)
 				.addParameter(ParameterType.OPTIONAL, "x")
 				.addParameter(ParameterType.OPTIONAL, "y")
@@ -32,7 +33,18 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		return this.label;
 	}
 
-	public BranchCommandHelp getCommandHelp() {
+	@Override
+	public String getDescription() {
+		return "Set position of " + this.label;
+	}
+	
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		// TODO Auto-generated method stub
+		return new ArrayList<>();
+	}
+	
+	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;
 	}
 

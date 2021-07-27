@@ -6,9 +6,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.player.Player;
 
 public interface CommandHandler extends CommandEntry {
-	String getLabel();
-	String getDescription();
 	List<ParameterHelp> getParameterHelpList();
-	void onCommand(Player player, String[] args);
+	boolean onCommand(Player player, String[] args);
 	List<String> onTabComplete(Player player, String[] args);
 }
