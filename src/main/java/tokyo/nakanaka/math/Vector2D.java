@@ -16,5 +16,13 @@ public class Vector2D {
 	public double getY() {
 		return y;
 	}
+
+	public double innerProduct(Vector2D other) {
+		return x * other.getX() + y * other.getY();
+	}
+	
+	public double getAbsolute() {
+		return Math.sqrt(this.innerProduct(this));
+	}
 	
 }
