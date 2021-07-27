@@ -25,6 +25,11 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	public String getLabel() {
 		return "side";
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Set the side number, must be larger than or equal to 3";
+	}
 
 	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;

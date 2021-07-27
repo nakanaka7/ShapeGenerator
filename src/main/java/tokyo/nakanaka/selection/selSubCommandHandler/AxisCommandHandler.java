@@ -26,6 +26,11 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 		return "axis";
 	}
 	
+	@Override
+	public String getDescription() {
+		return "Set axis";
+	}
+	
 	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;
 	}

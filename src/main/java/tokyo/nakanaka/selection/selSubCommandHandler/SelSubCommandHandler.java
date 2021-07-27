@@ -9,6 +9,7 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 
 public interface SelSubCommandHandler {
 	String getLabel();
+	String getDescription();
 	BranchCommandHelpOld getCommandHelp();
 	/**
 	 * @return true if data changed else false

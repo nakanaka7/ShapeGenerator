@@ -17,6 +17,11 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 		return this.posHandler.getLabel();
 	}
 	
+	@Override
+	public String getDescription() {
+		return this.posHandler.getDescription();
+	}
+	
 	public BranchCommandHelpOld getCommandHelp() {
 		return this.posHandler.getCommandHelp();
 	}

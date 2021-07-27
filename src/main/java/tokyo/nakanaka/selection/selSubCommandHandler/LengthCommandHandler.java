@@ -26,6 +26,11 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 	public String getLabel() {
 		return this.label;
 	}
+	
+	@Override
+	public String getDescription() {
+		return "Set " + this.label + " (positive double value)";
+	}
 
 	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;

@@ -32,6 +32,11 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		return this.label;
 	}
 
+	@Override
+	public String getDescription() {
+		return "Set position of " + this.label;
+	}
+	
 	public BranchCommandHelpOld getCommandHelp() {
 		return cmdHelp;
 	}
