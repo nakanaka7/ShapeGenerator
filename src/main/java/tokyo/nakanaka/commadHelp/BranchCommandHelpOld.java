@@ -3,12 +3,12 @@ package tokyo.nakanaka.commadHelp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BranchCommandHelp implements CommandHelp {
+public class BranchCommandHelpOld implements CommandHelp {
 	private String label;
 	private String description;
 	private List<ParameterData> paramDataList = new ArrayList<>();
 	
-	private BranchCommandHelp(Builder builder) {
+	private BranchCommandHelpOld(Builder builder) {
 		this.label = builder.label;
 		this.description = builder.description;
 		this.paramDataList = builder.paramDataList;
@@ -38,8 +38,8 @@ public class BranchCommandHelp implements CommandHelp {
 			return this;
 		}
 		
-		public BranchCommandHelp build() {
-			return new BranchCommandHelp(this);
+		public BranchCommandHelpOld build() {
+			return new BranchCommandHelpOld(this);
 		}
 
 	}

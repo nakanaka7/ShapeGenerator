@@ -3,7 +3,7 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
@@ -19,11 +19,11 @@ import tokyo.nakanaka.world.World;
 public class ResetCommandHandler implements CommandHandler {
 	private SelectionStrategySource selStraSource;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
-	private BranchCommandHelp cmdHelp;
+	private BranchCommandHelpOld cmdHelp;
 	
 	public ResetCommandHandler(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
-		this.cmdHelp = new BranchCommandHelp.Builder("reset")
+		this.cmdHelp = new BranchCommandHelpOld.Builder("reset")
 				.description("Reset the selection")
 				.build();
 	}
@@ -43,7 +43,7 @@ public class ResetCommandHandler implements CommandHandler {
 		return new ArrayList<>();
 	}
 
-	public BranchCommandHelp getCommandHelp() {
+	public BranchCommandHelpOld getCommandHelp() {
 		return this.cmdHelp;
 	}
 
