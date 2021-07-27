@@ -2,9 +2,9 @@ package tokyo.nakanaka.logger;
 
 public class LogTemplate {
 	public static String ofLine(String title) {
-		return LogColor.GRAY + "--- " 
+		return LogColor.WHITE + "--- " 
 			+ LogColor.RESET + LogColor.GOLD + "[" + title + "]"
-			+ LogColor.RESET + LogColor.GRAY + " ---------------------";		
+			+ LogColor.RESET + LogColor.WHITE + " ---------------------";		
 	}
 	
 	public static String ofKeyValue(String key, String value) {

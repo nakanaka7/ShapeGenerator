@@ -77,7 +77,7 @@ public class DelCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		logger.print(LogDesignColor.NORMAL + "Deleted " + delNum + " chunk(s)");
+		logger.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
 		if(delNum < num) {
 			logger.print(LogDesignColor.ERROR + "reached the first generation");
 		}

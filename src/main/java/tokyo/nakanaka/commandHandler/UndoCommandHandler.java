@@ -42,11 +42,11 @@ public class UndoCommandHandler implements CommandHandler{
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
 				logger.print(LogDesignColor.ERROR + "Can not parse the number");
-				return false;
+				return true;
 			}
 			if(num <= 0) {
 				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
-				return false;
+				return true;
 			}
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
@@ -60,13 +60,13 @@ public class UndoCommandHandler implements CommandHandler{
 		}
 		if(totalNum == 0) {
 			logger.print(LogDesignColor.ERROR + "Nothing to undo");
-			return false;
+			return true;
 		}
 		logger.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
 		if(totalNum < num) {
 			logger.print(LogDesignColor.ERROR + "Reached the beginning command");
 		}
-		return false;
+		return true;
 	}
 	
 	@Override
