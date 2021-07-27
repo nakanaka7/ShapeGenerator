@@ -71,7 +71,7 @@ public class SelCommandDirectory implements CommandDirectory {
 
 				@Override
 				public String getDescription() {
-					return selSubCmdHandler.getCommandHelp().getDescription();
+					return selSubCmdHandler.getDescription();
 				}
 
 				@Override
