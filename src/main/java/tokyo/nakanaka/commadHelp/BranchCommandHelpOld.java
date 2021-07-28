@@ -2,7 +2,7 @@ package tokyo.nakanaka.commadHelp;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Deprecated
 public class BranchCommandHelpOld implements CommandHelp {
 	private String label;
 	private String description;
