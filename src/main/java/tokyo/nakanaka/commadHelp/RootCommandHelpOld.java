@@ -2,13 +2,13 @@ package tokyo.nakanaka.commadHelp;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class RootCommandHelp implements CommandHelp {
+@Deprecated
+public class RootCommandHelpOld implements CommandHelp {
 	private String label;
 	private String description;
 	private List<CommandHelp> subList = new ArrayList<>();
 	
-	private RootCommandHelp(Builder builder) {
+	private RootCommandHelpOld(Builder builder) {
 		this.label = builder.label;
 		this.description = builder.description;
 	}
@@ -26,8 +26,8 @@ public class RootCommandHelp implements CommandHelp {
 			return this;
 		}
 		
-		public RootCommandHelp build() {
-			return new RootCommandHelp(this);
+		public RootCommandHelpOld build() {
+			return new RootCommandHelpOld(this);
 		}
 
 	}
