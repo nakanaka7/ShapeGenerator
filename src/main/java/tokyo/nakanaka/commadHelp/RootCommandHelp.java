@@ -8,11 +8,11 @@ import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.commandHandler.CommandEntry;
 import tokyo.nakanaka.player.Player;
 
-public class RootCommandHelpNew {
+public class RootCommandHelp {
 	private CommandDirectory cmdDir;
 	private String head;
 	
-	public RootCommandHelpNew(String[] parentLabels, CommandDirectory cmdDir) {
+	public RootCommandHelp(String[] parentLabels, CommandDirectory cmdDir) {
 		this.cmdDir = cmdDir;
 		String str = this.cmdDir.getLabel();
 		if(parentLabels.length != 0) {

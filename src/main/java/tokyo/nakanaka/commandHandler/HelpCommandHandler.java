@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.commadHelp.BranchCommandHelpNew;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.commadHelp.RootCommandHelpNew;
+import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
@@ -59,7 +59,7 @@ public class HelpCommandHandler implements CommandHandler {
 		}else if(cmdEntry instanceof CommandDirectory) {
 			CommandDirectory cmdDir = (CommandDirectory)cmdEntry;
 			if(args.length == 0) {
-				RootCommandHelpNew cmdHelp = new RootCommandHelpNew(parentLabels, cmdDir);
+				RootCommandHelp cmdHelp = new RootCommandHelp(parentLabels, cmdDir);
 				logger.print(LogTemplate.ofLine("Help for " + cmdHelp.getSubject()));
 				logger.print(LogTemplate.ofKeyValue("Description", cmdHelp.getDescription()));
 				logger.print(LogTemplate.ofKeyValue("Usage", cmdHelp.getUsage()));
