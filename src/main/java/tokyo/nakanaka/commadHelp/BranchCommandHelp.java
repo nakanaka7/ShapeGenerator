@@ -6,13 +6,13 @@ import java.util.List;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commandHandler.CommandHandler;
 
-public class BranchCommandHelpNew {
+public class BranchCommandHelp {
 	private String[] parentLabels;
 	private String label;
 	private String description;
 	private List<ParameterHelp> paramHelpList;
 	
-	public BranchCommandHelpNew(String[] parentLabels, CommandHandler cmdHandler) {
+	public BranchCommandHelp(String[] parentLabels, CommandHandler cmdHandler) {
 		this.parentLabels = parentLabels;
 		this.label = cmdHandler.getLabel();
 		this.description = cmdHandler.getDescription();

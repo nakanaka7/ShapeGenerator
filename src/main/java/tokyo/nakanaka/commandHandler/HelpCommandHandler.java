@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelpNew;
+import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
@@ -48,7 +48,7 @@ public class HelpCommandHandler implements CommandHandler {
 				return false;
 			}
 			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
-			BranchCommandHelpNew cmdHelp = new BranchCommandHelpNew(parentLabels, cmdHandler);
+			BranchCommandHelp cmdHelp = new BranchCommandHelp(parentLabels, cmdHandler);
 			logger.print(LogTemplate.ofLine("Help for " + cmdHelp.getSubject()));
 			logger.print(LogTemplate.ofKeyValue("Description", cmdHelp.getDescription()));
 			logger.print(LogTemplate.ofKeyValue("Usage", cmdHelp.getUsage()));
