@@ -3,7 +3,6 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelpOld;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
@@ -19,15 +18,11 @@ import tokyo.nakanaka.world.World;
 public class ResetCommandHandler implements CommandHandler {
 	private SelectionStrategySource selStraSource;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
-	private BranchCommandHelpOld cmdHelp;
 	
 	public ResetCommandHandler(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
-		this.cmdHelp = new BranchCommandHelpOld.Builder("reset")
-				.description("Reset the selection")
-				.build();
 	}
-	
+
 	@Override
 	public String getLabel() {
 		return "reset";
@@ -42,15 +37,11 @@ public class ResetCommandHandler implements CommandHandler {
 	public List<ParameterHelp> getParameterHelpList() {
 		return new ArrayList<>();
 	}
-
-	public BranchCommandHelpOld getCommandHelp() {
-		return this.cmdHelp;
-	}
-
+	
 	public boolean onCommand(Player player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
-			logger.print(LogColor.RED + "Usage: " + "/sg sel " + this.cmdHelp.getUsage());
+			logger.print(LogColor.RED + "Usage: " + "/sg sel reset");
 			return false;
 		}
 		World world = player.getWorld();
