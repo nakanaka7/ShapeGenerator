@@ -6,6 +6,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class CuboidPos2CommandHandler implements SelSubCommandHandler{
@@ -44,8 +45,8 @@ public class CuboidPos2CommandHandler implements SelSubCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(String[] args) {
-		return this.posHandler.onTabComplete(args);
+	public List<String> onTabComplete(Player player, String[] args) {
+		return this.posHandler.onTabComplete(player, args);
 	}
 	
 }

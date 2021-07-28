@@ -11,6 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class PosCommandHandler implements SelSubCommandHandler {
@@ -71,7 +72,7 @@ public class PosCommandHandler implements SelSubCommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(String[] args) {
+	public List<String> onTabComplete(Player player, String[] args) {
 		if(args.length <= 3) {
 			return Arrays.asList("~");
 		}else {

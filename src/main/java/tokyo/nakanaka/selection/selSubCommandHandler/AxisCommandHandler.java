@@ -10,6 +10,7 @@ import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.player.Player;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class AxisCommandHandler implements SelSubCommandHandler{
@@ -49,7 +50,7 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(String[] args) {
+	public List<String> onTabComplete(Player player, String[] args) {
 		return Arrays.asList("x", "y", "z");
 	}
 
