@@ -29,4 +29,8 @@ public class SelectionStrategySource {
 		return new ArrayList<>(this.strategyMap.keySet());
 	}
 	
+	public SelectionShape getDefaultSelectionShape() {
+		return SelectionShape.CUBOID;
+	}
+	
 }
