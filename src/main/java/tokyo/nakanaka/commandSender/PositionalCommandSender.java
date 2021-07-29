@@ -1,7 +1,7 @@
 package tokyo.nakanaka.commandSender;
 
-public interface PositionalCommandSender extends CommandSender{
-	public int getX();
-	public int getY();
-	public int getZ();
+import tokyo.nakanaka.BlockPosition;
+
+public interface PositionalCommandSender extends CommandSender {
+	public BlockPosition getBlockPosition();
 }
