@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
+import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.commandHandler.CommandEntry;
 import tokyo.nakanaka.commandHandler.CommandHandler;
@@ -12,12 +13,17 @@ import tokyo.nakanaka.commandHandler.SgCommandDirectory;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class SgCommandHandler {
 	private SgCommandDirectory sgCmdDir;
 
 	public SgCommandHandler(SgCommandDirectory sgCmdDir) {
 		this.sgCmdDir = sgCmdDir;
+	}
+	
+	public SgCommandHandler(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
+		this.sgCmdDir = new SgCommandDirectory(blockArg, selStrtgSource);
 	}
 	
 	public void onCommand(Player player, String[] args) {
@@ -66,6 +72,9 @@ public class SgCommandHandler {
 	}
 	
 	private List<String> onRecursiveTabComplete(CommandEntry cmdEntry, Player player, String[] args) {
+		if(args.length == 0) {
+			return new ArrayList<>();
+		}
 		if(cmdEntry instanceof CommandHandler) {
 			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
 			return cmdHandler.onTabComplete(player, args);
