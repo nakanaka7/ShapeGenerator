@@ -10,39 +10,39 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.world.World;
 
-public class PlayerFactory {
+public class UserFactory {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
 	private SelectionShape defaultShape;
 	
-	public PlayerFactory(Map<SelectionShape, SelectionStrategy> strategyMap, SelectionShape defaultShape) {
+	public UserFactory(Map<SelectionShape, SelectionStrategy> strategyMap, SelectionShape defaultShape) {
 		this.strategyMap = strategyMap;
 		this.defaultShape = defaultShape;
 	}
 
-	public Player createConsolePlayer() {
-		return new Player(UUID.randomUUID());
+	public User createConsoleUser() {
+		return new User(UUID.randomUUID());
 	}
 	
-	public Player createHumanPlayer(UUID uid, World world) {
-		Player player = new Player(uid);
-		player.setSelectionShape(this.defaultShape);
+	public User createHumanUser(UUID uid, World world) {
+		User user = new User(uid);
+		user.setSelectionShape(this.defaultShape);
 		RegionBuildingData regionData = this.strategyMap.get(this.defaultShape).newRegionBuildingData();
 		SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
-		player.setSelectionBuildingData(selData);
-		return player;
+		user.setSelectionBuildingData(selData);
+		return user;
 	}
 	
-	public Player createBlockPlayer(String name, World world, BlockVector3D pos) {
-		Player player = new Player(UUID.randomUUID() ,name);
-		player.setWorld(world);
-		player.setX(pos.getX());
-		player.setY(pos.getY());
-		player.setZ(pos.getZ());
-		player.setSelectionShape(this.defaultShape);
+	public User createBlockUser(String name, World world, BlockVector3D pos) {
+		User user = new User(UUID.randomUUID() ,name);
+		user.setWorld(world);
+		user.setX(pos.getX());
+		user.setY(pos.getY());
+		user.setZ(pos.getZ());
+		user.setSelectionShape(this.defaultShape);
 		RegionBuildingData regionData = this.strategyMap.get(this.defaultShape).newRegionBuildingData();
 		SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
-		player.setSelectionBuildingData(selData);
-		return player;
+		user.setSelectionBuildingData(selData);
+		return user;
 	}
 	
 }

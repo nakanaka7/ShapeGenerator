@@ -11,34 +11,34 @@ import tokyo.nakanaka.commandSender.PlayerCommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEventListener;
 import tokyo.nakanaka.logger.LogDesignColor;
-import tokyo.nakanaka.player.Player;
-import tokyo.nakanaka.player.PlayerRepository;
+import tokyo.nakanaka.player.User;
+import tokyo.nakanaka.player.UserRepository;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class Main {
-	private PlayerRepository playerRepo;
+	private UserRepository playerRepo;
 	private SelectionStrategySource selStrtgSource;
 	private SgCommandHandler sgCmdHandler;
 	private ClickBlockEventListener evtListner;
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
-		this.playerRepo = new PlayerRepository();
+		this.playerRepo = new UserRepository();
 		this.selStrtgSource = selStrtgSource;
 		this.sgCmdHandler = new SgCommandHandler(blockArg, selStrtgSource);
 		this.evtListner = new ClickBlockEventListener(this.playerRepo, selStrtgSource);
 	}
 	
 	public void onSgCommand(CommandSender cmdSender, String[] args) {
-		Player player;
+		User user;
 		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
-			player = this.playerRepo.getHumanPlayer(uid);
-			if(player == null) {
-				player = new Player(uid);
-				this.playerRepo.registerHumanPlayer(player);
-				MainFunctions.setDefaultSelection(this.selStrtgSource, player);
+			user = this.playerRepo.getHumanUser(uid);
+			if(user == null) {
+				user = new User(uid);
+				this.playerRepo.registerHumanUser(user);
+				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
-			player.setBlockPosition(playerCmdSender.getBlockPosition());
+			user.setBlockPosition(playerCmdSender.getBlockPosition());
 		}else if(cmdSender instanceof BlockCommandSender blockCmdSender) {
 			if(args.length == 0 || !args[0].startsWith("@")) {
 				blockCmdSender.print(LogDesignColor.ERROR + "Type \"@[name]\" after \"/sg\" to specify a dummy player");
@@ -46,51 +46,51 @@ public class Main {
 			}
 			BlockCmdLine blockCmdLine = toBlockCmdLine(args);
 			String name = blockCmdLine.name();
-			player = this.playerRepo.getBlockPlayer(name);
-			if(player == null) {
-				player = new Player(UUID.randomUUID(), name);
-				this.playerRepo.registerBlockPlayer(player);
-				MainFunctions.setDefaultSelection(this.selStrtgSource, player);
+			user = this.playerRepo.getBlockUser(name);
+			if(user == null) {
+				user = new User(UUID.randomUUID(), name);
+				this.playerRepo.registerBlockPlayer(user);
+				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
-			player.setBlockPosition(blockCmdSender.getBlockPosition());
+			user.setBlockPosition(blockCmdSender.getBlockPosition());
 			args = blockCmdLine.shiftArgs();
 		}else {
-			player = this.playerRepo.getConsolePlayer();
+			user = this.playerRepo.getConsoleUser();
 		}
-		player.setLogger(cmdSender);
-		this.sgCmdHandler.onCommand(player, args);
+		user.setLogger(cmdSender);
+		this.sgCmdHandler.onCommand(user, args);
 	}
 	
 	public List<String> onSgTabComplete(CommandSender cmdSender, String[] args) {
-		Player player; 
+		User user; 
 		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
 			if(!args[0].startsWith("@")) {
 				UUID uid = playerCmdSender.getUniqueID();
-				player = this.playerRepo.getHumanPlayer(uid);
-				if(player == null) {
-					player = new Player(uid);
-					this.playerRepo.registerHumanPlayer(player);
-					MainFunctions.setDefaultSelection(this.selStrtgSource, player);
+				user = this.playerRepo.getHumanUser(uid);
+				if(user == null) {
+					user = new User(uid);
+					this.playerRepo.registerHumanUser(user);
+					MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 				}
-				player.setBlockPosition(playerCmdSender.getBlockPosition());
+				user.setBlockPosition(playerCmdSender.getBlockPosition());
 			}else {
 				BlockCmdLine blockCmdLine = toBlockCmdLine(args);
 				String name = blockCmdLine.name();
-				player = this.playerRepo.getBlockPlayer(name);
-				if(player == null) {
-					player = new Player(UUID.randomUUID(), name);
-					MainFunctions.setDefaultSelection(this.selStrtgSource, player);
+				user = this.playerRepo.getBlockUser(name);
+				if(user == null) {
+					user = new User(UUID.randomUUID(), name);
+					MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 				}
-				player.setBlockPosition(playerCmdSender.getBlockPosition());
+				user.setBlockPosition(playerCmdSender.getBlockPosition());
 				args = blockCmdLine.shiftArgs();
 			}
 		}else if(cmdSender instanceof ConsoleCommandSender) {
-			player = this.playerRepo.getConsolePlayer();
+			user = this.playerRepo.getConsoleUser();
 		}else {
 			//unreachable
 			return null;
 		}
-		return this.sgCmdHandler.onTabComplete(player, args);
+		return this.sgCmdHandler.onTabComplete(user, args);
 	}
 	
 	private static record BlockCmdLine(String name, String[] shiftArgs) {};

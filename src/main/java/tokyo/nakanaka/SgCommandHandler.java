@@ -12,7 +12,7 @@ import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.commandHandler.SgCommandDirectory;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class SgCommandHandler {
@@ -26,15 +26,15 @@ public class SgCommandHandler {
 		this.sgCmdDir = new SgCommandDirectory(blockArg, selStrtgSource);
 	}
 	
-	public void onCommand(Player player, String[] args) {
-		onRecursiveCommand(new String[0], this.sgCmdDir, player, args);
+	public void onCommand(User user, String[] args) {
+		onRecursiveCommand(new String[0], this.sgCmdDir, user, args);
 	}
 	
-	private static void onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, Player player, String[] args) {
-		Logger logger = player.getLogger();
+	private static void onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(cmdEntry instanceof CommandHandler) {
 			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
-			boolean success = cmdHandler.onCommand(player, args);
+			boolean success = cmdHandler.onCommand(user, args);
 			if(!success) {
 				BranchCommandHelp help = new BranchCommandHelp(parentLabels, cmdHandler);
 				logger.print(LogDesignColor.ERROR + "Usage: " + help.getUsage());
@@ -42,7 +42,7 @@ public class SgCommandHandler {
 			}
 		}else if(cmdEntry instanceof CommandDirectory) {
 			CommandDirectory cmdDir = (CommandDirectory)cmdEntry;
-			List<CommandEntry> subEntryList = cmdDir.getSubList(player);
+			List<CommandEntry> subEntryList = cmdDir.getSubList(user);
 			if(args.length == 0) {
 				logger.print(LogDesignColor.NORMAL + "See help");
 				return;
@@ -63,24 +63,24 @@ public class SgCommandHandler {
 			subParentLabels[parentLabels.length] = cmdEntry.getLabel();
 			String[] subArgs = new String[args.length - 1];
 			System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-			onRecursiveCommand(subParentLabels, subEntry, player, subArgs);
+			onRecursiveCommand(subParentLabels, subEntry, user, subArgs);
 		}
 	}
 
-	public List<String> onTabComplete(Player player, String[] args) {
-		return onRecursiveTabComplete(this.sgCmdDir, player, args);
+	public List<String> onTabComplete(User user, String[] args) {
+		return onRecursiveTabComplete(this.sgCmdDir, user, args);
 	}
 	
-	private List<String> onRecursiveTabComplete(CommandEntry cmdEntry, Player player, String[] args) {
+	private List<String> onRecursiveTabComplete(CommandEntry cmdEntry, User user, String[] args) {
 		if(args.length == 0) {
 			return new ArrayList<>();
 		}
 		if(cmdEntry instanceof CommandHandler) {
 			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
-			return cmdHandler.onTabComplete(player, args);
+			return cmdHandler.onTabComplete(user, args);
 		}else if(cmdEntry instanceof CommandDirectory) {
 			CommandDirectory cmdDir = (CommandDirectory)cmdEntry;
-			List<CommandEntry> subCmdEntryList = cmdDir.getSubList(player);
+			List<CommandEntry> subCmdEntryList = cmdDir.getSubList(user);
 			if(args.length == 1) {
 				return subCmdEntryList.stream()
 						.map(s -> s.getLabel())
@@ -99,7 +99,7 @@ public class SgCommandHandler {
 			}
 			String[] subArgs = new String[args.length - 1];
 			System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-			return onRecursiveTabComplete(subCmdEntry, player, subArgs);
+			return onRecursiveTabComplete(subCmdEntry, user, subArgs);
 		}else {
 			//unreachable
 			return new ArrayList<>();

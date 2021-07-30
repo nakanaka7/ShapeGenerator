@@ -9,7 +9,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.world.World;
 
-public class Player {
+public class User {
 	private UUID uid;
 	private String name;
 	private Logger logger;
@@ -22,12 +22,12 @@ public class Player {
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	
-	public Player(UUID uid, String name) {
+	public User(UUID uid, String name) {
 		this.uid = uid;
 		this.name = name;
 	}
 
-	public Player(UUID uid) {
+	public User(UUID uid) {
 		this.uid = uid;
 	}
 	
