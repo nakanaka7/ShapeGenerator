@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
@@ -35,11 +35,11 @@ public class SelCommandDirectory implements CommandDirectory {
 	}
 	
 	@Override
-	public List<CommandEntry> getSubList(Player player) {
+	public List<CommandEntry> getSubList(User user) {
 		List<CommandEntry> handlerList = new ArrayList<>();
 		handlerList.add(new ResetCommandHandler(this.selStraSource));
 		handlerList.add(new OffsetCommandHandler());
-		SelectionShape shape = player.getSelectionShape();
+		SelectionShape shape = user.getSelectionShape();
 		SelectionStrategy strategy = this.selStraSource.get(shape);
 		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 		for(SelSubCommandHandler selSubCmdHandler : cmdHandlerList) {
@@ -50,22 +50,22 @@ public class SelCommandDirectory implements CommandDirectory {
 				}
 	
 				@Override
-				public boolean onCommand(Player player, String[] args) {
-					World world = player.getWorld();
-					BlockVector3D playerPos = new BlockVector3D(player.getX(), player.getY(), player.getZ());
-					SelectionBuildingData selData = player.getSelectionBuildingData();
+				public boolean onCommand(User user, String[] args) {
+					World world = user.getWorld();
+					BlockVector3D playerPos = new BlockVector3D(user.getX(), user.getY(), user.getZ());
+					SelectionBuildingData selData = user.getSelectionBuildingData();
 					if(!world.equals(selData.getWorld())) {
 						SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
-						player.setSelectionBuildingData(newSelData);	
+						user.setSelectionBuildingData(newSelData);	
 					}
 					RegionBuildingData regionData = selData.getRegionData();
-					selSubCmdHandler.onCommand(regionData, player.getLogger(), playerPos, args);
-					new SelectionMessenger().printSelection(player.getLogger(), shape, selData, strategy.getDefaultOffsetLabel());
+					selSubCmdHandler.onCommand(regionData, user.getLogger(), playerPos, args);
+					new SelectionMessenger().printSelection(user.getLogger(), shape, selData, strategy.getDefaultOffsetLabel());
 					return true;
 				}
 
 				@Override
-				public List<String> onTabComplete(Player player, String[] args) {
+				public List<String> onTabComplete(User player, String[] args) {
 					return selSubCmdHandler.onTabComplete(player, args);
 				}
 

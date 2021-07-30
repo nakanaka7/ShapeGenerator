@@ -10,7 +10,7 @@ import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
@@ -48,7 +48,7 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		return Arrays.asList("3", "4", "5", "6", "7", "8", "9", "10");
 	}
 	

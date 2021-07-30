@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class DelCommandHandler implements CommandHandler {
 	@Override
@@ -33,8 +33,8 @@ public class DelCommandHandler implements CommandHandler {
 		return "Delete the generated blocks";
 	}
 	
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length > 1) {
 			return false;
 		}
@@ -51,7 +51,7 @@ public class DelCommandHandler implements CommandHandler {
 				return true;
 			}
 		}
-		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		List<GenerateCommand> originalList = new ArrayList<>();
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -85,7 +85,7 @@ public class DelCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.MinXCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class MinXCommandHandler implements CommandHandler {
 	
@@ -35,8 +35,8 @@ public class MinXCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			return false;
 		}
@@ -47,7 +47,7 @@ public class MinXCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
 			return true;
 		}
-		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -66,7 +66,7 @@ public class MinXCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		MinXCommand minxCmd = new MinXCommand(originalCmd, value, player.getBlockPhysics());
+		MinXCommand minxCmd = new MinXCommand(originalCmd, value, user.getBlockPhysics());
 		minxCmd.execute();
 		undoManager.add(minxCmd);
 		logger.print(LogDesignColor.NORMAL + "Set minX -> " + value);
@@ -74,9 +74,9 @@ public class MinXCommandHandler implements CommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(player.getX()));
+			return Arrays.asList(String.valueOf(user.getX()));
 		}else {
 			return new ArrayList<>();
 		}

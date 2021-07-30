@@ -12,7 +12,7 @@ import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuildingData;
@@ -46,14 +46,14 @@ public class GenrCommandHandler implements CommandHandler{
 	}
 
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			return false;
 		}
-		SelectionBuildingData selData = player.getSelectionBuildingData();
+		SelectionBuildingData selData = user.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
-		SelectionStrategy selStrategy = this.selStraSource.get(player.getSelectionShape());
+		SelectionStrategy selStrategy = this.selStraSource.get(user.getSelectionShape());
 		BoundRegion3D region;
 		try {
 			region = selStrategy.buildBoundRegion3D(regionData);
@@ -73,7 +73,7 @@ public class GenrCommandHandler implements CommandHandler{
 			logger.print(LogDesignColor.ERROR + "Invalid block specification");
 			return true;
 		}
-		GenerateCommand generateCmd = new GenerateCommand(sel, block, player.getBlockPhysics());	
+		GenerateCommand generateCmd = new GenerateCommand(sel, block, user.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
@@ -81,12 +81,12 @@ public class GenrCommandHandler implements CommandHandler{
 			return true;
 		}
 		logger.print(LogDesignColor.NORMAL + "Generated block(s)");
-		player.getUndoCommandManager().add(generateCmd);
+		user.getUndoCommandManager().add(generateCmd);
 		return true;
 	}
 	
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return this.blockArg.onTabComplete(args[0]);
 		}else {

@@ -9,7 +9,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class UndoCommandHandler implements CommandHandler{
 	
@@ -31,8 +31,8 @@ public class UndoCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length > 1) {
 			return false;
 		}
@@ -49,7 +49,7 @@ public class UndoCommandHandler implements CommandHandler{
 				return true;
 			}
 		}
-		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		int totalNum = 0;
 		for(int i = 0; i < num; ++i) {
 			boolean success = undoManager.undo();
@@ -70,7 +70,7 @@ public class UndoCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

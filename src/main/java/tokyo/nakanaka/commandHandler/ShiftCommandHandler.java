@@ -16,7 +16,7 @@ import tokyo.nakanaka.geometricProperty.Direction;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class ShiftCommandHandler implements CommandHandler{
 
@@ -39,8 +39,8 @@ public class ShiftCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length != 2) {
 			return false;
 		}
@@ -58,7 +58,7 @@ public class ShiftCommandHandler implements CommandHandler{
 			logger.print(LogDesignColor.ERROR + "Can not parse integer");
 			return true;
 		}
-		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -81,7 +81,7 @@ public class ShiftCommandHandler implements CommandHandler{
 		double dy = dir.getY() * blocks;
 		double dz = dir.getZ() * blocks;
 		Vector3D displacement = new Vector3D(dx, dy, dz);
-		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, player.getBlockPhysics());
+		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, user.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
 		logger.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
@@ -89,7 +89,7 @@ public class ShiftCommandHandler implements CommandHandler{
 	}
 	
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList(Direction.values()).stream()
 					.map(s -> s.toString().toLowerCase())

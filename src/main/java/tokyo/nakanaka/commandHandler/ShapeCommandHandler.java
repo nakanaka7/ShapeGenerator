@@ -8,7 +8,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
@@ -51,8 +51,8 @@ public class ShapeCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			return false;
 		}
@@ -68,15 +68,15 @@ public class ShapeCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Unsupported shape");
 			return true;
 		}	
-		SelectionShape original = player.getSelectionShape();
+		SelectionShape original = user.getSelectionShape();
 		if(shape == original) {
 			logger.print(LogDesignColor.ERROR + "Already set : Nothing to change");
 			return true;
 		}else {
-			player.setSelectionShape(shape);
+			user.setSelectionShape(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
-			SelectionBuildingData selData = new SelectionBuildingData(player.getWorld(), regionData);
-			player.setSelectionBuildingData(selData);
+			SelectionBuildingData selData = new SelectionBuildingData(user.getWorld(), regionData);
+			user.setSelectionBuildingData(selData);
 			logger.print(LogDesignColor.NORMAL + "Set the shape -> " + shape);
 			new SelectionMessenger().printClickDescription(logger, selStrategy);
 			return true;
@@ -84,7 +84,7 @@ public class ShapeCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return this.selStraSource.getShapeList().stream()
 					.map(s -> s.toString().toLowerCase())

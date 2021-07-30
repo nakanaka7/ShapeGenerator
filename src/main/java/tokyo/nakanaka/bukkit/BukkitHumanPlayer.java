@@ -5,9 +5,9 @@ import org.bukkit.inventory.ItemStack;
 
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.player.HumanPlayer;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
-public class BukkitHumanPlayer extends Player implements HumanPlayer {
+public class BukkitHumanPlayer extends User implements HumanPlayer {
 	private org.bukkit.entity.Player bukkitPlayer;
 	public BukkitHumanPlayer(org.bukkit.entity.Player bukkitPlayer) {
 		super(bukkitPlayer.getUniqueId(), bukkitPlayer.getName());
