@@ -66,7 +66,7 @@ public class SelCommandDirectory implements CommandDirectory {
 
 				@Override
 				public List<String> onTabComplete(Player player, String[] args) {
-					return selSubCmdHandler.onTabComplete(args);
+					return selSubCmdHandler.onTabComplete(player, args);
 				}
 
 				@Override

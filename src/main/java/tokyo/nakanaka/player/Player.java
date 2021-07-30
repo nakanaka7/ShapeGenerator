@@ -2,6 +2,7 @@ package tokyo.nakanaka.player;
 
 import java.util.UUID;
 
+import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
@@ -44,6 +45,13 @@ public class Player {
 
 	public void setLogger(Logger logger) {
 		this.logger = logger;
+	}
+	
+	public void setBlockPosition(BlockPosition blockPos) {
+		this.world = blockPos.world();
+		this.x = blockPos.x();
+		this.y = blockPos.y();
+		this.z = blockPos.z();
 	}
 	
 	public World getWorld() {
