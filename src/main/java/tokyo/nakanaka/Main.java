@@ -1,5 +1,6 @@
 package tokyo.nakanaka;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class Main {
 		this.evtListner = new ClickBlockEventListener(this.playerRepo, selStrtgSource);
 	}
 	
-	public void onSgCommand(CommandSender cmdSender, String[] args) {
+	public void onSgCommandNew(CommandSender cmdSender, String[] args) {
 		User user;
 		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
@@ -61,7 +62,42 @@ public class Main {
 		this.sgCmdHandler.onCommand(user, args);
 	}
 	
+	public void onSgCommand(CommandSender cmdSender, String[] args) {
+		User user;
+		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
+			UUID uid = playerCmdSender.getUniqueID();
+			user = this.playerRepo.getHumanUser(uid);
+			if(user == null) {
+				user = new User(uid);
+				this.playerRepo.registerHumanUser(user);
+				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
+			}
+			user.setBlockPosition(playerCmdSender.getBlockPosition());
+		}else {
+			return;
+		}
+		user.setLogger(cmdSender);
+		this.sgCmdHandler.onCommand(user, args);
+	}
+	
 	public List<String> onSgTabComplete(CommandSender cmdSender, String[] args) {
+		User user; 
+		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
+			UUID uid = playerCmdSender.getUniqueID();
+			user = this.playerRepo.getHumanUser(uid);
+			if(user == null) {
+				user = new User(uid);
+				this.playerRepo.registerHumanUser(user);
+				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
+			}
+			user.setBlockPosition(playerCmdSender.getBlockPosition());
+		}else {
+			return new ArrayList<>();
+		}
+		return this.sgCmdHandler.onTabComplete(user, args);
+	}
+	
+	public List<String> onSgTabCompleteOld(CommandSender cmdSender, String[] args) {
 		User user; 
 		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
 			if(!args[0].startsWith("@")) {
