@@ -5,114 +5,90 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Server;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
-import tokyo.nakanaka.ClickBlockEventHandler;
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Item;
+import tokyo.nakanaka.Main;
 import tokyo.nakanaka.Scheduler;
-import tokyo.nakanaka.player.Player;
-import tokyo.nakanaka.player.PlayerRepository;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.SelectionBuildingData;
-import tokyo.nakanaka.selection.SelectionShape;
-import tokyo.nakanaka.selection.selectionStrategy.CuboidSelectionStrategy;
+import tokyo.nakanaka.bukkit.commandSender.BukkitPlayerCommandSender;
+import tokyo.nakanaka.commandSender.PlayerCommandSender;
+import tokyo.nakanaka.event.ClickBlockEvent;
+import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 import tokyo.nakanaka.world.World;
 
-public class ClickBlockEventHandlerAdapter implements Listener{
-	private Server server;
-	private PlayerRepository playerRepo;
+public class BukkitClickBlockEventListener implements Listener{
+	private Main main;
 	private Scheduler scheduler;
-	private ClickBlockEventHandler clickHandler;
-	private Map<Player, Boolean> activateRightMap = new HashMap<>();
+	private Map<UUID, Boolean> activateRightMapNew = new HashMap<>();
 	
-	public ClickBlockEventHandlerAdapter(Server server, PlayerRepository playerRepo, Scheduler scheduler, ClickBlockEventHandler clickHandler) {
-		this.server = server;
-		this.playerRepo = playerRepo;
+	public BukkitClickBlockEventListener(Main main, Scheduler scheduler) {
+		this.main = main;
 		this.scheduler = scheduler;
-		this.clickHandler = clickHandler;
 	}
-
+	
 	@EventHandler
-	public void onLeftClickBlock(BlockBreakEvent e) {
-		org.bukkit.entity.Player bukkitPlayer = e.getPlayer();
-		ItemStack itemStack = bukkitPlayer.getInventory().getItemInMainHand();
-		Material type = itemStack.getType();
-		if(type != Material.BLAZE_ROD) {
+	public void onLeftClickBlock(BlockBreakEvent evt0) {
+		org.bukkit.entity.Player player0 = evt0.getPlayer();
+		Item item = null;
+		try {
+			item = Item.valueOf(player0.getInventory().getItemInMainHand().getType().toString());
+		}catch(IllegalArgumentException e) {
 			return;
 		}
-		e.setCancelled(true);
-		UUID uid = bukkitPlayer.getUniqueId();
-		Player player = this.playerRepo.getHumanPlayer(uid);
-		Location loc = e.getBlock().getLocation();
-		World world = new BukkitWorld(this.server, loc.getWorld());
-		if(player == null) {
-			player = new Player(uid);
-			player.setSelectionShape(SelectionShape.CUBOID);
-			RegionBuildingData regionData = new CuboidSelectionStrategy().newRegionBuildingData();
-			SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
-			player.setSelectionBuildingData(selData);
-			this.playerRepo.registerHumanPlayer(player);
+		if(item != Item.BLAZE_ROD) {
+			return;
 		}
-		player.setLogger(new BukkitLogger(bukkitPlayer));
-		player.setWorld(world);
+		evt0.setCancelled(true);
+		PlayerCommandSender player = new BukkitPlayerCommandSender(player0);
+		World world = new BukkitWorld(player0.getServer(), player0.getWorld());
+		Location loc = evt0.getBlock().getLocation();
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
-		this.clickHandler.onLeftClickBlock(player, x, y, z);
+		BlockPosition blockPos = new BlockPosition(world, x, y, z);
+		ClickBlockEvent evt = new ClickBlockEvent(player, blockPos, HandType.LEFT_HAND, item);
+		this.main.onClickBlockEvent(evt);
 	}
 	
 	@EventHandler
-	public void onRightClickBlock(PlayerInteractEvent e) {
-		if(e.getAction() != Action.RIGHT_CLICK_BLOCK) {
+	public void onRightClickBlock(PlayerInteractEvent evt0) {
+		if(evt0.getAction() != Action.RIGHT_CLICK_BLOCK) {
 			return;
 		}
-		org.bukkit.entity.Player bukkitPlayer = e.getPlayer();
-		ItemStack itemStack = bukkitPlayer.getInventory().getItemInMainHand();
-		Material type = itemStack.getType();
-		if(type != Material.BLAZE_ROD) {
+		org.bukkit.entity.Player player0 = evt0.getPlayer();
+		Item item = null;
+		try {
+			item = Item.valueOf(player0.getInventory().getItemInMainHand().getType().toString());
+		}catch(IllegalArgumentException e) {
 			return;
 		}
-		e.setCancelled(true);
-		UUID uid = bukkitPlayer.getUniqueId();
-		Player player = this.playerRepo.getHumanPlayer(bukkitPlayer.getUniqueId());
-		Location loc = e.getClickedBlock().getLocation();
-		World world = new BukkitWorld(this.server, loc.getWorld());
-		if(player == null) {
-			player = new Player(uid);
-			player.setSelectionShape(SelectionShape.CUBOID);
-			RegionBuildingData regionData = new CuboidSelectionStrategy().newRegionBuildingData();
-			SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
-			player.setSelectionBuildingData(selData);		
-			this.playerRepo.registerHumanPlayer(player);
+		if(item != Item.BLAZE_ROD) {
+			return;
 		}
-		player.setLogger(new BukkitLogger(bukkitPlayer));
-		Boolean canActivate = this.activateRightMap.get(player);
+		evt0.setCancelled(true);
+		PlayerCommandSender player = new BukkitPlayerCommandSender(player0);
+		Boolean canActivate = this.activateRightMapNew.get(player.getUniqueID());
 		if(canActivate == null) {
 			canActivate = true;
 		}
 		if(!canActivate) {
 			return;
 		}
-		player.setWorld(world);
+		World world = new BukkitWorld(player0.getServer(), player0.getWorld());
+		Location loc = evt0.getClickedBlock().getLocation();
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
-		this.clickHandler.onRightClickBlock(player, x, y, z);
-		this.activateRightMap.put(player, false);
-		Player finalPlayer = player;//final or effectively final
-		Runnable activate = new Runnable() {
-			@Override
-			public void run() {
-				activateRightMap.put(finalPlayer, true);
-			}
-		};
-		this.scheduler.scheduleLater(1, activate);
+		BlockPosition blockPos = new BlockPosition(world, x, y, z);
+		ClickBlockEvent evt = new ClickBlockEvent(player, blockPos, HandType.RIGHT_HAND, item);
+		this.main.onClickBlockEvent(evt);
+		this.activateRightMapNew.put(player.getUniqueID(), false);
+		this.scheduler.scheduleLater(1, () -> this.activateRightMapNew.put(player.getUniqueID(), true));
 	}
-	
+
 }
