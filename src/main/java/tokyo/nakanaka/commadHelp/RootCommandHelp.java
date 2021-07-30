@@ -6,7 +6,7 @@ import java.util.List;
 import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.commandHandler.CommandEntry;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class RootCommandHelp {
 	private CommandDirectory cmdDir;
@@ -38,9 +38,9 @@ public class RootCommandHelp {
 	 * the first element of pair is subcommand label,
 	 * the second element of pair is subcommand description
 	 */
-	public List<Pair<String, String>> getSubCommandDescriptionList(Player player){
+	public List<Pair<String, String>> getSubCommandDescriptionList(User user){
 		List<Pair<String, String>> list = new ArrayList<>();
-		for(CommandEntry e : this.cmdDir.getSubList(player)) {
+		for(CommandEntry e : this.cmdDir.getSubList(user)) {
 			String first =  e.getLabel();
 			String second = e.getDescription();
 			list.add(new Pair<>(first, second));

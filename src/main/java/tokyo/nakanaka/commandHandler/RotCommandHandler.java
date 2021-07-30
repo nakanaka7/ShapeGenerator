@@ -14,7 +14,7 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class RotCommandHandler implements CommandHandler{
 		
@@ -37,7 +37,7 @@ public class RotCommandHandler implements CommandHandler{
 	}
 		
 	@Override
-	public boolean onCommand(Player player, String[] args) {
+	public boolean onCommand(User player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
 			return false;
@@ -83,7 +83,7 @@ public class RotCommandHandler implements CommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else if(args.length == 2) {

@@ -13,7 +13,7 @@ import tokyo.nakanaka.command.MaxZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class MaxZCommandHandler implements CommandHandler {	
 	@Override
@@ -34,8 +34,8 @@ public class MaxZCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			return false;
 		}
@@ -46,7 +46,7 @@ public class MaxZCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
 			return true;
 		}
-		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -65,7 +65,7 @@ public class MaxZCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, player.getBlockPhysics());
+		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, user.getBlockPhysics());
 		maxzCmd.execute();
 		undoManager.add(maxzCmd);
 		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
@@ -73,9 +73,9 @@ public class MaxZCommandHandler implements CommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(player.getZ()));
+			return Arrays.asList(String.valueOf(user.getZ()));
 		}else {
 			return new ArrayList<>();
 		}

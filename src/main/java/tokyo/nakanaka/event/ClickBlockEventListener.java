@@ -8,8 +8,8 @@ import tokyo.nakanaka.MainFunctions;
 import tokyo.nakanaka.commandSender.PlayerCommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.player.Player;
-import tokyo.nakanaka.player.PlayerRepository;
+import tokyo.nakanaka.player.User;
+import tokyo.nakanaka.player.UserRepository;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
@@ -19,12 +19,12 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventListener {
-	private PlayerRepository playerRepo;
+	private UserRepository userRepo;
 	private SelectionStrategySource selStrtgSource;
 	private static SelectionMessenger selMessenger = new SelectionMessenger();
 	
-	public ClickBlockEventListener(PlayerRepository playerRepo, SelectionStrategySource selStrtgSource) {
-		this.playerRepo = playerRepo;
+	public ClickBlockEventListener(UserRepository userRepo, SelectionStrategySource selStrtgSource) {
+		this.userRepo = userRepo;
 		this.selStrtgSource = selStrtgSource;
 	}
 	
@@ -37,10 +37,10 @@ public class ClickBlockEventListener {
 			return;
 		}
 		UUID uid = player.getUniqueID();
-		Player user = this.playerRepo.getHumanPlayer(uid);
+		User user = this.userRepo.getHumanUser(uid);
 		if(user == null) {
-			user = new Player(uid);
-			this.playerRepo.registerHumanPlayer(user);
+			user = new User(uid);
+			this.userRepo.registerHumanUser(user);
 			MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 		}
 		user.setLogger(player);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class SgCommandDirectory implements CommandDirectory {
@@ -43,7 +43,7 @@ public class SgCommandDirectory implements CommandDirectory {
 	}
 	
 	@Override
-	public List<CommandEntry> getSubList(Player player) {
+	public List<CommandEntry> getSubList(User user) {
 		return subList;
 	}
 	

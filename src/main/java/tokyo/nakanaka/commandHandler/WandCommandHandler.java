@@ -8,7 +8,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.player.HumanPlayer;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
@@ -37,22 +37,22 @@ public class WandCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		if(!(player instanceof HumanPlayer)) {
-			player.getLogger().print(LogDesignColor.ERROR + "Only player can execute this command");
+	public boolean onCommand(User user, String[] args) {
+		if(!(user instanceof HumanPlayer)) {
+			user.getLogger().print(LogDesignColor.ERROR + "Only player can execute this command");
 		}
-		HumanPlayer hp = (HumanPlayer) player;
+		HumanPlayer hp = (HumanPlayer) user;
 		hp.giveItem(Item.BLAZE_ROD, 1);
-		SelectionShape shape = player.getSelectionShape();
+		SelectionShape shape = user.getSelectionShape();
 		SelectionStrategy strategy = this.selStraSource.get(shape);
-		Logger logger = player.getLogger();
+		Logger logger = user.getLogger();
 		logger.print(LogDesignColor.NORMAL + "Gave wand to " + hp.getName());
 		new SelectionMessenger().printClickDescription(logger, strategy);
 		return true;
 	}
 
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		return new ArrayList<>();
 	}
 

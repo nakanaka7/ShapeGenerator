@@ -14,7 +14,7 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.player.Player;
+import tokyo.nakanaka.player.User;
 
 public class MirrorCommandHandler implements CommandHandler {
 	
@@ -36,8 +36,8 @@ public class MirrorCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(Player player, String[] args) {
-		Logger logger = player.getLogger();
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			return false;
 		}
@@ -48,7 +48,7 @@ public class MirrorCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Can not parse axis");
 			return true;
 		}
-		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -67,7 +67,7 @@ public class MirrorCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}	
-		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, player.getBlockPhysics());
+		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, user.getBlockPhysics());
 		mirrorCmd.execute();
 		undoManager.add(mirrorCmd);
 		logger.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
@@ -75,7 +75,7 @@ public class MirrorCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(Player player, String[] args) {
+	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else {
