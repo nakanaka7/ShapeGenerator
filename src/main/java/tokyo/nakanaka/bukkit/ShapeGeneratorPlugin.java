@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import tokyo.nakanaka.Main;
 import tokyo.nakanaka.bukkit.commandSender.BukkitBlockCommandSender;
 import tokyo.nakanaka.bukkit.commandSender.BukkitConsoleCommandSender;
-import tokyo.nakanaka.bukkit.commandSender.BukkitPlayerCommandSender;
+import tokyo.nakanaka.bukkit.commandSender.BukkitPlayer;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
@@ -52,7 +52,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin {
 	
 	private static CommandSender convertCommandSender(org.bukkit.command.CommandSender cmdSender0) {
 		if(cmdSender0 instanceof Player p) {
-			return new BukkitPlayerCommandSender(p);
+			return new BukkitPlayer(p);
 		}else if(cmdSender0 instanceof BlockCommandSender b) {
 			return new BukkitBlockCommandSender(b);
 		}else if(cmdSender0 instanceof ConsoleCommandSender c) {

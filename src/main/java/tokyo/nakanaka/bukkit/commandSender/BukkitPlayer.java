@@ -7,8 +7,8 @@ import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.world.World;
 
-public class BukkitPlayerCommandSender extends BukkitCommandSender implements Player {
-	public BukkitPlayerCommandSender(org.bukkit.entity.Player player0) {
+public class BukkitPlayer extends BukkitCommandSender implements Player {
+	public BukkitPlayer(org.bukkit.entity.Player player0) {
 		super(player0);
 	}
 
