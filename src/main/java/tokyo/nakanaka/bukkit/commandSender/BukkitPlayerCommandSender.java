@@ -4,10 +4,10 @@ import java.util.UUID;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.bukkit.BukkitWorld;
-import tokyo.nakanaka.commandSender.PlayerCommandSender;
+import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.world.World;
 
-public class BukkitPlayerCommandSender implements PlayerCommandSender {
+public class BukkitPlayerCommandSender implements Player {
 	private org.bukkit.entity.Player player0;
 	
 	public BukkitPlayerCommandSender(org.bukkit.entity.Player player0) {

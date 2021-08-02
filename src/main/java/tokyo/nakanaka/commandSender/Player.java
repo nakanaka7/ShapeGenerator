@@ -2,6 +2,6 @@ package tokyo.nakanaka.commandSender;
 
 import java.util.UUID;
 
-public interface PlayerCommandSender extends BlockPositionalCommandSender {
+public interface Player extends BlockPositionalCommandSender {
 	public UUID getUniqueID();
 }

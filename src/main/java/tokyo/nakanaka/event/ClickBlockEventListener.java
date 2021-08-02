@@ -5,7 +5,7 @@ import java.util.UUID;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.MainFunctions;
-import tokyo.nakanaka.commandSender.PlayerCommandSender;
+import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.player.User;
@@ -29,7 +29,7 @@ public class ClickBlockEventListener {
 	}
 	
 	public void onClickBlockEvent(ClickBlockEvent evt) {
-		PlayerCommandSender player = evt.getPlayer();
+		Player player = evt.getPlayer();
 		BlockPosition blockPos = evt.getBlockPos();
 		HandType handType = evt.getHandType();
 		Item item = evt.getItem();
