@@ -1,6 +1,6 @@
 package tokyo.nakanaka.selection.selectionStrategy;
 
-import static tokyo.nakanaka.logger.LogConstant.HEAD_ERROR;
+import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
 
 import java.util.Arrays;
 import java.util.List;

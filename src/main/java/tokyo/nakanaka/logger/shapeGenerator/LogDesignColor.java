@@ -1,4 +1,6 @@
-package tokyo.nakanaka.logger;
+package tokyo.nakanaka.logger.shapeGenerator;
+
+import tokyo.nakanaka.logger.LogColor;
 
 public class LogDesignColor {
 	public static LogColor MAIN = LogColor.GOLD;

@@ -15,8 +15,8 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.Main;
 import tokyo.nakanaka.Scheduler;
-import tokyo.nakanaka.bukkit.commandSender.BukkitPlayerCommandSender;
-import tokyo.nakanaka.commandSender.PlayerCommandSender;
+import tokyo.nakanaka.bukkit.commandSender.BukkitPlayer;
+import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 import tokyo.nakanaka.world.World;
@@ -44,7 +44,7 @@ public class BukkitClickBlockEventListener implements Listener{
 			return;
 		}
 		evt0.setCancelled(true);
-		PlayerCommandSender player = new BukkitPlayerCommandSender(player0);
+		Player player = new BukkitPlayer(player0);
 		World world = new BukkitWorld(player0.getServer(), player0.getWorld());
 		Location loc = evt0.getBlock().getLocation();
 		int x = loc.getBlockX();
@@ -71,7 +71,7 @@ public class BukkitClickBlockEventListener implements Listener{
 			return;
 		}
 		evt0.setCancelled(true);
-		PlayerCommandSender player = new BukkitPlayerCommandSender(player0);
+		Player player = new BukkitPlayer(player0);
 		Boolean canActivate = this.activateRightMapNew.get(player.getUniqueID());
 		if(canActivate == null) {
 			canActivate = true;

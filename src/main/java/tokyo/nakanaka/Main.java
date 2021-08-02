@@ -8,10 +8,10 @@ import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.commandSender.BlockCommandSender;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.commandSender.ConsoleCommandSender;
-import tokyo.nakanaka.commandSender.PlayerCommandSender;
+import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEventListener;
-import tokyo.nakanaka.logger.LogDesignColor;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.player.UserRepository;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
@@ -31,7 +31,7 @@ public class Main {
 	
 	public void onSgCommandNew(CommandSender cmdSender, String[] args) {
 		User user;
-		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
+		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
 			user = this.playerRepo.getHumanUser(uid);
 			if(user == null) {
@@ -64,7 +64,7 @@ public class Main {
 	
 	public void onSgCommand(CommandSender cmdSender, String[] args) {
 		User user;
-		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
+		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
 			user = this.playerRepo.getHumanUser(uid);
 			if(user == null) {
@@ -82,7 +82,7 @@ public class Main {
 	
 	public List<String> onSgTabComplete(CommandSender cmdSender, String[] args) {
 		User user; 
-		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
+		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
 			user = this.playerRepo.getHumanUser(uid);
 			if(user == null) {
@@ -99,7 +99,7 @@ public class Main {
 	
 	public List<String> onSgTabCompleteOld(CommandSender cmdSender, String[] args) {
 		User user; 
-		if(cmdSender instanceof PlayerCommandSender playerCmdSender) {
+		if(cmdSender instanceof Player playerCmdSender) {
 			if(!args[0].startsWith("@")) {
 				UUID uid = playerCmdSender.getUniqueID();
 				user = this.playerRepo.getHumanUser(uid);

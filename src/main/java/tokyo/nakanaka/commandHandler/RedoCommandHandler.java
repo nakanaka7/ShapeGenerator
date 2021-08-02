@@ -7,8 +7,8 @@ import java.util.List;
 import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.player.User;
 
 public class RedoCommandHandler implements CommandHandler{

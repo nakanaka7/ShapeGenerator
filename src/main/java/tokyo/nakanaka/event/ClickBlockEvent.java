@@ -2,15 +2,15 @@ package tokyo.nakanaka.event;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
-import tokyo.nakanaka.commandSender.PlayerCommandSender;
+import tokyo.nakanaka.commandSender.Player;
 
 public class ClickBlockEvent {
-	private PlayerCommandSender player;
+	private Player player;
 	private BlockPosition blockPos;
 	private HandType handType;
 	private Item item;
 	
-	public ClickBlockEvent(PlayerCommandSender player, BlockPosition blockPos, HandType handType, Item item) {
+	public ClickBlockEvent(Player player, BlockPosition blockPos, HandType handType, Item item) {
 		this.player = player;
 		this.blockPos = blockPos;
 		this.handType = handType;
@@ -22,7 +22,7 @@ public class ClickBlockEvent {
 		RIGHT_HAND;
 	}
 
-	public PlayerCommandSender getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 
