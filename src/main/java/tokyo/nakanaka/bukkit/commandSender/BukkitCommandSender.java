@@ -1,13 +1,11 @@
 package tokyo.nakanaka.bukkit.commandSender;
 
-import org.bukkit.command.CommandSender;
+import tokyo.nakanaka.commandSender.CommandSender;
 
-import tokyo.nakanaka.logger.Logger;
-
-public class BukkitCommandSender implements Logger{
-	protected CommandSender sender;
+public class BukkitCommandSender implements CommandSender{
+	protected org.bukkit.command.CommandSender sender;
 	
-	public BukkitCommandSender(CommandSender sender) {
+	public BukkitCommandSender(org.bukkit.command.CommandSender sender) {
 		this.sender = sender;
 	}
 
