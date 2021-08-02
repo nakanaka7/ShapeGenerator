@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import tokyo.nakanaka.logger.Logger;
 
 public class BukkitLogger implements Logger{
-	private CommandSender sender;
+	protected CommandSender sender;
 	
 	public BukkitLogger(CommandSender sender) {
 		this.sender = sender;
