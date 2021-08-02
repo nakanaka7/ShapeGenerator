@@ -3,33 +3,29 @@ package tokyo.nakanaka.bukkit.commandSender;
 import java.util.UUID;
 
 import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.bukkit.BukkitLogger;
 import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.world.World;
 
-public class BukkitPlayerCommandSender implements Player {
-	private org.bukkit.entity.Player player0;
-	
+public class BukkitPlayerCommandSender extends BukkitLogger implements Player {
 	public BukkitPlayerCommandSender(org.bukkit.entity.Player player0) {
-		this.player0 = player0;
-	}
-
-	@Override
-	public void print(String msg) {
-		this.player0.sendMessage(msg);
+		super(player0);
 	}
 
 	@Override
 	public BlockPosition getBlockPosition() {
-		World world = new BukkitWorld(this.player0.getServer(), this.player0.getWorld());
-		int x = this.player0.getLocation().getBlockX();
-		int y = this.player0.getLocation().getBlockY();
-		int z = this.player0.getLocation().getBlockZ();
+		org.bukkit.entity.Player player0 = (org.bukkit.entity.Player)this.sender;
+		World world = new BukkitWorld(player0.getServer(), player0.getWorld());
+		int x = player0.getLocation().getBlockX();
+		int y = player0.getLocation().getBlockY();
+		int z = player0.getLocation().getBlockZ();
 		return new BlockPosition(world, x, y, z);
 	}
 
 	@Override
 	public UUID getUniqueID() {
+		org.bukkit.entity.Player player0 = (org.bukkit.entity.Player)this.sender;
 		return player0.getUniqueId();
 	}
 
