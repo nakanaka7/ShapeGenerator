@@ -8,6 +8,12 @@
 	<groupId>tokyo.nakanaka</groupId>
 	<artifactId>ShapeGenerator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+  <repositories>
+    <repository>
+      <id>local-maven-repo</id>
+      <url>file:///${project.parent.basedir}/local-maven-repo</url>
+    </repository>
+  </repositories>
    	<dependencies>
     	<dependency>
     		<groupId>org.spigotmc</groupId>
@@ -20,6 +26,11 @@
   		  	<groupId>org.apache.commons</groupId>
     		<artifactId>commons-math3</artifactId>
     		<version>3.6.1</version>
+		</dependency>
+		<dependency>
+  		  	<groupId>tokyo.nakanaka</groupId>
+    		<artifactId>NakanakaCommons</artifactId>
+    		<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
