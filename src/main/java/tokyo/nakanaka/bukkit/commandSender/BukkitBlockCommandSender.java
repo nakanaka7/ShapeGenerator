@@ -5,7 +5,7 @@ import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.commandSender.BlockCommandSender;
 import tokyo.nakanaka.world.World;
 
-public class BukkitBlockCommandSender extends BukkitLogger implements BlockCommandSender { 
+public class BukkitBlockCommandSender extends BukkitCommandSender implements BlockCommandSender { 
 	
 	public BukkitBlockCommandSender(org.bukkit.command.BlockCommandSender blockCmdSender) {
 		super(blockCmdSender);
