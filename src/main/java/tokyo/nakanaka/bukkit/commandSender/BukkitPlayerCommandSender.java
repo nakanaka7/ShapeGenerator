@@ -10,8 +10,8 @@ import tokyo.nakanaka.world.World;
 public class BukkitPlayerCommandSender implements PlayerCommandSender {
 	private org.bukkit.entity.Player player;
 	
-	public BukkitPlayerCommandSender(org.bukkit.entity.Player player) {
-		this.player = player;
+	public BukkitPlayerCommandSender(org.bukkit.entity.Player player0) {
+		this.player = player0;
 	}
 
 	@Override
