@@ -10,8 +10,8 @@ import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.commandHandler.CommandEntry;
 import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.commandHandler.SgCommandDirectory;
-import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 

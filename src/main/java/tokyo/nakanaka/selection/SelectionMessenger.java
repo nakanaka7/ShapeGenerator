@@ -3,9 +3,9 @@ package tokyo.nakanaka.selection;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.LogDesignColor;
-import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
+import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 

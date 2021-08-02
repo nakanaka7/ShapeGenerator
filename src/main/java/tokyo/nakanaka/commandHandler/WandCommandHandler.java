@@ -5,8 +5,8 @@ import java.util.List;
 
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.player.HumanPlayer;
 import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.SelectionMessenger;

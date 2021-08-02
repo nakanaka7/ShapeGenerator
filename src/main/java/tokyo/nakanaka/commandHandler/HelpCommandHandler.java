@@ -8,9 +8,9 @@ import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
-import tokyo.nakanaka.logger.LogDesignColor;
-import tokyo.nakanaka.logger.LogTemplate;
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
+import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
 import tokyo.nakanaka.player.User;
 
 public class HelpCommandHandler implements CommandHandler {

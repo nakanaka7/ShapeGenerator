@@ -1,4 +1,6 @@
-package tokyo.nakanaka.logger;
+package tokyo.nakanaka.logger.shapeGenerator;
+
+import tokyo.nakanaka.logger.LogColor;
 
 public class LogTemplate {
 	public static String ofLine(String title) {

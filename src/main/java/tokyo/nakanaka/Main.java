@@ -11,7 +11,7 @@ import tokyo.nakanaka.commandSender.ConsoleCommandSender;
 import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEventListener;
-import tokyo.nakanaka.logger.LogDesignColor;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.player.UserRepository;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;

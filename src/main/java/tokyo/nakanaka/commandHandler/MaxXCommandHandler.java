@@ -11,8 +11,8 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MaxXCommand;
 import tokyo.nakanaka.command.UndoableCommand;
-import tokyo.nakanaka.logger.LogDesignColor;
 import tokyo.nakanaka.logger.Logger;
+import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.player.User;
 
 public class MaxXCommandHandler implements CommandHandler {	
