@@ -1,4 +1,4 @@
-package tokyo.nakanaka.bukkit;
+package tokyo.nakanaka.bukkit.commandSender;
 
 import org.bukkit.command.CommandSender;
 

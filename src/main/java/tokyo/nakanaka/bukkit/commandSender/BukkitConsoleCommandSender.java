@@ -1,6 +1,5 @@
 package tokyo.nakanaka.bukkit.commandSender;
 
-import tokyo.nakanaka.bukkit.BukkitLogger;
 import tokyo.nakanaka.commandSender.ConsoleCommandSender;
 
 public class BukkitConsoleCommandSender extends BukkitLogger implements ConsoleCommandSender {	
