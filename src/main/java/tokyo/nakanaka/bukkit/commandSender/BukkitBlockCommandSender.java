@@ -1,9 +1,9 @@
 package tokyo.nakanaka.bukkit.commandSender;
 
 import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.commandSender.BlockCommandSender;
-import tokyo.nakanaka.world.World;
 
 public class BukkitBlockCommandSender extends BukkitCommandSender implements BlockCommandSender { 
 	

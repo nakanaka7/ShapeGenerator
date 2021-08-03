@@ -3,6 +3,7 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
@@ -13,7 +14,6 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.world.World;
 
 public class ResetCommandHandler implements CommandHandler {
 	private SelectionStrategySource selStraSource;

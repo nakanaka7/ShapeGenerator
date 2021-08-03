@@ -3,9 +3,9 @@ package tokyo.nakanaka.bukkit.commandSender;
 import java.util.UUID;
 
 import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.commandSender.Player;
-import tokyo.nakanaka.world.World;
 
 public class BukkitPlayer extends BukkitCommandSender implements Player {
 	public BukkitPlayer(org.bukkit.entity.Player player0) {
