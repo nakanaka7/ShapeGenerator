@@ -3,12 +3,12 @@ package tokyo.nakanaka.player;
 import java.util.Map;
 import java.util.UUID;
 
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.world.World;
 
 public class UserFactory {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;

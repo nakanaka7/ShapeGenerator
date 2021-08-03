@@ -1,7 +1,7 @@
 package tokyo.nakanaka.selection;
 
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.world.World;
 
 public class SelectionBuildingData {
 	private World world;

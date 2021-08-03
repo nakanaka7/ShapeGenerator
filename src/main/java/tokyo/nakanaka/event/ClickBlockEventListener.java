@@ -5,6 +5,7 @@ import java.util.UUID;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.MainFunctions;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -16,7 +17,6 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.world.World;
 
 public class ClickBlockEventListener {
 	private UserRepository userRepo;

@@ -2,8 +2,8 @@ package tokyo.nakanaka.selection;
 
 import java.util.Map;
 
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.world.World;
 
 public class SelectionBuildingDataFactory {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;
