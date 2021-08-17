@@ -8,7 +8,6 @@ import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.commandSender.BlockCommandSender;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.commandSender.ConsoleCommandSender;
-import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEventListener;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;

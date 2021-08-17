@@ -3,7 +3,7 @@ package tokyo.nakanaka.selection.selectionStrategy;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.geometricProperty.Axis;
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;

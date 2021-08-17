@@ -1,6 +1,6 @@
 package tokyo.nakanaka.math;
 
-import tokyo.nakanaka.geometricProperty.Axis;
+import tokyo.nakanaka.Axis;
 
 public class LinearTransformation {
 	public static final LinearTransformation IDENTITY = new LinearTransformation(Matrix3x3.IDENTITY);

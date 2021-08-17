@@ -1,6 +1,6 @@
 package tokyo.nakanaka.command;
 
-import tokyo.nakanaka.geometricProperty.Axis;
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.selection.Selection;
 
 public class MirrorCommand implements AdjustCommand {

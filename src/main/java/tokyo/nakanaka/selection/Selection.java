@@ -1,7 +1,7 @@
 package tokyo.nakanaka.selection;
 
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.geometricProperty.Axis;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.math.region3D.BlockRegion3D;

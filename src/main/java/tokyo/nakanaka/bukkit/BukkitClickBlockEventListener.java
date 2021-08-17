@@ -14,10 +14,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.Main;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.bukkit.commandSender.BukkitPlayer;
-import tokyo.nakanaka.commandSender.Player;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 

@@ -2,7 +2,7 @@ package tokyo.nakanaka.math.boundRegion3D;
 
 import static tokyo.nakanaka.MaxMinCalculator.*;
 
-import tokyo.nakanaka.geometricProperty.Axis;
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.math.region3D.BlockRegion3D;
