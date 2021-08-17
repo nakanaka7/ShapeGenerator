@@ -1,4 +1,4 @@
-package tokyo.nakanaka.geometricProperty;
+package tokyo.nakanaka;
 
 import tokyo.nakanaka.math.Vector3D;
 
