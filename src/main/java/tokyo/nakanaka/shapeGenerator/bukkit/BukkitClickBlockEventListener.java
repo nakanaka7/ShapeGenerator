@@ -1,4 +1,4 @@
-package tokyo.nakanaka.bukkit;
+package tokyo.nakanaka.shapeGenerator.bukkit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +15,7 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.bukkit.commandSender.BukkitPlayer;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;

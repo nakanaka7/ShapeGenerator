@@ -1,4 +1,4 @@
-package tokyo.nakanaka.bukkit;
+package tokyo.nakanaka.shapeGenerator.bukkit;
 
 import org.bukkit.Material;
 
