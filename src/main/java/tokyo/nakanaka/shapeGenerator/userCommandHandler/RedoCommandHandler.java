@@ -11,7 +11,7 @@ import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class RedoCommandHandler implements CommandHandler{
+public class RedoCommandHandler implements UserCommandHandler{
 		
 	@Override
 	public String getLabel() {

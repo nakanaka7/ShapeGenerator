@@ -10,7 +10,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class PhyCommandHandler implements CommandHandler{
+public class PhyCommandHandler implements UserCommandHandler{
 
 	@Override
 	public String getLabel() {

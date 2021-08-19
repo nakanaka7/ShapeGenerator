@@ -18,7 +18,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class ShiftCommandHandler implements CommandHandler{
+public class ShiftCommandHandler implements UserCommandHandler{
 
 	@Override
 	public String getLabel() {

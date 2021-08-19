@@ -13,9 +13,9 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.shapeGenerator.user.User;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandHandler;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
-public class OffsetCommandHandler implements CommandHandler {
+public class OffsetCommandHandler implements UserCommandHandler {
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	@Override

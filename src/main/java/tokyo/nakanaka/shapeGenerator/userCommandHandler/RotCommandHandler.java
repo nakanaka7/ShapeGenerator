@@ -16,7 +16,7 @@ import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class RotCommandHandler implements CommandHandler{
+public class RotCommandHandler implements UserCommandHandler{
 		
 	@Override
 	public String getLabel() {

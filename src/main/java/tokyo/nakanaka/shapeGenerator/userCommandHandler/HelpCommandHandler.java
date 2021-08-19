@@ -13,7 +13,7 @@ import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class HelpCommandHandler implements CommandHandler {
+public class HelpCommandHandler implements UserCommandHandler {
 	private SgCommandDirectory sgCmdDir;
 	
 	public HelpCommandHandler(SgCommandDirectory sgCmdDir) {
@@ -43,11 +43,11 @@ public class HelpCommandHandler implements CommandHandler {
 	
 	private static boolean onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, User user, String[] args) {
 		Logger logger = user.getLogger();
-		if(cmdEntry instanceof CommandHandler) {
+		if(cmdEntry instanceof UserCommandHandler) {
 			if(args.length != 0) {
 				return false;
 			}
-			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
+			UserCommandHandler cmdHandler = (UserCommandHandler)cmdEntry;
 			BranchCommandHelp cmdHelp = new BranchCommandHelp(parentLabels, cmdHandler);
 			logger.print(LogTemplate.ofLine("Help for " + cmdHelp.getSubject()));
 			logger.print(LogTemplate.ofKeyValue("Description", cmdHelp.getDescription()));
@@ -98,7 +98,7 @@ public class HelpCommandHandler implements CommandHandler {
 	}
 	
 	private static List<String> onRecursiveTabComplete(CommandEntry cmdEntry, User user, String[] args) {
-		if(cmdEntry instanceof CommandHandler) {
+		if(cmdEntry instanceof UserCommandHandler) {
 			return new ArrayList<>();
 		}else if(cmdEntry instanceof CommandDirectory) {
 			CommandDirectory cmdDir = (CommandDirectory)cmdEntry;

@@ -16,7 +16,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class ShapeCommandHandler implements CommandHandler {
+public class ShapeCommandHandler implements UserCommandHandler {
 	private SelectionStrategySource selStraSource;
 	
 	public ShapeCommandHandler(SelectionStrategySource selStraSource) {

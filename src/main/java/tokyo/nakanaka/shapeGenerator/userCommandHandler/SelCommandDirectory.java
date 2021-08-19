@@ -43,7 +43,7 @@ public class SelCommandDirectory implements CommandDirectory {
 		SelectionStrategy strategy = this.selStraSource.get(shape);
 		List<SelSubCommandHandler> cmdHandlerList = strategy.getSelSubCommandHandlers();
 		for(SelSubCommandHandler selSubCmdHandler : cmdHandlerList) {
-			CommandHandler cmdHandler = new CommandHandler() {
+			UserCommandHandler cmdHandler = new UserCommandHandler() {
 				@Override
 				public String getLabel() {
 					return selSubCmdHandler.getLabel();

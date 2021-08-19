@@ -15,7 +15,7 @@ import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MaxZCommandHandler implements CommandHandler {	
+public class MaxZCommandHandler implements UserCommandHandler {	
 	@Override
 	public String getLabel() {
 		return "maxz";

@@ -16,7 +16,7 @@ import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MirrorCommandHandler implements CommandHandler {
+public class MirrorCommandHandler implements UserCommandHandler {
 	
 	@Override
 	public String getLabel() {

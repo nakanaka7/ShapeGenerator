@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.shapeGenerator.Pair;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandHandler;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
 public class BranchCommandHelp {
 	private String[] parentLabels;
@@ -12,7 +12,7 @@ public class BranchCommandHelp {
 	private String description;
 	private List<ParameterHelp> paramHelpList;
 	
-	public BranchCommandHelp(String[] parentLabels, CommandHandler cmdHandler) {
+	public BranchCommandHelp(String[] parentLabels, UserCommandHandler cmdHandler) {
 		this.parentLabels = parentLabels;
 		this.label = cmdHandler.getLabel();
 		this.description = cmdHandler.getDescription();

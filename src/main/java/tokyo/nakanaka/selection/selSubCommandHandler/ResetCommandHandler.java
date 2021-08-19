@@ -13,9 +13,9 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.user.User;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandHandler;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
-public class ResetCommandHandler implements CommandHandler {
+public class ResetCommandHandler implements UserCommandHandler {
 	private SelectionStrategySource selStraSource;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	

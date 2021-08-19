@@ -14,7 +14,7 @@ import tokyo.nakanaka.shapeGenerator.Item;
 import tokyo.nakanaka.shapeGenerator.user.HumanPlayer;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class WandCommandHandler implements CommandHandler {
+public class WandCommandHandler implements UserCommandHandler {
 	private SelectionStrategySource selStraSource;
 	
 	public WandCommandHandler(SelectionStrategySource selStraSource) {

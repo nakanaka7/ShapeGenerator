@@ -12,7 +12,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandDirectory;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandEntry;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandHandler;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.SgCommandDirectory;
 
 public class SgCommandHandler {
@@ -32,8 +32,8 @@ public class SgCommandHandler {
 	
 	private static void onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, User user, String[] args) {
 		Logger logger = user.getLogger();
-		if(cmdEntry instanceof CommandHandler) {
-			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
+		if(cmdEntry instanceof UserCommandHandler) {
+			UserCommandHandler cmdHandler = (UserCommandHandler)cmdEntry;
 			boolean success = cmdHandler.onCommand(user, args);
 			if(!success) {
 				BranchCommandHelp help = new BranchCommandHelp(parentLabels, cmdHandler);
@@ -75,8 +75,8 @@ public class SgCommandHandler {
 		if(args.length == 0) {
 			return new ArrayList<>();
 		}
-		if(cmdEntry instanceof CommandHandler) {
-			CommandHandler cmdHandler = (CommandHandler)cmdEntry;
+		if(cmdEntry instanceof UserCommandHandler) {
+			UserCommandHandler cmdHandler = (UserCommandHandler)cmdEntry;
 			return cmdHandler.onTabComplete(user, args);
 		}else if(cmdEntry instanceof CommandDirectory) {
 			CommandDirectory cmdDir = (CommandDirectory)cmdEntry;
