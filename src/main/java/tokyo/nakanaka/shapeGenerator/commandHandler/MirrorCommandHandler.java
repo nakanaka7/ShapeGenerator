@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandHandler;
+package tokyo.nakanaka.shapeGenerator.commandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,37 +9,36 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.RotateCommand;
+import tokyo.nakanaka.command.MirrorCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class RotCommandHandler implements CommandHandler{
-		
+public class MirrorCommandHandler implements CommandHandler {
+	
 	@Override
 	public String getLabel() {
-		return "rot";
+		return "mirror";
 	}
 	
 	@Override
 	public String getDescription() {
-		return "Rotate the generated blocks";
+		return "Mirror the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
 		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"x", "y", "z"}, ""));
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "degree", ""));
 		return list;
 	}
-		
+	
 	@Override
-	public boolean onCommand(User player, String[] args) {
-		Logger logger = player.getLogger();
-		if(args.length != 2) {
+	public boolean onCommand(User user, String[] args) {
+		Logger logger = user.getLogger();
+		if(args.length != 1) {
 			return false;
 		}
 		Axis axis;
@@ -49,14 +48,7 @@ public class RotCommandHandler implements CommandHandler{
 			logger.print(LogDesignColor.ERROR + "Can not parse axis");
 			return true;
 		}
-		double degree;
-		try {
-			degree = Double.valueOf(args[1]);
-		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return true;
-		}
-		UndoCommandManager undoManager = player.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -74,23 +66,21 @@ public class RotCommandHandler implements CommandHandler{
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
-		}
-		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, player.getBlockPhysics());
-		rotateCmd.execute();
-		undoManager.add(rotateCmd);
-		logger.print(LogDesignColor.NORMAL + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
+		}	
+		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, user.getBlockPhysics());
+		mirrorCmd.execute();
+		undoManager.add(mirrorCmd);
+		logger.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 		return true;
 	}
-
+	
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
-		}else if(args.length == 2) {
-			return Arrays.asList("0", "90", "-90", "180", "270");
 		}else {
 			return new ArrayList<>();
 		}
 	}
-
+	
 }

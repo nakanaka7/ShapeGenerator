@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandHandler;
+package tokyo.nakanaka.shapeGenerator.commandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,29 +8,28 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MinXCommand;
+import tokyo.nakanaka.command.MaxZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MinXCommandHandler implements CommandHandler {
-	
+public class MaxZCommandHandler implements CommandHandler {	
 	@Override
 	public String getLabel() {
-		return "minx";
+		return "maxz";
 	}
 
 	@Override
 	public String getDescription() {
-		return "Set min x of the generated blocks";
+		return "Set max z of the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The x coordinate"));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The z coordinate"));
 		return list;
 	}
 	
@@ -66,17 +65,17 @@ public class MinXCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		MinXCommand minxCmd = new MinXCommand(originalCmd, value, user.getBlockPhysics());
-		minxCmd.execute();
-		undoManager.add(minxCmd);
-		logger.print(LogDesignColor.NORMAL + "Set minX -> " + value);
+		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, user.getBlockPhysics());
+		maxzCmd.execute();
+		undoManager.add(maxzCmd);
+		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
 		return true;
 	}
 
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(user.getX()));
+			return Arrays.asList(String.valueOf(user.getZ()));
 		}else {
 			return new ArrayList<>();
 		}

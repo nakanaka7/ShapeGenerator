@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandHandler;
+package tokyo.nakanaka.shapeGenerator.commandHandler;
 
 public interface CommandEntry {
 	String getLabel();

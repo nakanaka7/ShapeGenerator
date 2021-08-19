@@ -3,9 +3,9 @@ package tokyo.nakanaka.commadHelp;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commandHandler.CommandDirectory;
-import tokyo.nakanaka.commandHandler.CommandEntry;
 import tokyo.nakanaka.shapeGenerator.Pair;
+import tokyo.nakanaka.shapeGenerator.commandHandler.CommandDirectory;
+import tokyo.nakanaka.shapeGenerator.commandHandler.CommandEntry;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class RootCommandHelp {

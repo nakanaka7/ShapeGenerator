@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandHandler;
+package tokyo.nakanaka.shapeGenerator.commandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;

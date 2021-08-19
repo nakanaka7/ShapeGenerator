@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandHandler;
+package tokyo.nakanaka.shapeGenerator.commandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,22 +8,23 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxZCommand;
+import tokyo.nakanaka.command.MinZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MaxZCommandHandler implements CommandHandler {	
+public class MinZCommandHandler implements CommandHandler {
+		
 	@Override
 	public String getLabel() {
-		return "maxz";
+		return "minz";
 	}
-
+	
 	@Override
 	public String getDescription() {
-		return "Set max z of the generated blocks";
+		return "Set min z of the generated blocks";
 	}
 	
 	@Override
@@ -65,10 +66,10 @@ public class MaxZCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, user.getBlockPhysics());
-		maxzCmd.execute();
-		undoManager.add(maxzCmd);
-		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
+		MinZCommand minzCmd = new MinZCommand(originalCmd, value, user.getBlockPhysics());
+		minzCmd.execute();
+		undoManager.add(minzCmd);
+		logger.print(LogDesignColor.NORMAL + "Set minZ -> " + value);
 		return true;
 	}
 

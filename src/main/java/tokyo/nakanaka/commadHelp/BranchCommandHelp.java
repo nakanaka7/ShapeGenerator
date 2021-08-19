@@ -3,8 +3,8 @@ package tokyo.nakanaka.commadHelp;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.shapeGenerator.Pair;
+import tokyo.nakanaka.shapeGenerator.commandHandler.CommandHandler;
 
 public class BranchCommandHelp {
 	private String[] parentLabels;

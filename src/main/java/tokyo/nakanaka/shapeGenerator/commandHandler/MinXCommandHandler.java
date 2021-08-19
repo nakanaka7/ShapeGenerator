@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandHandler;
+package tokyo.nakanaka.shapeGenerator.commandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,32 +8,32 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MinYCommand;
+import tokyo.nakanaka.command.MinXCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MinYCommandHandler implements CommandHandler {
+public class MinXCommandHandler implements CommandHandler {
 	
 	@Override
 	public String getLabel() {
-		return "miny";
+		return "minx";
 	}
-	
+
 	@Override
 	public String getDescription() {
-		return "Set min y of the generated blocks";
+		return "Set min x of the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The y coordinate"));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The x coordinate"));
 		return list;
 	}
-
+	
 	@Override
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
@@ -66,17 +66,17 @@ public class MinYCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		MinYCommand minyCmd = new MinYCommand(originalCmd, value, user.getBlockPhysics());
-		minyCmd.execute();
-		undoManager.add(minyCmd);
-		logger.print(LogDesignColor.NORMAL + "Set minY -> " + value);
+		MinXCommand minxCmd = new MinXCommand(originalCmd, value, user.getBlockPhysics());
+		minxCmd.execute();
+		undoManager.add(minxCmd);
+		logger.print(LogDesignColor.NORMAL + "Set minX -> " + value);
 		return true;
 	}
 
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(user.getY()));
+			return Arrays.asList(String.valueOf(user.getX()));
 		}else {
 			return new ArrayList<>();
 		}

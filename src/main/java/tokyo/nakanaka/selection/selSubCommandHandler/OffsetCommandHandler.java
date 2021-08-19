@@ -7,12 +7,12 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
-import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
+import tokyo.nakanaka.shapeGenerator.commandHandler.CommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class OffsetCommandHandler implements CommandHandler {

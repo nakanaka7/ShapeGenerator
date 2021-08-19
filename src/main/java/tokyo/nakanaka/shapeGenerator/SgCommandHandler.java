@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
-import tokyo.nakanaka.commandHandler.CommandDirectory;
-import tokyo.nakanaka.commandHandler.CommandEntry;
-import tokyo.nakanaka.commandHandler.CommandHandler;
-import tokyo.nakanaka.commandHandler.SgCommandDirectory;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.commandHandler.CommandDirectory;
+import tokyo.nakanaka.shapeGenerator.commandHandler.CommandEntry;
+import tokyo.nakanaka.shapeGenerator.commandHandler.CommandHandler;
+import tokyo.nakanaka.shapeGenerator.commandHandler.SgCommandDirectory;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class SgCommandHandler {
