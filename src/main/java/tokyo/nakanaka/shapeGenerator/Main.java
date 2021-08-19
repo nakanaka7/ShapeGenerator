@@ -17,26 +17,26 @@ import tokyo.nakanaka.player.UserRepository;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 
 public class Main {
-	private UserRepository playerRepo;
+	private UserRepository userRepo;
 	private SelectionStrategySource selStrtgSource;
 	private SgCommandHandler sgCmdHandler;
 	private ClickBlockEventListener evtListner;
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
-		this.playerRepo = new UserRepository();
+		this.userRepo = new UserRepository();
 		this.selStrtgSource = selStrtgSource;
 		this.sgCmdHandler = new SgCommandHandler(blockArg, selStrtgSource);
-		this.evtListner = new ClickBlockEventListener(this.playerRepo, selStrtgSource);
+		this.evtListner = new ClickBlockEventListener(this.userRepo, selStrtgSource);
 	}
 	
 	public void onSgCommandNew(CommandSender cmdSender, String[] args) {
 		User user;
 		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
-			user = this.playerRepo.getHumanUser(uid);
+			user = this.userRepo.getHumanUser(uid);
 			if(user == null) {
 				user = new User(uid);
-				this.playerRepo.registerHumanUser(user);
+				this.userRepo.registerHumanUser(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
 			user.setBlockPosition(playerCmdSender.getBlockPosition());
@@ -47,16 +47,16 @@ public class Main {
 			}
 			BlockCmdLine blockCmdLine = toBlockCmdLine(args);
 			String name = blockCmdLine.name();
-			user = this.playerRepo.getBlockUser(name);
+			user = this.userRepo.getBlockUser(name);
 			if(user == null) {
 				user = new User(UUID.randomUUID(), name);
-				this.playerRepo.registerBlockPlayer(user);
+				this.userRepo.registerBlockPlayer(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
 			user.setBlockPosition(blockCmdSender.getBlockPosition());
 			args = blockCmdLine.shiftArgs();
 		}else {
-			user = this.playerRepo.getConsoleUser();
+			user = this.userRepo.getConsoleUser();
 		}
 		user.setLogger(cmdSender);
 		this.sgCmdHandler.onCommand(user, args);
@@ -66,10 +66,10 @@ public class Main {
 		User user;
 		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
-			user = this.playerRepo.getHumanUser(uid);
+			user = this.userRepo.getHumanUser(uid);
 			if(user == null) {
 				user = new User(uid);
-				this.playerRepo.registerHumanUser(user);
+				this.userRepo.registerHumanUser(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
 			user.setBlockPosition(playerCmdSender.getBlockPosition());
@@ -84,10 +84,10 @@ public class Main {
 		User user; 
 		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
-			user = this.playerRepo.getHumanUser(uid);
+			user = this.userRepo.getHumanUser(uid);
 			if(user == null) {
 				user = new User(uid);
-				this.playerRepo.registerHumanUser(user);
+				this.userRepo.registerHumanUser(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
 			user.setBlockPosition(playerCmdSender.getBlockPosition());
@@ -102,17 +102,17 @@ public class Main {
 		if(cmdSender instanceof Player playerCmdSender) {
 			if(!args[0].startsWith("@")) {
 				UUID uid = playerCmdSender.getUniqueID();
-				user = this.playerRepo.getHumanUser(uid);
+				user = this.userRepo.getHumanUser(uid);
 				if(user == null) {
 					user = new User(uid);
-					this.playerRepo.registerHumanUser(user);
+					this.userRepo.registerHumanUser(user);
 					MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 				}
 				user.setBlockPosition(playerCmdSender.getBlockPosition());
 			}else {
 				BlockCmdLine blockCmdLine = toBlockCmdLine(args);
 				String name = blockCmdLine.name();
-				user = this.playerRepo.getBlockUser(name);
+				user = this.userRepo.getBlockUser(name);
 				if(user == null) {
 					user = new User(UUID.randomUUID(), name);
 					MainFunctions.setDefaultSelection(this.selStrtgSource, user);
@@ -121,7 +121,7 @@ public class Main {
 				args = blockCmdLine.shiftArgs();
 			}
 		}else if(cmdSender instanceof ConsoleCommandSender) {
-			user = this.playerRepo.getConsoleUser();
+			user = this.userRepo.getConsoleUser();
 		}else {
 			//unreachable
 			return null;
