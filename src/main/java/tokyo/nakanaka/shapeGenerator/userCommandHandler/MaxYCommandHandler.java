@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,23 +8,22 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MinYCommand;
+import tokyo.nakanaka.command.MaxYCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MinYCommandHandler implements CommandHandler {
-	
+public class MaxYCommandHandler implements CommandHandler {	
 	@Override
 	public String getLabel() {
-		return "miny";
+		return "maxy";
 	}
-	
+
 	@Override
 	public String getDescription() {
-		return "Set min y of the generated blocks";
+		return "Set max y of the generated blocks";
 	}
 	
 	@Override
@@ -33,7 +32,7 @@ public class MinYCommandHandler implements CommandHandler {
 		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The y coordinate"));
 		return list;
 	}
-
+	
 	@Override
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
@@ -66,10 +65,10 @@ public class MinYCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		MinYCommand minyCmd = new MinYCommand(originalCmd, value, user.getBlockPhysics());
-		minyCmd.execute();
-		undoManager.add(minyCmd);
-		logger.print(LogDesignColor.NORMAL + "Set minY -> " + value);
+		MaxYCommand maxyCmd = new MaxYCommand(originalCmd, value, user.getBlockPhysics());
+		maxyCmd.execute();
+		undoManager.add(maxyCmd);
+		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
 		return true;
 	}
 

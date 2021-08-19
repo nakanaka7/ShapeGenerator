@@ -1,61 +1,49 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.ShiftCommand;
+import tokyo.nakanaka.command.MaxXCommand;
 import tokyo.nakanaka.command.UndoableCommand;
-import tokyo.nakanaka.geometricProperty.Direction;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
-import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class ShiftCommandHandler implements CommandHandler{
-
+public class MaxXCommandHandler implements CommandHandler {	
 	@Override
 	public String getLabel() {
-		return "shift";
+		return "maxx";
 	}
-	
+
 	@Override
 	public String getDescription() {
-		return "Shift the generated blocks";
+		return "Set max x of the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "direction", ""));
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "length", ""));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The x coordinate"));
 		return list;
 	}
 	
 	@Override
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
-		if(args.length != 2) {
+		if(args.length != 1) {
 			return false;
 		}
-		Direction dir;
-		double blocks;
+		double value;
 		try {
-			dir = Direction.valueOf(args[0].toUpperCase());
+			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse direction");
-			return true;
-		}
-		try {
-			blocks = Double.parseDouble(args[1]);
-		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse integer");
+			logger.print(LogDesignColor.ERROR + "Can not parse double");
 			return true;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
@@ -77,28 +65,20 @@ public class ShiftCommandHandler implements CommandHandler{
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		double dx = dir.getX() * blocks;
-		double dy = dir.getY() * blocks;
-		double dz = dir.getZ() * blocks;
-		Vector3D displacement = new Vector3D(dx, dy, dz);
-		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, user.getBlockPhysics());
-		shiftCmd.execute();
-		undoManager.add(shiftCmd);
-		logger.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
+		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, user.getBlockPhysics());
+		maxxCmd.execute();
+		undoManager.add(maxxCmd);
+		logger.print(LogDesignColor.NORMAL + "Set maxX -> " + value);
 		return true;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(Direction.values()).stream()
-					.map(s -> s.toString().toLowerCase())
-					.collect(Collectors.toList());
-		}else if(args.length == 2) {
-			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+			return Arrays.asList(String.valueOf(user.getX()));
 		}else {
-			return Arrays.asList();
+			return new ArrayList<>();
 		}
 	}
-	
+
 }

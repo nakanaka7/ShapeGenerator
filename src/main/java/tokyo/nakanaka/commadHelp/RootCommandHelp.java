@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.shapeGenerator.Pair;
-import tokyo.nakanaka.shapeGenerator.commandHandler.CommandDirectory;
-import tokyo.nakanaka.shapeGenerator.commandHandler.CommandEntry;
 import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandDirectory;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandEntry;
 
 public class RootCommandHelp {
 	private CommandDirectory cmdDir;

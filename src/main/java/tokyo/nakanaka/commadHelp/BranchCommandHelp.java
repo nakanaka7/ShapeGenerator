@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.shapeGenerator.Pair;
-import tokyo.nakanaka.shapeGenerator.commandHandler.CommandHandler;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandHandler;
 
 public class BranchCommandHelp {
 	private String[] parentLabels;

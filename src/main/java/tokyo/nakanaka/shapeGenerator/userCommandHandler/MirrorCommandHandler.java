@@ -1,35 +1,37 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxYCommand;
+import tokyo.nakanaka.command.MirrorCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MaxYCommandHandler implements CommandHandler {	
+public class MirrorCommandHandler implements CommandHandler {
+	
 	@Override
 	public String getLabel() {
-		return "maxy";
+		return "mirror";
 	}
-
+	
 	@Override
 	public String getDescription() {
-		return "Set max y of the generated blocks";
+		return "Mirror the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The y coordinate"));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"x", "y", "z"}, ""));
 		return list;
 	}
 	
@@ -39,11 +41,11 @@ public class MaxYCommandHandler implements CommandHandler {
 		if(args.length != 1) {
 			return false;
 		}
-		double value;
-		try {
-			value = Double.valueOf(args[0]);
+		Axis axis;
+		try{
+			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse double");
+			logger.print(LogDesignColor.ERROR + "Can not parse axis");
 			return true;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
@@ -64,21 +66,21 @@ public class MaxYCommandHandler implements CommandHandler {
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
-		}
-		MaxYCommand maxyCmd = new MaxYCommand(originalCmd, value, user.getBlockPhysics());
-		maxyCmd.execute();
-		undoManager.add(maxyCmd);
-		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
+		}	
+		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, user.getBlockPhysics());
+		mirrorCmd.execute();
+		undoManager.add(mirrorCmd);
+		logger.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 		return true;
 	}
-
+	
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(user.getY()));
+			return Arrays.asList("x", "y", "z");
 		}else {
 			return new ArrayList<>();
 		}
 	}
-
+	
 }

@@ -1,51 +1,61 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MirrorCommand;
+import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.geometricProperty.Direction;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MirrorCommandHandler implements CommandHandler {
-	
+public class ShiftCommandHandler implements CommandHandler{
+
 	@Override
 	public String getLabel() {
-		return "mirror";
+		return "shift";
 	}
 	
 	@Override
 	public String getDescription() {
-		return "Mirror the generated blocks";
+		return "Shift the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"x", "y", "z"}, ""));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "direction", ""));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "length", ""));
 		return list;
 	}
 	
 	@Override
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
-		if(args.length != 1) {
+		if(args.length != 2) {
 			return false;
 		}
-		Axis axis;
-		try{
-			axis = Axis.valueOf(args[0].toUpperCase());
+		Direction dir;
+		double blocks;
+		try {
+			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse axis");
+			logger.print(LogDesignColor.ERROR + "Can not parse direction");
+			return true;
+		}
+		try {
+			blocks = Double.parseDouble(args[1]);
+		}catch(IllegalArgumentException e) {
+			logger.print(LogDesignColor.ERROR + "Can not parse integer");
 			return true;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
@@ -66,20 +76,28 @@ public class MirrorCommandHandler implements CommandHandler {
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
-		}	
-		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, user.getBlockPhysics());
-		mirrorCmd.execute();
-		undoManager.add(mirrorCmd);
-		logger.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
+		}
+		double dx = dir.getX() * blocks;
+		double dy = dir.getY() * blocks;
+		double dz = dir.getZ() * blocks;
+		Vector3D displacement = new Vector3D(dx, dy, dz);
+		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, user.getBlockPhysics());
+		shiftCmd.execute();
+		undoManager.add(shiftCmd);
+		logger.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
 		return true;
 	}
 	
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList("x", "y", "z");
+			return Arrays.asList(Direction.values()).stream()
+					.map(s -> s.toString().toLowerCase())
+					.collect(Collectors.toList());
+		}else if(args.length == 2) {
+			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}else {
-			return new ArrayList<>();
+			return Arrays.asList();
 		}
 	}
 	

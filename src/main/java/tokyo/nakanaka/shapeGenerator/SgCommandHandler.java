@@ -9,11 +9,11 @@ import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.commandHandler.CommandDirectory;
-import tokyo.nakanaka.shapeGenerator.commandHandler.CommandEntry;
-import tokyo.nakanaka.shapeGenerator.commandHandler.CommandHandler;
-import tokyo.nakanaka.shapeGenerator.commandHandler.SgCommandDirectory;
 import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandDirectory;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandEntry;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandHandler;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.SgCommandDirectory;
 
 public class SgCommandHandler {
 	private SgCommandDirectory sgCmdDir;

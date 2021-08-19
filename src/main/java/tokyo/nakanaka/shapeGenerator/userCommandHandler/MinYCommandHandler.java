@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,31 +8,32 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxZCommand;
+import tokyo.nakanaka.command.MinYCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class MaxZCommandHandler implements CommandHandler {	
+public class MinYCommandHandler implements CommandHandler {
+	
 	@Override
 	public String getLabel() {
-		return "maxz";
+		return "miny";
 	}
-
+	
 	@Override
 	public String getDescription() {
-		return "Set max z of the generated blocks";
+		return "Set min y of the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The z coordinate"));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The y coordinate"));
 		return list;
 	}
-	
+
 	@Override
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
@@ -65,17 +66,17 @@ public class MaxZCommandHandler implements CommandHandler {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, user.getBlockPhysics());
-		maxzCmd.execute();
-		undoManager.add(maxzCmd);
-		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
+		MinYCommand minyCmd = new MinYCommand(originalCmd, value, user.getBlockPhysics());
+		minyCmd.execute();
+		undoManager.add(minyCmd);
+		logger.print(LogDesignColor.NORMAL + "Set minY -> " + value);
 		return true;
 	}
 
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(user.getZ()));
+			return Arrays.asList(String.valueOf(user.getY()));
 		}else {
 			return new ArrayList<>();
 		}

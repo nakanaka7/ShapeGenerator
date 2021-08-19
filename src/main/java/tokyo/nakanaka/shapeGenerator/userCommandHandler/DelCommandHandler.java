@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,21 +6,19 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.command.AdjustCommand;
+import tokyo.nakanaka.command.DeleteCommand;
+import tokyo.nakanaka.command.GenerateCommand;
+import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class UndoCommandHandler implements CommandHandler{
-	
+public class DelCommandHandler implements CommandHandler {
 	@Override
 	public String getLabel() {
-		return "undo";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Undo block changing command(s)";
+		return "del";
 	}
 	
 	@Override
@@ -31,6 +29,10 @@ public class UndoCommandHandler implements CommandHandler{
 	}
 	
 	@Override
+	public String getDescription() {
+		return "Delete the generated blocks";
+	}
+	
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length > 1) {
@@ -50,21 +52,34 @@ public class UndoCommandHandler implements CommandHandler{
 			}
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
-		int totalNum = 0;
-		for(int i = 0; i < num; ++i) {
-			boolean success = undoManager.undo();
-			if(!success) {
-				break;
+		List<GenerateCommand> originalList = new ArrayList<>();
+		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
+			UndoableCommand cmd = undoManager.getUndoCommand(i);
+			GenerateCommand originalCmd = null;
+			if(cmd instanceof GenerateCommand) {
+				originalCmd = (GenerateCommand) cmd;
+			}else if(cmd instanceof AdjustCommand) {
+				originalCmd = ((AdjustCommand)cmd).getLastCommand();
 			}
-			++totalNum;
+			if(originalCmd != null && !originalCmd.hasUndone()) {
+				originalList.add(originalCmd);
+				if(originalList.size() == num) {
+					break;
+				}
+			}
 		}
-		if(totalNum == 0) {
-			logger.print(LogDesignColor.ERROR + "Nothing to undo");
+		int delNum = originalList.size();
+		DeleteCommand deleteCmd
+			= new DeleteCommand(originalList.toArray(new GenerateCommand[delNum]));
+		deleteCmd.execute();
+		undoManager.add(deleteCmd);
+		if(delNum == 0) {
+			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		logger.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
-		if(totalNum < num) {
-			logger.print(LogDesignColor.ERROR + "Reached the beginning command");
+		logger.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
+		if(delNum < num) {
+			logger.print(LogDesignColor.ERROR + "reached the first generation");
 		}
 		return true;
 	}
@@ -76,5 +91,5 @@ public class UndoCommandHandler implements CommandHandler{
 		}
 		return new ArrayList<>();
 	}
-
+	
 }

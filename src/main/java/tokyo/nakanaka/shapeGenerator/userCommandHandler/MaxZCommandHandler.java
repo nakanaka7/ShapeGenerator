@@ -1,57 +1,47 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.ScaleCommand;
+import tokyo.nakanaka.command.MaxZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class ScaleCommandHandler implements CommandHandler{
-
+public class MaxZCommandHandler implements CommandHandler {	
 	@Override
 	public String getLabel() {
-		return "scale";
+		return "maxz";
 	}
-	
+
 	@Override
 	public String getDescription() {
-		return "Change scale of the generated blocks";
+		return "Set max z of the generated blocks";
 	}
 	
 	@Override
 	public List<ParameterHelp> getParameterHelpList() {
 		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"x", "y", "z"}, ""));
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "factor", ""));
+		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The z coordinate"));
 		return list;
 	}
 	
 	@Override
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
-		if(args.length != 2) {
+		if(args.length != 1) {
 			return false;
 		}
-		Axis axis;
-		try{
-			axis = Axis.valueOf(args[0].toUpperCase());
-		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse axis");
-			return true;
-		}
-		double factor;
+		double value;
 		try {
-			factor = Double.valueOf(args[1]);
+			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
 			return true;
@@ -75,19 +65,17 @@ public class ScaleCommandHandler implements CommandHandler{
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
 			return true;
 		}
-		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, user.getBlockPhysics());
-		scaleCmd.execute();
-		undoManager.add(scaleCmd);
-		logger.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
+		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, user.getBlockPhysics());
+		maxzCmd.execute();
+		undoManager.add(maxzCmd);
+		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
 		return true;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(User user, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList("x", "y", "z");
-		}else if(args.length == 2) {
-			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+			return Arrays.asList(String.valueOf(user.getZ()));
 		}else {
 			return new ArrayList<>();
 		}
