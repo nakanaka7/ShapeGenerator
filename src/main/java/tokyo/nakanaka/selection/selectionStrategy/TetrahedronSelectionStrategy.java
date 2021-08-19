@@ -1,7 +1,7 @@
 package tokyo.nakanaka.selection.selectionStrategy;
 
-import static tokyo.nakanaka.MaxMinCalculator.max;
-import static tokyo.nakanaka.MaxMinCalculator.min;
+import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
+import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 
 import java.util.Arrays;
 import java.util.List;

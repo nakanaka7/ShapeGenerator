@@ -3,7 +3,6 @@ package tokyo.nakanaka.commandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.Item;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
@@ -13,6 +12,7 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.Item;
 
 public class WandCommandHandler implements CommandHandler {
 	private SelectionStrategySource selStraSource;

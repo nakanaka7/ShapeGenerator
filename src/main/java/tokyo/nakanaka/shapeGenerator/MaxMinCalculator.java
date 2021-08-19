@@ -1,4 +1,4 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.shapeGenerator;
 
 public class MaxMinCalculator {
 	private MaxMinCalculator() {

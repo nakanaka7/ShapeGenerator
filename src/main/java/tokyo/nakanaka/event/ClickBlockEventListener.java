@@ -3,8 +3,6 @@ package tokyo.nakanaka.event;
 import java.util.UUID;
 
 import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Item;
-import tokyo.nakanaka.MainFunctions;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
@@ -17,6 +15,8 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.Item;
+import tokyo.nakanaka.shapeGenerator.MainFunctions;
 
 public class ClickBlockEventListener {
 	private UserRepository userRepo;

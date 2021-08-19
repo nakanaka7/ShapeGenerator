@@ -1,4 +1,4 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.shapeGenerator;
 
 public class Pair<E1, E2> {
 	private E1 e1;

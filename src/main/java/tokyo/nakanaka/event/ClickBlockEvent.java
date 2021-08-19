@@ -1,8 +1,8 @@
 package tokyo.nakanaka.event;
 
 import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Item;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.shapeGenerator.Item;
 
 public class ClickBlockEvent {
 	private Player player;

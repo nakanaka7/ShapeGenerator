@@ -3,10 +3,10 @@ package tokyo.nakanaka.commadHelp;
 import java.util.ArrayList;
 import java.util.List;
 
-import tokyo.nakanaka.Pair;
 import tokyo.nakanaka.commandHandler.CommandDirectory;
 import tokyo.nakanaka.commandHandler.CommandEntry;
 import tokyo.nakanaka.player.User;
+import tokyo.nakanaka.shapeGenerator.Pair;
 
 public class RootCommandHelp {
 	private CommandDirectory cmdDir;

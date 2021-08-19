@@ -1,4 +1,4 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;

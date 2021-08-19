@@ -1,9 +1,10 @@
-package tokyo.nakanaka;
+package tokyo.nakanaka.shapeGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.commandSender.BlockCommandSender;
 import tokyo.nakanaka.commandSender.CommandSender;

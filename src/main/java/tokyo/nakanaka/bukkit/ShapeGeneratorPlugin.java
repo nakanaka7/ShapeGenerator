@@ -5,9 +5,9 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import tokyo.nakanaka.Main;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.Main;
 
 public class ShapeGeneratorPlugin extends JavaPlugin {
 	private Main main;

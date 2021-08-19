@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Axis;
-import tokyo.nakanaka.UndoCommandManager;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
@@ -15,6 +14,7 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.player.User;
+import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
 public class ScaleCommandHandler implements CommandHandler{
 
