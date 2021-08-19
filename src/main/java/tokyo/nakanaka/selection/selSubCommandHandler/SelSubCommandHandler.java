@@ -5,8 +5,8 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public interface SelSubCommandHandler {
 	String getLabel();

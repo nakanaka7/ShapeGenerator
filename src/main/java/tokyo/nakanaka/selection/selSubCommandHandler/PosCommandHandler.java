@@ -11,8 +11,8 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class PosCommandHandler implements SelSubCommandHandler {
 	private String label;

@@ -12,8 +12,8 @@ import tokyo.nakanaka.command.MinZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class MinZCommandHandler implements CommandHandler {
 		

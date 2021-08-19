@@ -3,9 +3,9 @@ package tokyo.nakanaka.shapeGenerator.bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import tokyo.nakanaka.player.HumanPlayer;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.shapeGenerator.Item;
+import tokyo.nakanaka.shapeGenerator.user.HumanPlayer;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class BukkitHumanPlayer extends User implements HumanPlayer {
 	private org.bukkit.entity.Player bukkitPlayer;

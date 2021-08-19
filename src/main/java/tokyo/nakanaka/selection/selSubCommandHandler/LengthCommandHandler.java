@@ -9,8 +9,8 @@ import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class LengthCommandHandler implements SelSubCommandHandler {
 	private String label;

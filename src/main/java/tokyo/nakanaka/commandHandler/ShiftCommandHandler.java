@@ -15,8 +15,8 @@ import tokyo.nakanaka.geometricProperty.Direction;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class ShiftCommandHandler implements CommandHandler{
 

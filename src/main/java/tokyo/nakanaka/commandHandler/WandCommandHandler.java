@@ -6,13 +6,13 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
-import tokyo.nakanaka.player.HumanPlayer;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.Item;
+import tokyo.nakanaka.shapeGenerator.user.HumanPlayer;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class WandCommandHandler implements CommandHandler {
 	private SelectionStrategySource selStraSource;

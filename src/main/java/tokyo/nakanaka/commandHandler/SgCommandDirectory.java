@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class SgCommandDirectory implements CommandDirectory {
 	private List<CommandEntry> subList = new ArrayList<>();

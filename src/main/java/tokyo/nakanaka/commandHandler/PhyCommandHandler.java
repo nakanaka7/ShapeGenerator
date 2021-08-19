@@ -8,7 +8,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
-import tokyo.nakanaka.player.User;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class PhyCommandHandler implements CommandHandler{
 

@@ -6,7 +6,6 @@ import java.util.List;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
@@ -16,6 +15,7 @@ import tokyo.nakanaka.selection.selSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class SelCommandDirectory implements CommandDirectory {
 	private SelectionStrategySource selStraSource;

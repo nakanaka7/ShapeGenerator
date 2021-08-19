@@ -12,8 +12,8 @@ import tokyo.nakanaka.commandHandler.CommandHandler;
 import tokyo.nakanaka.commandHandler.SgCommandDirectory;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class SgCommandHandler {
 	private SgCommandDirectory sgCmdDir;

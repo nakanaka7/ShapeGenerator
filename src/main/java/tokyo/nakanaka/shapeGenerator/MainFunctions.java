@@ -1,10 +1,10 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import tokyo.nakanaka.player.User;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class MainFunctions {
 	public static void setDefaultSelection(SelectionStrategySource selStrtgSource, User user) {

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.player;
+package tokyo.nakanaka.shapeGenerator.user;
 
 import tokyo.nakanaka.shapeGenerator.Item;
 

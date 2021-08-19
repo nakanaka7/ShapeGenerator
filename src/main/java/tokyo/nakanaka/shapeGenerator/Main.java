@@ -12,9 +12,9 @@ import tokyo.nakanaka.commandSender.ConsoleCommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEventListener;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
-import tokyo.nakanaka.player.User;
-import tokyo.nakanaka.player.UserRepository;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 
 public class Main {
 	private UserRepository userRepo;

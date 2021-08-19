@@ -11,7 +11,7 @@ import tokyo.nakanaka.commadHelp.RootCommandHelp;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
-import tokyo.nakanaka.player.User;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class HelpCommandHandler implements CommandHandler {
 	private SgCommandDirectory sgCmdDir;

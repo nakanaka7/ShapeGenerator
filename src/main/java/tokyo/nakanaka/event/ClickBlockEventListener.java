@@ -7,8 +7,6 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.player.User;
-import tokyo.nakanaka.player.UserRepository;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
@@ -17,6 +15,8 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.Item;
 import tokyo.nakanaka.shapeGenerator.MainFunctions;
+import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 
 public class ClickBlockEventListener {
 	private UserRepository userRepo;
