@@ -10,9 +10,11 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.commandHelp.DelHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class DelCommandHandler implements UserCommandHandler {
@@ -36,7 +38,8 @@ public class DelCommandHandler implements UserCommandHandler {
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length > 1) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
+			return true;
 		}
 		int num = 1;
 		if(args.length == 1) {
