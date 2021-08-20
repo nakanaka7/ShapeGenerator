@@ -8,9 +8,11 @@ import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commadHelp.RootCommandHelp;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
+import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class HelpCommandHandler implements UserCommandHandler {
@@ -45,7 +47,8 @@ public class HelpCommandHandler implements UserCommandHandler {
 		Logger logger = user.getLogger();
 		if(cmdEntry instanceof UserCommandHandler) {
 			if(args.length != 0) {
-				return false;
+				logger.print(LogColor.RED + "Usage: " + new HelpHelp().getUsage());
+				return true;
 			}
 			UserCommandHandler cmdHandler = (UserCommandHandler)cmdEntry;
 			BranchCommandHelp cmdHelp = new BranchCommandHelp(parentLabels, cmdHandler);
