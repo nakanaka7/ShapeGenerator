@@ -6,8 +6,10 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
+import tokyo.nakanaka.shapeGenerator.commandHelp.PhyHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class PhyCommandHandler implements UserCommandHandler{
@@ -32,8 +34,10 @@ public class PhyCommandHandler implements UserCommandHandler{
 	@Override
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
+		String usageMsg = LogColor.RED + "Usage: " + new PhyHelp().getUsage();
 		if(args.length != 1) {
-			return false;
+			logger.print(usageMsg);
+			return true;
 		}
 		boolean physics;
 		String bool = args[0];
@@ -42,7 +46,8 @@ public class PhyCommandHandler implements UserCommandHandler{
 		}else if(bool.equals("false")) {
 			physics = false;
 		}else {
-			return false;
+			logger.print(usageMsg);
+			return true;
 		}
 		user.setBlockPhysics(physics);
 		if(physics) {
