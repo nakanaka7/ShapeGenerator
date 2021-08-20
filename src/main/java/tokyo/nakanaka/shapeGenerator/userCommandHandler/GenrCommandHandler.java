@@ -8,6 +8,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.math.Vector3D;
@@ -17,6 +18,7 @@ import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.commandHelp.GenrHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class GenrCommandHandler implements UserCommandHandler{
@@ -49,7 +51,8 @@ public class GenrCommandHandler implements UserCommandHandler{
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " +  new GenrHelp().getUsage());
+			return true;
 		}
 		SelectionBuildingData selData = user.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
