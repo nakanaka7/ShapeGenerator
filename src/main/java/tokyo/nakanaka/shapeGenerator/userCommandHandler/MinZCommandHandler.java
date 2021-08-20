@@ -10,9 +10,11 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MinZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.commandHelp.MinzHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 
 public class MinZCommandHandler implements UserCommandHandler {
@@ -38,7 +40,8 @@ public class MinZCommandHandler implements UserCommandHandler {
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
-			return false;
+			logger.print(LogColor.RED + "Usage: " + new MinzHelp().getUsage());
+			return true;
 		}
 		double value;
 		try {
