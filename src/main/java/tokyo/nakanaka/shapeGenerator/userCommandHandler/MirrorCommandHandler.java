@@ -11,6 +11,7 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MirrorCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
@@ -36,17 +37,18 @@ public class MirrorCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
-			return false;
+			logger.print(LogColor.RED + "Usage: /sg mirror <x|y|z>");
+			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse axis");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -65,13 +67,12 @@ public class MirrorCommandHandler implements UserCommandHandler {
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return true;
+			return;
 		}	
 		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, user.getBlockPhysics());
 		mirrorCmd.execute();
 		undoManager.add(mirrorCmd);
 		logger.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
-		return true;
 	}
 	
 	@Override
