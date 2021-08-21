@@ -1,9 +1,12 @@
 package tokyo.nakanaka.shapeGenerator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.commandSender.BlockCommandSender;
@@ -11,8 +14,11 @@ import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.commandSender.ConsoleCommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEventListener;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.commandHandler.HelpCommandHandler;
+import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 
@@ -21,12 +27,14 @@ public class Main {
 	private SelectionStrategySource selStrtgSource;
 	private SgCommandHandler sgCmdHandler;
 	private ClickBlockEventListener evtListner;
+	private Map<String, CommandHandler> cmdHandlerMap = new HashMap<>();
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
 		this.userRepo = new UserRepository();
 		this.selStrtgSource = selStrtgSource;
 		this.sgCmdHandler = new SgCommandHandler(blockArg, selStrtgSource);
 		this.evtListner = new ClickBlockEventListener(this.userRepo, selStrtgSource);
+		this.cmdHandlerMap.put("help", new HelpCommandHandler());
 	}
 	
 	public void onSgCommandNew(CommandSender cmdSender, String[] args) {
@@ -63,6 +71,19 @@ public class Main {
 	}
 	
 	public void onSgCommand(CommandSender cmdSender, String[] args) {
+		if(args.length == 0) {
+			cmdSender.print(LogColor.RED + "Usage: /sg <subcommand>");
+			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
+			return;
+		}
+		String subLabel = args[0];
+		String[] subArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
+		if(this.cmdHandlerMap.containsKey(subLabel)) {
+			this.cmdHandlerMap.get(subLabel).onCommand(cmdSender, subArgs);
+			return;
+		}
+		
 		User user;
 		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
@@ -81,6 +102,15 @@ public class Main {
 	}
 	
 	public List<String> onSgTabComplete(CommandSender cmdSender, String[] args) {
+		if(args.length == 0) {
+			return List.of();
+		}
+		String subLabel = args[0];
+		String[] subArgs = new String[args.length - 1];
+		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
+		if(this.cmdHandlerMap.containsKey(subLabel)) {
+			return this.cmdHandlerMap.get(subLabel).onTabComplete(cmdSender, subArgs);
+		}
 		User user; 
 		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
