@@ -6,6 +6,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
@@ -34,6 +35,7 @@ public class RedoCommandHandler implements UserCommandHandler{
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length > 1) {
+			logger.print(LogColor.RED + "Usage: /sg redo [number]");
 			return false;
 		}
 		int num = 1;

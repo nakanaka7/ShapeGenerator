@@ -11,6 +11,7 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
@@ -40,7 +41,8 @@ public class ScaleCommandHandler implements UserCommandHandler{
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 2) {
-			return false;
+			logger.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
+			return true;
 		}
 		Axis axis;
 		try{

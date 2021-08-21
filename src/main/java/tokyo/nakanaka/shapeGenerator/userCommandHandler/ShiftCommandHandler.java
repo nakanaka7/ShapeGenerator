@@ -12,6 +12,7 @@ import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.geometricProperty.Direction;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.math.Vector3D;
@@ -42,7 +43,8 @@ public class ShiftCommandHandler implements UserCommandHandler{
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 2) {
-			return false;
+			logger.print(LogColor.RED + "Usage: /sg shift <direction> <length>");
+			return true;
 		}
 		Direction dir;
 		double blocks;
