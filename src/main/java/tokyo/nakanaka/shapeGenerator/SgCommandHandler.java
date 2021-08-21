@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import tokyo.nakanaka.commadHelp.BranchCommandHelp;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
@@ -12,8 +11,8 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandDirectory;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandEntry;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.SgCommandDirectory;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
 public class SgCommandHandler {
 	private SgCommandDirectory sgCmdDir;
@@ -34,12 +33,7 @@ public class SgCommandHandler {
 		Logger logger = user.getLogger();
 		if(cmdEntry instanceof UserCommandHandler) {
 			UserCommandHandler cmdHandler = (UserCommandHandler)cmdEntry;
-			boolean success = cmdHandler.onCommand(user, args);
-			if(!success) {
-				BranchCommandHelp help = new BranchCommandHelp(parentLabels, cmdHandler);
-				logger.print(LogDesignColor.ERROR + "Usage: " + help.getUsage());
-				return;
-			}
+			cmdHandler.onCommand(user, args);
 		}else if(cmdEntry instanceof CommandDirectory) {
 			CommandDirectory cmdDir = (CommandDirectory)cmdEntry;
 			List<CommandEntry> subEntryList = cmdDir.getSubList(user);
