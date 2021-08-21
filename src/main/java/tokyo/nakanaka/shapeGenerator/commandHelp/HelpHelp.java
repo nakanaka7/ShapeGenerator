@@ -1,9 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class HelpHelp implements CommandHelp {
+import tokyo.nakanaka.logger.LogColor;
 
+public class HelpHelp implements CommandHelp {
+	private String usage = "/sg help [subcommand]";
+	
 	public String getUsage() {
-		return "/sg help [subcommand]";
+		return this.usage;
+	}
+
+	@Override
+	public String toSingleLine() {
+		return LogColor.GOLD + usage + ": " + LogColor.RESET + "Print the command help";
 	}
 
 }

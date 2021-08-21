@@ -1,9 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class MaxyHelp implements CommandHelp {
+import tokyo.nakanaka.logger.LogColor;
 
+public class MaxyHelp implements CommandHelp {
+	private String usage = "/sg maxy <value>";
+	
 	public String getUsage() {
-		return "/sg maxy <value>";
+		return this.usage;
+	}
+
+	@Override
+	public String toSingleLine() {
+		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + "Set max y of the generated blocks";
 	}
 	
 }

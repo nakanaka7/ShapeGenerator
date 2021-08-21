@@ -1,9 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class DelHelp implements CommandHelp {
+import tokyo.nakanaka.logger.LogColor;
 
+public class DelHelp implements CommandHelp {
+	private String usage = "/sg del [number]";
+	
 	public String getUsage() {
-		return "/sg del [number]";
+		return this.usage;
+	}
+
+	@Override
+	public String toSingleLine() {
+		return LogColor.GOLD + usage + ": " + LogColor.RESET + "Delete the generated block(s)";
 	}
 
 }

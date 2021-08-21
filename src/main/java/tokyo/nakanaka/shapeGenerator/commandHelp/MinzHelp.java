@@ -1,9 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class MinzHelp implements CommandHelp {
+import tokyo.nakanaka.logger.LogColor;
 
+public class MinzHelp implements CommandHelp {
+	private String usage = "/sg minz <value>";
+	
 	public String getUsage() {
-		return "/sg minz <value>";
+		return this.usage;
+	}
+
+	@Override
+	public String toSingleLine() {
+		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + "Set min z of the generated blocks";
 	}
 
 }

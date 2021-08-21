@@ -1,9 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class MinxHelp implements CommandHelp {
+import tokyo.nakanaka.logger.LogColor;
 
+public class MinxHelp implements CommandHelp {
+	private String usage = "/sg minx <value>";
+	
 	public String getUsage() {
-		return "/sg minx <value>";
+		return this.usage;
+	}
+
+	@Override
+	public String toSingleLine() {
+		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + "Set min x of the generated blocks";
 	}
 
 }
