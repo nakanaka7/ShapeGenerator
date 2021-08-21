@@ -37,12 +37,12 @@ public class OffsetCommandHandler implements UserCommandHandler {
 		return list;
 	}
 
-	public boolean onCommand(User player, String[] args) {
+	public void onCommand(User player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0 && args.length != 3) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel offset [x] [y] [z]");
 			logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
-			return false;
+			return;
 		}
 		Vector3D pos;
 		if(args.length == 0) {
@@ -58,16 +58,17 @@ public class OffsetCommandHandler implements UserCommandHandler {
 				z = coordArg.onParsingDouble(args[2], player.getZ());
 			}catch(IllegalArgumentException e) {
 				logger.print(LogColor.RED + "Can not parse the coordinates");
-				return true;
+				return;
 			}
 			pos = new Vector3D(x, y, z);
 		}else {
-			return true;
+			return;
 		}
 		SelectionBuildingData selData = player.getSelectionBuildingData();
 		selData.setOffset(pos);
 		this.selMessenger.printSelection(logger, player.getSelectionShape(), selData, "");
-		return false;
+		logger.print(LogColor.RED + "Usage: " + "/sg sel offset [x] [y] [z]");
+		logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
 	}
 	
 	public List<String> onTabComplete(User user, String[] args) {

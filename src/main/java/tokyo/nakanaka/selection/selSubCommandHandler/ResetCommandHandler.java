@@ -38,11 +38,11 @@ public class ResetCommandHandler implements UserCommandHandler {
 		return new ArrayList<>();
 	}
 	
-	public boolean onCommand(User player, String[] args) {
+	public void onCommand(User player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel reset");
-			return false;
+			return;
 		}
 		World world = player.getWorld();
 		SelectionShape shape = player.getSelectionShape();
@@ -51,7 +51,6 @@ public class ResetCommandHandler implements UserCommandHandler {
 		player.setSelectionBuildingData(newSelData);
 		String defaultOffsetLabel = strategy.getDefaultOffsetLabel();
 		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
-		return true;
 	}
 	
 	public List<String> onTabComplete(User user, String[] args) {
