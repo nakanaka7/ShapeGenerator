@@ -1,9 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class ScaleHelp {
+import tokyo.nakanaka.logger.LogColor;
 
+public class ScaleHelp implements CommandHelp {
+	private String usage = "/sg scale <x|y|z> <factor>";
+	
 	public String getUsage() {
-		return "/sg scale <x|y|z> <factor>";
+		return this.usage;
+	}
+
+	@Override
+	public String toSingleLine() {
+		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + "Change the scale of the generated block(s)";
 	}
 	
 }

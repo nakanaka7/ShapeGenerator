@@ -1,9 +1,18 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class UndoHelp {
+import tokyo.nakanaka.logger.LogColor;
 
+public class UndoHelp implements CommandHelp {
+	private String usage = "/sg undo [number]";
+	private String description = "Undo block changing command(s)";
+	
 	public String getUsage() {
-		return "/sg undo [number]";
+		return this.usage;
+	}
+
+	@Override
+	public String toSingleLine() {
+		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;
 	}
 	
 }
