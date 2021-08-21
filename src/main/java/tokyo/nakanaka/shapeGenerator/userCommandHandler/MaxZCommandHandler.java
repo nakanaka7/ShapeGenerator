@@ -36,18 +36,18 @@ public class MaxZCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: " + new MaxzHelp().getUsage());
-			return true;
+			return;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -66,13 +66,12 @@ public class MaxZCommandHandler implements UserCommandHandler {
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return true;
+			return;
 		}
 		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, user.getBlockPhysics());
 		maxzCmd.execute();
 		undoManager.add(maxzCmd);
 		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
-		return true;
 	}
 
 	@Override

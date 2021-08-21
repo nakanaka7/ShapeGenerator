@@ -38,25 +38,25 @@ public class ScaleCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 2) {
 			logger.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
-			return true;
+			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse axis");
-			return true;
+			return;
 		}
 		double factor;
 		try {
 			factor = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -75,13 +75,13 @@ public class ScaleCommandHandler implements UserCommandHandler{
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return true;
+			return;
 		}
 		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, user.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
 		logger.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
-		return true;
+		return;
 	}
 	
 	@Override

@@ -40,11 +40,11 @@ public class ShiftCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 2) {
 			logger.print(LogColor.RED + "Usage: /sg shift <direction> <length>");
-			return true;
+			return;
 		}
 		Direction dir;
 		double blocks;
@@ -52,13 +52,13 @@ public class ShiftCommandHandler implements UserCommandHandler{
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse direction");
-			return true;
+			return;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse integer");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -77,7 +77,7 @@ public class ShiftCommandHandler implements UserCommandHandler{
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return true;
+			return;
 		}
 		double dx = dir.getX() * blocks;
 		double dy = dir.getY() * blocks;
@@ -87,7 +87,6 @@ public class ShiftCommandHandler implements UserCommandHandler{
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
 		logger.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
-		return true;
 	}
 	
 	@Override

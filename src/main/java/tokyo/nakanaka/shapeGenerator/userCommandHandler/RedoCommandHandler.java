@@ -32,11 +32,12 @@ public class RedoCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
+		String usageMsg = LogColor.RED + "Usage: /sg redo [number]";
 		if(args.length > 1) {
-			logger.print(LogColor.RED + "Usage: /sg redo [number]");
-			return false;
+			logger.print(usageMsg);
+			return;
 		}
 		int num = 1;
 		if(args.length == 1) {
@@ -44,11 +45,11 @@ public class RedoCommandHandler implements UserCommandHandler{
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
 				logger.print(LogDesignColor.ERROR + "Can not parse the number");
-				return false;
+				return;
 			}
 			if(num <= 0) {
 				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
-				return false;
+				return;
 			}
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
@@ -62,13 +63,14 @@ public class RedoCommandHandler implements UserCommandHandler{
 		}
 		if(totalNum == 0) {
 			logger.print(LogDesignColor.ERROR + "Nothing to redo");
-			return false;
+			logger.print(usageMsg);
+			return;
 		}
 		logger.print(LogDesignColor.NORMAL + "Redid " + totalNum + " command(s)");
 		if(totalNum < num) {
 			logger.print(LogDesignColor.ERROR + "Reached the end command");
 		}
-		return false;
+		logger.print(usageMsg);
 	}
 
 	@Override

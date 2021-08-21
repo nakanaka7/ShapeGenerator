@@ -48,11 +48,11 @@ public class GenrCommandHandler implements UserCommandHandler{
 	}
 
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: " +  new GenrHelp().getUsage());
-			return true;
+			return;
 		}
 		SelectionBuildingData selData = user.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
@@ -62,7 +62,7 @@ public class GenrCommandHandler implements UserCommandHandler{
 			region = selStrategy.buildBoundRegion3D(regionData);
 		}catch(IllegalStateException e) {
 			logger.print(LogDesignColor.ERROR + "Incomplete selection");
-			return true;
+			return;
 		}
 		Vector3D offset = selData.getOffset();
 		if(offset == null) {
@@ -74,18 +74,18 @@ public class GenrCommandHandler implements UserCommandHandler{
 			block = this.blockArg.onParsing(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Invalid block specification");
-			return true;
+			return;
 		}
 		GenerateCommand generateCmd = new GenerateCommand(sel, block, user.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Unsettable block");
-			return true;
+			return;
 		}
 		logger.print(LogDesignColor.NORMAL + "Generated block(s)");
 		user.getUndoCommandManager().add(generateCmd);
-		return true;
+		return;
 	}
 	
 	@Override

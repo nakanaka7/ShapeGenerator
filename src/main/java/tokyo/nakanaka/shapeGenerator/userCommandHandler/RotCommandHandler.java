@@ -38,25 +38,25 @@ public class RotCommandHandler implements UserCommandHandler{
 	}
 		
 	@Override
-	public boolean onCommand(User player, String[] args) {
+	public void onCommand(User player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
 			logger.print(LogColor.RED + "Usage: /sg rot <x|y|z> <degree>");
-			return true;
+			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse axis");
-			return true;
+			return;
 		}
 		double degree;
 		try {
 			degree = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = player.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -75,13 +75,13 @@ public class RotCommandHandler implements UserCommandHandler{
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return true;
+			return;
 		}
 		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, player.getBlockPhysics());
 		rotateCmd.execute();
 		undoManager.add(rotateCmd);
 		logger.print(LogDesignColor.NORMAL + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
-		return true;
+		return;
 	}
 
 	@Override

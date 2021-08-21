@@ -37,18 +37,18 @@ public class MinXCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: " + new MinxHelp().getUsage());
-			return true;
+			return;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
 			logger.print(LogDesignColor.ERROR + "Can not parse double");
-			return true;
+			return;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
@@ -67,13 +67,12 @@ public class MinXCommandHandler implements UserCommandHandler {
 		}
 		if(originalCmd == null) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return true;
+			return;
 		}
 		MinXCommand minxCmd = new MinXCommand(originalCmd, value, user.getBlockPhysics());
 		minxCmd.execute();
 		undoManager.add(minxCmd);
 		logger.print(LogDesignColor.NORMAL + "Set minX -> " + value);
-		return true;
 	}
 
 	@Override

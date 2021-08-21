@@ -37,7 +37,7 @@ public class WandCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		if(!(user instanceof HumanPlayer)) {
 			user.getLogger().print(LogDesignColor.ERROR + "Only player can execute this command");
 		}
@@ -48,7 +48,6 @@ public class WandCommandHandler implements UserCommandHandler {
 		Logger logger = user.getLogger();
 		logger.print(LogDesignColor.NORMAL + "Gave wand to " + hp.getName());
 		new SelectionMessenger().printClickDescription(logger, strategy);
-		return true;
 	}
 
 	@Override

@@ -35,11 +35,11 @@ public class DelCommandHandler implements UserCommandHandler {
 		return "Delete the generated blocks";
 	}
 	
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length > 1) {
 			logger.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
-			return true;
+			return;
 		}
 		int num = 1;
 		if(args.length == 1) {
@@ -47,11 +47,11 @@ public class DelCommandHandler implements UserCommandHandler {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
 				logger.print(LogDesignColor.ERROR + "Can not parse the number");
-				return true;
+				return;
 			}
 			if(num <= 0) {
 				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
-				return true;
+				return;
 			}
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
@@ -78,13 +78,13 @@ public class DelCommandHandler implements UserCommandHandler {
 		undoManager.add(deleteCmd);
 		if(delNum == 0) {
 			logger.print(LogDesignColor.ERROR + "Generate blocks first");
-			return true;
+			return;
 		}
 		logger.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
 		if(delNum < num) {
 			logger.print(LogDesignColor.ERROR + "reached the first generation");
 		}
-		return true;
+		return;
 	}
 	
 	@Override

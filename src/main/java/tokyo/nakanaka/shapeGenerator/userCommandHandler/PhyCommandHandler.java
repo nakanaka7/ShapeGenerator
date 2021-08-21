@@ -32,12 +32,12 @@ public class PhyCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(User user, String[] args) {
+	public void onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		String usageMsg = LogColor.RED + "Usage: " + new PhyHelp().getUsage();
 		if(args.length != 1) {
 			logger.print(usageMsg);
-			return true;
+			return;
 		}
 		boolean physics;
 		String bool = args[0];
@@ -47,7 +47,7 @@ public class PhyCommandHandler implements UserCommandHandler{
 			physics = false;
 		}else {
 			logger.print(usageMsg);
-			return true;
+			return;
 		}
 		user.setBlockPhysics(physics);
 		if(physics) {
@@ -55,7 +55,6 @@ public class PhyCommandHandler implements UserCommandHandler{
 		}else {
 			logger.print(LogDesignColor.NORMAL+ "Set physics -> " + bool);
 		}
-		return true;
 	}
 
 	@Override
