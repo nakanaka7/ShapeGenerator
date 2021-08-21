@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -54,7 +55,8 @@ public class ShapeCommandHandler implements UserCommandHandler {
 	public boolean onCommand(User user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
-			return false;
+			logger.print(LogColor.RED + "Usage: /sg shape <type>");
+			return true;
 		}
 		SelectionShape shape;
 		try{
