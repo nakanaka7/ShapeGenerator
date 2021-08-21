@@ -7,6 +7,6 @@ import tokyo.nakanaka.shapeGenerator.user.User;
 
 public interface UserCommandHandler extends CommandEntry {
 	List<ParameterHelp> getParameterHelpList();
-	boolean onCommand(User user, String[] args);
+	void onCommand(User user, String[] args);
 	List<String> onTabComplete(User user, String[] args);
 }
