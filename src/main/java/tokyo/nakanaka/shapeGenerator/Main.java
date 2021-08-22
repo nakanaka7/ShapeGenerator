@@ -87,15 +87,15 @@ public class Main {
 		}
 		
 		User user;
-		if(cmdSender instanceof Player playerCmdSender) {
-			UUID uid = playerCmdSender.getUniqueID();
+		if(cmdSender instanceof Player player) {
+			UUID uid = player.getUniqueID();
 			user = this.userRepo.getHumanUser(uid);
 			if(user == null) {
 				user = new User(uid);
 				this.userRepo.registerHumanUser(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
-			user.setBlockPosition(playerCmdSender.getBlockPosition());
+			user.setBlockPosition(player.getBlockPosition());
 		}else {
 			return;
 		}
