@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
+import java.util.List;
+
 import tokyo.nakanaka.logger.LogColor;
 
 public class ShiftHelp implements CommandHelp {
@@ -13,6 +15,12 @@ public class ShiftHelp implements CommandHelp {
 	@Override
 	public String toSingleLine() {
 		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;
+	}
+
+	@Override
+	public List<String> toMultipleLines() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
