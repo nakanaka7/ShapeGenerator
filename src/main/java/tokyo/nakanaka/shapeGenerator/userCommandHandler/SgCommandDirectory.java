@@ -11,8 +11,6 @@ public class SgCommandDirectory implements CommandDirectory {
 	private List<CommandEntry> subList = new ArrayList<>();
 	
 	public SgCommandDirectory(BlockCommandArgument blockArg, SelectionStrategySource selStraSource) {
-		subList.add(new HelpCommandHandler(this));
-		subList.add(new WandCommandHandler(selStraSource));
 		subList.add(new ShapeCommandHandler(selStraSource));
 		subList.add(new SelCommandDirectory(selStraSource));
 		subList.add(new GenrCommandHandler(blockArg, selStraSource));
