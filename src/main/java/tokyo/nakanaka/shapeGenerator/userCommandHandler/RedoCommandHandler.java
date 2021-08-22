@@ -10,7 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 
 public class RedoCommandHandler implements UserCommandHandler{
 		
@@ -32,7 +32,7 @@ public class RedoCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(User user, String[] args) {
+	public void onCommand(UserOld user, String[] args) {
 		Logger logger = user.getLogger();
 		String usageMsg = LogColor.RED + "Usage: /sg redo [number]";
 		if(args.length > 1) {
@@ -74,7 +74,7 @@ public class RedoCommandHandler implements UserCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(User user, String[] args) {
+	public List<String> onTabComplete(UserOld user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

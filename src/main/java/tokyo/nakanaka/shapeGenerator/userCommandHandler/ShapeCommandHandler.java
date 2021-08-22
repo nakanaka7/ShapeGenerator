@@ -15,7 +15,7 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 
 public class ShapeCommandHandler implements UserCommandHandler {
 	private SelectionStrategySource selStraSource;
@@ -52,7 +52,7 @@ public class ShapeCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(User user, String[] args) {
+	public void onCommand(UserOld user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: /sg shape <type>");
@@ -86,7 +86,7 @@ public class ShapeCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(User user, String[] args) {
+	public List<String> onTabComplete(UserOld user, String[] args) {
 		if(args.length == 1) {
 			return this.selStraSource.getShapeList().stream()
 					.map(s -> s.toString().toLowerCase())

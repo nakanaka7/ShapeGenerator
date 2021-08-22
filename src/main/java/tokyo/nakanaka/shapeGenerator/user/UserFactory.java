@@ -19,12 +19,12 @@ public class UserFactory {
 		this.defaultShape = defaultShape;
 	}
 
-	public User createConsoleUser() {
-		return new User(UUID.randomUUID());
+	public UserOld createConsoleUser() {
+		return new UserOld(UUID.randomUUID());
 	}
 	
-	public User createHumanUser(UUID uid, World world) {
-		User user = new User(uid);
+	public UserOld createHumanUser(UUID uid, World world) {
+		UserOld user = new UserOld(uid);
 		user.setSelectionShape(this.defaultShape);
 		RegionBuildingData regionData = this.strategyMap.get(this.defaultShape).newRegionBuildingData();
 		SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
@@ -32,8 +32,8 @@ public class UserFactory {
 		return user;
 	}
 	
-	public User createBlockUser(String name, World world, BlockVector3D pos) {
-		User user = new User(UUID.randomUUID() ,name);
+	public UserOld createBlockUser(String name, World world, BlockVector3D pos) {
+		UserOld user = new UserOld(UUID.randomUUID() ,name);
 		user.setWorld(world);
 		user.setX(pos.getX());
 		user.setY(pos.getY());

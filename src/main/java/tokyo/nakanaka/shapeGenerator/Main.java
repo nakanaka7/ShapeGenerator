@@ -20,7 +20,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 
 public class Main {
@@ -40,12 +40,12 @@ public class Main {
 	}
 	
 	public void onSgCommandNew(CommandSender cmdSender, String[] args) {
-		User user;
+		UserOld user;
 		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
 			user = this.userRepo.getHumanUser(uid);
 			if(user == null) {
-				user = new User(uid);
+				user = new UserOld(uid);
 				this.userRepo.registerHumanUser(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
@@ -59,7 +59,7 @@ public class Main {
 			String name = blockCmdLine.name();
 			user = this.userRepo.getBlockUser(name);
 			if(user == null) {
-				user = new User(UUID.randomUUID(), name);
+				user = new UserOld(UUID.randomUUID(), name);
 				this.userRepo.registerBlockPlayer(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
@@ -86,12 +86,12 @@ public class Main {
 			return;
 		}
 		
-		User user;
+		UserOld user;
 		if(cmdSender instanceof Player player) {
 			UUID uid = player.getUniqueID();
 			user = this.userRepo.getHumanUser(uid);
 			if(user == null) {
-				user = new User(uid);
+				user = new UserOld(uid);
 				this.userRepo.registerHumanUser(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
@@ -113,12 +113,12 @@ public class Main {
 		if(this.cmdHandlerMap.containsKey(subLabel)) {
 			return this.cmdHandlerMap.get(subLabel).onTabComplete(cmdSender, subArgs);
 		}
-		User user; 
+		UserOld user; 
 		if(cmdSender instanceof Player playerCmdSender) {
 			UUID uid = playerCmdSender.getUniqueID();
 			user = this.userRepo.getHumanUser(uid);
 			if(user == null) {
-				user = new User(uid);
+				user = new UserOld(uid);
 				this.userRepo.registerHumanUser(user);
 				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 			}
@@ -130,13 +130,13 @@ public class Main {
 	}
 	
 	public List<String> onSgTabCompleteOld(CommandSender cmdSender, String[] args) {
-		User user; 
+		UserOld user; 
 		if(cmdSender instanceof Player playerCmdSender) {
 			if(!args[0].startsWith("@")) {
 				UUID uid = playerCmdSender.getUniqueID();
 				user = this.userRepo.getHumanUser(uid);
 				if(user == null) {
-					user = new User(uid);
+					user = new UserOld(uid);
 					this.userRepo.registerHumanUser(user);
 					MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 				}
@@ -146,7 +146,7 @@ public class Main {
 				String name = blockCmdLine.name();
 				user = this.userRepo.getBlockUser(name);
 				if(user == null) {
-					user = new User(UUID.randomUUID(), name);
+					user = new UserOld(UUID.randomUUID(), name);
 					MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 				}
 				user.setBlockPosition(playerCmdSender.getBlockPosition());

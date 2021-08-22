@@ -15,7 +15,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 
 public class RotCommandHandler implements UserCommandHandler{
 		
@@ -38,7 +38,7 @@ public class RotCommandHandler implements UserCommandHandler{
 	}
 		
 	@Override
-	public void onCommand(User player, String[] args) {
+	public void onCommand(UserOld player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 2) {
 			logger.print(LogColor.RED + "Usage: /sg rot <x|y|z> <degree>");
@@ -85,7 +85,7 @@ public class RotCommandHandler implements UserCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(User user, String[] args) {
+	public List<String> onTabComplete(UserOld user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else if(args.length == 2) {

@@ -12,7 +12,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
 public class OffsetCommandHandler implements UserCommandHandler {
@@ -37,7 +37,7 @@ public class OffsetCommandHandler implements UserCommandHandler {
 		return list;
 	}
 
-	public void onCommand(User player, String[] args) {
+	public void onCommand(UserOld player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0 && args.length != 3) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel offset [x] [y] [z]");
@@ -71,7 +71,7 @@ public class OffsetCommandHandler implements UserCommandHandler {
 		logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
 	}
 	
-	public List<String> onTabComplete(User user, String[] args) {
+	public List<String> onTabComplete(UserOld user, String[] args) {
 		if(args.length <= 3) {
 			return Arrays.asList("~");
 		}else {

@@ -19,7 +19,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHelp.GenrHelp;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 
 public class GenrCommandHandler implements UserCommandHandler{
 	private BlockCommandArgument blockArg;
@@ -48,7 +48,7 @@ public class GenrCommandHandler implements UserCommandHandler{
 	}
 
 	@Override
-	public void onCommand(User user, String[] args) {
+	public void onCommand(UserOld user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: " +  new GenrHelp().getUsage());
@@ -89,7 +89,7 @@ public class GenrCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public List<String> onTabComplete(User user, String[] args) {
+	public List<String> onTabComplete(UserOld user, String[] args) {
 		if(args.length == 1) {
 			return this.blockArg.onTabComplete(args[0]);
 		}else {

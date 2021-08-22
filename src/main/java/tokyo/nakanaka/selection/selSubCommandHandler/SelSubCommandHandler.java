@@ -6,7 +6,7 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 
 public interface SelSubCommandHandler {
 	String getLabel();
@@ -16,5 +16,5 @@ public interface SelSubCommandHandler {
 	 * @return true if data changed else false
 	 */
 	boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args);
-	List<String> onTabComplete(User user, String[] args);
+	List<String> onTabComplete(UserOld user, String[] args);
 }

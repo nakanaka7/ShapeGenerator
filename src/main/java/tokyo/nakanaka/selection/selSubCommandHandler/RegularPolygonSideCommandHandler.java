@@ -11,7 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	
@@ -48,7 +48,7 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(User user, String[] args) {
+	public List<String> onTabComplete(UserOld user, String[] args) {
 		return Arrays.asList("3", "4", "5", "6", "7", "8", "9", "10");
 	}
 	

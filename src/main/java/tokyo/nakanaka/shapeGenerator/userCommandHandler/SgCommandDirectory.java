@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 
 public class SgCommandDirectory implements CommandDirectory {
 	private List<CommandEntry> subList = new ArrayList<>();
@@ -41,7 +41,7 @@ public class SgCommandDirectory implements CommandDirectory {
 	}
 	
 	@Override
-	public List<CommandEntry> getSubList(User user) {
+	public List<CommandEntry> getSubList(UserOld user) {
 		return subList;
 	}
 	

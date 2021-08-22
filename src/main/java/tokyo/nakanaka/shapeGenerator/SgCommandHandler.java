@@ -8,7 +8,7 @@ import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserOld;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandDirectory;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandEntry;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.SgCommandDirectory;
@@ -25,11 +25,11 @@ public class SgCommandHandler {
 		this.sgCmdDir = new SgCommandDirectory(blockArg, selStrtgSource);
 	}
 	
-	public void onCommand(User user, String[] args) {
+	public void onCommand(UserOld user, String[] args) {
 		onRecursiveCommand(new String[0], this.sgCmdDir, user, args);
 	}
 	
-	private static void onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, User user, String[] args) {
+	private static void onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, UserOld user, String[] args) {
 		Logger logger = user.getLogger();
 		if(cmdEntry instanceof UserCommandHandler) {
 			UserCommandHandler cmdHandler = (UserCommandHandler)cmdEntry;
@@ -61,11 +61,11 @@ public class SgCommandHandler {
 		}
 	}
 
-	public List<String> onTabComplete(User user, String[] args) {
+	public List<String> onTabComplete(UserOld user, String[] args) {
 		return onRecursiveTabComplete(this.sgCmdDir, user, args);
 	}
 	
-	private List<String> onRecursiveTabComplete(CommandEntry cmdEntry, User user, String[] args) {
+	private List<String> onRecursiveTabComplete(CommandEntry cmdEntry, UserOld user, String[] args) {
 		if(args.length == 0) {
 			return new ArrayList<>();
 		}
