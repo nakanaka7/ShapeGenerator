@@ -62,7 +62,13 @@ public class HelpCommandHandler implements CommandHandler {
 				.forEach(s -> cmdSender.print(s.toSingleLine()));
 			cmdSender.print(LogColor.GOLD + "Run \"/sg help <subcommand>\" for details");
 		}else if(args.length == 1) {
-			
+			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
+			if(cmdHelp != null) {
+				cmdHelp.toMultipleLines().stream()
+					.forEach(s -> cmdSender.print(s));
+			}else {
+				cmdSender.print(LogColor.RED + "Unknown subcommand");
+			}
 		}else {
 			cmdSender.print(LogColor.RED + "Usage: /sg help [subcommand]");
 		}
