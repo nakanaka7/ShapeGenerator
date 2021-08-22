@@ -18,6 +18,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHandler.HelpCommandHandler;
+import tokyo.nakanaka.shapeGenerator.commandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.user.UserRepository;
@@ -35,6 +36,7 @@ public class Main {
 		this.sgCmdHandler = new SgCommandHandler(blockArg, selStrtgSource);
 		this.evtListner = new ClickBlockEventListener(this.userRepo, selStrtgSource);
 		this.cmdHandlerMap.put("help", new HelpCommandHandler());
+		this.cmdHandlerMap.put("wand", new WandCommandHandler());
 	}
 	
 	public void onSgCommandNew(CommandSender cmdSender, String[] args) {
