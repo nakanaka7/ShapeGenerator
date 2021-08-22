@@ -15,7 +15,7 @@ public class MaxyHelp implements CommandHelp {
 
 	@Override
 	public String toSingleLine() {
-		return LogColor.GOLD + this.usage + ": " + this.description;
+		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;
 	}
 
 	@Override
