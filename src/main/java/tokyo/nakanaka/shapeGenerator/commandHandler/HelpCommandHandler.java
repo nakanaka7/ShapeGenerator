@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.CommandHelp;
@@ -26,7 +27,8 @@ import tokyo.nakanaka.shapeGenerator.commandHelp.ShapeHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.ShiftHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.UndoHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.WandHelp;
-import tokyo.nakanaka.shapeGenerator.user.User;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
 public class HelpCommandHandler implements UserCommandHandler {
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
@@ -54,7 +56,7 @@ public class HelpCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(User user, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 0) {
 			cmdSender.print("--- [" + LogColor.GOLD + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
@@ -75,12 +77,30 @@ public class HelpCommandHandler implements UserCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(User user, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHelpMap.keySet());
 		}else {
 			return List.of();
 		}
+	}
+
+	@Override
+	public String getLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ParameterHelp> getParameterHelpList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
