@@ -18,8 +18,11 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHandler.HelpCommandHandler;
+import tokyo.nakanaka.shapeGenerator.commandHandler.PhyCommandHandler;
+import tokyo.nakanaka.shapeGenerator.commandHandler.UserCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
+import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.user.UserOld;
 import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 
@@ -29,14 +32,17 @@ public class Main {
 	private SgCommandHandler sgCmdHandler;
 	private ClickBlockEventListener evtListner;
 	private Map<String, CommandHandler> cmdHandlerMap = new HashMap<>();
+	private Map<String, UserCommandHandler> userCmdHandlerMap = new HashMap<>();
+	private Map<User, Boolean> physicsMap = new HashMap<>();
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
 		this.userRepo = new UserRepository();
 		this.selStrtgSource = selStrtgSource;
 		this.sgCmdHandler = new SgCommandHandler(blockArg, selStrtgSource);
 		this.evtListner = new ClickBlockEventListener(this.userRepo, selStrtgSource);
-		this.cmdHandlerMap.put("help", new HelpCommandHandler());
-		this.cmdHandlerMap.put("wand", new WandCommandHandler());
+		this.userCmdHandlerMap.put("help", new HelpCommandHandler());
+		this.userCmdHandlerMap.put("wand", new WandCommandHandler());
+		this.userCmdHandlerMap.put("phy", new PhyCommandHandler(this.physicsMap));
 	}
 	
 	public void onSgCommandNew(CommandSender cmdSender, String[] args) {
@@ -78,29 +84,38 @@ public class Main {
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
 		}
-		String subLabel = args[0];
-		String[] subArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		if(this.cmdHandlerMap.containsKey(subLabel)) {
-			this.cmdHandlerMap.get(subLabel).onCommand(cmdSender, subArgs);
+		User user;
+		String subLabel;
+		String[] subArgs;
+		if(cmdSender instanceof Player player) {
+			user = new User(player.getUniqueID());
+			subLabel = args[0];
+			subArgs = new String[args.length - 1];
+			System.arraycopy(args, 1, subArgs, 0, args.length - 1);
+		}else {
+			cmdSender.print(LogColor.RED + "Player only");
 			return;
 		}
+		UserCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
+		if(userCmdHandler != null) {
+			userCmdHandler.onCommand(user, cmdSender, subArgs);
+		}
 		
-		UserOld user;
-		if(cmdSender instanceof Player player) {
+		UserOld userOld;
+		if(cmdSender instanceof Player) {
 			UUID uid = player.getUniqueID();
-			user = this.userRepo.getHumanUser(uid);
-			if(user == null) {
-				user = new UserOld(uid);
-				this.userRepo.registerHumanUser(user);
-				MainFunctions.setDefaultSelection(this.selStrtgSource, user);
+			userOld = this.userRepo.getHumanUser(uid);
+			if(userOld == null) {
+				userOld = new UserOld(uid);
+				this.userRepo.registerHumanUser(userOld);
+				MainFunctions.setDefaultSelection(this.selStrtgSource, userOld);
 			}
-			user.setBlockPosition(player.getBlockPosition());
+			userOld.setBlockPosition(player.getBlockPosition());
 		}else {
 			return;
 		}
-		user.setLogger(cmdSender);
-		this.sgCmdHandler.onCommand(user, args);
+		userOld.setLogger(cmdSender);
+		this.sgCmdHandler.onCommand(userOld, args);
 	}
 	
 	public List<String> onSgTabComplete(CommandSender cmdSender, String[] args) {
