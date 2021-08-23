@@ -13,7 +13,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class HelpCommandHandler implements UserCommandHandler {
 	private SgCommandDirectory sgCmdDir;
@@ -39,11 +39,11 @@ public class HelpCommandHandler implements UserCommandHandler {
 		return list;
 	}
 			
-	public void onCommand(UserOld user, String[] args) {
+	public void onCommand(UserData user, String[] args) {
 		onRecursiveCommand(new String[0], this.sgCmdDir, user, args);
 	}
 	
-	private static boolean onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, UserOld user, String[] args) {
+	private static boolean onRecursiveCommand(String[] parentLabels, CommandEntry cmdEntry, UserData user, String[] args) {
 		Logger logger = user.getLogger();
 		if(cmdEntry instanceof UserCommandHandler) {
 			if(args.length != 0) {
@@ -96,11 +96,11 @@ public class HelpCommandHandler implements UserCommandHandler {
 		}
 	}
 
-	public List<String> onTabComplete(UserOld user, String[] args) {
+	public List<String> onTabComplete(UserData user, String[] args) {
 		return onRecursiveTabComplete(this.sgCmdDir, user, args);
 	}
 	
-	private static List<String> onRecursiveTabComplete(CommandEntry cmdEntry, UserOld user, String[] args) {
+	private static List<String> onRecursiveTabComplete(CommandEntry cmdEntry, UserData user, String[] args) {
 		if(cmdEntry instanceof UserCommandHandler) {
 			return new ArrayList<>();
 		}else if(cmdEntry instanceof CommandDirectory) {

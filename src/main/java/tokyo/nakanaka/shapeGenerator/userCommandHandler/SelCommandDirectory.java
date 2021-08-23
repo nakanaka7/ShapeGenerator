@@ -15,7 +15,7 @@ import tokyo.nakanaka.selection.selSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class SelCommandDirectory implements CommandDirectory {
 	private SelectionStrategySource selStraSource;
@@ -35,7 +35,7 @@ public class SelCommandDirectory implements CommandDirectory {
 	}
 	
 	@Override
-	public List<CommandEntry> getSubList(UserOld user) {
+	public List<CommandEntry> getSubList(UserData user) {
 		List<CommandEntry> handlerList = new ArrayList<>();
 		handlerList.add(new ResetCommandHandler(this.selStraSource));
 		handlerList.add(new OffsetCommandHandler());
@@ -50,7 +50,7 @@ public class SelCommandDirectory implements CommandDirectory {
 				}
 	
 				@Override
-				public void onCommand(UserOld user, String[] args) {
+				public void onCommand(UserData user, String[] args) {
 					World world = user.getWorld();
 					BlockVector3D playerPos = new BlockVector3D(user.getX(), user.getY(), user.getZ());
 					SelectionBuildingData selData = user.getSelectionBuildingData();
@@ -64,7 +64,7 @@ public class SelCommandDirectory implements CommandDirectory {
 				}
 
 				@Override
-				public List<String> onTabComplete(UserOld player, String[] args) {
+				public List<String> onTabComplete(UserData player, String[] args) {
 					return selSubCmdHandler.onTabComplete(player, args);
 				}
 

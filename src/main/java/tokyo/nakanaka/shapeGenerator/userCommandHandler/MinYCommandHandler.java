@@ -15,7 +15,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.commandHelp.MinyHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class MinYCommandHandler implements UserCommandHandler {
 	
@@ -37,7 +37,7 @@ public class MinYCommandHandler implements UserCommandHandler {
 	}
 
 	@Override
-	public void onCommand(UserOld user, String[] args) {
+	public void onCommand(UserData user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 1) {
 			logger.print(LogColor.RED + "Usage: " + new MinyHelp().getUsage());
@@ -76,7 +76,7 @@ public class MinYCommandHandler implements UserCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(UserOld user, String[] args) {
+	public List<String> onTabComplete(UserData user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList(String.valueOf(user.getY()));
 		}else {

@@ -7,7 +7,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 	private PosCommandHandler posHandler = new PosCommandHandler("pos1");
@@ -45,7 +45,7 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(UserOld user, String[] args) {
+	public List<String> onTabComplete(UserData user, String[] args) {
 		return this.posHandler.onTabComplete(user, args);
 	}
 

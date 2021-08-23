@@ -10,7 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class UndoCommandHandler implements UserCommandHandler{
 	
@@ -32,7 +32,7 @@ public class UndoCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(UserOld user, String[] args) {
+	public void onCommand(UserData user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length > 1) {
 			logger.print(LogColor.RED + "Usage: /sg undo [number]");
@@ -72,7 +72,7 @@ public class UndoCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserOld user, String[] args) {
+	public List<String> onTabComplete(UserData user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

@@ -5,27 +5,27 @@ import java.util.Map;
 import java.util.UUID;
 
 public class UserRepository {
-	private UserOld console = new UserOld(UUID.randomUUID());
-	private Map<UUID, UserOld> humanMap = new HashMap<>();
-	private Map<String, UserOld> blockMap = new HashMap<>();
+	private UserData console = new UserData(UUID.randomUUID());
+	private Map<UUID, UserData> humanMap = new HashMap<>();
+	private Map<String, UserData> blockMap = new HashMap<>();
 	
-	public UserOld getConsoleUser() {
+	public UserData getConsoleUser() {
 		return this.console;
 	}
 	
-	public UserOld getHumanUser(UUID uid) {
+	public UserData getHumanUser(UUID uid) {
 		return this.humanMap.get(uid);
 	}
 	
-	public void registerHumanUser(UserOld user) {
+	public void registerHumanUser(UserData user) {
 		this.humanMap.put(user.getUniqueId(), user);
 	}
 	
-	public UserOld getBlockUser(String name) {
+	public UserData getBlockUser(String name) {
 		return this.blockMap.get(name);
 	}
 	
-	public void registerBlockPlayer(UserOld user) {
+	public void registerBlockPlayer(UserData user) {
 		this.blockMap.put(user.getName(), user);
 	}
 	

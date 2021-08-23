@@ -9,7 +9,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
-public class UserOld {
+public class UserData {
 	private UUID uid;
 	private String name;
 	private Logger logger;
@@ -22,12 +22,12 @@ public class UserOld {
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	
-	public UserOld(UUID uid, String name) {
+	public UserData(UUID uid, String name) {
 		this.uid = uid;
 		this.name = name;
 	}
 
-	public UserOld(UUID uid) {
+	public UserData(UUID uid) {
 		this.uid = uid;
 	}
 	

@@ -15,7 +15,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.commandHelp.DelHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class DelCommandHandler implements UserCommandHandler {
 	@Override
@@ -35,7 +35,7 @@ public class DelCommandHandler implements UserCommandHandler {
 		return "Delete the generated blocks";
 	}
 	
-	public void onCommand(UserOld user, String[] args) {
+	public void onCommand(UserData user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length > 1) {
 			logger.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
@@ -88,7 +88,7 @@ public class DelCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserOld user, String[] args) {
+	public List<String> onTabComplete(UserData user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

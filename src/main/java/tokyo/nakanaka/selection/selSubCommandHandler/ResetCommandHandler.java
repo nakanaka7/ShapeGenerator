@@ -12,7 +12,7 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
 public class ResetCommandHandler implements UserCommandHandler {
@@ -38,7 +38,7 @@ public class ResetCommandHandler implements UserCommandHandler {
 		return new ArrayList<>();
 	}
 	
-	public void onCommand(UserOld player, String[] args) {
+	public void onCommand(UserData player, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel reset");
@@ -53,7 +53,7 @@ public class ResetCommandHandler implements UserCommandHandler {
 		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
 	}
 	
-	public List<String> onTabComplete(UserOld user, String[] args) {
+	public List<String> onTabComplete(UserData user, String[] args) {
 		return new ArrayList<>();
 	}
 

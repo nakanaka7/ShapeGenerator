@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.shapeGenerator.Pair;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandDirectory;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.CommandEntry;
 
@@ -38,7 +38,7 @@ public class RootCommandHelp {
 	 * the first element of pair is subcommand label,
 	 * the second element of pair is subcommand description
 	 */
-	public List<Pair<String, String>> getSubCommandDescriptionList(UserOld user){
+	public List<Pair<String, String>> getSubCommandDescriptionList(UserData user){
 		List<Pair<String, String>> list = new ArrayList<>();
 		for(CommandEntry e : this.cmdDir.getSubList(user)) {
 			String first =  e.getLabel();

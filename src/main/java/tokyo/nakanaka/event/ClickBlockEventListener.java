@@ -15,7 +15,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.Item;
 import tokyo.nakanaka.shapeGenerator.MainFunctions;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 
 public class ClickBlockEventListener {
@@ -37,9 +37,9 @@ public class ClickBlockEventListener {
 			return;
 		}
 		UUID uid = player.getUniqueID();
-		UserOld user = this.userRepo.getHumanUser(uid);
+		UserData user = this.userRepo.getHumanUser(uid);
 		if(user == null) {
-			user = new UserOld(uid);
+			user = new UserData(uid);
 			this.userRepo.registerHumanUser(user);
 			MainFunctions.setDefaultSelection(this.selStrtgSource, user);
 		}

@@ -17,7 +17,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.user.UserOld;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class ShiftCommandHandler implements UserCommandHandler{
 
@@ -40,7 +40,7 @@ public class ShiftCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(UserOld user, String[] args) {
+	public void onCommand(UserData user, String[] args) {
 		Logger logger = user.getLogger();
 		if(args.length != 2) {
 			logger.print(LogColor.RED + "Usage: /sg shift <direction> <length>");
@@ -90,7 +90,7 @@ public class ShiftCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserOld user, String[] args) {
+	public List<String> onTabComplete(UserData user, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList(Direction.values()).stream()
 					.map(s -> s.toString().toLowerCase())
