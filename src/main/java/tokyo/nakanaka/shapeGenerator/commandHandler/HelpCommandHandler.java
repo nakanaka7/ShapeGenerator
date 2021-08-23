@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.CommandHelp;
@@ -27,8 +26,9 @@ import tokyo.nakanaka.shapeGenerator.commandHelp.ShapeHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.ShiftHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.UndoHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.WandHelp;
+import tokyo.nakanaka.shapeGenerator.user.User;
 
-public class HelpCommandHandler implements CommandHandler {
+public class HelpCommandHandler implements UserCommandHandler {
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 	
 	public HelpCommandHandler() {
@@ -54,7 +54,7 @@ public class HelpCommandHandler implements CommandHandler {
 	}
 	
 	@Override
-	public void onCommand(CommandSender cmdSender, String[] args) {
+	public void onCommand(User user, CommandSender cmdSender, String[] args) {
 		if(args.length == 0) {
 			cmdSender.print("--- [" + LogColor.GOLD + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
@@ -75,7 +75,7 @@ public class HelpCommandHandler implements CommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(User user, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHelpMap.keySet());
 		}else {
