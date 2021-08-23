@@ -10,8 +10,8 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MinYCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.commandHelp.MinyHelp;
@@ -37,17 +37,16 @@ public class MinYCommandHandler implements UserCommandHandler {
 	}
 
 	@Override
-	public void onCommand(UserData user, String[] args) {
-		Logger logger = user.getLogger();
+	public void onCommand(UserData user, CommandSender cmdSender, String[] args) {
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + new MinyHelp().getUsage());
+			cmdSender.print(LogColor.RED + "Usage: " + new MinyHelp().getUsage());
 			return;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse double");
+			cmdSender.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = user.getUndoCommandManager();
@@ -66,19 +65,19 @@ public class MinYCommandHandler implements UserCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogDesignColor.ERROR + "Generate blocks first");
+			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
 		MinYCommand minyCmd = new MinYCommand(originalCmd, value, user.getBlockPhysics());
 		minyCmd.execute();
 		undoManager.add(minyCmd);
-		logger.print(LogDesignColor.NORMAL + "Set minY -> " + value);
+		cmdSender.print(LogDesignColor.NORMAL + "Set minY -> " + value);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(user.getY()));
+			return Arrays.asList(String.valueOf(userData.getY()));
 		}else {
 			return new ArrayList<>();
 		}

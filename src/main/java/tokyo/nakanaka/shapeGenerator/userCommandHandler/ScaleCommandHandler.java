@@ -11,8 +11,8 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ScaleCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -38,27 +38,26 @@ public class ScaleCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(UserData user, String[] args) {
-		Logger logger = user.getLogger();
+	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
+			cmdSender.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse axis");
+			cmdSender.print(LogDesignColor.ERROR + "Can not parse axis");
 			return;
 		}
 		double factor;
 		try {
 			factor = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse double");
+			cmdSender.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = user.getUndoCommandManager();
+		UndoCommandManager undoManager = userData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -74,18 +73,18 @@ public class ScaleCommandHandler implements UserCommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogDesignColor.ERROR + "Generate blocks first");
+			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, user.getBlockPhysics());
+		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, userData.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
-		logger.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
+		cmdSender.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else if(args.length == 2) {

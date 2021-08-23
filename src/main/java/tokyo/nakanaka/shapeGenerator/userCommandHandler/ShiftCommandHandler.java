@@ -11,9 +11,9 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.geometricProperty.Direction;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
@@ -40,10 +40,9 @@ public class ShiftCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(UserData user, String[] args) {
-		Logger logger = user.getLogger();
+	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length != 2) {
-			logger.print(LogColor.RED + "Usage: /sg shift <direction> <length>");
+			cmdSender.print(LogColor.RED + "Usage: /sg shift <direction> <length>");
 			return;
 		}
 		Direction dir;
@@ -51,16 +50,16 @@ public class ShiftCommandHandler implements UserCommandHandler{
 		try {
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse direction");
+			cmdSender.print(LogDesignColor.ERROR + "Can not parse direction");
 			return;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse integer");
+			cmdSender.print(LogDesignColor.ERROR + "Can not parse integer");
 			return;
 		}
-		UndoCommandManager undoManager = user.getUndoCommandManager();
+		UndoCommandManager undoManager = userData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -76,21 +75,21 @@ public class ShiftCommandHandler implements UserCommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogDesignColor.ERROR + "Generate blocks first");
+			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
 		double dx = dir.getX() * blocks;
 		double dy = dir.getY() * blocks;
 		double dz = dir.getZ() * blocks;
 		Vector3D displacement = new Vector3D(dx, dy, dz);
-		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, user.getBlockPhysics());
+		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, userData.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
-		logger.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
+		cmdSender.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList(Direction.values()).stream()
 					.map(s -> s.toString().toLowerCase())

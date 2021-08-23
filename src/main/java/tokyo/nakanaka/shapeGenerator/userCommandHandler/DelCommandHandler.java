@@ -10,8 +10,8 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.commandHelp.DelHelp;
@@ -35,10 +35,10 @@ public class DelCommandHandler implements UserCommandHandler {
 		return "Delete the generated blocks";
 	}
 	
-	public void onCommand(UserData user, String[] args) {
-		Logger logger = user.getLogger();
+	@Override
+	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length > 1) {
-			logger.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
+			cmdSender.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
 			return;
 		}
 		int num = 1;
@@ -46,15 +46,15 @@ public class DelCommandHandler implements UserCommandHandler {
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				logger.print(LogDesignColor.ERROR + "Can not parse the number");
+				cmdSender.print(LogDesignColor.ERROR + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				cmdSender.print(LogDesignColor.ERROR + "The number must be larger than 0");
 				return;
 			}
 		}
-		UndoCommandManager undoManager = user.getUndoCommandManager();
+		UndoCommandManager undoManager = userData.getUndoCommandManager();
 		List<GenerateCommand> originalList = new ArrayList<>();
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -77,18 +77,18 @@ public class DelCommandHandler implements UserCommandHandler {
 		deleteCmd.execute();
 		undoManager.add(deleteCmd);
 		if(delNum == 0) {
-			logger.print(LogDesignColor.ERROR + "Generate blocks first");
+			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		logger.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
+		cmdSender.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
 		if(delNum < num) {
-			logger.print(LogDesignColor.ERROR + "reached the first generation");
+			cmdSender.print(LogDesignColor.ERROR + "reached the first generation");
 		}
 		return;
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

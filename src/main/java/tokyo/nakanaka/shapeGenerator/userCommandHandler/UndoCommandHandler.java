@@ -6,8 +6,8 @@ import java.util.List;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -32,10 +32,9 @@ public class UndoCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(UserData user, String[] args) {
-		Logger logger = user.getLogger();
+	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length > 1) {
-			logger.print(LogColor.RED + "Usage: /sg undo [number]");
+			cmdSender.print(LogColor.RED + "Usage: /sg undo [number]");
 			return;
 		}
 		int num = 1;
@@ -43,15 +42,15 @@ public class UndoCommandHandler implements UserCommandHandler{
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				logger.print(LogDesignColor.ERROR + "Can not parse the number");
+				cmdSender.print(LogDesignColor.ERROR + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				logger.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				cmdSender.print(LogDesignColor.ERROR + "The number must be larger than 0");
 				return;
 			}
 		}
-		UndoCommandManager undoManager = user.getUndoCommandManager();
+		UndoCommandManager undoManager = userData.getUndoCommandManager();
 		int totalNum = 0;
 		for(int i = 0; i < num; ++i) {
 			boolean success = undoManager.undo();
@@ -61,18 +60,18 @@ public class UndoCommandHandler implements UserCommandHandler{
 			++totalNum;
 		}
 		if(totalNum == 0) {
-			logger.print(LogDesignColor.ERROR + "Nothing to undo");
+			cmdSender.print(LogDesignColor.ERROR + "Nothing to undo");
 			return;
 		}
-		logger.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
+		cmdSender.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
 		if(totalNum < num) {
-			logger.print(LogDesignColor.ERROR + "Reached the beginning command");
+			cmdSender.print(LogDesignColor.ERROR + "Reached the beginning command");
 		}
 		return;
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

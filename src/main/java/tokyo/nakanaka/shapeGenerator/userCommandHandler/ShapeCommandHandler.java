@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
@@ -52,41 +52,40 @@ public class ShapeCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData user, String[] args) {
-		Logger logger = user.getLogger();
+	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: /sg shape <type>");
+			cmdSender.print(LogColor.RED + "Usage: /sg shape <type>");
 			return;
 		}
 		SelectionShape shape;
 		try{
 			shape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Invalid shape");
+			cmdSender.print(LogDesignColor.ERROR + "Invalid shape");
 			return;
 		}
 		SelectionStrategy selStrategy = this.selStraSource.get(shape);
 		if(selStrategy == null) {
-			logger.print(LogDesignColor.ERROR + "Unsupported shape");
+			cmdSender.print(LogDesignColor.ERROR + "Unsupported shape");
 			return;
 		}	
-		SelectionShape original = user.getSelectionShape();
+		SelectionShape original = userData.getSelectionShape();
 		if(shape == original) {
-			logger.print(LogDesignColor.ERROR + "Already set : Nothing to change");
+			cmdSender.print(LogDesignColor.ERROR + "Already set : Nothing to change");
 			return;
 		}else {
-			user.setSelectionShape(shape);
+			userData.setSelectionShape(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
-			SelectionBuildingData selData = new SelectionBuildingData(user.getWorld(), regionData);
-			user.setSelectionBuildingData(selData);
-			logger.print(LogDesignColor.NORMAL + "Set the shape -> " + shape);
-			new SelectionMessenger().printClickDescription(logger, selStrategy);
+			SelectionBuildingData selData = new SelectionBuildingData(userData.getWorld(), regionData);
+			userData.setSelectionBuildingData(selData);
+			cmdSender.print(LogDesignColor.NORMAL + "Set the shape -> " + shape);
+			new SelectionMessenger().printClickDescription(cmdSender, selStrategy);
 			return;
 		}
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
 			return this.selStraSource.getShapeList().stream()
 					.map(s -> s.toString().toLowerCase())

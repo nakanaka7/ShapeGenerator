@@ -5,6 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
@@ -50,7 +51,7 @@ public class SelCommandDirectory implements CommandDirectory {
 				}
 	
 				@Override
-				public void onCommand(UserData user, String[] args) {
+				public void onCommand(UserData user, CommandSender cmdSender, String[] args) {
 					World world = user.getWorld();
 					BlockVector3D playerPos = new BlockVector3D(user.getX(), user.getY(), user.getZ());
 					SelectionBuildingData selData = user.getSelectionBuildingData();
@@ -64,7 +65,7 @@ public class SelCommandDirectory implements CommandDirectory {
 				}
 
 				@Override
-				public List<String> onTabComplete(UserData player, String[] args) {
+				public List<String> onTabComplete(UserData player, CommandSender cmdSender, String[] args) {
 					return selSubCmdHandler.onTabComplete(player, args);
 				}
 

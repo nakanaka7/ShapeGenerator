@@ -10,8 +10,8 @@ import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MaxZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.commandHelp.MaxzHelp;
@@ -36,20 +36,19 @@ public class MaxZCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData user, String[] args) {
-		Logger logger = user.getLogger();
+	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + new MaxzHelp().getUsage());
+			cmdSender.print(LogColor.RED + "Usage: " + new MaxzHelp().getUsage());
 			return;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			logger.print(LogDesignColor.ERROR + "Can not parse double");
+			cmdSender.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = user.getUndoCommandManager();
+		UndoCommandManager undoManager = userData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -65,19 +64,19 @@ public class MaxZCommandHandler implements UserCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			logger.print(LogDesignColor.ERROR + "Generate blocks first");
+			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, user.getBlockPhysics());
+		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, userData.getBlockPhysics());
 		maxzCmd.execute();
 		undoManager.add(maxzCmd);
-		logger.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
+		cmdSender.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(user.getZ()));
+			return Arrays.asList(String.valueOf(userData.getZ()));
 		}else {
 			return new ArrayList<>();
 		}
