@@ -5,6 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
@@ -38,7 +39,7 @@ public class ResetCommandHandler implements UserCommandHandler {
 		return new ArrayList<>();
 	}
 	
-	public void onCommand(UserData player, String[] args) {
+	public void onCommand(UserData player, CommandSender cmdSender, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel reset");
@@ -53,7 +54,7 @@ public class ResetCommandHandler implements UserCommandHandler {
 		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
 	}
 	
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData user, CommandSender cmdSender, String[] args) {
 		return new ArrayList<>();
 	}
 

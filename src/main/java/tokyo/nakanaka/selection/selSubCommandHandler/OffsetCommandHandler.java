@@ -7,6 +7,7 @@ import java.util.List;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
+import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
@@ -37,7 +38,8 @@ public class OffsetCommandHandler implements UserCommandHandler {
 		return list;
 	}
 
-	public void onCommand(UserData player, String[] args) {
+	@Override
+	public void onCommand(UserData player, CommandSender cmdSender, String[] args) {
 		Logger logger = player.getLogger();
 		if(args.length != 0 && args.length != 3) {
 			logger.print(LogColor.RED + "Usage: " + "/sg sel offset [x] [y] [z]");
@@ -71,7 +73,8 @@ public class OffsetCommandHandler implements UserCommandHandler {
 		logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
 	}
 	
-	public List<String> onTabComplete(UserData user, String[] args) {
+	@Override
+	public List<String> onTabComplete(UserData user, CommandSender cmdSender, String[] args) {
 		if(args.length <= 3) {
 			return Arrays.asList("~");
 		}else {
