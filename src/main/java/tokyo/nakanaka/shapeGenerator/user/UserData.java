@@ -22,6 +22,9 @@ public class UserData {
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	
+	public UserData() {
+	}
+	
 	public UserData(UUID uid, String name) {
 		this.uid = uid;
 		this.name = name;
