@@ -21,7 +21,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 public class ClickBlockEventListener {
 	private UserRepository userRepo;
 	private SelectionStrategySource selStrtgSource;
-	private static SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	public ClickBlockEventListener(UserRepository userRepo, SelectionStrategySource selStrtgSource) {
 		this.userRepo = userRepo;
@@ -63,7 +62,7 @@ public class ClickBlockEventListener {
 				selStrategy.onRightClickBlock(regionData, player, pos);
 			}
 		}
-		selMessenger.printSelection(player, selShape, selData, selStrategy.getDefaultOffsetLabel());
+		new SelectionMessenger().printSelection(player, selShape, selData, selStrategy.getDefaultOffsetLabel());
 	}
 	
 }
