@@ -6,7 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import tokyo.nakanaka.bukkit.BukkitFunctions;
-import tokyo.nakanaka.bukkit.BukkitScheduler;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.Main;
@@ -18,8 +17,6 @@ public class ShapeGeneratorPlugin extends JavaPlugin {
 	public void onEnable() {
 		SelectionStrategySource selStrtgSource = new SelectionStrategySource();
 		this.main = new Main(new BukkitBlockArgument(), selStrtgSource);
-		this.getServer().getPluginManager()
-			.registerEvents(new BukkitClickBlockEventListener(this.main, new BukkitScheduler(this)), this);
 	}
 	
 	@Override
