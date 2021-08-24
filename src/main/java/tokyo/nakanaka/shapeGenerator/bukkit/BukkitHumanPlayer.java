@@ -3,7 +3,7 @@ package tokyo.nakanaka.shapeGenerator.bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import tokyo.nakanaka.shapeGenerator.Item;
+import tokyo.nakanaka.shapeGenerator.legacy.Item;
 import tokyo.nakanaka.shapeGenerator.user.HumanPlayer;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 

@@ -19,8 +19,8 @@ import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.bukkit.commandSender.BukkitPlayer;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.ClickBlockEvent.HandType;
-import tokyo.nakanaka.shapeGenerator.Item;
 import tokyo.nakanaka.shapeGenerator.Main;
+import tokyo.nakanaka.shapeGenerator.legacy.Item;
 
 public class BukkitClickBlockEventListener implements Listener{
 	private Main main;
