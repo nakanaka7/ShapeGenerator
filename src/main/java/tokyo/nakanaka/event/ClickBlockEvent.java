@@ -1,20 +1,20 @@
 package tokyo.nakanaka.event;
 
 import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.ItemStack;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.shapeGenerator.legacy.Item;
 
 public class ClickBlockEvent {
 	private Player player;
 	private BlockPosition blockPos;
 	private HandType handType;
-	private Item item;
+	private ItemStack itemStack;
 	
-	public ClickBlockEvent(Player player, BlockPosition blockPos, HandType handType, Item item) {
+	public ClickBlockEvent(Player player, BlockPosition blockPos, HandType handType, ItemStack itemStack) {
 		this.player = player;
 		this.blockPos = blockPos;
 		this.handType = handType;
-		this.item = item;
+		this.itemStack = itemStack;
 	}
 	
 	public static enum HandType{
@@ -34,8 +34,8 @@ public class ClickBlockEvent {
 		return handType;
 	}
 
-	public Item getItem() {
-		return item;
+	public ItemStack getItemStack() {
+		return itemStack;
 	}
 
 }
