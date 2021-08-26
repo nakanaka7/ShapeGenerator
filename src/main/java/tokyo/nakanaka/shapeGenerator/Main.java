@@ -8,20 +8,25 @@ import java.util.UUID;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
+import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
-import tokyo.nakanaka.event.ClickBlockEventListener;
-import tokyo.nakanaka.event.ClickBlockEvent.HandType;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.selection.SelectionBuildingData;
+import tokyo.nakanaka.selection.SelectionMessenger;
+import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHandler.HelpCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHandler.PhyCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
-import tokyo.nakanaka.shapeGenerator.user.UserRepository;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.DelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.MaxXCommandHandler;
@@ -40,14 +45,12 @@ import tokyo.nakanaka.shapeGenerator.userCommandHandler.UndoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
 public class Main {
-	private UserRepository userRepo;
-	private ClickBlockEventListener evtListner;
+	private SelectionStrategySource selStrtgSource;
 	private Map<String, UserCommandHandler> userCmdHandlerMap = new HashMap<>();
 	private Map<UUID, UserData> userDataMap = new HashMap<>();
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
-		this.userRepo = new UserRepository();
-		this.evtListner = new ClickBlockEventListener(this.userRepo, selStrtgSource);
+		this.selStrtgSource = selStrtgSource;
 		this.userCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.userCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.userCmdHandlerMap.put("shape", new ShapeCommandHandler(selStrtgSource));
@@ -116,12 +119,42 @@ public class Main {
 		return List.of();
 	}
 	
-	public void onClickBlockEvent(Player player, BlockPosition blockPos, HandType handType, Item item) {
-		
-	}
-	
 	public void onClickBlockEvent(ClickBlockEvent evt) {
-		this.evtListner.onClickBlockEvent(evt);
+		Item item = evt.getItemStack().getItem();
+		if(!item.equals(new Item(new NamespacedID("minecraft", "blaze_rod")))) {
+			return;
+		}
+		evt.cancel();
+		Player player = evt.getPlayer();
+		UUID uid = player.getUniqueID();
+		UserData userData = this.userDataMap.get(uid);
+		if(userData == null) {
+			userData = new UserData();
+			this.userDataMap.put(uid, userData);		
+			MainFunctions.setDefaultSelection(this.selStrtgSource, userData);
+		}
+		userData.setLogger(player);
+		SelectionShape selShape = userData.getSelectionShape();
+		SelectionBuildingData selData = userData.getSelectionBuildingData();
+		SelectionStrategy selStrategy = this.selStrtgSource.get(selShape);
+		BlockPosition blockPos = evt.getBlockPos();
+		World world = blockPos.world();
+		if(!world.equals(selData.getWorld())) {
+			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
+			selData = new SelectionBuildingData(world, regionData);
+			userData.setSelectionBuildingData(selData);
+		}
+		RegionBuildingData regionData = selData.getRegionData();
+		BlockVector3D pos = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
+		switch(evt.getHandType()) {
+			case LEFT_HAND -> {
+				selStrategy.onLeftClickBlock(regionData, player, pos);
+			}
+			case RIGHT_HAND -> {
+				selStrategy.onRightClickBlock(regionData, player, pos);
+			}
+		}
+		new SelectionMessenger().printSelection(player, selShape, selData, selStrategy.getDefaultOffsetLabel());
 	}
 	
 }
