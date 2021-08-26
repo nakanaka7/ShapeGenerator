@@ -4,7 +4,7 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.ItemStack;
 import tokyo.nakanaka.Player;
 
-public class ClickBlockEvent {
+public abstract class ClickBlockEvent {
 	private Player player;
 	private BlockPosition blockPos;
 	private HandType handType;
@@ -38,4 +38,6 @@ public class ClickBlockEvent {
 		return itemStack;
 	}
 
+	public abstract void cancel();
+	
 }
