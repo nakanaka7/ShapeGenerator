@@ -4,40 +4,19 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.ItemStack;
 import tokyo.nakanaka.Player;
 
-public abstract class ClickBlockEvent {
-	private Player player;
-	private BlockPosition blockPos;
-	private HandType handType;
-	private ItemStack itemStack;
+/**
+ * Represents click block event
+ */
+public interface ClickBlockEvent {
 	
-	public ClickBlockEvent(Player player, BlockPosition blockPos, HandType handType, ItemStack itemStack) {
-		this.player = player;
-		this.blockPos = blockPos;
-		this.handType = handType;
-		this.itemStack = itemStack;
-	}
-	
-	public static enum HandType{
-		LEFT_HAND,
-		RIGHT_HAND;
-	}
+	public Player getPlayer();
 
-	public Player getPlayer() {
-		return player;
-	}
+	public BlockPosition getBlockPos();
 
-	public BlockPosition getBlockPos() {
-		return blockPos;
-	}
+	public HandType getHandType();
 
-	public HandType getHandType() {
-		return handType;
-	}
+	public ItemStack getItemStack();
 
-	public ItemStack getItemStack() {
-		return itemStack;
-	}
-
-	public abstract void cancel();
+	public void cancel();
 	
 }
