@@ -44,6 +44,9 @@ import tokyo.nakanaka.shapeGenerator.userCommandHandler.UndoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 import tokyo.nakanaka.shapeGenerator.userCommandHandler.WandCommandHandler;
 
+/**
+ * Main class for the project. 
+ */
 public class Main {
 	private SelectionStrategySource selStrtgSource;
 	private Map<String, UserCommandHandler> userCmdHandlerMap = new HashMap<>();
@@ -70,7 +73,11 @@ public class Main {
 		this.userCmdHandlerMap.put("undo", new UndoCommandHandler());
 		this.userCmdHandlerMap.put("redo", new RedoCommandHandler());
 	}
-		
+	/**
+	 * Handles "/sg" command
+	 * @param cmdSender a command sender
+	 * @param args arguments of the command line
+	 */
 	public void onSgCommand(CommandSender cmdSender, String[] args) {
 		if(!(cmdSender instanceof Player player)) {
 			cmdSender.print(LogColor.RED + "Player only command");
@@ -95,7 +102,12 @@ public class Main {
 			userCmdHandler.onCommand(userData, cmdSender, subArgs);
 		}
 	}
-	
+	/**
+	 * Get a list for tab complete of "/sg" command
+	 * @param cmdSender a command sender
+	 * @param args arguments of the command line
+	 * @return a list for tab complete of "/sg" command
+	 */
 	public List<String> onSgTabComplete(CommandSender cmdSender, String[] args) {
 		if(!(cmdSender instanceof Player player)) {
 			return List.of();
@@ -118,7 +130,10 @@ public class Main {
 		}
 		return List.of();
 	}
-	
+	/**
+	 * Handles a click block event
+	 * @param evt a click block event
+	 */
 	public void onClickBlockEvent(ClickBlockEvent evt) {
 		Item item = evt.getItemStack().getItem();
 		if(!item.equals(new Item(new NamespacedID("minecraft", "blaze_rod")))) {
