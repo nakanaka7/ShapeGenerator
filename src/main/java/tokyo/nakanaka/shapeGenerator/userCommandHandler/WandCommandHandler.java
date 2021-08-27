@@ -6,21 +6,19 @@ import tokyo.nakanaka.Item;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.WandHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg wand" command
+ */
 public class WandCommandHandler implements UserCommandHandler {
 
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
-		if(!(cmdSender instanceof Player player)) {
-			cmdSender.print(LogColor.RED + "Player only command");
-			return;
-		}
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 0) {
-			cmdSender.print(LogColor.RED + "Usage: " + new WandHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new WandHelp().getUsage());
 			return;
 		}
 		Item item = new Item(new NamespacedID("minecraft", "blaze_rod"));
@@ -28,7 +26,7 @@ public class WandCommandHandler implements UserCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		return List.of();
 	}
 
