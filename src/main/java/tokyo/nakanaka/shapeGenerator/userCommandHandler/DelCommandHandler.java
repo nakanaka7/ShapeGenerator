@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.commandHelp.DelHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg del" command
+ */
 public class DelCommandHandler implements UserCommandHandler {
 	@Override
 	public String getLabel() {
@@ -36,9 +39,9 @@ public class DelCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length > 1) {
-			cmdSender.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
 			return;
 		}
 		int num = 1;
@@ -46,11 +49,11 @@ public class DelCommandHandler implements UserCommandHandler {
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				cmdSender.print(LogDesignColor.ERROR + "Can not parse the number");
+				player.print(LogDesignColor.ERROR + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				cmdSender.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				player.print(LogDesignColor.ERROR + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -77,18 +80,18 @@ public class DelCommandHandler implements UserCommandHandler {
 		deleteCmd.execute();
 		undoManager.add(deleteCmd);
 		if(delNum == 0) {
-			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		cmdSender.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
+		player.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
 		if(delNum < num) {
-			cmdSender.print(LogDesignColor.ERROR + "reached the first generation");
+			player.print(LogDesignColor.ERROR + "reached the first generation");
 		}
 		return;
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}
