@@ -3,12 +3,12 @@ package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.math.Vector3D;
@@ -21,6 +21,9 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHelp.GenrHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg genr" command
+ */
 public class GenrCommandHandler implements UserCommandHandler{
 	private BlockCommandArgument blockArg;
 	private SelectionStrategySource selStraSource;
@@ -48,9 +51,9 @@ public class GenrCommandHandler implements UserCommandHandler{
 	}
 
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
-			cmdSender.print(LogColor.RED + "Usage: " +  new GenrHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " +  new GenrHelp().getUsage());
 			return;
 		}
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
@@ -60,7 +63,7 @@ public class GenrCommandHandler implements UserCommandHandler{
 		try {
 			region = selStrategy.buildBoundRegion3D(regionData);
 		}catch(IllegalStateException e) {
-			cmdSender.print(LogDesignColor.ERROR + "Incomplete selection");
+			player.print(LogDesignColor.ERROR + "Incomplete selection");
 			return;
 		}
 		Vector3D offset = selData.getOffset();
@@ -72,23 +75,23 @@ public class GenrCommandHandler implements UserCommandHandler{
 		try {
 			block = this.blockArg.onParsing(args[0]);
 		}catch(IllegalArgumentException e) {
-			cmdSender.print(LogDesignColor.ERROR + "Invalid block specification");
+			player.print(LogDesignColor.ERROR + "Invalid block specification");
 			return;
 		}
 		GenerateCommand generateCmd = new GenerateCommand(sel, block, userData.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
-			cmdSender.print(LogDesignColor.ERROR + "Unsettable block");
+			player.print(LogDesignColor.ERROR + "Unsettable block");
 			return;
 		}
-		cmdSender.print(LogDesignColor.NORMAL + "Generated block(s)");
+		player.print(LogDesignColor.NORMAL + "Generated block(s)");
 		userData.getUndoCommandManager().add(generateCmd);
 		return;
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return this.blockArg.onTabComplete(args[0]);
 		}else {
