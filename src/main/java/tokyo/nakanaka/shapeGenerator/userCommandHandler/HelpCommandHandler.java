@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHandler;
+package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -28,7 +28,6 @@ import tokyo.nakanaka.shapeGenerator.commandHelp.ShiftHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.UndoHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.WandHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
 public class HelpCommandHandler implements UserCommandHandler {
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
