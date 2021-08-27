@@ -99,7 +99,7 @@ public class Main {
 				userData = new UserData();
 				this.userDataMap.put(uid, userData);
 			}
-			userCmdHandler.onCommand(userData, cmdSender, subArgs);
+			userCmdHandler.onCommand(userData, player, subArgs);
 		}
 	}
 	/**
@@ -126,7 +126,7 @@ public class Main {
 				userData = new UserData();
 				this.userDataMap.put(uid, userData);
 			}
-			return userCmdHandler.onTabComplete(userData, cmdSender, subArgs);
+			return userCmdHandler.onTabComplete(userData, player, subArgs);
 		}
 		return List.of();
 	}
