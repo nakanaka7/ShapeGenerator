@@ -92,15 +92,18 @@ public class Main {
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		UserCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
-		if(userCmdHandler != null) {
-			UUID uid = player.getUniqueID();
-			UserData userData = this.userDataMap.get(uid);
-			if(userData == null) {
-				userData = new UserData();
-				this.userDataMap.put(uid, userData);
-			}
-			userCmdHandler.onCommand(userData, player, subArgs);
+		if(userCmdHandler == null) {
+			cmdSender.print(LogColor.RED + "Unknown subcommand");
+			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
+			return;
 		}
+		UUID uid = player.getUniqueID();
+		UserData userData = this.userDataMap.get(uid);
+		if(userData == null) {
+			userData = new UserData();
+			this.userDataMap.put(uid, userData);
+		}
+		userCmdHandler.onCommand(userData, player, subArgs);
 	}
 	/**
 	 * Get a list for tab complete of "/sg" command
