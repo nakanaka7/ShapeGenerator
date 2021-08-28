@@ -49,29 +49,29 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  */
 public class Main {
 	private SelectionStrategySource selStrtgSource;
-	private Map<String, SgSubCommandHandler> userCmdHandlerMap = new HashMap<>();
+	private Map<String, SgSubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	private Map<UUID, UserData> userDataMap = new HashMap<>();
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
 		this.selStrtgSource = selStrtgSource;
-		this.userCmdHandlerMap.put("help", new HelpCommandHandler());
-		this.userCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.userCmdHandlerMap.put("shape", new ShapeCommandHandler(selStrtgSource));
-		this.userCmdHandlerMap.put("genr", new GenrCommandHandler(blockArg, selStrtgSource));
-		this.userCmdHandlerMap.put("phy", new PhyCommandHandler());
-		this.userCmdHandlerMap.put("shift", new ShiftCommandHandler());
-		this.userCmdHandlerMap.put("scale", new ScaleCommandHandler());
-		this.userCmdHandlerMap.put("mirror", new MirrorCommandHandler());
-		this.userCmdHandlerMap.put("rot", new RotCommandHandler());
-		this.userCmdHandlerMap.put("maxx", new MaxXCommandHandler());
-		this.userCmdHandlerMap.put("maxy", new MaxYCommandHandler());
-		this.userCmdHandlerMap.put("maxz", new MaxZCommandHandler());
-		this.userCmdHandlerMap.put("minx", new MinXCommandHandler());
-		this.userCmdHandlerMap.put("miny", new MinYCommandHandler());
-		this.userCmdHandlerMap.put("minz", new MinZCommandHandler());
-		this.userCmdHandlerMap.put("del", new DelCommandHandler());
-		this.userCmdHandlerMap.put("undo", new UndoCommandHandler());
-		this.userCmdHandlerMap.put("redo", new RedoCommandHandler());
+		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
+		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
+		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(selStrtgSource));
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockArg, selStrtgSource));
+		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
+		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
+		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
+		this.sgSubCmdHandlerMap.put("mirror", new MirrorCommandHandler());
+		this.sgSubCmdHandlerMap.put("rot", new RotCommandHandler());
+		this.sgSubCmdHandlerMap.put("maxx", new MaxXCommandHandler());
+		this.sgSubCmdHandlerMap.put("maxy", new MaxYCommandHandler());
+		this.sgSubCmdHandlerMap.put("maxz", new MaxZCommandHandler());
+		this.sgSubCmdHandlerMap.put("minx", new MinXCommandHandler());
+		this.sgSubCmdHandlerMap.put("miny", new MinYCommandHandler());
+		this.sgSubCmdHandlerMap.put("minz", new MinZCommandHandler());
+		this.sgSubCmdHandlerMap.put("del", new DelCommandHandler());
+		this.sgSubCmdHandlerMap.put("undo", new UndoCommandHandler());
+		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
 	}
 	/**
 	 * Handles "/sg" command
@@ -91,8 +91,8 @@ public class Main {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SgSubCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
-		if(userCmdHandler == null) {
+		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
+		if(sgSubCmdHandler == null) {
 			cmdSender.print(LogColor.RED + "Unknown subcommand");
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
@@ -103,7 +103,7 @@ public class Main {
 			userData = new UserData();
 			this.userDataMap.put(uid, userData);
 		}
-		userCmdHandler.onCommand(userData, player, subArgs);
+		sgSubCmdHandler.onCommand(userData, player, subArgs);
 	}
 	/**
 	 * Get a list for tab complete of "/sg" command
@@ -116,20 +116,20 @@ public class Main {
 			return List.of();
 		}
 		if(args.length == 1) {
-			return 	new ArrayList<>(this.userCmdHandlerMap.keySet());
+			return 	new ArrayList<>(this.sgSubCmdHandlerMap.keySet());
 		}	
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SgSubCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
-		if(userCmdHandler != null) {
+		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
+		if(sgSubCmdHandler != null) {
 			UUID uid = player.getUniqueID();
 			UserData userData = this.userDataMap.get(uid);
 			if(userData == null) {
 				userData = new UserData();
 				this.userDataMap.put(uid, userData);
 			}
-			return userCmdHandler.onTabComplete(userData, player, subArgs);
+			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
 		}
 		return List.of();
 	}
