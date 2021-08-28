@@ -13,9 +13,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg sel" command
  */
 public class SelCommandHandler implements UserCommandHandler {
-
-	
-
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();
@@ -36,18 +33,6 @@ public class SelCommandHandler implements UserCommandHandler {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		return null;
-	}
-
-	@Override
-	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

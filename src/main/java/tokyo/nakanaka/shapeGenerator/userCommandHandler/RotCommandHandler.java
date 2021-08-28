@@ -19,17 +19,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg rot" command
  */
 public class RotCommandHandler implements UserCommandHandler{
-		
-	@Override
-	public String getLabel() {
-		return "rot";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Rotate the generated blocks";
-	}
-		
+			
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 2) {

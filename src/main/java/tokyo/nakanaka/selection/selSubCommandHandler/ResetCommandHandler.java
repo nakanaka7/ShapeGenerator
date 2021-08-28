@@ -22,16 +22,6 @@ public class ResetCommandHandler implements UserCommandHandler {
 	public ResetCommandHandler(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
 	}
-
-	@Override
-	public String getLabel() {
-		return "reset";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Reset the selection";
-	}
 	
 	public void onCommand(UserData userData, Player player, String[] args) {
 		Logger logger = userData.getLogger();

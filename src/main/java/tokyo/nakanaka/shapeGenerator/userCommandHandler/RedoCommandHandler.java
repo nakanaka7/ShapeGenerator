@@ -16,16 +16,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class RedoCommandHandler implements UserCommandHandler{
 		
 	@Override
-	public String getLabel() {
-		return "redo";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Redo block changing command(s)";
-	}
-	
-	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		String usageMsg = LogColor.RED + "Usage: /sg redo [number]";
 		if(args.length > 1) {

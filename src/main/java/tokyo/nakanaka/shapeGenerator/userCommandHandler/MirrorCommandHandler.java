@@ -21,16 +21,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class MirrorCommandHandler implements UserCommandHandler {
 	
 	@Override
-	public String getLabel() {
-		return "mirror";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Mirror the generated blocks";
-	}
-	
-	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: /sg mirror <x|y|z>");

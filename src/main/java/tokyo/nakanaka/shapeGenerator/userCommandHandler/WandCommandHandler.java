@@ -29,16 +29,4 @@ public class WandCommandHandler implements UserCommandHandler {
 		return List.of();
 	}
 
-	@Override
-	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

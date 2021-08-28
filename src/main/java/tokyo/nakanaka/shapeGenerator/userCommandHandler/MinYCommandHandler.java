@@ -21,16 +21,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class MinYCommandHandler implements UserCommandHandler {
 	
 	@Override
-	public String getLabel() {
-		return "miny";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Set min y of the generated blocks";
-	}
-	
-	@Override
 	public void onCommand(UserData user, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: " + new MinyHelp().getUsage());

@@ -86,16 +86,4 @@ public class HelpCommandHandler implements UserCommandHandler {
 		}
 	}
 
-	@Override
-	public String getLabel() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

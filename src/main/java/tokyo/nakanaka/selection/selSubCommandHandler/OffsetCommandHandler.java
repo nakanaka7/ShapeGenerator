@@ -18,16 +18,6 @@ public class OffsetCommandHandler implements UserCommandHandler {
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	@Override
-	public String getLabel() {
-		return "offset";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Set offset";
-	}
-	
-	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		Logger logger = userData.getLogger();
 		if(args.length != 0 && args.length != 3) {

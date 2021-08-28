@@ -31,16 +31,6 @@ public class ShapeCommandHandler implements UserCommandHandler {
 	}
 
 	@Override
-	public String getLabel() {
-		return "shape";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Set selection shape";
-	}
-	
-	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: /sg shape <type>");

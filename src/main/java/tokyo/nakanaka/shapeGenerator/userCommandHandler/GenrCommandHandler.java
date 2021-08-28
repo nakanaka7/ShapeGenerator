@@ -30,16 +30,6 @@ public class GenrCommandHandler implements UserCommandHandler{
 		this.blockArg = blockArg;
 		this.selStraSource = selStraSource;
 	}
-
-	@Override
-	public String getLabel() {
-		return "genr";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Generate blocks in the selection";
-	}
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

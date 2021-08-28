@@ -19,15 +19,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg maxy" command
  */
 public class MaxYCommandHandler implements UserCommandHandler {	
-	@Override
-	public String getLabel() {
-		return "maxy";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Set max y of the generated blocks";
-	}
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

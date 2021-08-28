@@ -21,16 +21,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class MinZCommandHandler implements UserCommandHandler {
 		
 	@Override
-	public String getLabel() {
-		return "minz";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Set min z of the generated blocks";
-	}
-	
-	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: " + new MinzHelp().getUsage());

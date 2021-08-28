@@ -19,15 +19,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg maxx"
  */
 public class MaxXCommandHandler implements UserCommandHandler {	
-	@Override
-	public String getLabel() {
-		return "maxx";
-	}
-
-	@Override
-	public String getDescription() {
-		return "Set max x of the generated blocks";
-	}
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

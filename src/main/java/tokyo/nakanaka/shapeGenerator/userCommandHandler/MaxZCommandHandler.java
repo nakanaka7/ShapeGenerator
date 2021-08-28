@@ -19,16 +19,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg maxz" command
  */
 public class MaxZCommandHandler implements UserCommandHandler {	
-	@Override
-	public String getLabel() {
-		return "maxz";
-	}
 
-	@Override
-	public String getDescription() {
-		return "Set max z of the generated blocks";
-	}
-	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {

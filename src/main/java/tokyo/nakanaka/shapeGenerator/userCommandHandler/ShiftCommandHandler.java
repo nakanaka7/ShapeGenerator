@@ -22,16 +22,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class ShiftCommandHandler implements UserCommandHandler{
 
 	@Override
-	public String getLabel() {
-		return "shift";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Shift the generated blocks";
-	}
-	
-	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 2) {
 			player.print(LogColor.RED + "Usage: /sg shift <direction> <length>");

@@ -16,16 +16,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class UndoCommandHandler implements UserCommandHandler{
 	
 	@Override
-	public String getLabel() {
-		return "undo";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "Undo block changing command(s)";
-	}
-	
-	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length > 1) {
 			player.print(LogColor.RED + "Usage: /sg undo [number]");
