@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg sel" command
  */
-public class SelCommandHandler implements UserCommandHandler {
+public class SelCommandHandler implements SgSubCommandHandler {
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();

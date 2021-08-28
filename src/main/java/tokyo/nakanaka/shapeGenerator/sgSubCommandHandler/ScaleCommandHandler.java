@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MirrorCommand;
+import tokyo.nakanaka.command.ScaleCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
@@ -16,14 +16,14 @@ import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg mirror" command
+ * Handles "/sg scale" command
  */
-public class MirrorCommandHandler implements UserCommandHandler {
+public class ScaleCommandHandler implements SgSubCommandHandler{
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
-		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: /sg mirror <x|y|z>");
+		if(args.length != 2) {
+			player.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
 			return;
 		}
 		Axis axis;
@@ -31,6 +31,13 @@ public class MirrorCommandHandler implements UserCommandHandler {
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			player.print(LogDesignColor.ERROR + "Can not parse axis");
+			return;
+		}
+		double factor;
+		try {
+			factor = Double.valueOf(args[1]);
+		}catch(IllegalArgumentException e) {
+			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = userData.getUndoCommandManager();
@@ -51,20 +58,23 @@ public class MirrorCommandHandler implements UserCommandHandler {
 		if(originalCmd == null) {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
-		}	
-		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, userData.getBlockPhysics());
-		mirrorCmd.execute();
-		undoManager.add(mirrorCmd);
-		player.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
+		}
+		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, userData.getBlockPhysics());
+		scaleCmd.execute();
+		undoManager.add(scaleCmd);
+		player.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
+		return;
 	}
 	
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
+		}else if(args.length == 2) {
+			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}else {
 			return new ArrayList<>();
 		}
 	}
-	
+
 }

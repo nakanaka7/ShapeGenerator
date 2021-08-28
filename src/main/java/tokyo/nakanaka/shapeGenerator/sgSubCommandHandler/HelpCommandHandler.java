@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -31,7 +31,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg help" command
  */
-public class HelpCommandHandler implements UserCommandHandler {
+public class HelpCommandHandler implements SgSubCommandHandler {
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 	
 	public HelpCommandHandler() {

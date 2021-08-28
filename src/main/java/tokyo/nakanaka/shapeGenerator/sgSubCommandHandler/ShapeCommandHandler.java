@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg shape" command
  */
-public class ShapeCommandHandler implements UserCommandHandler {
+public class ShapeCommandHandler implements SgSubCommandHandler {
 	private SelectionStrategySource selStraSource;
 	
 	public ShapeCommandHandler(SelectionStrategySource selStraSource) {

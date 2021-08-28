@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,23 +7,23 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxXCommand;
+import tokyo.nakanaka.command.MinYCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.commandHelp.MaxxHelp;
+import tokyo.nakanaka.shapeGenerator.commandHelp.MinyHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg maxx"
+ * Handles "/sg miny" command
  */
-public class MaxXCommandHandler implements UserCommandHandler {	
+public class MinYCommandHandler implements SgSubCommandHandler {
 	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(UserData user, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MaxxHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new MinyHelp().getUsage());
 			return;
 		}
 		double value;
@@ -33,7 +33,7 @@ public class MaxXCommandHandler implements UserCommandHandler {
 			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -52,16 +52,16 @@ public class MaxXCommandHandler implements UserCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, userData.getBlockPhysics());
-		maxxCmd.execute();
-		undoManager.add(maxxCmd);
-		player.print(LogDesignColor.NORMAL + "Set maxX -> " + value);
+		MinYCommand minyCmd = new MinYCommand(originalCmd, value, user.getBlockPhysics());
+		minyCmd.execute();
+		undoManager.add(minyCmd);
+		player.print(LogDesignColor.NORMAL + "Set minY -> " + value);
 	}
 
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(userData.getX()));
+			return Arrays.asList(String.valueOf(userData.getY()));
 		}else {
 			return new ArrayList<>();
 		}

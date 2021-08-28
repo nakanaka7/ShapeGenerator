@@ -23,33 +23,33 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxXCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxYCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxZCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinXCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinYCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinZCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MirrorCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.PhyCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.DelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.GenrCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.HelpCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.MaxXCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.MaxYCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.MaxZCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.MinXCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.MinYCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.MinZCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.MirrorCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.PhyCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.RedoCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.RotCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.ScaleCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.ShapeCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.ShiftCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.UndoCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.WandCommandHandler;
 
 /**
  * Main class for the project. 
  */
 public class Main {
 	private SelectionStrategySource selStrtgSource;
-	private Map<String, UserCommandHandler> userCmdHandlerMap = new HashMap<>();
+	private Map<String, SgSubCommandHandler> userCmdHandlerMap = new HashMap<>();
 	private Map<UUID, UserData> userDataMap = new HashMap<>();
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
@@ -91,7 +91,7 @@ public class Main {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		UserCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
+		SgSubCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
 		if(userCmdHandler == null) {
 			cmdSender.print(LogColor.RED + "Unknown subcommand");
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
@@ -121,7 +121,7 @@ public class Main {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		UserCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
+		SgSubCommandHandler userCmdHandler = this.userCmdHandlerMap.get(subLabel);
 		if(userCmdHandler != null) {
 			UUID uid = player.getUniqueID();
 			UserData userData = this.userDataMap.get(uid);

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.ScaleCommand;
+import tokyo.nakanaka.command.RotateCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
@@ -16,14 +16,14 @@ import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg scale" command
+ * Handles "/sg rot" command
  */
-public class ScaleCommandHandler implements UserCommandHandler{
-	
+public class RotCommandHandler implements SgSubCommandHandler{
+			
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
+			player.print(LogColor.RED + "Usage: /sg rot <x|y|z> <degree>");
 			return;
 		}
 		Axis axis;
@@ -33,9 +33,9 @@ public class ScaleCommandHandler implements UserCommandHandler{
 			player.print(LogDesignColor.ERROR + "Can not parse axis");
 			return;
 		}
-		double factor;
+		double degree;
 		try {
-			factor = Double.valueOf(args[1]);
+			degree = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
 			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
@@ -59,19 +59,19 @@ public class ScaleCommandHandler implements UserCommandHandler{
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, userData.getBlockPhysics());
-		scaleCmd.execute();
-		undoManager.add(scaleCmd);
-		player.print(LogDesignColor.NORMAL + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
+		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, userData.getBlockPhysics());
+		rotateCmd.execute();
+		undoManager.add(rotateCmd);
+		player.print(LogDesignColor.NORMAL + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
 		return;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else if(args.length == 2) {
-			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+			return Arrays.asList("0", "90", "-90", "180", "270");
 		}else {
 			return new ArrayList<>();
 		}

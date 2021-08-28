@@ -1,39 +1,39 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MinYCommand;
+import tokyo.nakanaka.command.MirrorCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.commandHelp.MinyHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg miny" command
+ * Handles "/sg mirror" command
  */
-public class MinYCommandHandler implements UserCommandHandler {
+public class MirrorCommandHandler implements SgSubCommandHandler {
 	
 	@Override
-	public void onCommand(UserData user, Player player, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MinyHelp().getUsage());
+			player.print(LogColor.RED + "Usage: /sg mirror <x|y|z>");
 			return;
 		}
-		double value;
-		try {
-			value = Double.valueOf(args[0]);
+		Axis axis;
+		try{
+			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogDesignColor.ERROR + "Can not parse double");
+			player.print(LogDesignColor.ERROR + "Can not parse axis");
 			return;
 		}
-		UndoCommandManager undoManager = user.getUndoCommandManager();
+		UndoCommandManager undoManager = userData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -51,20 +51,20 @@ public class MinYCommandHandler implements UserCommandHandler {
 		if(originalCmd == null) {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
-		}
-		MinYCommand minyCmd = new MinYCommand(originalCmd, value, user.getBlockPhysics());
-		minyCmd.execute();
-		undoManager.add(minyCmd);
-		player.print(LogDesignColor.NORMAL + "Set minY -> " + value);
+		}	
+		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, userData.getBlockPhysics());
+		mirrorCmd.execute();
+		undoManager.add(mirrorCmd);
+		player.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 	}
-
+	
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(userData.getY()));
+			return Arrays.asList("x", "y", "z");
 		}else {
 			return new ArrayList<>();
 		}
 	}
-
+	
 }

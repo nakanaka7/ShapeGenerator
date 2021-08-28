@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,23 +7,23 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxYCommand;
+import tokyo.nakanaka.command.MinZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.commandHelp.MaxyHelp;
+import tokyo.nakanaka.shapeGenerator.commandHelp.MinzHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg maxy" command
+ * Handles "/sg minz" command
  */
-public class MaxYCommandHandler implements UserCommandHandler {	
-	
+public class MinZCommandHandler implements SgSubCommandHandler {
+		
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MaxyHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new MinzHelp().getUsage());
 			return;
 		}
 		double value;
@@ -52,17 +52,16 @@ public class MaxYCommandHandler implements UserCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MaxYCommand maxyCmd = new MaxYCommand(originalCmd, value, userData.getBlockPhysics());
-		maxyCmd.execute();
-		undoManager.add(maxyCmd);
-		player.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
-		return;
+		MinZCommand minzCmd = new MinZCommand(originalCmd, value, userData.getBlockPhysics());
+		minzCmd.execute();
+		undoManager.add(minzCmd);
+		player.print(LogDesignColor.NORMAL + "Set minZ -> " + value);
 	}
 
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(userData.getY()));
+			return Arrays.asList(String.valueOf(userData.getZ()));
 		}else {
 			return new ArrayList<>();
 		}

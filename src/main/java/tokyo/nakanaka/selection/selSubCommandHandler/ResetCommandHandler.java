@@ -12,10 +12,10 @@ import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
-public class ResetCommandHandler implements UserCommandHandler {
+public class ResetCommandHandler implements SgSubCommandHandler {
 	private SelectionStrategySource selStraSource;
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	

@@ -11,10 +11,10 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
-import tokyo.nakanaka.shapeGenerator.userCommandHandler.UserCommandHandler;
 
-public class OffsetCommandHandler implements UserCommandHandler {
+public class OffsetCommandHandler implements SgSubCommandHandler {
 	private SelectionMessenger selMessenger = new SelectionMessenger();
 	
 	@Override

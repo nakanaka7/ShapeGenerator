@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg wand" command
  */
-public class WandCommandHandler implements UserCommandHandler {
+public class WandCommandHandler implements SgSubCommandHandler {
 
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

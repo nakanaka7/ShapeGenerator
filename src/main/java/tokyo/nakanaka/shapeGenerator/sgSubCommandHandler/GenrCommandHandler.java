@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.userCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg genr" command
  */
-public class GenrCommandHandler implements UserCommandHandler{
+public class GenrCommandHandler implements SgSubCommandHandler{
 	private BlockCommandArgument blockArg;
 	private SelectionStrategySource selStraSource;
 	
