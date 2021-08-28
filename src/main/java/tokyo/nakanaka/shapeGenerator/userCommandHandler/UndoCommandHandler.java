@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg undo" command
+ */
 public class UndoCommandHandler implements UserCommandHandler{
 	
 	@Override
@@ -32,9 +35,9 @@ public class UndoCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length > 1) {
-			cmdSender.print(LogColor.RED + "Usage: /sg undo [number]");
+			player.print(LogColor.RED + "Usage: /sg undo [number]");
 			return;
 		}
 		int num = 1;
@@ -42,11 +45,11 @@ public class UndoCommandHandler implements UserCommandHandler{
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				cmdSender.print(LogDesignColor.ERROR + "Can not parse the number");
+				player.print(LogDesignColor.ERROR + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				cmdSender.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				player.print(LogDesignColor.ERROR + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -60,18 +63,18 @@ public class UndoCommandHandler implements UserCommandHandler{
 			++totalNum;
 		}
 		if(totalNum == 0) {
-			cmdSender.print(LogDesignColor.ERROR + "Nothing to undo");
+			player.print(LogDesignColor.ERROR + "Nothing to undo");
 			return;
 		}
-		cmdSender.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
+		player.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
 		if(totalNum < num) {
-			cmdSender.print(LogDesignColor.ERROR + "Reached the beginning command");
+			player.print(LogDesignColor.ERROR + "Reached the beginning command");
 		}
 		return;
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

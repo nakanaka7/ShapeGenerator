@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg redo" command
+ */
 public class RedoCommandHandler implements UserCommandHandler{
 		
 	@Override
@@ -32,10 +35,10 @@ public class RedoCommandHandler implements UserCommandHandler{
 	}
 	
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		String usageMsg = LogColor.RED + "Usage: /sg redo [number]";
 		if(args.length > 1) {
-			cmdSender.print(usageMsg);
+			player.print(usageMsg);
 			return;
 		}
 		int num = 1;
@@ -43,11 +46,11 @@ public class RedoCommandHandler implements UserCommandHandler{
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				cmdSender.print(LogDesignColor.ERROR + "Can not parse the number");
+				player.print(LogDesignColor.ERROR + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				cmdSender.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				player.print(LogDesignColor.ERROR + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -61,19 +64,19 @@ public class RedoCommandHandler implements UserCommandHandler{
 			++totalNum;
 		}
 		if(totalNum == 0) {
-			cmdSender.print(LogDesignColor.ERROR + "Nothing to redo");
-			cmdSender.print(usageMsg);
+			player.print(LogDesignColor.ERROR + "Nothing to redo");
+			player.print(usageMsg);
 			return;
 		}
-		cmdSender.print(LogDesignColor.NORMAL + "Redid " + totalNum + " command(s)");
+		player.print(LogDesignColor.NORMAL + "Redid " + totalNum + " command(s)");
 		if(totalNum < num) {
-			cmdSender.print(LogDesignColor.ERROR + "Reached the end command");
+			player.print(LogDesignColor.ERROR + "Reached the end command");
 		}
-		cmdSender.print(usageMsg);
+		player.print(usageMsg);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

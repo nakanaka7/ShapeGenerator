@@ -5,18 +5,21 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MirrorCommand;
 import tokyo.nakanaka.command.UndoableCommand;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg mirror" command
+ */
 public class MirrorCommandHandler implements UserCommandHandler {
 	
 	@Override
@@ -37,16 +40,16 @@ public class MirrorCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
-			cmdSender.print(LogColor.RED + "Usage: /sg mirror <x|y|z>");
+			player.print(LogColor.RED + "Usage: /sg mirror <x|y|z>");
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			cmdSender.print(LogDesignColor.ERROR + "Can not parse axis");
+			player.print(LogDesignColor.ERROR + "Can not parse axis");
 			return;
 		}
 		UndoCommandManager undoManager = userData.getUndoCommandManager();
@@ -65,17 +68,17 @@ public class MirrorCommandHandler implements UserCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}	
 		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, userData.getBlockPhysics());
 		mirrorCmd.execute();
 		undoManager.add(mirrorCmd);
-		cmdSender.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
+		player.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else {

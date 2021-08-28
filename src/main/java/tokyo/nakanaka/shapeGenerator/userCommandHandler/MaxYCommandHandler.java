@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MaxYCommand;
 import tokyo.nakanaka.command.UndoableCommand;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.commandHelp.MaxyHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg maxy" command
+ */
 public class MaxYCommandHandler implements UserCommandHandler {	
 	@Override
 	public String getLabel() {
@@ -36,16 +39,16 @@ public class MaxYCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
-			cmdSender.print(LogColor.RED + "Usage: " + new MaxyHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new MaxyHelp().getUsage());
 			return;
 		}
 		double value;
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			cmdSender.print(LogDesignColor.ERROR + "Can not parse double");
+			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = userData.getUndoCommandManager();
@@ -64,18 +67,18 @@ public class MaxYCommandHandler implements UserCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			cmdSender.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
 		MaxYCommand maxyCmd = new MaxYCommand(originalCmd, value, userData.getBlockPhysics());
 		maxyCmd.execute();
 		undoManager.add(maxyCmd);
-		cmdSender.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
+		player.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
 		return;
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList(String.valueOf(userData.getY()));
 		}else {

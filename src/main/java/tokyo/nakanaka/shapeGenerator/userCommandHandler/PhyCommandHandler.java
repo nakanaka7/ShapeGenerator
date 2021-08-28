@@ -1,19 +1,25 @@
 package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
 import java.util.List;
+
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.PhyHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg phy" command
+ * @author nakaj
+ *
+ */
 public class PhyCommandHandler implements UserCommandHandler {
 
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		String usageMsg = LogColor.RED + "Usage: " + new PhyHelp().getUsage();
 		if(args.length != 1) {
-			cmdSender.print(usageMsg);
+			player.print(usageMsg);
 			return;
 		}
 		boolean physics;
@@ -23,15 +29,15 @@ public class PhyCommandHandler implements UserCommandHandler {
 		}else if(bool.equals("false")) {
 			physics = false;
 		}else {
-			cmdSender.print(usageMsg);
+			player.print(usageMsg);
 			return;
 		}
 		userData.setBlockPhysics(physics);
-		cmdSender.print(LogColor.GOLD + "Set physics -> " + bool);
+		player.print(LogColor.GOLD + "Set physics -> " + bool);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return List.of("true", "false");
 		}else {

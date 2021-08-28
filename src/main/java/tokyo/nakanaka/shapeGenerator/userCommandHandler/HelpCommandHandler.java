@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.CommandHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.DelHelp;
@@ -29,6 +29,9 @@ import tokyo.nakanaka.shapeGenerator.commandHelp.UndoHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.WandHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg help" command
+ */
 public class HelpCommandHandler implements UserCommandHandler {
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 	
@@ -55,28 +58,28 @@ public class HelpCommandHandler implements UserCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData userData, CommandSender cmdSender, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length == 0) {
-			cmdSender.print("--- [" + LogColor.GOLD + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
+			player.print("--- [" + LogColor.GOLD + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
 				.map(s -> s.getValue())
-				.forEach(s -> cmdSender.print(s.toSingleLine()));
-			cmdSender.print(LogColor.GOLD + "Run \"/sg help <subcommand>\" for details");
+				.forEach(s -> player.print(s.toSingleLine()));
+			player.print(LogColor.GOLD + "Run \"/sg help <subcommand>\" for details");
 		}else if(args.length == 1) {
 			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
 			if(cmdHelp != null) {
 				cmdHelp.toMultipleLines().stream()
-					.forEach(s -> cmdSender.print(s));
+					.forEach(s -> player.print(s));
 			}else {
-				cmdSender.print(LogColor.RED + "Unknown subcommand");
+				player.print(LogColor.RED + "Unknown subcommand");
 			}
 		}else {
-			cmdSender.print(LogColor.RED + "Usage: /sg help [subcommand]");
+			player.print(LogColor.RED + "Usage: /sg help [subcommand]");
 		}
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, CommandSender cmdSender, String[] args) {
+	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHelpMap.keySet());
 		}else {
