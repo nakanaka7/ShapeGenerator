@@ -5,7 +5,6 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
@@ -32,11 +31,6 @@ public class ResetCommandHandler implements UserCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Reset the selection";
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		return new ArrayList<>();
 	}
 	
 	public void onCommand(UserData userData, Player player, String[] args) {

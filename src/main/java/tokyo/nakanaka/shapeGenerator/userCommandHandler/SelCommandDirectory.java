@@ -5,7 +5,6 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
@@ -74,10 +73,6 @@ public class SelCommandDirectory implements CommandDirectory {
 					return selSubCmdHandler.getDescription();
 				}
 
-				@Override
-				public List<ParameterHelp> getParameterHelpList() {
-					return selSubCmdHandler.getParameterHelpList();
-				}
 			};
 			handlerList.add(cmdHandler);
 		}

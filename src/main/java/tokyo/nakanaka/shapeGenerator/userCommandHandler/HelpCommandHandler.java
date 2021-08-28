@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.CommandHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.DelHelp;
@@ -95,12 +94,6 @@ public class HelpCommandHandler implements UserCommandHandler {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.WandHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -38,12 +37,6 @@ public class WandCommandHandler implements UserCommandHandler {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

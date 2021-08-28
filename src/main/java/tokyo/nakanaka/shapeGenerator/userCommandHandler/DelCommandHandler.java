@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.DeleteCommand;
 import tokyo.nakanaka.command.GenerateCommand;
@@ -25,14 +23,7 @@ public class DelCommandHandler implements UserCommandHandler {
 	public String getLabel() {
 		return "del";
 	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.OPTIONAL, "number", ""));
-		return list;
-	}
-	
+		
 	@Override
 	public String getDescription() {
 		return "Delete the generated blocks";

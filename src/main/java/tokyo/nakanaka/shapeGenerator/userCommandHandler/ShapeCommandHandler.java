@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.selection.RegionBuildingData;
@@ -40,18 +38,6 @@ public class ShapeCommandHandler implements UserCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Set selection shape";
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		SelectionShape[] shapes = SelectionShape.values();
-		String[] shapeStrs = new String[shapes.length];
-		for(int i = 0; i < shapes.length; i++) {
-			shapeStrs[i] = shapes[i].toString().toLowerCase();
-		}
-		list.add(new ParameterHelp(ParameterType.REQUIRED, shapeStrs, ""));
-		return list;
 	}
 	
 	@Override

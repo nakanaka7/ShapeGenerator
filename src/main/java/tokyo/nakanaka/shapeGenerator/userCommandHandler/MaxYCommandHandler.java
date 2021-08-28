@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MaxYCommand;
@@ -29,13 +27,6 @@ public class MaxYCommandHandler implements UserCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Set max y of the generated blocks";
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The y coordinate"));
-		return list;
 	}
 	
 	@Override

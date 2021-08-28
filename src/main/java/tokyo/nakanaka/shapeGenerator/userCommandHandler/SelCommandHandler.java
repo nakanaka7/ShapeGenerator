@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
@@ -52,10 +51,4 @@ public class SelCommandHandler implements UserCommandHandler {
 		return null;
 	}
 
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

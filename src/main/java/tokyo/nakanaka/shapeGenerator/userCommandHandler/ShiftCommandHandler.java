@@ -1,13 +1,10 @@
 package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.ShiftCommand;
@@ -32,14 +29,6 @@ public class ShiftCommandHandler implements UserCommandHandler{
 	@Override
 	public String getDescription() {
 		return "Shift the generated blocks";
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "direction", ""));
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "length", ""));
-		return list;
 	}
 	
 	@Override

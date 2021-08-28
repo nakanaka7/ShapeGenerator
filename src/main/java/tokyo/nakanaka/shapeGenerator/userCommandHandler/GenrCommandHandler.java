@@ -5,8 +5,6 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
@@ -43,13 +41,6 @@ public class GenrCommandHandler implements UserCommandHandler{
 		return "Generate blocks in the selection";
 	}
 	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "block", "The block to generate"));
-		return list;
-	}
-
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {

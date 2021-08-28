@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MinXCommand;
@@ -30,13 +28,6 @@ public class MinXCommandHandler implements UserCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Set min x of the generated blocks";
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "value", "The x coordinate"));
-		return list;
 	}
 	
 	@Override

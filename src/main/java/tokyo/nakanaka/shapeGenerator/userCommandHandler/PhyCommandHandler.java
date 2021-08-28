@@ -3,7 +3,6 @@ package tokyo.nakanaka.shapeGenerator.userCommandHandler;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.commandHelp.PhyHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -53,12 +52,6 @@ public class PhyCommandHandler implements UserCommandHandler {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

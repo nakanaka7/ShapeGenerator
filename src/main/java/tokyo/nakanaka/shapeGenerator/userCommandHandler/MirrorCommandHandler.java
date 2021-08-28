@@ -6,8 +6,6 @@ import java.util.List;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.command.MirrorCommand;
@@ -30,13 +28,6 @@ public class MirrorCommandHandler implements UserCommandHandler {
 	@Override
 	public String getDescription() {
 		return "Mirror the generated blocks";
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"x", "y", "z"}, ""));
-		return list;
 	}
 	
 	@Override
