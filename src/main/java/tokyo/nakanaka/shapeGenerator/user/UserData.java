@@ -7,6 +7,7 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
 public class UserData {
@@ -18,7 +19,8 @@ public class UserData {
 	private int y;
 	private int z;
 	private SelectionShape shape;
-	private SelectionBuildingData selData;
+	private SelectionBuildingData selBuildData;
+	private SelectionData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	
@@ -98,10 +100,18 @@ public class UserData {
 	}
 
 	public SelectionBuildingData getSelectionBuildingData() {
-		return selData;
+		return selBuildData;
 	}
 
 	public void setSelectionBuildingData(SelectionBuildingData selData) {
+		this.selBuildData = selData;
+	}
+
+	public SelectionData getSelectionData() {
+		return selData;
+	}
+
+	public void setSelectionData(SelectionData selData) {
 		this.selData = selData;
 	}
 
