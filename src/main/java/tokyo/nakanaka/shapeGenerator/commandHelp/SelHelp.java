@@ -9,6 +9,14 @@ public class SelHelp implements CommandHelp {
 	private String usage = "/sg sel <subcommand>";
 	private String description = "Specify the selection";
 
+	/**
+	 * Get the usage
+	 * @return the usage
+	 */
+	public String getUsage() {
+		return usage;
+	}
+
 	@Override
 	public String toSingleLine() {
 		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;
