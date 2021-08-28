@@ -17,24 +17,22 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class SelCommandDirectory implements CommandDirectory {
+@Deprecated
+public class SelCommandDirectory {
 	private SelectionStrategySource selStraSource;
 	
 	public SelCommandDirectory(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
 	}
 
-	@Override
 	public String getLabel() {
 		return "sel";
 	}
 	
-	@Override
 	public String getDescription() {
 		return "Specify the selection";
 	}
 	
-	@Override
 	public List<CommandEntry> getSubList(UserData user) {
 		List<CommandEntry> handlerList = new ArrayList<>();
 		handlerList.add(new ResetCommandHandler(this.selStraSource));
