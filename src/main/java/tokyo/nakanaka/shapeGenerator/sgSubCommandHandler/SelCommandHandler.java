@@ -10,6 +10,7 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.commandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid.CuboidSelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
@@ -17,6 +18,10 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  */
 public class SelCommandHandler implements SgSubCommandHandler {
 	private Map<SelectionShape, SelectionStrategy> selStrtgMap = new EnumMap<>(SelectionShape.class);
+	
+	public SelCommandHandler() {
+		this.selStrtgMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());
+	}
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
