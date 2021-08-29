@@ -13,15 +13,17 @@ public interface SelSubCommandHandler {
 	 * Handles "/sg sel" subcommand
 	 * @param selData a selection data that the user data holds
 	 * @param player player that run the command
-	 * @param args arguments of the subcommand
+	 * @param subLabel label of the subcommand
+	 * @param subArgs arguments of the subcommand
 	 */
-	void onCommand(SelectionData selData, Player player, String[] args);
+	void onCommand(SelectionData selData, Player player, String subLabel, String[] subArgs);
 	/**
 	 * Return a list of tab complete for "/sg sel" subcommand
 	 * @param selData a selection data that the user data holds
 	 * @param player player that run the command
-	 * @param args arguments of the subcommand
+	 * @param subLabel label of the subcommand
+	 * @param subArgs arguments of the subcommand
 	 * @return a list of tab complete for "/sg sel" subcommand
 	 */
-	List<String> onTabComplete(SelectionData selData, Player player, String[] args);
+	List<String> onTabComplete(SelectionData selData, Player player, String subLabel, String[] subArgs);
 }
