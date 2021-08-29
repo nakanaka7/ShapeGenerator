@@ -1,8 +1,9 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid;
 
 import java.util.Map;
 
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
 
 /**
  * SelectionStrategy for cuboid selection
