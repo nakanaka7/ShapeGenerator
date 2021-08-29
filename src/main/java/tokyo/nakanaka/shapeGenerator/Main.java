@@ -98,13 +98,10 @@ public class Main {
 			return;
 		}
 		User user = new User(player.getUniqueID());
-		UserData userData = this.userDataMap.get(user);
-		if(userData == null) {
-			userData = new UserData();
-			this.userDataMap.put(user, userData);
-		}
+		UserData userData = this.prepareUserData(user);
 		sgSubCmdHandler.onCommand(userData, player, subArgs);
 	}
+	
 	/**
 	 * Get a list for tab complete of "/sg" command
 	 * @param cmdSender a command sender
@@ -124,11 +121,7 @@ public class Main {
 		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
 			User user = new User(player.getUniqueID());
-			UserData userData = this.userDataMap.get(user);
-			if(userData == null) {
-				userData = new UserData();
-				this.userDataMap.put(user, userData);
-			}
+			UserData userData = this.prepareUserData(user);
 			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
 		}
 		return List.of();
@@ -145,12 +138,7 @@ public class Main {
 		evt.cancel();
 		Player player = evt.getPlayer();
 		User user = new User(player.getUniqueID());
-		UserData userData = this.userDataMap.get(user);
-		if(userData == null) {
-			userData = new UserData();
-			this.userDataMap.put(user, userData);		
-			MainFunctions.setDefaultSelection(this.selStrtgSource, userData);
-		}
+		UserData userData = this.prepareUserData(user);
 		userData.setLogger(player);
 		SelectionShape selShape = userData.getSelectionShape();
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
@@ -173,6 +161,20 @@ public class Main {
 			}
 		}
 		new SelectionMessenger().printSelection(player, selShape, selData, selStrategy.getDefaultOffsetLabel());
+	}
+	
+	/**
+	 * Get UserData. If there is a user data for the user, return it, otherwise create new one and return it.
+	 * @param user a user
+	 * @return UserData which the user has
+	 */
+	private UserData prepareUserData(User user) {
+		UserData userData = this.userDataMap.get(user);
+		if(userData == null) {
+			userData = new UserData();
+			this.userDataMap.put(user, userData);
+		}
+		return userData;
 	}
 	
 }
