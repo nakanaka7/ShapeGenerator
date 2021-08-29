@@ -1,8 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.selSubCommandHandler.SelSubCommandHandler;
 
 /**
@@ -11,11 +8,8 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.selSubCommandHandler.Se
 public class CuboidSelectionStrategy implements SelectionStrategy {
 
 	@Override
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
-		HashMap<String, SelSubCommandHandler> map = new HashMap<>();
-		map.put("pos1", null);
-		map.put("pos2", null);
-		return map;
+	public SelSubCommandHandler getSelSubCommandHandler() {
+		return null;
 	}
 
 }
