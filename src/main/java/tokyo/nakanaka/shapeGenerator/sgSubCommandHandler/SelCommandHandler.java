@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
@@ -49,6 +50,10 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		SelectionShape shape = userData.getSelectionShape();
 		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = this.selStrtgMap.get(shape).getSelSubCommandHandlerMap();
 		String subLabel = args[0];
+		if(args.length == 1) {
+			return selSubCmdHandlerMap.keySet().stream()
+					.collect(Collectors.toList());
+		}
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SelSubCommandHandler selSubCmdHandler = selSubCmdHandlerMap.get(subLabel);
