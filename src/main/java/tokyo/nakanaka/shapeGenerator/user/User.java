@@ -42,7 +42,6 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((uid == null) ? 0 : uid.hashCode());
 		return result;
 	}
@@ -56,11 +55,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (uid == null) {
 			if (other.uid != null)
 				return false;
