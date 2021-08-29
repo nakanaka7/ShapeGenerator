@@ -48,6 +48,8 @@ public class Pos2CommandHandler implements SelSubCommandHandler {
 		}
 		CuboidRegionData cuboidRegData = (CuboidRegionData) selData.getRegionData();
 		cuboidRegData.setPos2(new Vector3D(x, y, z));
+		List<String> msgLines = new CuboidSelectionMessenger().getMessageLines(cuboidRegData);
+		msgLines.stream().forEach(player::print);
 	}
 
 	@Override
