@@ -11,6 +11,15 @@ public class SelectionData {
 	private RegionData regionData;
 	
 	/**
+	 * @param world the world of the selection data
+	 * @param regionData the region data of the selection data
+	 */
+	public SelectionData(World world, RegionData regionData) {
+		this.world = world;
+		this.regionData = regionData;
+	}
+
+	/**
 	 * Get the world which the selection data has
 	 * @return the world which the selection data has
 	 */
