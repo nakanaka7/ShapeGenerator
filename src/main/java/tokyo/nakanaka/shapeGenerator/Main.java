@@ -22,6 +22,8 @@ import tokyo.nakanaka.selection.SelectionShape;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
+import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
@@ -170,6 +172,11 @@ public class Main {
 		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
 			userData = new UserData();
+			userData.setSelectionShape(SelectionShape.CUBOID);
+			World world = player.getEntityPosition().world();
+			RegionData regData = new CuboidRegionData();
+			SelectionData selData = new SelectionData(world, regData);
+			userData.setSelectionData(selData);
 			this.userDataMap.put(user, userData);
 		}
 		return userData;
