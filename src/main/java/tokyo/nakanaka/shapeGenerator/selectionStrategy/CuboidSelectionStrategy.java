@@ -1,6 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
 
 /**
  * SelectionStrategy for cuboid selection

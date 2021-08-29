@@ -1,6 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
 
 /**
  * Holds methods which is special to a selection shape
