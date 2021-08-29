@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
@@ -37,11 +36,12 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.PhyCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
+import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
@@ -50,7 +50,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class Main {
 	private SelectionStrategySource selStrtgSource;
 	private Map<String, SgSubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
-	private Map<UUID, UserData> userDataMap = new HashMap<>();
+	private Map<User, UserData> userDataMap = new HashMap<>();
 	
 	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
 		this.selStrtgSource = selStrtgSource;
@@ -97,11 +97,11 @@ public class Main {
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
 		}
-		UUID uid = player.getUniqueID();
-		UserData userData = this.userDataMap.get(uid);
+		User user = new User(player.getUniqueID());
+		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
 			userData = new UserData();
-			this.userDataMap.put(uid, userData);
+			this.userDataMap.put(user, userData);
 		}
 		sgSubCmdHandler.onCommand(userData, player, subArgs);
 	}
@@ -123,11 +123,11 @@ public class Main {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
-			UUID uid = player.getUniqueID();
-			UserData userData = this.userDataMap.get(uid);
+			User user = new User(player.getUniqueID());
+			UserData userData = this.userDataMap.get(user);
 			if(userData == null) {
 				userData = new UserData();
-				this.userDataMap.put(uid, userData);
+				this.userDataMap.put(user, userData);
 			}
 			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
 		}
@@ -144,11 +144,11 @@ public class Main {
 		}
 		evt.cancel();
 		Player player = evt.getPlayer();
-		UUID uid = player.getUniqueID();
-		UserData userData = this.userDataMap.get(uid);
+		User user = new User(player.getUniqueID());
+		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
 			userData = new UserData();
-			this.userDataMap.put(uid, userData);		
+			this.userDataMap.put(user, userData);		
 			MainFunctions.setDefaultSelection(this.selStrtgSource, userData);
 		}
 		userData.setLogger(player);
