@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.shapeGenerator;
 
 public enum SelectionShape {
 	CUBOID,

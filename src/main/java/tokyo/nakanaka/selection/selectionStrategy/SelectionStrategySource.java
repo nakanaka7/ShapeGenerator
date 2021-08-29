@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tokyo.nakanaka.selection.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShape;
 
 public class SelectionStrategySource {
 	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();

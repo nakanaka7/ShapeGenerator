@@ -4,6 +4,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.SelectionShape;
 
 public class SelectionBuildingDataFactory {
 	private Map<SelectionShape, SelectionStrategy> strategyMap;

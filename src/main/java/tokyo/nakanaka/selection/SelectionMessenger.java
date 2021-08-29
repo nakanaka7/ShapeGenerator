@@ -8,6 +8,7 @@ import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.SelectionShape;
 
 public class SelectionMessenger {
 	public void printSelection(Logger logger, SelectionShape shape, 
