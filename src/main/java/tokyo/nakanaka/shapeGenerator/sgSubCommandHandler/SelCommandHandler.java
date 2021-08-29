@@ -21,7 +21,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();
-		SelSubCommandHandler selSubCmdHandler = this.selStrtgMap.get(shape).getSelSubCommandHandler();
+		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = this.selStrtgMap.get(shape).getSelSubCommandHandlerMap();
 		if(args.length == 0) {
 			player.print(LogColor.RED + "Usage:" + new SelHelp().getUsage());
 			player.print(LogColor.RED + "See help");
@@ -30,17 +30,27 @@ public class SelCommandHandler implements SgSubCommandHandler {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		selSubCmdHandler.onCommand(userData.getSelectionData(), player, subLabel, subArgs);
+		SelSubCommandHandler selSubCmdHandler = selSubCmdHandlerMap.get(subLabel);
+		if(selSubCmdHandler == null) {
+			player.print(LogColor.RED + "Unkown subcommand");
+			player.print(LogColor.RED + "See help");
+			return;
+		}
+		selSubCmdHandler.onCommand(userData.getSelectionData(), player, subArgs);
 	}
 
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();
-		SelSubCommandHandler selSubCmdHandler = this.selStrtgMap.get(shape).getSelSubCommandHandler();	
+		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = this.selStrtgMap.get(shape).getSelSubCommandHandlerMap();
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		return selSubCmdHandler.onTabComplete(userData.getSelectionData(), player, subLabel, subArgs);
+		SelSubCommandHandler selSubCmdHandler = selSubCmdHandlerMap.get(subLabel);
+		if(selSubCmdHandler == null) {
+			return List.of();
+		}
+		return selSubCmdHandler.onTabComplete(userData.getSelectionData(), player, subArgs);
 	}
 
 }
