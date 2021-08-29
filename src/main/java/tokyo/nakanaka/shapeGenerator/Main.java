@@ -97,8 +97,7 @@ public class Main {
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
 		}
-		User user = new User(player.getUniqueID());
-		UserData userData = this.prepareUserData(user);
+		UserData userData = this.prepareUserData(player);
 		sgSubCmdHandler.onCommand(userData, player, subArgs);
 	}
 	
@@ -120,8 +119,7 @@ public class Main {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
-			User user = new User(player.getUniqueID());
-			UserData userData = this.prepareUserData(user);
+			UserData userData = this.prepareUserData(player);
 			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
 		}
 		return List.of();
@@ -137,8 +135,7 @@ public class Main {
 		}
 		evt.cancel();
 		Player player = evt.getPlayer();
-		User user = new User(player.getUniqueID());
-		UserData userData = this.prepareUserData(user);
+		UserData userData = this.prepareUserData(player);
 		userData.setLogger(player);
 		SelectionShape selShape = userData.getSelectionShape();
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
@@ -164,11 +161,12 @@ public class Main {
 	}
 	
 	/**
-	 * Get UserData. If there is a user data for the user, return it, otherwise create new one and return it.
-	 * @param user a user
+	 * Get UserData. If there is a user data for the player, return it, otherwise create new one and return it.
+	 * @param player player
 	 * @return UserData which the user has
 	 */
-	private UserData prepareUserData(User user) {
+	private UserData prepareUserData(Player player) {
+		User user = new User(player.getUniqueID());
 		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
 			userData = new UserData();
