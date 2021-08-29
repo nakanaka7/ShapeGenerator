@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
+import java.util.Map;
+
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
 
 /**
@@ -7,9 +9,9 @@ import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
  */
 public interface SelectionStrategy {
 	/**
-	 * Get SelSubCommandHandler
-	 * @return SelSubCommandHandler
+	 * Get SelSubCommandHandlerMap
+	 * @return SelSubCommandHandlerMap
 	 */
-	SelSubCommandHandler getSelSubCommandHandler();
+	Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap();
 	
 }
