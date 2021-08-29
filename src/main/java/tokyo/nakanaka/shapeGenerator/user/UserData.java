@@ -18,7 +18,7 @@ public class UserData {
 	private int x;
 	private int y;
 	private int z;
-	private SelectionShape shape;
+	private SelectionShape shape = SelectionShape.CUBOID;
 	private SelectionBuildingData selBuildData;
 	private SelectionData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
