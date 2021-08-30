@@ -18,10 +18,10 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg shape" command
  */
-public class ShapeCommandHandler implements SgSubCommandHandler {
+public class ShapeCommandHandlerOld implements SgSubCommandHandler {
 	private SelectionStrategySource selStraSource;
 	
-	public ShapeCommandHandler(SelectionStrategySource selStraSource) {
+	public ShapeCommandHandlerOld(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
 		SelectionShape[] shapes = SelectionShape.values();
 		String[] shapeStrs = new String[shapes.length];
