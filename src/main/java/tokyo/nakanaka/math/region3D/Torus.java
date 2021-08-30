@@ -26,7 +26,7 @@ public class Torus implements Region3D{
 		PolarVector2D polar = PolarVector2D.valueOf(x, y);
 		double angle = polar.getArgument();
 		Vector3D q = new Vector3D(this.radiusMain * Math.cos(angle), this.radiusMain * Math.sin(angle), 0);
-		return new Vector3D(x, y, z).distance(q) <= this.radiusSub;
+		return new Vector3D(x, y, z).getDistance(q) <= this.radiusSub;
 	}
 	
 }
