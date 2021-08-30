@@ -4,9 +4,9 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 
 public interface SelectionStrategy {
 	RegionBuildingData newRegionBuildingData();

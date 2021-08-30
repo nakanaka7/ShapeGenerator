@@ -1,11 +1,11 @@
-package tokyo.nakanaka.math.boundRegion3D;
+package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.region3D.BlockRegion3D;
-import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.math.region3D.Region3Ds;
+import tokyo.nakanaka.shapeGenerator.math.region3D.BlockRegion3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
 public class SphereBoundRegion implements BoundRegion3D {
 	private Region3D region;

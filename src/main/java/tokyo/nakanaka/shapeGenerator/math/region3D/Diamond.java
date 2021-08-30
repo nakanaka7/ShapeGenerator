@@ -1,4 +1,4 @@
-package tokyo.nakanaka.math.region3D;
+package tokyo.nakanaka.shapeGenerator.math.region3D;
 
 public class Diamond implements Region3D {
 	private double radiusX;

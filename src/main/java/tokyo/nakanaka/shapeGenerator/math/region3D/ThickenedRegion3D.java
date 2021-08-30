@@ -1,6 +1,6 @@
-package tokyo.nakanaka.math.region3D;
+package tokyo.nakanaka.shapeGenerator.math.region3D;
 
-import tokyo.nakanaka.math.region2D.Region2D;
+import tokyo.nakanaka.shapeGenerator.math.region2D.Region2D;
 
 /**
  * Represents thickened region used by Region2D. It is thickened along z axis,

@@ -3,8 +3,8 @@ package tokyo.nakanaka.selection;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.math.region3D.BlockRegion3D;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.BlockRegion3D;
 
 public class Selection {
 	private World world;

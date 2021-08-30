@@ -1,4 +1,4 @@
-package tokyo.nakanaka.math.region3D;
+package tokyo.nakanaka.shapeGenerator.math.region3D;
 
 import java.util.HashSet;
 import java.util.Set;

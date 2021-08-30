@@ -1,4 +1,4 @@
-package tokyo.nakanaka.math.region2D;
+package tokyo.nakanaka.shapeGenerator.math.region2D;
 
 import tokyo.nakanaka.math.PolarVector2D;
 import tokyo.nakanaka.math.Vector2D;

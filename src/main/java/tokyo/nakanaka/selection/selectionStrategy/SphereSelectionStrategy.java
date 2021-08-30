@@ -8,16 +8,16 @@ import java.util.List;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.math.boundRegion3D.SphereBoundRegion;
-import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.math.region3D.Region3Ds;
-import tokyo.nakanaka.math.region3D.Sphere;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
 
 public class SphereSelectionStrategy implements SelectionStrategy{
 

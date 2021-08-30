@@ -9,12 +9,6 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.math.boundRegion3D.CuboidBoundRegion;
-import tokyo.nakanaka.math.region2D.Region2D;
-import tokyo.nakanaka.math.region2D.RegularPolygon;
-import tokyo.nakanaka.math.region3D.Region3D;
-import tokyo.nakanaka.math.region3D.Region3Ds;
-import tokyo.nakanaka.math.region3D.ThickenedRegion3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.selection.selSubCommandHandler.AxisCommandHandler;
@@ -22,6 +16,12 @@ import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.RegularPolygonSideCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
+import tokyo.nakanaka.shapeGenerator.math.region2D.Region2D;
+import tokyo.nakanaka.shapeGenerator.math.region2D.RegularPolygon;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
+import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
 
 public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 
