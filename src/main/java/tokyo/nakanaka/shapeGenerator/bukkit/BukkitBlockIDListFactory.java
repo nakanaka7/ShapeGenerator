@@ -6,12 +6,15 @@ import java.util.stream.Collectors;
 import org.bukkit.Material;
 
 import tokyo.nakanaka.NamespacedID;
+import tokyo.nakanaka.shapeGenerator.BlockIDListFactory;
 
 /**
  * A Factory class of list of block IDs for bukkit
  */
-public class BukkitBlockIDListFactory {
-	List<NamespacedID> getBlockIDList(){
+public class BukkitBlockIDListFactory implements BlockIDListFactory {
+	
+	@Override
+	public List<NamespacedID> getBlockIDList() {
 		return List.of(Material.values()).stream()
 				.filter(s -> s.isBlock())
 				.map(s -> s.toString().toLowerCase())
