@@ -19,7 +19,7 @@ public class ShapeGeneratorPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		SelectionStrategySource selStrtgSource = new SelectionStrategySource();
-		this.main = new Main(new BukkitBlockArgument(), selStrtgSource);
+		this.main = new Main(new BukkitBlockIDListFactory(), selStrtgSource);
 		Scheduler scheduler = new BukkitScheduler(this);
 		Listener listener = new BukkitClickBlockEventListener(this.main, scheduler);
 		this.getServer().getPluginManager().registerEvents(listener, this);

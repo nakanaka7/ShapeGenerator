@@ -10,7 +10,6 @@ import tokyo.nakanaka.Item;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.commandArgument.BlockCommandArgument;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
@@ -22,7 +21,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandlerOld;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxXCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxYCommandHandler;
@@ -52,13 +51,13 @@ public class Main {
 	private Map<String, SgSubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	private Map<User, UserData> userDataMap = new HashMap<>();
 	
-	public Main(BlockCommandArgument blockArg, SelectionStrategySource selStrtgSource) {
+	public Main(BlockIDListFactory blockIDListFactory, SelectionStrategySource selStrtgSource) {
 		this.selStrtgSource = selStrtgSource;
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler());
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandlerOld(blockArg, selStrtgSource));
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
 		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
