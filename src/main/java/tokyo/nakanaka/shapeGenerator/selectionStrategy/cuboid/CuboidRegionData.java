@@ -1,6 +1,7 @@
-package tokyo.nakanaka.shapeGenerator.regionData;
+package tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid;
 
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
  * RegionData for cuboid selection

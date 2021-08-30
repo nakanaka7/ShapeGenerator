@@ -9,7 +9,6 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 
 /**
  * Handles "/sg sel pos2" command

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
 

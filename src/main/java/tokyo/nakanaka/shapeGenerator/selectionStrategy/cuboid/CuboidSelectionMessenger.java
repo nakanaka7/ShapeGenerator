@@ -5,7 +5,6 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 
 public class CuboidSelectionMessenger {
 	public List<String> getMessageLines(CuboidRegionData cuboidRegData){
