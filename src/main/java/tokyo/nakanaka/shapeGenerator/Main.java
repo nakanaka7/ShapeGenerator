@@ -22,7 +22,7 @@ import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandlerOld;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxXCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxYCommandHandler;
@@ -58,7 +58,7 @@ public class Main {
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler());
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockArg, selStrtgSource));
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandlerOld(blockArg, selStrtgSource));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
 		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
