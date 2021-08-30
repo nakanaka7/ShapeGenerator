@@ -57,5 +57,10 @@ public class CuboidRegionData implements RegionData{
 		double lbz = Math.min(pos1.getZ(), pos2.getZ());
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
+
+	@Override
+	public Vector3D getDefaultOffset() {
+		return this.pos1;
+	}
 	
 }
