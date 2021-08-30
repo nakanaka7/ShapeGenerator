@@ -2,6 +2,8 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.Map;
 
+import tokyo.nakanaka.World;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid.CuboidSelectionStrategy;
 
@@ -27,6 +29,16 @@ public enum SelectionShape {
 	 */
 	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
 		return this.selStrtg.getSelSubCommandHandlerMap();
+	}
+	
+	/**
+	 * Get SelectionData
+	 * @param world a world of the selection data
+	 * @return SelectionData
+	 */
+	public SelectionData newSelectionData(World world) {
+		RegionData regData = this.selStrtg.newRegionData();
+		return new SelectionData(world, regData);
 	}
 	
 }
