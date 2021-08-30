@@ -6,11 +6,12 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid.CuboidSelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.sphere.SphereSelectionStrategy;
 
 public enum SelectionShape {
 	CUBOID(new CuboidSelectionStrategy()),
 	DIAMOND(null),
-	SPHERE(null),
+	SPHERE(new SphereSelectionStrategy()),
 	TORUS(null),
 	LINE(null),
 	TRIANGLE(null),
