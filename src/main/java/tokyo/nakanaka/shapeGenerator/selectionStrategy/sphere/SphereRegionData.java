@@ -7,7 +7,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
  * Region data of sphere selection
  */
 public class SphereRegionData implements RegionData {
-	private Vector3D center;
+	private Vector3D center = Vector3D.ORIGIN;
 	private double radius;
 	
 	/**
