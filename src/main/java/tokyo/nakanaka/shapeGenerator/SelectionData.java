@@ -1,6 +1,9 @@
 package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.selection.Selection;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
@@ -9,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 public class SelectionData {
 	private World world;
 	private RegionData regionData;
+	private Vector3D offset;
 	
 	/**
 	 * @param world the world of the selection data
@@ -49,6 +53,11 @@ public class SelectionData {
 	 */
 	public void setRegionData(RegionData regionData) {
 		this.regionData = regionData;
+	}
+	
+	public Selection createSelection() {
+		BoundRegion3D boundReg = this.regionData.createBoundRegion3D();
+		return new Selection(world, boundReg, offset);
 	}
 	
 }
