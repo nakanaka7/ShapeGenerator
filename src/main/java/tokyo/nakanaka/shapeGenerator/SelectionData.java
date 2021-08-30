@@ -12,7 +12,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 public class SelectionData {
 	private World world;
 	private RegionData regionData;
-	private Vector3D offset;
+	private Vector3D offset = null;
 	
 	/**
 	 * @param world the world of the selection data
@@ -55,8 +55,36 @@ public class SelectionData {
 		this.regionData = regionData;
 	}
 	
+	/**
+	 * Returns the offset of the selection
+	 * @return the offset of the selection
+	 */
+	public Vector3D getOffset() {
+		Vector3D offset = this.offset;
+		if(offset == null) {
+			offset = this.regionData.getDefaultOffset();
+		}
+		return offset;
+	}
+
+	/**
+	 * Set an offset
+	 * @param offset an offset of the selection
+	 */
+	public void setOffset(Vector3D offset) {
+		this.offset = offset;
+	}
+	
+	/**
+	 * Return the selection from this data
+	 * @return the selection from this data
+	 */
 	public Selection createSelection() {
 		BoundRegion3D boundReg = this.regionData.createBoundRegion3D();
+		Vector3D offset = this.offset;
+		if(offset == null) {
+			offset = this.regionData.getDefaultOffset();
+		}
 		return new Selection(world, boundReg, offset);
 	}
 	
