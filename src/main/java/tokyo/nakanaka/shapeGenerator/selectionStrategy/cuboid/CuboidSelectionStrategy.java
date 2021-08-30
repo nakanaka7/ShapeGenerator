@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
 
 /**
@@ -17,6 +19,11 @@ public class CuboidSelectionStrategy implements SelectionStrategy {
 		map.put("pos1", new Pos1CommandHandler());
 		map.put("pos2", new Pos2CommandHandler());
 		return map;
+	}
+
+	@Override
+	public RegionData newRegionData() {
+		return new CuboidRegionData();
 	}
 
 }
