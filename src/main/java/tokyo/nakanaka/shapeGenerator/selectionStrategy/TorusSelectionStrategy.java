@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.selectionStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,28 +14,22 @@ import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.selection.selSubCommandHandler.AxisCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
-import tokyo.nakanaka.selection.selSubCommandHandler.RegularPolygonSideCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
-import tokyo.nakanaka.shapeGenerator.math.region2D.Region2D;
-import tokyo.nakanaka.shapeGenerator.math.region2D.RegularPolygon;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
-import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
 
-public class RegularPolygonSelectionStrategy implements SelectionStrategy {
+public class TorusSelectionStrategy implements SelectionStrategy {
 
 	@Override
 	public RegionBuildingData newRegionBuildingData() {
 		RegionBuildingData data = new RegionBuildingData.Builder()
 				.addDataTag("center", DataType.VECTOR3D)
-				.addDataTag("radius", DataType.DOUBLE)
-				.addDataTag("side", DataType.INTEGER)
-				.addDataTag("thickness", DataType.DOUBLE)
+				.addDataTag("radius_main", DataType.DOUBLE)
+				.addDataTag("radius_sub", DataType.DOUBLE)
 				.addDataTag("axis", DataType.STRING)
 				.build();
-		data.putInteger("side", 3);
-		data.putDouble("thickness", 1.0);
 		data.putString("axis", "y");
 		return data;
 	}
@@ -47,25 +41,39 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 
 	@Override
 	public String getRightClickDescription() {
-		return "Set radius by the center coordinates";
+		return "Set radius_main, radius_sub";
 	}
 	
 	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		data.putVector3D("center", blockPos.toVector3D());
-		data.putDouble("radius", null);
+		Vector3D center = blockPos.toVector3D();
+		data.putVector3D("center", center);
+		data.putDouble("radius_main", null);
+		data.putDouble("radius_sub", null);
 	}
 
 	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
+		Vector3D pos = blockPos.toVector3D();
 		Vector3D center = data.getVector3D("center");
+		Double radiusMain = data.getDouble("radius_main");
+		Double radiusSub = data.getDouble("radius_sub");
+		Axis axis = Axis.valueOf(data.getString("axis").toUpperCase());
 		if(center == null) {
 			logger.print(LogColor.RED + "Set center first");
 			return;
+		}else if(radiusMain == null) {
+			radiusMain = pos.negate(center).getAbsolute();
+			data.putDouble("radius_main", radiusMain);
+		}else {
+			Vector3D e1 = axis.toVector3D();
+			Vector3D p = pos.negate(center);
+			double p1 = p.innerProduct(e1);
+			Vector3D p2e2 = p.negate(e1.multiply(p1));
+			Vector3D e2 = p2e2.divide(p2e2.getAbsolute());
+			radiusSub = p.negate(e2.multiply(radiusMain)).getAbsolute() + 0.5;
+			data.putDouble("radius_sub", radiusSub);
 		}
-		Vector3D pos = blockPos.toVector3D();
-		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
-		data.putDouble("radius", radius);
 	}
 
 	@Override
@@ -76,54 +84,39 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	@Override
 	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
 		return Arrays.asList(new PosCommandHandler("center"),
-				new LengthCommandHandler("radius"),
-				new RegularPolygonSideCommandHandler(),
-				new LengthCommandHandler("thickness"),
+				new LengthCommandHandler("radius_main"),
+				new LengthCommandHandler("radius_sub"),
 				new AxisCommandHandler());
 	}
 
 	@Override
 	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
 		Vector3D center = data.getVector3D("center");
-		Double radius = data.getDouble("radius");
-		Integer side = data.getInteger("side");
-		Double thickness = data.getDouble("thickness");
-		if(center == null || radius == null || side == null || thickness == null) {
+		Double radiusMain = data.getDouble("radius_main");
+		Double radiusSub = data.getDouble("radius_sub");
+		if(center == null || radiusMain == null || radiusSub == null) {
 			throw new IllegalStateException();
 		}
 		Axis axis = Axis.valueOf(data.getString("axis").toUpperCase());
-		Region2D regularPoly = new RegularPolygon(side);
-		Region3D region = new ThickenedRegion3D(regularPoly, thickness);
-		region = Region3Ds.linearTransform(region, LinearTransformation.ofXScale(radius));
-		region = Region3Ds.linearTransform(region, LinearTransformation.ofYScale(radius));
-		double ubx = radius;
-		double uby = radius;
-		double ubz = radius;
-		double lbx = - radius;
-		double lby = - radius;
-		double lbz = - radius;
+		Region3D region = new Torus(radiusMain, radiusSub);
 		switch(axis) {
 		case X:
 			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(90));
-			ubx = thickness/ 2;
-			lbx = - thickness/ 2;
 			break;
 		case Y:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(-90));
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(-90));
-			uby = thickness/ 2;
-			lby = - thickness/ 2;
+			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(90));
 			break;
 		case Z:
-			ubz = thickness/ 2;
-			lbz = - thickness/ 2;
-			break;
-		default:
 			break;
 		}
-		CuboidBoundRegion bound = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return bound.createShiftedRegion(center);
+		region = Region3Ds.shift(region, center);
+		double ubx = center.getX() + radiusMain + radiusSub;
+		double uby = center.getY() + radiusMain + radiusSub;
+		double ubz = center.getZ() + radiusMain + radiusSub;
+		double lbx = center.getX() - radiusMain - radiusSub;
+		double lby = center.getY() - radiusMain - radiusSub;
+		double lbz = center.getZ() - radiusMain - radiusSub;
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
 }

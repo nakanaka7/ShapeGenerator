@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.selectionStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;

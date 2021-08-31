@@ -7,8 +7,8 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
-import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
 
 public class UserFactory {
 	private Map<SelectionShapeNew, SelectionStrategy> strategyMap;

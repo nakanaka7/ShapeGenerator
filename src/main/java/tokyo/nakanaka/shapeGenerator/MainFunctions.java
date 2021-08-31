@@ -2,7 +2,7 @@ package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
-import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class MainFunctions {

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.selectionStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

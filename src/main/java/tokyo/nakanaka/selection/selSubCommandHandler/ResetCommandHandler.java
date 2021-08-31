@@ -9,9 +9,9 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
-import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 

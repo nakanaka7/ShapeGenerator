@@ -10,8 +10,8 @@ import tokyo.nakanaka.Scheduler;
 import tokyo.nakanaka.bukkit.BukkitFunctions;
 import tokyo.nakanaka.bukkit.BukkitScheduler;
 import tokyo.nakanaka.commandSender.CommandSender;
-import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.Main;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategySource;
 
 public class ShapeGeneratorPlugin extends JavaPlugin {
 	private Main main;
