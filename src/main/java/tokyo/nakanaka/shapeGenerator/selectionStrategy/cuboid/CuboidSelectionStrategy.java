@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.math.Vector3D;
@@ -45,6 +46,11 @@ public class CuboidSelectionStrategy implements SelectionStrategy {
 		double lby = Math.min(pos1.getY(), pos2.getY());
 		double lbz = Math.min(pos1.getZ(), pos2.getZ());
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public List<String> regionDataKeyList() {
+		return List.of("pos1", "pos2");
 	}
 
 }

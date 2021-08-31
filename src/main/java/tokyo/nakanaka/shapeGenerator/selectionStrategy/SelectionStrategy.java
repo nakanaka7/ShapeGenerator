@@ -1,5 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
@@ -27,4 +28,10 @@ public interface SelectionStrategy {
 	 * @throws IllegalArgumentException if the region data cannot create a BoundRegion3D object
 	 */
 	BoundRegion3D createBoundRegion3D(RegionData regData);
+	/**
+	 * Returns key list for region data. It does not contain "offset".
+	 * @return key list for region data. It does not contain "offset".
+	 */
+	List<String> regionDataKeyList();
+	
 }

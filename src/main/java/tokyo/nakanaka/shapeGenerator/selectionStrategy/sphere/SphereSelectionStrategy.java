@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy.sphere;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.math.Vector3D;
@@ -38,6 +39,11 @@ public class SphereSelectionStrategy implements SelectionStrategy {
 		Region3D region = new Sphere(radius);
 		region = Region3Ds.shift(region, center);
 		return new SphereBoundRegion(region, center, radius);
+	}
+
+	@Override
+	public List<String> regionDataKeyList() {
+		return List.of("center", "radius");
 	}
 
 }
