@@ -3,6 +3,7 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
@@ -11,7 +12,6 @@ import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class PosCommandHandler implements SelSubCommandHandler {
@@ -41,7 +41,7 @@ public class PosCommandHandler implements SelSubCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(RegionBuildingData data, Player player, String[] args) {
+	public boolean onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 0 && args.length != 3) {
 			player.print(LogColor.RED + "Usage: " + "/sg sel " + this.label + "[x] [y] [z]");
 			player.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
@@ -68,7 +68,8 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		}else {
 			return false;
 		}
-		data.putVector3D(this.label, pos);
+		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
+		regDataMap.put(this.label, pos);
 		return true;
 	}
 	
