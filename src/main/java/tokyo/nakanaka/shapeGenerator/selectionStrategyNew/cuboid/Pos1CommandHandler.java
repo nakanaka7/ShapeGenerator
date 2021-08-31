@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew.cuboid;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 
 /**
- * Handles "/sg sel pos2" command
+ * Handles "/sg sel pos1" command
  */
-public class Pos2CommandHandler implements SelSubCommandHandler {
+public class Pos1CommandHandler implements SelSubCommandHandler {
 
 	@Override
 	public void onCommand(SelectionData selData, Player player, String[] subArgs) {
-		String usage = "/sg sel pos2 <x> <y> <z>";
+		String usage = "/sg sel pos1 <x> <y> <z>";
 		double x;
 		double y;
 		double z;
@@ -46,7 +46,7 @@ public class Pos2CommandHandler implements SelSubCommandHandler {
 			selData.setRegionData(new CuboidRegionData());
 		}
 		CuboidRegionData cuboidRegData = (CuboidRegionData) selData.getRegionData();
-		cuboidRegData.setPos2(new Vector3D(x, y, z));
+		cuboidRegData.setPos1(new Vector3D(x, y, z));
 		List<String> msgLines = new CuboidSelectionMessenger().getMessageLines(cuboidRegData);
 		msgLines.stream().forEach(player::print);
 	}

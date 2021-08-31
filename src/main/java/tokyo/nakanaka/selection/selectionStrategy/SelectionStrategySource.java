@@ -5,32 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 
 public class SelectionStrategySource {
-	private Map<SelectionShape, SelectionStrategy> strategyMap = new HashMap<>();
+	private Map<SelectionShapeNew, SelectionStrategy> strategyMap = new HashMap<>();
 	
 	public SelectionStrategySource() {
-		strategyMap.put(SelectionShape.CUBOID, new CuboidSelectionStrategy());
-		strategyMap.put(SelectionShape.DIAMOND, new DiamondSelectionStrategy());
-		strategyMap.put(SelectionShape.SPHERE, new SphereSelectionStrategy());
-		strategyMap.put(SelectionShape.TORUS, new TorusSelectionStrategy());
-		strategyMap.put(SelectionShape.LINE, new LineSelectionStrategy());
-		strategyMap.put(SelectionShape.TRIANGLE, new TriangleSelectionStrategy());
-		strategyMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionStrategy());
-		strategyMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.CUBOID, new CuboidSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.DIAMOND, new DiamondSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.SPHERE, new SphereSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.TORUS, new TorusSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.LINE, new LineSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.TRIANGLE, new TriangleSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.TETRAHEDRON, new TetrahedronSelectionStrategy());
+		strategyMap.put(SelectionShapeNew.REGULAR_POLYGON, new RegularPolygonSelectionStrategy());
 	}
 	
-	public SelectionStrategy get(SelectionShape shape) {
+	public SelectionStrategy get(SelectionShapeNew shape) {
 		return this.strategyMap.get(shape);
 	}
 	
-	public List<SelectionShape> getShapeList() {
+	public List<SelectionShapeNew> getShapeList() {
 		return new ArrayList<>(this.strategyMap.keySet());
 	}
 	
-	public SelectionShape getDefaultSelectionShape() {
-		return SelectionShape.CUBOID;
+	public SelectionShapeNew getDefaultSelectionShape() {
+		return SelectionShapeNew.CUBOID;
 	}
 	
 }

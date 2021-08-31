@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew.cuboid;
 
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;

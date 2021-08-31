@@ -137,7 +137,7 @@ public class Main {
 		Player player = evt.getPlayer();
 		UserData userData = this.prepareUserData(player);
 		userData.setLogger(player);
-		SelectionShape selShape = userData.getSelectionShape();
+		SelectionShapeNew selShape = userData.getSelectionShape();
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
 		SelectionStrategy selStrategy = this.selStrtgSource.get(selShape);
 		BlockPosition blockPos = evt.getBlockPos();
@@ -170,7 +170,7 @@ public class Main {
 		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
 			userData = new UserData();
-			SelectionShape defaultShape = SelectionShape.CUBOID;
+			SelectionShapeNew defaultShape = SelectionShapeNew.CUBOID;
 			userData.setSelectionShape(defaultShape);
 			SelectionData selData = defaultShape.newSelectionData(player.getEntityPosition().world());
 			userData.setSelectionData(selData);

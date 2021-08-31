@@ -8,13 +8,13 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 
 public class UserFactory {
-	private Map<SelectionShape, SelectionStrategy> strategyMap;
-	private SelectionShape defaultShape;
+	private Map<SelectionShapeNew, SelectionStrategy> strategyMap;
+	private SelectionShapeNew defaultShape;
 	
-	public UserFactory(Map<SelectionShape, SelectionStrategy> strategyMap, SelectionShape defaultShape) {
+	public UserFactory(Map<SelectionShapeNew, SelectionStrategy> strategyMap, SelectionShapeNew defaultShape) {
 		this.strategyMap = strategyMap;
 		this.defaultShape = defaultShape;
 	}

@@ -12,7 +12,7 @@ import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
@@ -23,7 +23,7 @@ public class ShapeCommandHandlerOld implements SgSubCommandHandler {
 	
 	public ShapeCommandHandlerOld(SelectionStrategySource selStraSource) {
 		this.selStraSource = selStraSource;
-		SelectionShape[] shapes = SelectionShape.values();
+		SelectionShapeNew[] shapes = SelectionShapeNew.values();
 		String[] shapeStrs = new String[shapes.length];
 		for(int i = 0; i < shapes.length; i++) {
 			shapeStrs[i] = shapes[i].toString().toLowerCase();
@@ -36,9 +36,9 @@ public class ShapeCommandHandlerOld implements SgSubCommandHandler {
 			player.print(LogColor.RED + "Usage: /sg shape <type>");
 			return;
 		}
-		SelectionShape shape;
+		SelectionShapeNew shape;
 		try{
-			shape = SelectionShape.valueOf(args[0].toUpperCase());
+			shape = SelectionShapeNew.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			player.print(LogDesignColor.ERROR + "Invalid shape");
 			return;
@@ -48,7 +48,7 @@ public class ShapeCommandHandlerOld implements SgSubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Unsupported shape");
 			return;
 		}	
-		SelectionShape original = userData.getSelectionShape();
+		SelectionShapeNew original = userData.getSelectionShape();
 		if(shape == original) {
 			player.print(LogDesignColor.ERROR + "Already set : Nothing to change");
 			return;

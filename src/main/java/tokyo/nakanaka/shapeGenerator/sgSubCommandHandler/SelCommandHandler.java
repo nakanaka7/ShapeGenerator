@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.commandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -18,7 +18,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
-		SelectionShape shape = userData.getSelectionShape();
+		SelectionShapeNew shape = userData.getSelectionShape();
 		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
 		if(args.length == 0) {
 			player.print(LogColor.RED + "Usage:" + new SelHelp().getUsage());
@@ -39,7 +39,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
-		SelectionShape shape = userData.getSelectionShape();
+		SelectionShapeNew shape = userData.getSelectionShape();
 		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
 		String subLabel = args[0];
 		if(args.length == 1) {

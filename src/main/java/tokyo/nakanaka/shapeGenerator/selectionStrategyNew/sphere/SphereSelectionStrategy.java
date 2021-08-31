@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy.sphere;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew.sphere;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +12,9 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelectionStrategyNew;
 
-public class SphereSelectionStrategy implements SelectionStrategy {
+public class SphereSelectionStrategy implements SelectionStrategyNew {
 
 	@Override
 	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {

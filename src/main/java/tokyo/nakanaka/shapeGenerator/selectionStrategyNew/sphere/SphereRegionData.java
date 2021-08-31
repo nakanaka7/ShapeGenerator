@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy.sphere;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew.sphere;
 
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;

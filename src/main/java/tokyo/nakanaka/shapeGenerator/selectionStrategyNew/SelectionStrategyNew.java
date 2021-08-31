@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 /**
  * Holds methods which is special to a selection shape
  */
-public interface SelectionStrategy {
+public interface SelectionStrategyNew {
 	/**
 	 * Get SelSubCommandHandlerMap
 	 * @return SelSubCommandHandlerMap

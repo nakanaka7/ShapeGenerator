@@ -8,10 +8,10 @@ import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 
 public class SelectionMessenger {
-	public void printSelection(Logger logger, SelectionShape shape, 
+	public void printSelection(Logger logger, SelectionShapeNew shape, 
 			SelectionBuildingData selData, String defaultOffsetLabel) {
 		logger.print(LogTemplate.ofLine(shape.toString() + " Selection"));
 		RegionBuildingData regionData = selData.getRegionData();

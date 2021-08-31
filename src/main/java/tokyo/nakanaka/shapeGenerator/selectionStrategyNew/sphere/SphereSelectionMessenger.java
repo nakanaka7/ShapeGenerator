@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy.sphere;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew.sphere;
 
 import java.util.ArrayList;
 import java.util.List;

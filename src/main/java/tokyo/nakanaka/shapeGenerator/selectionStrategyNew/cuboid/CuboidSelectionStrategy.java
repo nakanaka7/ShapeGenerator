@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew.cuboid;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +11,12 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelectionStrategyNew;
 
 /**
  * SelectionStrategy for cuboid selection
  */
-public class CuboidSelectionStrategy implements SelectionStrategy {
+public class CuboidSelectionStrategy implements SelectionStrategyNew {
 
 	@Override
 	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {

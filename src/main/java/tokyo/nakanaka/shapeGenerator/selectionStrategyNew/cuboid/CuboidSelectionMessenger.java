@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew.cuboid;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,11 +7,11 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.cuboid.CuboidSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.sphere.SphereSelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelectionStrategyNew;
+import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.cuboid.CuboidSelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.sphere.SphereSelectionStrategy;
 
-public enum SelectionShape {
+public enum SelectionShapeNew {
 	CUBOID(new CuboidSelectionStrategy()),
 	DIAMOND(null),
 	SPHERE(new SphereSelectionStrategy()),
@@ -21,9 +21,9 @@ public enum SelectionShape {
 	TETRAHEDRON(null),
 	REGULAR_POLYGON(null);
 	
-	private SelectionStrategy selStrtg;
+	private SelectionStrategyNew selStrtg;
 	
-	private SelectionShape(SelectionStrategy selStrtg) {
+	private SelectionShapeNew(SelectionStrategyNew selStrtg) {
 		this.selStrtg = selStrtg;
 	}
 	

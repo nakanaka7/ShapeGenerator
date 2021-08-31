@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.commandHelp.ShapeHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -21,14 +21,14 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 			player.print(LogColor.RED + "Usage: " + new ShapeHelp().getUsage());
 			return;
 		}
-		SelectionShape shape;
+		SelectionShapeNew shape;
 		try{
-			shape = SelectionShape.valueOf(args[0].toUpperCase());
+			shape = SelectionShapeNew.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			player.print(LogColor.RED + "Invalid shape");
 			return;
 		}
-		SelectionShape original = userData.getSelectionShape();
+		SelectionShapeNew original = userData.getSelectionShape();
 		if(shape != original) {
 			userData.setSelectionShape(shape);
 			SelectionData selData = shape.newSelectionData(player.getEntityPosition().world());
@@ -40,7 +40,7 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		return switch(args.length) {
-			case 1 -> List.of(SelectionShape.values()).stream()
+			case 1 -> List.of(SelectionShapeNew.values()).stream()
 					.map(s -> s.toString().toLowerCase())
 					.collect(Collectors.toList());
 			default -> List.of();
