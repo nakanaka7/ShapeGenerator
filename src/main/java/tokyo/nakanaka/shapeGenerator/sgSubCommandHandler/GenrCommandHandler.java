@@ -36,7 +36,13 @@ public class GenrCommandHandler implements SgSubCommandHandler {
 			player.print(LogColor.RED + "Invalid block specification");
 			return;
 		}
-		Selection sel = userData.getSelectionData().createSelection();
+		Selection sel;
+		try {
+			sel = userData.getSelectionShape().createSelection(userData.getSelectionData());
+		}catch(IllegalArgumentException e) {
+			player.print(LogColor.RED + "Incomplete selection");
+			return;
+		}
 		GenerateCommand generateCmd = new GenerateCommand(sel, block, userData.getBlockPhysics());	
 		try {
 			generateCmd.execute();
