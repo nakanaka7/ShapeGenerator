@@ -34,7 +34,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.PhyCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
@@ -56,7 +56,7 @@ public class Main {
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
-		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler());
+		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandlerNew());
 		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
