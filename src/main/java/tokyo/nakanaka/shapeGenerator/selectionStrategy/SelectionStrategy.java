@@ -37,5 +37,11 @@ public interface SelectionStrategy {
 	 * A key of the region data for the default offset
 	 */
 	String defaultOffsetKey();
-	
+	/**
+	 * Returns a BoundRegion3D object from the region data
+	 * @param regData the region data
+	 * @return a BoundRegion3D object from the region data
+	 * @throws IllegalArgumentException if the region data cannot create a BoundRegion3D object
+	 */
+	BoundRegion3D buildBoundRegion3D(Map<String, Object> regData);
 }

@@ -51,4 +51,16 @@ public class SphereSelectionStrategy implements SelectionStrategy {
 		return "center";
 	}
 
+	@Override
+	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regData) {
+		Vector3D center = (Vector3D)regData.get("center");
+		Double radius = (Double)regData.get("radius");
+		if(center == null || radius == null) {
+			throw new IllegalArgumentException();
+		}
+		Region3D region = new Sphere(radius);
+		region = Region3Ds.shift(region, center);
+		return new SphereBoundRegion(region, center, radius);
+	}
+
 }
