@@ -2,8 +2,6 @@ package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.Selection;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
@@ -73,20 +71,6 @@ public class SelectionData {
 	 */
 	public void setOffset(Vector3D offset) {
 		this.offset = offset;
-	}
-	
-	/**
-	 * Return the selection from this data
-	 * @return the selection from this data
-	 */
-	@Deprecated
-	public Selection createSelection() {
-		BoundRegion3D boundReg = this.regionData.createBoundRegion3D();
-		Vector3D offset = this.offset;
-		if(offset == null) {
-			offset = this.regionData.getDefaultOffset();
-		}
-		return new Selection(world, boundReg, offset);
 	}
 	
 }
