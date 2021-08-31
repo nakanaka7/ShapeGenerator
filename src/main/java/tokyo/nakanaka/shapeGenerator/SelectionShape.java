@@ -55,7 +55,7 @@ public enum SelectionShape {
 		World world = selData.getWorld();
 		RegionData regData = selData.getRegionData();
 		BoundRegion3D boundReg = this.selStrtg.createBoundRegion3D(regData);
-		Vector3D offset = selData.getOffset();
+		Vector3D offset = selData.getOffsetOld();
 		return new Selection(world, boundReg, offset);
 	}
 	

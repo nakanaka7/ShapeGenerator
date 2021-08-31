@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator;
 
+import java.util.LinkedHashMap;
+
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
@@ -9,16 +11,27 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
  */
 public class SelectionData {
 	private World world;
+	@Deprecated
 	private RegionData regionData;
+	@Deprecated
 	private Vector3D offset = null;
+	private LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
+	private String defaultOffsetKey;
 	
 	/**
 	 * @param world the world of the selection data
 	 * @param regionData the region data of the selection data
 	 */
+	@Deprecated
 	public SelectionData(World world, RegionData regionData) {
 		this.world = world;
 		this.regionData = regionData;
+	}
+	
+	public SelectionData(World world, LinkedHashMap<String, Object> regDataMap, String defaultOffsetKey) {
+		this.world = world;
+		this.regDataMap = regDataMap;
+		this.defaultOffsetKey = defaultOffsetKey;
 	}
 
 	/**
@@ -41,6 +54,7 @@ public class SelectionData {
 	 * Get the region data which the selection data has
 	 * @return the region data which the selection data has
 	 */
+	@Deprecated
 	public RegionData getRegionData() {
 		return regionData;
 	}
@@ -49,6 +63,7 @@ public class SelectionData {
 	 * Set a region data to the selection data
 	 * @param regionData a region data to set to the selection data
 	 */
+	@Deprecated
 	public void setRegionData(RegionData regionData) {
 		this.regionData = regionData;
 	}
@@ -57,19 +72,21 @@ public class SelectionData {
 	 * Returns the offset of the selection
 	 * @return the offset of the selection
 	 */
-	public Vector3D getOffset() {
+	@Deprecated
+	public Vector3D getOffsetOld() {
 		Vector3D offset = this.offset;
 		if(offset == null) {
 			offset = this.regionData.getDefaultOffset();
 		}
 		return offset;
 	}
-
+	
 	/**
 	 * Set an offset
 	 * @param offset an offset of the selection
 	 */
-	public void setOffset(Vector3D offset) {
+	@Deprecated
+	public void setOffsetOld(Vector3D offset) {
 		this.offset = offset;
 	}
 	
