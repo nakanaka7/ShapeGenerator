@@ -13,10 +13,9 @@ public class SelectionData {
 	private World world;
 	@Deprecated
 	private RegionData regionData;
-	@Deprecated
-	private Vector3D offset = null;
 	private LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
 	private String defaultOffsetKey;
+	private Vector3D offset = null;
 	
 	/**
 	 * @param world the world of the selection data
@@ -97,5 +96,25 @@ public class SelectionData {
 	public void setOffsetOld(Vector3D offset) {
 		this.offset = offset;
 	}
+
+	/**
+	 * Returns the offset of this selection
+	 * @return the offset of this selection
+	 */
+	public Vector3D getOffset() {
+		Vector3D offset = this.offset;
+		if(offset == null) {
+			offset = (Vector3D) this.regDataMap.get(defaultOffsetKey);
+		}
+		return offset;
+	}
 	
+	/**
+	 * Set an offset of this selection
+	 * @param offset an offset of this selection
+	 */
+	public void setOffset(Vector3D offset) {
+		this.offset = offset;
+	}
+		
 }
