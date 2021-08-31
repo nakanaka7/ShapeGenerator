@@ -4,6 +4,7 @@ import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
@@ -57,6 +58,11 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 		}else {
 			data.putVector3D("pos4", blockPos.toVector3D());
 		}	
+	}
+	
+	@Override
+	public List<String> regionKeyList() {
+		return List.of("pos1", "pos2", "pos3", "pos4");
 	}
 
 	@Override

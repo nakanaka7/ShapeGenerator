@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
@@ -52,6 +53,11 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
+	public List<String> regionKeyList() {
+		return List.of("pos1", "pos2", "thickness");
+	}
+	
+	@Override
 	public String getDefaultOffsetKey() {
 		return "pos1";
 	}
@@ -100,5 +106,5 @@ public class LineSelectionStrategy implements SelectionStrategy {
 		double lbz = Math.min(pos1.getZ(), pos2.getZ()) - thickness;
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
-
+	
 }

@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
@@ -63,6 +64,11 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 			data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
 			data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
 		}
+	}
+	
+	@Override
+	public List<String> regionKeyList() {
+		return List.of("pos1", "pos2");
 	}
 
 	@Override

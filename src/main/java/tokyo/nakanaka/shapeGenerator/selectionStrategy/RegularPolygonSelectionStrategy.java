@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
@@ -69,6 +70,11 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 		data.putDouble("radius", radius);
 	}
 
+	@Override
+	public List<String> regionKeyList() {
+		return List.of("center", "radius", "side", "thickness", "axis");
+	}
+	
 	@Override
 	public String getDefaultOffsetKey() {
 		return "center";

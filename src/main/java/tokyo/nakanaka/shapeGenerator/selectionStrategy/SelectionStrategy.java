@@ -1,5 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
@@ -14,6 +15,11 @@ public interface SelectionStrategy {
 	String getRightClickDescription();
 	void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
+	/**
+	 * Returns a list of keys for the selection region. It does not contain "world" or "offset".
+	 * @return a list of keys for the selection region. It does not contain "world" or "offset".
+	 */
+	List<String> regionKeyList();
 	String getDefaultOffsetKey();
 	/**
 	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object

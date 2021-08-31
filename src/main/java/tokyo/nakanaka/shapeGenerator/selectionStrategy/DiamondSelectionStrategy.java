@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
@@ -68,6 +69,11 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 		}	
 	}
 
+	@Override
+	public List<String> regionKeyList() {
+		return List.of("center", "radius_x", "radius_y", "radius_z");
+	}
+	
 	@Override
 	public String getDefaultOffsetKey() {
 		return "center";

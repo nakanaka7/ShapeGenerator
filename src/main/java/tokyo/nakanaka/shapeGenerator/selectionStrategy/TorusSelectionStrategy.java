@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
@@ -77,6 +78,11 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 		}
 	}
 
+	@Override
+	public List<String> regionKeyList() {
+		return List.of("center", "radius_main", "radius_sub", "axis");
+	}
+	
 	@Override
 	public String getDefaultOffsetKey() {
 		return "center";
