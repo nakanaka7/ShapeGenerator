@@ -60,6 +60,14 @@ public class SelectionData {
 	}
 	
 	/**
+	 * Get the region data map which the selection data has
+	 * @return the region data map which the selection data has
+	 */
+	public LinkedHashMap<String, Object> getRegionDataMap() {
+		return this.regDataMap;
+	}
+	
+	/**
 	 * Set a region data to the selection data
 	 * @param regionData a region data to set to the selection data
 	 */
