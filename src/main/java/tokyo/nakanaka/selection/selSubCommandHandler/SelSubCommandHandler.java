@@ -2,9 +2,8 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -15,6 +14,13 @@ public interface SelSubCommandHandler {
 	/**
 	 * @return true if data changed else false
 	 */
-	boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args);
-	List<String> onTabComplete(UserData user, String[] args);
+	boolean onCommand(RegionBuildingData data, Player player, String[] subArgs);
+	/**
+	 * Returns a list for tab complete
+	 * @param user
+	 * @param player a player
+	 * @param subArgs arguments for this sub command
+	 * @return a list for tab complete
+	 */
+	List<String> onTabComplete(UserData user, Player player, String[] subArgs);
 }

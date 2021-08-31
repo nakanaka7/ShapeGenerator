@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -33,14 +32,14 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
-		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + "/sg sel side [number]");
+	public boolean onCommand(RegionBuildingData data, Player player, String[] subArgs) {
+		if(subArgs.length != 1) {
+			player.print(LogColor.RED + "Usage: " + "/sg sel side [number]");
 			return false;
 		}
-		Integer side = Integer.parseInt(args[0]);
+		Integer side = Integer.parseInt(subArgs[0]);
 		if(side < 3) {
-			logger.print(LogColor.RED + "The number must be larger than or equal to 3");
+			player.print(LogColor.RED + "The number must be larger than or equal to 3");
 			return false;
 		}
 		data.putInteger("side", side);
@@ -48,7 +47,7 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData user, Player player, String[] subArgs) {
 		return Arrays.asList("3", "4", "5", "6", "7", "8", "9", "10");
 	}
 	

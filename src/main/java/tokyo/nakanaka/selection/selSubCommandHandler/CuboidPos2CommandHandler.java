@@ -2,9 +2,8 @@ package tokyo.nakanaka.selection.selSubCommandHandler;
 
 import java.util.List;
 
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -29,8 +28,8 @@ public class CuboidPos2CommandHandler implements SelSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
-		boolean success = this.posHandler.onCommand(data, logger, playerPos, args);
+	public boolean onCommand(RegionBuildingData data, Player player, String[] args) {
+		boolean success = this.posHandler.onCommand(data, player, args);
 		if(!success) {
 			return false;
 		}
@@ -45,8 +44,8 @@ public class CuboidPos2CommandHandler implements SelSubCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
-		return this.posHandler.onTabComplete(user, args);
+	public List<String> onTabComplete(UserData user, Player player, String[] subArgs) {
+		return this.posHandler.onTabComplete(user, player, subArgs);
 	}
 	
 }

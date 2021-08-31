@@ -5,11 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -33,16 +32,16 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(RegionBuildingData data, Logger logger, BlockVector3D playerPos, String[] args) {
+	public boolean onCommand(RegionBuildingData data, Player player, String[] args) {
 		if(args.length != 1) {
-			logger.print(LogColor.RED + "Usage: " + "/sg sel axis <x|y|z>");
+			player.print(LogColor.RED + "Usage: " + "/sg sel axis <x|y|z>");
 			return false;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			logger.print(LogColor.RED + "Invalid axis");
+			player.print(LogColor.RED + "Invalid axis");
 			return false;
 		}
 		data.putString("axis", axis.toString().toLowerCase());
@@ -50,7 +49,7 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData user, String[] args) {
+	public List<String> onTabComplete(UserData user, Player player, String[] subArgs) {
 		return Arrays.asList("x", "y", "z");
 	}
 
