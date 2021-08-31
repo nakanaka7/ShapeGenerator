@@ -11,6 +11,7 @@ public interface RegionData {
 	 * Returns BoundRegion3D object from this data
 	 * @return BoundRegion3D object from this data
 	 */
+	@Deprecated
 	BoundRegion3D createBoundRegion3D();
 	/**
 	 * Returns a default offset
