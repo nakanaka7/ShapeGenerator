@@ -49,6 +49,7 @@ public enum SelectionShape {
 	 * Returns a selection from the selection data
 	 * @param selData a selection data
 	 * @return a selection from the selection data
+	 * @throws IllegalArgumentException if the selection data cannot create a selection
 	 */
 	public Selection createSelection(SelectionData selData) {
 		World world = selData.getWorld();
