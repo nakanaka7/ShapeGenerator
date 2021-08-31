@@ -46,4 +46,9 @@ public class SphereSelectionStrategy implements SelectionStrategy {
 		return List.of("center", "radius");
 	}
 
+	@Override
+	public String defaultOffsetKey() {
+		return "center";
+	}
+
 }

@@ -53,4 +53,9 @@ public class CuboidSelectionStrategy implements SelectionStrategy {
 		return List.of("pos1", "pos2");
 	}
 
+	@Override
+	public String defaultOffsetKey() {
+		return "pos1";
+	}
+
 }

@@ -33,5 +33,9 @@ public interface SelectionStrategy {
 	 * @return key list for region data. It does not contain "offset".
 	 */
 	List<String> regionDataKeyList();
+	/**
+	 * A key of the region data for the default offset
+	 */
+	String defaultOffsetKey();
 	
 }
