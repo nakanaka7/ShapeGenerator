@@ -3,8 +3,8 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -64,11 +64,13 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("pos1"),
-				new PosCommandHandler("pos2"),
-				new PosCommandHandler("pos3"),
-				new PosCommandHandler("pos4"));
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new PosCommandHandler("pos1"));
+		map.put("pos2", new PosCommandHandler("pos2"));
+		map.put("pos3", new PosCommandHandler("pos3"));
+		map.put("pos4", new PosCommandHandler("pos4"));
+		return map;
 	}
 
 	@Override

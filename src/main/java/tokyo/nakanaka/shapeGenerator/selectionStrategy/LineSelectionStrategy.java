@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -56,10 +56,12 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("pos1"),
-				new PosCommandHandler("pos2"),
-				new LengthCommandHandler("thickness"));
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new PosCommandHandler("pos1"));
+		map.put("pos2", new PosCommandHandler("pos2"));
+		map.put("thickness", new LengthCommandHandler("thickness"));
+		return map;
 	}
 
 	@Override

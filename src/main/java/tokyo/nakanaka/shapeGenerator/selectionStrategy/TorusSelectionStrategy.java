@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.logger.LogColor;
@@ -82,11 +82,13 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("center"),
-				new LengthCommandHandler("radius_main"),
-				new LengthCommandHandler("radius_sub"),
-				new AxisCommandHandler());
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandler> map = new HashMap<>();
+		map.put("center", new PosCommandHandler("center"));
+		map.put("radius_main", new LengthCommandHandler("radius_main"));
+		map.put("radius_sub", new LengthCommandHandler("radius_sub"));
+		map.put("axis", new AxisCommandHandler());
+		return map;
 	}
 
 	@Override

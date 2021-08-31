@@ -2,8 +2,8 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -63,8 +63,11 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 	}
 
 	@Override
-	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("center"), new LengthCommandHandler("radius"));
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandler> map = new HashMap<>();
+		map.put("center", new PosCommandHandler("center"));
+		map.put("radius", new LengthCommandHandler("radius"));
+		return map;
 	}
 
 	@Override

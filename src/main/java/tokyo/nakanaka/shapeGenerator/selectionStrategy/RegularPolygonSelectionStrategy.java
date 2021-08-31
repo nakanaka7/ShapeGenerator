@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.logger.LogColor;
@@ -74,12 +74,14 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		return Arrays.asList(new PosCommandHandler("center"),
-				new LengthCommandHandler("radius"),
-				new RegularPolygonSideCommandHandler(),
-				new LengthCommandHandler("thickness"),
-				new AxisCommandHandler());
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandler> map = new HashMap<>();
+		map.put("center", new PosCommandHandler("center"));
+		map.put("radius", new LengthCommandHandler("radius"));
+		map.put("side", new RegularPolygonSideCommandHandler());
+		map.put("thickness", new LengthCommandHandler("thickness"));
+		map.put("axis", new AxisCommandHandler());
+		return map;
 	}
 
 	@Override

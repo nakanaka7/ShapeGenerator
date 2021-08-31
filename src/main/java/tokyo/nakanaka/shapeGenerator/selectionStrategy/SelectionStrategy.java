@@ -1,6 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import java.util.List;
+import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -15,6 +15,10 @@ public interface SelectionStrategy {
 	void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	String getDefaultOffsetLabel();
-	List<SelSubCommandHandler> getSelSubCommandHandlers();
+	/**
+	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
+	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
+	 */
+	Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap();
 	BoundRegion3D buildBoundRegion3D(RegionBuildingData data);
 }

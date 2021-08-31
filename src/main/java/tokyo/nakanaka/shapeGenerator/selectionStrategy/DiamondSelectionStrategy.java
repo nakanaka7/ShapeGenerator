@@ -2,8 +2,8 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -74,13 +74,13 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public List<SelSubCommandHandler> getSelSubCommandHandlers() {
-		List<SelSubCommandHandler> list = new ArrayList<>();
-		list.add(new PosCommandHandler("center"));
-		list.add(new LengthCommandHandler("radius_x"));
-		list.add(new LengthCommandHandler("radius_y"));
-		list.add(new LengthCommandHandler("radius_z"));
-		return list;
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandler> map = new HashMap<>();
+		map.put("center", new PosCommandHandler("center"));
+		map.put("radius_x", new LengthCommandHandler("radius_x"));
+		map.put("radius_y", new LengthCommandHandler("radius_y"));
+		map.put("radius_z", new LengthCommandHandler("radius_z"));
+		return map;
 	}
 
 	@Override
