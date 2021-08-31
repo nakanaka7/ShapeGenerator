@@ -15,6 +15,7 @@ import tokyo.nakanaka.selection.selSubCommandHandler.AxisCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
@@ -100,6 +101,36 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 			throw new IllegalStateException();
 		}
 		Axis axis = Axis.valueOf(data.getString("axis").toUpperCase());
+		Region3D region = new Torus(radiusMain, radiusSub);
+		switch(axis) {
+		case X:
+			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
+			break;
+		case Y:
+			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(90));
+			break;
+		case Z:
+			break;
+		}
+		region = Region3Ds.shift(region, center);
+		double ubx = center.getX() + radiusMain + radiusSub;
+		double uby = center.getY() + radiusMain + radiusSub;
+		double ubz = center.getZ() + radiusMain + radiusSub;
+		double lbx = center.getX() - radiusMain - radiusSub;
+		double lby = center.getY() - radiusMain - radiusSub;
+		double lbz = center.getZ() - radiusMain - radiusSub;
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
+		Vector3D center = (Vector3D) regionDataMap.get("center");
+		Double radiusMain = (Double) regionDataMap.get("radius_main");
+		Double radiusSub = (Double) regionDataMap.get("radius_sub");
+		if(center == null || radiusMain == null || radiusSub == null) {
+			throw new IllegalStateException();
+		}
+		Axis axis = Axis.valueOf(((String)regionDataMap.get("axis")).toUpperCase());
 		Region3D region = new Torus(radiusMain, radiusSub);
 		switch(axis) {
 		case X:

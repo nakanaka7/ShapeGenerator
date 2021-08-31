@@ -21,4 +21,12 @@ public interface SelectionStrategy {
 	 */
 	Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap();
 	BoundRegion3D buildBoundRegion3D(RegionBuildingData data);
+	/**
+	 * Return a bound region from the map of region data
+	 * @param regionDataMap the map of region data
+	 * @return a bound region from the map of region data
+	 * @throws IllegalStateException if this cannot build a bound region from the map
+	 */
+	BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap);
+	
 }

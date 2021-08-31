@@ -15,6 +15,7 @@ import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
@@ -86,6 +87,27 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 		Vector3D pos2 = data.getVector3D("pos2");
 		Vector3D pos3 = data.getVector3D("pos3");
 		Double thickness = data.getDouble("thickness");
+		if(pos1 == null || pos2 == null || pos3 == null || thickness == null) {
+			throw new IllegalStateException();
+		}
+		Region3D region = new Triangle(pos1.getX(), pos1.getY(), pos1.getZ(),
+				pos2.getX(), pos2.getY(), pos2.getZ(),
+				pos3.getX(), pos3.getY(), pos3.getZ(), thickness);
+		double ubx = max(pos1.getX(), pos2.getX(), pos3.getX()) + thickness / 2;
+		double uby = max(pos1.getY(), pos2.getY(), pos3.getY()) + thickness / 2;
+		double ubz = max(pos1.getZ(), pos2.getZ(), pos3.getZ()) + thickness / 2;
+		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX()) - thickness / 2;
+		double lby = min(pos1.getY(), pos2.getY(), pos3.getY()) - thickness / 2;
+		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ()) - thickness / 2;
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
+		Vector3D pos1 = (Vector3D) regionDataMap.get("pos1");
+		Vector3D pos2 = (Vector3D) regionDataMap.get("pos2");
+		Vector3D pos3 = (Vector3D) regionDataMap.get("pos3");
+		Double thickness = (Double) regionDataMap.get("thickness");
 		if(pos1 == null || pos2 == null || pos3 == null || thickness == null) {
 			throw new IllegalStateException();
 		}
