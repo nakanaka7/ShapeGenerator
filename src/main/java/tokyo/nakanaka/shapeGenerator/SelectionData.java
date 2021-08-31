@@ -79,6 +79,7 @@ public class SelectionData {
 	 * Return the selection from this data
 	 * @return the selection from this data
 	 */
+	@Deprecated
 	public Selection createSelection() {
 		BoundRegion3D boundReg = this.regionData.createBoundRegion3D();
 		Vector3D offset = this.offset;
