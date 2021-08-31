@@ -14,7 +14,7 @@ public interface SelectionStrategy {
 	String getRightClickDescription();
 	void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
-	String getDefaultOffsetLabel();
+	String getDefaultOffsetKey();
 	/**
 	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
 	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object

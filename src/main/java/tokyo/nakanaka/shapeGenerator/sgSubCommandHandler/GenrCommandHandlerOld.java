@@ -49,7 +49,7 @@ public class GenrCommandHandlerOld implements SgSubCommandHandler{
 		}
 		Vector3D offset = selData.getOffset();
 		if(offset == null) {
-			offset = regionData.getVector3D(selStrategy.getDefaultOffsetLabel());
+			offset = regionData.getVector3D(selStrategy.getDefaultOffsetKey());
 		}
 		Selection sel = new Selection(selData.getWorld(), region, offset);
 		Block block;

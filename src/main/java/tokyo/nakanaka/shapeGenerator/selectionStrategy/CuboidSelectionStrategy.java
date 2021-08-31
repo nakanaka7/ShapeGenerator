@@ -65,7 +65,7 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 	}
 
 	@Override
-	public String getDefaultOffsetLabel() {
+	public String getDefaultOffsetKey() {
 		return "pos1";
 	}
 

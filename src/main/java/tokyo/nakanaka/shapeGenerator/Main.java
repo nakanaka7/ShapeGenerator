@@ -157,7 +157,7 @@ public class Main {
 				selStrategy.onRightClickBlock(regionData, player, pos);
 			}
 		}
-		new SelectionMessenger().printSelection(player, selShape, selData, selStrategy.getDefaultOffsetLabel());
+		new SelectionMessenger().printSelection(player, selShape, selData, selStrategy.getDefaultOffsetKey());
 	}
 	
 	/**

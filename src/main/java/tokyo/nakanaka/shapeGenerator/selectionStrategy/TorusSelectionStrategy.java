@@ -77,7 +77,7 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public String getDefaultOffsetLabel() {
+	public String getDefaultOffsetKey() {
 		return "center";
 	}
 
