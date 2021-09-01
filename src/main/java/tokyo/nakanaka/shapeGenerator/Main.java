@@ -36,9 +36,9 @@ public class Main {
 		this.selStrtgSource = selStrtgSource;
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandlerNew());
-		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandlerNew());
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandlerNew(blockIDListFactory));
+		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
+		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler());
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
 		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
@@ -78,7 +78,7 @@ public class Main {
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
 		}
-		UserData userData = this.prepareUserDataNew(player);
+		UserData userData = this.prepareUserData(player);
 		sgSubCmdHandler.onCommand(userData, player, subArgs);
 	}
 	
@@ -100,7 +100,7 @@ public class Main {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
-			UserData userData = this.prepareUserDataNew(player);
+			UserData userData = this.prepareUserData(player);
 			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
 		}
 		return List.of();
@@ -116,7 +116,7 @@ public class Main {
 		}
 		evt.cancel();
 		Player player = evt.getPlayer();
-		UserData userData = this.prepareUserDataNew(player);
+		UserData userData = this.prepareUserData(player);
 		userData.setLogger(player);
 		SelectionShapeNew selShape = userData.getSelectionShapeNew();
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
