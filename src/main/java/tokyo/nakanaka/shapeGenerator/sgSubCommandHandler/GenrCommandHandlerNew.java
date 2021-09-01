@@ -16,10 +16,10 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg genr" command
  */
-public class GenrCommandHandler implements SgSubCommandHandler {
+public class GenrCommandHandlerNew implements SgSubCommandHandler {
 	private BlockIDListFactory blockIDFactory;
 	
-	public GenrCommandHandler(BlockIDListFactory blockIDFactory) {
+	public GenrCommandHandlerNew(BlockIDListFactory blockIDFactory) {
 		this.blockIDFactory = blockIDFactory;
 	}
 
