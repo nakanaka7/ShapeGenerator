@@ -7,8 +7,6 @@ import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
@@ -22,20 +20,6 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		this.label = label;
 	}
 
-	@Override
-	public String getDescription() {
-		return "Set position of " + this.label;
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.OPTIONAL, "x", ""));
-		list.add(new ParameterHelp(ParameterType.OPTIONAL, "y", ""));
-		list.add(new ParameterHelp(ParameterType.OPTIONAL, "z", ""));
-		return list;
-	}
-	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 0 && args.length != 3) {

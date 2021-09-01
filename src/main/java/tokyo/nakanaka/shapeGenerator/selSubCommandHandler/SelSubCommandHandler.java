@@ -3,16 +3,14 @@ package tokyo.nakanaka.shapeGenerator.selSubCommandHandler;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public interface SelSubCommandHandler {
-	@Deprecated
-	String getDescription();
-	@Deprecated
-	List<ParameterHelp> getParameterHelpList();
 	/**
-	 * @return true if data changed else false
+	 * Handles "sg sel" subcommand
+	 * @param userData a user data 
+	 * @param player a player
+	 * @param subArgs arguments for this sub command
 	 */
 	void onCommand(UserData userData, Player player, String[] subArgs);
 	/**

@@ -1,32 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.selSubCommandHandler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class AxisCommandHandler implements SelSubCommandHandler{
 
-	@Override
-	public String getDescription() {
-		return "Set axis";
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, new String[] {"x", "y", "z"}, ""));
-		return list;
-	}
-	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] subArgs) {
 		if(subArgs.length != 1) {

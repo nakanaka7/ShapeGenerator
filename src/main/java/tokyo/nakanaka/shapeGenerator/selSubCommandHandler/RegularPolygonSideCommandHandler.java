@@ -1,31 +1,16 @@
 package tokyo.nakanaka.shapeGenerator.selSubCommandHandler;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
-	
-	@Override
-	public String getDescription() {
-		return "Set the side number, must be larger than or equal to 3";
-	}
-
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "number", ""));
-		return new ArrayList<>();
-	}
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] subArgs) {

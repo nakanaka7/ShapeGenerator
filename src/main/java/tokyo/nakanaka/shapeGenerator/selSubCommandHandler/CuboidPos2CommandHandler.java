@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -13,16 +12,6 @@ public class CuboidPos2CommandHandler implements SelSubCommandHandler{
 	private PosCommandHandler posHandler = new PosCommandHandler("pos2");
 	private LengthCalculator lengthCalc = new LengthCalculator();
 
-	@Override
-	public String getDescription() {
-		return this.posHandler.getDescription();
-	}
-	
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		return this.posHandler.getParameterHelpList();
-	}
-	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] subArgs) {
 		this.posHandler.onCommand(userData, player, subArgs);

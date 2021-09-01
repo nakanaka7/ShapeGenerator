@@ -1,13 +1,10 @@
 package tokyo.nakanaka.shapeGenerator.selSubCommandHandler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commadHelp.ParameterHelp;
-import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -19,18 +16,6 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 		this.label = label;
 	}
 
-	@Override
-	public String getDescription() {
-		return "Set " + this.label + " (positive double value)";
-	}
-
-	@Override
-	public List<ParameterHelp> getParameterHelpList() {
-		List<ParameterHelp> list = new ArrayList<>();
-		list.add(new ParameterHelp(ParameterType.REQUIRED, "length", ""));
-		return new ArrayList<>();
-	}
-	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] subArgs) {
 		if(subArgs.length != 1) {
