@@ -7,7 +7,9 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
@@ -44,6 +46,21 @@ public interface SelectionStrategy {
 	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
 	 */
 	Map<String, SelSubCommandHandler> selSubCommandHandlerMap();
+	
+	/**
+	 * Returns a selection from the selection data
+	 * @param selData a selection data
+	 * @return a selection from the selection data
+	 * @throws IllegalArgumentException if the selection data cannot create a selection
+	 */
+	default Selection buildSelection(SelectionData selData) {
+		World world = selData.getWorld();
+		Map<String, Object> regDataMap = selData.getRegionDataMap();
+		BoundRegion3D boundReg = this.buildBoundRegion3D(regDataMap);
+		Vector3D offset = selData.getOffset();
+		return new Selection(world, boundReg, offset);
+	}
+	
 	@Deprecated
 	BoundRegion3D buildBoundRegion3D(RegionBuildingData data);
 	/**
