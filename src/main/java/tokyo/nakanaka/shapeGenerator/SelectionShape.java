@@ -41,7 +41,7 @@ public enum SelectionShape {
 	 * Get SelSubCommandHandlerMap
 	 * @return SelSubCommandHandlerMap
 	 */
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		return this.selStrtg.selSubCommandHandlerMap();
 	}
 	

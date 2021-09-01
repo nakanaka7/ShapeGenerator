@@ -19,7 +19,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();
-		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
+		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.selSubCommandHandlerMap();
 		if(args.length == 0) {
 			player.print(LogColor.RED + "Usage:" + new SelHelp().getUsage());
 			player.print(LogColor.RED + "See help");
@@ -41,7 +41,7 @@ public class SelCommandHandler implements SgSubCommandHandler {
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();
-		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
+		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.selSubCommandHandlerMap();
 		String subLabel = args[0];
 		if(args.length == 1) {
 			return selSubCmdHandlerMap.keySet().stream()
