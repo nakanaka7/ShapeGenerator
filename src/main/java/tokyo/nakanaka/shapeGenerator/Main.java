@@ -78,7 +78,7 @@ public class Main {
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
 		}
-		UserData userData = this.prepareUserData(player);
+		UserData userData = this.prepareUserDataNew(player);
 		sgSubCmdHandler.onCommand(userData, player, subArgs);
 	}
 	
@@ -100,7 +100,7 @@ public class Main {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
-			UserData userData = this.prepareUserData(player);
+			UserData userData = this.prepareUserDataNew(player);
 			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
 		}
 		return List.of();
@@ -116,7 +116,7 @@ public class Main {
 		}
 		evt.cancel();
 		Player player = evt.getPlayer();
-		UserData userData = this.prepareUserData(player);
+		UserData userData = this.prepareUserDataNew(player);
 		userData.setLogger(player);
 		SelectionShapeNew selShape = userData.getSelectionShapeNew();
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
@@ -146,7 +146,7 @@ public class Main {
 	 * @param player player
 	 * @return UserData which the user has
 	 */
-	private UserData prepareUserData(Player player) {
+	private UserData prepareUserDataNew(Player player) {
 		User user = new User(player.getUniqueID());
 		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
@@ -154,6 +154,25 @@ public class Main {
 			SelectionShapeNew defaultShape = SelectionShapeNew.CUBOID;
 			userData.setSelectionShapeNew(defaultShape);
 			SelectionData selData = defaultShape.newSelectionData(player.getEntityPosition().world());
+			userData.setSelectionData(selData);
+			this.userDataMap.put(user, userData);
+		}
+		return userData;
+	}
+	
+	/**
+	 * Get UserData. If there is a user data for the player, return it, otherwise create new one and return it.
+	 * @param player player
+	 * @return UserData which the user has
+	 */
+	private UserData prepareUserData(Player player) {
+		User user = new User(player.getUniqueID());
+		UserData userData = this.userDataMap.get(user);
+		if(userData == null) {
+			userData = new UserData();
+			SelectionShape defaultShape = SelectionShape.CUBOID;
+			SelectionData selData = defaultShape.newSelectionData(player.getEntityPosition().world());
+			userData.setSelectionShape(defaultShape);
 			userData.setSelectionData(selData);
 			this.userDataMap.put(user, userData);
 		}
