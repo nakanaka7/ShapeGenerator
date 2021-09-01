@@ -76,25 +76,6 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
-		Vector3D pos1 = data.getVector3D("pos1");
-		Vector3D pos2 = data.getVector3D("pos2");
-		Vector3D pos3 = data.getVector3D("pos3");
-		Vector3D pos4 = data.getVector3D("pos4");
-		Region3D region = new Tetrahedron(pos1.getX(), pos1.getY(), pos1.getZ(),
-				pos2.getX(), pos2.getY(), pos2.getZ(),
-				pos3.getX(), pos3.getY(), pos3.getZ(),
-				pos4.getX(), pos4.getY(), pos4.getZ());
-		double ubx = max(pos1.getX(), pos2.getX(), pos3.getX(), pos4.getX());
-		double uby = max(pos1.getY(), pos2.getY(), pos3.getY(), pos4.getY());
-		double ubz = max(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
-		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX(), pos4.getX());
-		double lby = min(pos1.getY(), pos2.getY(), pos3.getY(), pos4.getY());
-		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
-		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-	}
-
-	@Override
 	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
 		Vector3D pos1 = (Vector3D) regionDataMap.get("pos1");
 		Vector3D pos2 = (Vector3D) regionDataMap.get("pos2");

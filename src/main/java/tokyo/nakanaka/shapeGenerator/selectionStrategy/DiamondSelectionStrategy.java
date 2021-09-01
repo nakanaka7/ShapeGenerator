@@ -79,26 +79,6 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(RegionBuildingData data) {
-		Vector3D center = data.getVector3D("center");
-		Double radiusX = data.getDouble("radius_x");
-		Double radiusY = data.getDouble("radius_y");
-		Double radiusZ = data.getDouble("radius_z");
-		if(center == null || radiusX == null || radiusY == null || radiusZ == null) {
-			throw new IllegalStateException();
-		}
-		Region3D region = new Diamond(radiusX, radiusY, radiusZ);
-		region = Region3Ds.shift(region, center);
-		double ubx = center.getX() + radiusX;
-		double uby = center.getY() + radiusY;
-		double ubz = center.getZ() + radiusZ;
-		double lbx = center.getX() - radiusX;
-		double lby = center.getY() - radiusY;
-		double lbz = center.getZ() - radiusZ;
-		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-	}
-
-	@Override
 	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
 		Vector3D center = (Vector3D) regionDataMap.get("center");
 		Double radiusX = (Double) regionDataMap.get("radius_x");

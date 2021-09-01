@@ -92,36 +92,6 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
-		Vector3D center = data.getVector3D("center");
-		Double radiusMain = data.getDouble("radius_main");
-		Double radiusSub = data.getDouble("radius_sub");
-		if(center == null || radiusMain == null || radiusSub == null) {
-			throw new IllegalStateException();
-		}
-		Axis axis = Axis.valueOf(data.getString("axis").toUpperCase());
-		Region3D region = new Torus(radiusMain, radiusSub);
-		switch(axis) {
-		case X:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
-			break;
-		case Y:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(90));
-			break;
-		case Z:
-			break;
-		}
-		region = Region3Ds.shift(region, center);
-		double ubx = center.getX() + radiusMain + radiusSub;
-		double uby = center.getY() + radiusMain + radiusSub;
-		double ubz = center.getZ() + radiusMain + radiusSub;
-		double lbx = center.getX() - radiusMain - radiusSub;
-		double lby = center.getY() - radiusMain - radiusSub;
-		double lbz = center.getZ() - radiusMain - radiusSub;
-		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-	}
-
-	@Override
 	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
 		Vector3D center = (Vector3D) regionDataMap.get("center");
 		Double radiusMain = (Double) regionDataMap.get("radius_main");

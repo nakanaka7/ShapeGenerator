@@ -62,8 +62,6 @@ public interface SelectionStrategy {
 		return new Selection(world, boundReg, offset);
 	}
 	
-	@Deprecated
-	BoundRegion3D buildBoundRegion3D(RegionBuildingData data);
 	/**
 	 * Return a bound region from the map of region data
 	 * @param regionDataMap the map of region data

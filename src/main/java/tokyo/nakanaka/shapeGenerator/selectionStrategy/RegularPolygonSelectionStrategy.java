@@ -83,50 +83,6 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public CuboidBoundRegion buildBoundRegion3D(RegionBuildingData data) {
-		Vector3D center = data.getVector3D("center");
-		Double radius = data.getDouble("radius");
-		Integer side = data.getInteger("side");
-		Double thickness = data.getDouble("thickness");
-		if(center == null || radius == null || side == null || thickness == null) {
-			throw new IllegalStateException();
-		}
-		Axis axis = Axis.valueOf(data.getString("axis").toUpperCase());
-		Region2D regularPoly = new RegularPolygon(side);
-		Region3D region = new ThickenedRegion3D(regularPoly, thickness);
-		region = Region3Ds.linearTransform(region, LinearTransformation.ofXScale(radius));
-		region = Region3Ds.linearTransform(region, LinearTransformation.ofYScale(radius));
-		double ubx = radius;
-		double uby = radius;
-		double ubz = radius;
-		double lbx = - radius;
-		double lby = - radius;
-		double lbz = - radius;
-		switch(axis) {
-		case X:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(90));
-			ubx = thickness/ 2;
-			lbx = - thickness/ 2;
-			break;
-		case Y:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(-90));
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(-90));
-			uby = thickness/ 2;
-			lby = - thickness/ 2;
-			break;
-		case Z:
-			ubz = thickness/ 2;
-			lbz = - thickness/ 2;
-			break;
-		default:
-			break;
-		}
-		CuboidBoundRegion bound = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return bound.createShiftedRegion(center);
-	}
-
-	@Override
 	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
 		Vector3D center = (Vector3D) regionDataMap.get("center");
 		Double radius = (Double) regionDataMap.get("radius");
