@@ -11,15 +11,13 @@ import tokyo.nakanaka.bukkit.BukkitFunctions;
 import tokyo.nakanaka.bukkit.BukkitScheduler;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.shapeGenerator.Main;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategySource;
 
 public class ShapeGeneratorPlugin extends JavaPlugin {
 	private Main main;
 	
 	@Override
 	public void onEnable() {
-		SelectionStrategySource selStrtgSource = new SelectionStrategySource();
-		this.main = new Main(new BukkitBlockIDListFactory(), selStrtgSource);
+		this.main = new Main(new BukkitBlockIDListFactory());
 		Scheduler scheduler = new BukkitScheduler(this);
 		Listener listener = new BukkitClickBlockEventListener(this.main, scheduler);
 		this.getServer().getPluginManager().registerEvents(listener, this);
