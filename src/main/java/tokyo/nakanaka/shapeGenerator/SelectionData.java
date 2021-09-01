@@ -27,10 +27,12 @@ public class SelectionData {
 		this.regionData = regionData;
 	}
 	
-	public SelectionData(World world, LinkedHashMap<String, Object> regDataMap, String defaultOffsetKey) {
+	public SelectionData(World world, String defaultOffsetKey, String... regionDataKeys) {
 		this.world = world;
-		this.regDataMap = regDataMap;
 		this.defaultOffsetKey = defaultOffsetKey;
+		for(String key : regionDataKeys) {
+			this.regDataMap.put(key, null);
+		}
 	}
 
 	/**
