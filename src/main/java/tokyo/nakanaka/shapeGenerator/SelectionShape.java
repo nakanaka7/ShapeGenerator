@@ -1,6 +1,5 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
@@ -51,9 +50,7 @@ public enum SelectionShape {
 	 * @return SelectionData
 	 */
 	public SelectionData newSelectionData(World world) {
-		List<String> keyList = this.selStrtg.regionKeyList();
-		String[] regionDataKeys = keyList.toArray(new String[keyList.size()]);
-		return new SelectionData(world, this.selStrtg.defaultOffsetKey(), regionDataKeys);
+		return this.selStrtg.newSelectionData(world);
 	}
 	
 	/**
