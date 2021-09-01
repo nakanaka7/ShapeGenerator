@@ -5,8 +5,8 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelSubCommandHandlerNew;
 
 /**
  * Handles "/sg sel radius"

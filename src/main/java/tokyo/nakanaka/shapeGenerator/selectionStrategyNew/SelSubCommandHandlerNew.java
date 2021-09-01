@@ -1,8 +1,9 @@
-package tokyo.nakanaka.shapeGenerator;
+package tokyo.nakanaka.shapeGenerator.selectionStrategyNew;
 
 import java.util.List;
 
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
 
 /**
  * Handles "/sg sel" subcommand
