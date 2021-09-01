@@ -7,7 +7,9 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public interface SelSubCommandHandler {
+	@Deprecated
 	String getDescription();
+	@Deprecated
 	List<ParameterHelp> getParameterHelpList();
 	/**
 	 * @return true if data changed else false
