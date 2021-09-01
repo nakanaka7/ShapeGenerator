@@ -7,6 +7,7 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
@@ -18,7 +19,8 @@ public class UserData {
 	private int x;
 	private int y;
 	private int z;
-	private SelectionShapeNew shape = SelectionShapeNew.CUBOID;
+	private SelectionShapeNew shapeNew = SelectionShapeNew.CUBOID;
+	private SelectionShape shape;
 	private SelectionBuildingData selBuildData;
 	private SelectionData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
@@ -90,13 +92,29 @@ public class UserData {
 	public void setZ(int z) {
 		this.z = z;
 	}
-
-	public SelectionShapeNew getSelectionShape() {
+	
+	/**
+	 * Returns a selection shape for the user
+	 * @return a selection shape for the user
+	 */
+	public SelectionShape getShape() {
 		return shape;
 	}
 
-	public void setSelectionShape(SelectionShapeNew shape) {
+	/**
+	 * Set a selection shape for the user
+	 * @param shape a selection shape
+	 */
+	public void setShape(SelectionShape shape) {
 		this.shape = shape;
+	}
+
+	public SelectionShapeNew getSelectionShape() {
+		return shapeNew;
+	}
+
+	public void setSelectionShape(SelectionShapeNew shape) {
+		this.shapeNew = shape;
 	}
 
 	public SelectionBuildingData getSelectionBuildingData() {
