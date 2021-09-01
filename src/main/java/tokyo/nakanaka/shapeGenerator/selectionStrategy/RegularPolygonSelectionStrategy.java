@@ -2,7 +2,6 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
@@ -85,16 +84,6 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 		Vector3D pos = blockPos.toVector3D();
 		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
 		data.putDouble("radius", radius);
-	}
-
-	@Override
-	public List<String> regionKeyList() {
-		return List.of("center", "radius", "side", "thickness", "axis");
-	}
-	
-	@Override
-	public String defaultOffsetKey() {
-		return "center";
 	}
 
 	@Override

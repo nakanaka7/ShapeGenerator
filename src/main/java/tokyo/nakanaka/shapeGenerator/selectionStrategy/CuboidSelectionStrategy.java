@@ -78,16 +78,6 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 	}
 	
 	@Override
-	public List<String> regionKeyList() {
-		return List.of("pos1", "pos2");
-	}
-
-	@Override
-	public String defaultOffsetKey() {
-		return "pos1";
-	}
-
-	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String,  SelSubCommandHandler> map = new HashMap<>();
 		map.put("pos1", new CuboidPos1CommandHandler());

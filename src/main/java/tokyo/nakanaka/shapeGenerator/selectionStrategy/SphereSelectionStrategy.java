@@ -4,7 +4,6 @@ import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
@@ -71,17 +70,7 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
 		data.putDouble("radius", radius);
 	}
-
-	@Override
-	public List<String> regionKeyList() {
-		return List.of("center", "radius");
-	}
 	
-	@Override
-	public String defaultOffsetKey() {
-		return "center";
-	}
-
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SelSubCommandHandler> map = new HashMap<>();

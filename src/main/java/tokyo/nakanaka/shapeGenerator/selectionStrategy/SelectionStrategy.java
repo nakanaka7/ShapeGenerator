@@ -1,6 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
-import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
@@ -34,14 +33,6 @@ public interface SelectionStrategy {
 	 * @param blockPos the clicked block position 
 	 */
 	void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos);
-	/**
-	 * Returns a list of keys for the selection region. It does not contain "world" or "offset".
-	 * @return a list of keys for the selection region. It does not contain "world" or "offset".
-	 */
-	@Deprecated
-	List<String> regionKeyList();
-	@Deprecated
-	String defaultOffsetKey();
 	/**
 	 * Returns new selection data for the selection shape
 	 * @param world a world

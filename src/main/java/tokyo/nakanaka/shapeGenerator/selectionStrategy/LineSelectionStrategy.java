@@ -1,7 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
@@ -60,16 +59,6 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D pos2 = blockPos.toVector3D();
 		data.putVector3D("pos2", pos2);
-	}
-
-	@Override
-	public List<String> regionKeyList() {
-		return List.of("pos1", "pos2", "thickness");
-	}
-	
-	@Override
-	public String defaultOffsetKey() {
-		return "pos1";
 	}
 
 	@Override
