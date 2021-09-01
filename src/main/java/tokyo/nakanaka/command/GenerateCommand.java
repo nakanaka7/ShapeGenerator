@@ -8,7 +8,7 @@ import java.util.Set;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.selection.Selection;
+import tokyo.nakanaka.shapeGenerator.Selection;
 
 public class GenerateCommand implements UndoableCommand{
 	private Selection sel;

@@ -1,6 +1,6 @@
 package tokyo.nakanaka.command;
 
-import tokyo.nakanaka.selection.Selection;
+import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.LogicalConjunctRegion3D;

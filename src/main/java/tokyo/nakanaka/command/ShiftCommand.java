@@ -1,7 +1,7 @@
 package tokyo.nakanaka.command;
 
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.Selection;
+import tokyo.nakanaka.shapeGenerator.Selection;
 
 public class ShiftCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;

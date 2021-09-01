@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection;
+package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;

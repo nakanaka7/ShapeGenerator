@@ -8,8 +8,8 @@ import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.command.GenerateCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
-import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.shapeGenerator.BlockIDListFactory;
+import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.commandHelp.GenrHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 

@@ -4,7 +4,6 @@ import java.util.Map;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelSubCommandHandlerNew;

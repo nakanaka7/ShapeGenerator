@@ -1,7 +1,7 @@
 package tokyo.nakanaka.command;
 
 import tokyo.nakanaka.Axis;
-import tokyo.nakanaka.selection.Selection;
+import tokyo.nakanaka.shapeGenerator.Selection;
 
 public class ScaleCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;
