@@ -11,6 +11,9 @@ import tokyo.nakanaka.shapeGenerator.commandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
+/**
+ * Handles "/sg sel" command
+ */
 public class SelCommandHandler implements SgSubCommandHandler {
 
 	@Override
