@@ -23,11 +23,6 @@ public class PosCommandHandler implements SelSubCommandHandler {
 	}
 
 	@Override
-	public String getLabel() {
-		return this.label;
-	}
-
-	@Override
 	public String getDescription() {
 		return "Set position of " + this.label;
 	}

@@ -20,11 +20,6 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 	}
 
 	@Override
-	public String getLabel() {
-		return this.label;
-	}
-	
-	@Override
 	public String getDescription() {
 		return "Set " + this.label + " (positive double value)";
 	}

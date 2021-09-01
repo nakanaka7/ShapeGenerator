@@ -14,11 +14,6 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 	private LengthCalculator lengthCalc = new LengthCalculator();
 
 	@Override
-	public String getLabel() {
-		return this.posHandler.getLabel();
-	}
-	
-	@Override
 	public String getDescription() {
 		return this.posHandler.getDescription();
 	}

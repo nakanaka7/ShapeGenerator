@@ -7,7 +7,6 @@ import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public interface SelSubCommandHandler {
-	String getLabel();
 	String getDescription();
 	List<ParameterHelp> getParameterHelpList();
 	/**

@@ -16,11 +16,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class AxisCommandHandler implements SelSubCommandHandler{
 
 	@Override
-	public String getLabel() {
-		return "axis";
-	}
-	
-	@Override
 	public String getDescription() {
 		return "Set axis";
 	}

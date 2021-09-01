@@ -16,11 +16,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	
 	@Override
-	public String getLabel() {
-		return "side";
-	}
-	
-	@Override
 	public String getDescription() {
 		return "Set the side number, must be larger than or equal to 3";
 	}
