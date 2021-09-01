@@ -3,6 +3,7 @@ package tokyo.nakanaka.selection;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
 
+@Deprecated
 public class SelectionBuildingData {
 	private World world;
 	private RegionBuildingData regionData;

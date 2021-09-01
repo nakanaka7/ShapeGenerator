@@ -7,6 +7,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.math.Vector3D;
 
+@Deprecated
 public class RegionBuildingData {
 	private List<String> labelList;
 	private Map<String, DataType> typeMap;
