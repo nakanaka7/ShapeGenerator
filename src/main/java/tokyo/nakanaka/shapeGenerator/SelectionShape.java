@@ -5,9 +5,7 @@ import java.util.Map;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.Selection;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.CuboidSelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.DiamondSelectionStrategy;
@@ -60,11 +58,7 @@ public enum SelectionShape {
 	 * @throws IllegalArgumentException if the selection data cannot create a selection
 	 */
 	public Selection buildSelection(SelectionData selData) {
-		World world = selData.getWorld();
-		Map<String, Object> regDataMap = selData.getRegionDataMap();
-		BoundRegion3D boundReg = this.selStrtg.buildBoundRegion3D(regDataMap);
-		Vector3D offset = selData.getOffset();
-		return new Selection(world, boundReg, offset);
+		return this.selStrtg.buildSelection(selData);
 	}
 
 	/**
