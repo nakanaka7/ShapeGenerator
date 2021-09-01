@@ -146,25 +146,6 @@ public class Main {
 	 * @param player player
 	 * @return UserData which the user has
 	 */
-	private UserData prepareUserDataNew(Player player) {
-		User user = new User(player.getUniqueID());
-		UserData userData = this.userDataMap.get(user);
-		if(userData == null) {
-			userData = new UserData();
-			SelectionShapeNew defaultShape = SelectionShapeNew.CUBOID;
-			userData.setSelectionShapeNew(defaultShape);
-			SelectionData selData = defaultShape.newSelectionData(player.getEntityPosition().world());
-			userData.setSelectionData(selData);
-			this.userDataMap.put(user, userData);
-		}
-		return userData;
-	}
-	
-	/**
-	 * Get UserData. If there is a user data for the player, return it, otherwise create new one and return it.
-	 * @param player player
-	 * @return UserData which the user has
-	 */
 	private UserData prepareUserData(Player player) {
 		User user = new User(player.getUniqueID());
 		UserData userData = this.userDataMap.get(user);
