@@ -39,7 +39,7 @@ public class GenrCommandHandlerOld implements SgSubCommandHandler{
 		}
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
 		RegionBuildingData regionData = selData.getRegionData();
-		SelectionStrategy selStrategy = this.selStraSource.get(userData.getSelectionShape());
+		SelectionStrategy selStrategy = this.selStraSource.get(userData.getSelectionShapeNew());
 		BoundRegion3D region;
 		try {
 			region = selStrategy.buildBoundRegion3D(regionData);

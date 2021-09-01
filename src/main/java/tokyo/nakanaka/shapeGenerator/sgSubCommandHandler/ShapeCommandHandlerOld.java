@@ -48,12 +48,12 @@ public class ShapeCommandHandlerOld implements SgSubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Unsupported shape");
 			return;
 		}	
-		SelectionShapeNew original = userData.getSelectionShape();
+		SelectionShapeNew original = userData.getSelectionShapeNew();
 		if(shape == original) {
 			player.print(LogDesignColor.ERROR + "Already set : Nothing to change");
 			return;
 		}else {
-			userData.setSelectionShape(shape);
+			userData.setSelectionShapeNew(shape);
 			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
 			SelectionBuildingData selData = new SelectionBuildingData(userData.getWorld(), regionData);
 			userData.setSelectionBuildingData(selData);

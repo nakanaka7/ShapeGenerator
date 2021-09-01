@@ -28,9 +28,9 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 			player.print(LogColor.RED + "Invalid shape");
 			return;
 		}
-		SelectionShapeNew original = userData.getSelectionShape();
+		SelectionShapeNew original = userData.getSelectionShapeNew();
 		if(shape != original) {
-			userData.setSelectionShape(shape);
+			userData.setSelectionShapeNew(shape);
 			SelectionData selData = shape.newSelectionData(player.getEntityPosition().world());
 			userData.setSelectionData(selData);
 		}

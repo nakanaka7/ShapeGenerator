@@ -97,7 +97,7 @@ public class UserData {
 	 * Returns a selection shape for the user
 	 * @return a selection shape for the user
 	 */
-	public SelectionShape getShape() {
+	public SelectionShape getSelectionShape() {
 		return shape;
 	}
 
@@ -105,15 +105,15 @@ public class UserData {
 	 * Set a selection shape for the user
 	 * @param shape a selection shape
 	 */
-	public void setShape(SelectionShape shape) {
+	public void setSelectionShape(SelectionShape shape) {
 		this.shape = shape;
 	}
 
-	public SelectionShapeNew getSelectionShape() {
+	public SelectionShapeNew getSelectionShapeNew() {
 		return shapeNew;
 	}
 
-	public void setSelectionShape(SelectionShapeNew shape) {
+	public void setSelectionShapeNew(SelectionShapeNew shape) {
 		this.shapeNew = shape;
 	}
 

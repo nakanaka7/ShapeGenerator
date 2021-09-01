@@ -30,7 +30,7 @@ public class ResetCommandHandler implements SgSubCommandHandler {
 			return;
 		}
 		World world = userData.getWorld();
-		SelectionShapeNew shape = userData.getSelectionShape();
+		SelectionShapeNew shape = userData.getSelectionShapeNew();
 		SelectionStrategy strategy = this.selStraSource.get(shape);
 		SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
 		userData.setSelectionBuildingData(newSelData);

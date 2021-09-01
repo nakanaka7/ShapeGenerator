@@ -25,7 +25,7 @@ public class UserFactory {
 	
 	public UserData createHumanUser(UUID uid, World world) {
 		UserData user = new UserData(uid);
-		user.setSelectionShape(this.defaultShape);
+		user.setSelectionShapeNew(this.defaultShape);
 		RegionBuildingData regionData = this.strategyMap.get(this.defaultShape).newRegionBuildingData();
 		SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
 		user.setSelectionBuildingData(selData);
@@ -38,7 +38,7 @@ public class UserFactory {
 		user.setX(pos.getX());
 		user.setY(pos.getY());
 		user.setZ(pos.getZ());
-		user.setSelectionShape(this.defaultShape);
+		user.setSelectionShapeNew(this.defaultShape);
 		RegionBuildingData regionData = this.strategyMap.get(this.defaultShape).newRegionBuildingData();
 		SelectionBuildingData selData = new SelectionBuildingData(world, regionData);
 		user.setSelectionBuildingData(selData);

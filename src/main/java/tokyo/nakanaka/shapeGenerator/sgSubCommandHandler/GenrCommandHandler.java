@@ -38,7 +38,7 @@ public class GenrCommandHandler implements SgSubCommandHandler {
 		}
 		Selection sel;
 		try {
-			sel = userData.getSelectionShape().createSelection(userData.getSelectionData());
+			sel = userData.getSelectionShapeNew().createSelection(userData.getSelectionData());
 		}catch(IllegalArgumentException e) {
 			player.print(LogColor.RED + "Incomplete selection");
 			return;
