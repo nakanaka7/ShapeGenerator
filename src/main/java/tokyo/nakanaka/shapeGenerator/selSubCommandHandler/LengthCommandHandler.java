@@ -37,21 +37,21 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(UserData userData, Player player, String[] subArgs) {
+	public void onCommand(UserData userData, Player player, String[] subArgs) {
 		if(subArgs.length != 1) {
 			player.print(LogColor.RED + "Usage: " + "/sg sel " + this.label + "<length>");
-			return false;
+			return;
 		}
 		double value;
 		try {
 			value = Double.parseDouble(subArgs[0]);
 		}catch(IllegalArgumentException e) {
 			player.print(LogColor.RED + "Can not parse double");
-			return true;
+			return;
 		}
 		if(value <= 0) {
 			player.print(LogColor.RED + "The value must be larger than 0");
-			return false;
+			return;
 		}
 		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
 		regDataMap.put(this.label, value);
@@ -59,7 +59,6 @@ public class LengthCommandHandler implements SelSubCommandHandler {
 		for(String line : lines) {
 			player.print(line);
 		}
-		return true;
 	}
 
 	@Override

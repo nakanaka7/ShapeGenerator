@@ -33,15 +33,15 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(UserData userData, Player player, String[] subArgs) {
+	public void onCommand(UserData userData, Player player, String[] subArgs) {
 		if(subArgs.length != 1) {
 			player.print(LogColor.RED + "Usage: " + "/sg sel side [number]");
-			return false;
+			return;
 		}
 		Integer side = Integer.parseInt(subArgs[0]);
 		if(side < 3) {
 			player.print(LogColor.RED + "The number must be larger than or equal to 3");
-			return false;
+			return;
 		}
 		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
 		regDataMap.put("side", side);
@@ -49,7 +49,6 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 		for(String line : lines) {
 			player.print(line);
 		}
-		return true;
 	}
 
 	@Override

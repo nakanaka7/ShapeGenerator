@@ -13,7 +13,7 @@ public interface SelSubCommandHandler {
 	/**
 	 * @return true if data changed else false
 	 */
-	boolean onCommand(UserData userData, Player player, String[] subArgs);
+	void onCommand(UserData userData, Player player, String[] subArgs);
 	/**
 	 * Returns a list for tab complete
 	 * @param userData a user data

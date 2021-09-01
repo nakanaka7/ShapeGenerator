@@ -33,17 +33,17 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(UserData userData, Player player, String[] subArgs) {
+	public void onCommand(UserData userData, Player player, String[] subArgs) {
 		if(subArgs.length != 1) {
 			player.print(LogColor.RED + "Usage: " + "/sg sel axis <x|y|z>");
-			return false;
+			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(subArgs[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			player.print(LogColor.RED + "Invalid axis");
-			return false;
+			return;
 		}
 		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
 		regDataMap.put("axis", axis.toString().toLowerCase());
@@ -51,7 +51,6 @@ public class AxisCommandHandler implements SelSubCommandHandler{
 		for(String line : lines) {
 			player.print(line);
 		}
-		return true;
 	}
 
 	@Override

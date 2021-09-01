@@ -29,11 +29,8 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 	}
 	
 	@Override
-	public boolean onCommand(UserData userData, Player player, String[] subArgs) {
-		boolean success = this.posHandler.onCommand(userData, player, subArgs);
-		if(!success) {
-			return false;
-		}
+	public void onCommand(UserData userData, Player player, String[] subArgs) {
+		this.posHandler.onCommand(userData, player, subArgs);
 		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
 		Vector3D pos1 = (Vector3D) regDataMap.get("pos1");
 		Vector3D pos2 = (Vector3D) regDataMap.get("pos2");
@@ -46,7 +43,6 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 		for(String line : lines) {
 			player.print(line);
 		}
-		return true;
 	}
 
 	@Override

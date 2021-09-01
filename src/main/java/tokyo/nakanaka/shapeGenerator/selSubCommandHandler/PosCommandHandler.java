@@ -42,11 +42,11 @@ public class PosCommandHandler implements SelSubCommandHandler {
 	}
 	
 	@Override
-	public boolean onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 0 && args.length != 3) {
 			player.print(LogColor.RED + "Usage: " + "/sg sel " + this.label + "[x] [y] [z]");
 			player.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
-			return false;
+			return;
 		}
 		Vector3D pos;
 		BlockPosition playerPos = player.getBlockPosition();
@@ -63,11 +63,11 @@ public class PosCommandHandler implements SelSubCommandHandler {
 				z = coordArg.onParsingDouble(args[2], playerPos.z());
 			}catch(IllegalArgumentException e) {
 				player.print(LogColor.RED + "Can not parse the coordinates");
-				return false;
+				return;
 			}
 			pos = new Vector3D(x, y, z);
 		}else {
-			return false;
+			return;
 		}
 		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
 		regDataMap.put(this.label, pos);
@@ -75,7 +75,6 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		for(String line : lines) {
 			player.print(line);
 		}
-		return true;
 	}
 	
 	@Override
