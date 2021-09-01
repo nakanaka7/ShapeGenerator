@@ -11,14 +11,14 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
-import tokyo.nakanaka.selection.selSubCommandHandler.LengthCommandHandler;
-import tokyo.nakanaka.selection.selSubCommandHandler.PosCommandHandler;
-import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Diamond;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
 public class DiamondSelectionStrategy implements SelectionStrategy {
 

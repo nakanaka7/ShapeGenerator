@@ -1,4 +1,4 @@
-package tokyo.nakanaka.selection.selSubCommandHandler;
+package tokyo.nakanaka.shapeGenerator.selSubCommandHandler;
 
 import tokyo.nakanaka.math.Vector3D;
 

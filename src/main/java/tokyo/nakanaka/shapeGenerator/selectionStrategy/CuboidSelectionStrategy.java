@@ -9,14 +9,14 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
-import tokyo.nakanaka.selection.selSubCommandHandler.CuboidPos1CommandHandler;
-import tokyo.nakanaka.selection.selSubCommandHandler.CuboidPos2CommandHandler;
-import tokyo.nakanaka.selection.selSubCommandHandler.LengthCalculator;
-import tokyo.nakanaka.selection.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos1CommandHandler;
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos2CommandHandler;
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCalculator;
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
 public class CuboidSelectionStrategy implements SelectionStrategy{
 	private LengthCalculator lengthCalc = new LengthCalculator();
