@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class MaxxHelp implements CommandHelp {
-	private String usage = "/sg maxx <value>";
-	private String description = "Set max x of the generated blocks";
+public class RedoHelp implements CommandHelp {
+	private String usage = "/sg redo [number]";
+	private String description = "Redo block changing command(s)";
 	
 	public String getUsage() {
 		return this.usage;
@@ -22,11 +22,11 @@ public class MaxxHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg maxx] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg redo] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <value>: " + LogColor.RESET + "x coordinate");
+		lines.add(LogColor.GOLD + "  [number]: " + LogColor.RESET + "a number to redo generation(s)");
 		return lines;
 	}
 	

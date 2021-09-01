@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class DelHelp implements CommandHelp {
-	private String usage = "/sg del [number]";
-	private String description = "Delete the generated block(s)";
+public class HelpHelp implements CommandHelp {
+	private String usage = "/sg help [subcommand]";
+	private String description = "Print the command help";
 	
 	public String getUsage() {
 		return this.usage;
@@ -26,8 +26,8 @@ public class DelHelp implements CommandHelp {
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  [number]: " + LogColor.RESET + "a number to delete generation(s)");
+		lines.add(LogColor.GOLD + "  [subcommand]: " + LogColor.RESET + "a subcommand to print the help");
 		return lines;
 	}
-
+	
 }

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class UndoHelp implements CommandHelp {
-	private String usage = "/sg undo [number]";
-	private String description = "Undo block changing command(s)";
-	
+public class MinyHelp implements CommandHelp {
+	private String usage = "/sg miny <value>";
+	private String description = "Set min y of the generated blocks";
+
 	public String getUsage() {
 		return this.usage;
 	}
@@ -22,11 +22,11 @@ public class UndoHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg undo] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg miny] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  [number]: " + LogColor.RESET + "a number to undo generation(s)");
+		lines.add(LogColor.GOLD + "  <value>: " + LogColor.RESET + "y coordinate");
 		return lines;
 	}
 	

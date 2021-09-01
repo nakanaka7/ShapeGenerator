@@ -6,7 +6,7 @@ import tokyo.nakanaka.Item;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.commandHelp.WandHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.WandHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class MinyHelp implements CommandHelp {
-	private String usage = "/sg miny <value>";
-	private String description = "Set min y of the generated blocks";
-
+public class ShapeHelp implements CommandHelp {
+	private String usage = "/sg shape <type>";
+	private String description = "Set selection shape";
+	
 	public String getUsage() {
-		return this.usage;
+		return usage;
 	}
 
 	@Override
@@ -22,12 +22,12 @@ public class MinyHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg miny] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg shape] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <value>: " + LogColor.RESET + "y coordinate");
+		lines.add(LogColor.GOLD + "  <type>: " + LogColor.RESET + "a shape type");
 		return lines;
 	}
-	
+
 }

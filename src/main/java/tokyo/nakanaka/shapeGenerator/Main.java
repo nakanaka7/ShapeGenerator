@@ -12,7 +12,6 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
@@ -33,6 +32,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
 import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 

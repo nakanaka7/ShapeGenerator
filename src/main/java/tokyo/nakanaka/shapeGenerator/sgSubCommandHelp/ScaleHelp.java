@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,16 +6,12 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class SelHelp implements CommandHelp {
-	private String usage = "/sg sel <subcommand>";
-	private String description = "Specify the selection";
-
-	/**
-	 * Get the usage
-	 * @return the usage
-	 */
+public class ScaleHelp implements CommandHelp {
+	private String usage = "/sg scale <x|y|z> <factor>";
+	private String description = "Change the scale of the generated block(s)";
+	
 	public String getUsage() {
-		return usage;
+		return this.usage;
 	}
 
 	@Override
@@ -26,12 +22,13 @@ public class SelHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg sel] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg scale] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <subcommand>: " + LogColor.RESET + "subcommand");
+		lines.add(LogColor.GOLD + "  <x|y|z>: " + LogColor.RESET + "an axis for scaling");
+		lines.add(LogColor.GOLD + "  <factor>: " + LogColor.RESET + "a factor for scaling");
 		return lines;
 	}
-
+	
 }

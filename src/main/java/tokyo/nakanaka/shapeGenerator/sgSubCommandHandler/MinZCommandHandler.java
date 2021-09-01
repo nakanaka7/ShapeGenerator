@@ -12,7 +12,7 @@ import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.commandHelp.MinzHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinzHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**

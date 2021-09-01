@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class PhyHelp implements CommandHelp {
-	private String usage = "/sg phy <true|false>";
-	private String description = "Toggle physics option for generating blocks";
+public class MinzHelp implements CommandHelp {
+	private String usage = "/sg minz <value>";
+	private String description = "Set min z of the generated blocks";
 	
 	public String getUsage() {
 		return this.usage;
@@ -22,11 +22,11 @@ public class PhyHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg phy] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg minz] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <true|false>: " + LogColor.RESET + "an option for physics");
+		lines.add(LogColor.GOLD + "  <value>: " + LogColor.RESET + "z coordinate");
 		return lines;
 	}
 

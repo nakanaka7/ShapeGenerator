@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**

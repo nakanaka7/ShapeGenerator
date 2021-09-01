@@ -4,7 +4,7 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.commandHelp.PhyHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.PhyHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**

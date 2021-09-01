@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class MirrorHelp implements CommandHelp {
-	private String usage = "/sg mirror <x|y|z>";
-	private String description = "Mirror the generated blocks";
+public class RotHelp implements CommandHelp {
+	private String usage = "/sg rot <x|y|z> <degree>";
+	private String description = "Rotate the generated block(s)";
 	
 	public String getUsage() {
 		return this.usage;
@@ -22,11 +22,12 @@ public class MirrorHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg mirror] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg rot] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <x|y|z>: " + LogColor.RESET + "an axis to mirror");
+		lines.add(LogColor.GOLD + "  <x|y|z>: " + LogColor.RESET + "an axis for rotating");
+		lines.add(LogColor.GOLD + "  <degree>: " + LogColor.RESET + "a degree for rotating");
 		return lines;
 	}
 	

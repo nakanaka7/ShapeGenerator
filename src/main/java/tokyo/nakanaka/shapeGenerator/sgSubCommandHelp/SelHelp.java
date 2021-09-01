@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,16 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
-public class MaxyHelp implements CommandHelp {
-	private String usage = "/sg maxy <value>";
-	private String description = "Set max y of the generated blocks";
-	
+public class SelHelp implements CommandHelp {
+	private String usage = "/sg sel <subcommand>";
+	private String description = "Specify the selection";
+
+	/**
+	 * Get the usage
+	 * @return the usage
+	 */
 	public String getUsage() {
-		return this.usage;
+		return usage;
 	}
 
 	@Override
@@ -22,11 +26,11 @@ public class MaxyHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg maxy] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg sel] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <value>: " + LogColor.RESET + "y coordinate");
+		lines.add(LogColor.GOLD + "  <subcommand>: " + LogColor.RESET + "subcommand");
 		return lines;
 	}
 
