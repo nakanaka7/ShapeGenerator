@@ -12,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelectionStrategyNew;
 import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.cuboid.CuboidSelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.sphere.SphereSelectionStrategy;
 
+@Deprecated
 public enum SelectionShapeNew {
 	CUBOID(new CuboidSelectionStrategy()),
 	DIAMOND(null),
