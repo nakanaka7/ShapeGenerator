@@ -17,6 +17,13 @@ public class SelectionData {
 	private String defaultOffsetKey;
 	private Vector3D offset = null;
 	
+	public SelectionData(World world, LinkedHashMap<String, Object> regDataMap, String defaultOffsetKey) {
+		super();
+		this.world = world;
+		this.regDataMap = regDataMap;
+		this.defaultOffsetKey = defaultOffsetKey;
+	}
+
 	/**
 	 * @param world the world of the selection data
 	 * @param regionData the region data of the selection data
