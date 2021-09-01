@@ -43,12 +43,12 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public String getLeftClickDescription() {
+	public String leftClickDescription() {
 		return "Set center";
 	}
 
 	@Override
-	public String getRightClickDescription() {
+	public String rightClickDescription() {
 		return "Set radius by the center coordinates";
 	}
 	
@@ -76,12 +76,12 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public String getDefaultOffsetKey() {
+	public String defaultOffsetKey() {
 		return "center";
 	}
 
 	@Override
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SelSubCommandHandler> map = new HashMap<>();
 		map.put("center", new PosCommandHandler("center"));
 		map.put("radius", new LengthCommandHandler("radius"));

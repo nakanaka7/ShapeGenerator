@@ -33,7 +33,7 @@ public class SelectionMessenger {
 	}
 	
 	public void printClickDescription(Logger logger, SelectionStrategy strategy) {
-		logger.print(LogDesignColor.NORMAL + "Left click: " + strategy.getLeftClickDescription()
-		+ " / " + "Right click: " + strategy.getRightClickDescription());
+		logger.print(LogDesignColor.NORMAL + "Left click: " + strategy.leftClickDescription()
+		+ " / " + "Right click: " + strategy.rightClickDescription());
 	}
 }

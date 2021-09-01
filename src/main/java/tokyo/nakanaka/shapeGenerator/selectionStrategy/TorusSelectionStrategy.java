@@ -37,12 +37,12 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	}
 
 	@Override
-	public String getLeftClickDescription() {
+	public String leftClickDescription() {
 		return "Set center";
 	}
 
 	@Override
-	public String getRightClickDescription() {
+	public String rightClickDescription() {
 		return "Set radius_main, radius_sub";
 	}
 	
@@ -84,12 +84,12 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public String getDefaultOffsetKey() {
+	public String defaultOffsetKey() {
 		return "center";
 	}
 
 	@Override
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SelSubCommandHandler> map = new HashMap<>();
 		map.put("center", new PosCommandHandler("center"));
 		map.put("radius_main", new LengthCommandHandler("radius_main"));

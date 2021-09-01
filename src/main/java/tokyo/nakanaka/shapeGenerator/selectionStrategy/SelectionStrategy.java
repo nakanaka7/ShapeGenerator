@@ -11,8 +11,8 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 
 public interface SelectionStrategy {
 	RegionBuildingData newRegionBuildingData();
-	String getLeftClickDescription();
-	String getRightClickDescription();
+	String leftClickDescription();
+	String rightClickDescription();
 	void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	/**
@@ -20,12 +20,12 @@ public interface SelectionStrategy {
 	 * @return a list of keys for the selection region. It does not contain "world" or "offset".
 	 */
 	List<String> regionKeyList();
-	String getDefaultOffsetKey();
+	String defaultOffsetKey();
 	/**
 	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
 	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
 	 */
-	Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap();
+	Map<String, SelSubCommandHandler> selSubCommandHandlerMap();
 	BoundRegion3D buildBoundRegion3D(RegionBuildingData data);
 	/**
 	 * Return a bound region from the map of region data

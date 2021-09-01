@@ -34,7 +34,7 @@ public class ResetCommandHandler implements SgSubCommandHandler {
 		SelectionStrategy strategy = this.selStraSource.get(shape);
 		SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
 		userData.setSelectionBuildingData(newSelData);
-		String defaultOffsetLabel = strategy.getDefaultOffsetKey();
+		String defaultOffsetLabel = strategy.defaultOffsetKey();
 		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
 	}
 	

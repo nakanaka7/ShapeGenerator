@@ -36,12 +36,12 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public String getLeftClickDescription() {
+	public String leftClickDescription() {
 		return "Set pos1";
 	}
 
 	@Override
-	public String getRightClickDescription() {
+	public String rightClickDescription() {
 		return "Set pos2, pos3";
 	}
 
@@ -73,12 +73,12 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public String getDefaultOffsetKey() {
+	public String defaultOffsetKey() {
 		return "pos1";
 	}
 
 	@Override
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SelSubCommandHandler> map = new HashMap<>();
 		map.put("pos1", new PosCommandHandler("pos1"));
 		map.put("pos2", new PosCommandHandler("pos2"));

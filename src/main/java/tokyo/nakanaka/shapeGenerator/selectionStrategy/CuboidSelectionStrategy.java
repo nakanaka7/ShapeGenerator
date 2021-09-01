@@ -33,12 +33,12 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 	}
 	
 	@Override
-	public String getLeftClickDescription() {
+	public String leftClickDescription() {
 		return "Set pos1";
 	}
 
 	@Override
-	public String getRightClickDescription() {
+	public String rightClickDescription() {
 		return "Set pos2";
 	}
 
@@ -72,12 +72,12 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 	}
 
 	@Override
-	public String getDefaultOffsetKey() {
+	public String defaultOffsetKey() {
 		return "pos1";
 	}
 
 	@Override
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String,  SelSubCommandHandler> map = new HashMap<>();
 		map.put("pos1", new CuboidPos1CommandHandler());
 		map.put("pos2", new CuboidPos2CommandHandler());
