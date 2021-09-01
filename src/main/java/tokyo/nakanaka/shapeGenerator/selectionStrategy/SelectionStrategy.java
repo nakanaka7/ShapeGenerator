@@ -38,7 +38,9 @@ public interface SelectionStrategy {
 	 * Returns a list of keys for the selection region. It does not contain "world" or "offset".
 	 * @return a list of keys for the selection region. It does not contain "world" or "offset".
 	 */
+	@Deprecated
 	List<String> regionKeyList();
+	@Deprecated
 	String defaultOffsetKey();
 	/**
 	 * Returns new selection data for the selection shape
