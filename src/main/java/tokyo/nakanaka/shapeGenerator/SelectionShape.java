@@ -7,15 +7,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.selection.Selection;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.CuboidSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.DiamondSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.LineSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.RegularPolygonSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SphereSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.TetrahedronSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.TorusSelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.TriangleSelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionStrategy.*;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public enum SelectionShape {
