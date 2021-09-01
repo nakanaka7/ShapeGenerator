@@ -1,5 +1,8 @@
 package tokyo.nakanaka.shapeGenerator;
 
+import java.util.Map;
+
+import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.*;
 
 public enum SelectionShape {
@@ -18,4 +21,11 @@ public enum SelectionShape {
 		this.selStrtg = selStrtg;
 	}
 	
+	/**
+	 * Get SelSubCommandHandlerMap
+	 * @return SelSubCommandHandlerMap
+	 */
+	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
+		return this.selStrtg.selSubCommandHandlerMap();
+	}
 }
