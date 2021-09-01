@@ -3,6 +3,8 @@ package tokyo.nakanaka.shapeGenerator;
 import java.util.List;
 import java.util.Map;
 
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.Selection;
@@ -17,6 +19,7 @@ import tokyo.nakanaka.shapeGenerator.selectionStrategy.SphereSelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.TetrahedronSelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.TorusSelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.TriangleSelectionStrategy;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public enum SelectionShape {
 	CUBOID(new CuboidSelectionStrategy()),
@@ -65,6 +68,26 @@ public enum SelectionShape {
 		BoundRegion3D boundReg = this.selStrtg.buildBoundRegion3D(regDataMap);
 		Vector3D offset = selData.getOffset();
 		return new Selection(world, boundReg, offset);
+	}
+
+	/**
+	 * Handles a left click block event
+	 * @param userData the user data
+	 * @param player the player of the event
+	 * @param blockPos the clicked block position 
+	 */
+	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		this.selStrtg.onLeftClickBlock(userData, player, blockPos);
+	}
+	
+	/**
+	 * Handles a right click block event
+	 * @param userData the user data
+	 * @param player the player of the event
+	 * @param blockPos the clicked block position 
+	 */
+	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		this.selStrtg.onRightClickBlock(userData, player, blockPos);
 	}
 	
 }
