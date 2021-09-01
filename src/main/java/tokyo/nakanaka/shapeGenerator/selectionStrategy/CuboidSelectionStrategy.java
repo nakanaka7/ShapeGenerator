@@ -4,11 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Player;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
@@ -17,6 +22,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos1CommandHandl
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos2CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCalculator;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class CuboidSelectionStrategy implements SelectionStrategy{
 	private LengthCalculator lengthCalc = new LengthCalculator();
@@ -116,6 +122,25 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 		double lby = Math.min(pos1.getY(), pos2.getY());
 		double lbz = Math.min(pos1.getZ(), pos2.getZ());
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		World world = blockPos.world();
+		if(!world.equals(userData.getSelectionData().getWorld())) {
+			SelectionData newSelData = userData.getSelectionShape().newSelectionData(world);
+			userData.setSelectionData(newSelData);
+		}
+		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
+		for(String line : lines) {
+			player.print(line);
+		}
+	}
+
+	@Override
+	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

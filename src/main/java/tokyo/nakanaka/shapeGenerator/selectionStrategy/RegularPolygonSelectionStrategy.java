@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -24,6 +26,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.RegularPolygonSideCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 
@@ -177,6 +180,18 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 		}
 		CuboidBoundRegion bound = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 		return bound.createShiftedRegion(center);
+	}
+
+	@Override
+	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

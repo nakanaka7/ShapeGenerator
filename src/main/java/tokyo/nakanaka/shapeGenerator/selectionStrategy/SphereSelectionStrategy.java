@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
@@ -19,6 +21,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class SphereSelectionStrategy implements SelectionStrategy{
 
@@ -98,6 +101,18 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 		Region3D region = new Sphere(radius);
 		region = Region3Ds.shift(region, center);
 		return new SphereBoundRegion(region, center, radius);
+	}
+
+	@Override
+	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

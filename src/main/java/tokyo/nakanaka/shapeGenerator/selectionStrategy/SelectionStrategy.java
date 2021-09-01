@@ -3,11 +3,14 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 import java.util.List;
 import java.util.Map;
 
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public interface SelectionStrategy {
 	RegionBuildingData newRegionBuildingData();
@@ -15,6 +18,20 @@ public interface SelectionStrategy {
 	String rightClickDescription();
 	void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
+	/**
+	 * Handles a left click block event
+	 * @param userData the user data
+	 * @param player the player of the event
+	 * @param blockPos the clicked block position 
+	 */
+	void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos);
+	/**
+	 * Handles a right click block event
+	 * @param userData the user data
+	 * @param player the player of the event
+	 * @param blockPos the clicked block position 
+	 */
+	void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos);
 	/**
 	 * Returns a list of keys for the selection region. It does not contain "world" or "offset".
 	 * @return a list of keys for the selection region. It does not contain "world" or "offset".

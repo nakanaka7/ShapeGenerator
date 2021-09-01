@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
@@ -18,6 +20,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Tetrahedron;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TetrahedronSelectionStrategy implements SelectionStrategy {
 
@@ -116,6 +119,18 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 		double lby = min(pos1.getY(), pos2.getY(), pos3.getY(), pos4.getY());
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

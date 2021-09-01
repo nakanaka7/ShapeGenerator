@@ -7,6 +7,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 
+@Deprecated
 public class SelectionStrategySource {
 	private Map<SelectionShapeNew, SelectionStrategy> strategyMap = new HashMap<>();
 	

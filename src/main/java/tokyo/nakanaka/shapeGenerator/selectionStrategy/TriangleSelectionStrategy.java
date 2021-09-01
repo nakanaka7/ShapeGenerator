@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import tokyo.nakanaka.BlockPosition;
+import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -20,6 +22,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TriangleSelectionStrategy implements SelectionStrategy {
 
@@ -127,6 +130,18 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 		double lby = min(pos1.getY(), pos2.getY(), pos3.getY()) - thickness / 2;
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ()) - thickness / 2;
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

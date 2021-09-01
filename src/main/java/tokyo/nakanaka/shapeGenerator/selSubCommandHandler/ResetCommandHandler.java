@@ -31,12 +31,12 @@ public class ResetCommandHandler implements SgSubCommandHandler {
 			return;
 		}
 		World world = userData.getWorld();
-		SelectionShapeNew shape = userData.getSelectionShapeNew();
-		SelectionStrategy strategy = this.selStraSource.get(shape);
-		SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
-		userData.setSelectionBuildingData(newSelData);
-		String defaultOffsetLabel = strategy.defaultOffsetKey();
-		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
+	//	SelectionShapeNew shape = userData.getSelectionShapeNew();
+		//SelectionStrategy strategy = this.selStraSource.get(shape);
+		//SelectionBuildingData newSelData = new SelectionBuildingData(world, strategy.newRegionBuildingData());
+		//userData.setSelectionBuildingData(newSelData);
+		//String defaultOffsetLabel = strategy.defaultOffsetKey();
+		//this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
 		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
 		for(String line : lines) {
 			player.print(line);

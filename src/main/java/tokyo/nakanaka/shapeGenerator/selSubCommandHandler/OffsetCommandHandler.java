@@ -47,7 +47,7 @@ public class OffsetCommandHandler implements SgSubCommandHandler {
 		}
 		SelectionBuildingData selData = userData.getSelectionBuildingData();
 		selData.setOffset(pos);
-		this.selMessenger.printSelection(logger, userData.getSelectionShapeNew(), selData, "");
+		//this.selMessenger.printSelection(logger, userData.getSelectionShapeNew(), selData, "");
 		logger.print(LogColor.RED + "Usage: " + "/sg sel offset [x] [y] [z]");
 		logger.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
 	}

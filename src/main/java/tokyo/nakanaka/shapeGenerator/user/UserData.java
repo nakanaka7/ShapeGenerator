@@ -8,7 +8,6 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
 public class UserData {
@@ -19,7 +18,6 @@ public class UserData {
 	private int x;
 	private int y;
 	private int z;
-	private SelectionShapeNew shapeNew = SelectionShapeNew.CUBOID;
 	private SelectionShape shape;
 	private SelectionBuildingData selBuildData;
 	private SelectionData selData;
@@ -107,14 +105,6 @@ public class UserData {
 	 */
 	public void setSelectionShape(SelectionShape shape) {
 		this.shape = shape;
-	}
-
-	public SelectionShapeNew getSelectionShapeNew() {
-		return shapeNew;
-	}
-
-	public void setSelectionShapeNew(SelectionShapeNew shape) {
-		this.shapeNew = shape;
 	}
 
 	public SelectionBuildingData getSelectionBuildingData() {
