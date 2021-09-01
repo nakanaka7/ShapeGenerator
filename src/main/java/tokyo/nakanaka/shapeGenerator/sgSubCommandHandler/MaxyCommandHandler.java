@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg maxy" command
  */
-public class MaxYCommandHandler implements SgSubCommandHandler {	
+public class MaxyCommandHandler implements SgSubCommandHandler {	
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

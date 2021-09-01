@@ -7,23 +7,23 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxXCommand;
+import tokyo.nakanaka.command.MinXCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MaxxHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinxHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg maxx"
+ * Handles "/sg minx" command
  */
-public class MaxXCommandHandler implements SgSubCommandHandler {	
+public class MinxCommandHandler implements SgSubCommandHandler {
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MaxxHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new MinxHelp().getUsage());
 			return;
 		}
 		double value;
@@ -52,10 +52,10 @@ public class MaxXCommandHandler implements SgSubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, userData.getBlockPhysics());
-		maxxCmd.execute();
-		undoManager.add(maxxCmd);
-		player.print(LogDesignColor.NORMAL + "Set maxX -> " + value);
+		MinXCommand minxCmd = new MinXCommand(originalCmd, value, userData.getBlockPhysics());
+		minxCmd.execute();
+		undoManager.add(minxCmd);
+		player.print(LogDesignColor.NORMAL + "Set minX -> " + value);
 	}
 
 	@Override

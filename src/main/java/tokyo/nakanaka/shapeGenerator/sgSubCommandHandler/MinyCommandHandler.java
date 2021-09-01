@@ -7,23 +7,23 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MinZCommand;
+import tokyo.nakanaka.command.MinYCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinzHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinyHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg minz" command
+ * Handles "/sg miny" command
  */
-public class MinZCommandHandler implements SgSubCommandHandler {
-		
+public class MinyCommandHandler implements SgSubCommandHandler {
+	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(UserData user, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MinzHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new MinyHelp().getUsage());
 			return;
 		}
 		double value;
@@ -33,7 +33,7 @@ public class MinZCommandHandler implements SgSubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = user.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -52,16 +52,16 @@ public class MinZCommandHandler implements SgSubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MinZCommand minzCmd = new MinZCommand(originalCmd, value, userData.getBlockPhysics());
-		minzCmd.execute();
-		undoManager.add(minzCmd);
-		player.print(LogDesignColor.NORMAL + "Set minZ -> " + value);
+		MinYCommand minyCmd = new MinYCommand(originalCmd, value, user.getBlockPhysics());
+		minyCmd.execute();
+		undoManager.add(minyCmd);
+		player.print(LogDesignColor.NORMAL + "Set minY -> " + value);
 	}
 
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(userData.getZ()));
+			return Arrays.asList(String.valueOf(userData.getY()));
 		}else {
 			return new ArrayList<>();
 		}

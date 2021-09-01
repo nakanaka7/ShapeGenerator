@@ -7,23 +7,23 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.command.AdjustCommand;
 import tokyo.nakanaka.command.GenerateCommand;
-import tokyo.nakanaka.command.MaxZCommand;
+import tokyo.nakanaka.command.MinZCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MaxzHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinzHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * Handles "/sg maxz" command
+ * Handles "/sg minz" command
  */
-public class MaxZCommandHandler implements SgSubCommandHandler {	
-
+public class MinzCommandHandler implements SgSubCommandHandler {
+		
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MaxzHelp().getUsage());
+			player.print(LogColor.RED + "Usage: " + new MinzHelp().getUsage());
 			return;
 		}
 		double value;
@@ -52,10 +52,10 @@ public class MaxZCommandHandler implements SgSubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, userData.getBlockPhysics());
-		maxzCmd.execute();
-		undoManager.add(maxzCmd);
-		player.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
+		MinZCommand minzCmd = new MinZCommand(originalCmd, value, userData.getBlockPhysics());
+		minzCmd.execute();
+		undoManager.add(minzCmd);
+		player.print(LogDesignColor.NORMAL + "Set minZ -> " + value);
 	}
 
 	@Override
