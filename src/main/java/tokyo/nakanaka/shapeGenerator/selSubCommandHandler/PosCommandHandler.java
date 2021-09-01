@@ -12,6 +12,7 @@ import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class PosCommandHandler implements SelSubCommandHandler {
@@ -70,6 +71,10 @@ public class PosCommandHandler implements SelSubCommandHandler {
 		}
 		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
 		regDataMap.put(this.label, pos);
+		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
+		for(String line : lines) {
+			player.print(line);
+		}
 		return true;
 	}
 	

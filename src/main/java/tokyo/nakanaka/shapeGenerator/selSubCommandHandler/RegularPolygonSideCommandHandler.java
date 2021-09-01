@@ -10,6 +10,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.commadHelp.ParameterType;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
@@ -44,6 +45,10 @@ public class RegularPolygonSideCommandHandler implements SelSubCommandHandler {
 		}
 		Map<String, Object> regDataMap = userData.getSelectionData().getRegionDataMap();
 		regDataMap.put("side", side);
+		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
+		for(String line : lines) {
+			player.print(line);
+		}
 		return true;
 	}
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commadHelp.ParameterHelp;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class CuboidPos1CommandHandler implements SelSubCommandHandler{
@@ -40,6 +41,10 @@ public class CuboidPos1CommandHandler implements SelSubCommandHandler{
 			regDataMap.put("width", this.lengthCalc.calcWidth(pos1, pos2));
 			regDataMap.put("height", this.lengthCalc.calcHeight(pos1, pos2));
 			regDataMap.put("length", this.lengthCalc.calcLength(pos1, pos2));
+		}
+		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
+		for(String line : lines) {
+			player.print(line);
 		}
 		return true;
 	}

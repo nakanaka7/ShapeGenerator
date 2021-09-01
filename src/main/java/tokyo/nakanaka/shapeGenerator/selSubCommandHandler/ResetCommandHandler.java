@@ -10,6 +10,7 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
+import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategySource;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
@@ -36,6 +37,10 @@ public class ResetCommandHandler implements SgSubCommandHandler {
 		userData.setSelectionBuildingData(newSelData);
 		String defaultOffsetLabel = strategy.defaultOffsetKey();
 		this.selMessenger.printSelection(logger, shape, newSelData, defaultOffsetLabel);
+		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
+		for(String line : lines) {
+			player.print(line);
+		}
 	}
 	
 	public List<String> onTabComplete(UserData user, Player player, String[] args) {
