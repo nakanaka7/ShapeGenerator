@@ -1,12 +1,14 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -14,6 +16,7 @@ import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region2D.Region2D;
@@ -30,6 +33,17 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 
+	@Override
+	public SelectionData newSelectionData(World world) {
+		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
+		regDataMap.put("center", null);
+		regDataMap.put("radius", null);
+		regDataMap.put("side", 3);
+		regDataMap.put("thickness", 1.0);
+		regDataMap.put("axis", "y");
+		return new SelectionData(world, regDataMap, "center");
+	}
+	
 	@Override
 	public RegionBuildingData newRegionBuildingData() {
 		RegionBuildingData data = new RegionBuildingData.Builder()

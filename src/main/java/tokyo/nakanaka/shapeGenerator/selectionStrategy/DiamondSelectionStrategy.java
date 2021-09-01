@@ -8,11 +8,13 @@ import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Diamond;
@@ -25,6 +27,11 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class DiamondSelectionStrategy implements SelectionStrategy {
 
+	@Override
+	public SelectionData newSelectionData(World world) {
+		return new SelectionData(world, "center", "center", "radius_x", "radius_y", "radius_z");
+	}
+	
 	@Override
 	public RegionBuildingData newRegionBuildingData() {
 		return new RegionBuildingData.Builder()

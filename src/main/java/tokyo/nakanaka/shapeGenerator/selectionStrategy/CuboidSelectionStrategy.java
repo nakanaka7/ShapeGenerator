@@ -28,6 +28,11 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 	private LengthCalculator lengthCalc = new LengthCalculator();
 	
 	@Override
+	public SelectionData newSelectionData(World world) {
+		return new SelectionData(world, "pos1", "pos1", "pos2");
+	}
+	
+	@Override
 	public RegionBuildingData newRegionBuildingData() {
 		return new RegionBuildingData.Builder()
 				.addDataTag("pos1", DataType.VECTOR3D)

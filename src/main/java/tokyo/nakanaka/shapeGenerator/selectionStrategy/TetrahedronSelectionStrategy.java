@@ -4,16 +4,19 @@ import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
@@ -24,6 +27,16 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TetrahedronSelectionStrategy implements SelectionStrategy {
 
+	@Override
+	public SelectionData newSelectionData(World world) {
+		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
+		regDataMap.put("pos1", null);
+		regDataMap.put("pos2", null);
+		regDataMap.put("pos3", null);
+		regDataMap.put("pos4", null);
+		return new SelectionData(world, regDataMap, "pos1");
+	}
+	
 	@Override
 	public RegionBuildingData newRegionBuildingData() {
 		return new RegionBuildingData.Builder()
@@ -132,5 +145,5 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }
