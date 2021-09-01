@@ -9,8 +9,6 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg phy" command
- * @author nakaj
- *
  */
 public class PhyCommandHandler implements SgSubCommandHandler {
 
