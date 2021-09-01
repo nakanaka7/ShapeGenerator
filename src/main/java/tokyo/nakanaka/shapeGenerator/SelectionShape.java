@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.selection.Selection;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.CuboidSelectionStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.DiamondSelectionStrategy;
@@ -48,6 +51,20 @@ public enum SelectionShape {
 		List<String> keyList = this.selStrtg.regionKeyList();
 		String[] regionDataKeys = keyList.toArray(new String[keyList.size()]);
 		return new SelectionData(world, this.selStrtg.defaultOffsetKey(), regionDataKeys);
+	}
+	
+	/**
+	 * Returns a selection from the selection data
+	 * @param selData a selection data
+	 * @return a selection from the selection data
+	 * @throws IllegalArgumentException if the selection data cannot create a selection
+	 */
+	public Selection buildSelection(SelectionData selData) {
+		World world = selData.getWorld();
+		Map<String, Object> regDataMap = selData.getRegionDataMap();
+		BoundRegion3D boundReg = this.selStrtg.buildBoundRegion3D(regDataMap);
+		Vector3D offset = selData.getOffset();
+		return new Selection(world, boundReg, offset);
 	}
 	
 }
