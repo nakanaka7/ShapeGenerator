@@ -36,7 +36,7 @@ public class Main {
 		this.selStrtgSource = selStrtgSource;
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
+		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandlerNew());
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandlerNew());
 		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandlerNew(blockIDListFactory));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());

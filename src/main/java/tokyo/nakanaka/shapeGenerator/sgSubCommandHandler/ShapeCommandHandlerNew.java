@@ -13,7 +13,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg shape" command
  */
-public class ShapeCommandHandler implements SgSubCommandHandler {
+public class ShapeCommandHandlerNew implements SgSubCommandHandler {
 
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
