@@ -9,18 +9,30 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.World;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.SelectionBuildingData;
-import tokyo.nakanaka.selection.SelectionMessenger;
 import tokyo.nakanaka.shapeGenerator.commandHelp.HelpHelp;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategySource;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxXCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxYCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxZCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinXCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinYCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinZCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MirrorCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.PhyCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -28,12 +40,10 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Main class for the project. 
  */
 public class Main {
-	private SelectionStrategySource selStrtgSource;
 	private Map<String, SgSubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	private Map<User, UserData> userDataMap = new HashMap<>();
 	
-	public Main(BlockIDListFactory blockIDListFactory, SelectionStrategySource selStrtgSource) {
-		this.selStrtgSource = selStrtgSource;
+	public Main(BlockIDListFactory blockIDListFactory) {
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
@@ -117,28 +127,16 @@ public class Main {
 		evt.cancel();
 		Player player = evt.getPlayer();
 		UserData userData = this.prepareUserData(player);
-		userData.setLogger(player);
-		SelectionShapeNew selShape = userData.getSelectionShapeNew();
-		SelectionBuildingData selData = userData.getSelectionBuildingData();
-		SelectionStrategy selStrategy = this.selStrtgSource.get(selShape);
+		SelectionShape selShape = userData.getSelectionShape();
 		BlockPosition blockPos = evt.getBlockPos();
-		World world = blockPos.world();
-		if(!world.equals(selData.getWorld())) {
-			RegionBuildingData regionData = selStrategy.newRegionBuildingData();
-			selData = new SelectionBuildingData(world, regionData);
-			userData.setSelectionBuildingData(selData);
-		}
-		RegionBuildingData regionData = selData.getRegionData();
-		BlockVector3D pos = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
 			case LEFT_HAND -> {
-				selStrategy.onLeftClickBlock(regionData, player, pos);
+				selShape.onLeftClickBlock(userData, player, blockPos);
 			}
 			case RIGHT_HAND -> {
-				selStrategy.onRightClickBlock(regionData, player, pos);
+				selShape.onRightClickBlock(userData, player, blockPos);
 			}
 		}
-		new SelectionMessenger().printSelection(player, selShape, selData, selStrategy.defaultOffsetKey());
 	}
 	
 	/**
