@@ -5,13 +5,13 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 
 /**
  * Handles "/sg sel radius"
  */
-public class RadiusCommandHandler implements SelSubCommandHandler {
+public class RadiusCommandHandler implements SelSubCommandHandlerNew {
 
 	@Override
 	public void onCommand(SelectionData selData, Player player, String[] subArgs) {

@@ -7,13 +7,13 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 
 /**
  * Handles "/sg sel pos1" command
  */
-public class Pos1CommandHandler implements SelSubCommandHandler {
+public class Pos1CommandHandler implements SelSubCommandHandlerNew {
 
 	@Override
 	public void onCommand(SelectionData selData, Player player, String[] subArgs) {

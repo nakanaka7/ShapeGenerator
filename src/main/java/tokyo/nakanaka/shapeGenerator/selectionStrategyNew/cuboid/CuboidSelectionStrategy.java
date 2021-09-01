@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
@@ -19,8 +19,8 @@ import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelectionStrategyNew;
 public class CuboidSelectionStrategy implements SelectionStrategyNew {
 
 	@Override
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
-		Map<String, SelSubCommandHandler> map = new HashMap<>();
+	public Map<String, SelSubCommandHandlerNew> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandlerNew> map = new HashMap<>();
 		map.put("pos1", new Pos1CommandHandler());
 		map.put("pos2", new Pos2CommandHandler());
 		return map;

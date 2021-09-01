@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.commandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -19,7 +19,7 @@ public class SelCommandHandlerNew implements SgSubCommandHandler {
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		SelectionShapeNew shape = userData.getSelectionShape();
-		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
+		Map<String, SelSubCommandHandlerNew> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
 		if(args.length == 0) {
 			player.print(LogColor.RED + "Usage:" + new SelHelp().getUsage());
 			player.print(LogColor.RED + "See help");
@@ -28,7 +28,7 @@ public class SelCommandHandlerNew implements SgSubCommandHandler {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SelSubCommandHandler selSubCmdHandler = selSubCmdHandlerMap.get(subLabel);
+		SelSubCommandHandlerNew selSubCmdHandler = selSubCmdHandlerMap.get(subLabel);
 		if(selSubCmdHandler == null) {
 			player.print(LogColor.RED + "Unkown subcommand");
 			player.print(LogColor.RED + "See help");
@@ -40,7 +40,7 @@ public class SelCommandHandlerNew implements SgSubCommandHandler {
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		SelectionShapeNew shape = userData.getSelectionShape();
-		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
+		Map<String, SelSubCommandHandlerNew> selSubCmdHandlerMap = shape.getSelSubCommandHandlerMap();
 		String subLabel = args[0];
 		if(args.length == 1) {
 			return selSubCmdHandlerMap.keySet().stream()
@@ -48,7 +48,7 @@ public class SelCommandHandlerNew implements SgSubCommandHandler {
 		}
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SelSubCommandHandler selSubCmdHandler = selSubCmdHandlerMap.get(subLabel);
+		SelSubCommandHandlerNew selSubCmdHandler = selSubCmdHandlerMap.get(subLabel);
 		if(selSubCmdHandler == null) {
 			return List.of();
 		}

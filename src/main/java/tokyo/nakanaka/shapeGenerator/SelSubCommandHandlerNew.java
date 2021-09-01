@@ -7,7 +7,7 @@ import tokyo.nakanaka.Player;
 /**
  * Handles "/sg sel" subcommand
  */
-public interface SelSubCommandHandler {
+public interface SelSubCommandHandlerNew {
 	/**
 	 * Handles "/sg sel" subcommand
 	 * @param selData a selection data that the user data holds

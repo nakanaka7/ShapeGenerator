@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
@@ -17,8 +17,8 @@ import tokyo.nakanaka.shapeGenerator.selectionStrategyNew.SelectionStrategyNew;
 public class SphereSelectionStrategy implements SelectionStrategyNew {
 
 	@Override
-	public Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap() {
-		Map<String, SelSubCommandHandler> map = new HashMap<>();
+	public Map<String, SelSubCommandHandlerNew> getSelSubCommandHandlerMap() {
+		Map<String, SelSubCommandHandlerNew> map = new HashMap<>();
 		map.put("center", new CenterCommandHandler());
 		map.put("radius", new RadiusCommandHandler());
 		return map;

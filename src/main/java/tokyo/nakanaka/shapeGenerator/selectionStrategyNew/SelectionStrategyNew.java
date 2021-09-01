@@ -3,7 +3,7 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategyNew;
 import java.util.List;
 import java.util.Map;
 
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerNew;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
@@ -15,7 +15,7 @@ public interface SelectionStrategyNew {
 	 * Get SelSubCommandHandlerMap
 	 * @return SelSubCommandHandlerMap
 	 */
-	Map<String, SelSubCommandHandler> getSelSubCommandHandlerMap();
+	Map<String, SelSubCommandHandlerNew> getSelSubCommandHandlerMap();
 	/**
 	 * Create new region data
 	 * @return new region data
