@@ -43,6 +43,7 @@ public interface SelectionStrategy {
 	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
 	 */
 	Map<String, SelSubCommandHandler> selSubCommandHandlerMap();
+	@Deprecated
 	BoundRegion3D buildBoundRegion3D(RegionBuildingData data);
 	/**
 	 * Return a bound region from the map of region data
