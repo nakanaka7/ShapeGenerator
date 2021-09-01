@@ -10,6 +10,7 @@ import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
+@SuppressWarnings("deprecation")
 public class UserData {
 	private UUID uid;
 	private String name;
@@ -106,11 +107,13 @@ public class UserData {
 	public void setSelectionShape(SelectionShape shape) {
 		this.shape = shape;
 	}
-
+	
+	@Deprecated
 	public SelectionBuildingData getSelectionBuildingData() {
 		return selBuildData;
 	}
 
+	@Deprecated
 	public void setSelectionBuildingData(SelectionBuildingData selData) {
 		this.selBuildData = selData;
 	}
