@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.commandHelp;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
 public class ShiftHelp implements CommandHelp {
 	private String usage = "/sg shift <direction> <length>";

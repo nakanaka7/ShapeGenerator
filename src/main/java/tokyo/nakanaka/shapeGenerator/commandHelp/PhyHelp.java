@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
 public class PhyHelp implements CommandHelp {
 	private String usage = "/sg phy <true|false>";

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
 public class RotHelp implements CommandHelp {
 	private String usage = "/sg rot <x|y|z> <degree>";
