@@ -5,7 +5,7 @@ import java.util.Map;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
-
+@Deprecated
 public class SelectionBuildingDataFactory {
 	private Map<SelectionShapeNew, SelectionStrategy> strategyMap;
 	

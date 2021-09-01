@@ -9,7 +9,7 @@ import tokyo.nakanaka.logger.shapeGenerator.LogTemplate;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeNew;
 import tokyo.nakanaka.shapeGenerator.selectionStrategy.SelectionStrategy;
-
+@Deprecated
 public class SelectionMessenger {
 	public void printSelection(Logger logger, SelectionShapeNew shape, 
 			SelectionBuildingData selData, String defaultOffsetLabel) {
