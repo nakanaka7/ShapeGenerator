@@ -37,16 +37,6 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public RegionBuildingData newRegionBuildingData() {
-		return new RegionBuildingData.Builder()
-				.addDataTag("pos1", DataType.VECTOR3D)
-				.addDataTag("pos2", DataType.VECTOR3D)
-				.addDataTag("pos3", DataType.VECTOR3D)
-				.addDataTag("pos4", DataType.VECTOR3D)
-				.build();
-	}
-
-	@Override
 	public String leftClickDescription() {
 		return "Set pos1";
 	}

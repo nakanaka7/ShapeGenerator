@@ -38,18 +38,6 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 		regDataMap.put("axis", "y");
 		return new SelectionData(world, regDataMap, "center");
 	}
-	
-	@Override
-	public RegionBuildingData newRegionBuildingData() {
-		RegionBuildingData data = new RegionBuildingData.Builder()
-				.addDataTag("center", DataType.VECTOR3D)
-				.addDataTag("radius_main", DataType.DOUBLE)
-				.addDataTag("radius_sub", DataType.DOUBLE)
-				.addDataTag("axis", DataType.STRING)
-				.build();
-		data.putString("axis", "y");
-		return data;
-	}
 
 	@Override
 	public String leftClickDescription() {

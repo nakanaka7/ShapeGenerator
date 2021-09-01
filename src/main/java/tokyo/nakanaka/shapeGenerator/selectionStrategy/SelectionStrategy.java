@@ -16,10 +16,11 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public interface SelectionStrategy {
-	RegionBuildingData newRegionBuildingData();
 	String leftClickDescription();
 	String rightClickDescription();
+	@Deprecated
 	void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
+	@Deprecated
 	void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos);
 	/**
 	 * Handles a left click block event

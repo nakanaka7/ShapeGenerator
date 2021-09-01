@@ -44,21 +44,6 @@ public class RegularPolygonSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public RegionBuildingData newRegionBuildingData() {
-		RegionBuildingData data = new RegionBuildingData.Builder()
-				.addDataTag("center", DataType.VECTOR3D)
-				.addDataTag("radius", DataType.DOUBLE)
-				.addDataTag("side", DataType.INTEGER)
-				.addDataTag("thickness", DataType.DOUBLE)
-				.addDataTag("axis", DataType.STRING)
-				.build();
-		data.putInteger("side", 3);
-		data.putDouble("thickness", 1.0);
-		data.putString("axis", "y");
-		return data;
-	}
-
-	@Override
 	public String leftClickDescription() {
 		return "Set center";
 	}

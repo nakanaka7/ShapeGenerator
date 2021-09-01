@@ -32,16 +32,6 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public RegionBuildingData newRegionBuildingData() {
-		return new RegionBuildingData.Builder()
-				.addDataTag("center", DataType.VECTOR3D)
-				.addDataTag("radius_x", DataType.DOUBLE)
-				.addDataTag("radius_y", DataType.DOUBLE)
-				.addDataTag("radius_z", DataType.DOUBLE)
-				.build();
-	}
-
-	@Override
 	public String leftClickDescription() {
 		return "Set center";
 	}

@@ -29,17 +29,6 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	}
 	
 	@Override
-	public RegionBuildingData newRegionBuildingData() {
-		RegionBuildingData data = new RegionBuildingData.Builder()
-				.addDataTag("pos1", DataType.VECTOR3D)
-				.addDataTag("pos2", DataType.VECTOR3D)
-				.addDataTag("thickness", DataType.DOUBLE)
-				.build();
-		data.putDouble("thickness", 1.0);
-		return data;
-	}
-
-	@Override
 	public String leftClickDescription() {
 		return "Set pos1";
 	}

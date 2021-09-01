@@ -36,14 +36,6 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 	}
 	
 	@Override
-	public RegionBuildingData newRegionBuildingData() {
-		return new RegionBuildingData.Builder()
-				.addDataTag("center", DataType.VECTOR3D)
-				.addDataTag("radius", DataType.DOUBLE)
-				.build();
-	}
-
-	@Override
 	public String leftClickDescription() {
 		return "Set center";
 	}
