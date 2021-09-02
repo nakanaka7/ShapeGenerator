@@ -26,7 +26,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCalculator;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class CuboidSelectionStrategy implements SelectionStrategy{
+public class CuboidSelectionDelegator implements SelectionShapeDelegator{
 	private LengthCalculator lengthCalc = new LengthCalculator();
 	
 	@Override

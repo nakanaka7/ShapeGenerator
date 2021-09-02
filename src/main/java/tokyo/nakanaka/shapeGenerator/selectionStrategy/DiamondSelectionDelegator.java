@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
+import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,50 +18,68 @@ import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Line;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Diamond;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class LineSelectionStrategy implements SelectionStrategy {
-	
+public class DiamondSelectionDelegator implements SelectionShapeDelegator {
+
 	@Override
 	public SelectionData newSelectionData(World world) {
 		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
-		regDataMap.put("pos1", null);
-		regDataMap.put("pos2", null);
-		regDataMap.put("thickness", 1);
-		return new SelectionData(world, regDataMap, "pos1");
+		regDataMap.put("center", null);
+		regDataMap.put("radius_x", null);
+		regDataMap.put("radius_y", null);
+		regDataMap.put("radius_z", null);
+		return new SelectionData(world, regDataMap, "center");
 	}
 	
 	@Override
 	public String leftClickDescription() {
-		return "Set pos1";
+		return "Set center";
 	}
 
 	@Override
 	public String rightClickDescription() {
-		return "Set pos2";
+		return "Set radius_x, radius_y, radius_z";
 	}
-	
+
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D pos1 = blockPos.toVector3D();
-		data.putVector3D("pos1", pos1);
+		Vector3D center = blockPos.toVector3D();
+		data.putVector3D("center", center);
+		data.putDouble("radius_x", null);
+		data.putDouble("radius_y", null);
+		data.putDouble("radius_z", null);
 	}
 
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D pos2 = blockPos.toVector3D();
-		data.putVector3D("pos2", pos2);
+		Vector3D center = data.getVector3D("center");
+		if(center == null) {
+			logger.print(HEAD_ERROR + "Set center first");
+			return;
+		}
+		Vector3D pos = blockPos.toVector3D();
+		double radius = pos.negate(center).getAbsolute() + 0.5;
+		if(data.get("radius_x") == null) {
+			data.putDouble("radius_x", radius);
+		}else if(data.get("radius_y") == null) {
+			data.putDouble("radius_y", radius);
+		}else {
+			data.putDouble("radius_z", radius);
+		}	
 	}
 
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SelSubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandler("pos1"));
-		map.put("pos2", new PosCommandHandler("pos2"));
-		map.put("thickness", new LengthCommandHandler("thickness"));
+		map.put("center", new PosCommandHandler("center"));
+		map.put("radius_x", new LengthCommandHandler("radius_x"));
+		map.put("radius_y", new LengthCommandHandler("radius_y"));
+		map.put("radius_z", new LengthCommandHandler("radius_z"));
 		return map;
 	}
 
@@ -73,19 +93,21 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	}
 	
 	private BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
-		Vector3D pos1 = (Vector3D) regionDataMap.get("pos1");
-		Vector3D pos2 = (Vector3D) regionDataMap.get("pos2");
-		Double thickness = (Double) regionDataMap.get("thickness");
-		if(pos1 == null || pos2 == null || thickness == null) {
+		Vector3D center = (Vector3D) regionDataMap.get("center");
+		Double radiusX = (Double) regionDataMap.get("radius_x");
+		Double radiusY = (Double) regionDataMap.get("radius_y");
+		Double radiusZ = (Double) regionDataMap.get("radius_z");
+		if(center == null || radiusX == null || radiusY == null || radiusZ == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new Line(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ(), thickness);
-		double ubx = Math.max(pos1.getX(), pos2.getX()) + thickness;
-		double uby = Math.max(pos1.getY(), pos2.getY()) + thickness;
-		double ubz = Math.max(pos1.getZ(), pos2.getZ()) + thickness;
-		double lbx = Math.min(pos1.getX(), pos2.getX()) - thickness;
-		double lby = Math.min(pos1.getY(), pos2.getY()) - thickness;
-		double lbz = Math.min(pos1.getZ(), pos2.getZ()) - thickness;
+		Region3D region = new Diamond(radiusX, radiusY, radiusZ);
+		region = Region3Ds.shift(region, center);
+		double ubx = center.getX() + radiusX;
+		double uby = center.getY() + radiusY;
+		double ubz = center.getZ() + radiusZ;
+		double lbx = center.getX() - radiusX;
+		double lby = center.getY() - radiusY;
+		double lbz = center.getZ() - radiusZ;
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
@@ -100,5 +122,5 @@ public class LineSelectionStrategy implements SelectionStrategy {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

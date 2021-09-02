@@ -10,19 +10,19 @@ import tokyo.nakanaka.shapeGenerator.selectionStrategy.*;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public enum SelectionShape {
-	CUBOID(new CuboidSelectionStrategy()),
-	DIAMOND(new DiamondSelectionStrategy()),
-	SPHERE(new SphereSelectionStrategy()),
-	TORUS(new TorusSelectionStrategy()),
-	LINE(new LineSelectionStrategy()),
-	TRIANGLE(new TriangleSelectionStrategy()),
-	TETRAHEDRON(new TetrahedronSelectionStrategy()),
-	REGULAR_POLYGON(new RegularPolygonSelectionStrategy());
+	CUBOID(new CuboidSelectionDelegator()),
+	DIAMOND(new DiamondSelectionDelegator()),
+	SPHERE(new SphereSelectionDelegator()),
+	TORUS(new TorusSelectionDelegator()),
+	LINE(new LineSelectionDelegator()),
+	TRIANGLE(new TriangleSelectionDelegator()),
+	TETRAHEDRON(new TetrahedronSelectionDelegator()),
+	REGULAR_POLYGON(new RegularPolygonSelectionDelegator());
 	
-	private SelectionStrategy selStrtg;
+	private SelectionShapeDelegator selDlgt;
 	
-	private SelectionShape(SelectionStrategy selStrtg) {
-		this.selStrtg = selStrtg;
+	private SelectionShape(SelectionShapeDelegator selDlgt) {
+		this.selDlgt = selDlgt;
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public enum SelectionShape {
 	 * @return SelSubCommandHandlerMap
 	 */
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
-		return this.selStrtg.selSubCommandHandlerMap();
+		return this.selDlgt.selSubCommandHandlerMap();
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public enum SelectionShape {
 	 * @return SelectionData
 	 */
 	public SelectionData newSelectionData(World world) {
-		return this.selStrtg.newSelectionData(world);
+		return this.selDlgt.newSelectionData(world);
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public enum SelectionShape {
 	 * @throws IllegalArgumentException if the selection data cannot create a selection
 	 */
 	public Selection buildSelection(SelectionData selData) {
-		return this.selStrtg.buildSelection(selData);
+		return this.selDlgt.buildSelection(selData);
 	}
 
 	/**
@@ -59,7 +59,7 @@ public enum SelectionShape {
 	 * @param blockPos the clicked block position 
 	 */
 	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		this.selStrtg.onLeftClickBlock(userData, player, blockPos);
+		this.selDlgt.onLeftClickBlock(userData, player, blockPos);
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public enum SelectionShape {
 	 * @param blockPos the clicked block position 
 	 */
 	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		this.selStrtg.onRightClickBlock(userData, player, blockPos);
+		this.selDlgt.onRightClickBlock(userData, player, blockPos);
 	}
 	
 }

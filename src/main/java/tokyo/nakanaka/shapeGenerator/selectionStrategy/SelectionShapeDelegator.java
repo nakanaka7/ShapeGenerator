@@ -13,7 +13,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Holds SelectionShape delegating methods
  */
-public interface SelectionStrategy {
+public interface SelectionShapeDelegator {
 	
 	/**
 	 * Returns new selection data for the selection shape
