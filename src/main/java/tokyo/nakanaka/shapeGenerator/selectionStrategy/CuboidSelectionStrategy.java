@@ -13,6 +13,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
@@ -80,9 +81,11 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
-		Vector3D pos1 = (Vector3D) regionDataMap.get("pos1");
-		Vector3D pos2 = (Vector3D) regionDataMap.get("pos2");
+	public Selection buildSelection(SelectionData selData) {
+		World world = selData.getWorld();
+		Map<String, Object> regDataMap = selData.getRegionDataMap();
+		Vector3D pos1 = (Vector3D) regDataMap.get("pos1");
+		Vector3D pos2 = (Vector3D) regDataMap.get("pos2");
 		if(pos1 == null || pos2 == null) {
 			throw new IllegalStateException();
 		}
@@ -93,9 +96,11 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 		double lbx = Math.min(pos1.getX(), pos2.getX());
 		double lby = Math.min(pos1.getY(), pos2.getY());
 		double lbz = Math.min(pos1.getZ(), pos2.getZ());
-		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+		Vector3D offset = selData.getOffset();
+		return new Selection(world, boundReg, offset);
 	}
-
+	
 	@Override
 	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
 		

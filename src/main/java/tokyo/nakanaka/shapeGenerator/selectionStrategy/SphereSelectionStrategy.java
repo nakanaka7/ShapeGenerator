@@ -14,6 +14,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
+import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
@@ -70,7 +71,15 @@ public class SphereSelectionStrategy implements SelectionStrategy{
 	}
 
 	@Override
-	public BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
+	public Selection buildSelection(SelectionData selData) {
+		World world = selData.getWorld();
+		Map<String, Object> regDataMap = selData.getRegionDataMap();
+		BoundRegion3D boundReg = this.buildBoundRegion3D(regDataMap);
+		Vector3D offset = selData.getOffset();
+		return new Selection(world, boundReg, offset);
+	}
+	
+	private BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
 		Vector3D center = (Vector3D) regionDataMap.get("center");
 		Double radius = (Double) regionDataMap.get("radius");
 		if(center == null || radius == null) {
