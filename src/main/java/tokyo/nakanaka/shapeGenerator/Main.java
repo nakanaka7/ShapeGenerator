@@ -9,9 +9,11 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Item;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
@@ -120,15 +122,23 @@ public class Main {
 	 * @param evt a click block event
 	 */
 	public void onClickBlockEvent(ClickBlockEvent evt) {
+		//cancel the event if the clicked item is not "minecraft:blaze_rod"
 		Item item = evt.getItemStack().getItem();
 		if(!item.equals(new Item(new NamespacedID("minecraft", "blaze_rod")))) {
 			return;
 		}
 		evt.cancel();
 		Player player = evt.getPlayer();
+		BlockPosition blockPos = evt.getBlockPos();
 		UserData userData = this.prepareUserData(player);
 		SelectionShape selShape = userData.getSelectionShape();
-		BlockPosition blockPos = evt.getBlockPos();
+		//reset the selection data if the clicked block world is not equal to the world of the selection data
+		World evtWorld = blockPos.world();
+		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
+			SelectionData newSelData = selShape.newSelectionData(evtWorld);
+			userData.setSelectionData(newSelData);
+		}
+		//update the selection data
 		switch(evt.getHandType()) {
 			case LEFT_HAND -> {
 				selShape.onLeftClickBlock(userData, player, blockPos);
@@ -136,6 +146,11 @@ public class Main {
 			case RIGHT_HAND -> {
 				selShape.onRightClickBlock(userData, player, blockPos);
 			}
+		}
+		//print the selection message
+		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
+		for(String line : lines) {
+			player.print(line);
 		}
 	}
 	
