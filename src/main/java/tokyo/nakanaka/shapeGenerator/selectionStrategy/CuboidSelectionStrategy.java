@@ -100,15 +100,8 @@ public class CuboidSelectionStrategy implements SelectionStrategy{
 
 	@Override
 	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		World world = blockPos.world();
-		if(!world.equals(userData.getSelectionData().getWorld())) {
-			SelectionData newSelData = userData.getSelectionShape().newSelectionData(world);
-			userData.setSelectionData(newSelData);
-		}
-		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
-		for(String line : lines) {
-			player.print(line);
-		}
+		
+		
 	}
 
 	@Override
