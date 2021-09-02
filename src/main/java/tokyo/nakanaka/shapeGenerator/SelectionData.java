@@ -15,20 +15,11 @@ public class SelectionData {
 	private Vector3D offset = null;
 	
 	public SelectionData(World world, LinkedHashMap<String, Object> regDataMap, String defaultOffsetKey) {
-		super();
 		this.world = world;
 		this.regDataMap = regDataMap;
 		this.defaultOffsetKey = defaultOffsetKey;
 	}
 	
-	public SelectionData(World world, String defaultOffsetKey, String... regionDataKeys) {
-		this.world = world;
-		this.defaultOffsetKey = defaultOffsetKey;
-		for(String key : regionDataKeys) {
-			this.regDataMap.put(key, null);
-		}
-	}
-
 	/**
 	 * Get the world which the selection data has
 	 * @return the world which the selection data has
