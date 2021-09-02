@@ -6,7 +6,7 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionStrategy.*;
+import tokyo.nakanaka.shapeGenerator.selectionShapeDelegator.*;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public enum SelectionShape {
