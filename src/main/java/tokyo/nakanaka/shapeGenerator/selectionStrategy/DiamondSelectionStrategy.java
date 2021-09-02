@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
@@ -28,7 +29,12 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 
 	@Override
 	public SelectionData newSelectionData(World world) {
-		return new SelectionData(world, "center", "center", "radius_x", "radius_y", "radius_z");
+		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
+		regDataMap.put("center", null);
+		regDataMap.put("radius_x", null);
+		regDataMap.put("radius_y", null);
+		regDataMap.put("radius_z", null);
+		return new SelectionData(world, regDataMap, "center");
 	}
 	
 	@Override

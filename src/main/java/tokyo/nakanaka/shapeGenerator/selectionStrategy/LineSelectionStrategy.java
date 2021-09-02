@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionStrategy;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.BlockPosition;
@@ -25,7 +26,11 @@ public class LineSelectionStrategy implements SelectionStrategy {
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		return new SelectionData(world, "pos1", "pos1", "pos2", "thickness");
+		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
+		regDataMap.put("pos1", null);
+		regDataMap.put("pos2", null);
+		regDataMap.put("thickness", 1);
+		return new SelectionData(world, regDataMap, "pos1");
 	}
 	
 	@Override
