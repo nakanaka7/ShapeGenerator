@@ -10,14 +10,14 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeDelegator.*;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public enum SelectionShape {
-	CUBOID(new CuboidSelectionDelegator()),
-	DIAMOND(new DiamondSelectionDelegator()),
-	SPHERE(new SphereSelectionDelegator()),
-	TORUS(new TorusSelectionDelegator()),
-	LINE(new LineSelectionDelegator()),
-	TRIANGLE(new TriangleSelectionDelegator()),
-	TETRAHEDRON(new TetrahedronSelectionDelegator()),
-	REGULAR_POLYGON(new RegularPolygonSelectionDelegator());
+	CUBOID(new CuboidSelectionShapeDelegator()),
+	DIAMOND(new DiamondSelectionShapeDelegator()),
+	SPHERE(new SphereSelectionShapeDelegator()),
+	TORUS(new TorusSelectionShapeDelegator()),
+	LINE(new LineSelectionShapeDelegator()),
+	TRIANGLE(new TriangleSelectionShapeDelegator()),
+	TETRAHEDRON(new TetrahedronSelectionShapeDelegator()),
+	REGULAR_POLYGON(new RegularPolygonSelectionShapeDelegator());
 	
 	private SelectionShapeDelegator selDlgt;
 	

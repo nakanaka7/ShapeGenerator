@@ -27,7 +27,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class TriangleSelectionDelegator implements SelectionShapeDelegator {
+public class TriangleSelectionShapeDelegator implements SelectionShapeDelegator {
 
 	@Override
 	public SelectionData newSelectionData(World world) {
