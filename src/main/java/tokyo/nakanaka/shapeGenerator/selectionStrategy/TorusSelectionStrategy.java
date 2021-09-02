@@ -49,7 +49,6 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 		return "Set radius_main, radius_sub";
 	}
 	
-	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D center = blockPos.toVector3D();
 		data.putVector3D("center", center);
@@ -57,7 +56,6 @@ public class TorusSelectionStrategy implements SelectionStrategy {
 		data.putDouble("radius_sub", null);
 	}
 
-	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D pos = blockPos.toVector3D();
 		Vector3D center = data.getVector3D("center");

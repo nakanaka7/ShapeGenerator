@@ -41,7 +41,6 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 		return "Set radius_x, radius_y, radius_z";
 	}
 
-	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D center = blockPos.toVector3D();
 		data.putVector3D("center", center);
@@ -50,7 +49,6 @@ public class DiamondSelectionStrategy implements SelectionStrategy {
 		data.putDouble("radius_z", null);
 	}
 
-	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D center = data.getVector3D("center");
 		if(center == null) {

@@ -46,7 +46,6 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 		return "Set pos2, pos3, pos4";
 	}
 	
-	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		data.putVector3D("pos1", blockPos.toVector3D());
 		data.putVector3D("pos2", null);
@@ -54,7 +53,6 @@ public class TetrahedronSelectionStrategy implements SelectionStrategy {
 		data.putVector3D("pos4", null);
 	}
 
-	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		if(data.get("pos2") == null) {
 			data.putVector3D("pos2", blockPos.toVector3D());

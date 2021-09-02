@@ -46,15 +46,13 @@ public class TriangleSelectionStrategy implements SelectionStrategy {
 	public String rightClickDescription() {
 		return "Set pos2, pos3";
 	}
-
-	@Override
+	
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		data.putVector3D("pos1", blockPos.toVector3D());
 		data.putVector3D("pos2", null);
 		data.putVector3D("pos3", null);
 	}
 
-	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D pos1 = data.getVector3D("pos1");
 		if(pos1 == null) {

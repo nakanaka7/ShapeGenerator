@@ -38,13 +38,11 @@ public class LineSelectionStrategy implements SelectionStrategy {
 		return "Set pos2";
 	}
 	
-	@Override
 	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D pos1 = blockPos.toVector3D();
 		data.putVector3D("pos1", pos1);
 	}
 
-	@Override
 	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
 		Vector3D pos2 = blockPos.toVector3D();
 		data.putVector3D("pos2", pos2);
