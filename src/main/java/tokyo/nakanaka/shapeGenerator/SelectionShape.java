@@ -59,7 +59,7 @@ public enum SelectionShape {
 	 * @param blockPos the clicked block position 
 	 */
 	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		this.selDlgt.onLeftClickBlock(userData, player, blockPos);
+		
 	}
 	
 	/**
@@ -69,7 +69,6 @@ public enum SelectionShape {
 	 * @param blockPos the clicked block position 
 	 */
 	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		this.selDlgt.onRightClickBlock(userData, player, blockPos);
+		
 	}
-	
 }
