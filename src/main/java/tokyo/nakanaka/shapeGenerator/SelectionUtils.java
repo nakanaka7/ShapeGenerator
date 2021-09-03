@@ -44,12 +44,22 @@ public class SelectionUtils {
 		return selmap.get(selShape).rightClickDescription();
 	}
 	
-	public static void updateRegionDataByLeftClick(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
-		//TODO
+	/**
+	 * Set a first block click position into the region data
+	 * @param regData the region data 
+	 * @param blockPos the clicked block position 
+	 */
+	public static void setFirstClickData(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
+		selmap.get(selShape).setFirstClickData(regionData, blockPos);
 	}
 	
-	public static void updateRegionDataByRightClick(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
-		//TODO
+	/**
+	 * Set data on additional block clicking
+	 * @param regData the region data
+	 * @param blockPos the clicked block position 
+	 */
+	public static void setAdditionalClickData(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
+		selmap.get(selShape).setAdditionalClickData(regionData, blockPos);
 	}
 	
 	/**
