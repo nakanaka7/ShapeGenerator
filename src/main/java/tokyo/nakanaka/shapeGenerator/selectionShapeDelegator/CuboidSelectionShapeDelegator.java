@@ -98,6 +98,9 @@ public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
 		double lbz = Math.min(pos1.getZ(), pos2.getZ());
 		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 		Vector3D offset = selData.getOffset();
+		if(offset == null) {
+			offset = pos1;
+		}
 		return new Selection(world, boundReg, offset);
 	}
 	

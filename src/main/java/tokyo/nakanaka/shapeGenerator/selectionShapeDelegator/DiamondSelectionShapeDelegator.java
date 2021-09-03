@@ -89,6 +89,9 @@ public class DiamondSelectionShapeDelegator implements SelectionShapeDelegator {
 		Map<String, Object> regDataMap = selData.getRegionDataMap();
 		BoundRegion3D boundReg = this.buildBoundRegion3D(regDataMap);
 		Vector3D offset = selData.getOffset();
+		if(offset == null) {
+			offset = (Vector3D) regDataMap.get("center");
+		}
 		return new Selection(world, boundReg, offset);
 	}
 	
