@@ -1,19 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeDelegator;
 
-import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
@@ -26,7 +19,6 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class DiamondSelectionShapeDelegator implements SelectionShapeDelegator {
 
@@ -53,31 +45,6 @@ public class DiamondSelectionShapeDelegator implements SelectionShapeDelegator {
 	@Override
 	public String rightClickDescription() {
 		return "Set radius_x, radius_y, radius_z";
-	}
-
-	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D center = blockPos.toVector3D();
-		data.putVector3D("center", center);
-		data.putDouble("radius_x", null);
-		data.putDouble("radius_y", null);
-		data.putDouble("radius_z", null);
-	}
-
-	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D center = data.getVector3D("center");
-		if(center == null) {
-			logger.print(HEAD_ERROR + "Set center first");
-			return;
-		}
-		Vector3D pos = blockPos.toVector3D();
-		double radius = pos.negate(center).getAbsolute() + 0.5;
-		if(data.get("radius_x") == null) {
-			data.putDouble("radius_x", radius);
-		}else if(data.get("radius_y") == null) {
-			data.putDouble("radius_y", radius);
-		}else {
-			data.putDouble("radius_z", radius);
-		}	
 	}
 
 	@Override
@@ -122,17 +89,27 @@ public class DiamondSelectionShapeDelegator implements SelectionShapeDelegator {
 	}
 
 	@Override
-	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
+	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
+		DiamondRegionData diamondRegData = (DiamondRegionData)regData;
+		Vector3D center = blockPos.toVector3D();
+		diamondRegData.setCenter(center);
 	}
 
 	@Override
-	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
+	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
+		DiamondRegionData diamondRegData = (DiamondRegionData)regData;
+		Vector3D center = diamondRegData.getCenter();
+		Vector3D pos = blockPos.toVector3D();
+		double radius = pos.negate(center).getAbsolute() + 0.5;
+		if(diamondRegData.getRadius_x() == null) {
+			diamondRegData.setRadius_x(radius);
+		}else if(diamondRegData.getRadius_y() == null) {
+			diamondRegData.setRadius_y(radius);
+		}else {
+			diamondRegData.setRadius_z(radius);
+		}	
 	}
-
+	
 	@Override
 	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
 		DiamondRegionData diamondRegData = (DiamondRegionData)regData;

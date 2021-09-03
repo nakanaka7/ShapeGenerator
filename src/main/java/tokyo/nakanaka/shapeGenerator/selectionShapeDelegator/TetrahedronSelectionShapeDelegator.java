@@ -54,23 +54,26 @@ public class TetrahedronSelectionShapeDelegator implements SelectionShapeDelegat
 		return "Set pos2, pos3, pos4";
 	}
 	
-	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		data.putVector3D("pos1", blockPos.toVector3D());
-		data.putVector3D("pos2", null);
-		data.putVector3D("pos3", null);
-		data.putVector3D("pos4", null);
+	@Override
+	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
+		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
+		Vector3D pos = blockPos.toVector3D();
+		tetraRegData.setPos1(pos);
 	}
 
-	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		if(data.get("pos2") == null) {
-			data.putVector3D("pos2", blockPos.toVector3D());
-		}else if(data.get("pos3") == null) {
-			data.putVector3D("pos3", blockPos.toVector3D());
+	@Override
+	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
+		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
+		Vector3D pos = blockPos.toVector3D();
+		if(tetraRegData.getPos2() == null) {
+			tetraRegData.setPos2(pos);
+		}else if(tetraRegData.getPos2() == null) {
+			tetraRegData.setPos3(pos);
 		}else {
-			data.putVector3D("pos4", blockPos.toVector3D());
-		}	
+			tetraRegData.setPos4(pos);
+		}
 	}
-	
+		
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SelSubCommandHandler> map = new HashMap<>();
@@ -112,18 +115,6 @@ public class TetrahedronSelectionShapeDelegator implements SelectionShapeDelegat
 	}
 
 	@Override
-	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
 		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
 		Vector3D pos1 = tetraRegData.getPos1();
@@ -148,5 +139,5 @@ public class TetrahedronSelectionShapeDelegator implements SelectionShapeDelegat
 		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
 		return tetraRegData.getPos1();
 	}
-	
+
 }

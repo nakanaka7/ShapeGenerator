@@ -59,6 +59,18 @@ public class LineSelectionShapeDelegator implements SelectionShapeDelegator {
 		Vector3D pos2 = blockPos.toVector3D();
 		data.putVector3D("pos2", pos2);
 	}
+	
+	@Override
+	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
@@ -99,18 +111,6 @@ public class LineSelectionShapeDelegator implements SelectionShapeDelegator {
 	}
 
 	@Override
-	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
 		LineRegionData lineRegData = (LineRegionData)regData;
 		Vector3D pos1 = lineRegData.getPos1();
@@ -134,5 +134,5 @@ public class LineSelectionShapeDelegator implements SelectionShapeDelegator {
 		LineRegionData lineRegData = (LineRegionData)regData;
 		return lineRegData.getPos1();
 	}
-	
+
 }

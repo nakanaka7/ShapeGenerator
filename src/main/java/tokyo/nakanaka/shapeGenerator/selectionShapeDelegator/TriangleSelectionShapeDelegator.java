@@ -74,6 +74,24 @@ public class TriangleSelectionShapeDelegator implements SelectionShapeDelegator 
 			data.putVector3D("pos3", pos);
 		}
 	}
+	
+	@Override
+	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
+		TriangleRegionData triRegData = (TriangleRegionData) regData;
+		Vector3D pos = blockPos.toVector3D();
+		triRegData.setPos1(pos);
+	}
+
+	@Override
+	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
+		TriangleRegionData triRegData = (TriangleRegionData) regData;
+		Vector3D pos = blockPos.toVector3D();
+		if(triRegData.getPos2() == null) {
+			triRegData.setPos2(pos);
+		}else {
+			triRegData.setPos3(pos);
+		}
+	}
 
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
@@ -118,18 +136,6 @@ public class TriangleSelectionShapeDelegator implements SelectionShapeDelegator 
 	}
 
 	@Override
-	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
 		TriangleRegionData triRegData = (TriangleRegionData) regData;
 		Vector3D pos1 = triRegData.getPos1();
@@ -156,5 +162,5 @@ public class TriangleSelectionShapeDelegator implements SelectionShapeDelegator 
 		TriangleRegionData triRegData = (TriangleRegionData) regData;
 		return triRegData.getPos1();
 	}
-
+	
 }

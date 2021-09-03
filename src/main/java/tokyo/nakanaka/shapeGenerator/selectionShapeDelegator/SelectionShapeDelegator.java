@@ -5,6 +5,7 @@ import java.util.Map;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
@@ -48,23 +49,20 @@ public interface SelectionShapeDelegator {
 	 * @return a short description for right clicking block event
 	 */
 	String rightClickDescription();
-	/**
-	 * Handles a left clicking block event
-	 * @param userData the user data
-	 * @param player the player of the event
-	 * @param blockPos the clicked block position 
-	 */
-	@Deprecated
-	void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos);
 	
 	/**
-	 * Handles a right clicking block event
-	 * @param userData the user data
-	 * @param player the player of the event
+	 * Set a first block click position into the region data
+	 * @param regData the region data 
 	 * @param blockPos the clicked block position 
 	 */
-	@Deprecated
-	void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos);
+	void setFirstClickData(RegionData regData, BlockVector3D blockPos);
+	
+	/**
+	 * Set data on additional block clicking
+	 * @param regData the region data
+	 * @param blockPos the clicked block position 
+	 */
+	void setAdditionalClickData(RegionData regData, BlockVector3D blockPos);
 		
 	/**
 	 * Returns a selection from the selection data

@@ -2,20 +2,13 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeDelegator;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
@@ -24,12 +17,9 @@ import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos1CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos2CommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCalculator;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
-	private LengthCalculator lengthCalc = new LengthCalculator();
 	
 	@Override
 	public RegionData newRegionData() {
@@ -60,28 +50,6 @@ public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
 		return "Set pos2";
 	}
 
-	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D pos1 = blockPos.toVector3D();
-		data.putVector3D("pos1", pos1);
-		Vector3D pos2 = data.getVector3D("pos2");
-		if(pos2 != null) {
-			data.putDouble("width", this.lengthCalc.calcWidth(pos1, pos2));
-			data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
-			data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
-		}
-	}
-
-	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D pos2 = blockPos.toVector3D();
-		data.putVector3D("pos2", pos2);
-		Vector3D pos1 = data.getVector3D("pos1");
-		if(pos1 != null) {
-			data.putDouble("width", this.lengthCalc.calcWidth(pos1, pos2));
-			data.putDouble("height", this.lengthCalc.calcHeight(pos1, pos2));
-			data.putDouble("length", this.lengthCalc.calcLength(pos1, pos2));
-		}
-	}
-	
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String,  SelSubCommandHandler> map = new HashMap<>();
@@ -115,15 +83,17 @@ public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
 	}
 	
 	@Override
-	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		
-		
+	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
+		CuboidRegionData cuboidRegData = (CuboidRegionData)regData;
+		Vector3D pos1 = blockPos.toVector3D();
+		cuboidRegData.setPos1(pos1);
 	}
 
 	@Override
-	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
+	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
+		CuboidRegionData cuboidRegData = (CuboidRegionData)regData;
+		Vector3D pos2 = blockPos.toVector3D();
+		cuboidRegData.setPos2(pos2);
 	}
 	
 	@Override

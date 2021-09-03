@@ -5,16 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
-import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
@@ -31,7 +25,6 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.RegularPolygonSideCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class RegularPolygonSelectionShapeDelegator implements SelectionShapeDelegator {
 
@@ -61,22 +54,6 @@ public class RegularPolygonSelectionShapeDelegator implements SelectionShapeDele
 		return "Set radius by the center coordinates";
 	}
 	
-	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		data.putVector3D("center", blockPos.toVector3D());
-		data.putDouble("radius", null);
-	}
-
-	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D center = data.getVector3D("center");
-		if(center == null) {
-			logger.print(LogColor.RED + "Set center first");
-			return;
-		}
-		Vector3D pos = blockPos.toVector3D();
-		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
-		data.putDouble("radius", radius);
-	}
-
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SelSubCommandHandler> map = new HashMap<>();
@@ -144,17 +121,20 @@ public class RegularPolygonSelectionShapeDelegator implements SelectionShapeDele
 	}
 
 	@Override
-	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
+	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
+		RegularPolygonRegionData rpRegData = (RegularPolygonRegionData)regData;
+		rpRegData.setCenter(blockPos.toVector3D());
 	}
 
 	@Override
-	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
+	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
+		RegularPolygonRegionData rpRegData = (RegularPolygonRegionData)regData;
+		Vector3D pos = blockPos.toVector3D();
+		Vector3D center = rpRegData.getCenter();
+		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
+		rpRegData.setRadius(radius);
 	}
-
+	
 	@Override
 	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
 		RegularPolygonRegionData rpRegData = (RegularPolygonRegionData)regData;

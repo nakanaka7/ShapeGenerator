@@ -1,19 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeDelegator;
 
-import static tokyo.nakanaka.logger.shapeGenerator.LogConstant.HEAD_ERROR;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
@@ -26,7 +19,6 @@ import tokyo.nakanaka.shapeGenerator.regionData.SphereRegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class SphereSelectionShapeDelegator implements SelectionShapeDelegator{
 
@@ -53,21 +45,22 @@ public class SphereSelectionShapeDelegator implements SelectionShapeDelegator{
 		return "Set radius by the center coordinates";
 	}
 	
-	public void onLeftClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
+	@Override
+	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
+		SphereRegionData sphereRegData = (SphereRegionData)regData;
 		Vector3D center = blockPos.toVector3D();
-		data.putVector3D("center", center);
+		sphereRegData.setCenter(center);
 	}
 
-	public void onRightClickBlock(RegionBuildingData data, Logger logger, BlockVector3D blockPos) {
-		Vector3D center = data.getVector3D("center");
-		if(center == null) {
-			logger.print(HEAD_ERROR + "Set center first");
-			return;
-		}
+	@Override
+	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
+		SphereRegionData sphereRegData = (SphereRegionData)regData;
+		Vector3D center = sphereRegData.getCenter();
 		Vector3D pos = blockPos.toVector3D();
 		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
-		data.putDouble("radius", radius);
+		sphereRegData.setRadius(radius);
 	}
+
 	
 	@Override
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
@@ -98,18 +91,6 @@ public class SphereSelectionShapeDelegator implements SelectionShapeDelegator{
 		Region3D region = new Sphere(radius);
 		region = Region3Ds.shift(region, center);
 		return new SphereBoundRegion(region, center, radius);
-	}
-
-	@Override
-	public void onLeftClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onRightClickBlock(UserData userData, Player player, BlockPosition blockPos) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
