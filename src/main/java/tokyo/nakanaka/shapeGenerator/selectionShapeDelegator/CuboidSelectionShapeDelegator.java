@@ -31,13 +31,16 @@ public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
+		SelectionData selData = new SelectionData();
+		selData.setWorld(world);
 		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
 		regDataMap.put("pos1", null);
 		regDataMap.put("pos2", null);
 		regDataMap.put("width", null);
 		regDataMap.put("height", null);
 		regDataMap.put("length", null);
-		return new SelectionData(world, regDataMap, "pos1");
+		selData.setRegionDataMap(regDataMap);
+		return selData;
 	}
 	
 	@Override
