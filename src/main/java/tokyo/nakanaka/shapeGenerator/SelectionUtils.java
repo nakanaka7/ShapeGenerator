@@ -12,8 +12,10 @@ public class SelectionUtils {
 	private static Map<SelectionShape, SelectionShapeDelegator> selmap = new HashMap<>();
 	
 	public static SelectionData newSelectionData(SelectionShape selShape) {
-		//TODO
-		return null;
+		SelectionData selData = new SelectionData();
+		RegionData regData = selmap.get(selShape).newRegionData();
+		selData.setRegionData(regData);
+		return selData;
 	}
 	
 	/**
