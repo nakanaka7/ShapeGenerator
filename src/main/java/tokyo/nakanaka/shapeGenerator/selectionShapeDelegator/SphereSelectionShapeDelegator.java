@@ -112,4 +112,23 @@ public class SphereSelectionShapeDelegator implements SelectionShapeDelegator{
 		
 	}
 
+	@Override
+	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
+		SphereRegionData sphereRegData = (SphereRegionData)regData;
+		Vector3D center = sphereRegData.getCenter();
+		Double radius = sphereRegData.getRadius();
+		if(center == null || radius == null) {
+			throw new IllegalStateException();
+		}
+		Region3D region = new Sphere(radius);
+		region = Region3Ds.shift(region, center);
+		return new SphereBoundRegion(region, center, radius);
+	}
+
+	@Override
+	public Vector3D defaultOffset(RegionData regData) {
+		SphereRegionData sphereRegData = (SphereRegionData)regData;
+		return sphereRegData.getCenter();
+	}
+
 }

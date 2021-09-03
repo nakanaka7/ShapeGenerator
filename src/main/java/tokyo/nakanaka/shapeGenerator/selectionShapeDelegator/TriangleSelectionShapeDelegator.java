@@ -129,4 +129,32 @@ public class TriangleSelectionShapeDelegator implements SelectionShapeDelegator 
 		
 	}
 
+	@Override
+	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
+		TriangleRegionData triRegData = (TriangleRegionData) regData;
+		Vector3D pos1 = triRegData.getPos1();
+		Vector3D pos2 = triRegData.getPos2();
+		Vector3D pos3 = triRegData.getPos3();
+		Double thickness = triRegData.getThickness();
+		if(pos1 == null || pos2 == null || pos3 == null || thickness == null) {
+			throw new IllegalStateException();
+		}
+		Region3D region = new Triangle(pos1.getX(), pos1.getY(), pos1.getZ(),
+				pos2.getX(), pos2.getY(), pos2.getZ(),
+				pos3.getX(), pos3.getY(), pos3.getZ(), thickness);
+		double ubx = max(pos1.getX(), pos2.getX(), pos3.getX()) + thickness / 2;
+		double uby = max(pos1.getY(), pos2.getY(), pos3.getY()) + thickness / 2;
+		double ubz = max(pos1.getZ(), pos2.getZ(), pos3.getZ()) + thickness / 2;
+		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX()) - thickness / 2;
+		double lby = min(pos1.getY(), pos2.getY(), pos3.getY()) - thickness / 2;
+		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ()) - thickness / 2;
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public Vector3D defaultOffset(RegionData regData) {
+		TriangleRegionData triRegData = (TriangleRegionData) regData;
+		return triRegData.getPos1();
+	}
+
 }

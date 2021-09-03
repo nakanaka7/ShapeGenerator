@@ -125,5 +125,29 @@ public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
+		CuboidRegionData cuboidRegData = (CuboidRegionData)regData;
+		Vector3D pos1 = cuboidRegData.getPos1();
+		Vector3D pos2 = cuboidRegData.getPos2();
+		if(pos1 == null || pos2 == null) {
+			throw new IllegalStateException();
+		}
+		Region3D region = new Cuboid(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ());
+		double ubx = Math.max(pos1.getX(), pos2.getX());
+		double uby = Math.max(pos1.getY(), pos2.getY());
+		double ubz = Math.max(pos1.getZ(), pos2.getZ());
+		double lbx = Math.min(pos1.getX(), pos2.getX());
+		double lby = Math.min(pos1.getY(), pos2.getY());
+		double lbz = Math.min(pos1.getZ(), pos2.getZ());
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public Vector3D defaultOffset(RegionData regData) {
+		CuboidRegionData cuboidRegData = (CuboidRegionData)regData;
+		return cuboidRegData.getPos2();
+	}
 
 }

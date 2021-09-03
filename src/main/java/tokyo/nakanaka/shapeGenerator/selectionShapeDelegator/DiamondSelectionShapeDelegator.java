@@ -133,4 +133,31 @@ public class DiamondSelectionShapeDelegator implements SelectionShapeDelegator {
 		
 	}
 
+	@Override
+	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
+		DiamondRegionData diamondRegData = (DiamondRegionData)regData;
+		Vector3D center = diamondRegData.getCenter();
+		Double radiusX = diamondRegData.getRadius_x();
+		Double radiusY = diamondRegData.getRadius_y();
+		Double radiusZ = diamondRegData.getRadius_z();
+		if(center == null || radiusX == null || radiusY == null || radiusZ == null) {
+			throw new IllegalStateException();
+		}
+		Region3D region = new Diamond(radiusX, radiusY, radiusZ);
+		region = Region3Ds.shift(region, center);
+		double ubx = center.getX() + radiusX;
+		double uby = center.getY() + radiusY;
+		double ubz = center.getZ() + radiusZ;
+		double lbx = center.getX() - radiusX;
+		double lby = center.getY() - radiusY;
+		double lbz = center.getZ() - radiusZ;
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public Vector3D defaultOffset(RegionData regData) {
+		DiamondRegionData diamondRegData = (DiamondRegionData)regData;
+		return diamondRegData.getCenter();
+	}
+
 }

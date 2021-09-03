@@ -150,4 +150,41 @@ public class TorusSelectionShapeDelegator implements SelectionShapeDelegator {
 		
 	}
 
+	@Override
+	public BoundRegion3D buildBoundRegion3D(RegionData regData) {	
+		TorusRegionData torusRegData = (TorusRegionData) regData;
+		Vector3D center = torusRegData.getCenter();
+		Double radiusMain = torusRegData.getRadiusMain();
+		Double radiusSub = torusRegData.getRadiusSub();
+		if(center == null || radiusMain == null || radiusSub == null) {
+			throw new IllegalStateException();
+		}
+		Axis axis = torusRegData.getAxis();
+		Region3D region = new Torus(radiusMain, radiusSub);
+		switch(axis) {
+		case X:
+			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
+			break;
+		case Y:
+			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(90));
+			break;
+		case Z:
+			break;
+		}
+		region = Region3Ds.shift(region, center);
+		double ubx = center.getX() + radiusMain + radiusSub;
+		double uby = center.getY() + radiusMain + radiusSub;
+		double ubz = center.getZ() + radiusMain + radiusSub;
+		double lbx = center.getX() - radiusMain - radiusSub;
+		double lby = center.getY() - radiusMain - radiusSub;
+		double lbz = center.getZ() - radiusMain - radiusSub;
+		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+	}
+
+	@Override
+	public Vector3D defaultOffset(RegionData regData) {
+		TorusRegionData torusRegData = (TorusRegionData) regData;
+		return torusRegData.getCenter();
+	}
+
 }
