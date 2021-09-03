@@ -14,6 +14,10 @@ public class SelectionData {
 	private String defaultOffsetKey;
 	private Vector3D offset = null;
 	
+	public SelectionData() {
+	}
+	
+	@Deprecated
 	public SelectionData(World world, LinkedHashMap<String, Object> regDataMap, String defaultOffsetKey) {
 		this.world = world;
 		this.regDataMap = regDataMap;
@@ -49,10 +53,6 @@ public class SelectionData {
 	 * @return the offset of this selection
 	 */
 	public Vector3D getOffset() {
-		Vector3D offset = this.offset;
-		if(offset == null) {
-			offset = (Vector3D) this.regDataMap.get(defaultOffsetKey);
-		}
 		return offset;
 	}
 	
