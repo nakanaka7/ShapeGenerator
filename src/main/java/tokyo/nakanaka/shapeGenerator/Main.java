@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -139,12 +140,12 @@ public class Main {
 			userData.setSelectionData(newSelData);
 		}
 		//update the selection data
+		LinkedHashMap<String,Object> regDataMap = userData.getSelectionData().getRegionDataMap();
+		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
 			case LEFT_HAND -> {
-				selShape.onLeftClickBlock(userData, player, blockPos);
 			}
 			case RIGHT_HAND -> {
-				selShape.onRightClickBlock(userData, player, blockPos);
 			}
 		}
 		//print the selection message
