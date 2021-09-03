@@ -10,9 +10,8 @@ import tokyo.nakanaka.math.Vector3D;
  */
 public class SelectionData {
 	private World world;
-	private LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
-	private String defaultOffsetKey;
-	private Vector3D offset = null;
+	private LinkedHashMap<String, Object> regDataMap;
+	private Vector3D offset;
 	
 	public SelectionData() {
 	}
@@ -21,7 +20,6 @@ public class SelectionData {
 	public SelectionData(World world, LinkedHashMap<String, Object> regDataMap, String defaultOffsetKey) {
 		this.world = world;
 		this.regDataMap = regDataMap;
-		this.defaultOffsetKey = defaultOffsetKey;
 	}
 	
 	/**
@@ -48,6 +46,14 @@ public class SelectionData {
 		return this.regDataMap;
 	}
 	
+	/**
+	 * Set a region data map
+	 * @param regDataMap a region data map
+	 */
+	public void setRegionDataMap(LinkedHashMap<String, Object> regDataMap) {
+		this.regDataMap = regDataMap;
+	}
+
 	/**
 	 * Returns the offset of this selection
 	 * @return the offset of this selection
