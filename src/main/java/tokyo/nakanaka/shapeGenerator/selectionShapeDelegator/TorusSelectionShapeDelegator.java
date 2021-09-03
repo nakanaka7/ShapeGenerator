@@ -22,6 +22,8 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.TorusRegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.AxisCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
@@ -30,6 +32,11 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TorusSelectionShapeDelegator implements SelectionShapeDelegator {
 
+	@Override
+	public RegionData newRegionData() {
+		return new TorusRegionData();
+	}
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
 		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();

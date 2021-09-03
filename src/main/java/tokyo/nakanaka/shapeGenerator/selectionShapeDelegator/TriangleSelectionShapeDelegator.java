@@ -22,6 +22,8 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.TriangleRegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
@@ -29,6 +31,11 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TriangleSelectionShapeDelegator implements SelectionShapeDelegator {
 
+	@Override
+	public RegionData newRegionData() {
+		return new TriangleRegionData();
+	}
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
 		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();

@@ -20,6 +20,8 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos1CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos2CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCalculator;
@@ -28,6 +30,11 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
 	private LengthCalculator lengthCalc = new LengthCalculator();
+	
+	@Override
+	public RegionData newRegionData() {
+		return new CuboidRegionData();
+	}
 	
 	@Override
 	public SelectionData newSelectionData(World world) {

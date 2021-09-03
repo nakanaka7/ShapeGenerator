@@ -24,6 +24,8 @@ import tokyo.nakanaka.shapeGenerator.math.region2D.RegularPolygon;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.RegularPolygonRegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.AxisCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
@@ -33,6 +35,11 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class RegularPolygonSelectionShapeDelegator implements SelectionShapeDelegator {
 
+	@Override
+	public RegionData newRegionData() {
+		return new RegularPolygonRegionData();
+	}
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
 		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();

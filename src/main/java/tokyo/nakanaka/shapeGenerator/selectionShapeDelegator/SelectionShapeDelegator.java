@@ -7,6 +7,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -15,6 +16,11 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  */
 public interface SelectionShapeDelegator {
 	
+	/**
+	 * Returns new region data of a selection
+	 * @return new region data of a selection
+	 */
+	RegionData newRegionData();
 	/**
 	 * Returns new selection data for the selection shape
 	 * @param world a world
