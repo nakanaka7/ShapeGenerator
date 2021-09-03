@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
  * Selection data that user data has
@@ -11,6 +12,7 @@ import tokyo.nakanaka.math.Vector3D;
 public class SelectionData {
 	private World world;
 	private LinkedHashMap<String, Object> regDataMap;
+	private RegionData regionData;
 	private Vector3D offset;
 	
 	public SelectionData() {
@@ -52,6 +54,22 @@ public class SelectionData {
 	 */
 	public void setRegionDataMap(LinkedHashMap<String, Object> regDataMap) {
 		this.regDataMap = regDataMap;
+	}
+
+	/**
+	 * Return the region data
+	 * @return the region data
+	 */
+	public RegionData getRegionData() {
+		return regionData;
+	}
+
+	/**
+	 * Set a region data
+	 * @param regionData a region data
+	 */
+	public void setRegionData(RegionData regionData) {
+		this.regionData = regionData;
 	}
 
 	/**
