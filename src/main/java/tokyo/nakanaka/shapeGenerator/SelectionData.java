@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
@@ -12,10 +13,15 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 public class SelectionData {
 	private World world;
 	private LinkedHashMap<String, Object> regDataMap;
-	private RegionData regionData;
+	private RegionData regData;
 	private Vector3D offset;
 	
 	public SelectionData() {
+	}
+	
+	public SelectionData(World world, RegionData regData) {
+		this.world = world;
+		this.regData = regData;
 	}
 	
 	@Deprecated
@@ -61,7 +67,7 @@ public class SelectionData {
 	 * @return the region data
 	 */
 	public RegionData getRegionData() {
-		return regionData;
+		return regData;
 	}
 
 	/**
@@ -69,7 +75,7 @@ public class SelectionData {
 	 * @param regionData a region data
 	 */
 	public void setRegionData(RegionData regionData) {
-		this.regionData = regionData;
+		this.regData = regionData;
 	}
 
 	/**
@@ -86,6 +92,20 @@ public class SelectionData {
 	 */
 	public void setOffset(Vector3D offset) {
 		this.offset = offset;
+	}
+	
+	/**
+	 * Returns a selection from the selection data
+	 * @return a selection from the selection data
+	 * @throws IllegalStateException if the selection data cannot create a selection
+	 */
+	public Selection buildSelection() {
+		BoundRegion3D boundReg = regData.buildBoundRegion3D();
+		Vector3D offset = this.offset;
+		if(offset == null) {
+			offset = regData.defaultOffset();
+		}
+		return new Selection(this.world, boundReg, offset);
 	}
 		
 }
