@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeDelegator.SelectionShapeDelegator;
 
-public class SelectionUtils {
+public class SelectionHandler {
 	private static Map<SelectionShape, SelectionShapeDelegator> selmap = new HashMap<>();
 	
 	public static SelectionData newSelectionData(SelectionShape selShape) {
