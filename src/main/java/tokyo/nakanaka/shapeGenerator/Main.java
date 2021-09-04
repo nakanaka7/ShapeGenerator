@@ -42,7 +42,7 @@ public class Main {
 		SelectionHandler selHandler = new SelectionHandler(selStrtgMap);
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(selHandler));
+		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(selHandler));
 		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(selHandler, blockIDListFactory));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
