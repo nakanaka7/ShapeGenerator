@@ -39,7 +39,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;

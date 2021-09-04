@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
+package tokyo.nakanaka.shapeGenerator;
 
 import java.util.List;
 

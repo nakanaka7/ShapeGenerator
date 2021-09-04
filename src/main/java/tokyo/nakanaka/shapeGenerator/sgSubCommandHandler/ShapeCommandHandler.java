@@ -9,6 +9,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionDataCreator;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 

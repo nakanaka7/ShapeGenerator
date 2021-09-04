@@ -11,6 +11,7 @@ import tokyo.nakanaka.command.MaxXCommand;
 import tokyo.nakanaka.command.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MaxxHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;

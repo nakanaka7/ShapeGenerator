@@ -11,6 +11,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionDataCreator;
 import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.OffsetCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;

@@ -10,6 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.BlockIDListFactory;
 import tokyo.nakanaka.shapeGenerator.Selection;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
