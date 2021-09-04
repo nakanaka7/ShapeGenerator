@@ -64,4 +64,9 @@ public class TriangleRegionData implements RegionData {
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
+	@Override
+	public Vector3D defaultOffset() {
+		return pos1;
+	}
+
 }

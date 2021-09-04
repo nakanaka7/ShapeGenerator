@@ -97,5 +97,9 @@ public class RegularPolygonRegionData implements RegionData {
 		return bound.createShiftedRegion(center);
 	}
 
+	@Override
+	public Vector3D defaultOffset() {
+		return center;
+	}
 	
 }

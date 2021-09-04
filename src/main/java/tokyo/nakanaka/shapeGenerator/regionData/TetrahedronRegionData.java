@@ -64,5 +64,10 @@ public class TetrahedronRegionData implements RegionData {
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
+
+	@Override
+	public Vector3D defaultOffset() {
+		return pos1;
+	}
 	
 }

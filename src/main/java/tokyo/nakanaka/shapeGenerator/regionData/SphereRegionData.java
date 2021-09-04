@@ -36,5 +36,10 @@ public class SphereRegionData implements RegionData {
 		region = Region3Ds.shift(region, center);
 		return new SphereBoundRegion(region, center, radius);
 	}
+
+	@Override
+	public Vector3D defaultOffset() {
+		return center;
+	}
 	
 }

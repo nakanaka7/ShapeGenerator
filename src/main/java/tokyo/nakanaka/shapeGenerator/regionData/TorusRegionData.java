@@ -72,5 +72,10 @@ public class TorusRegionData implements RegionData {
 		double lbz = center.getZ() - radiusMain - radiusSub;
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
+
+	@Override
+	public Vector3D defaultOffset() {
+		return center;
+	}
 	
 }
