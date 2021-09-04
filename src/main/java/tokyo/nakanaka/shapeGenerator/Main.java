@@ -28,6 +28,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class Main {
 	private Map<String, SgSubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	private Map<User, UserData> userDataMap = new HashMap<>();
+	private SelectionDataCreator selDataCreator;
 	
 	public Main(BlockIDListFactory blockIDListFactory) {
 		Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
@@ -40,9 +41,10 @@ public class Main {
 		selStrtgMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
 		SelectionHandler selHandler = new SelectionHandler(selStrtgMap);
+		this.selDataCreator = new SelectionDataCreator(selStrtgMap);
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
+		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(this.selDataCreator));
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(selHandler));
 		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
@@ -158,9 +160,10 @@ public class Main {
 		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
 			userData = new UserData();
-			userData.setSelectionShape(SelectionShape.CUBOID);
+			SelectionShape defaultShape = SelectionShape.CUBOID;
+			userData.setSelectionShape(defaultShape);
 			World world = player.getEntityPosition().world();
-			SelectionData selData = new SelectionData(world, new CuboidRegionData());
+			SelectionData selData = this.selDataCreator.newSelectionData(defaultShape, world);
 			userData.setSelectionData(selData);
 			this.userDataMap.put(user, userData);
 		}
