@@ -8,10 +8,11 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionDataCreator;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class ResetCommandHandler implements SelSubCommandHandler {
+public class ResetCommandHandler implements SubCommandHandler {
 	private SelectionDataCreator selDataCreator;
 
 	public ResetCommandHandler(SelectionDataCreator selDataCreator) {

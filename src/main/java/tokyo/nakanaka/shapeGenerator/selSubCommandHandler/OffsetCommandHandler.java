@@ -8,10 +8,11 @@ import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class OffsetCommandHandler implements SelSubCommandHandler {
+public class OffsetCommandHandler implements SubCommandHandler {
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
