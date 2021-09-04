@@ -131,7 +131,7 @@ public class Main {
 		//reset the selection data if the clicked block world is not equal to the world of the selection data
 		World evtWorld = blockPos.world();
 		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
-			SelectionData newSelData = selShape.newSelectionData(evtWorld);
+			SelectionData newSelData = this.selDataCreator.newSelectionData(selShape, evtWorld);
 			userData.setSelectionData(newSelData);
 		}
 		//update the selection data
