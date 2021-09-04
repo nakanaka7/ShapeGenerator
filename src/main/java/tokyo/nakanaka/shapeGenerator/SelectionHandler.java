@@ -10,16 +10,28 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
+/**
+ * Holds methods which depends on selection shape 
+ */
 public class SelectionHandler {
-	private Map<SelectionShape, SelectionShapeStrategy> selmap = new HashMap<>();
+	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
 	
-	public SelectionHandler(Map<SelectionShape, SelectionShapeStrategy> selmap) {
-		this.selmap = selmap;
+	/**
+	 * Construct the handler
+	 * @param selStrtgMap a map which key is selection shape and which value is selection shape strategy.
+	 */
+	public SelectionHandler(Map<SelectionShape, SelectionShapeStrategy> selStrtgMap) {
+		this.selStrtgMap = selStrtgMap;
 	}
 
+	/**
+	 * Returns a new selection data for the selection shape
+	 * @param selShape a selection shape
+	 * @return a new selection data for the selection shape
+	 */
 	public SelectionData newSelectionData(SelectionShape selShape) {
 		SelectionData selData = new SelectionData();
-		RegionData regData = selmap.get(selShape).newRegionData();
+		RegionData regData = selStrtgMap.get(selShape).newRegionData();
 		selData.setRegionData(regData);
 		return selData;
 	}
@@ -29,7 +41,7 @@ public class SelectionHandler {
 	 * @return SelSubCommandHandlerMap
 	 */
 	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap(SelectionShape selShape) {
-		return selmap.get(selShape).selSubCommandHandlerMap();
+		return selStrtgMap.get(selShape).selSubCommandHandlerMap();
 	}
 	
 	/**
@@ -37,7 +49,7 @@ public class SelectionHandler {
 	 * @return a short description for left clicking block event
 	 */
 	public String leftClickDescription(SelectionShape selShape) {
-		return selmap.get(selShape).leftClickDescription();
+		return selStrtgMap.get(selShape).leftClickDescription();
 	}
 	
 	/**
@@ -45,7 +57,7 @@ public class SelectionHandler {
 	 * @return a short description for right clicking block event
 	 */
 	public String rightClickDescription(SelectionShape selShape) {
-		return selmap.get(selShape).rightClickDescription();
+		return selStrtgMap.get(selShape).rightClickDescription();
 	}
 	
 	/**
@@ -54,7 +66,7 @@ public class SelectionHandler {
 	 * @param blockPos the clicked block position 
 	 */
 	public void setFirstClickData(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
-		selmap.get(selShape).setFirstClickData(regionData, blockPos);
+		selStrtgMap.get(selShape).setFirstClickData(regionData, blockPos);
 	}
 	
 	/**
@@ -63,7 +75,7 @@ public class SelectionHandler {
 	 * @param blockPos the clicked block position 
 	 */
 	public void setAdditionalClickData(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
-		selmap.get(selShape).setAdditionalClickData(regionData, blockPos);
+		selStrtgMap.get(selShape).setAdditionalClickData(regionData, blockPos);
 	}
 	
 	/**
@@ -73,7 +85,7 @@ public class SelectionHandler {
 	 * @throws IllegalArgumentException if the selection data cannot create a selection
 	 */
 	public Selection buildSelection(SelectionShape selShape, SelectionData selData) {
-		SelectionShapeStrategy s = selmap.get(selShape);
+		SelectionShapeStrategy s = selStrtgMap.get(selShape);
 		RegionData regData = selData.getRegionData();
 		BoundRegion3D boundReg = s.buildBoundRegion3D(regData);
 		Vector3D offset = selData.getOffset();
