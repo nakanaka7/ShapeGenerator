@@ -13,7 +13,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg redo" command
  */
-public class RedoCommandHandler implements SgSubCommandHandler{
+public class RedoCommandHandler implements SubCommandHandler{
 		
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

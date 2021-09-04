@@ -13,7 +13,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg undo" command
  */
-public class UndoCommandHandler implements SgSubCommandHandler{
+public class UndoCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

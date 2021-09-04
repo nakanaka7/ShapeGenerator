@@ -39,7 +39,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SgSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
@@ -53,7 +53,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  */
 public class Main {
 	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
-	private Map<String, SgSubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
+	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	private Map<User, UserData> userDataMap = new HashMap<>();
 	private SelectionDataCreator selDataCreator;
 	
@@ -109,7 +109,7 @@ public class Main {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
+		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler == null) {
 			cmdSender.print(LogColor.RED + "Unknown subcommand");
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
@@ -135,7 +135,7 @@ public class Main {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SgSubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
+		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
 			UserData userData = this.prepareUserData(player);
 			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);

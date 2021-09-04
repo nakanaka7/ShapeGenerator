@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg minx" command
  */
-public class MinxCommandHandler implements SgSubCommandHandler {
+public class MinxCommandHandler implements SubCommandHandler {
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg del" command
  */
-public class DelCommandHandler implements SgSubCommandHandler {
+public class DelCommandHandler implements SubCommandHandler {
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg rot" command
  */
-public class RotCommandHandler implements SgSubCommandHandler{
+public class RotCommandHandler implements SubCommandHandler{
 			
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

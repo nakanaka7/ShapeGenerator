@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg phy" command
  */
-public class PhyCommandHandler implements SgSubCommandHandler {
+public class PhyCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

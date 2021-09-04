@@ -20,7 +20,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg sel" command
  */
-public class SelCommandHandler implements SgSubCommandHandler {
+public class SelCommandHandler implements SubCommandHandler {
 	private Map<String, SelSubCommandHandler> commonSelSubCmdHandlerMap = new HashMap<>();
 	private SelectionHandler selHandler;
 	

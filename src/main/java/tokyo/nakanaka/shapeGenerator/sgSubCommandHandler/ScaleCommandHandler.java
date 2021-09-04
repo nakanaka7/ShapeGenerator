@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg scale" command
  */
-public class ScaleCommandHandler implements SgSubCommandHandler{
+public class ScaleCommandHandler implements SubCommandHandler{
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {

@@ -16,7 +16,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg genr" command
  */
-public class GenrCommandHandler implements SgSubCommandHandler {
+public class GenrCommandHandler implements SubCommandHandler {
 	private BlockIDListFactory blockIDFactory;
 	
 	public GenrCommandHandler(BlockIDListFactory blockIDFactory) {

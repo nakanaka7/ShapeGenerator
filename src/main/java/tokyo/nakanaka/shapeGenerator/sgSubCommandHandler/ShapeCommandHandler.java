@@ -15,7 +15,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg shape" command
  */
-public class ShapeCommandHandler implements SgSubCommandHandler {
+public class ShapeCommandHandler implements SubCommandHandler {
 	private SelectionDataCreator selDataCreator;
 	
 	public ShapeCommandHandler(SelectionDataCreator selDataCreator) {

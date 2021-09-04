@@ -19,7 +19,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 /**
  * Handles "/sg shift" command
  */
-public class ShiftCommandHandler implements SgSubCommandHandler{
+public class ShiftCommandHandler implements SubCommandHandler{
 
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
