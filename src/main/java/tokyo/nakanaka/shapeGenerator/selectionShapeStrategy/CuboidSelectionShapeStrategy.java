@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeDelegator;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,7 +19,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos1CommandHandl
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos2CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
-public class CuboidSelectionShapeDelegator implements SelectionShapeDelegator{
+public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	
 	@Override
 	public RegionData newRegionData() {

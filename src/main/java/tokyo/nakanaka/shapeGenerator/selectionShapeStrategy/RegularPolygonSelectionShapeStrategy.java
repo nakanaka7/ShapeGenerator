@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeDelegator;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -26,7 +26,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.RegularPolygonSideCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
-public class RegularPolygonSelectionShapeDelegator implements SelectionShapeDelegator {
+public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrategy {
 
 	@Override
 	public RegionData newRegionData() {

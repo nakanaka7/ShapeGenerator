@@ -6,22 +6,22 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeDelegator.*;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public enum SelectionShape {
-	CUBOID(new CuboidSelectionShapeDelegator()),
-	DIAMOND(new DiamondSelectionShapeDelegator()),
-	SPHERE(new SphereSelectionShapeDelegator()),
-	TORUS(new TorusSelectionShapeDelegator()),
-	LINE(new LineSelectionShapeDelegator()),
-	TRIANGLE(new TriangleSelectionShapeDelegator()),
-	TETRAHEDRON(new TetrahedronSelectionShapeDelegator()),
-	REGULAR_POLYGON(new RegularPolygonSelectionShapeDelegator());
+	CUBOID(new CuboidSelectionShapeStrategy()),
+	DIAMOND(new DiamondSelectionShapeStrategy()),
+	SPHERE(new SphereSelectionShapeStrategy()),
+	TORUS(new TorusSelectionShapeStrategy()),
+	LINE(new LineSelectionShapeStrategy()),
+	TRIANGLE(new TriangleSelectionShapeStrategy()),
+	TETRAHEDRON(new TetrahedronSelectionShapeStrategy()),
+	REGULAR_POLYGON(new RegularPolygonSelectionShapeStrategy());
 	
-	private SelectionShapeDelegator selDlgt;
+	private SelectionShapeStrategy selDlgt;
 	
-	private SelectionShape(SelectionShapeDelegator selDlgt) {
+	private SelectionShape(SelectionShapeStrategy selDlgt) {
 		this.selDlgt = selDlgt;
 	}
 	

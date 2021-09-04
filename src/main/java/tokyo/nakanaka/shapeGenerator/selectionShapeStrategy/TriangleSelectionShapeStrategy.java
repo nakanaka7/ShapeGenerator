@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeDelegator;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
@@ -29,7 +29,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class TriangleSelectionShapeDelegator implements SelectionShapeDelegator {
+public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 
 	@Override
 	public RegionData newRegionData() {

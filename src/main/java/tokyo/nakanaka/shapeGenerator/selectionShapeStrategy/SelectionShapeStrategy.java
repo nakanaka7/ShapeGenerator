@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeDelegator;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 /**
  * Holds SelectionShape delegating methods
  */
-public interface SelectionShapeDelegator {
+public interface SelectionShapeStrategy {
 	
 	/**
 	 * Returns new region data of a selection
