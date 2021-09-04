@@ -22,7 +22,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg sel" command
  */
 public class SelCommandHandler implements SubCommandHandler {
-	private Map<String, SelSubCommandHandler> commonSelSubCmdHandlerMap = new HashMap<>();
+	private Map<String, SubCommandHandler> commonSelSubCmdHandlerMap = new HashMap<>();
 	private SelectionHandler selHandler;
 	
 	{
@@ -45,7 +45,7 @@ public class SelCommandHandler implements SubCommandHandler {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SelSubCommandHandler commonHandler = this.commonSelSubCmdHandlerMap.get(subLabel);
+		SubCommandHandler commonHandler = this.commonSelSubCmdHandlerMap.get(subLabel);
 		if(commonHandler != null) {
 			commonHandler.onCommand(userData, player, subArgs);
 			return;
@@ -73,7 +73,7 @@ public class SelCommandHandler implements SubCommandHandler {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SelSubCommandHandler commonHandler = this.commonSelSubCmdHandlerMap.get(subLabel);
+		SubCommandHandler commonHandler = this.commonSelSubCmdHandlerMap.get(subLabel);
 		if(commonHandler != null) {
 			return commonHandler.onTabComplete(userData, player, subArgs);
 		}
