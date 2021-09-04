@@ -1,57 +1,19 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.Map;
-
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.World;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public enum SelectionShape {
-	CUBOID(new CuboidSelectionShapeStrategy()),
-	DIAMOND(new DiamondSelectionShapeStrategy()),
-	SPHERE(new SphereSelectionShapeStrategy()),
-	TORUS(new TorusSelectionShapeStrategy()),
-	LINE(new LineSelectionShapeStrategy()),
-	TRIANGLE(new TriangleSelectionShapeStrategy()),
-	TETRAHEDRON(new TetrahedronSelectionShapeStrategy()),
-	REGULAR_POLYGON(new RegularPolygonSelectionShapeStrategy());
+	CUBOID,
+	DIAMOND,
+	SPHERE,
+	TORUS,
+	LINE,
+	TRIANGLE,
+	TETRAHEDRON,
+	REGULAR_POLYGON;
 	
-	private SelectionShapeStrategy selDlgt;
-	
-	private SelectionShape(SelectionShapeStrategy selDlgt) {
-		this.selDlgt = selDlgt;
-	}
-	
-	/**
-	 * Get SelSubCommandHandlerMap
-	 * @return SelSubCommandHandlerMap
-	 */
-	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
-		return this.selDlgt.selSubCommandHandlerMap();
-	}
-	
-	/**
-	 * Get SelectionData
-	 * @param world a world of the selection data
-	 * @return SelectionData
-	 */
-	public SelectionData newSelectionData(World world) {
-		return this.selDlgt.newSelectionData(world);
-	}
-	
-	/**
-	 * Returns a selection from the selection data
-	 * @param selData a selection data
-	 * @return a selection from the selection data
-	 * @throws IllegalArgumentException if the selection data cannot create a selection
-	 */
-	public Selection buildSelection(SelectionData selData) {
-		return this.selDlgt.buildSelection(selData);
-	}
-
 	/**
 	 * Handles a left click block event
 	 * @param userData the user data
