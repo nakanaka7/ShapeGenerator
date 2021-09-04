@@ -44,7 +44,7 @@ public class Main {
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler());
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(selHandler));
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(selHandler, blockIDListFactory));
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
 		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
