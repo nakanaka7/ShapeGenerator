@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
@@ -15,11 +16,16 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg sel" command
  */
 public class SelCommandHandler implements SgSubCommandHandler {
+	private SelectionHandler selHandler;
+
+	public SelCommandHandler(SelectionHandler selHandler) {
+		this.selHandler = selHandler;
+	}
 
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();
-		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = shape.selSubCommandHandlerMap();
+		Map<String, SelSubCommandHandler> selSubCmdHandlerMap = this.selHandler.selSubCommandHandlerMap(shape);
 		if(args.length == 0) {
 			player.print(LogColor.RED + "Usage:" + new SelHelp().getUsage());
 			player.print(LogColor.RED + "See help");
@@ -35,7 +41,6 @@ public class SelCommandHandler implements SgSubCommandHandler {
 			return;
 		}
 		selSubCmdHandler.onCommand(userData, player, subArgs);
-
 	}
 
 	@Override

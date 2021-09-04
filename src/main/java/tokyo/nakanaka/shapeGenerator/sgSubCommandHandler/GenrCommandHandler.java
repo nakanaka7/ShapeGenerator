@@ -10,6 +10,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.logger.shapeGenerator.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.BlockIDListFactory;
 import tokyo.nakanaka.shapeGenerator.Selection;
+import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -17,9 +18,11 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg genr" command
  */
 public class GenrCommandHandler implements SgSubCommandHandler {
+	private SelectionHandler selHandler;
 	private BlockIDListFactory blockIDFactory;
 	
-	public GenrCommandHandler(BlockIDListFactory blockIDFactory) {
+	public GenrCommandHandler(SelectionHandler selHandler, BlockIDListFactory blockIDFactory) {
+		this.selHandler = selHandler;
 		this.blockIDFactory = blockIDFactory;
 	}
 	
@@ -38,7 +41,7 @@ public class GenrCommandHandler implements SgSubCommandHandler {
 		}
 		Selection sel;
 		try {
-			sel = userData.getSelectionShape().buildSelection(userData.getSelectionData());
+			sel = this.selHandler.buildSelection(userData.getSelectionShape(), userData.getSelectionData());
 		}catch(IllegalArgumentException e) {
 			player.print(LogColor.RED + "Incomplete selection");
 			return;

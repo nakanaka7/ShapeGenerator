@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -14,7 +15,12 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Handles "/sg shape" command
  */
 public class ShapeCommandHandler implements SgSubCommandHandler {
+	private SelectionHandler selHandler;
 	
+	public ShapeCommandHandler(SelectionHandler selHandler) {
+		this.selHandler = selHandler;
+	}
+
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		if(args.length != 1) {
@@ -31,7 +37,8 @@ public class ShapeCommandHandler implements SgSubCommandHandler {
 		SelectionShape original = userData.getSelectionShape();
 		if(shape != original) {
 			userData.setSelectionShape(shape);
-			SelectionData selData = shape.newSelectionData(player.getEntityPosition().world());
+			SelectionData selData = this.selHandler.newSelectionData(shape);
+			selData.setWorld(player.getEntityPosition().world());
 			userData.setSelectionData(selData);
 		}
 		player.print(LogColor.GOLD + "Set the shape -> " + shape);
