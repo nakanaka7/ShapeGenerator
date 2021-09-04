@@ -15,6 +15,7 @@ import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
@@ -157,9 +158,9 @@ public class Main {
 		UserData userData = this.userDataMap.get(user);
 		if(userData == null) {
 			userData = new UserData();
-			SelectionShape defaultShape = SelectionShape.CUBOID;
-			SelectionData selData = defaultShape.newSelectionData(player.getEntityPosition().world());
-			userData.setSelectionShape(defaultShape);
+			userData.setSelectionShape(SelectionShape.CUBOID);
+			World world = player.getEntityPosition().world();
+			SelectionData selData = new SelectionData(world, new CuboidRegionData());
 			userData.setSelectionData(selData);
 			this.userDataMap.put(user, userData);
 		}
