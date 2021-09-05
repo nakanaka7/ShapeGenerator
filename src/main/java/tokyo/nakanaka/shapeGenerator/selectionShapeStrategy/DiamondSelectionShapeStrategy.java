@@ -101,12 +101,12 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		Vector3D center = diamondRegData.getCenter();
 		Vector3D pos = blockPos.toVector3D();
 		double radius = pos.negate(center).getAbsolute() + 0.5;
-		if(diamondRegData.getRadius_x() == null) {
-			diamondRegData.setRadius_x(radius);
-		}else if(diamondRegData.getRadius_y() == null) {
-			diamondRegData.setRadius_y(radius);
+		if(diamondRegData.getRadiusX() == null) {
+			diamondRegData.setRadiusX(radius);
+		}else if(diamondRegData.getRadiusY() == null) {
+			diamondRegData.setRadiusY(radius);
 		}else {
-			diamondRegData.setRadius_z(radius);
+			diamondRegData.setRadiusZ(radius);
 		}	
 	}
 	
@@ -114,9 +114,9 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 	public BoundRegion3D buildBoundRegion3D(RegionData regData) {
 		DiamondRegionData diamondRegData = (DiamondRegionData)regData;
 		Vector3D center = diamondRegData.getCenter();
-		Double radiusX = diamondRegData.getRadius_x();
-		Double radiusY = diamondRegData.getRadius_y();
-		Double radiusZ = diamondRegData.getRadius_z();
+		Double radiusX = diamondRegData.getRadiusX();
+		Double radiusY = diamondRegData.getRadiusY();
+		Double radiusZ = diamondRegData.getRadiusZ();
 		if(center == null || radiusX == null || radiusY == null || radiusZ == null) {
 			throw new IllegalStateException();
 		}
