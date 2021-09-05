@@ -15,11 +15,37 @@ import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.CuboidSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DiamondSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LineSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.RegularPolygonSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SphereSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TetrahedronSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TorusSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TriangleSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxxCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxyCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxzCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinxCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinyCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinzCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MirrorCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.PhyCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
-import tokyo.nakanaka.shapeGenerator.user.User;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.user.UserDataRepository;
 
 /**
  * Main class for the project. 
@@ -27,7 +53,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class Main {
 	private SelectionHandler selHandler;
 	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
-	private Map<User, UserData> userDataMap = new HashMap<>();
+	private UserDataRepository userDataRepository;
 	
 	{
 		Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
@@ -40,6 +66,7 @@ public class Main {
 		selStrtgMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
 		this.selHandler = new SelectionHandler(selStrtgMap);
+		this.userDataRepository = new UserDataRepository(selHandler);
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(this.selHandler));
@@ -87,7 +114,7 @@ public class Main {
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
 		}
-		UserData userData = this.prepareUserData(player);
+		UserData userData = this.userDataRepository.prepareUserData(player);
 		sgSubCmdHandler.onCommand(userData, player, subArgs);
 	}
 	
@@ -109,7 +136,7 @@ public class Main {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
-			UserData userData = this.prepareUserData(player);
+			UserData userData = this.userDataRepository.prepareUserData(player);
 			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
 		}
 		return List.of();
@@ -127,7 +154,7 @@ public class Main {
 		evt.cancel();
 		Player player = evt.getPlayer();
 		BlockPosition blockPos = evt.getBlockPos();
-		UserData userData = this.prepareUserData(player);
+		UserData userData = this.userDataRepository.prepareUserData(player);
 		SelectionShape selShape = userData.getSelectionShape();
 		//reset the selection data if the clicked block world is not equal to the world of the selection data
 		World evtWorld = blockPos.world();
@@ -151,26 +178,5 @@ public class Main {
 			player.print(line);
 		}
 	}
-	
-	/**
-	 * Get UserData. If there is a user data for the player, return it, otherwise create new one and return it.
-	 * @param player player
-	 * @return UserData which the user has
-	 */
-	private UserData prepareUserData(Player player) {
-		User user = new User(player.getUniqueID());
-		UserData userData = this.userDataMap.get(user);
-		if(userData == null) {
-			userData = new UserData();
-			SelectionShape defaultShape = SelectionShape.CUBOID;
-			userData.setSelectionShape(defaultShape);
-			World world = player.getEntityPosition().world();
-			SelectionData selData = this.selHandler.newSelectionData(defaultShape);
-			selData.setWorld(world);
-			userData.setSelectionData(selData);
-			this.userDataMap.put(user, userData);
-		}
-		return userData;
-	}
-	
+		
 }
