@@ -4,50 +4,60 @@ import java.util.List;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.commandArgument.CoordinateCommandArgument;
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.Utils;
+import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelSubCommandHandlerUtils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class OffsetCommandHandler implements SubCommandHandler {
 	
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
-		SelectionData selData = userData.getSelectionData();
-		if(args.length != 0 && args.length != 3) {
-			player.print(LogColor.RED + "Usage: " + "/sg sel offset [x] [y] [z]");
-			player.print(LogColor.RED + "Note: When specifing the coordinates, [x], [y], [z] must be given altogether");
-			return;
+		String usage = "/sg sel offset [x] [y] [z]";
+		//parse the arguments to a position
+		double x;
+		double y;
+		double z;
+		BlockPosition pos = player.getBlockPosition();
+		switch(args.length) {
+		case 0 -> {
+			x = pos.x();
+			y = pos.y();
+			z = pos.z();
 		}
-		Vector3D pos;
-		if(args.length == 0) {
-			BlockPosition playerPos = player.getBlockPosition();
-			pos = new Vector3D(playerPos.x(), playerPos.y(), playerPos.z());
-		}else if(args.length == 3) {
-			CoordinateCommandArgument coordArg = new CoordinateCommandArgument();
-			double x;
-			double y;
-			double z;
+		case 3 -> {
 			try {
-				x = coordArg.onParsingDouble(args[0], userData.getX());
-				y = coordArg.onParsingDouble(args[1], userData.getY());
-				z = coordArg.onParsingDouble(args[2], userData.getZ());
+				x = Double.parseDouble(args[0]);
+				y = Double.parseDouble(args[1]);
+				z = Double.parseDouble(args[2]);
 			}catch(IllegalArgumentException e) {
-				player.print(LogColor.RED + "Can not parse the coordinates");
+				player.print(LogColor.RED + "Usage: " + usage);
 				return;
 			}
-			pos = new Vector3D(x, y, z);
-		}else {
+		}
+		default -> {
+			player.print(LogColor.RED + "Usage: " + usage);
 			return;
+		}	
 		}
-		selData.setOffset(pos);
-		List<String> lines = Utils.getSelectionMessageLines(selData);
-		for(String line : lines) {
-			player.print(line);
+		//reset the selection data if the world changes
+		World evtWorld = pos.world();
+		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
+			RegionData cuboidRegData = new CuboidRegionData();
+			SelectionData newSelData = new SelectionData(evtWorld, cuboidRegData);
+			userData.setSelectionData(newSelData);
 		}
+		SelectionData selData = userData.getSelectionData();
+		selData.setOffset(new Vector3D(x, y, z));
+		//print the selection message
+		List<String> lines = SelSubCommandHandlerUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
+		lines.stream().forEach(player::print);
 	}
 	
 	@Override
