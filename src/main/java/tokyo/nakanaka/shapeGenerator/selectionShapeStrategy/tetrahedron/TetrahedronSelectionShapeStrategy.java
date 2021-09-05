@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron;
 
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
@@ -17,6 +17,7 @@ import tokyo.nakanaka.selection.RegionBuildingData;
 import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
@@ -25,6 +26,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.TetrahedronRegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy {
@@ -84,6 +86,15 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 		return map;
 	}
 
+	public Map<String, SubCommandHandler> selSubCommandHandlerMapNew() {
+		Map<String, SubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new Pos1CommandHandler());
+		map.put("pos2", new Pos2CommandHandler());
+		map.put("pos3", new Pos3CommandHandler());
+		map.put("pos4", new Pos4CommandHandler());
+		return map;
+	}
+	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		World world = selData.getWorld();
