@@ -3,7 +3,6 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.Map;
 
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
@@ -50,11 +49,4 @@ public interface SelectionShapeStrategy {
 	 */
 	void setAdditionalClickData(RegionData regData, BlockVector3D blockPos);
 			
-	/**
-	 * Returns default offset
-	 * @param regData a region data
-	 * @return default offset
-	 */
-	Vector3D defaultOffset(RegionData regData);
-	
 }

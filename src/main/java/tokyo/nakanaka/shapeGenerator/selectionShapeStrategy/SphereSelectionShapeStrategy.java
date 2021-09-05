@@ -72,10 +72,4 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 		return new SphereBoundRegion(region, center, radius);
 	}
 
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		SphereRegionData sphereRegData = (SphereRegionData)regData;
-		return sphereRegData.getCenter();
-	}
-
 }

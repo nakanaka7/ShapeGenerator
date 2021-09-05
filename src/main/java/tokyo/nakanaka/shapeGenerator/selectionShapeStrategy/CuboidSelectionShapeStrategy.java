@@ -60,10 +60,4 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 		cuboidRegData.setPos2(pos2);
 	}
 	
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		CuboidRegionData cuboidRegData = (CuboidRegionData)regData;
-		return cuboidRegData.getPos2();
-	}
-
 }

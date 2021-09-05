@@ -3,17 +3,10 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.HashMap;
 import java.util.Map;
 
-import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.shapeGenerator.Selection;
-import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Line;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.regionData.LineRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
@@ -67,10 +60,4 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 		return map;
 	}
 	
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		LineRegionData lineRegData = (LineRegionData)regData;
-		return lineRegData.getPos1();
-	}
-
 }

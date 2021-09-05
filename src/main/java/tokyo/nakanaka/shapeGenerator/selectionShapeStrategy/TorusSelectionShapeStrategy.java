@@ -68,10 +68,4 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		return map;
 	}
 	
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		TorusRegionData torusRegData = (TorusRegionData) regData;
-		return torusRegData.getCenter();
-	}
-
 }

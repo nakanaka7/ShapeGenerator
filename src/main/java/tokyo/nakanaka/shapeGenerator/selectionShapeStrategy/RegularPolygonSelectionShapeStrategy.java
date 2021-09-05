@@ -108,10 +108,4 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 		rpRegData.setRadius(radius);
 	}
 
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		RegularPolygonRegionData rpRegData = (RegularPolygonRegionData)regData;
-		return rpRegData.getCenter();
-	}
-
 }

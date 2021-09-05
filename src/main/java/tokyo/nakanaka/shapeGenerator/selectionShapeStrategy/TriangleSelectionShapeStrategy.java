@@ -79,10 +79,4 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		return map;
 	}
 	
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		TriangleRegionData triRegData = (TriangleRegionData) regData;
-		return triRegData.getPos1();
-	}
-	
 }

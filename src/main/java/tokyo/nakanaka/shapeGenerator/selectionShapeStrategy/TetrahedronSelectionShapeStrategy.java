@@ -6,11 +6,8 @@ import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 import java.util.HashMap;
 import java.util.Map;
 
-import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.Selection;
-import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -81,28 +78,4 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 		return map;
 	}
 	
-	private BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
-		Vector3D pos1 = (Vector3D) regionDataMap.get("pos1");
-		Vector3D pos2 = (Vector3D) regionDataMap.get("pos2");
-		Vector3D pos3 = (Vector3D) regionDataMap.get("pos3");
-		Vector3D pos4 = (Vector3D) regionDataMap.get("pos4");
-		Region3D region = new Tetrahedron(pos1.getX(), pos1.getY(), pos1.getZ(),
-				pos2.getX(), pos2.getY(), pos2.getZ(),
-				pos3.getX(), pos3.getY(), pos3.getZ(),
-				pos4.getX(), pos4.getY(), pos4.getZ());
-		double ubx = max(pos1.getX(), pos2.getX(), pos3.getX(), pos4.getX());
-		double uby = max(pos1.getY(), pos2.getY(), pos3.getY(), pos4.getY());
-		double ubz = max(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
-		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX(), pos4.getX());
-		double lby = min(pos1.getY(), pos2.getY(), pos3.getY(), pos4.getY());
-		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
-		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-	}
-	
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
-		return tetraRegData.getPos1();
-	}
-
 }

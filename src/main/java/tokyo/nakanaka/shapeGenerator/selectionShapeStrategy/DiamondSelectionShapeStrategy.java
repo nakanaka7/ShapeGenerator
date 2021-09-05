@@ -60,10 +60,4 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		}	
 	}
 	
-	@Override
-	public Vector3D defaultOffset(RegionData regData) {
-		DiamondRegionData diamondRegData = (DiamondRegionData)regData;
-		return diamondRegData.getCenter();
-	}
-
 }
