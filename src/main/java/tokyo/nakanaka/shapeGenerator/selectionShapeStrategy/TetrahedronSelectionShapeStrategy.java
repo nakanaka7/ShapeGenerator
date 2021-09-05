@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
@@ -26,7 +26,10 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.TetrahedronRegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron.Pos1CommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron.Pos2CommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron.Pos3CommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron.Pos4CommandHandler;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy {
