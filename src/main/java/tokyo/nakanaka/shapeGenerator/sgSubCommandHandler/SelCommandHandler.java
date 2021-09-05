@@ -12,9 +12,9 @@ import tokyo.nakanaka.shapeGenerator.SelectionDataCreator;
 import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.OffsetCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.OffsetCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
