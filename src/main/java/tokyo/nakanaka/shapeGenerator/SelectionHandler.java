@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
@@ -76,23 +74,6 @@ public class SelectionHandler {
 	 */
 	public void setAdditionalClickData(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
 		selStrtgMap.get(selShape).setAdditionalClickData(regionData, blockPos);
-	}
-	
-	/**
-	 * Returns a selection from the selection data
-	 * @param selData a selection data
-	 * @return a selection from the selection data
-	 * @throws IllegalArgumentException if the selection data cannot create a selection
-	 */
-	public Selection buildSelection(SelectionShape selShape, SelectionData selData) {
-		SelectionShapeStrategy s = selStrtgMap.get(selShape);
-		RegionData regData = selData.getRegionData();
-		BoundRegion3D boundReg = s.buildBoundRegion3D(regData);
-		Vector3D offset = selData.getOffset();
-		if(offset == null) {
-			offset = s.defaultOffset(regData);
-		}
-		return new Selection(selData.getWorld(), boundReg, offset);
 	}
 	
 }
