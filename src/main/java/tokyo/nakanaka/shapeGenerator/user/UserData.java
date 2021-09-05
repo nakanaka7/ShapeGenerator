@@ -5,12 +5,10 @@ import java.util.UUID;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
-import tokyo.nakanaka.selection.SelectionBuildingData;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
-@SuppressWarnings("deprecation")
 public class UserData {
 	private UUID uid;
 	private String name;
@@ -20,7 +18,6 @@ public class UserData {
 	private int y;
 	private int z;
 	private SelectionShape shape;
-	private SelectionBuildingData selBuildData;
 	private SelectionData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
@@ -108,16 +105,6 @@ public class UserData {
 		this.shape = shape;
 	}
 	
-	@Deprecated
-	public SelectionBuildingData getSelectionBuildingData() {
-		return selBuildData;
-	}
-
-	@Deprecated
-	public void setSelectionBuildingData(SelectionBuildingData selData) {
-		this.selBuildData = selData;
-	}
-
 	public SelectionData getSelectionData() {
 		return selData;
 	}
