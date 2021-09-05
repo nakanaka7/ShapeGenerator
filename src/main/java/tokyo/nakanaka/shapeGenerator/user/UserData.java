@@ -1,25 +1,15 @@
 package tokyo.nakanaka.shapeGenerator.user;
 
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
 public class UserData {
-	private Logger logger;
 	private SelectionShape shape;
 	private SelectionData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	
-	public Logger getLogger() {
-		return logger;
-	}
-
-	public void setLogger(Logger logger) {
-		this.logger = logger;
-	}
-
 	/**
 	 * Returns a selection shape for the user
 	 * @return a selection shape for the user
