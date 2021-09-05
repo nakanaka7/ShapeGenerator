@@ -25,12 +25,12 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  * Main class for the project. 
  */
 public class Main {
-	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
+	private SelectionHandler selHandler;
 	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	private Map<User, UserData> userDataMap = new HashMap<>();
-	private SelectionDataCreator selDataCreator;
 	
 	{
+		Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
 		selStrtgMap.put(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
@@ -39,16 +39,11 @@ public class Main {
 		selStrtgMap.put(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
-	}
-	
-	public Main(BlockIDListFactory blockIDListFactory) {
-		this.selDataCreator = new SelectionDataCreator(selStrtgMap);
-		SelSubCommandHandlerMapCreator selSubCmdHandlerMapCreator = new SelSubCommandHandlerMapCreator(selStrtgMap);
+		this.selHandler = new SelectionHandler(selStrtgMap);
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(this.selDataCreator));
-		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(selDataCreator, selSubCmdHandlerMapCreator));
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
+		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(this.selHandler));
+		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(this.selHandler));
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
 		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
@@ -63,6 +58,10 @@ public class Main {
 		this.sgSubCmdHandlerMap.put("del", new DelCommandHandler());
 		this.sgSubCmdHandlerMap.put("undo", new UndoCommandHandler());
 		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
+	}
+	
+	public Main(BlockIDListFactory blockIDListFactory) {
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
 	}
 	/**
 	 * Handles "/sg" command
@@ -133,7 +132,8 @@ public class Main {
 		//reset the selection data if the clicked block world is not equal to the world of the selection data
 		World evtWorld = blockPos.world();
 		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
-			SelectionData newSelData = this.selDataCreator.newSelectionData(selShape, evtWorld);
+			SelectionData newSelData = this.selHandler.newSelectionData(selShape);
+			newSelData.setWorld(evtWorld);
 			userData.setSelectionData(newSelData);
 		}
 		//update the selection data
@@ -165,7 +165,8 @@ public class Main {
 			SelectionShape defaultShape = SelectionShape.CUBOID;
 			userData.setSelectionShape(defaultShape);
 			World world = player.getEntityPosition().world();
-			SelectionData selData = this.selDataCreator.newSelectionData(defaultShape, world);
+			SelectionData selData = this.selHandler.newSelectionData(defaultShape);
+			selData.setWorld(world);
 			userData.setSelectionData(selData);
 			this.userDataMap.put(user, userData);
 		}
