@@ -11,9 +11,9 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
 public class DiamondRegionData implements RegionData {
 	private Vector3D center;
-	private Double radius_x;
-	private Double radius_y;
-	private Double radius_z;
+	private Double radiusX;
+	private Double radiusY;
+	private Double radiusZ;
 	
 	public Vector3D getCenter() {
 		return center;
@@ -23,42 +23,42 @@ public class DiamondRegionData implements RegionData {
 		this.center = center;
 	}
 	
-	public Double getRadius_x() {
-		return radius_x;
+	public Double getRadiusX() {
+		return radiusX;
 	}
-	public void setRadius_x(Double radius_x) {
-		this.radius_x = radius_x;
-	}
-	
-	public Double getRadius_y() {
-		return radius_y;
+	public void setRadiusX(Double radiusX) {
+		this.radiusX = radiusX;
 	}
 	
-	public void setRadius_y(Double radius_y) {
-		this.radius_y = radius_y;
+	public Double getRadiusY() {
+		return radiusY;
 	}
 	
-	public Double getRadius_z() {
-		return radius_z;
+	public void setRadiusY(Double radiusY) {
+		this.radiusY = radiusY;
 	}
 	
-	public void setRadius_z(Double radius_z) {
-		this.radius_z = radius_z;
+	public Double getRadiusZ() {
+		return radiusZ;
+	}
+	
+	public void setRadiusZ(Double radiusZ) {
+		this.radiusZ = radiusZ;
 	}
 	
 	@Override
 	public BoundRegion3D buildBoundRegion3D() {
-		if(center == null || radius_x == null || radius_y == null || radius_z == null) {
+		if(center == null || radiusX == null || radiusY == null || radiusZ == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new Diamond(radius_x, radius_y, radius_z);
+		Region3D region = new Diamond(radiusX, radiusY, radiusZ);
 		region = Region3Ds.shift(region, center);
-		double ubx = center.getX() + radius_x;
-		double uby = center.getY() + radius_y;
-		double ubz = center.getZ() + radius_z;
-		double lbx = center.getX() - radius_x;
-		double lby = center.getY() - radius_y;
-		double lbz = center.getZ() - radius_z;
+		double ubx = center.getX() + radiusX;
+		double uby = center.getY() + radiusY;
+		double ubz = center.getZ() + radiusZ;
+		double lbx = center.getX() - radiusX;
+		double lby = center.getY() - radiusY;
+		double lbz = center.getZ() - radiusZ;
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
@@ -75,9 +75,9 @@ public class DiamondRegionData implements RegionData {
 		map.put("radius_z", "");
 		if(center != null) {
 			map.put("center", center.toString());
-			map.put("radius_x", String.valueOf(radius_x));
-			map.put("radius_y", String.valueOf(radius_y));
-			map.put("radius_z", String.valueOf(radius_z));
+			map.put("radius_x", String.valueOf(radiusX));
+			map.put("radius_y", String.valueOf(radiusY));
+			map.put("radius_z", String.valueOf(radiusZ));
 		}
 		return map;
 	}
