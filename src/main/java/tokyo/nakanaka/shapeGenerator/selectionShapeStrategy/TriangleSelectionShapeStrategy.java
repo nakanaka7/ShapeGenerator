@@ -88,18 +88,6 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		map.put("thickness", new LengthCommandHandler("thickness"));
 		return map;
 	}
-
-	@Override
-	public Selection buildSelection(SelectionData selData) {
-		World world = selData.getWorld();
-		Map<String, Object> regDataMap = selData.getRegionDataMap();
-		BoundRegion3D boundReg = this.buildBoundRegion3D(regDataMap);
-		Vector3D offset = selData.getOffset();
-		if(offset == null) {
-			offset = (Vector3D) regDataMap.get("pos1");
-		}
-		return new Selection(world, boundReg, offset);
-	}
 	
 	private BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
 		Vector3D pos1 = (Vector3D) regionDataMap.get("pos1");

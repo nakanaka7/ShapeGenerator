@@ -54,15 +54,6 @@ public interface SelectionShapeStrategy {
 	void setAdditionalClickData(RegionData regData, BlockVector3D blockPos);
 		
 	/**
-	 * Returns a selection from the selection data
-	 * @param selData a selection data
-	 * @return a selection from the selection data
-	 * @throws IllegalArgumentException if the selection data cannot create a selection
-	 */
-	@Deprecated
-	Selection buildSelection(SelectionData selData);
-	
-	/**
 	 * Returns a bound region from the region data
 	 * @param regData a region data
 	 * @return a bound region from the region data
