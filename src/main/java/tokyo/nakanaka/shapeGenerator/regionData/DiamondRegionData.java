@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.regionData;
 
+import java.util.LinkedHashMap;
+
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -64,5 +66,20 @@ public class DiamondRegionData implements RegionData {
 	public Vector3D defaultOffset() {
 		return center;
 	}
-		
+	
+	public LinkedHashMap<String, String> toLinkedHashMap() {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		map.put("center", "");
+		map.put("radius_x", "");
+		map.put("radius_y", "");
+		map.put("radius_z", "");
+		if(center != null) {
+			map.put("center", center.toString());
+			map.put("radius_x", String.valueOf(radius_x));
+			map.put("radius_y", String.valueOf(radius_y));
+			map.put("radius_z", String.valueOf(radius_z));
+		}
+		return map;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.regionData;
 
+import java.util.LinkedHashMap;
+
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -46,4 +48,26 @@ public class CuboidRegionData implements RegionData {
 		return pos1;
 	}
 	
+	public LinkedHashMap<String, String> toLinkedHashMap() {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		map.put("pos1", "");
+		map.put("pos2", "");
+		map.put("width", "");
+		map.put("height", "");
+		map.put("length", "");
+		if(pos1 != null) {
+			map.put("pos1", pos1.toString());
+		}
+		if(pos2 != null) {
+			map.put("pos2", pos2.toString());
+		}
+		if(pos1 != null && pos2 != null) {
+			map.put("width", String.valueOf(pos2.getX() - pos1.getX()));
+			map.put("height", String.valueOf(pos2.getY() - pos1.getY()));
+			map.put("length", String.valueOf(pos2.getZ() - pos1.getZ
+					()));
+		}
+		return map;
+	}
+
 }
