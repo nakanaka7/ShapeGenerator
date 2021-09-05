@@ -1,20 +1,11 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Item;
-import tokyo.nakanaka.NamespacedID;
-import tokyo.nakanaka.Player;
-import tokyo.nakanaka.World;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.CuboidSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DiamondSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LineSelectionShapeStrategy;
@@ -24,38 +15,16 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SphereSelectionShape
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TetrahedronSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TorusSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TriangleSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxxCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxyCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxzCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinxCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinyCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinzCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MirrorCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.PhyCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 import tokyo.nakanaka.shapeGenerator.user.UserDataRepository;
 
 /**
  * Main class for the project. 
  */
 public class Main {
-	private SelectionHandler selHandler;
-	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
-	private UserDataRepository userDataRepository;
+	private SgCommandHandler sgCmdHandler;
+	private SgEventHandler sgEvtHandler;
 	
-	{
+	public Main(BlockIDListFactory blockIDListFactory) {
 		Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
 		selStrtgMap.put(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
@@ -65,57 +34,19 @@ public class Main {
 		selStrtgMap.put(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
-		this.selHandler = new SelectionHandler(selStrtgMap);
-		this.userDataRepository = new UserDataRepository(selHandler);
-		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
-		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(this.selHandler));
-		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(this.selHandler));
-		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
-		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
-		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
-		this.sgSubCmdHandlerMap.put("mirror", new MirrorCommandHandler());
-		this.sgSubCmdHandlerMap.put("rot", new RotCommandHandler());
-		this.sgSubCmdHandlerMap.put("maxx", new MaxxCommandHandler());
-		this.sgSubCmdHandlerMap.put("maxy", new MaxyCommandHandler());
-		this.sgSubCmdHandlerMap.put("maxz", new MaxzCommandHandler());
-		this.sgSubCmdHandlerMap.put("minx", new MinxCommandHandler());
-		this.sgSubCmdHandlerMap.put("miny", new MinyCommandHandler());
-		this.sgSubCmdHandlerMap.put("minz", new MinzCommandHandler());
-		this.sgSubCmdHandlerMap.put("del", new DelCommandHandler());
-		this.sgSubCmdHandlerMap.put("undo", new UndoCommandHandler());
-		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
+		var selHandler = new SelectionHandler(selStrtgMap);
+		var userDataRepository = new UserDataRepository(selHandler);
+		this.sgCmdHandler = new SgCommandHandler(userDataRepository, selHandler, blockIDListFactory);
+		this.sgEvtHandler = new SgEventHandler(userDataRepository, selHandler);
 	}
 	
-	public Main(BlockIDListFactory blockIDListFactory) {
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
-	}
 	/**
 	 * Handles "/sg" command
 	 * @param cmdSender a command sender
 	 * @param args arguments of the command line
 	 */
 	public void onSgCommand(CommandSender cmdSender, String[] args) {
-		if(!(cmdSender instanceof Player player)) {
-			cmdSender.print(LogColor.RED + "Player only command");
-			return;
-		}
-		if(args.length == 0) {
-			cmdSender.print(LogColor.RED + "Usage: /sg <subcommand>");
-			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
-			return;
-		}
-		String subLabel = args[0];
-		String[] subArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
-		if(sgSubCmdHandler == null) {
-			cmdSender.print(LogColor.RED + "Unknown subcommand");
-			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
-			return;
-		}
-		UserData userData = this.userDataRepository.prepareUserData(player);
-		sgSubCmdHandler.onCommand(userData, player, subArgs);
+		this.sgCmdHandler.onCommand(cmdSender, args);
 	}
 	
 	/**
@@ -125,58 +56,15 @@ public class Main {
 	 * @return a list for tab complete of "/sg" command
 	 */
 	public List<String> onSgTabComplete(CommandSender cmdSender, String[] args) {
-		if(!(cmdSender instanceof Player player)) {
-			return List.of();
-		}
-		if(args.length == 1) {
-			return 	new ArrayList<>(this.sgSubCmdHandlerMap.keySet());
-		}	
-		String subLabel = args[0];
-		String[] subArgs = new String[args.length - 1];
-		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
-		if(sgSubCmdHandler != null) {
-			UserData userData = this.userDataRepository.prepareUserData(player);
-			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
-		}
-		return List.of();
+		return this.sgCmdHandler.onTabComplete(cmdSender, args);
 	}
+	
 	/**
 	 * Handles a click block event
 	 * @param evt a click block event
 	 */
 	public void onClickBlockEvent(ClickBlockEvent evt) {
-		//cancel the event if the clicked item is not "minecraft:blaze_rod"
-		Item item = evt.getItemStack().getItem();
-		if(!item.equals(new Item(new NamespacedID("minecraft", "blaze_rod")))) {
-			return;
-		}
-		evt.cancel();
-		Player player = evt.getPlayer();
-		BlockPosition blockPos = evt.getBlockPos();
-		UserData userData = this.userDataRepository.prepareUserData(player);
-		SelectionShape selShape = userData.getSelectionShape();
-		//reset the selection data if the clicked block world is not equal to the world of the selection data
-		World evtWorld = blockPos.world();
-		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
-			SelectionData newSelData = this.selHandler.newSelectionData(selShape);
-			newSelData.setWorld(evtWorld);
-			userData.setSelectionData(newSelData);
-		}
-		//update the selection data
-		LinkedHashMap<String,Object> regDataMap = userData.getSelectionData().getRegionDataMap();
-		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
-		switch(evt.getHandType()) {
-			case LEFT_HAND -> {
-			}
-			case RIGHT_HAND -> {
-			}
-		}
-		//print the selection message
-		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
-		for(String line : lines) {
-			player.print(line);
-		}
+		this.sgEvtHandler.onClickBlockEvent(evt);
 	}
 		
 }
