@@ -1,5 +1,6 @@
 package tokyo.nakanaka.shapeGenerator;
 
+@Deprecated
 public class Pair<E1, E2> {
 	private E1 e1;
 	private E2 e2;
