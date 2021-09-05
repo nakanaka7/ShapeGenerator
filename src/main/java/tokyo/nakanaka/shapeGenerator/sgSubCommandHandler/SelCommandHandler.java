@@ -8,8 +8,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelSubCommandHandlerMapCreator;
-import tokyo.nakanaka.shapeGenerator.SelectionDataCreator;
+import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.OffsetCommandHandler;
@@ -22,15 +21,15 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
  */
 public class SelCommandHandler implements SubCommandHandler {
 	private Map<String, SubCommandHandler> commonSelSubCmdHandlerMap = new HashMap<>();
-	private SelSubCommandHandlerMapCreator selSubCmdHandlerMapCreator;
+	private SelectionHandler selHandler;
 	
 	{
 		this.commonSelSubCmdHandlerMap.put("offset", new OffsetCommandHandler());
 	}
 	
-	public SelCommandHandler(SelectionDataCreator selDataCreator, SelSubCommandHandlerMapCreator selSubCmdHandlerMapCreator) {
-		this.commonSelSubCmdHandlerMap.put("reset", new ResetCommandHandler(selDataCreator));
-		this.selSubCmdHandlerMapCreator = selSubCmdHandlerMapCreator;
+	public SelCommandHandler(SelectionHandler selHandler) {
+		this.commonSelSubCmdHandlerMap.put("reset", new ResetCommandHandler(selHandler));
+		this.selHandler = selHandler;
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class SelCommandHandler implements SubCommandHandler {
 			commonHandler.onCommand(userData, player, subArgs);
 			return;
 		}
-		Map<String, SubCommandHandler> selSubCmdHandlerMap = this.selSubCmdHandlerMapCreator.selSubCommandHandlerMap(shape);
+		Map<String, SubCommandHandler> selSubCmdHandlerMap = this.selHandler.selSubCommandHandlerMap(shape);
 		SubCommandHandler properHandler = selSubCmdHandlerMap.get(subLabel);
 		if(properHandler != null) {
 			properHandler.onCommand(userData, player, subArgs);
@@ -62,7 +61,7 @@ public class SelCommandHandler implements SubCommandHandler {
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		SelectionShape shape = userData.getSelectionShape();
-		Map<String, SubCommandHandler> selSubCmdHandlerMap = this.selSubCmdHandlerMapCreator.selSubCommandHandlerMap(shape);
+		Map<String, SubCommandHandler> selSubCmdHandlerMap = this.selHandler.selSubCommandHandlerMap(shape);
 		if(args.length == 1) {
 			List<String> subLabelList = new ArrayList<>(this.commonSelSubCmdHandlerMap.keySet());
 			subLabelList.addAll(selSubCmdHandlerMap.keySet().stream()
