@@ -48,6 +48,7 @@ public class CuboidRegionData implements RegionData {
 		return pos1;
 	}
 	
+	@Override
 	public LinkedHashMap<String, String> toLinkedHashMap() {
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 		map.put("pos1", "");
@@ -64,8 +65,7 @@ public class CuboidRegionData implements RegionData {
 		if(pos1 != null && pos2 != null) {
 			map.put("width", String.valueOf(pos2.getX() - pos1.getX()));
 			map.put("height", String.valueOf(pos2.getY() - pos1.getY()));
-			map.put("length", String.valueOf(pos2.getZ() - pos1.getZ
-					()));
+			map.put("length", String.valueOf(pos2.getZ() - pos1.getZ()));
 		}
 		return map;
 	}

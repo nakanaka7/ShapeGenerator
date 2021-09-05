@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.regionData;
 
+import java.util.LinkedHashMap;
+
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
@@ -100,6 +102,32 @@ public class RegularPolygonRegionData implements RegionData {
 	@Override
 	public Vector3D defaultOffset() {
 		return center;
+	}
+	
+	@Override
+	public LinkedHashMap<String, String> toLinkedHashMap() {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		map.put("center", "");
+		map.put("radius", "");
+		map.put("side", "");
+		map.put("thickness", "");
+		map.put("axis", "");
+		if(center != null) {
+			map.put("center", center.toString());
+		}
+		if(radius != null) {
+			map.put("radius", String.valueOf(radius));
+		}
+		if(side != null) {
+			map.put("side", String.valueOf(side));
+		}
+		if(thickness != null) {
+			map.put("thickness", String.valueOf(thickness));
+		}
+		if(axis != null) {
+			map.put("axis", axis.toString().toLowerCase());
+		}
+		return map;
 	}
 	
 }

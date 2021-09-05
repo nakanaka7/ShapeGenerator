@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.regionData;
 
+import java.util.LinkedHashMap;
+
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
@@ -76,6 +78,24 @@ public class TorusRegionData implements RegionData {
 	@Override
 	public Vector3D defaultOffset() {
 		return center;
+	}
+	
+	@Override
+	public LinkedHashMap<String, String> toLinkedHashMap() {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		map.put("center", "");
+		map.put("radius_main", "");
+		map.put("radius_sub", "");
+		if(center != null) {
+			map.put("center", center.toString());
+		}
+		if(radiusMain != null) {
+			map.put("radius_main", String.valueOf(radiusMain));
+		}
+		if(radiusSub != null) {
+			map.put("radius_sub", String.valueOf(radiusSub));
+		}
+		return map;
 	}
 	
 }

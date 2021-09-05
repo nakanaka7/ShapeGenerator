@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.regionData;
 
+import java.util.LinkedHashMap;
+
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -53,6 +55,24 @@ public class LineRegionData implements RegionData {
 	@Override
 	public Vector3D defaultOffset() {
 		return pos1;
+	}
+	
+	@Override
+	public LinkedHashMap<String, String> toLinkedHashMap() {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		map.put("pos1", "");
+		map.put("pos2", "");
+		map.put("thickness", "");
+		if(pos1 != null) {
+			map.put("pos1", pos1.toString());
+		}
+		if(pos2 != null) {
+			map.put("pos2", pos2.toString());
+		}
+		if(thickness != null) {
+			map.put("thickness", String.valueOf(thickness));
+		}
+		return map;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.regionData;
 
+import java.util.LinkedHashMap;
+
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
@@ -40,6 +42,20 @@ public class SphereRegionData implements RegionData {
 	@Override
 	public Vector3D defaultOffset() {
 		return center;
+	}
+	
+	@Override
+	public LinkedHashMap<String, String> toLinkedHashMap() {
+		LinkedHashMap<String, String> map = new LinkedHashMap<>();
+		map.put("center", "");
+		map.put("radius", "");
+		if(center != null) {
+			map.put("center", center.toString());
+		}
+		if(radius != null) {
+			map.put("radius", String.valueOf(radius));
+		}
+		return map;
 	}
 	
 }
