@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboid;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -9,6 +9,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
@@ -18,6 +19,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos1CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos2CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	
@@ -57,7 +59,12 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 		map.put("pos2", new CuboidPos2CommandHandler());
 		return map;
 	}
-
+	
+	public Map<String, SubCommandHandler> selSubCommandHandlerMapNew(){
+		Map<String,  SubCommandHandler> map = new HashMap<>();
+		return map;
+	}
+	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		World world = selData.getWorld();
