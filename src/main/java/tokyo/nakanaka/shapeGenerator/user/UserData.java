@@ -2,7 +2,6 @@ package tokyo.nakanaka.shapeGenerator.user;
 
 import java.util.UUID;
 
-import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
@@ -14,9 +13,6 @@ public class UserData {
 	private String name;
 	private Logger logger;
 	private World world;
-	private int x;
-	private int y;
-	private int z;
 	private SelectionShape shape;
 	private SelectionData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
@@ -49,44 +45,13 @@ public class UserData {
 	public void setLogger(Logger logger) {
 		this.logger = logger;
 	}
-	
-	public void setBlockPosition(BlockPosition blockPos) {
-		this.world = blockPos.world();
-		this.x = blockPos.x();
-		this.y = blockPos.y();
-		this.z = blockPos.z();
-	}
-	
+		
 	public World getWorld() {
 		return world;
 	}
 
 	public void setWorld(World world) {
 		this.world = world;
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getZ() {
-		return z;
-	}
-
-	public void setZ(int z) {
-		this.z = z;
 	}
 	
 	/**
