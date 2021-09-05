@@ -1,7 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.World;
@@ -27,20 +26,6 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	@Override
 	public RegionData newRegionData() {
 		return new CuboidRegionData();
-	}
-	
-	@Override
-	public SelectionData newSelectionData(World world) {
-		SelectionData selData = new SelectionData();
-		selData.setWorld(world);
-		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
-		regDataMap.put("pos1", null);
-		regDataMap.put("pos2", null);
-		regDataMap.put("width", null);
-		regDataMap.put("height", null);
-		regDataMap.put("length", null);
-		selData.setRegionDataMap(regDataMap);
-		return selData;
 	}
 	
 	@Override

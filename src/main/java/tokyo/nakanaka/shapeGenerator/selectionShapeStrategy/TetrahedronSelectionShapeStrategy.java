@@ -4,17 +4,11 @@ import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.selection.RegionBuildingData;
-import tokyo.nakanaka.selection.RegionBuildingData.DataType;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
@@ -30,23 +24,12 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedronSelSubCom
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedronSelSubCommandHandler.Pos2CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedronSelSubCommandHandler.Pos3CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedronSelSubCommandHandler.Pos4CommandHandler;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy {
 
 	@Override
 	public RegionData newRegionData() {
 		return new TetrahedronRegionData();
-	}
-	
-	@Override
-	public SelectionData newSelectionData(World world) {
-		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
-		regDataMap.put("pos1", null);
-		regDataMap.put("pos2", null);
-		regDataMap.put("pos3", null);
-		regDataMap.put("pos4", null);
-		return new SelectionData(world, regDataMap, "pos1");
 	}
 	
 	@Override

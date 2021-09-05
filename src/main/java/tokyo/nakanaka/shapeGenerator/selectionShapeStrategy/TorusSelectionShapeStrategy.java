@@ -1,7 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
@@ -30,16 +29,6 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		return new TorusRegionData();
 	}
 	
-	@Override
-	public SelectionData newSelectionData(World world) {
-		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
-		regDataMap.put("center", null);
-		regDataMap.put("radius_main", null);
-		regDataMap.put("radius_sub", null);
-		regDataMap.put("axis", "y");
-		return new SelectionData(world, regDataMap, "center");
-	}
-
 	@Override
 	public String leftClickDescription() {
 		return "Set center";

@@ -1,7 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.World;
@@ -25,16 +24,6 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 	@Override
 	public RegionData newRegionData() {
 		return new DiamondRegionData();
-	}
-	
-	@Override
-	public SelectionData newSelectionData(World world) {
-		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
-		regDataMap.put("center", null);
-		regDataMap.put("radius_x", null);
-		regDataMap.put("radius_y", null);
-		regDataMap.put("radius_z", null);
-		return new SelectionData(world, regDataMap, "center");
 	}
 	
 	@Override

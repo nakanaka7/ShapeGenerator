@@ -1,7 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.Axis;
@@ -31,17 +30,6 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 	@Override
 	public RegionData newRegionData() {
 		return new RegularPolygonRegionData();
-	}
-	
-	@Override
-	public SelectionData newSelectionData(World world) {
-		LinkedHashMap<String, Object> regDataMap = new LinkedHashMap<>();
-		regDataMap.put("center", null);
-		regDataMap.put("radius", null);
-		regDataMap.put("side", 3);
-		regDataMap.put("thickness", 1.0);
-		regDataMap.put("axis", "y");
-		return new SelectionData(world, regDataMap, "center");
 	}
 	
 	@Override
