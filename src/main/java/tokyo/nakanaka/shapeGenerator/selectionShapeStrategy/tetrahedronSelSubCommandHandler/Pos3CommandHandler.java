@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboid;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedronSelSubCommandHandler;
 
 import java.util.List;
 
@@ -12,15 +12,16 @@ import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
+import tokyo.nakanaka.shapeGenerator.regionData.TetrahedronRegionData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelSubCommandHandlerUtils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public class Pos2CommandHandler implements SubCommandHandler {
+public class Pos3CommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(UserData userData, Player player, String[] args) {
 		//parse the arguments to a position
-		String usage = "/sg sel pos2 [x] [y] [z]";
+		String usage = "/sg sel pos3 [x] [y] [z]";
 		double x;
 		double y;
 		double z;
@@ -54,11 +55,11 @@ public class Pos2CommandHandler implements SubCommandHandler {
 			userData.setSelectionData(newSelData);
 		}
 		SelectionData selData = userData.getSelectionData();
-		CuboidRegionData cuboidRegData = (CuboidRegionData)selData.getRegionData();
+		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)selData.getRegionData();
 		//update the selection data
-		cuboidRegData.setPos2(new Vector3D(x, y, z));
+		tetraRegData.setPos3(new Vector3D(x, y, z));
 		//print the selection message
-		List<String> lines = SelSubCommandHandlerUtils.selectionMessage(SelectionShape.CUBOID, selData);
+		List<String> lines = SelSubCommandHandlerUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
 		lines.stream().forEach(player::print);
 	}
 
