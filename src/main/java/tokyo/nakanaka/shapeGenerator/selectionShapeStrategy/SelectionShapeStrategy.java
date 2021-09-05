@@ -3,8 +3,8 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.Map;
 
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
 /**
  * Holds SelectionShape delegating methods
@@ -18,10 +18,10 @@ public interface SelectionShapeStrategy {
 	RegionData newRegionData();
 		
 	/**
-	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
-	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SelSubCommandHandler object
+	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
+	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
 	 */
-	Map<String, SelSubCommandHandler> selSubCommandHandlerMap();
+	Map<String, SubCommandHandler> selSubCommandHandlerMap();
 
 	/**
 	 * Returns a short description for left clicking block event
