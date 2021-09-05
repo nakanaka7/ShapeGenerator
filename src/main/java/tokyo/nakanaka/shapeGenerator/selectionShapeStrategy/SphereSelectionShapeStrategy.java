@@ -3,21 +3,11 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.HashMap;
 import java.util.Map;
 
-import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.Selection;
-import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.SphereRegionData;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 
@@ -54,22 +44,9 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 
 	
 	@Override
-	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
-		Map<String, SelSubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center"));
-		map.put("radius", new LengthCommandHandler("radius"));
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+		Map<String, SubCommandHandler> map = new HashMap<>();
 		return map;
 	}
 	
-	private BoundRegion3D buildBoundRegion3D(Map<String, Object> regionDataMap) {
-		Vector3D center = (Vector3D) regionDataMap.get("center");
-		Double radius = (Double) regionDataMap.get("radius");
-		if(center == null || radius == null) {
-			throw new IllegalStateException();
-		}
-		Region3D region = new Sphere(radius);
-		region = Region3Ds.shift(region, center);
-		return new SphereBoundRegion(region, center, radius);
-	}
-
 }

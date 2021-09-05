@@ -8,11 +8,9 @@ import tokyo.nakanaka.logger.Logger;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.selection.RegionBuildingData;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.TriangleRegionData;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
 public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 
@@ -70,12 +68,8 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 	}
 
 	@Override
-	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
-		Map<String, SelSubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandler("pos1"));
-		map.put("pos2", new PosCommandHandler("pos2"));
-		map.put("pos3", new PosCommandHandler("pos3"));
-		map.put("thickness", new LengthCommandHandler("thickness"));
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+		Map<String, SubCommandHandler> map = new HashMap<>();
 		return map;
 	}
 	

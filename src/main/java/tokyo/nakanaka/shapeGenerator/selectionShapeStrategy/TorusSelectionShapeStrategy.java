@@ -6,12 +6,9 @@ import java.util.Map;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.TorusRegionData;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.AxisCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
 public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 
@@ -59,12 +56,8 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 	}
 	
 	@Override
-	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
-		Map<String, SelSubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center"));
-		map.put("radius_main", new LengthCommandHandler("radius_main"));
-		map.put("radius_sub", new LengthCommandHandler("radius_sub"));
-		map.put("axis", new AxisCommandHandler());
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+		Map<String, SubCommandHandler> map = new HashMap<>();
 		return map;
 	}
 	

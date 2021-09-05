@@ -5,11 +5,9 @@ import java.util.Map;
 
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.DiamondRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.LengthCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 
 public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 
@@ -29,12 +27,8 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 	}
 
 	@Override
-	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
-		Map<String, SelSubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center"));
-		map.put("radius_x", new LengthCommandHandler("radius_x"));
-		map.put("radius_y", new LengthCommandHandler("radius_y"));
-		map.put("radius_z", new LengthCommandHandler("radius_z"));
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+		Map<String, SubCommandHandler> map = new HashMap<>();
 		return map;
 	}
 

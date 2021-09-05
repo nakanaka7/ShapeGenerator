@@ -8,9 +8,6 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos1CommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.CuboidPos2CommandHandler;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboidSelSubCommandHandler.Pos1CommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboidSelSubCommandHandler.Pos2CommandHandler;
 
@@ -32,14 +29,7 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	}
 
 	@Override
-	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap() {
-		Map<String,  SelSubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new CuboidPos1CommandHandler());
-		map.put("pos2", new CuboidPos2CommandHandler());
-		return map;
-	}
-	
-	public Map<String, SubCommandHandler> selSubCommandHandlerMapNew(){
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
 		map.put("pos1", new Pos1CommandHandler());
 		map.put("pos2", new Pos2CommandHandler());
