@@ -24,7 +24,7 @@ public class ResetCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Usage: " + "/sg sel reset");
 			return;
 		}
-		World world = userData.getWorld();
+		World world = player.getEntityPosition().world();
 		SelectionShape shape = userData.getSelectionShape();
 		SelectionData newSelData = this.selDataCreator.newSelectionData(shape, world);
 		userData.setSelectionData(newSelData);
