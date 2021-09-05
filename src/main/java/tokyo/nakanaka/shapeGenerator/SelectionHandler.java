@@ -1,18 +1,16 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selSubCommandHandler.SelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 /**
  * Holds methods which depends on selection shape 
  */
 public class SelectionHandler {
-	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
+	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap;
 	
 	/**
 	 * Construct the handler
@@ -38,7 +36,7 @@ public class SelectionHandler {
 	 * Get SelSubCommandHandlerMap
 	 * @return SelSubCommandHandlerMap
 	 */
-	public Map<String, SelSubCommandHandler> selSubCommandHandlerMap(SelectionShape selShape) {
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap(SelectionShape selShape) {
 		return selStrtgMap.get(selShape).selSubCommandHandlerMap();
 	}
 	
