@@ -62,6 +62,8 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	
 	public Map<String, SubCommandHandler> selSubCommandHandlerMapNew(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new Pos1CommandHandler());
+		map.put("pos2", new Pos2CommandHandler());
 		return map;
 	}
 	
