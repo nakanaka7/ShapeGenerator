@@ -1,7 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
@@ -61,11 +59,10 @@ public class MaxxCommandHandler implements SubCommandHandler {
 
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
-		if(args.length == 1) {
-			return Arrays.asList(String.valueOf(userData.getX()));
-		}else {
-			return new ArrayList<>();
-		}
+		return switch(args.length) {
+		case 1 -> List.of(String.valueOf((double)player.getBlockPosition().x()));
+		default -> List.of();
+		};
 	}
 
 }
