@@ -15,7 +15,6 @@ import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.CuboidSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DiamondSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LineSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.RegularPolygonSelectionShapeStrategy;
@@ -24,6 +23,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SphereSelectionShape
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TetrahedronSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TorusSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TriangleSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboid.CuboidSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
