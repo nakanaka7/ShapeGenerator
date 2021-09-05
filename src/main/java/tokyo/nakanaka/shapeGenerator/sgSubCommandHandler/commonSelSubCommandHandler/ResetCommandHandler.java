@@ -6,17 +6,17 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionDataCreator;
+import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.Utils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class ResetCommandHandler implements SubCommandHandler {
-	private SelectionDataCreator selDataCreator;
+	private SelectionHandler selHandler;
 
-	public ResetCommandHandler(SelectionDataCreator selDataCreator) {
-		this.selDataCreator = selDataCreator;
+	public ResetCommandHandler(SelectionHandler selHandler) {
+		this.selHandler = selHandler;
 	}
 
 	public void onCommand(UserData userData, Player player, String[] args) {
@@ -26,7 +26,8 @@ public class ResetCommandHandler implements SubCommandHandler {
 		}
 		World world = player.getEntityPosition().world();
 		SelectionShape shape = userData.getSelectionShape();
-		SelectionData newSelData = this.selDataCreator.newSelectionData(shape, world);
+		SelectionData newSelData = this.selHandler.newSelectionData(shape);
+		newSelData.setWorld(world);
 		userData.setSelectionData(newSelData);
 		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
 		for(String line : lines) {
