@@ -6,6 +6,7 @@ import java.util.Map;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.LineRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.lineSelSubCommandHandler.*;
 
 public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 	
@@ -26,6 +27,9 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new Pos1CommandHandler());
+		map.put("pos2", new Pos2CommandHandler());
+		map.put("thickness", new ThicknessCommandHandler());
 		return map;
 	}
 	
