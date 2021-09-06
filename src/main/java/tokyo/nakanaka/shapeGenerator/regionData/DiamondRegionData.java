@@ -16,31 +16,16 @@ public class DiamondRegionData implements RegionData {
 	private Double radiusY;
 	private Double radiusZ;
 	
-	public Vector3D getCenter() {
-		return center;
-	}
-	
 	public void setCenter(Vector3D center) {
 		this.center = center;
 	}
 	
-	public Double getRadiusX() {
-		return radiusX;
-	}
 	public void setRadiusX(Double radiusX) {
 		this.radiusX = radiusX;
 	}
 	
-	public Double getRadiusY() {
-		return radiusY;
-	}
-	
 	public void setRadiusY(Double radiusY) {
 		this.radiusY = radiusY;
-	}
-	
-	public Double getRadiusZ() {
-		return radiusZ;
 	}
 	
 	public void setRadiusZ(Double radiusZ) {
