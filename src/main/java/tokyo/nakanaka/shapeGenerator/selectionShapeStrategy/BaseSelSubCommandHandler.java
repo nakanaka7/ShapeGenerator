@@ -12,9 +12,9 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
- * A base abstract class to handle "/sg sel" subcommand
+ * A base abstract class to handle "/sg sel" subcommand. E is object type for parsing.
  */
-public abstract class BaseSelSubCommandHandler implements SubCommandHandler {
+public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 	private String usage;
 	
 	/**
@@ -26,7 +26,7 @@ public abstract class BaseSelSubCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(UserData userData, Player player, String[] subArgs) {
-		Object value;
+		E value;
 		try {
 			value = this.parse(player, subArgs);
 		}catch(IllegalArgumentException e) {
@@ -49,7 +49,7 @@ public abstract class BaseSelSubCommandHandler implements SubCommandHandler {
 	 * @return an object which was parsed. This object will be set into the region data
 	 * @throws IllegalArgumentException if this cannot parse the arguments to an object
 	 */
-	protected abstract Object parse(Player player, String[] args);
+	protected abstract E parse(Player player, String[] args);
 	
 	/**
 	 * Returns new region data 
@@ -62,6 +62,6 @@ public abstract class BaseSelSubCommandHandler implements SubCommandHandler {
 	 * @param regData the region data
 	 * @param parsed the parsed object which is given by parse() method
 	 */
-	protected abstract void setParsedValue(RegionData regData, Object parsed);
+	protected abstract void setParsedValue(RegionData regData, E parsed);
 	
 }
