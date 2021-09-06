@@ -6,6 +6,8 @@ import java.util.Map;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.SphereRegionData;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.sphereSelSubCommandHandler.CenterCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.sphereSelSubCommandHandler.RadiusCommandHandler;
 
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 
@@ -27,6 +29,8 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
+		map.put("center", new CenterCommandHandler());
+		map.put("radius", new RadiusCommandHandler());
 		return map;
 	}
 	
