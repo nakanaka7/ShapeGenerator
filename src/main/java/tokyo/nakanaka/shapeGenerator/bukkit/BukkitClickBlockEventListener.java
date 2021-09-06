@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import tokyo.nakanaka.Scheduler;
@@ -24,15 +23,13 @@ public class BukkitClickBlockEventListener implements Listener{
 	}
 	
 	@EventHandler
-	public void onLeftClickBlock(BlockBreakEvent evt0) {
-		ClickBlockEvent evt = new BukkitClickBlockEvent(evt0);
-		this.main.onClickBlockEvent(evt);
-	}
-	
-	@EventHandler
-	public void onRightClickBlock(PlayerInteractEvent evt0) {
-		ClickBlockEvent evt = new BukkitClickBlockEvent(evt0);
-		this.main.onClickBlockEvent(evt);
+	public void onClickBlockEvent(PlayerInteractEvent evt0) {
+		ClickBlockEvent evt;
+		try{
+			evt = new BukkitClickBlockEvent(evt0);
+		}catch(IllegalArgumentException e) {
+			return;
+		}
 		UUID uid = evt0.getPlayer().getUniqueId();
 		Boolean canActivate = this.activateRightMapNew.get(uid);
 		if(canActivate == null) {
@@ -41,6 +38,7 @@ public class BukkitClickBlockEventListener implements Listener{
 		if(!canActivate) {
 			return;
 		}
+		this.main.onClickBlockEvent(evt);
 		this.activateRightMapNew.put(uid, false);
 		this.scheduler.scheduleLater(1, () -> this.activateRightMapNew.put(uid, true));
 	}
