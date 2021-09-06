@@ -2,7 +2,6 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.Map;
 
-import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
@@ -54,24 +53,6 @@ public class SelectionHandler {
 	 */
 	public String rightClickDescription(SelectionShape selShape) {
 		return selStrtgMap.get(selShape).rightClickDescription();
-	}
-	
-	/**
-	 * Set a first block click position into the region data
-	 * @param regData the region data 
-	 * @param blockPos the clicked block position 
-	 */
-	public void setFirstClickData(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
-		selStrtgMap.get(selShape).setFirstClickData(regionData, blockPos);
-	}
-	
-	/**
-	 * Set data on additional block clicking
-	 * @param regData the region data
-	 * @param blockPos the clicked block position 
-	 */
-	public void setAdditionalClickData(SelectionShape selShape, RegionData regionData, BlockVector3D blockPos) {
-		selStrtgMap.get(selShape).setAdditionalClickData(regionData, blockPos);
 	}
 	
 }
