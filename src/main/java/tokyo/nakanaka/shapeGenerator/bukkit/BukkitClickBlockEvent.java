@@ -2,7 +2,6 @@ package tokyo.nakanaka.shapeGenerator.bukkit;
 
 import org.bukkit.Location;
 import org.bukkit.event.Cancellable;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import tokyo.nakanaka.BlockPosition;
@@ -26,32 +25,21 @@ public class BukkitClickBlockEvent implements ClickBlockEvent {
 	private Cancellable evt0;
 	
 	/**
-	 * Construct a click block event from BlockBreakEvent object
-	 * @param evt0 an original event
-	 */
-	public BukkitClickBlockEvent(BlockBreakEvent evt0) {
-		org.bukkit.entity.Player player0 = evt0.getPlayer();
-		this.player = new BukkitPlayer(player0);
-		Location loc = evt0.getBlock().getLocation();
-		World world = new BukkitWorld(player0.getServer(), loc.getWorld());
-		this.blockPos = new BlockPosition(world, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
-		this.handType = HandType.LEFT_HAND;
-		org.bukkit.inventory.ItemStack itemStack0 = player0.getInventory().getItemInMainHand();
-		this.itemStack = BukkitFunctions.convertItemStack(itemStack0);
-		this.evt0 = evt0;
-	}
-	
-	/**
 	 * Construct a click block event from PlayerInteractEvent evt0
 	 * @param evt0 an original event
+	 * @throws IllegalArgumentException if the event is not a click block event
 	 */
 	public BukkitClickBlockEvent(PlayerInteractEvent evt0) {
+		this.handType = switch(evt0.getAction()) {
+		case LEFT_CLICK_BLOCK -> this.handType = HandType.LEFT_HAND;
+		case RIGHT_CLICK_BLOCK -> this.handType = HandType.RIGHT_HAND;
+		default -> throw new IllegalArgumentException();
+		};
 		org.bukkit.entity.Player player0 = evt0.getPlayer();
 		this.player = new BukkitPlayer(player0);
 		Location loc = evt0.getClickedBlock().getLocation();
 		World world = new BukkitWorld(player0.getServer(), loc.getWorld());
 		this.blockPos = new BlockPosition(world, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
-		this.handType = HandType.RIGHT_HAND;
 		org.bukkit.inventory.ItemStack itemStack0 = player0.getInventory().getItemInMainHand();
 		this.itemStack = BukkitFunctions.convertItemStack(itemStack0);
 		this.evt0 = evt0;
