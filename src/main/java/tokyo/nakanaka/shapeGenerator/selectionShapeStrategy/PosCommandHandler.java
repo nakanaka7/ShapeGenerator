@@ -4,70 +4,34 @@ import java.util.List;
 
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.MessageUtils;
-import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public abstract class PosCommandHandler implements SubCommandHandler {
-	private String subLabel;
+public abstract class PosCommandHandler extends BaseSelSubCommandHandler<Vector3D> {
 	
 	public PosCommandHandler(String subLabel) {
-		this.subLabel = subLabel;
+		super("/sg sel " + subLabel + " [x] [y] [z]");
 	}
 
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
-		String usage = "/sg sel " + subLabel + " [x] [y] [z]";
-		//parse the arguments to a position
-		double x;
-		double y;
-		double z;
-		BlockPosition pos = player.getBlockPosition();
-		switch(args.length) {
+	protected Vector3D parse(Player player, String[] args) {
+		return switch(args.length) {
 		case 0 -> {
-			x = pos.x();
-			y = pos.y();
-			z = pos.z();
+			BlockPosition pos = player.getBlockPosition();
+			yield new Vector3D(pos.x(), pos.y(), pos.z());
 		}
 		case 3 -> {
-			try {
-				x = Double.parseDouble(args[0]);
-				y = Double.parseDouble(args[1]);
-				z = Double.parseDouble(args[2]);
-			}catch(IllegalArgumentException e) {
-				player.print(LogColor.RED + "Usage: " + usage);
-				return;
-			}
+			double x = Double.parseDouble(args[0]);
+			double y = Double.parseDouble(args[1]);
+			double z = Double.parseDouble(args[2]);
+			yield new Vector3D(x, y, z);
 		}
 		default -> {
-			player.print(LogColor.RED + "Usage: " + usage);
-			return;
-		}	
+			throw new IllegalArgumentException();
 		}
-		//reset the selection data if the world changes
-		World evtWorld = pos.world();
-		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
-			RegionData newRegData = this.newRegionData();
-			SelectionData newSelData = new SelectionData(evtWorld, newRegData);
-			userData.setSelectionData(newSelData);
-		}
-		SelectionData selData = userData.getSelectionData();
-		RegionData regData = selData.getRegionData();
-		//update the selection data
-		this.setParsedValue(regData, new Vector3D(x, y, z));
-		//print the selection message
-		List<String> lines = MessageUtils.selectionMessage(userData.getSelectionShape(), selData);
-		lines.stream().forEach(player::print);
+		};
 	}
 	
-	protected abstract RegionData newRegionData();
-	protected abstract void setParsedValue(RegionData regData, Vector3D parsed);
-
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
 		BlockPosition pos = player.getBlockPosition();
