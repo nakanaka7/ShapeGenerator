@@ -8,7 +8,6 @@ import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.event.ClickBlockEvent;
-import tokyo.nakanaka.event.HandType;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
@@ -38,9 +37,9 @@ public class SgEventHandler {
 		BlockPosition blockPos = evt.getBlockPos();
 		UserData userData = this.userDataRepository.prepareUserData(player);
 		SelectionShape selShape = userData.getSelectionShape();
-		//reset the selection data if the world changes or clicked type is left hand
+		//reset the selection data if the world changes
 		World evtWorld = blockPos.world();
-		if(!evtWorld.equals(userData.getSelectionData().getWorld()) || evt.getHandType() == HandType.LEFT_HAND) {
+		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
 			SelectionData newSelData = this.selHandler.newSelectionData(selShape);
 			newSelData.setWorld(evtWorld);
 			userData.setSelectionData(newSelData);
@@ -50,8 +49,8 @@ public class SgEventHandler {
 		RegionData regData = selData.getRegionData();
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
-			case LEFT_HAND -> this.selHandler.setFirstClickData(selShape, regData, v);
-			case RIGHT_HAND -> this.selHandler.setAdditionalClickData(selShape, regData, v);
+			case LEFT_HAND -> regData.onLeftClick(v);
+			case RIGHT_HAND -> regData.onRightClick(v);
 		}
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(selShape, selData);
