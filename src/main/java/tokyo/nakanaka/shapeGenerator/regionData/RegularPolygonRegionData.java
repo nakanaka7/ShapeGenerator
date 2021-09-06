@@ -17,9 +17,9 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
 public class RegularPolygonRegionData implements RegionData {
 	private Vector3D center;
 	private Double radius;
-	private Integer side;
-	private Double thickness;
-	private Axis axis;
+	private Integer side = 3;
+	private Double thickness = 1.0;
+	private Axis axis = Axis.Y;
 	
 	public void setCenter(Vector3D center) {
 		this.center = center;
