@@ -11,7 +11,6 @@ import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.event.HandType;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelSubCommandHandlerUtils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 import tokyo.nakanaka.shapeGenerator.user.UserDataRepository;
 
@@ -55,7 +54,7 @@ public class SgEventHandler {
 			case RIGHT_HAND -> this.selHandler.setAdditionalClickData(selShape, regData, v);
 		}
 		//print the selection message
-		List<String> lines = SelSubCommandHandlerUtils.selectionMessage(selShape, selData);
+		List<String> lines = MessageUtils.selectionMessage(selShape, selData);
 		lines.stream().forEach(player::print);
 	}
 	

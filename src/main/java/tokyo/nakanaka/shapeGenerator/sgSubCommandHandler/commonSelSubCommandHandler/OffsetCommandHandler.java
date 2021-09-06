@@ -7,12 +7,12 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelSubCommandHandlerUtils;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class OffsetCommandHandler implements SubCommandHandler {
@@ -56,7 +56,7 @@ public class OffsetCommandHandler implements SubCommandHandler {
 		SelectionData selData = userData.getSelectionData();
 		selData.setOffset(new Vector3D(x, y, z));
 		//print the selection message
-		List<String> lines = SelSubCommandHandlerUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
+		List<String> lines = MessageUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
 		lines.stream().forEach(player::print);
 	}
 	

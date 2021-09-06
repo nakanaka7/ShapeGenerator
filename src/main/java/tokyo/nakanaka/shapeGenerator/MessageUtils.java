@@ -1,15 +1,13 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
+package tokyo.nakanaka.shapeGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
 
-public class SelSubCommandHandlerUtils {
-	private SelSubCommandHandlerUtils() {	
+public class MessageUtils {
+	private MessageUtils() {	
 	}
 	
 	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {

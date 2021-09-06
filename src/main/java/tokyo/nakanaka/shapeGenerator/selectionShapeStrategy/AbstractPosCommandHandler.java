@@ -7,6 +7,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
@@ -62,7 +63,7 @@ public abstract class AbstractPosCommandHandler implements SubCommandHandler {
 		//update the selection data
 		this.setPos(regData, new Vector3D(x, y, z));
 		//print the selection message
-		List<String> lines = SelSubCommandHandlerUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
+		List<String> lines = MessageUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
 		lines.stream().forEach(player::print);
 	}
 	
