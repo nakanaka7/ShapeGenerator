@@ -3,8 +3,6 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.HashMap;
 import java.util.Map;
 
-import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.TetrahedronRegionData;
@@ -30,26 +28,6 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 		return "Set pos2, pos3, pos4";
 	}
 	
-	@Override
-	public void setFirstClickData(RegionData regData, BlockVector3D blockPos) {
-		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
-		Vector3D pos = blockPos.toVector3D();
-		tetraRegData.setPos1(pos);
-	}
-
-	@Override
-	public void setAdditionalClickData(RegionData regData, BlockVector3D blockPos) {
-		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
-		Vector3D pos = blockPos.toVector3D();
-		if(tetraRegData.getPos2() == null) {
-			tetraRegData.setPos2(pos);
-		}else if(tetraRegData.getPos2() == null) {
-			tetraRegData.setPos3(pos);
-		}else {
-			tetraRegData.setPos4(pos);
-		}
-	}
-		
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
