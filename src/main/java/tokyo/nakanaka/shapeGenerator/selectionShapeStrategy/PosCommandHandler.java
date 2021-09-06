@@ -9,9 +9,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
@@ -54,8 +52,8 @@ public abstract class PosCommandHandler implements SubCommandHandler {
 		//reset the selection data if the world changes
 		World evtWorld = pos.world();
 		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
-			RegionData cuboidRegData = new CuboidRegionData();
-			SelectionData newSelData = new SelectionData(evtWorld, cuboidRegData);
+			RegionData newRegData = this.newRegionData();
+			SelectionData newSelData = new SelectionData(evtWorld, newRegData);
 			userData.setSelectionData(newSelData);
 		}
 		SelectionData selData = userData.getSelectionData();
@@ -63,10 +61,11 @@ public abstract class PosCommandHandler implements SubCommandHandler {
 		//update the selection data
 		this.setPos(regData, new Vector3D(x, y, z));
 		//print the selection message
-		List<String> lines = MessageUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
+		List<String> lines = MessageUtils.selectionMessage(userData.getSelectionShape(), selData);
 		lines.stream().forEach(player::print);
 	}
 	
+	protected abstract RegionData newRegionData();
 	protected abstract void setPos(RegionData regData, Vector3D pos);
 
 	@Override
