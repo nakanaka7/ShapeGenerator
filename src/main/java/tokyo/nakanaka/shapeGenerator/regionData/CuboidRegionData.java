@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator.regionData;
 
 import java.util.LinkedHashMap;
 
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -26,6 +27,16 @@ public class CuboidRegionData implements RegionData {
 	
 	public void setPos2(Vector3D pos2) {
 		this.pos2 = pos2;
+	}
+	
+	@Override
+	public void onLeftClick(BlockVector3D blockPos) {
+		this.pos1 = blockPos.toVector3D();
+	}
+	
+	@Override
+	public void onRightClick(BlockVector3D blockPos) {
+		this.pos2 = blockPos.toVector3D();
 	}
 	
 	@Override

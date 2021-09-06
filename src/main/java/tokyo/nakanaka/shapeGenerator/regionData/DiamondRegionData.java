@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator.regionData;
 
 import java.util.LinkedHashMap;
 
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -47,6 +48,30 @@ public class DiamondRegionData implements RegionData {
 	}
 	
 	@Override
+	public void onLeftClick(BlockVector3D blockPos) {
+		this.center = blockPos.toVector3D();
+		this.radiusX = null;
+		this.radiusY = null;
+		this.radiusZ = null;
+	}
+
+	@Override
+	public void onRightClick(BlockVector3D blockPos) {
+		if(this.center == null) {
+			throw new IllegalStateException();
+		}
+		Vector3D pos = blockPos.toVector3D();
+		double radius = pos.negate(this.center).getAbsolute() + 0.5;
+		if(this.radiusX == null) {
+			this.radiusX = radius;
+		}else if(this.radiusY == null) {
+			this.radiusY = radius;
+		}else {
+			this.radiusZ = radius;
+		}	
+	}
+	
+	@Override
 	public BoundRegion3D buildBoundRegion3D() {
 		if(center == null || radiusX == null || radiusY == null || radiusZ == null) {
 			throw new IllegalStateException();
@@ -82,5 +107,5 @@ public class DiamondRegionData implements RegionData {
 		}
 		return map;
 	}
-	
+
 }

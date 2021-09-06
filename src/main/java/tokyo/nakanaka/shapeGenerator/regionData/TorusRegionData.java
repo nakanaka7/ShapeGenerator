@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.regionData;
 import java.util.LinkedHashMap;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
@@ -47,6 +48,28 @@ public class TorusRegionData implements RegionData {
 	
 	public void setAxis(Axis axis) {
 		this.axis = axis;
+	}
+	
+	@Override
+	public void onLeftClick(BlockVector3D blockPos) {
+		this.center = blockPos.toVector3D();
+		this.radiusMain = null;
+		this.radiusSub = null;
+	}
+
+	@Override
+	public void onRightClick(BlockVector3D blockPos) {
+		Vector3D pos = blockPos.toVector3D();
+		if(this.radiusMain == null) {
+			this.radiusMain = pos.negate(this.center).getAbsolute();
+		}else {
+			Vector3D e1 = this.axis.toVector3D();
+			Vector3D p = pos.negate(this.center);
+			double p1 = p.innerProduct(e1);
+			Vector3D p2e2 = p.negate(e1.multiply(p1));
+			Vector3D e2 = p2e2.divide(p2e2.getAbsolute());
+			this.radiusSub = p.negate(e2.multiply(this.radiusMain)).getAbsolute() + 0.5;
+		}
 	}
 	
 	@Override
@@ -97,5 +120,5 @@ public class TorusRegionData implements RegionData {
 		}
 		return map;
 	}
-	
+
 }

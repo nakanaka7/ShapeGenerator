@@ -5,6 +5,7 @@ import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 
 import java.util.LinkedHashMap;
 
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -47,6 +48,29 @@ public class TetrahedronRegionData implements RegionData {
 	
 	public void setPos4(Vector3D pos4) {
 		this.pos4 = pos4;
+	}
+	
+	@Override
+	public void onLeftClick(BlockVector3D blockPos) {
+		this.pos1 = blockPos.toVector3D();
+		this.pos2 = null;
+		this.pos3 = null;
+		this.pos4 = null;
+	}
+
+	@Override
+	public void onRightClick(BlockVector3D blcokPos) {
+		if(this.pos1 == null) {
+			throw new IllegalStateException();
+		}
+		Vector3D pos = blcokPos.toVector3D();
+		if(this.pos2 == null) {
+			this.pos2 = pos;
+		}else if(this.pos3 == null) {
+			this.pos3 = pos;
+		}else {
+			this.pos4 = pos;
+		}
 	}
 	
 	@Override

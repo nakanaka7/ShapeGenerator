@@ -5,6 +5,7 @@ import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
 
 import java.util.LinkedHashMap;
 
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -15,7 +16,7 @@ public class TriangleRegionData implements RegionData {
 	private Vector3D pos1;
 	private Vector3D pos2;
 	private Vector3D pos3;
-	private Double thickness;
+	private Double thickness = 1.0;
 	
 	public Vector3D getPos1() {
 		return pos1;
@@ -47,6 +48,26 @@ public class TriangleRegionData implements RegionData {
 	
 	public void setThickness(Double thickness) {
 		this.thickness = thickness;
+	}
+	
+	@Override
+	public void onLeftClick(BlockVector3D blockPos) {
+		this.pos1 = blockPos.toVector3D();
+		this.pos2 = null;
+		this.pos3 = null;
+	}
+
+	@Override
+	public void onRightClick(BlockVector3D blockPos) {
+		if(this.pos1 == null) {
+			throw new IllegalArgumentException();
+		}
+		Vector3D pos = blockPos.toVector3D();
+		if(this.pos2 == null) {
+			this.pos2 = pos;
+		}else {
+			this.pos3 = pos;
+		}	
 	}
 	
 	@Override
@@ -92,5 +113,5 @@ public class TriangleRegionData implements RegionData {
 		}
 		return map;
 	}
-
+	
 }

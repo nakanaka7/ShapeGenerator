@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.regionData;
 import java.util.LinkedHashMap;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
@@ -58,6 +59,18 @@ public class RegularPolygonRegionData implements RegionData {
 	
 	public void setAxis(Axis axis) {
 		this.axis = axis;
+	}
+	
+	@Override
+	public void onLeftClick(BlockVector3D blockPos) {
+		this.center = blockPos.toVector3D();
+	}
+
+	@Override
+	public void onRightClick(BlockVector3D blockPos) {
+		Vector3D pos = blockPos.toVector3D();
+		double radius = Math.floor(pos.negate(this.center).getAbsolute()) + 0.5;
+		this.radius = radius;
 	}
 	
 	@Override
@@ -129,5 +142,5 @@ public class RegularPolygonRegionData implements RegionData {
 		}
 		return map;
 	}
-	
+
 }

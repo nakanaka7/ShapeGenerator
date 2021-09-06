@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator.regionData;
 
 import java.util.LinkedHashMap;
 
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
@@ -26,6 +27,22 @@ public class SphereRegionData implements RegionData {
 	}
 	
 	public void setRadius(Double radius) {
+		this.radius = radius;
+	}
+	
+	@Override
+	public void onLeftClick(BlockVector3D blockPos) {
+		this.center = blockPos.toVector3D();
+		this.radius = null;
+	}
+
+	@Override
+	public void onRightClick(BlockVector3D blockPos) {
+		if(this.center == null) {
+			throw new IllegalStateException();
+		}
+		Vector3D pos = blockPos.toVector3D();
+		double radius = Math.floor(pos.negate(this.center).getAbsolute()) + 0.5;
 		this.radius = radius;
 	}
 	
@@ -57,5 +74,5 @@ public class SphereRegionData implements RegionData {
 		}
 		return map;
 	}
-	
+
 }
