@@ -14,7 +14,7 @@ public class MessageUtils {
 		List<String> lines = new ArrayList<>();
 		lines.add("--- [" + LogColor.GOLD + selShape + " Selection" + LogColor.RESET + "] ---------------------");
 		for(Entry<String, String> e : selData.getRegionData().toLinkedHashMap().entrySet()) {
-			lines.add(LogColor.GOLD + e.getKey() + ": " + e.getValue());
+			lines.add(LogColor.GOLD + e.getKey() + ": " + LogColor.RESET + e.getValue());
 		}
 		return lines;
 	}
