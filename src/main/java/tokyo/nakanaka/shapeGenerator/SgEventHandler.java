@@ -29,7 +29,7 @@ public class SgEventHandler {
 	 * @param evt a click block event
 	 */
 	public void onClickBlockEvent(ClickBlockEvent evt) {
-		//cancel the event if the clicked item is not "minecraft:blaze_rod"
+		//ignore the event if the clicking item is not "minecraft:blaze_rod"
 		Item item = evt.getItemStack().getItem();
 		if(!item.equals(new Item(new NamespacedID("minecraft", "blaze_rod")))) {
 			return;
