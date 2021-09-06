@@ -20,7 +20,7 @@ public class CenterCommandHandler extends PosCommandHandler {
 	}
 
 	@Override
-	protected void setPos(RegionData regData, Vector3D pos) {
+	protected void setParsedValue(RegionData regData, Vector3D pos) {
 		var diamondRegData = (DiamondRegionData)regData;
 		diamondRegData.setCenter(pos);
 	}

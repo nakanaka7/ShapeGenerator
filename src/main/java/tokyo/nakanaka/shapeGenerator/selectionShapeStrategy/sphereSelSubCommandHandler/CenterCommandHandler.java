@@ -17,7 +17,7 @@ public class CenterCommandHandler extends PosCommandHandler {
 	}
 
 	@Override
-	protected void setPos(RegionData regData, Vector3D pos) {
+	protected void setParsedValue(RegionData regData, Vector3D pos) {
 		SphereRegionData sphereRegData = (SphereRegionData)regData;
 		sphereRegData.setCenter(pos);
 	}

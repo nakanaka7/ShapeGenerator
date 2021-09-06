@@ -17,7 +17,7 @@ public class Pos1CommandHandler extends PosCommandHandler {
 	}
 	
 	@Override
-	protected void setPos(RegionData regData, Vector3D pos) {
+	protected void setParsedValue(RegionData regData, Vector3D pos) {
 		CuboidRegionData cuboidRegData = (CuboidRegionData)regData;
 		cuboidRegData.setPos1(pos);
 	}

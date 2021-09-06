@@ -59,14 +59,14 @@ public abstract class PosCommandHandler implements SubCommandHandler {
 		SelectionData selData = userData.getSelectionData();
 		RegionData regData = selData.getRegionData();
 		//update the selection data
-		this.setPos(regData, new Vector3D(x, y, z));
+		this.setParsedValue(regData, new Vector3D(x, y, z));
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(userData.getSelectionShape(), selData);
 		lines.stream().forEach(player::print);
 	}
 	
 	protected abstract RegionData newRegionData();
-	protected abstract void setPos(RegionData regData, Vector3D pos);
+	protected abstract void setParsedValue(RegionData regData, Vector3D parsed);
 
 	@Override
 	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
