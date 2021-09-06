@@ -12,6 +12,11 @@ public class Pos2CommandHandler extends PosCommandHandler {
 	}
 
 	@Override
+	protected RegionData newRegionData() {
+		return new CuboidRegionData();
+	}
+	
+	@Override
 	protected void setPos(RegionData regData, Vector3D pos) {
 		CuboidRegionData cuboidRegData = (CuboidRegionData)regData;
 		cuboidRegData.setPos2(pos);

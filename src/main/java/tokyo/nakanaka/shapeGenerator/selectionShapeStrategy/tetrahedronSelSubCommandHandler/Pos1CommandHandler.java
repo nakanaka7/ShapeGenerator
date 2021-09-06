@@ -10,11 +10,16 @@ public class Pos1CommandHandler extends PosCommandHandler {
 	public Pos1CommandHandler() {
 		super("pos1");
 	}
+	
+	@Override
+	protected RegionData newRegionData() {
+		return new TetrahedronRegionData();
+	}
 
 	@Override
 	protected void setPos(RegionData regData, Vector3D pos) {
 		TetrahedronRegionData tetraRegData = (TetrahedronRegionData)regData;
 		tetraRegData.setPos1(pos);
 	}
-	
+
 }

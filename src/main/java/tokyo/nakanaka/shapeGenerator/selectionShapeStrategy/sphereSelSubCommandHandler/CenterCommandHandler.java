@@ -10,6 +10,11 @@ public class CenterCommandHandler extends PosCommandHandler {
 	public CenterCommandHandler() {
 		super("center");
 	}
+	
+	@Override
+	protected RegionData newRegionData() {
+		return new SphereRegionData();
+	}
 
 	@Override
 	protected void setPos(RegionData regData, Vector3D pos) {
