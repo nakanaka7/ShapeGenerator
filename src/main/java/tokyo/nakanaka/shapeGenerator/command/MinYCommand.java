@@ -1,29 +1,29 @@
-package tokyo.nakanaka.command;
+package tokyo.nakanaka.shapeGenerator.command;
 
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.LogicalConjunctRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.MaxXRegion3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.MinYRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
-public class MaxXCommand implements AdjustCommand {
+public class MinYCommand implements AdjustCommand {
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
-	public MaxXCommand(GenerateCommand originalCmd, double maxX, boolean physics){
+	public MinYCommand(GenerateCommand originalCmd, double minY, boolean physics){
 		this.originalCmd = originalCmd;
 		Selection originalSel = originalCmd.getSelection();
 		BoundRegion3D bound = originalSel.getBoundRegion3D();
 		Region3D region = bound.getRegion3D();
-		double ubx = maxX;
+		double ubx = bound.getUpperBoundX();
 		double uby = bound.getUpperBoundY();
 		double ubz = bound.getUpperBoundZ();
 		double lbx = bound.getLowerBoundX();
-		double lby = bound.getLowerBoundY();
+		double lby = minY;
 		double lbz = bound.getLowerBoundZ();
-		Region3D maxXReg = new MaxXRegion3D(maxX);
-		Region3D newRegion = new LogicalConjunctRegion3D(region, maxXReg);
+		Region3D minYReg = new MinYRegion3D(minY);
+		Region3D newRegion = new LogicalConjunctRegion3D(region, minYReg);
 		BoundRegion3D newBound = new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 		Selection sel = new Selection(originalSel.getWorld(), newBound, originalSel.getOffset());
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
@@ -51,5 +51,5 @@ public class MaxXCommand implements AdjustCommand {
 	public GenerateCommand getLastCommand() {
 		return this.lastCmd;
 	}
-
+	
 }

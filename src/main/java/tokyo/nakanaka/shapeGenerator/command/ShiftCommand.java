@@ -1,18 +1,18 @@
-package tokyo.nakanaka.command;
+package tokyo.nakanaka.shapeGenerator.command;
 
-import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 
-public class ScaleCommand implements AdjustCommand{
+public class ShiftCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
-	public ScaleCommand(GenerateCommand originalCmd, Axis axis, double factor, boolean physics) {
+	public ShiftCommand(GenerateCommand originalCmd, Vector3D displacement, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getScaledSelection(axis, factor);
+		Selection sel = originalCmd.getSelection().shift(displacement);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
-	
+
 	@Override
 	public void execute() {
 		this.originalCmd.undo();

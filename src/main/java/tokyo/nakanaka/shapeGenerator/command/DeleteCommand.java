@@ -1,4 +1,4 @@
-package tokyo.nakanaka.command;
+package tokyo.nakanaka.shapeGenerator.command;
 
 public class DeleteCommand implements UndoableCommand{
 	private GenerateCommand[] generateCmds;

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.command;
+package tokyo.nakanaka.shapeGenerator.command;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.command;
+package tokyo.nakanaka.shapeGenerator.command;
 
 public interface UndoableCommand {
 	void execute();

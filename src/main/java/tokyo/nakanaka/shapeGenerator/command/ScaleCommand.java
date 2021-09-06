@@ -1,15 +1,15 @@
-package tokyo.nakanaka.command;
+package tokyo.nakanaka.shapeGenerator.command;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.shapeGenerator.Selection;
 
-public class MirrorCommand implements AdjustCommand {
+public class ScaleCommand implements AdjustCommand{
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
-	public MirrorCommand(GenerateCommand originalCmd, Axis axis, boolean physics) {
+	public ScaleCommand(GenerateCommand originalCmd, Axis axis, double factor, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getMirroedSelection(axis);
+		Selection sel = originalCmd.getSelection().getScaledSelection(axis, factor);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	
@@ -35,5 +35,5 @@ public class MirrorCommand implements AdjustCommand {
 	public GenerateCommand getLastCommand() {
 		return this.lastCmd;
 	}
-	
+
 }

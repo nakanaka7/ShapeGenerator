@@ -1,18 +1,18 @@
-package tokyo.nakanaka.command;
+package tokyo.nakanaka.shapeGenerator.command;
 
-import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.shapeGenerator.Selection;
 
-public class ShiftCommand implements AdjustCommand{
+public class MirrorCommand implements AdjustCommand {
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
 	
-	public ShiftCommand(GenerateCommand originalCmd, Vector3D displacement, boolean physics) {
+	public MirrorCommand(GenerateCommand originalCmd, Axis axis, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().shift(displacement);
+		Selection sel = originalCmd.getSelection().getMirroedSelection(axis);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
-
+	
 	@Override
 	public void execute() {
 		this.originalCmd.undo();
@@ -35,5 +35,5 @@ public class ShiftCommand implements AdjustCommand{
 	public GenerateCommand getLastCommand() {
 		return this.lastCmd;
 	}
-
+	
 }
