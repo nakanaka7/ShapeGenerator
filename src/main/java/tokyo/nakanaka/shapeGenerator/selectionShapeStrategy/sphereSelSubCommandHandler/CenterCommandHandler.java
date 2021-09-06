@@ -3,9 +3,9 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.sphereSelSubCommand
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.SphereRegionData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.AbstractPosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
 
-public class CenterCommandHandler extends AbstractPosCommandHandler {
+public class CenterCommandHandler extends PosCommandHandler {
 
 	public CenterCommandHandler() {
 		super("center");

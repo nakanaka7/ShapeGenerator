@@ -15,10 +15,10 @@ import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
-public abstract class AbstractPosCommandHandler implements SubCommandHandler {
+public abstract class PosCommandHandler implements SubCommandHandler {
 	private String subLabel;
 	
-	public AbstractPosCommandHandler(String subLabel) {
+	public PosCommandHandler(String subLabel) {
 		this.subLabel = subLabel;
 	}
 
