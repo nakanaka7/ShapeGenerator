@@ -19,9 +19,9 @@ public class RadiusCommandHandler extends LengthCommandHandler {
 	}
 
 	@Override
-	protected void setLength(RegionData regData, Double length) {
+	protected void setParsedValue(RegionData regData, Double parsed) {
 		var rpRegData = (RegularPolygonRegionData)regData;
-		rpRegData.setRadius(length);
+		rpRegData.setRadius(parsed);
 	}
 
 }

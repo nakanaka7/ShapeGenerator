@@ -19,9 +19,9 @@ public class RadiusXCommandHandler extends LengthCommandHandler {
 	}
 
 	@Override
-	protected void setLength(RegionData regData, Double length) {
+	protected void setParsedValue(RegionData regData, Double parsed) {
 		var diamondRegData = (DiamondRegionData)regData;
-		diamondRegData.setRadiusX(length);
+		diamondRegData.setRadiusX(parsed);
 	}
 	
 }

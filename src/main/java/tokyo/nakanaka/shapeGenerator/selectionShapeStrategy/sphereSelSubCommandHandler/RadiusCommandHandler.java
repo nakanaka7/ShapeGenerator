@@ -16,9 +16,9 @@ public class RadiusCommandHandler extends LengthCommandHandler {
 	}
 
 	@Override
-	protected void setLength(RegionData regData, Double length) {
+	protected void setParsedValue(RegionData regData, Double parsed) {
 		SphereRegionData spRegData = (SphereRegionData)regData;
-		spRegData.setRadius(length);
+		spRegData.setRadius(parsed);
 	}
 	
 }

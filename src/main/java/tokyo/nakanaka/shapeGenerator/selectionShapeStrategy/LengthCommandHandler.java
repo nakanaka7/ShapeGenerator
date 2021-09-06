@@ -3,7 +3,6 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public abstract class LengthCommandHandler extends BaseSelSubCommandHandler<Double> {
@@ -12,19 +11,12 @@ public abstract class LengthCommandHandler extends BaseSelSubCommandHandler<Doub
 		super("/sg sel " + subLabel + " <length>");
 	}
 		
-	protected abstract RegionData newRegionData();
-	protected abstract void setLength(RegionData regData, Double length);
-	
-	
+	@Override
 	protected Double parse(Player player, String[] args) {
 		return switch(args.length) {
 		case 1 -> Double.parseDouble(args[0]);
 		default -> throw new IllegalArgumentException();
 		};
-	}
-	
-	protected void setParsedValue(RegionData regData, Double parsed) {
-		this.setLength(regData, (Double)parsed);
 	}
 	
 	@Override
