@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.Utils;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class ResetCommandHandler implements SubCommandHandler {
 	private SelectionHandler selHandler;
@@ -19,23 +19,23 @@ public class ResetCommandHandler implements SubCommandHandler {
 		this.selHandler = selHandler;
 	}
 
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
 			player.print(LogColor.RED + "Usage: " + "/sg sel reset");
 			return;
 		}
 		World world = player.getEntityPosition().world();
-		SelectionShape shape = userData.getSelectionShape();
+		SelectionShape shape = playerData.getSelectionShape();
 		SelectionData newSelData = this.selHandler.newSelectionData(shape);
 		newSelData.setWorld(world);
-		userData.setSelectionData(newSelData);
-		List<String> lines = Utils.getSelectionMessageLines(userData.getSelectionData());
+		playerData.setSelectionData(newSelData);
+		List<String> lines = Utils.getSelectionMessageLines(playerData.getSelectionData());
 		for(String line : lines) {
 			player.print(line);
 		}
 	}
 	
-	public List<String> onTabComplete(UserData user, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return List.of();
 	}
 

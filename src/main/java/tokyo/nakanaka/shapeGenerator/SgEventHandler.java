@@ -9,16 +9,16 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
-import tokyo.nakanaka.shapeGenerator.user.UserDataRepository;
 
 public class SgEventHandler {
-	private UserDataRepository userDataRepository;
+	private PlayerDataRepository playerDataRepository;
 	private SelectionHandler selHandler;
 	
-	public SgEventHandler(UserDataRepository userDataRepository, SelectionHandler selHandler) {
-		this.userDataRepository = userDataRepository;
+	public SgEventHandler(PlayerDataRepository playerDataRepository, SelectionHandler selHandler) {
+		this.playerDataRepository = playerDataRepository;
 		this.selHandler = selHandler;
 	}
 
@@ -35,17 +35,17 @@ public class SgEventHandler {
 		evt.cancel();
 		Player player = evt.getPlayer();
 		BlockPosition blockPos = evt.getBlockPos();
-		UserData userData = this.userDataRepository.prepareUserData(player);
-		SelectionShape selShape = userData.getSelectionShape();
+		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
+		SelectionShape selShape = playerData.getSelectionShape();
 		//reset the selection data if the world changes
 		World evtWorld = blockPos.world();
-		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
+		if(!evtWorld.equals(playerData.getSelectionData().getWorld())) {
 			SelectionData newSelData = this.selHandler.newSelectionData(selShape);
 			newSelData.setWorld(evtWorld);
-			userData.setSelectionData(newSelData);
+			playerData.setSelectionData(newSelData);
 		}
 		//update the selection data
-		SelectionData selData = userData.getSelectionData();
+		SelectionData selData = playerData.getSelectionData();
 		RegionData regData = selData.getRegionData();
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {

@@ -10,8 +10,8 @@ import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg shape" command
@@ -24,7 +24,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: " + new ShapeHelp().getUsage());
 			return;
@@ -36,19 +36,19 @@ public class ShapeCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Invalid shape");
 			return;
 		}
-		SelectionShape original = userData.getSelectionShape();
+		SelectionShape original = playerData.getSelectionShape();
 		if(shape != original) {
-			userData.setSelectionShape(shape);
+			playerData.setSelectionShape(shape);
 			World world = player.getEntityPosition().world();
 			SelectionData selData = this.selHandler.newSelectionData(shape);
 			selData.setWorld(world);
-			userData.setSelectionData(selData);
+			playerData.setSelectionData(selData);
 		}
 		player.print(LogColor.GOLD + "Set the shape -> " + shape);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
 			case 1 -> List.of(SelectionShape.values()).stream()
 					.map(s -> s.toString().toLowerCase())

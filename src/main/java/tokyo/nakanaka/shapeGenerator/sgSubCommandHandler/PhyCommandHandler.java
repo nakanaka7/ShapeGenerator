@@ -5,8 +5,8 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.PhyHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg phy" command
@@ -14,7 +14,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class PhyCommandHandler implements SubCommandHandler {
 
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String usageMsg = LogColor.RED + "Usage: " + new PhyHelp().getUsage();
 		if(args.length != 1) {
 			player.print(usageMsg);
@@ -30,12 +30,12 @@ public class PhyCommandHandler implements SubCommandHandler {
 			player.print(usageMsg);
 			return;
 		}
-		userData.setBlockPhysics(physics);
+		playerData.setBlockPhysics(physics);
 		player.print(LogColor.GOLD + "Set physics -> " + bool);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 1) {
 			return List.of("true", "false");
 		}else {

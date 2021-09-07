@@ -8,6 +8,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandHelp;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.DelHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
@@ -27,7 +28,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShiftHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.UndoHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.WandHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg help" command
@@ -58,7 +58,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 0) {
 			player.print("--- [" + LogColor.GOLD + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
@@ -79,7 +79,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 1) {
 			return new ArrayList<>(this.cmdHelpMap.keySet());
 		}else {

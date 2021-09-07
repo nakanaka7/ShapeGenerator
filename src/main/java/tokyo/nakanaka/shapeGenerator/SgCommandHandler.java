@@ -9,6 +9,8 @@ import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
@@ -29,11 +31,9 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
-import tokyo.nakanaka.shapeGenerator.user.UserDataRepository;
 
 public class SgCommandHandler implements CommandHandler {
-	private UserDataRepository userDataRepository;
+	private PlayerDataRepository playerDataRepository;
 	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	
 	{
@@ -55,8 +55,8 @@ public class SgCommandHandler implements CommandHandler {
 		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
 	}
 	
-	public SgCommandHandler(UserDataRepository userDataRepository, SelectionHandler selHandler, BlockIDListFactory blockIDListFactory) {
-		this.userDataRepository = userDataRepository;
+	public SgCommandHandler(PlayerDataRepository playerDataRepository, SelectionHandler selHandler, BlockIDListFactory blockIDListFactory) {
+		this.playerDataRepository = playerDataRepository;
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(selHandler));
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(selHandler));
 		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
@@ -87,8 +87,8 @@ public class SgCommandHandler implements CommandHandler {
 			cmdSender.print(LogColor.RED + "Run \"" + new HelpHelp().getUsage() + "\" for help");
 			return;
 		}
-		UserData userData = this.userDataRepository.prepareUserData(player);
-		sgSubCmdHandler.onCommand(userData, player, subArgs);
+		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
+		sgSubCmdHandler.onCommand(playerData, player, subArgs);
 	}
 
 	/**
@@ -110,8 +110,8 @@ public class SgCommandHandler implements CommandHandler {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
 		if(sgSubCmdHandler != null) {
-			UserData userData = this.userDataRepository.prepareUserData(player);
-			return sgSubCmdHandler.onTabComplete(userData, player, subArgs);
+			PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
+			return sgSubCmdHandler.onTabComplete(playerData, player, subArgs);
 		}
 		return List.of();
 	}

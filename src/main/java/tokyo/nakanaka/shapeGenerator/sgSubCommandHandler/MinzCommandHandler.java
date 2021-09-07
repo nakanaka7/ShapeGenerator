@@ -11,8 +11,8 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinZCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinzHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg minz" command
@@ -20,7 +20,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class MinzCommandHandler implements SubCommandHandler {
 		
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: " + new MinzHelp().getUsage());
 			return;
@@ -32,7 +32,7 @@ public class MinzCommandHandler implements SubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -51,14 +51,14 @@ public class MinzCommandHandler implements SubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MinZCommand minzCmd = new MinZCommand(originalCmd, value, userData.getBlockPhysics());
+		MinZCommand minzCmd = new MinZCommand(originalCmd, value, playerData.getBlockPhysics());
 		minzCmd.execute();
 		undoManager.add(minzCmd);
 		player.print(LogDesignColor.NORMAL + "Set minZ -> " + value);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
 		case 1 -> List.of(String.valueOf((double)player.getBlockPosition().z()));
 		default -> List.of();

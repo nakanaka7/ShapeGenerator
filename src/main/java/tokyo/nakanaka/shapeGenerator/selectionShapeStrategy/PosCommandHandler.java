@@ -5,7 +5,7 @@ import java.util.List;
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public abstract class PosCommandHandler extends BaseSelSubCommandHandler<Vector3D> {
 	
@@ -33,7 +33,7 @@ public abstract class PosCommandHandler extends BaseSelSubCommandHandler<Vector3
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		BlockPosition pos = player.getBlockPosition();
 		return switch(args.length) {
 			case 1 -> List.of(String.valueOf(pos.x()));

@@ -15,7 +15,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
  * Handles "/sg shift" command
@@ -23,7 +23,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class ShiftCommandHandler implements SubCommandHandler{
 
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
 			player.print(LogColor.RED + "Usage: /sg shift <direction> <length>");
 			return;
@@ -42,7 +42,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 			player.print(LogDesignColor.ERROR + "Can not parse integer");
 			return;
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -65,14 +65,14 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		double dy = dir.getY() * blocks;
 		double dz = dir.getZ() * blocks;
 		Vector3D displacement = new Vector3D(dx, dy, dz);
-		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, userData.getBlockPhysics());
+		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, playerData.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
 		player.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList(Direction.values()).stream()
 					.map(s -> s.toString().toLowerCase())

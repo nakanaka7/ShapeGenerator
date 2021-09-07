@@ -4,10 +4,10 @@ import java.util.List;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.TorusRegionData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.BaseSelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg sel axis" command in torus selection mode
@@ -38,7 +38,7 @@ public class AxisCommandHandler extends BaseSelSubCommandHandler<Axis> {
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
 		case 1 -> List.of("x", "y", "z");
 		default -> List.of();

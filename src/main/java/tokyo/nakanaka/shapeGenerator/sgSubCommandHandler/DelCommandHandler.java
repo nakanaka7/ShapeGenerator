@@ -13,8 +13,8 @@ import tokyo.nakanaka.shapeGenerator.command.DeleteCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.DelHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg del" command
@@ -22,7 +22,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class DelCommandHandler implements SubCommandHandler {
 	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length > 1) {
 			player.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
 			return;
@@ -40,7 +40,7 @@ public class DelCommandHandler implements SubCommandHandler {
 				return;
 			}
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		List<GenerateCommand> originalList = new ArrayList<>();
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -74,7 +74,7 @@ public class DelCommandHandler implements SubCommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

@@ -3,9 +3,9 @@ package tokyo.nakanaka.shapeGenerator;
 import java.util.List;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public interface SubCommandHandler {
-	void onCommand(UserData userData, Player player, String[] args);
-	List<String> onTabComplete(UserData userData, Player player, String[] args);
+	void onCommand(PlayerData playerData, Player player, String[] args);
+	List<String> onTabComplete(PlayerData playerData, Player player, String[] args);
 }

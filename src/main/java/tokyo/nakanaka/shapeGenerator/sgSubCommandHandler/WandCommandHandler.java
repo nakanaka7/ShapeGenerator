@@ -7,8 +7,8 @@ import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.WandHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg wand" command
@@ -16,7 +16,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class WandCommandHandler implements SubCommandHandler {
 
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
 			player.print(LogColor.RED + "Usage: " + new WandHelp().getUsage());
 			return;
@@ -26,7 +26,7 @@ public class WandCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return List.of();
 	}
 

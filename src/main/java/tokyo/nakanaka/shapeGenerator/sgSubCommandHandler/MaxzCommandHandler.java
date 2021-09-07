@@ -11,8 +11,8 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MaxZCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MaxzHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg maxz" command
@@ -20,7 +20,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class MaxzCommandHandler implements SubCommandHandler {	
 
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: " + new MaxzHelp().getUsage());
 			return;
@@ -32,7 +32,7 @@ public class MaxzCommandHandler implements SubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -51,14 +51,14 @@ public class MaxzCommandHandler implements SubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, userData.getBlockPhysics());
+		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, playerData.getBlockPhysics());
 		maxzCmd.execute();
 		undoManager.add(maxzCmd);
 		player.print(LogDesignColor.NORMAL + "Set maxY -> " + value);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
 		case 1 -> List.of(String.valueOf((double)player.getBlockPosition().z()));
 		default -> List.of();

@@ -14,7 +14,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.RotateCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
  * Handles "/sg rot" command
@@ -22,7 +22,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class RotCommandHandler implements SubCommandHandler{
 			
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
 			player.print(LogColor.RED + "Usage: /sg rot <x|y|z> <degree>");
 			return;
@@ -41,7 +41,7 @@ public class RotCommandHandler implements SubCommandHandler{
 			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -60,7 +60,7 @@ public class RotCommandHandler implements SubCommandHandler{
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, userData.getBlockPhysics());
+		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, playerData.getBlockPhysics());
 		rotateCmd.execute();
 		undoManager.add(rotateCmd);
 		player.print(LogDesignColor.NORMAL + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
@@ -68,7 +68,7 @@ public class RotCommandHandler implements SubCommandHandler{
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else if(args.length == 2) {

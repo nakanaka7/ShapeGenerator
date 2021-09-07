@@ -11,8 +11,8 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinXCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinxHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg minx" command
@@ -20,7 +20,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class MinxCommandHandler implements SubCommandHandler {
 	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: " + new MinxHelp().getUsage());
 			return;
@@ -32,7 +32,7 @@ public class MinxCommandHandler implements SubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Can not parse double");
 			return;
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
 			UndoableCommand cmd = undoManager.getUndoCommand(i);
@@ -51,14 +51,14 @@ public class MinxCommandHandler implements SubCommandHandler {
 			player.print(LogDesignColor.ERROR + "Generate blocks first");
 			return;
 		}
-		MinXCommand minxCmd = new MinXCommand(originalCmd, value, userData.getBlockPhysics());
+		MinXCommand minxCmd = new MinXCommand(originalCmd, value, playerData.getBlockPhysics());
 		minxCmd.execute();
 		undoManager.add(minxCmd);
 		player.print(LogDesignColor.NORMAL + "Set minX -> " + value);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
 		case 1 -> List.of(String.valueOf((double)player.getBlockPosition().x()));
 		default -> List.of();

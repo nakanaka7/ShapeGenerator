@@ -9,7 +9,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
  * Handles "/sg undo" command
@@ -17,7 +17,7 @@ import tokyo.nakanaka.shapeGenerator.user.UserData;
 public class UndoCommandHandler implements SubCommandHandler{
 	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length > 1) {
 			player.print(LogColor.RED + "Usage: /sg undo [number]");
 			return;
@@ -35,7 +35,7 @@ public class UndoCommandHandler implements SubCommandHandler{
 				return;
 			}
 		}
-		UndoCommandManager undoManager = userData.getUndoCommandManager();
+		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		int totalNum = 0;
 		for(int i = 0; i < num; ++i) {
 			boolean success = undoManager.undo();
@@ -56,7 +56,7 @@ public class UndoCommandHandler implements SubCommandHandler{
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 1) {
 			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 		}

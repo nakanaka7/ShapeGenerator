@@ -6,6 +6,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.CuboidSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DiamondSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LineSelectionShapeStrategy;
@@ -15,7 +16,6 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SphereSelectionShape
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TetrahedronSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TorusSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TriangleSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.user.UserDataRepository;
 
 /**
  * Main class for the project. 
@@ -35,9 +35,9 @@ public class Main {
 		selStrtgMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		selStrtgMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
 		var selHandler = new SelectionHandler(selStrtgMap);
-		var userDataRepository = new UserDataRepository(selHandler);
-		this.sgCmdHandler = new SgCommandHandler(userDataRepository, selHandler, blockIDListFactory);
-		this.sgEvtHandler = new SgEventHandler(userDataRepository, selHandler);
+		var playerDataRepository = new PlayerDataRepository(selHandler);
+		this.sgCmdHandler = new SgCommandHandler(playerDataRepository, selHandler, blockIDListFactory);
+		this.sgEvtHandler = new SgEventHandler(playerDataRepository, selHandler);
 	}
 	
 	/**

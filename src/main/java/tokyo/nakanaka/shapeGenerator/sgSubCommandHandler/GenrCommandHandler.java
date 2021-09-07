@@ -11,8 +11,8 @@ import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg genr" command
@@ -25,7 +25,7 @@ public class GenrCommandHandler implements SubCommandHandler {
 	}
 	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(LogColor.RED + "Usage: " +  new GenrHelp().getUsage());
 			return;
@@ -39,12 +39,12 @@ public class GenrCommandHandler implements SubCommandHandler {
 		}
 		Selection sel;
 		try {
-			sel = userData.getSelectionData().buildSelection();
+			sel = playerData.getSelectionData().buildSelection();
 		}catch(IllegalStateException e) {
 			player.print(LogColor.RED + "Incomplete selection");
 			return;
 		}
-		GenerateCommand generateCmd = new GenerateCommand(sel, block, userData.getBlockPhysics());	
+		GenerateCommand generateCmd = new GenerateCommand(sel, block, playerData.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
@@ -52,11 +52,11 @@ public class GenrCommandHandler implements SubCommandHandler {
 			return;
 		}
 		player.print(LogDesignColor.NORMAL + "Generated block(s)");
-		userData.getUndoCommandManager().add(generateCmd);
+		playerData.getUndoCommandManager().add(generateCmd);
 	}
 
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
 			case 1 -> this.blockIDFactory.getBlockIDList().stream()
 				.map(s -> s.toString())

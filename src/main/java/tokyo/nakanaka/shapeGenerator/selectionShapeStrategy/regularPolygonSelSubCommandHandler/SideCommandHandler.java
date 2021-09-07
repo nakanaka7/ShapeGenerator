@@ -3,10 +3,10 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSu
 import java.util.List;
 
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegularPolygonRegionData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.BaseSelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * Handles "/sg sel side" command in regular polygon selection mode
@@ -41,7 +41,7 @@ public class SideCommandHandler extends BaseSelSubCommandHandler<Integer> {
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
 		case 1 -> List.of("3", "4", "5", "6", "7", "8", "9");
 		default -> List.of();

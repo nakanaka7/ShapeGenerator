@@ -11,14 +11,14 @@ import tokyo.nakanaka.shapeGenerator.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 public class OffsetCommandHandler implements SubCommandHandler {
 	
 	@Override
-	public void onCommand(UserData userData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String usage = "/sg sel offset [x] [y] [z]";
 		//parse the arguments to a position
 		double x;
@@ -48,12 +48,12 @@ public class OffsetCommandHandler implements SubCommandHandler {
 		}
 		//reset the selection data if the world changes
 		World evtWorld = pos.world();
-		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
+		if(!evtWorld.equals(playerData.getSelectionData().getWorld())) {
 			RegionData cuboidRegData = new CuboidRegionData();
 			SelectionData newSelData = new SelectionData(evtWorld, cuboidRegData);
-			userData.setSelectionData(newSelData);
+			playerData.setSelectionData(newSelData);
 		}
-		SelectionData selData = userData.getSelectionData();
+		SelectionData selData = playerData.getSelectionData();
 		selData.setOffset(new Vector3D(x, y, z));
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
@@ -61,7 +61,7 @@ public class OffsetCommandHandler implements SubCommandHandler {
 	}
 	
 	@Override
-	public List<String> onTabComplete(UserData userData, Player player, String[] args) {
+	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		BlockPosition pos = player.getBlockPosition();
 		return switch(args.length) {
 			case 1 -> List.of(String.valueOf(pos.x()));

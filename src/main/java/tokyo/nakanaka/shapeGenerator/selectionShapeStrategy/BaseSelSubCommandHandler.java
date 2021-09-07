@@ -8,8 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.user.UserData;
 
 /**
  * A base abstract class to handle "/sg sel" subcommand. E is object type for parsing.
@@ -25,7 +25,7 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(UserData userData, Player player, String[] subArgs) {
+	public void onCommand(PlayerData playerData, Player player, String[] subArgs) {
 		E value;
 		try {
 			value = this.parse(player, subArgs);
@@ -34,13 +34,13 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 			return;
 		}
 		World evtWorld = player.getBlockPosition().world();
-		if(!evtWorld.equals(userData.getSelectionData().getWorld())) {
+		if(!evtWorld.equals(playerData.getSelectionData().getWorld())) {
 			RegionData newRegData = this.newRegionData();
 			SelectionData newSelData = new SelectionData(evtWorld, newRegData);
-			userData.setSelectionData(newSelData);
+			playerData.setSelectionData(newSelData);
 		}
-		this.setParsedValue(userData.getSelectionData().getRegionData(), value);
-		List<String> lines = MessageUtils.selectionMessage(userData.getSelectionShape(), userData.getSelectionData());
+		this.setParsedValue(playerData.getSelectionData().getRegionData(), value);
+		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionData());
 		lines.stream().forEach(player::print);
 	}
 	
