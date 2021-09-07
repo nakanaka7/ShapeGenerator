@@ -8,7 +8,6 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
@@ -27,11 +26,11 @@ public class UndoCommandHandler implements SubCommandHandler{
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				player.print(LogDesignColor.ERROR + "Can not parse the number");
+				player.print(LogColor.RED + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				player.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				player.print(LogColor.RED + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -45,12 +44,12 @@ public class UndoCommandHandler implements SubCommandHandler{
 			++totalNum;
 		}
 		if(totalNum == 0) {
-			player.print(LogDesignColor.ERROR + "Nothing to undo");
+			player.print(LogColor.RED + "Nothing to undo");
 			return;
 		}
-		player.print(LogDesignColor.NORMAL + "Undid " + totalNum + " command(s)");
+		player.print(LogColor.GOLD + "Undid " + totalNum + " command(s)");
 		if(totalNum < num) {
-			player.print(LogDesignColor.ERROR + "Reached the beginning command");
+			player.print(LogColor.RED + "Reached the beginning command");
 		}
 		return;
 	}

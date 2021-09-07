@@ -10,7 +10,6 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinXCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinxHelp;
 
@@ -29,7 +28,7 @@ public class MinxCommandHandler implements SubCommandHandler {
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogDesignColor.ERROR + "Can not parse double");
+			player.print(LogColor.RED + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -48,13 +47,13 @@ public class MinxCommandHandler implements SubCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
 		MinXCommand minxCmd = new MinXCommand(originalCmd, value, playerData.getBlockPhysics());
 		minxCmd.execute();
 		undoManager.add(minxCmd);
-		player.print(LogDesignColor.NORMAL + "Set minX -> " + value);
+		player.print(LogColor.GOLD + "Set minX -> " + value);
 	}
 
 	@Override

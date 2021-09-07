@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator.logger;
 
 import tokyo.nakanaka.logger.LogColor;
 
+@Deprecated
 public class LogDesignColor {
 	public static LogColor MAIN = LogColor.GOLD;
 	public static LogColor SUB = LogColor.WHITE;

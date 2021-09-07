@@ -10,7 +10,6 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MaxXCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MaxxHelp;
 
@@ -29,7 +28,7 @@ public class MaxxCommandHandler implements SubCommandHandler {
 		try {
 			value = Double.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogDesignColor.ERROR + "Can not parse double");
+			player.print(LogColor.RED + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -48,13 +47,13 @@ public class MaxxCommandHandler implements SubCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
 		MaxXCommand maxxCmd = new MaxXCommand(originalCmd, value, playerData.getBlockPhysics());
 		maxxCmd.execute();
 		undoManager.add(maxxCmd);
-		player.print(LogDesignColor.NORMAL + "Set maxX -> " + value);
+		player.print(LogColor.GOLD + "Set maxX -> " + value);
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
@@ -28,11 +27,11 @@ public class RedoCommandHandler implements SubCommandHandler{
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				player.print(LogDesignColor.ERROR + "Can not parse the number");
+				player.print(LogColor.RED + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				player.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				player.print(LogColor.RED + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -46,13 +45,13 @@ public class RedoCommandHandler implements SubCommandHandler{
 			++totalNum;
 		}
 		if(totalNum == 0) {
-			player.print(LogDesignColor.ERROR + "Nothing to redo");
+			player.print(LogColor.RED + "Nothing to redo");
 			player.print(usageMsg);
 			return;
 		}
-		player.print(LogDesignColor.NORMAL + "Redid " + totalNum + " command(s)");
+		player.print(LogColor.GOLD + "Redid " + totalNum + " command(s)");
 		if(totalNum < num) {
-			player.print(LogDesignColor.ERROR + "Reached the end command");
+			player.print(LogColor.RED + "Reached the end command");
 		}
 		player.print(usageMsg);
 	}

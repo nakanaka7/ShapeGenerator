@@ -13,7 +13,6 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
@@ -31,7 +30,7 @@ public class MirrorCommandHandler implements SubCommandHandler {
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogDesignColor.ERROR + "Can not parse axis");
+			player.print(LogColor.RED + "Can not parse axis");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -50,13 +49,13 @@ public class MirrorCommandHandler implements SubCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}	
 		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, playerData.getBlockPhysics());
 		mirrorCmd.execute();
 		undoManager.add(mirrorCmd);
-		player.print(LogDesignColor.NORMAL + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
+		player.print(LogColor.RED + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 	}
 	
 	@Override

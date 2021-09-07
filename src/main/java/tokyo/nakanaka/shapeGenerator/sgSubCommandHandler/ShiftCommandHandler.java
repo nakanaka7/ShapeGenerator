@@ -14,7 +14,6 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
@@ -33,13 +32,13 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		try {
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogDesignColor.ERROR + "Can not parse direction");
+			player.print(LogColor.RED + "Can not parse direction");
 			return;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogDesignColor.ERROR + "Can not parse integer");
+			player.print(LogColor.RED + "Can not parse integer");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -58,7 +57,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
 		double dx = dir.getX() * blocks;
@@ -68,7 +67,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, playerData.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
-		player.print(LogDesignColor.NORMAL + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
+		player.print(LogColor.GOLD + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
 	}
 	
 	@Override

@@ -12,7 +12,6 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.DeleteCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.DelHelp;
 
@@ -32,11 +31,11 @@ public class DelCommandHandler implements SubCommandHandler {
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				player.print(LogDesignColor.ERROR + "Can not parse the number");
+				player.print(LogColor.RED + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				player.print(LogDesignColor.ERROR + "The number must be larger than 0");
+				player.print(LogColor.RED + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -63,12 +62,12 @@ public class DelCommandHandler implements SubCommandHandler {
 		deleteCmd.execute();
 		undoManager.add(deleteCmd);
 		if(delNum == 0) {
-			player.print(LogDesignColor.ERROR + "Generate blocks first");
+			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
-		player.print(LogDesignColor.NORMAL + "Deleted " + delNum + " generation(s)");
+		player.print(LogColor.GOLD + "Deleted " + delNum + " generation(s)");
 		if(delNum < num) {
-			player.print(LogDesignColor.ERROR + "reached the first generation");
+			player.print(LogColor.RED + "reached the first generation");
 		}
 		return;
 	}

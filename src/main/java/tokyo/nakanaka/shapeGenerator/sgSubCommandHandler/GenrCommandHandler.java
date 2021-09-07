@@ -10,7 +10,6 @@ import tokyo.nakanaka.shapeGenerator.BlockIDListFactory;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
-import tokyo.nakanaka.shapeGenerator.logger.LogDesignColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
 
@@ -51,7 +50,7 @@ public class GenrCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Unsettable block");
 			return;
 		}
-		player.print(LogDesignColor.NORMAL + "Generated block(s)");
+		player.print(LogColor.GOLD + "Generated block(s)");
 		playerData.getUndoCommandManager().add(generateCmd);
 	}
 
