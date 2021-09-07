@@ -38,7 +38,7 @@ public class GenrCommandHandler implements SubCommandHandler {
 		}
 		Selection sel;
 		try {
-			sel = playerData.getSelectionBuilder().buildSelection();
+			sel = playerData.getSelectionBuilder().build();
 		}catch(IllegalStateException e) {
 			player.print(LogColor.RED + "Incomplete selection");
 			return;
