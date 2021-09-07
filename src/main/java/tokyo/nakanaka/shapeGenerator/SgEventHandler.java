@@ -40,8 +40,7 @@ public class SgEventHandler {
 		//reset the selection data if the world changes
 		World evtWorld = blockPos.world();
 		if(!evtWorld.equals(playerData.getSelectionData().getWorld())) {
-			SelectionData newSelData = this.selHandler.newSelectionData(selShape);
-			newSelData.setWorld(evtWorld);
+			SelectionData newSelData = this.selHandler.newSelectionData(selShape, evtWorld);
 			playerData.setSelectionData(newSelData);
 		}
 		//update the selection data

@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.Map;
 
+import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
@@ -22,13 +23,12 @@ public class SelectionHandler {
 	/**
 	 * Returns a new selection data for the selection shape
 	 * @param selShape a selection shape
+	 * @param world a world
 	 * @return a new selection data for the selection shape
 	 */
-	public SelectionData newSelectionData(SelectionShape selShape) {
-		SelectionData selData = new SelectionData();
+	public SelectionData newSelectionData(SelectionShape selShape, World world) {
 		RegionData regData = selStrtgMap.get(selShape).newRegionData();
-		selData.setRegionData(regData);
-		return selData;
+		return new SelectionData(world, regData);
 	}
 	
 	/**
