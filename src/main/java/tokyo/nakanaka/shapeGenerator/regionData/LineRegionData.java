@@ -57,6 +57,11 @@ public class LineRegionData implements RegionData {
 	}
 	
 	@Override
+	public String defaultOffsetLabel() {
+		return "pos1";
+	}
+	
+	@Override
 	public LinkedHashMap<String, String> toLinkedHashMap() {
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 		map.put("pos1", "");

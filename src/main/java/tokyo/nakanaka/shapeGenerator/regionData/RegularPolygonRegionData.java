@@ -98,6 +98,11 @@ public class RegularPolygonRegionData implements RegionData {
 	}
 	
 	@Override
+	public String defaultOffsetLabel() {
+		return "center";
+	}
+	
+	@Override
 	public LinkedHashMap<String, String> toLinkedHashMap() {
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
 		map.put("center", "");

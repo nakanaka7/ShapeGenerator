@@ -35,6 +35,12 @@ public interface RegionData {
 	Vector3D defaultOffset();
 	
 	/**
+	 * Returns default offset label
+	 * @return default offset label
+	 */
+	String defaultOffsetLabel();
+	
+	/**
 	 * Returns the map which holds this object's information
 	 * @return the map which holds this object's information
 	 */
