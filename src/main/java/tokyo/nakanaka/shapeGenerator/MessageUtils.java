@@ -10,10 +10,10 @@ public class MessageUtils {
 	private MessageUtils() {	
 	}
 	
-	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
+	public static List<String> selectionMessage(SelectionShape selShape, SelectionBuilder selBuilder) {
 		List<String> lines = new ArrayList<>();
 		lines.add("--- [" + LogColor.GOLD + selShape + " Selection" + LogColor.RESET + "] ---------------------");
-		for(Entry<String, String> e : selData.toLinkedHashMap().entrySet()) {
+		for(Entry<String, String> e : selBuilder.toLinkedHashMap().entrySet()) {
 			lines.add(LogColor.GOLD + e.getKey() + ": " + LogColor.RESET + e.getValue());
 		}
 		return lines;

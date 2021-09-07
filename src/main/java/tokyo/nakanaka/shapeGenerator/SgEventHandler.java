@@ -37,22 +37,22 @@ public class SgEventHandler {
 		BlockPosition blockPos = evt.getBlockPos();
 		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
 		SelectionShape selShape = playerData.getSelectionShape();
-		//reset the selection data if the world changes
+		//reset the selection builder if the world changes
 		World evtWorld = blockPos.world();
-		if(!evtWorld.equals(playerData.getSelectionData().getWorld())) {
-			SelectionData newSelData = this.selHandler.newSelectionData(selShape, evtWorld);
-			playerData.setSelectionData(newSelData);
+		if(!evtWorld.equals(playerData.getSelectionBuilder().getWorld())) {
+			SelectionBuilder newSelBuilder = this.selHandler.newSelectionBuilder(selShape, evtWorld);
+			playerData.setSelectionBuilder(newSelBuilder);
 		}
-		//update the selection data
-		SelectionData selData = playerData.getSelectionData();
-		RegionData regData = selData.getRegionData();
+		//update the selection builder
+		SelectionBuilder selBuilder = playerData.getSelectionBuilder();
+		RegionData regData = selBuilder.getRegionData();
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
 			case LEFT_HAND -> regData.onLeftClick(v);
 			case RIGHT_HAND -> regData.onRightClick(v);
 		}
 		//print the selection message
-		List<String> lines = MessageUtils.selectionMessage(selShape, selData);
+		List<String> lines = MessageUtils.selectionMessage(selShape, selBuilder);
 		lines.stream().forEach(player::print);
 	}
 	

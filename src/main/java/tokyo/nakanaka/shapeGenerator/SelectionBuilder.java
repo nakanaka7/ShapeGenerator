@@ -9,14 +9,14 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
- * Selection data that user data has
+ * A Class which build a selection
  */
-public class SelectionData {
+public class SelectionBuilder {
 	private World world;
 	private RegionData regData;
 	private Vector3D offset;
 	
-	public SelectionData(World world, RegionData regData) {
+	public SelectionBuilder(World world, RegionData regData) {
 		this.world = world;
 		this.regData = regData;
 	}

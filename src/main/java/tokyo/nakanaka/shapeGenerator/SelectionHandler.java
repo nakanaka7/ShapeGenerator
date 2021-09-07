@@ -21,14 +21,14 @@ public class SelectionHandler {
 	}
 
 	/**
-	 * Returns a new selection data for the selection shape
+	 * Returns a new selection builder for the selection shape
 	 * @param selShape a selection shape
 	 * @param world a world
-	 * @return a new selection data for the selection shape
+	 * @return a new selection builder for the selection shape
 	 */
-	public SelectionData newSelectionData(SelectionShape selShape, World world) {
+	public SelectionBuilder newSelectionBuilder(SelectionShape selShape, World world) {
 		RegionData regData = selStrtgMap.get(selShape).newRegionData();
-		return new SelectionData(world, regData);
+		return new SelectionBuilder(world, regData);
 	}
 	
 	/**

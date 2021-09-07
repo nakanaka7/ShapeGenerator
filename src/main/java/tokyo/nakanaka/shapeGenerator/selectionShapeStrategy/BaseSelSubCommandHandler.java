@@ -6,7 +6,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.MessageUtils;
-import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SelectionBuilder;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
@@ -34,13 +34,13 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 			return;
 		}
 		World evtWorld = player.getBlockPosition().world();
-		if(!evtWorld.equals(playerData.getSelectionData().getWorld())) {
+		if(!evtWorld.equals(playerData.getSelectionBuilder().getWorld())) {
 			RegionData newRegData = this.newRegionData();
-			SelectionData newSelData = new SelectionData(evtWorld, newRegData);
-			playerData.setSelectionData(newSelData);
+			SelectionBuilder newSelBuilder = new SelectionBuilder(evtWorld, newRegData);
+			playerData.setSelectionBuilder(newSelBuilder);
 		}
-		this.setParsedValue(playerData.getSelectionData().getRegionData(), value);
-		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionData());
+		this.setParsedValue(playerData.getSelectionBuilder().getRegionData(), value);
+		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionBuilder());
 		lines.stream().forEach(player::print);
 	}
 	
