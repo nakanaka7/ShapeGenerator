@@ -13,7 +13,7 @@ public class MessageUtils {
 	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
 		List<String> lines = new ArrayList<>();
 		lines.add("--- [" + LogColor.GOLD + selShape + " Selection" + LogColor.RESET + "] ---------------------");
-		for(Entry<String, String> e : selData.getRegionData().toLinkedHashMap().entrySet()) {
+		for(Entry<String, String> e : selData.toLinkedHashMap().entrySet()) {
 			lines.add(LogColor.GOLD + e.getKey() + ": " + LogColor.RESET + e.getValue());
 		}
 		return lines;
