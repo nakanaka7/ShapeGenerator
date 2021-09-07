@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
  */
 public class CenterCommandHandler extends PosCommandHandler {
 
-	public CenterCommandHandler(String subLabel) {
+	public CenterCommandHandler() {
 		super("center");
 	}
 
