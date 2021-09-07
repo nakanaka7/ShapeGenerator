@@ -31,8 +31,7 @@ public class PlayerDataRepository {
 			SelectionShape defaultShape = SelectionShape.CUBOID;
 			playerData.setSelectionShape(defaultShape);
 			World world = player.getEntityPosition().world();
-			SelectionData selData = this.selHandler.newSelectionData(defaultShape);
-			selData.setWorld(world);
+			SelectionData selData = this.selHandler.newSelectionData(defaultShape, world);
 			playerData.setSelectionData(selData);
 			this.playerDataMap.put(uid, playerData);
 		}
