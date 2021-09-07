@@ -6,9 +6,9 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.CommandHelp;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.DelHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;

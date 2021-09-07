@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.CommandHelp;
 
 public class MinyHelp implements CommandHelp {
 	private String usage = "/sg miny <value>";
