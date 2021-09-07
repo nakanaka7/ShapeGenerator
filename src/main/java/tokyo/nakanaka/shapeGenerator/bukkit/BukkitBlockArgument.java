@@ -9,7 +9,7 @@ import org.bukkit.Material;
 
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.commandArgument.BlockCommandArgument;
+import tokyo.nakanaka.shapeGenerator.commandArgument.BlockCommandArgument;
 
 public class BukkitBlockArgument implements BlockCommandArgument{
 

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.commandArgument;
+package tokyo.nakanaka.shapeGenerator.commandArgument;
 
 import java.util.Arrays;
 import java.util.List;

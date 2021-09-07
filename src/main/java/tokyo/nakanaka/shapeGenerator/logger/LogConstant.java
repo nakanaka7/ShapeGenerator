@@ -1,4 +1,4 @@
-package tokyo.nakanaka.logger.shapeGenerator;
+package tokyo.nakanaka.shapeGenerator.logger;
 
 import static tokyo.nakanaka.logger.LogColor.*;
 
