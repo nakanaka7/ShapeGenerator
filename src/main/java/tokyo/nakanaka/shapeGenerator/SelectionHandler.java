@@ -30,15 +30,14 @@ public class SelectionHandler {
 	}
 	
 	/**
-	 * Returns a selection from the selection builder 
+	 * Returns a selection from the selection data 
 	 * @param selShape a selection shape
-	 * @param selBuilder a selection builder
-	 * @return a selection from the selection builder 
+	 * @param selData a selection data
+	 * @return a selection from the selection data 
 	 * @throws IllegalStateException if the selection data cannot create a selection
 	 */
-	@SuppressWarnings("deprecation")
-	public Selection buildSelection(SelectionShape selShape, SelectionData selBuilder) {
-		return selBuilder.build();
+	public Selection buildSelection(SelectionShape selShape, SelectionData selData) {
+		return selStrtgMap.get(selShape).buildSelection(selData);
 	}
 	
 	/**
