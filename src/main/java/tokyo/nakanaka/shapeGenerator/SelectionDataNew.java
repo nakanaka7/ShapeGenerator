@@ -9,7 +9,7 @@ import tokyo.nakanaka.math.Vector3D;
 /**
  * A selection data
  */
-public class SelectionData {
+public class SelectionDataNew {
 	private World world;
 	private String dafualtOffsetLabel;
 	private LinkedHashMap<String, Object> extraDataMap = new LinkedHashMap<String, Object>();
@@ -21,7 +21,7 @@ public class SelectionData {
 	 * @param defaultOffsetLabel a default offset label, which must be included in extraDataLabels
 	 * @param extraDataLabels labels which are used to store extra data
 	 */
-	public SelectionData(World world, String defaultOffsetLabel, String... extraDataLabels) {
+	public SelectionDataNew(World world, String defaultOffsetLabel, String... extraDataLabels) {
 		this.world = world;
 		this.dafualtOffsetLabel = defaultOffsetLabel;
 		for(String e : extraDataLabels) {
