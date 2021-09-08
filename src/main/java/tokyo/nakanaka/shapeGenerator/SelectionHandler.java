@@ -36,6 +36,7 @@ public class SelectionHandler {
 	 * @param selShape a selection shape
 	 * @param selBuilder a selection builder
 	 * @return a selection from the selection builder 
+	 * @throws IllegalStateException if the selection data cannot create a selection
 	 */
 	@SuppressWarnings("deprecation")
 	public Selection buildSelection(SelectionShape selShape, SelectionBuilder selBuilder) {
