@@ -11,7 +11,6 @@ import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 public class SgEventHandler {
 	private PlayerDataRepository playerDataRepository;
@@ -44,15 +43,14 @@ public class SgEventHandler {
 			playerData.setSelectionBuilder(newSelBuilder);
 		}
 		//update the selection builder
-		SelectionData selBuilder = playerData.getSelectionBuilder();
-		RegionData regData = selBuilder.getRegionData();
+		SelectionData selData = playerData.getSelectionBuilder();
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
-			case LEFT_HAND -> regData.onLeftClick(v);
-			case RIGHT_HAND -> regData.onRightClick(v);
+			case LEFT_HAND -> this.selHandler.onLeftClick(selShape, selData, v);
+			case RIGHT_HAND -> this.selHandler.onRightClick(selShape, selData, v);
 		}
 		//print the selection message
-		List<String> lines = MessageUtils.selectionMessage(selShape, selBuilder);
+		List<String> lines = MessageUtils.selectionMessage(selShape, selData);
 		lines.stream().forEach(player::print);
 	}
 	
