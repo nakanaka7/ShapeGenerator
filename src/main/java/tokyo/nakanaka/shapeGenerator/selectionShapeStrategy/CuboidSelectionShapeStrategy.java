@@ -15,16 +15,16 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboidSelSubCommandHandler.Pos1CommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboidSelSubCommandHandler.Pos2CommandHandler;
 
 public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	
-	public SelectionData newSelectionDataNew(World world) {
+	@Override
+	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, "pos1", "pos1", "pos2");
 	}
 	
-	public Selection buildSelectionNew(SelectionData selData) {
+	@Override
+	public Selection buildSelection(SelectionData selData) {
 		BoundRegion3D boundReg;
 		Vector3D pos1 = (Vector3D) selData.getExtraData("pos1");
 		Vector3D pos2 = (Vector3D) selData.getExtraData("pos2");
@@ -60,23 +60,18 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new Pos1CommandHandler());
-		map.put("pos2", new Pos2CommandHandler());
-		return map;
-	}
-	
-	public Map<String, SubCommandHandler> selSubCommandHandlerMapNew(){
-		Map<String,  SubCommandHandler> map = new HashMap<>();
 		map.put("pos1", new PosCommandHandlerNew("pos1"));
 		map.put("pos2", new PosCommandHandlerNew("pos2"));
 		return map;
 	}
 	
-	public void onLeftClickNew(SelectionData selData, BlockVector3D blockPos) {
+	@Override
+	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData("pos1", blockPos.toVector3D());
 	}
 	
-	public void onRightClickNew(SelectionData selData, BlockVector3D blockPos) {
+	@Override
+	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData("pos2", blockPos.toVector3D());
 	}
 	
