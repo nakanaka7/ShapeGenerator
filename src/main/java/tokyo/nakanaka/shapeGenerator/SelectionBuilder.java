@@ -54,6 +54,21 @@ public class SelectionBuilder {
 	}
 	
 	/**
+	 * Clear custom offset
+	 */
+	public void clearCustomOffset() {
+		this.customOffset = null;
+	}
+	
+	/**
+	 * Returns true if this data has custom offset, otherwise false
+	 * @return true if this data has custom offset, otherwise false
+	 */
+	public boolean hasCustomOffset() {
+		return this.customOffset != null;
+	}
+	
+	/**
 	 * Returns a offset(nullable). If this data has custom offset, return it. Otherwise return a default offset. 
 	 * @return a offset(nullable). If this data has custom offset, return it. Otherwise return a default offset. 
 	 */
