@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.Map;
 
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
@@ -21,7 +22,12 @@ public interface SelectionShapeStrategy {
 	 * @return new region data of a selection
 	 */
 	RegionData newRegionData();
-		
+	
+	@SuppressWarnings("deprecation")
+	default Selection buildSelection(SelectionData selData) {
+		return selData.build();
+	}
+	
 	/**
 	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
 	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
