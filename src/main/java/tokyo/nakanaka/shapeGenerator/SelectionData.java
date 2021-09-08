@@ -12,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 /**
  * A Class which build a selection
  */
+@SuppressWarnings("deprecation")
 public class SelectionData {
 	private World world;
 	private String defualtOffsetLabel;

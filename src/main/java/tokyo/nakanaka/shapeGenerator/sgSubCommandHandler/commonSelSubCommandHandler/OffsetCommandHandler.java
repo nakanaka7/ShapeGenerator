@@ -15,6 +15,7 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
 import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
+@SuppressWarnings("deprecation")
 public class OffsetCommandHandler implements SubCommandHandler {
 	
 	@Override

@@ -12,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
 
+@SuppressWarnings("deprecation")
 public class TriangleRegionData implements RegionData {
 	private Vector3D pos1;
 	private Vector3D pos2;

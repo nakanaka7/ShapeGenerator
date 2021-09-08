@@ -10,6 +10,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Diamond;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
+@SuppressWarnings("deprecation")
 public class DiamondRegionData implements RegionData {
 	private Vector3D center;
 	private Double radiusX;

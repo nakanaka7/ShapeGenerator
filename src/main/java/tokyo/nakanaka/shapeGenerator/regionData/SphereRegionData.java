@@ -10,6 +10,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
 
+@SuppressWarnings("deprecation")
 public class SphereRegionData implements RegionData {
 	private Vector3D center;
 	private Double radius;

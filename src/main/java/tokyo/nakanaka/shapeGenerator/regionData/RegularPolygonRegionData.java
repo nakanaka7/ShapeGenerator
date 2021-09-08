@@ -14,6 +14,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
 
+@SuppressWarnings("deprecation")
 public class RegularPolygonRegionData implements RegionData {
 	private Vector3D center;
 	private Double radius;

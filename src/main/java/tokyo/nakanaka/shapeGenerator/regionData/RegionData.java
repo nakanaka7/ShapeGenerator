@@ -6,6 +6,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 
+@Deprecated
 public interface RegionData {
 	
 	/**

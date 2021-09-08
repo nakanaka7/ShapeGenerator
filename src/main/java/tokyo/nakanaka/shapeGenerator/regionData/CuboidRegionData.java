@@ -9,6 +9,7 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
+@SuppressWarnings("deprecation")
 public class CuboidRegionData implements RegionData {
 	private Vector3D pos1;
 	private Vector3D pos2;
