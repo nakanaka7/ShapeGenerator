@@ -38,7 +38,7 @@ public abstract class BaseSelSubCommandHandlerNew<E> implements SubCommandHandle
 		World evtWorld = player.getBlockPosition().world();
 		SelectionData selData = playerData.getSelectionBuilder();
 		if(!evtWorld.equals(selData.world())) {
-			playerData.setSelectionBuilder(new SelectionData(evtWorld, selData.dafualtOffsetLabel(), selData.extraDataLabels()));
+			playerData.setSelectionBuilder(new SelectionData(evtWorld, selData.defualtOffsetLabel(), selData.extraDataLabels()));
 		}
 		playerData.getSelectionBuilder().setExtraData(this.subLabel, value);
 		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionBuilder());
