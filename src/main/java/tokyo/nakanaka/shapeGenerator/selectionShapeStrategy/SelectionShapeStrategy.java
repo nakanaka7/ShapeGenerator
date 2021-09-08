@@ -13,6 +13,10 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
  */
 public interface SelectionShapeStrategy {
 	
+	/**
+	 * Returns new selection data
+	 * @param world a world of the selection data
+	 */
 	default SelectionData newSelectionData(World world) {
 		return new SelectionData(world, newRegionData());
 	}
