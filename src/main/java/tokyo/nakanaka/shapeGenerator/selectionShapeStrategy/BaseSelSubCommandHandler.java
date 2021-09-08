@@ -34,7 +34,7 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 			return;
 		}
 		World evtWorld = player.getBlockPosition().world();
-		if(!evtWorld.equals(playerData.getSelectionBuilder().getWorld())) {
+		if(!evtWorld.equals(playerData.getSelectionBuilder().world())) {
 			RegionData newRegData = this.newRegionData();
 			SelectionBuilder newSelBuilder = new SelectionBuilder(evtWorld, newRegData);
 			playerData.setSelectionBuilder(newSelBuilder);

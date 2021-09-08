@@ -48,13 +48,13 @@ public class OffsetCommandHandler implements SubCommandHandler {
 		}
 		//reset the selection data if the world changes
 		World evtWorld = pos.world();
-		if(!evtWorld.equals(playerData.getSelectionBuilder().getWorld())) {
+		if(!evtWorld.equals(playerData.getSelectionBuilder().world())) {
 			RegionData cuboidRegData = new CuboidRegionData();
 			SelectionBuilder newSelBuilder = new SelectionBuilder(evtWorld, cuboidRegData);
 			playerData.setSelectionBuilder(newSelBuilder);
 		}
 		SelectionBuilder selData = playerData.getSelectionBuilder();
-		selData.setOffset(new Vector3D(x, y, z));
+		selData.setCustomOffset(new Vector3D(x, y, z));
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
 		lines.stream().forEach(player::print);
