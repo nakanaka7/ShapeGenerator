@@ -67,8 +67,16 @@ public class SelectionData {
 	}
 	
 	/**
-	 * Returns a list for the extra data labels
-	 * @return a list for the extra data labels
+	 * Return an array of the extra data labels
+	 * @return an array of the extra data labels
+	 */
+	public String[] extraDataLabels() {
+		return this.extraDataMap.keySet().stream().toArray(String[]::new);
+	}
+	
+	/**
+	 * Returns a list of the extra data labels
+	 * @return a list of the extra data labels
 	 */
 	public List<String> extraDataLabelList() {
 		return this.extraDataMap.keySet().stream().toList();
