@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator;
 import java.util.Map;
 
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 /**
@@ -62,6 +63,26 @@ public class SelectionHandler {
 	 */
 	public String rightClickDescription(SelectionShape selShape) {
 		return selStrtgMap.get(selShape).rightClickDescription();
+	}
+	
+	/**
+	 * Update the selection data on left block click
+	 * @param selShape a selection shape
+	 * @param selData the selection data
+	 * @param blockPos the block position
+	 */
+	public void onLeftClick(SelectionShape selShape, SelectionData selData, BlockVector3D blockPos) {
+		this.selStrtgMap.get(selShape).onLeftClick(selData, blockPos);
+	}
+	
+	/**
+	 * Update the selection data on right block click
+	 * @param selShape a selection shape
+	 * @param selData the selection data
+	 * @param blockPos the block position
+	 */
+	public void onRightClick(SelectionShape selShape, SelectionData selData, BlockVector3D blockPos) {
+		this.selStrtgMap.get(selShape).onRightClick(selData, blockPos);
 	}
 	
 }
