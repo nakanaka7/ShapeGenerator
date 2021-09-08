@@ -30,6 +30,14 @@ public class SelectionBuilder {
 	}
 	
 	/**
+	 * Returns the default offset label
+	 * @return the default offset label
+	 */
+	public String dafualtOffsetLabel() {
+		return this.regData.defaultOffsetLabel();
+	}
+	
+	/**
 	 * Return the region data
 	 * @return the region data
 	 */
@@ -43,6 +51,18 @@ public class SelectionBuilder {
 	 */
 	public void setCustomOffset(Vector3D customOffset) {
 		this.customOffset = customOffset;
+	}
+	
+	/**
+	 * Returns a offset(nullable). If this data has custom offset, return it. Otherwise return a default offset. 
+	 * @return a offset(nullable). If this data has custom offset, return it. Otherwise return a default offset. 
+	 */
+	public Vector3D getOffset() {
+		if(this.customOffset != null) {
+			return this.customOffset;
+		}else {
+			return this.regData.defaultOffset();
+		}
 	}
 	
 	/**
