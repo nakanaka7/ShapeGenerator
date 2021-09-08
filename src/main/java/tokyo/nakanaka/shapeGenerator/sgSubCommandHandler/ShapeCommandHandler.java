@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelectionBuilder;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
@@ -40,7 +40,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 		if(shape != original) {
 			playerData.setSelectionShape(shape);
 			World world = player.getEntityPosition().world();
-			SelectionBuilder selBuilder = this.selHandler.newSelectionBuilder(shape, world);
+			SelectionData selBuilder = this.selHandler.newSelectionBuilder(shape, world);
 			playerData.setSelectionBuilder(selBuilder);
 		}
 		player.print(LogColor.GOLD + "Set the shape -> " + shape);

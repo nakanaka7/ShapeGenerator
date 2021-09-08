@@ -26,9 +26,9 @@ public class SelectionHandler {
 	 * @param world a world
 	 * @return a new selection builder for the selection shape
 	 */
-	public SelectionBuilder newSelectionBuilder(SelectionShape selShape, World world) {
+	public SelectionData newSelectionBuilder(SelectionShape selShape, World world) {
 		RegionData regData = selStrtgMap.get(selShape).newRegionData();
-		return new SelectionBuilder(world, regData);
+		return new SelectionData(world, regData);
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public class SelectionHandler {
 	 * @throws IllegalStateException if the selection data cannot create a selection
 	 */
 	@SuppressWarnings("deprecation")
-	public Selection buildSelection(SelectionShape selShape, SelectionBuilder selBuilder) {
+	public Selection buildSelection(SelectionShape selShape, SelectionData selBuilder) {
 		return selBuilder.build();
 	}
 	

@@ -11,12 +11,12 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 /**
  * A Class which build a selection
  */
-public class SelectionBuilder {
+public class SelectionData {
 	private World world;
 	private RegionData regData;
 	private Vector3D customOffset;
 	
-	public SelectionBuilder(World world, RegionData regData) {
+	public SelectionData(World world, RegionData regData) {
 		this.world = world;
 		this.regData = regData;
 	}
