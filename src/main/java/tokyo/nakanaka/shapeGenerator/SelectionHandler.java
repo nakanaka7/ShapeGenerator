@@ -26,7 +26,7 @@ public class SelectionHandler {
 	 * @param world a world
 	 * @return a new selection builder for the selection shape
 	 */
-	public SelectionData newSelectionBuilder(SelectionShape selShape, World world) {
+	public SelectionData newSelectionData(SelectionShape selShape, World world) {
 		RegionData regData = selStrtgMap.get(selShape).newRegionData();
 		return new SelectionData(world, regData);
 	}

@@ -40,7 +40,7 @@ public class SgEventHandler {
 		//reset the selection builder if the world changes
 		World evtWorld = blockPos.world();
 		if(!evtWorld.equals(playerData.getSelectionBuilder().world())) {
-			SelectionData newSelBuilder = this.selHandler.newSelectionBuilder(selShape, evtWorld);
+			SelectionData newSelBuilder = this.selHandler.newSelectionData(selShape, evtWorld);
 			playerData.setSelectionBuilder(newSelBuilder);
 		}
 		//update the selection builder
