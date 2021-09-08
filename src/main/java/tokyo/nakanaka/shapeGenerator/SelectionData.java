@@ -121,8 +121,14 @@ public class SelectionData {
 	 */
 	LinkedHashMap<String, String> toLinkedHashMap() {
 		var map = new LinkedHashMap<String, String>();
-		for(Entry<String, String> e : this.regData.toLinkedHashMap().entrySet()) {
-			map.put(e.getKey(), e.getValue());
+		if(this.regData != null) {
+			for(Entry<String, String> e : this.regData.toLinkedHashMap().entrySet()) {
+				map.put(e.getKey(), e.getValue());
+			}
+		}else {
+			for(Entry<String, Object> e : this.extraDataMap.entrySet()) {
+				map.put(e.getKey(), e.getValue().toString());
+			}
 		}
 		String offset;
 		if(this.customOffset != null) {
