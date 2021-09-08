@@ -1,6 +1,7 @@
 package tokyo.nakanaka.shapeGenerator;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import tokyo.nakanaka.World;
@@ -63,6 +64,36 @@ public class SelectionData {
 	 */
 	public RegionData getRegionData() {
 		return regData;
+	}
+	
+	/**
+	 * Returns a list for the extra data labels
+	 * @return a list for the extra data labels
+	 */
+	public List<String> extraDataLabelList() {
+		return this.extraDataMap.keySet().stream().toList();
+	}
+	
+	/**
+	 * Returns extra data for the label
+	 * @param label a label 
+	 * @return extra data for the label
+	 */
+	public Object getExtraData(String label) {
+		return this.extraDataMap.get(label);
+	}
+	
+	/**
+	 * Set a extra data for the label
+	 * @param label a label
+	 * @param data a data
+	 * @throws IllegalArgumentException if the label is not given in the constructor
+	 */
+	public void setExtraData(String label, Object data) {
+		if(!this.extraDataMap.containsKey(label)) {
+			throw new IllegalArgumentException();
+		}
+		this.extraDataMap.put(label, data);
 	}
 	
 	/**
