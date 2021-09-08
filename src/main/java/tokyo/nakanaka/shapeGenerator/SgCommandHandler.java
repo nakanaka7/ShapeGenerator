@@ -59,7 +59,7 @@ public class SgCommandHandler implements CommandHandler {
 		this.playerDataRepository = playerDataRepository;
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(selHandler));
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(selHandler));
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(blockIDListFactory));
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(selHandler, blockIDListFactory));
 	}
 	
 	/**
