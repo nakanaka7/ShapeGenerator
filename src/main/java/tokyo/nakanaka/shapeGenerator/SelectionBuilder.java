@@ -50,6 +50,7 @@ public class SelectionBuilder {
 	 * @return a selection from the selection data
 	 * @throws IllegalStateException if the selection data cannot create a selection
 	 */
+	@Deprecated
 	public Selection build() {
 		BoundRegion3D boundReg = regData.buildBoundRegion3D();
 		Vector3D offset = this.customOffset;
