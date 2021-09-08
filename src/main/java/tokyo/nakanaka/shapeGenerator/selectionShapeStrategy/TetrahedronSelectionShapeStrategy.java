@@ -31,11 +31,13 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 		return new TetrahedronRegionData();
 	}
 	
+	@Override
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, "pos1", "pos1", "pos2", "pos3", "pos4");
 	}
 	
-	public Selection buildSelectionNew(SelectionData selData) {
+	@Override
+	public Selection buildSelection(SelectionData selData) {
 		BoundRegion3D boundReg;
 		Vector3D pos1 = (Vector3D) selData.getExtraData("pos1");
 		Vector3D pos2 = (Vector3D) selData.getExtraData("pos2");
@@ -69,16 +71,7 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 	}
 	
 	@Override
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
-		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new Pos1CommandHandler());
-		map.put("pos2", new Pos2CommandHandler());
-		map.put("pos3", new Pos3CommandHandler());
-		map.put("pos4", new Pos4CommandHandler());
-		return map;
-	}
-	
-	public Map<String, SubCommandHandler> selSubCommandHandlerMapNew(){
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
 		map.put("pos1", new PosCommandHandlerNew("pos1"));
 		map.put("pos2", new PosCommandHandlerNew("pos2"));
@@ -87,14 +80,16 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 		return map;
 	}
 	
-	public void onLeftClickNew(SelectionData selData, BlockVector3D blockPos) {
+	@Override
+	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData("pos1", blockPos.toVector3D());
 		selData.setExtraData("pos2", null);
 		selData.setExtraData("pos3", null);
 		selData.setExtraData("pos4", null);
 	}
 	
-	public void onRightClickNew(SelectionData selData, BlockVector3D blockPos) {
+	@Override
+	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		if(selData.getExtraData("pos1") == null) {
 			throw new IllegalStateException();
 		}
