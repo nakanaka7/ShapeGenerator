@@ -32,6 +32,17 @@ public class SelectionHandler {
 	}
 	
 	/**
+	 * Returns a selection from the selection builder 
+	 * @param selShape a selection shape
+	 * @param selBuilder a selection builder
+	 * @return a selection from the selection builder 
+	 */
+	@SuppressWarnings("deprecation")
+	public Selection buildSelection(SelectionShape selShape, SelectionBuilder selBuilder) {
+		return selBuilder.build();
+	}
+	
+	/**
 	 * Get SelSubCommandHandlerMap
 	 * @return SelSubCommandHandlerMap
 	 */
