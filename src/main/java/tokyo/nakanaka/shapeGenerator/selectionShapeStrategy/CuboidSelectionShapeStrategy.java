@@ -21,7 +21,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboidSelSubCommandH
 public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	
 	public SelectionData newSelectionDataNew(World world) {
-		return new SelectionData(world, "pos1", "pos1", "pos2", "width", "height", "length");
+		return new SelectionData(world, "pos1", "pos1", "pos2");
 	}
 	
 	public Selection buildSelectionNew(SelectionData selData) {
