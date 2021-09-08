@@ -13,12 +13,28 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
  */
 public class SelectionData {
 	private World world;
+	private String dafualtOffsetLabel;
 	private RegionData regData;
+	private LinkedHashMap<String, Object> extraDataMap = new LinkedHashMap<String, Object>();
 	private Vector3D customOffset;
 	
 	public SelectionData(World world, RegionData regData) {
 		this.world = world;
 		this.regData = regData;
+	}
+	
+	/**
+	 * Constructs a selection data
+	 * @param world a world
+	 * @param defaultOffsetLabel a default offset label, which must be included in extraDataLabels
+	 * @param extraDataLabels labels which are used to store extra data
+	 */
+	public SelectionData(World world, String defaultOffsetLabel, String... extraDataLabels) {
+		this.world = world;
+		this.dafualtOffsetLabel = defaultOffsetLabel;
+		for(String e : extraDataLabels) {
+			this.extraDataMap.put(e, null);
+		}
 	}
 	
 	/**
@@ -34,7 +50,11 @@ public class SelectionData {
 	 * @return the default offset label
 	 */
 	public String dafualtOffsetLabel() {
-		return this.regData.defaultOffsetLabel();
+		if(this.dafualtOffsetLabel == null) {
+			return this.regData.defaultOffsetLabel();
+		}else {
+			return this.dafualtOffsetLabel;
+		}
 	}
 	
 	/**
