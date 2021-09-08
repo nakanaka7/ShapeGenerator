@@ -26,6 +26,7 @@ public interface SelectionShapeStrategy {
 	 * Returns new region data of a selection
 	 * @return new region data of a selection
 	 */
+	@Deprecated
 	RegionData newRegionData();
 	
 	@SuppressWarnings("deprecation")
