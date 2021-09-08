@@ -14,7 +14,7 @@ import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
  */
 public class SelectionData {
 	private World world;
-	private String dafualtOffsetLabel;
+	private String defualtOffsetLabel;
 	private RegionData regData;
 	private LinkedHashMap<String, Object> extraDataMap = new LinkedHashMap<String, Object>();
 	private Vector3D customOffset;
@@ -32,7 +32,7 @@ public class SelectionData {
 	 */
 	public SelectionData(World world, String defaultOffsetLabel, String... extraDataLabels) {
 		this.world = world;
-		this.dafualtOffsetLabel = defaultOffsetLabel;
+		this.defualtOffsetLabel = defaultOffsetLabel;
 		for(String e : extraDataLabels) {
 			this.extraDataMap.put(e, null);
 		}
@@ -50,11 +50,11 @@ public class SelectionData {
 	 * Returns the default offset label
 	 * @return the default offset label
 	 */
-	public String dafualtOffsetLabel() {
-		if(this.dafualtOffsetLabel == null) {
+	public String defualtOffsetLabel() {
+		if(this.defualtOffsetLabel == null) {
 			return this.regData.defaultOffsetLabel();
 		}else {
-			return this.dafualtOffsetLabel;
+			return this.defualtOffsetLabel;
 		}
 	}
 	
@@ -134,8 +134,10 @@ public class SelectionData {
 	public Vector3D getOffset() {
 		if(this.customOffset != null) {
 			return this.customOffset;
-		}else {
+		}else if(this.regData != null){
 			return this.regData.defaultOffset();
+		}else {
+			return (Vector3D) this.extraDataMap.get(this.defualtOffsetLabel);
 		}
 	}
 	
@@ -165,13 +167,20 @@ public class SelectionData {
 				map.put(e.getKey(), e.getValue());
 			}
 		}else {
-			for(Entry<String, Object> e : this.extraDataMap.entrySet()) {
-				map.put(e.getKey(), e.getValue().toString());
+			for(String k : this.extraDataMap.keySet()) {
+				Object o = this.extraDataMap.get(k);
+				String v = "";
+				if(o != null) {
+					v = o.toString();
+				}
+				map.put(k, v);
 			}
 		}
 		String offset;
 		if(this.customOffset != null) {
 			offset = this.customOffset.toString();
+		}else if(this.defualtOffsetLabel != null){
+			offset = this.defualtOffsetLabel;
 		}else {
 			offset = this.regData.defaultOffsetLabel();
 		}
