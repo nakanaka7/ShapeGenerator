@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 import java.util.Map;
 
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
@@ -49,5 +50,23 @@ public interface SelectionShapeStrategy {
 	 * @return a short description for right clicking block event
 	 */
 	String rightClickDescription();
-			
+	
+	/**
+	 * Update the selection data on left block click
+	 * @param selData the selection data
+	 * @param blockPos the block position
+	 */
+	default void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+		selData.getRegionData().onLeftClick(blockPos);
+	}
+	
+	/**
+	 * Update the selection data on right block click
+	 * @param selData the selection data
+	 * @param blockPos the block position
+	 */
+	default void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+		selData.getRegionData().onRightClick(blockPos);
+	}
+	
 }
