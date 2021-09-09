@@ -2,28 +2,18 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
- * A Class which build a selection
+ * A Class which has data for selection
  */
-@SuppressWarnings("deprecation")
 public class SelectionData {
 	private World world;
 	private String defualtOffsetLabel;
-	private RegionData regData;
 	private LinkedHashMap<String, Object> extraDataMap = new LinkedHashMap<String, Object>();
 	private Vector3D customOffset;
-	
-	public SelectionData(World world, RegionData regData) {
-		this.world = world;
-		this.regData = regData;
-	}
 	
 	/**
 	 * Constructs a selection data
@@ -52,19 +42,7 @@ public class SelectionData {
 	 * @return the default offset label
 	 */
 	public String defualtOffsetLabel() {
-		if(this.defualtOffsetLabel == null) {
-			return this.regData.defaultOffsetLabel();
-		}else {
-			return this.defualtOffsetLabel;
-		}
-	}
-	
-	/**
-	 * Return the region data
-	 * @return the region data
-	 */
-	public RegionData getRegionData() {
-		return regData;
+		return defualtOffsetLabel;
 	}
 	
 	/**
@@ -135,39 +113,17 @@ public class SelectionData {
 	public Vector3D getOffset() {
 		if(this.customOffset != null) {
 			return this.customOffset;
-		}else if(this.regData != null){
-			return this.regData.defaultOffset();
 		}else {
-			return (Vector3D) this.extraDataMap.get(this.defualtOffsetLabel);
+			return (Vector3D) this.extraDataMap.get(defualtOffsetLabel);
 		}
 	}
-	
-	/**
-	 * Returns a selection from the selection data
-	 * @return a selection from the selection data
-	 * @throws IllegalStateException if the selection data cannot create a selection
-	 */
-	@Deprecated
-	public Selection build() {
-		BoundRegion3D boundReg = regData.buildBoundRegion3D();
-		Vector3D offset = this.customOffset;
-		if(offset == null) {
-			offset = regData.defaultOffset();
-		}
-		return new Selection(this.world, boundReg, offset);
-	}
-	
+
 	/**
 	 * Returns the map which holds this object's information
 	 * @return the map which holds this object's information
 	 */
 	LinkedHashMap<String, String> toLinkedHashMap() {
 		var map = new LinkedHashMap<String, String>();
-		if(this.regData != null) {
-			for(Entry<String, String> e : this.regData.toLinkedHashMap().entrySet()) {
-				map.put(e.getKey(), e.getValue());
-			}
-		}else {
 			for(String k : this.extraDataMap.keySet()) {
 				Object o = this.extraDataMap.get(k);
 				String v = "";
@@ -176,14 +132,11 @@ public class SelectionData {
 				}
 				map.put(k, v);
 			}
-		}
 		String offset;
 		if(this.customOffset != null) {
 			offset = this.customOffset.toString();
-		}else if(this.defualtOffsetLabel != null){
-			offset = this.defualtOffsetLabel;
 		}else {
-			offset = this.regData.defaultOffsetLabel();
+			offset = this.defualtOffsetLabel;
 		}
 		map.put("offset", offset);
 		return map;
