@@ -19,6 +19,7 @@ public class ResetCommandHandler implements SubCommandHandler {
 		this.selHandler = selHandler;
 	}
 
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
 			player.print(LogColor.RED + "Usage: " + "/sg sel reset");
@@ -26,14 +27,15 @@ public class ResetCommandHandler implements SubCommandHandler {
 		}
 		World world = player.getEntityPosition().world();
 		SelectionShape shape = playerData.getSelectionShape();
-		SelectionData newSelBuilder = this.selHandler.newSelectionData(shape, world);
-		playerData.setSelectionData(newSelBuilder);
-		List<String> lines = MessageUtils.selectionMessage(shape, newSelBuilder);
+		SelectionData newSelData = this.selHandler.newSelectionData(shape, world);
+		playerData.setSelectionData(newSelData);
+		List<String> lines = MessageUtils.selectionMessage(shape, newSelData);
 		for(String line : lines) {
 			player.print(line);
 		}
 	}
 	
+	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return List.of();
 	}
