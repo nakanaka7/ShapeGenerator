@@ -38,12 +38,12 @@ public class SgEventHandler {
 		SelectionShape selShape = playerData.getSelectionShape();
 		//reset the selection builder if the world changes
 		World evtWorld = blockPos.world();
-		if(!evtWorld.equals(playerData.getSelectionBuilder().world())) {
+		if(!evtWorld.equals(playerData.getSelectionData().world())) {
 			SelectionData newSelBuilder = this.selHandler.newSelectionData(selShape, evtWorld);
-			playerData.setSelectionBuilder(newSelBuilder);
+			playerData.setSelectionData(newSelBuilder);
 		}
 		//update the selection builder
-		SelectionData selData = playerData.getSelectionBuilder();
+		SelectionData selData = playerData.getSelectionData();
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
 			case LEFT_HAND -> this.selHandler.onLeftClick(selShape, selData, v);

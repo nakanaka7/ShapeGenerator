@@ -36,12 +36,12 @@ public abstract class BaseSelSubCommandHandlerNew<E> implements SubCommandHandle
 			return;
 		}
 		World evtWorld = player.getBlockPosition().world();
-		SelectionData selData = playerData.getSelectionBuilder();
+		SelectionData selData = playerData.getSelectionData();
 		if(!evtWorld.equals(selData.world())) {
-			playerData.setSelectionBuilder(new SelectionData(evtWorld, selData.defualtOffsetLabel(), selData.extraDataLabels()));
+			playerData.setSelectionData(new SelectionData(evtWorld, selData.defualtOffsetLabel(), selData.extraDataLabels()));
 		}
-		playerData.getSelectionBuilder().setExtraData(this.subLabel, value);
-		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionBuilder());
+		playerData.getSelectionData().setExtraData(this.subLabel, value);
+		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionData());
 		lines.stream().forEach(player::print);
 	}
 	

@@ -32,7 +32,7 @@ public class PlayerDataRepository {
 			playerData.setSelectionShape(defaultShape);
 			World world = player.getEntityPosition().world();
 			SelectionData selBuilder = this.selHandler.newSelectionData(defaultShape, world);
-			playerData.setSelectionBuilder(selBuilder);
+			playerData.setSelectionData(selBuilder);
 			this.playerDataMap.put(uid, playerData);
 		}
 		return playerData;

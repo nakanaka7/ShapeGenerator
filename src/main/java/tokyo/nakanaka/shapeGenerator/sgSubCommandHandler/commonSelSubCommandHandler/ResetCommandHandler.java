@@ -27,7 +27,7 @@ public class ResetCommandHandler implements SubCommandHandler {
 		World world = player.getEntityPosition().world();
 		SelectionShape shape = playerData.getSelectionShape();
 		SelectionData newSelBuilder = this.selHandler.newSelectionData(shape, world);
-		playerData.setSelectionBuilder(newSelBuilder);
+		playerData.setSelectionData(newSelBuilder);
 		List<String> lines = MessageUtils.selectionMessage(shape, newSelBuilder);
 		for(String line : lines) {
 			player.print(line);

@@ -41,7 +41,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 			playerData.setSelectionShape(shape);
 			World world = player.getEntityPosition().world();
 			SelectionData selBuilder = this.selHandler.newSelectionData(shape, world);
-			playerData.setSelectionBuilder(selBuilder);
+			playerData.setSelectionData(selBuilder);
 		}
 		player.print(LogColor.GOLD + "Set the shape -> " + shape);
 	}

@@ -6,7 +6,7 @@ import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 
 public class PlayerData {
 	private SelectionShape shape;
-	private SelectionData selBuilder;
+	private SelectionData selData;
 	private UndoCommandManager undoCmdManager = new UndoCommandManager();
 	private boolean blockPhysics = false;
 	
@@ -26,12 +26,12 @@ public class PlayerData {
 		this.shape = shape;
 	}
 	
-	public SelectionData getSelectionBuilder() {
-		return selBuilder;
+	public SelectionData getSelectionData() {
+		return selData;
 	}
 
-	public void setSelectionBuilder(SelectionData selBuilder) {
-		this.selBuilder = selBuilder;
+	public void setSelectionData(SelectionData selData) {
+		this.selData = selData;
 	}
 
 	public UndoCommandManager getUndoCommandManager() {
