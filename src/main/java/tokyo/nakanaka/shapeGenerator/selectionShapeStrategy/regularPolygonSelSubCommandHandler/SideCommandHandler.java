@@ -4,11 +4,11 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.BaseSelSubCommandHandlerNew;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.BaseSelSubCommandHandler;
 
-public class SideCommandHandlerNew extends BaseSelSubCommandHandlerNew<Integer> {
+public class SideCommandHandler extends BaseSelSubCommandHandler<Integer> {
 
-	public SideCommandHandlerNew() {
+	public SideCommandHandler() {
 		super("side", new String[] {"number"});
 	}
 

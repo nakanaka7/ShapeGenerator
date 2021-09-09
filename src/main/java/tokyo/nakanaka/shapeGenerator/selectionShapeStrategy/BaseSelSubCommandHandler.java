@@ -13,7 +13,7 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 /**
  * A base abstract class to handle "/sg sel" subcommand. E is object type for parsing.
  */
-public abstract class BaseSelSubCommandHandlerNew<E> implements SubCommandHandler {	
+public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {	
 	private String subLabel;
 	private String[] subArgsUsage;
 
@@ -21,7 +21,7 @@ public abstract class BaseSelSubCommandHandlerNew<E> implements SubCommandHandle
 	 * @param subLabel sub label of the subcommand
 	 * @param subArgsUsage usage of the subcommand arguments
 	 */
-	public BaseSelSubCommandHandlerNew(String subLabel, String[] subArgsUsage) {
+	public BaseSelSubCommandHandler(String subLabel, String[] subArgsUsage) {
 		this.subLabel = subLabel;
 		this.subArgsUsage = subArgsUsage;
 	}

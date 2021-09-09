@@ -29,10 +29,10 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandlerNew("center"));
-		map.put("radius_main", new LengthCommandHandlerNew("radius_main"));
-		map.put("radius_sub", new LengthCommandHandlerNew("radius_sub"));
-		map.put("axis", new AxisCommandHandlerNew());
+		map.put("center", new PosCommandHandler("center"));
+		map.put("radius_main", new LengthCommandHandler("radius_main"));
+		map.put("radius_sub", new LengthCommandHandler("radius_sub"));
+		map.put("axis", new AxisCommandHandler());
 		return map;
 	}
 	

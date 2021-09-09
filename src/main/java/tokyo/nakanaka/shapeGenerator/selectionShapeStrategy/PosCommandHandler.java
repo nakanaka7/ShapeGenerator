@@ -7,9 +7,9 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
-public class PosCommandHandlerNew extends BaseSelSubCommandHandlerNew<Vector3D> {
+public class PosCommandHandler extends BaseSelSubCommandHandler<Vector3D> {
 	
-	public PosCommandHandlerNew(String subLabel) {
+	public PosCommandHandler(String subLabel) {
 		super(subLabel, new String[] {"[x]", "[y]", "[z]"});
 	}
 

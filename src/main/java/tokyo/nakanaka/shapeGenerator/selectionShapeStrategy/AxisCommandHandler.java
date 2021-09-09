@@ -6,9 +6,9 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
-public class AxisCommandHandlerNew extends BaseSelSubCommandHandlerNew<Axis> {
+public class AxisCommandHandler extends BaseSelSubCommandHandler<Axis> {
 
-	public AxisCommandHandlerNew() {
+	public AxisCommandHandler() {
 		super("axis", new String[] {"x|y|z"});
 	}
 

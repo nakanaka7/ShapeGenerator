@@ -17,7 +17,7 @@ import tokyo.nakanaka.shapeGenerator.math.region2D.RegularPolygon;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandlerNew;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrategy {
 
@@ -33,11 +33,11 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandlerNew("center"));
-		map.put("radius", new LengthCommandHandlerNew("radius"));
-		map.put("side", new SideCommandHandlerNew());
-		map.put("thickness", new LengthCommandHandlerNew("thickness"));
-		map.put("axis", new AxisCommandHandlerNew());
+		map.put("center", new PosCommandHandler("center"));
+		map.put("radius", new LengthCommandHandler("radius"));
+		map.put("side", new SideCommandHandler());
+		map.put("thickness", new LengthCommandHandler("thickness"));
+		map.put("axis", new AxisCommandHandler());
 		return map;
 	}
 	

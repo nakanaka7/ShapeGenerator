@@ -10,9 +10,9 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
  * @author nakaj
  *
  */
-public class LengthCommandHandlerNew extends BaseSelSubCommandHandlerNew<Double> {
+public class LengthCommandHandler extends BaseSelSubCommandHandler<Double> {
 
-	public LengthCommandHandlerNew(String subLabel) {
+	public LengthCommandHandler(String subLabel) {
 		super(subLabel, new String[]{"<length>"});
 	}
 	
