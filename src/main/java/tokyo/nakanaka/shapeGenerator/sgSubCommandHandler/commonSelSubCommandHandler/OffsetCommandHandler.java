@@ -9,15 +9,17 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
-@SuppressWarnings("deprecation")
 public class OffsetCommandHandler implements SubCommandHandler {
+	private SelectionHandler selHandler;
 	
+	public OffsetCommandHandler(SelectionHandler selHandler) {
+		this.selHandler = selHandler;
+	}
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String usage = "/sg sel offset [x] [y] [z]";
@@ -50,14 +52,13 @@ public class OffsetCommandHandler implements SubCommandHandler {
 		//reset the selection data if the world changes
 		World evtWorld = pos.world();
 		if(!evtWorld.equals(playerData.getSelectionData().world())) {
-			RegionData cuboidRegData = new CuboidRegionData();
-			SelectionData selData = new SelectionData(evtWorld, cuboidRegData);
+			SelectionData selData = this.selHandler.newSelectionData(playerData.getSelectionShape(), evtWorld);
 			playerData.setSelectionData(selData);
 		}
 		SelectionData selData = playerData.getSelectionData();
 		selData.setCustomOffset(new Vector3D(x, y, z));
 		//print the selection message
-		List<String> lines = MessageUtils.selectionMessage(SelectionShape.TETRAHEDRON, selData);
+		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), selData);
 		lines.stream().forEach(player::print);
 	}
 	
