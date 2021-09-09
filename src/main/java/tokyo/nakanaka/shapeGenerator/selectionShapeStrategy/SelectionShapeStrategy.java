@@ -7,7 +7,6 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 /**
  * Holds SelectionShape delegating methods
@@ -18,21 +17,7 @@ public interface SelectionShapeStrategy {
 	 * Returns new selection data
 	 * @param world a world of the selection data
 	 */
-	default SelectionData newSelectionData(World world) {
-		return new SelectionData(world, newRegionData());
-	}
-	
-	/**
-	 * Returns new region data of a selection
-	 * @return new region data of a selection
-	 */
-	@Deprecated
-	RegionData newRegionData();
-	
-	@SuppressWarnings("deprecation")
-	default Selection buildSelection(SelectionData selData) {
-		return selData.build();
-	}
+	SelectionData newSelectionData(World world);
 	
 	/**
 	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
@@ -57,17 +42,20 @@ public interface SelectionShapeStrategy {
 	 * @param selData the selection data
 	 * @param blockPos the block position
 	 */
-	default void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.getRegionData().onLeftClick(blockPos);
-	}
+	void onLeftClick(SelectionData selData, BlockVector3D blockPos);
 	
 	/**
 	 * Update the selection data on right block click
 	 * @param selData the selection data
 	 * @param blockPos the block position
 	 */
-	default void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.getRegionData().onRightClick(blockPos);
-	}
+	void onRightClick(SelectionData selData, BlockVector3D blockPos);
+	
+	/**
+	 * Returns a selection from the selection data
+	 * @param selData a selection data
+	 * @return a selection from the selection data
+	 */
+	Selection buildSelection(SelectionData selData);
 	
 }

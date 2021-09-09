@@ -13,14 +13,8 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Line;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.regionData.LineRegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
-	
-	public RegionData newRegionData() {
-		return new LineRegionData();
-	}
 	
 	@Override
 	public SelectionData newSelectionData(World world) {

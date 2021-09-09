@@ -17,17 +17,10 @@ import tokyo.nakanaka.shapeGenerator.math.region2D.RegularPolygon;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.RegularPolygonRegionData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandlerNew;
 
 public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrategy {
 
-	@Override
-	public RegionData newRegionData() {
-		return new RegularPolygonRegionData();
-	}
-	
 	@Override
 	public SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, "center", "center", "radius", "side", "thickness", "axis");
@@ -35,6 +28,17 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 		selData.setExtraData("thickness", 1.0);
 		selData.setExtraData("axis", Axis.Y);
 		return selData;
+	}
+	
+	@Override
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+		Map<String, SubCommandHandler> map = new HashMap<>();
+		map.put("center", new PosCommandHandlerNew("center"));
+		map.put("radius", new LengthCommandHandlerNew("radius"));
+		map.put("side", new SideCommandHandlerNew());
+		map.put("thickness", new LengthCommandHandlerNew("thickness"));
+		map.put("axis", new AxisCommandHandlerNew());
+		return map;
 	}
 	
 	@Override
@@ -61,17 +65,6 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 		Vector3D pos = blockPos.toVector3D();
 		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
 		selData.setExtraData("radius", radius);
-	}
-	
-	@Override
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
-		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandlerNew("center"));
-		map.put("radius", new LengthCommandHandlerNew("radius"));
-		map.put("side", new SideCommandHandlerNew());
-		map.put("thickness", new LengthCommandHandlerNew("thickness"));
-		map.put("axis", new AxisCommandHandlerNew());
-		return map;
 	}
 	
 	@Override

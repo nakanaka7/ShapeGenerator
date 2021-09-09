@@ -14,8 +14,6 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.SphereRegionData;
 
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 
@@ -24,11 +22,6 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 		return new SelectionData(world, "center", "center", "radius");
 	}
 	
-	@Override
-	public RegionData newRegionData() {
-		return new SphereRegionData();
-	}
-		
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();

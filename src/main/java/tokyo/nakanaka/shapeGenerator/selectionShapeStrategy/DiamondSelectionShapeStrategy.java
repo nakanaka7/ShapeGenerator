@@ -14,19 +14,22 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Diamond;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
-import tokyo.nakanaka.shapeGenerator.regionData.DiamondRegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 
 	@Override
-	public RegionData newRegionData() {
-		return new DiamondRegionData();
+	public SelectionData newSelectionData(World world) {
+		return new SelectionData(world, "center", "center", "width", "height", "length");
 	}
 	
 	@Override
-	public SelectionData newSelectionData(World world) {
-		return new SelectionData(world, "center", "center", "width", "height", "length");
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+		Map<String, SubCommandHandler> map = new HashMap<>();
+		map.put("center", new PosCommandHandlerNew("center"));
+		map.put("width", new LengthCommandHandlerNew("width"));
+		map.put("height", new LengthCommandHandlerNew("height"));
+		map.put("length", new LengthCommandHandlerNew("length"));
+		return map;
 	}
 	
 	@Override
@@ -58,16 +61,6 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		selData.setExtraData("length", length);
 	}
 
-	@Override
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
-		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandlerNew("center"));
-		map.put("width", new LengthCommandHandlerNew("width"));
-		map.put("height", new LengthCommandHandlerNew("height"));
-		map.put("length", new LengthCommandHandlerNew("length"));
-		return map;
-	}
-	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData("center");

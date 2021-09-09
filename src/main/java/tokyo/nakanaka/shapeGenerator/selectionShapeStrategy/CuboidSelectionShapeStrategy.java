@@ -13,14 +13,40 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.regionData.CuboidRegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
 
 public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, "pos1", "pos1", "pos2");
+	}
+	
+	@Override
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
+		Map<String,  SubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new PosCommandHandlerNew("pos1"));
+		map.put("pos2", new PosCommandHandlerNew("pos2"));
+		return map;
+	}
+	
+	@Override
+	public String leftClickDescription() {
+		return "Set pos1";
+	}
+
+	@Override
+	public String rightClickDescription() {
+		return "Set pos2";
+	}
+
+	@Override
+	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+		selData.setExtraData("pos1", blockPos.toVector3D());
+	}
+	
+	@Override
+	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+		selData.setExtraData("pos2", blockPos.toVector3D());
 	}
 	
 	@Override
@@ -40,39 +66,6 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy{
 		double lbz = Math.min(pos1.getZ(), pos2.getZ());
 		boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 		return new Selection(selData.world(), boundReg, selData.getOffset());
-	}
-	
-	@Override
-	public RegionData newRegionData() {
-		return new CuboidRegionData();
-	}
-	
-	@Override
-	public String leftClickDescription() {
-		return "Set pos1";
-	}
-
-	@Override
-	public String rightClickDescription() {
-		return "Set pos2";
-	}
-
-	@Override
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
-		Map<String,  SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandlerNew("pos1"));
-		map.put("pos2", new PosCommandHandlerNew("pos2"));
-		return map;
-	}
-	
-	@Override
-	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData("pos1", blockPos.toVector3D());
-	}
-	
-	@Override
-	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData("pos2", blockPos.toVector3D());
 	}
 	
 }

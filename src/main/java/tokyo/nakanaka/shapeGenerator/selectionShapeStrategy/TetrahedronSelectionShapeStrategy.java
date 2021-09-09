@@ -16,19 +16,55 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Tetrahedron;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.TetrahedronRegionData;
 
 public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy {
 
 	@Override
-	public RegionData newRegionData() {
-		return new TetrahedronRegionData();
+	public SelectionData newSelectionData(World world) {
+		return new SelectionData(world, "pos1", "pos1", "pos2", "pos3", "pos4");
 	}
 	
 	@Override
-	public SelectionData newSelectionData(World world) {
-		return new SelectionData(world, "pos1", "pos1", "pos2", "pos3", "pos4");
+	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
+		Map<String,  SubCommandHandler> map = new HashMap<>();
+		map.put("pos1", new PosCommandHandlerNew("pos1"));
+		map.put("pos2", new PosCommandHandlerNew("pos2"));
+		map.put("pos3", new PosCommandHandlerNew("pos3"));
+		map.put("pos4", new PosCommandHandlerNew("pos4"));
+		return map;
+	}
+	
+	@Override
+	public String leftClickDescription() {
+		return "Set pos1";
+	}
+
+	@Override
+	public String rightClickDescription() {
+		return "Set pos2, pos3, pos4";
+	}
+	
+	@Override
+	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+		selData.setExtraData("pos1", blockPos.toVector3D());
+		selData.setExtraData("pos2", null);
+		selData.setExtraData("pos3", null);
+		selData.setExtraData("pos4", null);
+	}
+	
+	@Override
+	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+		if(selData.getExtraData("pos1") == null) {
+			throw new IllegalStateException();
+		}
+		Vector3D pos = blockPos.toVector3D();
+		if(selData.getExtraData("pos2") == null) {
+			selData.setExtraData("pos2", pos);
+		}else if(selData.getExtraData("pos3") == null) {
+			selData.setExtraData("pos3", pos);
+		}else {
+			selData.setExtraData("pos4", pos);
+		}
 	}
 	
 	@Override
@@ -53,49 +89,6 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ(), pos4.getZ());
 		boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 		return new Selection(selData.world(), boundReg, selData.getOffset());
-	}
-	
-	@Override
-	public String leftClickDescription() {
-		return "Set pos1";
-	}
-
-	@Override
-	public String rightClickDescription() {
-		return "Set pos2, pos3, pos4";
-	}
-	
-	@Override
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
-		Map<String,  SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandlerNew("pos1"));
-		map.put("pos2", new PosCommandHandlerNew("pos2"));
-		map.put("pos3", new PosCommandHandlerNew("pos3"));
-		map.put("pos4", new PosCommandHandlerNew("pos4"));
-		return map;
-	}
-	
-	@Override
-	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData("pos1", blockPos.toVector3D());
-		selData.setExtraData("pos2", null);
-		selData.setExtraData("pos3", null);
-		selData.setExtraData("pos4", null);
-	}
-	
-	@Override
-	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		if(selData.getExtraData("pos1") == null) {
-			throw new IllegalStateException();
-		}
-		Vector3D pos = blockPos.toVector3D();
-		if(selData.getExtraData("pos2") == null) {
-			selData.setExtraData("pos2", pos);
-		}else if(selData.getExtraData("pos3") == null) {
-			selData.setExtraData("pos3", pos);
-		}else {
-			selData.setExtraData("pos4", pos);
-		}
 	}
 	
 }

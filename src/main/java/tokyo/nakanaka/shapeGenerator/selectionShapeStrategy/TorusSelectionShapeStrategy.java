@@ -16,8 +16,6 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.TorusRegionData;
 
 public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 
@@ -26,11 +24,6 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		SelectionData selData = new SelectionData(world, "center", "center", "radius_main", "radius_sub", "axis");
 		selData.setExtraData("axis", Axis.Y);
 		return selData;
-	}
-	
-	@Override
-	public RegionData newRegionData() {
-		return new TorusRegionData();
 	}
 	
 	@Override

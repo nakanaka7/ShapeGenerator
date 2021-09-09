@@ -16,15 +16,8 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
-import tokyo.nakanaka.shapeGenerator.regionData.RegionData;
-import tokyo.nakanaka.shapeGenerator.regionData.TriangleRegionData;
 
 public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
-
-	@Override
-	public RegionData newRegionData() {
-		return new TriangleRegionData();
-	}
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
