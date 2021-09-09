@@ -23,11 +23,8 @@ public class SelCommandHandler implements SubCommandHandler {
 	private Map<String, SubCommandHandler> commonSelSubCmdHandlerMap = new HashMap<>();
 	private SelectionHandler selHandler;
 	
-	{
-		this.commonSelSubCmdHandlerMap.put("offset", new OffsetCommandHandler());
-	}
-	
 	public SelCommandHandler(SelectionHandler selHandler) {
+		this.commonSelSubCmdHandlerMap.put("offset", new OffsetCommandHandler(selHandler));
 		this.commonSelSubCmdHandlerMap.put("reset", new ResetCommandHandler(selHandler));
 		this.selHandler = selHandler;
 	}
