@@ -8,7 +8,7 @@ import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 /**
- * Holds methods which depends on selection shape 
+ * A repository of selection shape strategies
  */
 public class SelectionShapeStrategyRepository {
 	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new LinkedHashMap<>();
@@ -49,6 +49,7 @@ public class SelectionShapeStrategyRepository {
 	 * @param world a world
 	 * @return a new selection builder for the selection shape
 	 */
+	@Deprecated
 	public SelectionData newSelectionData(SelectionShape selShape, World world) {
 		return selStrtgMap.get(selShape).newSelectionData(world);
 	}
@@ -60,6 +61,7 @@ public class SelectionShapeStrategyRepository {
 	 * @return a selection from the selection data 
 	 * @throws IllegalStateException if the selection data cannot create a selection
 	 */
+	@Deprecated
 	public Selection buildSelection(SelectionShape selShape, SelectionData selData) {
 		return selStrtgMap.get(selShape).buildSelection(selData);
 	}
@@ -68,6 +70,7 @@ public class SelectionShapeStrategyRepository {
 	 * Get SelSubCommandHandlerMap
 	 * @return SelSubCommandHandlerMap
 	 */
+	@Deprecated
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap(SelectionShape selShape) {
 		return selStrtgMap.get(selShape).selSubCommandHandlerMap();
 	}
@@ -76,6 +79,7 @@ public class SelectionShapeStrategyRepository {
 	 * Returns a short description for left clicking block event
 	 * @return a short description for left clicking block event
 	 */
+	@Deprecated
 	public String leftClickDescription(SelectionShape selShape) {
 		return selStrtgMap.get(selShape).leftClickDescription();
 	}
@@ -84,6 +88,7 @@ public class SelectionShapeStrategyRepository {
 	 * Returns a short description for right clicking block event
 	 * @return a short description for right clicking block event
 	 */
+	@Deprecated
 	public String rightClickDescription(SelectionShape selShape) {
 		return selStrtgMap.get(selShape).rightClickDescription();
 	}
@@ -94,6 +99,7 @@ public class SelectionShapeStrategyRepository {
 	 * @param selData the selection data
 	 * @param blockPos the block position
 	 */
+	@Deprecated
 	public void onLeftClick(SelectionShape selShape, SelectionData selData, BlockVector3D blockPos) {
 		this.selStrtgMap.get(selShape).onLeftClick(selData, blockPos);
 	}
@@ -104,6 +110,7 @@ public class SelectionShapeStrategyRepository {
 	 * @param selData the selection data
 	 * @param blockPos the block position
 	 */
+	@Deprecated
 	public void onRightClick(SelectionShape selShape, SelectionData selData, BlockVector3D blockPos) {
 		this.selStrtgMap.get(selShape).onRightClick(selData, blockPos);
 	}
