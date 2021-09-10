@@ -44,7 +44,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 		if(selShape != original) {
 			playerData.setSelectionShape(selShape);
 			World world = player.getEntityPosition().world();
-			SelectionData selData = this.shapeStrtgRepo.newSelectionData(selShape, world);
+			SelectionData selData = this.shapeStrtgRepo.get(selShape).newSelectionData(world);
 			playerData.setSelectionData(selData);
 		}
 		player.print(LogColor.GOLD + "Set the shape -> " + selShape);

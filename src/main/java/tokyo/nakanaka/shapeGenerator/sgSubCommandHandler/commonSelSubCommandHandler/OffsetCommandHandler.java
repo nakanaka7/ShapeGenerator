@@ -52,7 +52,9 @@ public class OffsetCommandHandler implements SubCommandHandler {
 		//reset the selection data if the world changes
 		World evtWorld = pos.world();
 		if(!evtWorld.equals(playerData.getSelectionData().world())) {
-			SelectionData selData = this.shapeStrtgRepo.newSelectionData(playerData.getSelectionShape(), evtWorld);
+			SelectionData selData = this.shapeStrtgRepo
+					.get(playerData.getSelectionShape())
+					.newSelectionData(evtWorld);
 			playerData.setSelectionData(selData);
 		}
 		SelectionData selData = playerData.getSelectionData();

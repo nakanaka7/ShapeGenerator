@@ -12,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
 
 /**
@@ -40,8 +41,9 @@ public class GenrCommandHandler implements SubCommandHandler {
 			return;
 		}
 		Selection sel;
+		SelectionShapeStrategy shapeStrtg = this.shapeStrtgRepo.get(playerData.getSelectionShape());
 		try {
-			sel = this.shapeStrtgRepo.buildSelection(playerData.getSelectionShape(), playerData.getSelectionData());
+			sel = shapeStrtg.buildSelection(playerData.getSelectionData());
 		}catch(IllegalStateException e) {
 			player.print(LogColor.RED + "Incomplete selection");
 			return;
