@@ -20,6 +20,10 @@ public class SelectionHandler {
 		this.selStrtgMap = selStrtgMap;
 	}
 
+	public SelectionShape[] registeredSelectionShapes() {
+		return this.selStrtgMap.keySet().stream().toArray(SelectionShape[]::new);
+	}
+	
 	/**
 	 * Returns a new selection builder for the selection shape
 	 * @param selShape a selection shape
