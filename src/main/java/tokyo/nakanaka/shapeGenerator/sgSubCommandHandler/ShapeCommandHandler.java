@@ -36,7 +36,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Invalid shape");
 			return;
 		}
-		if(!List.of(this.selHandler.registeredSelectionShapes()).contains(selShape)) {
+		if(!List.of(this.selHandler.registeredShapes()).contains(selShape)) {
 			player.print(LogColor.RED + "Unsupported shape");
 			return;
 		}

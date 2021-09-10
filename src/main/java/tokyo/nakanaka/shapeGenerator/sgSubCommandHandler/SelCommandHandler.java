@@ -26,7 +26,7 @@ public class SelCommandHandler implements SubCommandHandler {
 	public SelCommandHandler(SelectionHandler selHandler) {
 		this.commonMap.put("offset", new OffsetCommandHandler(selHandler));
 		this.commonMap.put("reset", new ResetCommandHandler(selHandler));
-		for(SelectionShape selShape : selHandler.registeredSelectionShapes()) {
+		for(SelectionShape selShape : selHandler.registeredShapes()) {
 			this.properMapMap.put(selShape, selHandler.selSubCommandHandlerMap(selShape));
 		}
 	}

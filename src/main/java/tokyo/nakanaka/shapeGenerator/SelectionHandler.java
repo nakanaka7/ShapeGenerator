@@ -26,7 +26,7 @@ public class SelectionHandler {
 	 * Returns an array of registered selection shapes
 	 * @return an array of registered selection shapes
 	 */
-	public SelectionShape[] registeredSelectionShapes() {
+	public SelectionShape[] registeredShapes() {
 		return this.selStrtgMap.keySet().stream().toArray(SelectionShape[]::new);
 	}
 	
