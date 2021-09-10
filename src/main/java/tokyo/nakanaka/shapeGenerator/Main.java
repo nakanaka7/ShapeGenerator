@@ -31,9 +31,9 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
-		var playerDataRepository = new PlayerDataRepository(shapeStrtgRepo);
-		this.sgCmdHandler = new SgCommandHandler(playerDataRepository, shapeStrtgRepo, blockIDListFactory);
-		this.sgEvtHandler = new SgEventHandler(playerDataRepository, shapeStrtgRepo);
+		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
+		this.sgCmdHandler = new SgCommandHandler(playerDataRepo, shapeStrtgRepo, blockIDListFactory);
+		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
 	}
 	
 	/**
