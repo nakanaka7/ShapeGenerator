@@ -29,21 +29,25 @@ public class ShapeCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Usage: " + new ShapeHelp().getUsage());
 			return;
 		}
-		SelectionShape shape;
+		SelectionShape selShape;
 		try{
-			shape = SelectionShape.valueOf(args[0].toUpperCase());
+			selShape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
 			player.print(LogColor.RED + "Invalid shape");
 			return;
 		}
-		SelectionShape original = playerData.getSelectionShape();
-		if(shape != original) {
-			playerData.setSelectionShape(shape);
-			World world = player.getEntityPosition().world();
-			SelectionData selBuilder = this.selHandler.newSelectionData(shape, world);
-			playerData.setSelectionData(selBuilder);
+		if(!List.of(this.selHandler.registeredSelectionShapes()).contains(selShape)) {
+			player.print(LogColor.RED + "Unsupported shape");
+			return;
 		}
-		player.print(LogColor.GOLD + "Set the shape -> " + shape);
+		SelectionShape original = playerData.getSelectionShape();
+		if(selShape != original) {
+			playerData.setSelectionShape(selShape);
+			World world = player.getEntityPosition().world();
+			SelectionData selData = this.selHandler.newSelectionData(selShape, world);
+			playerData.setSelectionData(selData);
+		}
+		player.print(LogColor.GOLD + "Set the shape -> " + selShape);
 	}
 
 	@Override
