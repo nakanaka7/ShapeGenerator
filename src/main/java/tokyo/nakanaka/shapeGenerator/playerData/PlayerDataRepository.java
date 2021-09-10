@@ -7,15 +7,15 @@ import java.util.UUID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionHandler;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 
 public class PlayerDataRepository {
-	private SelectionHandler selHandler;
+	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	private Map<UUID, PlayerData> playerDataMap = new HashMap<>();
 	
-	public PlayerDataRepository(SelectionHandler selHandler) {
-		this.selHandler = selHandler;
+	public PlayerDataRepository(SelectionShapeStrategyRepository shapeStrtgRepo) {
+		this.shapeStrtgRepo = shapeStrtgRepo;
 	}
 
 	/**
@@ -31,8 +31,8 @@ public class PlayerDataRepository {
 			SelectionShape defaultShape = SelectionShape.CUBOID;
 			playerData.setSelectionShape(defaultShape);
 			World world = player.getEntityPosition().world();
-			SelectionData selBuilder = this.selHandler.newSelectionData(defaultShape, world);
-			playerData.setSelectionData(selBuilder);
+			SelectionData selData = this.shapeStrtgRepo.newSelectionData(defaultShape, world);
+			playerData.setSelectionData(selData);
 			this.playerDataMap.put(uid, playerData);
 		}
 		return playerData;

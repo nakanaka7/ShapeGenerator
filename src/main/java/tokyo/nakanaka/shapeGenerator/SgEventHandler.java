@@ -14,11 +14,11 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 
 public class SgEventHandler {
 	private PlayerDataRepository playerDataRepository;
-	private SelectionHandler selHandler;
+	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
-	public SgEventHandler(PlayerDataRepository playerDataRepository, SelectionHandler selHandler) {
+	public SgEventHandler(PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo) {
 		this.playerDataRepository = playerDataRepository;
-		this.selHandler = selHandler;
+		this.shapeStrtgRepo = shapeStrtgRepo;
 	}
 
 	/**
@@ -39,15 +39,15 @@ public class SgEventHandler {
 		//reset the selection builder if the world changes
 		World evtWorld = blockPos.world();
 		if(!evtWorld.equals(playerData.getSelectionData().world())) {
-			SelectionData newSelBuilder = this.selHandler.newSelectionData(selShape, evtWorld);
+			SelectionData newSelBuilder = this.shapeStrtgRepo.newSelectionData(selShape, evtWorld);
 			playerData.setSelectionData(newSelBuilder);
 		}
 		//update the selection builder
 		SelectionData selData = playerData.getSelectionData();
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
-			case LEFT_HAND -> this.selHandler.onLeftClick(selShape, selData, v);
-			case RIGHT_HAND -> this.selHandler.onRightClick(selShape, selData, v);
+			case LEFT_HAND -> this.shapeStrtgRepo.onLeftClick(selShape, selData, v);
+			case RIGHT_HAND -> this.shapeStrtgRepo.onRightClick(selShape, selData, v);
 		}
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(selShape, selData);

@@ -55,11 +55,11 @@ public class SgCommandHandler implements CommandHandler {
 		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
 	}
 	
-	public SgCommandHandler(PlayerDataRepository playerDataRepository, SelectionHandler selHandler, BlockIDListFactory blockIDListFactory) {
+	public SgCommandHandler(PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory) {
 		this.playerDataRepository = playerDataRepository;
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(selHandler));
-		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(selHandler));
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(selHandler, blockIDListFactory));
+		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(shapeStrtgRepo));
+		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(shapeStrtgRepo));
+		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
 	}
 	
 	/**

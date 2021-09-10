@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelectionHandler;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
@@ -24,11 +24,11 @@ public class SelCommandHandler implements SubCommandHandler {
 	private Map<String, SubCommandHandler> commonMap = new HashMap<>();
 	private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
 	
-	public SelCommandHandler(SelectionHandler selHandler) {
-		this.commonMap.put("offset", new OffsetCommandHandler(selHandler));
-		this.commonMap.put("reset", new ResetCommandHandler(selHandler));
-		for(SelectionShape selShape : selHandler.registeredShapes()) {
-			SelectionShapeStrategy selStrtg = selHandler.get(selShape);
+	public SelCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
+		this.commonMap.put("offset", new OffsetCommandHandler(shapeStrtgRepo));
+		this.commonMap.put("reset", new ResetCommandHandler(shapeStrtgRepo));
+		for(SelectionShape selShape : shapeStrtgRepo.registeredShapes()) {
+			SelectionShapeStrategy selStrtg = shapeStrtgRepo.get(selShape);
 			this.properMapMap.put(selShape, selStrtg.selSubCommandHandlerMap());
 		}
 	}

@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrate
 /**
  * Holds methods which depends on selection shape 
  */
-public class SelectionHandler {
+public class SelectionShapeStrategyRepository {
 	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new LinkedHashMap<>();
 	
 	/**

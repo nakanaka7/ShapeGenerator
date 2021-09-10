@@ -22,18 +22,18 @@ public class Main {
 	private SgEventHandler sgEvtHandler;
 	
 	public Main(BlockIDListFactory blockIDListFactory) {
-		SelectionHandler selHandler = new SelectionHandler();
-		selHandler.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
-		selHandler.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
-		selHandler.register(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
-		selHandler.register(SelectionShape.TORUS, new TorusSelectionShapeStrategy());
-		selHandler.register(SelectionShape.LINE, new LineSelectionShapeStrategy());
-		selHandler.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
-		selHandler.register(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
-		selHandler.register(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
-		var playerDataRepository = new PlayerDataRepository(selHandler);
-		this.sgCmdHandler = new SgCommandHandler(playerDataRepository, selHandler, blockIDListFactory);
-		this.sgEvtHandler = new SgEventHandler(playerDataRepository, selHandler);
+		SelectionShapeStrategyRepository shapeStrtgRepo = new SelectionShapeStrategyRepository();
+		shapeStrtgRepo.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.TORUS, new TorusSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.LINE, new LineSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
+		var playerDataRepository = new PlayerDataRepository(shapeStrtgRepo);
+		this.sgCmdHandler = new SgCommandHandler(playerDataRepository, shapeStrtgRepo, blockIDListFactory);
+		this.sgEvtHandler = new SgEventHandler(playerDataRepository, shapeStrtgRepo);
 	}
 	
 	/**

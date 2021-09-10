@@ -7,7 +7,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionHandler;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
@@ -17,10 +17,10 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
  * Handles "/sg shape" command
  */
 public class ShapeCommandHandler implements SubCommandHandler {
-	private SelectionHandler selHandler;
+	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
-	public ShapeCommandHandler(SelectionHandler selHandler) {
-		this.selHandler = selHandler;
+	public ShapeCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
+		this.shapeStrtgRepo = shapeStrtgRepo;
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Invalid shape");
 			return;
 		}
-		if(!List.of(this.selHandler.registeredShapes()).contains(selShape)) {
+		if(!List.of(this.shapeStrtgRepo.registeredShapes()).contains(selShape)) {
 			player.print(LogColor.RED + "Unsupported shape");
 			return;
 		}
@@ -44,7 +44,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 		if(selShape != original) {
 			playerData.setSelectionShape(selShape);
 			World world = player.getEntityPosition().world();
-			SelectionData selData = this.selHandler.newSelectionData(selShape, world);
+			SelectionData selData = this.shapeStrtgRepo.newSelectionData(selShape, world);
 			playerData.setSelectionData(selData);
 		}
 		player.print(LogColor.GOLD + "Set the shape -> " + selShape);

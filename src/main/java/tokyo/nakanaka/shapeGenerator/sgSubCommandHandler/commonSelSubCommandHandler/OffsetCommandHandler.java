@@ -9,15 +9,15 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionHandler;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class OffsetCommandHandler implements SubCommandHandler {
-	private SelectionHandler selHandler;
+	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
-	public OffsetCommandHandler(SelectionHandler selHandler) {
-		this.selHandler = selHandler;
+	public OffsetCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
+		this.shapeStrtgRepo = shapeStrtgRepo;
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class OffsetCommandHandler implements SubCommandHandler {
 		//reset the selection data if the world changes
 		World evtWorld = pos.world();
 		if(!evtWorld.equals(playerData.getSelectionData().world())) {
-			SelectionData selData = this.selHandler.newSelectionData(playerData.getSelectionShape(), evtWorld);
+			SelectionData selData = this.shapeStrtgRepo.newSelectionData(playerData.getSelectionShape(), evtWorld);
 			playerData.setSelectionData(selData);
 		}
 		SelectionData selData = playerData.getSelectionData();
