@@ -1,8 +1,6 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
@@ -11,7 +9,6 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.CuboidSelectionShape
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DiamondSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LineSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.RegularPolygonSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SphereSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TetrahedronSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TorusSelectionShapeStrategy;
@@ -25,16 +22,15 @@ public class Main {
 	private SgEventHandler sgEvtHandler;
 	
 	public Main(BlockIDListFactory blockIDListFactory) {
-		Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new HashMap<>();
-		selStrtgMap.put(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
-		selStrtgMap.put(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
-		selStrtgMap.put(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
-		selStrtgMap.put(SelectionShape.TORUS, new TorusSelectionShapeStrategy());
-		selStrtgMap.put(SelectionShape.LINE, new LineSelectionShapeStrategy());
-		selStrtgMap.put(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
-		selStrtgMap.put(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
-		selStrtgMap.put(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
-		var selHandler = new SelectionHandler(selStrtgMap);
+		SelectionHandler selHandler = new SelectionHandler();
+		selHandler.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
+		selHandler.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
+		selHandler.register(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
+		selHandler.register(SelectionShape.TORUS, new TorusSelectionShapeStrategy());
+		selHandler.register(SelectionShape.LINE, new LineSelectionShapeStrategy());
+		selHandler.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
+		selHandler.register(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
+		selHandler.register(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
 		var playerDataRepository = new PlayerDataRepository(selHandler);
 		this.sgCmdHandler = new SgCommandHandler(playerDataRepository, selHandler, blockIDListFactory);
 		this.sgEvtHandler = new SgEventHandler(playerDataRepository, selHandler);
