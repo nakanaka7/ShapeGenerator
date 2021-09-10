@@ -12,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.SelectionHandler;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.OffsetCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.ResetCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
@@ -27,7 +28,8 @@ public class SelCommandHandler implements SubCommandHandler {
 		this.commonMap.put("offset", new OffsetCommandHandler(selHandler));
 		this.commonMap.put("reset", new ResetCommandHandler(selHandler));
 		for(SelectionShape selShape : selHandler.registeredShapes()) {
-			this.properMapMap.put(selShape, selHandler.selSubCommandHandlerMap(selShape));
+			SelectionShapeStrategy selStrtg = selHandler.get(selShape);
+			this.properMapMap.put(selShape, selStrtg.selSubCommandHandlerMap());
 		}
 	}
 
@@ -47,8 +49,8 @@ public class SelCommandHandler implements SubCommandHandler {
 			commonHandler.onCommand(playerData, player, subArgs);
 			return;
 		}
-		Map<String, SubCommandHandler> selSubCmdHandlerMap = this.properMapMap.get(shape);
-		SubCommandHandler properHandler = selSubCmdHandlerMap.get(subLabel);
+		Map<String, SubCommandHandler> properMap = this.properMapMap.get(shape);
+		SubCommandHandler properHandler = properMap.get(subLabel);
 		if(properHandler != null) {
 			properHandler.onCommand(playerData, player, subArgs);
 			return;
@@ -60,10 +62,10 @@ public class SelCommandHandler implements SubCommandHandler {
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		SelectionShape shape = playerData.getSelectionShape();
-		Map<String, SubCommandHandler> selSubCmdHandlerMap = this.properMapMap.get(shape);
+		Map<String, SubCommandHandler> properMap = this.properMapMap.get(shape);
 		if(args.length == 1) {
 			List<String> subLabelList = new ArrayList<>(this.commonMap.keySet());
-			subLabelList.addAll(selSubCmdHandlerMap.keySet().stream()
+			subLabelList.addAll(properMap.keySet().stream()
 					.collect(Collectors.toList()));
 			return subLabelList;
 		}
@@ -74,7 +76,7 @@ public class SelCommandHandler implements SubCommandHandler {
 		if(commonHandler != null) {
 			return commonHandler.onTabComplete(playerData, player, subArgs);
 		}
-		SubCommandHandler properHandler = selSubCmdHandlerMap.get(subLabel);
+		SubCommandHandler properHandler = properMap.get(subLabel);
 		if(properHandler != null) {
 			return properHandler.onTabComplete(playerData, player, subArgs);
 		}
