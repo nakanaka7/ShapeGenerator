@@ -22,8 +22,21 @@ public class SelectionHandler {
 		this.selStrtgMap.put(selShape, selStrtg);
 	}
 
+	/**
+	 * Returns an array of registered selection shapes
+	 * @return an array of registered selection shapes
+	 */
 	public SelectionShape[] registeredSelectionShapes() {
 		return this.selStrtgMap.keySet().stream().toArray(SelectionShape[]::new);
+	}
+	
+	/**
+	 * Returns a selection shape strategy for the given selection shape
+	 * @param selShape a selection shape 
+	 * @return a selection shape strategy
+	 */
+	public SelectionShapeStrategy get(SelectionShape selShape) {
+		return this.selStrtgMap.get(selShape);
 	}
 	
 	/**
