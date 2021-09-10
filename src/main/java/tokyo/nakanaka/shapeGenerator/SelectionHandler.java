@@ -34,8 +34,12 @@ public class SelectionHandler {
 	 * Returns a selection shape strategy for the given selection shape
 	 * @param selShape a selection shape 
 	 * @return a selection shape strategy
+	 * @throws IllegalArgumentException if the given selection shape is not registered
 	 */
 	public SelectionShapeStrategy get(SelectionShape selShape) {
+		if(!this.selStrtgMap.containsKey(selShape)) {
+			throw new IllegalArgumentException();
+		}
 		return this.selStrtgMap.get(selShape);
 	}
 	
