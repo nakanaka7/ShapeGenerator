@@ -1,5 +1,6 @@
 package tokyo.nakanaka.shapeGenerator;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.World;
@@ -10,14 +11,15 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrate
  * Holds methods which depends on selection shape 
  */
 public class SelectionHandler {
-	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap;
+	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new LinkedHashMap<>();
 	
 	/**
-	 * Construct the handler
-	 * @param selStrtgMap a map which key is selection shape and which value is selection shape strategy.
+	 * Register 
+	 * @param selShape a selection shape
+	 * @param selStrtg a selection shape strategy
 	 */
-	public SelectionHandler(Map<SelectionShape, SelectionShapeStrategy> selStrtgMap) {
-		this.selStrtgMap = selStrtgMap;
+	public void register(SelectionShape selShape, SelectionShapeStrategy selStrtg) {
+		this.selStrtgMap.put(selShape, selStrtg);
 	}
 
 	public SelectionShape[] registeredSelectionShapes() {
