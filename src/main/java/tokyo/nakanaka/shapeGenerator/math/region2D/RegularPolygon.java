@@ -1,5 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.math.region2D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.PolarVector2D;
 import tokyo.nakanaka.math.Vector2D;
 
@@ -8,6 +9,7 @@ import tokyo.nakanaka.math.Vector2D;
  * which radius is 1 and the origin is (0,0). (1,0) has always the vertex, and the other vetexes'  
  * will be fixed.
  */
+@PublicAPI
 public class RegularPolygon implements Region2D {
 	private int VertexNumber;
 	
