@@ -8,6 +8,7 @@ import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.event.ClickBlockEvent;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
@@ -49,7 +50,14 @@ public class SgEventHandler {
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
 		switch(evt.getHandType()) {
 			case LEFT_HAND -> shapeStrtg.onLeftClick(selData, v);
-			case RIGHT_HAND -> shapeStrtg.onRightClick(selData, v);
+			case RIGHT_HAND -> {
+				try{
+					shapeStrtg.onRightClick(selData, v);
+				}catch(IllegalStateException e) {
+					player.print(LogColor.RED + "Left click first");
+					return;
+				}
+			}
 		}
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(selShape, selData);
