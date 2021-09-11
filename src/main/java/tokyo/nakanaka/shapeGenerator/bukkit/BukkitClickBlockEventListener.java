@@ -9,10 +9,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import tokyo.nakanaka.Scheduler;
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.Main;
 
-public class BukkitClickBlockEventListener implements Listener{
+@PrivateAPI
+class BukkitClickBlockEventListener implements Listener{
 	private Main main;
 	private Scheduler scheduler;
 	private Map<UUID, Boolean> activateRightMapNew = new HashMap<>();

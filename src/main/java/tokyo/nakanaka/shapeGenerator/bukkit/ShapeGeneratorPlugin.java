@@ -7,11 +7,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import tokyo.nakanaka.Scheduler;
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.bukkit.BukkitFunctions;
 import tokyo.nakanaka.bukkit.BukkitScheduler;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.shapeGenerator.Main;
 
+@PublicAPI
 public class ShapeGeneratorPlugin extends JavaPlugin {
 	private Main main;
 	

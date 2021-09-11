@@ -8,6 +8,7 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.ItemStack;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.bukkit.BukkitFunctions;
 import tokyo.nakanaka.bukkit.BukkitWorld;
 import tokyo.nakanaka.bukkit.commandSender.BukkitPlayer;
@@ -17,7 +18,8 @@ import tokyo.nakanaka.event.HandType;
 /**
  * ClickBlockEvent for bukkit
  */
-public class BukkitClickBlockEvent implements ClickBlockEvent {
+@PrivateAPI
+class BukkitClickBlockEvent implements ClickBlockEvent {
 	private Player player;
 	private BlockPosition blockPos;
 	private HandType handType;
