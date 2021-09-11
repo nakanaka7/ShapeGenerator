@@ -3,8 +3,10 @@ package tokyo.nakanaka.shapeGenerator;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 
+@PrivateAPI
 public class UndoCommandManager {
 	private LinkedList<UndoableCommand> undoCmds = new LinkedList<>();
 	private Deque<UndoableCommand> redoCmds = new LinkedList<>();

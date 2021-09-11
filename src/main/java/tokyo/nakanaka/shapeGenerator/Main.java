@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.List;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
@@ -17,6 +18,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TriangleSelectionSha
 /**
  * Main class for the project. 
  */
+@PublicAPI
 public class Main {
 	private SgCommandHandler sgCmdHandler;
 	private SgEventHandler sgEvtHandler;
