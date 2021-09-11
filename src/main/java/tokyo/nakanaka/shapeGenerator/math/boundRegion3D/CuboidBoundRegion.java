@@ -3,12 +3,15 @@ package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.*;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.annotation.PrivateAPI;
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.BlockRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
+@PublicAPI
 public class CuboidBoundRegion implements BoundRegion3D {
 	private Region3D region;
 	private double upperBoundX;
@@ -18,6 +21,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	private double lowerBoundY;
 	private double lowerBoundZ;
 
+	@PublicAPI
 	public CuboidBoundRegion(Region3D region, double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
 			double lowerBoundY, double lowerBoundZ) {
 		this.region = region;
@@ -29,41 +33,49 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		this.lowerBoundZ = lowerBoundZ;
 	}
 	
+	@PrivateAPI
 	@Override
 	public Region3D getRegion3D() {
 		return this.region;
 	}
 	
+	@PrivateAPI
 	@Override
 	public double getUpperBoundX() {
 		return upperBoundX;
 	}
 	
+	@PrivateAPI
 	@Override
 	public double getUpperBoundY() {
 		return upperBoundY;
 	}
 	
+	@PrivateAPI
 	@Override
 	public double getUpperBoundZ() {
 		return upperBoundZ;
 	}
 	
+	@PrivateAPI
 	@Override
 	public double getLowerBoundX() {
 		return lowerBoundX;
 	}
 	
+	@PrivateAPI
 	@Override
 	public double getLowerBoundY() {
 		return lowerBoundY;
 	}
 	
+	@PrivateAPI
 	@Override
 	public double getLowerBoundZ() {
 		return lowerBoundZ;
 	}
 
+	@PrivateAPI
 	@Override
 	public CuboidBoundRegion createShiftedRegion(Vector3D displacement) {
 		Region3D region = Region3Ds.shift(this.region, displacement);
@@ -76,6 +88,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
+	@PrivateAPI
 	@Override
 	public BoundRegion3D createScaledRegion(Axis axis, double factor, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofScale(axis, factor);
@@ -105,6 +118,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
+	@PrivateAPI
 	@Override
 	public BoundRegion3D createMirroredRegion(Axis axis, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofMirror(axis);
@@ -134,6 +148,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
+	@PrivateAPI
 	@Override
 	public BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset) {
 		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
@@ -146,6 +161,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return spbound.createRotatedRegion(axis, degree, offset);
 	}
 	
+	@PrivateAPI
 	@Deprecated
 	public CuboidBoundRegion createTransformedRegion(LinearTransformation trans, Vector3D offset) {
 		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
@@ -176,6 +192,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
+	@PrivateAPI
 	@Override
 	public BlockRegion3D toBlockRegion3D() {
 		int ubx = (int)Math.floor(this.upperBoundX);
@@ -187,6 +204,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
+	@PrivateAPI
 	@Deprecated
 	public CuboidBoundRegion changeUpperBoundX(double maxX) {
 		return new CuboidBoundRegion(this.region, maxX, this.upperBoundY, this.upperBoundZ,
