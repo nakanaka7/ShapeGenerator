@@ -6,10 +6,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 
+@PublicAPI
 public class GenerateCommand implements UndoableCommand{
 	private Selection sel;
 	private Block block;

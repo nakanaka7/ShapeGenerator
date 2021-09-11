@@ -1,8 +1,10 @@
 package tokyo.nakanaka.shapeGenerator.command;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.shapeGenerator.Selection;
 
+@PublicAPI
 public class MirrorCommand implements AdjustCommand {
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;
