@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
-import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.max;
-import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.min;
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
 
 import java.util.HashMap;
 import java.util.Map;

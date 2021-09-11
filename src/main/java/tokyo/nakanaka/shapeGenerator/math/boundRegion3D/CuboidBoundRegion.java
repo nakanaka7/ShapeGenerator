@@ -1,6 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 
-import static tokyo.nakanaka.shapeGenerator.MaxMinCalculator.*;
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.*;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
