@@ -32,7 +32,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
 
-public class SgCommandHandler implements CommandHandler {
+class SgCommandHandler implements CommandHandler {
 	private PlayerDataRepository playerDataRepository;
 	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	
@@ -55,7 +55,7 @@ public class SgCommandHandler implements CommandHandler {
 		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
 	}
 	
-	public SgCommandHandler(PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory) {
+	SgCommandHandler(PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory) {
 		this.playerDataRepository = playerDataRepository;
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(shapeStrtgRepo));
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(shapeStrtgRepo));

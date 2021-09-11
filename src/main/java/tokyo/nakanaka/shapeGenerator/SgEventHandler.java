@@ -14,11 +14,11 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
-public class SgEventHandler {
+class SgEventHandler {
 	private PlayerDataRepository playerDataRepository;
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
-	public SgEventHandler(PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo) {
+	SgEventHandler(PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo) {
 		this.playerDataRepository = playerDataRepository;
 		this.shapeStrtgRepo = shapeStrtgRepo;
 	}
@@ -27,7 +27,7 @@ public class SgEventHandler {
 	 * Handles a click block event
 	 * @param evt a click block event
 	 */
-	public void onClickBlockEvent(ClickBlockEvent evt) {
+	void onClickBlockEvent(ClickBlockEvent evt) {
 		//ignore the event if the clicking item is not "minecraft:blaze_rod"
 		Item item = evt.getItemStack().getItem();
 		if(!item.equals(new Item(new NamespacedID("minecraft", "blaze_rod")))) {
