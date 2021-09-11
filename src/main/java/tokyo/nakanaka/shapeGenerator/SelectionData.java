@@ -4,11 +4,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.math.Vector3D;
 
 /**
  * A Class which has data for selection
  */
+@PrivateAPI
 public class SelectionData {
 	private World world;
 	private String defualtOffsetLabel;

@@ -2,10 +2,12 @@ package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.BlockRegion3D;
 
+@PublicAPI
 public class Selection {
 	private World world;
 	private BoundRegion3D region;
