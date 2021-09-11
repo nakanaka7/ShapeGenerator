@@ -16,14 +16,16 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {	
 	private String subLabel;
 	private String[] subArgsUsage;
+	private SelectionDataFactory selDataFactory;
 
 	/**
 	 * @param subLabel sub label of the subcommand
 	 * @param subArgsUsage usage of the subcommand arguments
 	 */
-	public BaseSelSubCommandHandler(String subLabel, String[] subArgsUsage) {
+	public BaseSelSubCommandHandler(String subLabel, String[] subArgsUsage, SelectionDataFactory selDataFactory) {
 		this.subLabel = subLabel;
 		this.subArgsUsage = subArgsUsage;
+		this.selDataFactory = selDataFactory;
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 		World evtWorld = player.getBlockPosition().world();
 		SelectionData selData = playerData.getSelectionData();
 		if(!evtWorld.equals(selData.world())) {
-			playerData.setSelectionData(new SelectionData(evtWorld, selData.defualtOffsetLabel(), selData.extraDataLabels()));
+			playerData.setSelectionData(this.selDataFactory.newSelectionData(evtWorld));
 		}
 		playerData.getSelectionData().setExtraData(this.subLabel, value);
 		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionData());

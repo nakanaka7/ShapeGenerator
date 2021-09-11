@@ -25,10 +25,10 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center"));
-		map.put("width", new LengthCommandHandler("width"));
-		map.put("height", new LengthCommandHandler("height"));
-		map.put("length", new LengthCommandHandler("length"));
+		map.put("center", new PosCommandHandler("center", this::newSelectionData));
+		map.put("width", new LengthCommandHandler("width", this::newSelectionData));
+		map.put("height", new LengthCommandHandler("height", this::newSelectionData));
+		map.put("length", new LengthCommandHandler("length", this::newSelectionData));
 		return map;
 	}
 	

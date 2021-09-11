@@ -9,8 +9,8 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class PosCommandHandler extends BaseSelSubCommandHandler<Vector3D> {
 	
-	public PosCommandHandler(String subLabel) {
-		super(subLabel, new String[] {"[x]", "[y]", "[z]"});
+	public PosCommandHandler(String subLabel, SelectionDataFactory selDataFactory) {
+		super(subLabel, new String[] {"[x]", "[y]", "[z]"}, selDataFactory);
 	}
 
 	@Override

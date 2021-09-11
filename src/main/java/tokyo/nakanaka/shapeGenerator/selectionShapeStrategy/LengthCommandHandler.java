@@ -12,8 +12,8 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
  */
 public class LengthCommandHandler extends BaseSelSubCommandHandler<Double> {
 
-	public LengthCommandHandler(String subLabel) {
-		super(subLabel, new String[]{"<length>"});
+	public LengthCommandHandler(String subLabel, SelectionDataFactory selDataFactory) {
+		super(subLabel, new String[]{"<length>"}, selDataFactory);
 	}
 	
 	@Override

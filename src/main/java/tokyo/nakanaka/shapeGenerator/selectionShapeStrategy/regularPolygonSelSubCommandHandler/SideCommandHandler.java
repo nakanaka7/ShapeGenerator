@@ -5,11 +5,12 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.BaseSelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionDataFactory;
 
 public class SideCommandHandler extends BaseSelSubCommandHandler<Integer> {
 
-	public SideCommandHandler() {
-		super("side", new String[] {"number"});
+	public SideCommandHandler(SelectionDataFactory selDataFactory) {
+		super("side", new String[] {"number"}, selDataFactory);
 	}
 
 	@Override

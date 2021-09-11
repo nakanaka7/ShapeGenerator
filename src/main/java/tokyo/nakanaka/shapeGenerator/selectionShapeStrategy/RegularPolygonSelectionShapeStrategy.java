@@ -33,11 +33,11 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center"));
-		map.put("radius", new LengthCommandHandler("radius"));
-		map.put("side", new SideCommandHandler());
-		map.put("thickness", new LengthCommandHandler("thickness"));
-		map.put("axis", new AxisCommandHandler());
+		map.put("center", new PosCommandHandler("center", this::newSelectionData));
+		map.put("radius", new LengthCommandHandler("radius", this::newSelectionData));
+		map.put("side", new SideCommandHandler(this::newSelectionData));
+		map.put("thickness", new LengthCommandHandler("thickness", this::newSelectionData));
+		map.put("axis", new AxisCommandHandler(this::newSelectionData));
 		return map;
 	}
 	

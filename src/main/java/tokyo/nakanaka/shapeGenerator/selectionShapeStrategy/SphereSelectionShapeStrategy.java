@@ -25,8 +25,8 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center"));
-		map.put("radius", new LengthCommandHandler("radius"));
+		map.put("center", new PosCommandHandler("center", this::newSelectionData));
+		map.put("radius", new LengthCommandHandler("radius", this::newSelectionData));
 		return map;
 	}
 	

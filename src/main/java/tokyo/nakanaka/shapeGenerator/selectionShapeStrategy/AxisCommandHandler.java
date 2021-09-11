@@ -8,8 +8,8 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class AxisCommandHandler extends BaseSelSubCommandHandler<Axis> {
 
-	public AxisCommandHandler() {
-		super("axis", new String[] {"x|y|z"});
+	public AxisCommandHandler(SelectionDataFactory selDataFactory) {
+		super("axis", new String[] {"x|y|z"}, selDataFactory);
 	}
 
 	@Override
