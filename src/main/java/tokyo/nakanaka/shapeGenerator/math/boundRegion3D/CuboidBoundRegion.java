@@ -131,16 +131,16 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		double lbz = this.lowerBoundZ;
 		switch(axis) {
 		case X:
-			ubx = - (ubx - offset.getX()) + offset.getX();
-			lbx = - (lbx - offset.getX()) + offset.getX();
+			lbx = - (ubx - offset.getX()) + offset.getX();
+			ubx = - (lbx - offset.getX()) + offset.getX();
 			break;
 		case Y:
-			uby = - (uby - offset.getY()) + offset.getY();
-			lby = - (lby - offset.getY()) + offset.getY();
+			lby = - (uby - offset.getY()) + offset.getY();
+			uby = - (lby - offset.getY()) + offset.getY();
 			break;
 		case Z:
-			ubz = - (ubz - offset.getZ()) + offset.getZ();
-			lbz = - (lbz - offset.getZ()) + offset.getZ();
+			lbz = - (ubz - offset.getZ()) + offset.getZ();
+			ubz = - (lbz - offset.getZ()) + offset.getZ();
 			break;
 		default:
 			throw new UnsupportedOperationException();
