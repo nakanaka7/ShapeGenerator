@@ -122,6 +122,7 @@ public class SelectionData {
 	 * Returns the map which holds this object's information
 	 * @return the map which holds this object's information
 	 */
+	@Deprecated
 	LinkedHashMap<String, String> toLinkedHashMap() {
 		var map = new LinkedHashMap<String, String>();
 			for(String k : this.extraDataMap.keySet()) {
