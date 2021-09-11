@@ -10,13 +10,35 @@ public class MessageUtils {
 	private MessageUtils() {	
 	}
 	
-	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selBuilder) {
+	public static List<String> selectionMessageOld(SelectionShape selShape, SelectionData selData) {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + selShape + " Selection" + LogColor.RESET + "] ---------------------");
-		for(Entry<String, String> e : selBuilder.toLinkedHashMap().entrySet()) {
+		lines.add("--- [" + LogColor.GOLD + selShape.toString() + " Selection" + LogColor.RESET + "] ---------------------");
+		for(Entry<String, String> e : selData.toLinkedHashMap().entrySet()) {
 			lines.add(LogColor.GOLD + e.getKey() + ": " + LogColor.RESET + e.getValue());
 		}
 		return lines;
 	}
+	
+	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
+		List<String> lines = new ArrayList<>();
+		lines.add("--- [" + LogColor.GOLD + selShape.toString() + " Selection" + LogColor.RESET + "] ---------------------");
+		for(String label : selData.extraDataLabels()) {
+			String dataStr = "";
+			Object data = selData.getExtraData(label);
+			if(data != null) {
+				dataStr = data.toString();
+			}
+			lines.add(LogColor.GOLD + label + ": " + LogColor.RESET + dataStr);
+		}
+		String offsetStr;
+		if(selData.hasCustomOffset()) {
+			offsetStr = selData.getOffset().toString();
+		}else {
+			offsetStr = selData.defualtOffsetLabel() + LogColor.GOLD + " (default)";
+		}
+		lines.add(LogColor.GOLD + "offset: " + LogColor.RESET + offsetStr);
+		return lines;
+	}
+	
 	
 }
