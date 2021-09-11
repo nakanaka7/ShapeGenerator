@@ -1,9 +1,11 @@
-package tokyo.nakanaka.shapeGenerator;
+package tokyo.nakanaka.shapeGenerator.message;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.SelectionData;
+import tokyo.nakanaka.shapeGenerator.SelectionShape;
 
 public class MessageUtils {
 	private MessageUtils() {	
