@@ -48,6 +48,7 @@ public interface SelectionShapeStrategy {
 	 * Update the selection data on right block click
 	 * @param selData the selection data
 	 * @param blockPos the block position
+	 * @throws IllegalStateException if left click needed first
 	 */
 	void onRightClick(SelectionData selData, BlockVector3D blockPos);
 	
