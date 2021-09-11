@@ -6,14 +6,7 @@ import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.CuboidSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DiamondSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LineSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.RegularPolygonSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SphereSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TetrahedronSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TorusSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.TriangleSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
 
 /**
  * Main class for the project. 
@@ -28,6 +21,7 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.CONE, new ConeSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TORUS, new TorusSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.LINE, new LineSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
