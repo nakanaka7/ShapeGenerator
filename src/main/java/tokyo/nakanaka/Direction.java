@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator;
+package tokyo.nakanaka;
 
 public enum Direction {
 	NORTH(0, 0, - 1),
