@@ -3,11 +3,13 @@ package tokyo.nakanaka.shapeGenerator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 /**
  * A repository of selection shape strategies
  */
+@PrivateAPI
 public class SelectionShapeStrategyRepository {
 	private Map<SelectionShape, SelectionShapeStrategy> selStrtgMap = new LinkedHashMap<>();
 	

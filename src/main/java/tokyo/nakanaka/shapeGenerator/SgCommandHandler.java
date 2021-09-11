@@ -7,6 +7,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
@@ -32,6 +33,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.WandCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
 
+@PrivateAPI
 class SgCommandHandler implements CommandHandler {
 	private PlayerDataRepository playerDataRepository;
 	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();

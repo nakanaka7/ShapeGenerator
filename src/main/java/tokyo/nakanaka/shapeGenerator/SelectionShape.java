@@ -1,5 +1,8 @@
 package tokyo.nakanaka.shapeGenerator;
 
+import tokyo.nakanaka.annotation.PublicAPI;
+
+@PublicAPI
 public enum SelectionShape {
 	CUBOID("cuboid"),
 	DIAMOND("diamond"),

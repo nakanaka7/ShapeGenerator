@@ -7,6 +7,7 @@ import tokyo.nakanaka.Item;
 import tokyo.nakanaka.NamespacedID;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -15,6 +16,7 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
+@PrivateAPI
 class SgEventHandler {
 	private PlayerDataRepository playerDataRepository;
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
