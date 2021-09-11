@@ -117,30 +117,5 @@ public class SelectionData {
 			return (Vector3D) this.extraDataMap.get(defualtOffsetLabel);
 		}
 	}
-
-	/**
-	 * Returns the map which holds this object's information
-	 * @return the map which holds this object's information
-	 */
-	@Deprecated
-	LinkedHashMap<String, String> toLinkedHashMap() {
-		var map = new LinkedHashMap<String, String>();
-			for(String k : this.extraDataMap.keySet()) {
-				Object o = this.extraDataMap.get(k);
-				String v = "";
-				if(o != null) {
-					v = o.toString();
-				}
-				map.put(k, v);
-			}
-		String offset;
-		if(this.customOffset != null) {
-			offset = this.customOffset.toString();
-		}else {
-			offset = this.defualtOffsetLabel;
-		}
-		map.put("offset", offset);
-		return map;
-	}
-		
+	
 }
