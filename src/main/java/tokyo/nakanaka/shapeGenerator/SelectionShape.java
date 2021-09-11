@@ -7,6 +7,7 @@ public enum SelectionShape {
 	CUBOID("cuboid"),
 	DIAMOND("diamond"),
 	SPHERE("sphere"),
+	CONE("cone"),
 	TORUS("torus"),
 	LINE("line"),
 	TRIANGLE("triangle"),
