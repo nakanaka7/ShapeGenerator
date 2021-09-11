@@ -1,11 +1,16 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
-
+/**
+ * Represents sphere which center is (0, 0, 0)
+ */
+@PublicAPI
 public class Sphere implements Region3D{
 	private double r;
+	
 	/**
-	 * Represents sphere which center is (0, 0, 0), and its radius is r
+	 * @param r a radius of the sphere
 	 */	
 	public Sphere(double r) {
 		if(r < 0) {
