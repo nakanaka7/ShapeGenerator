@@ -1,15 +1,21 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector2D;
 
 /**
  * Represents a cylinder which base is on x-y plane, which base center is the space origin,
  * and which axis is z-axis.
  */
+@PublicAPI
 public class Cylinder implements Region3D {
 	private double radius;
 	private double height;
 	
+	/**
+	 * @param radius the radius of the base disc
+	 * @param height the height of the cylinder
+	 */
 	public Cylinder(double radius, double height) {
 		this.radius = radius;
 		if(height < 0) {

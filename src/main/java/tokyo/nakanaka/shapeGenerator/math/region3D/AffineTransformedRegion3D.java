@@ -2,9 +2,11 @@ package tokyo.nakanaka.shapeGenerator.math.region3D;
 
 import org.apache.commons.math3.linear.SingularOperatorException;
 
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 
+@PrivateAPI
 public class AffineTransformedRegion3D implements Region3D{
 	private Region3D original;
 	private LinearTransformation linearTrans;
