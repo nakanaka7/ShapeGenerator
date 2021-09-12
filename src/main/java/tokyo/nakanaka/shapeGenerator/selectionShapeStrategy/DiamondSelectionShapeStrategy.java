@@ -70,7 +70,7 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		if(center == null || width == null || height == null || length == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new Diamond(width / 2, height / 2, length / 2);
+		Region3D region = new Diamond(width, height, length);
 		region = Region3Ds.shift(region, center);
 		double ubx = center.getX() + width / 2;
 		double uby = center.getY() + height / 2;
