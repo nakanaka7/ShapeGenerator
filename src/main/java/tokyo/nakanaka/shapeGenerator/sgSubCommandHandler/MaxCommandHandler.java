@@ -68,7 +68,7 @@ public class MaxCommandHandler implements SubCommandHandler {
 		};
 		maxCmd.execute();
 		undoManager.add(maxCmd);
-		player.print(LogColor.GOLD + "Set maxY -> " + coord);
+		player.print(LogColor.GOLD + "Set max" + axis.toString().toUpperCase() + " -> " + coord);
 		return;
 	}
 
