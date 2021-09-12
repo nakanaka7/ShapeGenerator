@@ -12,7 +12,8 @@ public enum SelectionShape {
 	LINE("line"),
 	TRIANGLE("triangle"),
 	TETRAHEDRON("tetrahedron"),
-	REGULAR_POLYGON("regular_polygon");
+	REGULAR_POLYGON("regular_polygon"),
+	HOLLOW_SPHERE("hollow_sphere");
 
 	private String name;
 	
