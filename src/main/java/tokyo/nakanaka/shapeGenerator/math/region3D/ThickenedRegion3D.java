@@ -1,11 +1,13 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.shapeGenerator.math.region2D.Region2D;
 
 /**
  * Represents thickened region used by Region2D. It is thickened along z axis,
  * keeping its center origin.
  */
+@PrivateAPI
 public class ThickenedRegion3D implements Region3D {
 	private Region2D region2D;
 	private double thickness;

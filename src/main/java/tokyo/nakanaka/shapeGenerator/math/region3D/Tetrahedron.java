@@ -2,10 +2,12 @@ package tokyo.nakanaka.shapeGenerator.math.region3D;
 
 import org.apache.commons.math3.linear.SingularOperatorException;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Matrix3x3;
 import tokyo.nakanaka.math.Vector3D;
 
+@PublicAPI
 public class Tetrahedron implements Region3D {
 	private Vector3D pos1;
 	private LinearTransformation invTrans;
