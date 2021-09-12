@@ -1,17 +1,21 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.PolarVector2D;
 import tokyo.nakanaka.math.Vector3D;
 
 /**
  * Represents a torus shape region, which center is the origin, and which axis is z.
  */
+@PublicAPI
 public class Torus implements Region3D{
 	private double radiusMain;
 	private double radiusSub;
 	
 	/**
-	 * @throws IllegalArgumentException
+	 * @param radiusMain the main radius
+	 * @param radiusSub the sub radius
+	 * @throws IllegalArgumentException if radiusMain or radiusSub is less than 0 (not inclusive)
 	 */
 	public Torus(double radiusMain, double radiusSub) {
 		if(radiusMain < 0 || radiusSub < 0) {
