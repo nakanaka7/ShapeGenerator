@@ -2,33 +2,44 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.List;
 
+import org.bukkit.Axis;
+
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
+import tokyo.nakanaka.shapeGenerator.command.MaxXCommand;
+import tokyo.nakanaka.shapeGenerator.command.MaxYCommand;
 import tokyo.nakanaka.shapeGenerator.command.MaxZCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MaxzHelp;
 
 /**
- * Handles "/sg maxz" command
+ * Handles "sg max" subcommand
  */
-public class MaxzCommandHandler implements SubCommandHandler {	
+public class MaxCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MaxzHelp().getUsage());
+		//check args length
+		if(args.length != 2) {
+			player.print(LogColor.RED + "Usage: " + "max x|y|z <coordinate>");
 			return;
 		}
-		double value;
+		Axis axis;
 		try {
-			value = Double.valueOf(args[0]);
+			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse double");
+			player.print(LogColor.RED + "Can not parse axis");
+			return;
+		}
+		double coord;
+		try {
+			coord = Double.valueOf(args[1]);
+		}catch(IllegalArgumentException e) {
+			player.print(LogColor.RED + "Can not parse coordinate");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -50,18 +61,39 @@ public class MaxzCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
-		MaxZCommand maxzCmd = new MaxZCommand(originalCmd, value, playerData.getBlockPhysics());
-		maxzCmd.execute();
-		undoManager.add(maxzCmd);
-		player.print(LogColor.GOLD + "Set maxY -> " + value);
+		UndoableCommand maxCmd = switch(axis) {
+			case X -> new MaxXCommand(originalCmd, coord, playerData.getBlockPhysics());
+			case Y -> new MaxYCommand(originalCmd, coord, playerData.getBlockPhysics());
+			case Z -> new MaxZCommand(originalCmd, coord, playerData.getBlockPhysics());
+		};
+		maxCmd.execute();
+		undoManager.add(maxCmd);
+		player.print(LogColor.GOLD + "Set max" + axis.toString().toUpperCase() + " -> " + coord);
+		return;
 	}
 
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
-		case 1 -> List.of(String.valueOf((double)player.getBlockPosition().z()));
+		case 1 -> List.of("x", "y", "z");
+		case 2 -> {
+			Axis axis;
+			try {
+				axis = Axis.valueOf(args[0].toUpperCase());
+			}catch(IllegalArgumentException e) {
+				yield List.of();
+			}
+			double s = switch(axis) {
+			case X -> (double)player.getBlockPosition().x();
+			case Y -> (double)player.getBlockPosition().y();
+			case Z -> (double)player.getBlockPosition().z();
+			};
+			yield List.of(String.valueOf(s));
+		}
 		default -> List.of();
 		};
 	}
+
+	
 
 }

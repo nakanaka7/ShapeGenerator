@@ -2,33 +2,44 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.List;
 
+import org.bukkit.Axis;
+
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
+import tokyo.nakanaka.shapeGenerator.command.MinXCommand;
+import tokyo.nakanaka.shapeGenerator.command.MinYCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinZCommand;
 import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinzHelp;
 
 /**
- * Handles "/sg minz" command
+ * Handles "sg min" subcommand
  */
-public class MinzCommandHandler implements SubCommandHandler {
-		
+public class MinCommandHandler implements SubCommandHandler {
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new MinzHelp().getUsage());
+		//check args length
+		if(args.length != 2) {
+			player.print(LogColor.RED + "Usage: " + "min x|y|z <coordinate>");
 			return;
 		}
-		double value;
+		Axis axis;
 		try {
-			value = Double.valueOf(args[0]);
+			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse double");
+			player.print(LogColor.RED + "Can not parse axis");
+			return;
+		}
+		double coord;
+		try {
+			coord = Double.valueOf(args[1]);
+		}catch(IllegalArgumentException e) {
+			player.print(LogColor.RED + "Can not parse coordinate");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -50,16 +61,35 @@ public class MinzCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
-		MinZCommand minzCmd = new MinZCommand(originalCmd, value, playerData.getBlockPhysics());
-		minzCmd.execute();
-		undoManager.add(minzCmd);
-		player.print(LogColor.GOLD + "Set minZ -> " + value);
+		UndoableCommand minCmd = switch(axis) {
+			case X -> new MinXCommand(originalCmd, coord, playerData.getBlockPhysics());
+			case Y -> new MinYCommand(originalCmd, coord, playerData.getBlockPhysics());
+			case Z -> new MinZCommand(originalCmd, coord, playerData.getBlockPhysics());
+		};
+		minCmd.execute();
+		undoManager.add(minCmd);
+		player.print(LogColor.GOLD + "Set min" + axis.toString().toUpperCase() + " -> " + coord);
+		return;
 	}
 
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
-		case 1 -> List.of(String.valueOf((double)player.getBlockPosition().z()));
+		case 1 -> List.of("x", "y", "z");
+		case 2 -> {
+			Axis axis;
+			try {
+				axis = Axis.valueOf(args[0].toUpperCase());
+			}catch(IllegalArgumentException e) {
+				yield List.of();
+			}
+			double s = switch(axis) {
+			case X -> (double)player.getBlockPosition().x();
+			case Y -> (double)player.getBlockPosition().y();
+			case Z -> (double)player.getBlockPosition().z();
+			};
+			yield List.of(String.valueOf(s));
+		}
 		default -> List.of();
 		};
 	}
