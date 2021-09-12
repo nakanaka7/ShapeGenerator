@@ -1,5 +1,8 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PrivateAPI;
+
+@PrivateAPI
 public class LogicalDisjunctRegion3D implements Region3D{
 	private Region3D region1;
 	private Region3D region2;
