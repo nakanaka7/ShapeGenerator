@@ -7,12 +7,29 @@ import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Matrix3x3;
 import tokyo.nakanaka.math.Vector3D;
 
+/**
+ * Represents tetrahedron made by 4 points
+ */
 @PublicAPI
 public class Tetrahedron implements Region3D {
 	private Vector3D pos1;
 	private LinearTransformation invTrans;
 	private boolean hasRegion;
 	
+	/**
+	 * @param x1 the x coordinate of the first position
+	 * @param y1 the y coordinate of the first position
+	 * @param z1 the z coordinate of the first position
+	 * @param x2 the x coordinate of the second position
+	 * @param y2 the y coordinate of the second position
+	 * @param z2 the z coordinate of the second position
+	 * @param x3 the x coordinate of the third position
+	 * @param y3 the y coordinate of the third position
+	 * @param z3 the z coordinate of the third position
+	 * @param x4 the x coordinate of the fourth position
+	 * @param y4 the y coordinate of the fourth position
+	 * @param z4 the z coordinate of the fourth position
+	 */
 	public Tetrahedron(double x1, double y1, double z1,
 			double x2, double y2, double z2,
 			double x3, double y3, double z3,
