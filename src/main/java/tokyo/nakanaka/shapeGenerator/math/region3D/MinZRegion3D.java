@@ -1,9 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
+
 /**
  * Represents a region which holds all the points which z coordinate is larger than or equals
  * to a specified value
  */
+@PublicAPI
 public class MinZRegion3D implements Region3D {
 	private double minZ;
 
