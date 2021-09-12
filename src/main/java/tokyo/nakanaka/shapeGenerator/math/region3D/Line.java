@@ -1,10 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
 
 /**
  * Represents a line between 2 points. It has thickness, and its ends are sphere. 
  */
+@PublicAPI
 public class Line implements Region3D {
 	private double x1;
 	private double y1;
@@ -15,13 +17,13 @@ public class Line implements Region3D {
 	private double thickness;
 	
 	/**
-	 * @param x1
-	 * @param y1
-	 * @param z1
-	 * @param x2
-	 * @param y2
-	 * @param z2
-	 * @param thickness must be positive
+	 * @param x1 x coordinate of the first position
+	 * @param y1 y coordinate of the first position
+	 * @param z1 z coordinate of the first position
+	 * @param x2 x coordinate of the first position 
+	 * @param y2 y coordinate of the first position
+	 * @param z2 z coordinate of the first position
+	 * @param thickness The thickness of the line. It must be positive
 	 */
 	
 	public Line(double x1, double y1, double z1, double x2, double y2, double z2, double thickness) {
