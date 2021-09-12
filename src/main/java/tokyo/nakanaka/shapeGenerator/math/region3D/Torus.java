@@ -9,28 +9,28 @@ import tokyo.nakanaka.math.Vector3D;
  */
 @PublicAPI
 public class Torus implements Region3D{
-	private double radiusMain;
-	private double radiusSub;
+	private double majorRadius;
+	private double minorRadius;
 	
 	/**
-	 * @param radiusMain the main radius
-	 * @param radiusSub the sub radius
+	 * @param majorRadius the main radius
+	 * @param minorRadius the sub radius
 	 * @throws IllegalArgumentException if radiusMain or radiusSub is less than 0 (not inclusive)
 	 */
-	public Torus(double radiusMain, double radiusSub) {
-		if(radiusMain < 0 || radiusSub < 0) {
+	public Torus(double majorRadius, double minorRadius) {
+		if(majorRadius < 0 || minorRadius < 0) {
 			throw new IllegalArgumentException();
 		}
-		this.radiusMain = radiusMain;
-		this.radiusSub = radiusSub;
+		this.majorRadius = majorRadius;
+		this.minorRadius = minorRadius;
 	}
 
 	@Override
 	public boolean contains(double x, double y, double z) {
 		PolarVector2D polar = PolarVector2D.valueOf(x, y);
 		double angle = polar.getArgument();
-		Vector3D q = new Vector3D(this.radiusMain * Math.cos(angle), this.radiusMain * Math.sin(angle), 0);
-		return new Vector3D(x, y, z).getDistance(q) <= this.radiusSub;
+		Vector3D q = new Vector3D(this.majorRadius * Math.cos(angle), this.majorRadius * Math.sin(angle), 0);
+		return new Vector3D(x, y, z).getDistance(q) <= this.minorRadius;
 	}
 	
 }

@@ -18,21 +18,25 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
 
 public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
-
+	private String CENTER = "center";
+	private String MAJOR_RADIUS = "major_radius";
+	private String MINOR_RADIUS = "minor_radius";
+	private String AXIS = "axis";
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		SelectionData selData = new SelectionData(world, "center", "center", "radius_main", "radius_sub", "axis");
-		selData.setExtraData("axis", Axis.Y);
+		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, MINOR_RADIUS, AXIS);
+		selData.setExtraData(AXIS, Axis.Y);
 		return selData;
 	}
 	
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center", this::newSelectionData));
-		map.put("radius_main", new LengthCommandHandler("radius_main", this::newSelectionData));
-		map.put("radius_sub", new LengthCommandHandler("radius_sub", this::newSelectionData));
-		map.put("axis", new AxisCommandHandler(this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
+		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, this::newSelectionData));
+		map.put(MINOR_RADIUS, new LengthCommandHandler(MINOR_RADIUS, this::newSelectionData));
+		map.put(AXIS, new AxisCommandHandler(this::newSelectionData));
 		return map;
 	}
 	
@@ -43,17 +47,17 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 
 	@Override
 	public String rightClickDescription() {
-		return "Set radius_main, radius_sub";
+		return "Set major_radius, minor_radius";
 	}
 		
 	@Override
 	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData("center", blockPos.toVector3D());
+		selData.setExtraData(CENTER, blockPos.toVector3D());
 	}
 
 	@Override
 	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		var center = (Vector3D)selData.getExtraData("center");
+		var center = (Vector3D)selData.getExtraData(CENTER);
 		if(center == null) {
 			throw new IllegalStateException();
 		}
@@ -63,7 +67,7 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		double dz = 2 * Math.abs(pos.getZ() - center.getZ()) + 1;
 		double length;
 		double height;
-		Axis axis = (Axis)selData.getExtraData("axis");
+		Axis axis = (Axis)selData.getExtraData(AXIS);
 		switch(axis) {
 		case X -> {
 			length = Math.max(dy, dz);
@@ -79,22 +83,22 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		}
 		default -> throw new IllegalArgumentException();
 		}
-		double radiusSub = height / 2;
-		double radiusMain = length / 2 - radiusSub;
-		selData.setExtraData("radius_main", radiusMain);
-		selData.setExtraData("radius_sub", radiusSub);
+		double minorRadius = height / 2;
+		double majorRadius = length / 2 - minorRadius;
+		selData.setExtraData(MAJOR_RADIUS, majorRadius);
+		selData.setExtraData(MINOR_RADIUS, minorRadius);
 	}
 	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
-		var center = (Vector3D)selData.getExtraData("center");
-		var radiusMain = (Double)selData.getExtraData("radius_main");
-		var radiusSub = (Double)selData.getExtraData("radius_sub");
-		var axis = (Axis)selData.getExtraData("axis");
-		if(center == null || radiusMain == null || radiusSub == null || axis == null) {
+		var center = (Vector3D)selData.getExtraData(CENTER);
+		var majorRadius = (Double)selData.getExtraData(MAJOR_RADIUS);
+		var minorRadius = (Double)selData.getExtraData(MINOR_RADIUS);
+		var axis = (Axis)selData.getExtraData(AXIS);
+		if(center == null || majorRadius == null || minorRadius == null || axis == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new Torus(radiusMain, radiusSub);
+		Region3D region = new Torus(majorRadius, minorRadius);
 		switch(axis) {
 		case X:
 			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
@@ -106,12 +110,12 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 			break;
 		}
 		region = Region3Ds.shift(region, center);
-		double ubx = center.getX() + radiusMain + radiusSub;
-		double uby = center.getY() + radiusMain + radiusSub;
-		double ubz = center.getZ() + radiusMain + radiusSub;
-		double lbx = center.getX() - radiusMain - radiusSub;
-		double lby = center.getY() - radiusMain - radiusSub;
-		double lbz = center.getZ() - radiusMain - radiusSub;
+		double ubx = center.getX() + majorRadius + minorRadius;
+		double uby = center.getY() + majorRadius + minorRadius;
+		double ubz = center.getZ() + majorRadius + minorRadius;
+		double lbx = center.getX() - majorRadius - minorRadius;
+		double lby = center.getY() - majorRadius - minorRadius;
+		double lbz = center.getZ() - majorRadius - minorRadius;
 		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
 		return new Selection(selData.world(), boundReg, selData.getOffset());
 	}
