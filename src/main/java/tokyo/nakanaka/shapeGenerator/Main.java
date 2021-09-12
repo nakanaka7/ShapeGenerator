@@ -27,6 +27,7 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.HOLLOW_SPHERE, new HollowSphereSelectionShapeStrategy());
 		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
 		this.sgCmdHandler = new SgCommandHandler(playerDataRepo, shapeStrtgRepo, blockIDListFactory);
 		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
