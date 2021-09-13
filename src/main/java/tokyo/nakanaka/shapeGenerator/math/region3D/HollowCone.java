@@ -30,7 +30,8 @@ public class HollowCone implements Region3D {
 			return false;
 		}
 		double l = new Vector2D(x, y).getAbsolute();
-		return this.innerRadius * (1 - z / this.height) <= l && l <= this.outerRadius * (1 - z / this.height);
+		return this.innerRadius - z * this.outerRadius / this.height <= l 
+				&& l <= this.outerRadius * (1 - z / this.height);
 	}
 
 }
