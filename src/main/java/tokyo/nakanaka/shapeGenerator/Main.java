@@ -21,6 +21,7 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.CYLINDER, new CylinderSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.CONE, new ConeSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TORUS, new TorusSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.LINE, new LineSelectionShapeStrategy());
