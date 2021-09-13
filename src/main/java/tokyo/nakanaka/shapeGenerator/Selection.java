@@ -10,12 +10,12 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.BlockRegion3D;
 @PublicAPI
 public class Selection {
 	private World world;
-	private BoundRegion3D region;
+	private BoundRegion3D boundReg;
 	private Vector3D offset;
 	
-	public Selection(World world, BoundRegion3D region, Vector3D offset) {
+	public Selection(World world, BoundRegion3D boundReg, Vector3D offset) {
 		this.world = world;
-		this.region = region;
+		this.boundReg = boundReg;
 		this.offset = offset;
 	}
 		
@@ -24,11 +24,11 @@ public class Selection {
 	}
 	
 	public BlockRegion3D getBlockRegion3D() {
-		return this.region.toBlockRegion3D();
+		return this.boundReg.toBlockRegion3D();
 	}
 	
 	public BoundRegion3D getBoundRegion3D() {
-		return region;
+		return boundReg;
 	}
 	
 	public Vector3D getOffset() {
@@ -36,23 +36,23 @@ public class Selection {
 	}
 
 	public Selection shift(Vector3D displacement) {
-		BoundRegion3D region = this.region.createShiftedRegion(displacement);
+		BoundRegion3D region = this.boundReg.createShiftedRegion(displacement);
 		Vector3D offset = this.offset.add(displacement);
 		return new Selection(world, region, offset);
 	}
 	
 	public Selection getScaledSelection(Axis axis, double factor) {
-		BoundRegion3D newRegion = this.region.createScaledRegion(axis, factor, this.offset);
+		BoundRegion3D newRegion = this.boundReg.createScaledRegion(axis, factor, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
 	public Selection getMirroedSelection(Axis axis) {
-		BoundRegion3D newRegion = this.region.createMirroredRegion(axis, this.offset);
+		BoundRegion3D newRegion = this.boundReg.createMirroredRegion(axis, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
 	public Selection getRotatedSelection(Axis axis, double degree) {
-		BoundRegion3D newRegion = this.region.createRotatedRegion(axis, degree, this.offset);
+		BoundRegion3D newRegion = this.boundReg.createRotatedRegion(axis, degree, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
