@@ -77,10 +77,8 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 		if(center == null || radius == null || side == null || thickness == null || axis == null) {
 			throw new IllegalStateException();
 		}
-		Region2D regularPoly = new RegularPolygon(side);
+		Region2D regularPoly = new RegularPolygon(radius, side);
 		Region3D region = new ThickenedRegion3D(regularPoly, thickness);
-		region = Region3Ds.linearTransform(region, LinearTransformation.ofXScale(radius));
-		region = Region3Ds.linearTransform(region, LinearTransformation.ofYScale(radius));
 		double ubx = radius;
 		double uby = radius;
 		double ubz = radius;

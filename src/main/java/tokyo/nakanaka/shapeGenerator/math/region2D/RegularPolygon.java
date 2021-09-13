@@ -11,10 +11,19 @@ import tokyo.nakanaka.math.Vector2D;
  */
 @PublicAPI
 public class RegularPolygon implements Region2D {
-	private int VertexNumber;
+	private double radius;
+	private int vertexNumber;
 	
-	public RegularPolygon(int VertexNumber) {
-		this.VertexNumber = VertexNumber;
+	/**
+	 * @param radius the radius of the regular polygon
+	 * @param vertexNumber the vertex numbers
+	 */
+	public RegularPolygon(double radius, int vertexNumber) {
+		if(radius < 0 || vertexNumber < 3) {
+			throw new IllegalArgumentException();
+		}
+		this.radius = radius;
+		this.vertexNumber = vertexNumber;
 	}
 
 	@Override
@@ -26,12 +35,12 @@ public class RegularPolygon implements Region2D {
 		PolarVector2D polar = PolarVector2D.valueOf(pos);
 		double d = polar.getRadius();
 		double arg = polar.getArgument();
-		if(d > 1) {
+		if(d > this.radius) {
 			return false;
 		}
-		arg = arg % (2 * Math.PI / this.VertexNumber);
-		arg = arg - (Math.PI / this.VertexNumber);
-		return d * Math.cos(arg) <= Math.cos(Math.PI / this.VertexNumber);
+		arg = arg % (2 * Math.PI / this.vertexNumber);
+		arg = arg - (Math.PI / this.vertexNumber);
+		return d * Math.cos(arg) <= this.radius * Math.cos(Math.PI / this.vertexNumber);
 	}
 	
 }
