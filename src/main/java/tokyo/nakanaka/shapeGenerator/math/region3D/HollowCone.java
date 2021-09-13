@@ -1,11 +1,13 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector2D;
 
 /**
  * Represents a cone which base is on x-y plane, which base center is the space origin,
  * and which extends to positive z.
  */
+@PublicAPI
 public class HollowCone implements Region3D {
 	private double outerRadius;
 	private double innerRadius;
