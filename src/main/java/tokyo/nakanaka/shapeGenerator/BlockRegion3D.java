@@ -1,13 +1,14 @@
-package tokyo.nakanaka.shapeGenerator.math.region3D;
+package tokyo.nakanaka.shapeGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.math.BlockVector3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
 @PrivateAPI
-public class BlockRegion3D{
+public class BlockRegion3D {
 	private Region3D region;
 	private int upperBoundX;
 	private int upperBoundY;

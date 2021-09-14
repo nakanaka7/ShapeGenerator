@@ -4,7 +4,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.BlockRegion3D;
+import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
 @PublicAPI
