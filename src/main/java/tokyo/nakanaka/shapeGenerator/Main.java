@@ -21,12 +21,18 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.SPHERE, new SphereSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.CYLINDER, new CylinderSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.CONE, new ConeSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TORUS, new TorusSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.LINE, new LineSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.REGULAR_POLYGON, new RegularPolygonSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.HOLLOW_SPHERE, new HollowSphereSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.HOLLOW_CYLINDER, new HollowCylinderSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.HOLLOW_CONE, new HollowConeSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.HOLLOW_TORUS, new HollowTorusSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_POLYGON, new HollowRegularPolygonSelectionShapeStrategy());
 		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
 		this.sgCmdHandler = new SgCommandHandler(playerDataRepo, shapeStrtgRepo, blockIDListFactory);
 		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
