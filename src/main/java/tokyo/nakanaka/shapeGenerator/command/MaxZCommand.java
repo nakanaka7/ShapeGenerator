@@ -18,12 +18,12 @@ public class MaxZCommand implements AdjustCommand {
 		Selection originalSel = originalCmd.getSelection();
 		BoundRegion3D bound = originalSel.getBoundRegion3D();
 		Region3D region = bound.getRegion3D();
-		double ubx = bound.getUpperBoundX();
-		double uby = bound.getUpperBoundY();
+		double ubx = bound.upperBoundX();
+		double uby = bound.upperBoundY();
 		double ubz = maxZ;
-		double lbx = bound.getLowerBoundX();
-		double lby = bound.getLowerBoundY();
-		double lbz = bound.getLowerBoundZ();
+		double lbx = bound.lowerBoundX();
+		double lby = bound.lowerBoundY();
+		double lbz = bound.lowerBoundZ();
 		Region3D maxZReg = new MaxZRegion3D(maxZ);
 		Region3D newRegion = new LogicalConjunctRegion3D(region, maxZReg);
 		BoundRegion3D newBound = new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);

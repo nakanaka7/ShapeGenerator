@@ -36,32 +36,32 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	}
 	
 	@Override
-	public double getUpperBoundX() {
+	public double upperBoundX() {
 		return upperBoundX;
 	}
 	
 	@Override
-	public double getUpperBoundY() {
+	public double upperBoundY() {
 		return upperBoundY;
 	}
 	
 	@Override
-	public double getUpperBoundZ() {
+	public double upperBoundZ() {
 		return upperBoundZ;
 	}
 	
 	@Override
-	public double getLowerBoundX() {
+	public double lowerBoundX() {
 		return lowerBoundX;
 	}
 	
 	@Override
-	public double getLowerBoundY() {
+	public double lowerBoundY() {
 		return lowerBoundY;
 	}
 	
 	@Override
-	public double getLowerBoundZ() {
+	public double lowerBoundZ() {
 		return lowerBoundZ;
 	}
 

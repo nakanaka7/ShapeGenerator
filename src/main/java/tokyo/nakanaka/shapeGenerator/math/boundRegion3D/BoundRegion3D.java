@@ -12,12 +12,12 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 @PrivateAPI
 public interface BoundRegion3D {
 	Region3D getRegion3D();
-	double getUpperBoundX();
-	double getUpperBoundY();
-	double getUpperBoundZ();
-	double getLowerBoundX();
-	double getLowerBoundY();
-	double getLowerBoundZ();
+	double upperBoundX();
+	double upperBoundY();
+	double upperBoundZ();
+	double lowerBoundX();
+	double lowerBoundY();
+	double lowerBoundZ();
 	
 	/**
 	 * Returns new bound region which is shifted  

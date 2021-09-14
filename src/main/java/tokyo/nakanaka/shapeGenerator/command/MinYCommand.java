@@ -18,12 +18,12 @@ public class MinYCommand implements AdjustCommand {
 		Selection originalSel = originalCmd.getSelection();
 		BoundRegion3D bound = originalSel.getBoundRegion3D();
 		Region3D region = bound.getRegion3D();
-		double ubx = bound.getUpperBoundX();
-		double uby = bound.getUpperBoundY();
-		double ubz = bound.getUpperBoundZ();
-		double lbx = bound.getLowerBoundX();
+		double ubx = bound.upperBoundX();
+		double uby = bound.upperBoundY();
+		double ubz = bound.upperBoundZ();
+		double lbx = bound.lowerBoundX();
 		double lby = minY;
-		double lbz = bound.getLowerBoundZ();
+		double lbz = bound.lowerBoundZ();
 		Region3D minYReg = new MinYRegion3D(minY);
 		Region3D newRegion = new LogicalConjunctRegion3D(region, minYReg);
 		BoundRegion3D newBound = new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);

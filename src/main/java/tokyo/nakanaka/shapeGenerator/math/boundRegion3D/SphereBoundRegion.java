@@ -24,32 +24,32 @@ public class SphereBoundRegion implements BoundRegion3D {
 	}
 	
 	@Override
-	public double getUpperBoundX() {
+	public double upperBoundX() {
 		return this.center.getX() + this.radius;
 	}
 	
 	@Override
-	public double getUpperBoundY() {
+	public double upperBoundY() {
 		return this.center.getY() + this.radius;
 	}
 	
 	@Override
-	public double getUpperBoundZ() {
+	public double upperBoundZ() {
 		return this.center.getZ() + this.radius;
 	}
 	
 	@Override
-	public double getLowerBoundX() {
+	public double lowerBoundX() {
 		return this.center.getX() - this.radius;
 	}
 	
 	@Override
-	public double getLowerBoundY() {
+	public double lowerBoundY() {
 		return this.center.getY() - this.radius;
 	}
 	
 	@Override
-	public double getLowerBoundZ() {
+	public double lowerBoundZ() {
 		return this.center.getZ() - this.radius;
 	}
 	

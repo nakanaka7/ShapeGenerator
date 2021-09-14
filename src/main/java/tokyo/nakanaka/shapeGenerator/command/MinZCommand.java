@@ -18,11 +18,11 @@ public class MinZCommand implements AdjustCommand {
 		Selection originalSel = originalCmd.getSelection();
 		BoundRegion3D bound = originalSel.getBoundRegion3D();
 		Region3D region = bound.getRegion3D();
-		double ubx = bound.getUpperBoundX();
-		double uby = bound.getUpperBoundY();
-		double ubz = bound.getUpperBoundZ();
-		double lbx = bound.getLowerBoundX();
-		double lby = bound.getLowerBoundY();
+		double ubx = bound.upperBoundX();
+		double uby = bound.upperBoundY();
+		double ubz = bound.upperBoundZ();
+		double lbx = bound.lowerBoundX();
+		double lby = bound.lowerBoundY();
 		double lbz = minZ;
 		Region3D minZReg = new MinZRegion3D(minZ);
 		Region3D newRegion = new LogicalConjunctRegion3D(region, minZReg);
