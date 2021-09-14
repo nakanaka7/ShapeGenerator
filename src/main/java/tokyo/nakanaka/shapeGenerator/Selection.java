@@ -18,11 +18,19 @@ public class Selection {
 		this.offset = offset;
 	}
 		
-	public World getWorld() {
+	/**
+	 * Returns the world of this selection
+	 * @return the world of this selection
+	 */
+	public World world() {
 		return world;
 	}
 	
-	public BlockRegion3D getBlockRegion3D() {
+	/**
+	 * Returns a block region made from this selection
+	 * @return block region made from this selection
+	 */
+	public BlockRegion3D createBlockRegion3D() {
 		return this.boundReg.toBlockRegion3D();
 	}
 	
