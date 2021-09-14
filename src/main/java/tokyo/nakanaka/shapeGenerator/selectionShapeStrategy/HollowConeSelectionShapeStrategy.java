@@ -6,7 +6,6 @@ import java.util.Map;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
@@ -15,7 +14,6 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.HollowCone;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
 public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy {
 	private String CENTER = "center";
@@ -79,47 +77,16 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 		if(innerRadius >= outerRadius) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new HollowCone(outerRadius, innerRadius, height);
-		double ubx = 0;
-		double uby = 0; 
-		double ubz = 0; 
-		double lbx = 0; 
-		double lby = 0; 
-		double lbz = 0; 
+		Region3D region = new HollowCone(outerRadius, innerRadius, height);	
+		BoundRegion3D boundReg = new CuboidBoundRegion(region, outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0);
+		Vector3D offset = selData.getOffset();
+		boundReg = boundReg.createShifted(offset);
 		switch(axis) {
-		case X:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
-			ubx += height;
-			lby -= outerRadius;
-			lbz -= outerRadius;
-			uby += outerRadius;
-			ubz += outerRadius;
-			break;
-		case Y:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(-90));
-			uby += height;
-			lbz -= outerRadius;
-			lbx -= outerRadius;
-			ubz += outerRadius;
-			ubx += outerRadius;
-			break;
-		case Z:
-			ubz += height;
-			lbx -= outerRadius;
-			lby -= outerRadius;
-			ubx += outerRadius;
-			uby += outerRadius;
-			break;
-		}
-		ubx += center.getX();
-		uby += center.getY();
-		ubz += center.getZ();
-		lbx += center.getX();
-		lby += center.getY();
-		lbz += center.getZ();
-		region = Region3Ds.shift(region, center);
-		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);	
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		case X -> boundReg = boundReg.createRotated(Axis.Y, 90, offset);
+		case Y -> boundReg = boundReg.createRotated(Axis.X, -90, offset);
+		case Z -> {}
+		};
+		return new Selection(selData.world(), boundReg, offset);
 	}
 
 }
