@@ -55,8 +55,4 @@ public class Selection {
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
-	public Selection getXLimitedSelection(double maxX) {
-		return null;
-	}
-
 }
