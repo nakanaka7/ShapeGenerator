@@ -77,7 +77,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 
 	@PrivateAPI
 	@Override
-	public CuboidBoundRegion createShiftedRegion(Vector3D displacement) {
+	public CuboidBoundRegion createShifted(Vector3D displacement) {
 		Region3D region = Region3Ds.shift(this.region, displacement);
 		double ubx = this.upperBoundX + displacement.getX();
 		double uby = this.upperBoundY + displacement.getY();
@@ -90,7 +90,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	
 	@PrivateAPI
 	@Override
-	public BoundRegion3D createScaledRegion(Axis axis, double factor, Vector3D offset) {
+	public BoundRegion3D createScaled(Axis axis, double factor, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofScale(axis, factor);
 		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
 		double ubx = this.upperBoundX;
@@ -120,7 +120,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	
 	@PrivateAPI
 	@Override
-	public BoundRegion3D createMirroredRegion(Axis axis, Vector3D offset) {
+	public BoundRegion3D createMirrored(Axis axis, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofMirror(axis);
 		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
 		double ubx = this.upperBoundX;
@@ -150,7 +150,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	
 	@PrivateAPI
 	@Override
-	public BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset) {
+	public BoundRegion3D createRotated(Axis axis, double degree, Vector3D offset) {
 		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
 		double cy = (this.upperBoundY + this.lowerBoundY) / 2.0;
 		double cz = (this.upperBoundZ + this.lowerBoundZ) / 2.0;
@@ -158,7 +158,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		Vector3D maxPos = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
 		double radius = maxPos.negate(center).getAbsolute();
 		SphereBoundRegion spbound = new SphereBoundRegion(this.region, center, radius);
-		return spbound.createRotatedRegion(axis, degree, offset);
+		return spbound.createRotated(axis, degree, offset);
 	}
 	
 	@PrivateAPI

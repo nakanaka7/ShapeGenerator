@@ -66,7 +66,7 @@ public class SphereBoundRegion implements BoundRegion3D {
 	
 	@PrivateAPI
 	@Override
-	public BoundRegion3D createShiftedRegion(Vector3D displacement) {
+	public BoundRegion3D createShifted(Vector3D displacement) {
 		Region3D newRegion = Region3Ds.shift(this.region, displacement);
 		Vector3D newCenter = this.center.add(displacement);
 		return new SphereBoundRegion(newRegion, newCenter, this.radius);
@@ -74,19 +74,19 @@ public class SphereBoundRegion implements BoundRegion3D {
 
 	@PrivateAPI
 	@Override
-	public BoundRegion3D createScaledRegion(Axis axis, double factor, Vector3D offset) {
+	public BoundRegion3D createScaled(Axis axis, double factor, Vector3D offset) {
 		double cx = this.center.getX();
 		double cy = this.center.getY();
 		double cz = this.center.getZ();
 		CuboidBoundRegion cubound = new CuboidBoundRegion(region, 
 				cx + radius, cy + radius, cz + radius,
 				cx - radius, cy - radius, cz - radius);
-		return cubound.createScaledRegion(axis, factor, offset);
+		return cubound.createScaled(axis, factor, offset);
 	}
 	
 	@PrivateAPI
 	@Override
-	public BoundRegion3D createMirroredRegion(Axis axis, Vector3D offset) {
+	public BoundRegion3D createMirrored(Axis axis, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofMirror(axis);
 		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
 		Vector3D newCenter = trans.apply(this.center.negate(offset)).add(offset);
@@ -95,7 +95,7 @@ public class SphereBoundRegion implements BoundRegion3D {
 	
 	@PrivateAPI
 	@Override
-	public BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset) {
+	public BoundRegion3D createRotated(Axis axis, double degree, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofRotation(axis, degree);
 		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
 		Vector3D newCenter = trans.apply(this.center.negate(offset)).add(offset);

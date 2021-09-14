@@ -24,13 +24,13 @@ public interface BoundRegion3D {
 	@PrivateAPI
 	double getLowerBoundZ();
 	@PrivateAPI
-	BoundRegion3D createShiftedRegion(Vector3D displacement);
+	BoundRegion3D createShifted(Vector3D displacement);
 	@PrivateAPI
-	BoundRegion3D createScaledRegion(Axis axis, double factor, Vector3D offset);
+	BoundRegion3D createScaled(Axis axis, double factor, Vector3D offset);
 	@PrivateAPI
-	BoundRegion3D createMirroredRegion(Axis axis, Vector3D offset);
+	BoundRegion3D createMirrored(Axis axis, Vector3D offset);
 	@PrivateAPI
-	BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset);
+	BoundRegion3D createRotated(Axis axis, double degree, Vector3D offset);
 	@PrivateAPI
 	BlockRegion3D toBlockRegion3D();
 }
