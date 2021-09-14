@@ -38,4 +38,53 @@ public class Cuboid implements Region3D{
 				&&((y1 <= y && y <= y2) || (y2 <= y && y <= y1)) 
 				&&((z1 <= z && z <= z2) || (z2 <= z && z <= z1)); 
 	}
+	
+	/**
+	 * Returns minimum x coordinate of this cuboid
+	 * @return minimum x coordinate of this cuboid
+	 */
+	public double minX() {
+		return Math.min(x1, x2);
+	}
+	
+	/**
+	 * Returns minimum y coordinate of this cuboid
+	 * @return minimum y coordinate of this cuboid
+	 */
+	public double minY() {
+		return Math.min(y1, y2);
+	}
+	
+	/**
+	 * Returns minimum z coordinate of this cuboid
+	 * @return minimum z coordinate of this cuboid
+	 */
+	public double minZ() {
+		return Math.min(z1, z2);
+	}
+	
+	/**
+	 * Returns maximum x coordinate of this cuboid
+	 * @return maximum x coordinate of this cuboid
+	 */
+	public double maxX() {
+		return Math.max(x1, x2);
+	}
+	
+	/**
+	 * Returns maximum y coordinate of this cuboid
+	 * @return maximum y coordinate of this cuboid
+	 */
+	public double maxY() {
+		return Math.max(y1, y2);
+	}
+	
+	/**
+	 * Returns maximum z coordinate of this cuboid
+	 * @return maximum z coordinate of this cuboid
+	 */
+	public double maxZ() {
+		return Math.max(z1, z2);
+	}
+	
 }
