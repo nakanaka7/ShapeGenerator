@@ -6,7 +6,6 @@ import java.util.Map;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
@@ -15,7 +14,6 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.HollowTorus;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
 public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy {
 	private String CENTER = "center";
@@ -77,25 +75,17 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 			throw new IllegalStateException();
 		}
 		Region3D region = new HollowTorus(majorRadius, outerMinorRadius, innerMinorRadius);
+		double a = majorRadius + outerMinorRadius;
+		double b = outerMinorRadius;
+		BoundRegion3D boundReg = new CuboidBoundRegion(region, a, a, b, -a, -a, -b);
+		Vector3D offset = selData.getOffset();
+		boundReg = boundReg.createShifted(offset);
 		switch(axis) {
-		case X:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
-			break;
-		case Y:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(90));
-			break;
-		case Z:
-			break;
-		}
-		region = Region3Ds.shift(region, center);
-		double ubx = center.getX() + majorRadius + outerMinorRadius;
-		double uby = center.getY() + majorRadius + outerMinorRadius;
-		double ubz = center.getZ() + majorRadius + outerMinorRadius;
-		double lbx = center.getX() - majorRadius - outerMinorRadius;
-		double lby = center.getY() - majorRadius - outerMinorRadius;
-		double lbz = center.getZ() - majorRadius - outerMinorRadius;
-		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		case X -> boundReg = boundReg.createRotated(Axis.Y, 90, offset);
+		case Y -> boundReg = boundReg.createRotated(Axis.X, -90, offset);
+		case Z -> {}
+		};
+		return new Selection(selData.world(), boundReg, offset);
 	}
 
 }

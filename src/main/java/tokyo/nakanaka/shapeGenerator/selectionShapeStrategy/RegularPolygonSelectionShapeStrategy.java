@@ -20,24 +20,29 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.ThickenedRegion3D;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrategy {
-
+	private String CENTER = "center";
+	private String RADIUS = "radius";
+	private String SIDE = "side";
+	private String THICKNESS = "thickness";
+	private String AXIS = "axis";
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		SelectionData selData = new SelectionData(world, "center", "center", "radius", "side", "thickness", "axis");
-		selData.setExtraData("side", 3);
-		selData.setExtraData("thickness", 1.0);
-		selData.setExtraData("axis", Axis.Y);
+		SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, SIDE, THICKNESS, AXIS);
+		selData.setExtraData(SIDE, 3);
+		selData.setExtraData(THICKNESS, 1.0);
+		selData.setExtraData(AXIS, Axis.Y);
 		return selData;
 	}
 	
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center", this::newSelectionData));
-		map.put("radius", new LengthCommandHandler("radius", this::newSelectionData));
-		map.put("side", new SideCommandHandler(this::newSelectionData));
-		map.put("thickness", new LengthCommandHandler("thickness", this::newSelectionData));
-		map.put("axis", new AxisCommandHandler(this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
+		map.put(SIDE, new SideCommandHandler(this::newSelectionData));
+		map.put(THICKNESS, new LengthCommandHandler(THICKNESS, this::newSelectionData));
+		map.put(AXIS, new AxisCommandHandler(this::newSelectionData));
 		return map;
 	}
 	
@@ -53,27 +58,27 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 	
 	@Override
 	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData("center", blockPos.toVector3D());
+		selData.setExtraData(CENTER, blockPos.toVector3D());
 	}
 
 	@Override
 	public void onRightClick(SelectionData selData,BlockVector3D blockPos) {
-		var center = (Vector3D)selData.getExtraData("center");
+		var center = (Vector3D)selData.getExtraData(CENTER);
 		if(center == null) {
 			throw new IllegalStateException();
 		}
 		Vector3D pos = blockPos.toVector3D();
 		double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
-		selData.setExtraData("radius", radius);
+		selData.setExtraData(RADIUS, radius);
 	}
 	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
-		var center = (Vector3D)selData.getExtraData("center");
-		var radius = (Double)selData.getExtraData("radius");
-		var side = (Integer)selData.getExtraData("side");
-		var thickness = (Double)selData.getExtraData("thickness");
-		var axis = (Axis)selData.getExtraData("axis");
+		var center = (Vector3D)selData.getExtraData(CENTER);
+		var radius = (Double)selData.getExtraData(RADIUS);
+		var side = (Integer)selData.getExtraData(SIDE);
+		var thickness = (Double)selData.getExtraData(THICKNESS);
+		var axis = (Axis)selData.getExtraData(AXIS);
 		if(center == null || radius == null || side == null || thickness == null || axis == null) {
 			throw new IllegalStateException();
 		}
@@ -106,7 +111,7 @@ public class RegularPolygonSelectionShapeStrategy implements SelectionShapeStrat
 			break;
 		}
 		CuboidBoundRegion boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		boundReg = boundReg.createShiftedRegion(center);
+		boundReg = boundReg.createShifted(center);
 		return new Selection(selData.world(), boundReg, selData.getOffset());
 	}
 	

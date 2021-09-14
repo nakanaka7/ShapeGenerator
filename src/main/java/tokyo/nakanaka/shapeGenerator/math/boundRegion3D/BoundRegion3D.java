@@ -4,9 +4,12 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.BlockRegion3D;
+import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
+/**
+ * Represents a region which is bound by a larger region. The second region must hold all the points of the first region.
+ */
 @PublicAPI
 public interface BoundRegion3D {
 	@PrivateAPI
@@ -23,14 +26,47 @@ public interface BoundRegion3D {
 	double getLowerBoundY();
 	@PrivateAPI
 	double getLowerBoundZ();
-	@PrivateAPI
-	BoundRegion3D createShiftedRegion(Vector3D displacement);
-	@PrivateAPI
-	BoundRegion3D createScaledRegion(Axis axis, double factor, Vector3D offset);
-	@PrivateAPI
-	BoundRegion3D createMirroredRegion(Axis axis, Vector3D offset);
-	@PrivateAPI
-	BoundRegion3D createRotatedRegion(Axis axis, double degree, Vector3D offset);
+	
+	/**
+	 * Returns new bound region which is shifted  
+	 * @param displacement a displacement of shift
+	 * @return new bound region which is shifted
+	 */
+	@PublicAPI
+	BoundRegion3D createShifted(Vector3D displacement);
+	
+	/**
+	 * Returns new bound region which is scaled along the specified axis with specified factor
+	 * @param axis the axis to scale
+	 * @param factor a scale factor
+	 * @param offset the origin of the transform
+	 * @return new bound region which is scaled along the specified axis and factor
+	 */
+	@PublicAPI
+	BoundRegion3D createScaled(Axis axis, double factor, Vector3D offset);
+
+	/**
+	 * Returns new bound region which is mirrored about the specified axis 
+	 * @param offset the origin of the transform
+	 * @return new bound region which is mirrored about the specified axis
+	 */
+	@PublicAPI
+	BoundRegion3D createMirrored(Axis axis, Vector3D offset);
+	
+	/**
+	 * Returns new bound region which is rotated about the specified axis by the given degree
+	 * @param axis x, y, or z axis, which is used with the offset to specify the rotation axis
+	 * @param degree the degree to rotate
+	 * @param offset used with the x y, or z axis to specify the rotation axis
+	 * @return new bound region which is rotated about the specified axis by the given degree
+	 */
+	@PublicAPI
+	BoundRegion3D createRotated(Axis axis, double degree, Vector3D offset);
+	
+	/**
+	 * Returns a block region from the bound region
+	 * @return a block region from the bound region
+	 */
 	@PrivateAPI
 	BlockRegion3D toBlockRegion3D();
 }

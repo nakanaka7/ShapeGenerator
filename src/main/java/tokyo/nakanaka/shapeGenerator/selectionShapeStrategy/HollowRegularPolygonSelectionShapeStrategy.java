@@ -115,7 +115,7 @@ public class HollowRegularPolygonSelectionShapeStrategy implements SelectionShap
 			break;
 		}
 		CuboidBoundRegion boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		boundReg = boundReg.createShiftedRegion(center);
+		boundReg = boundReg.createShifted(center);
 		return new Selection(selData.world(), boundReg, selData.getOffset());
 	}
 
