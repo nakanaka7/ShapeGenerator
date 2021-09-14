@@ -6,7 +6,6 @@ import java.util.Map;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
@@ -15,7 +14,6 @@ import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cylinder;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
 public class CylinderSelectionShapeStrategy implements SelectionShapeStrategy {
 	private String CENTER = "center";
@@ -86,7 +84,7 @@ public class CylinderSelectionShapeStrategy implements SelectionShapeStrategy {
 		selData.setExtraData(RADIUS, radius);
 		selData.setExtraData(HEIGHT, height);
 	}
-
+	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
@@ -97,46 +95,15 @@ public class CylinderSelectionShapeStrategy implements SelectionShapeStrategy {
 			throw new IllegalStateException();
 		}
 		Region3D region = new Cylinder(radius, height);
-		double ubx = 0;
-		double uby = 0; 
-		double ubz = 0; 
-		double lbx = 0; 
-		double lby = 0; 
-		double lbz = 0; 
+		BoundRegion3D boundReg = new CuboidBoundRegion(region, radius, radius, height, -radius, -radius, 0);
+		Vector3D offset = selData.getOffset();
+		boundReg = boundReg.createShifted(offset);
 		switch(axis) {
-		case X:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofYRotation(90));
-			ubx += height;
-			lby -= radius;
-			lbz -= radius;
-			uby += radius;
-			ubz += radius;
-			break;
-		case Y:
-			region = Region3Ds.linearTransform(region, LinearTransformation.ofXRotation(-90));
-			uby += height;
-			lbz -= radius;
-			lbx -= radius;
-			ubz += radius;
-			ubx += radius;
-			break;
-		case Z:
-			ubz += height;
-			lbx -= radius;
-			lby -= radius;
-			ubx += radius;
-			uby += radius;
-			break;
-		}
-		ubx += center.getX();
-		uby += center.getY();
-		ubz += center.getZ();
-		lbx += center.getX();
-		lby += center.getY();
-		lbz += center.getZ();
-		region = Region3Ds.shift(region, center);
-		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		case X -> boundReg = boundReg.createRotated(Axis.Y, 90, offset);
+		case Y -> boundReg = boundReg.createRotated(Axis.X, -90, offset);
+		case Z -> {}
+		};
+		return new Selection(selData.world(), boundReg, offset);
 	}
-
+	
 }
