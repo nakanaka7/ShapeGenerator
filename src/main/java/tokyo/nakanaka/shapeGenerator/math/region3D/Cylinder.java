@@ -15,6 +15,7 @@ public class Cylinder implements Region3D {
 	/**
 	 * @param radius the radius of the base disc
 	 * @param height the height of the cylinder
+	 * @throws if height is smaller than zero
 	 */
 	public Cylinder(double radius, double height) {
 		this.radius = radius;
