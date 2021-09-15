@@ -188,10 +188,4 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 
-	@Deprecated
-	public CuboidBoundRegion changeUpperBoundX(double maxX) {
-		return new CuboidBoundRegion(this.region, maxX, this.upperBoundY, this.upperBoundZ,
-				this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
-	}
-
 }
