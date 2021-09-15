@@ -1,4 +1,4 @@
-@PublicAPI
+@PrivateAPI
 package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 
-import tokyo.nakanaka.annotation.PublicAPI;
+import tokyo.nakanaka.annotation.PrivateAPI;

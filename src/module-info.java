@@ -4,7 +4,6 @@ module tokyo.nakanaka.shapeGenerator {
 	exports tokyo.nakanaka.shapeGenerator;
 	exports tokyo.nakanaka.shapeGenerator.bukkit;
 	exports tokyo.nakanaka.shapeGenerator.command;
-	exports tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 	exports tokyo.nakanaka.shapeGenerator.math.region2D;
 	exports tokyo.nakanaka.shapeGenerator.math.region3D;
 }

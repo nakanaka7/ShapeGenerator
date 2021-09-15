@@ -19,15 +19,15 @@ public class MaxXCommand implements AdjustCommand {
 		BoundRegion3D bound = originalSel.getBoundRegion3D();
 		Region3D region = bound.getRegion3D();
 		double ubx = maxX;
-		double uby = bound.getUpperBoundY();
-		double ubz = bound.getUpperBoundZ();
-		double lbx = bound.getLowerBoundX();
-		double lby = bound.getLowerBoundY();
-		double lbz = bound.getLowerBoundZ();
+		double uby = bound.upperBoundY();
+		double ubz = bound.upperBoundZ();
+		double lbx = bound.lowerBoundX();
+		double lby = bound.lowerBoundY();
+		double lbz = bound.lowerBoundZ();
 		Region3D maxXReg = new MaxXRegion3D(maxX);
 		Region3D newRegion = new LogicalConjunctRegion3D(region, maxXReg);
 		BoundRegion3D newBound = new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
-		Selection sel = new Selection(originalSel.getWorld(), newBound, originalSel.getOffset());
+		Selection sel = new Selection(originalSel.world(), newBound, originalSel.getOffset());
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	

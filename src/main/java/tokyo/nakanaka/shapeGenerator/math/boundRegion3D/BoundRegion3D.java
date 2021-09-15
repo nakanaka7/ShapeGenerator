@@ -2,7 +2,6 @@ package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.annotation.PrivateAPI;
-import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
@@ -10,29 +9,21 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 /**
  * Represents a region which is bound by a larger region. The second region must hold all the points of the first region.
  */
-@PublicAPI
+@PrivateAPI
 public interface BoundRegion3D {
-	@PrivateAPI
 	Region3D getRegion3D();
-	@PrivateAPI
-	double getUpperBoundX();
-	@PrivateAPI
-	double getUpperBoundY();
-	@PrivateAPI
-	double getUpperBoundZ();
-	@PrivateAPI
-	double getLowerBoundX();
-	@PrivateAPI
-	double getLowerBoundY();
-	@PrivateAPI
-	double getLowerBoundZ();
+	double upperBoundX();
+	double upperBoundY();
+	double upperBoundZ();
+	double lowerBoundX();
+	double lowerBoundY();
+	double lowerBoundZ();
 	
 	/**
 	 * Returns new bound region which is shifted  
 	 * @param displacement a displacement of shift
 	 * @return new bound region which is shifted
 	 */
-	@PublicAPI
 	BoundRegion3D createShifted(Vector3D displacement);
 	
 	/**
@@ -42,7 +33,6 @@ public interface BoundRegion3D {
 	 * @param offset the origin of the transform
 	 * @return new bound region which is scaled along the specified axis and factor
 	 */
-	@PublicAPI
 	BoundRegion3D createScaled(Axis axis, double factor, Vector3D offset);
 
 	/**
@@ -50,7 +40,6 @@ public interface BoundRegion3D {
 	 * @param offset the origin of the transform
 	 * @return new bound region which is mirrored about the specified axis
 	 */
-	@PublicAPI
 	BoundRegion3D createMirrored(Axis axis, Vector3D offset);
 	
 	/**
@@ -60,13 +49,11 @@ public interface BoundRegion3D {
 	 * @param offset used with the x y, or z axis to specify the rotation axis
 	 * @return new bound region which is rotated about the specified axis by the given degree
 	 */
-	@PublicAPI
 	BoundRegion3D createRotated(Axis axis, double degree, Vector3D offset);
 	
 	/**
 	 * Returns a block region from the bound region
 	 * @return a block region from the bound region
 	 */
-	@PrivateAPI
 	BlockRegion3D toBlockRegion3D();
 }

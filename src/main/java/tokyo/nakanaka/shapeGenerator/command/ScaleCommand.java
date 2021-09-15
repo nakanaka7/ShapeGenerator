@@ -11,7 +11,7 @@ public class ScaleCommand implements AdjustCommand{
 	
 	public ScaleCommand(GenerateCommand originalCmd, Axis axis, double factor, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getScaledSelection(axis, factor);
+		Selection sel = originalCmd.getSelection().createScaled(axis, factor);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	

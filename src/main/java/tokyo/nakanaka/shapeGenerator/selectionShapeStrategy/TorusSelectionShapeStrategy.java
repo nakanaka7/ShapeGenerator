@@ -10,8 +10,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
 
@@ -99,16 +98,13 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		Region3D region = new Torus(majorRadius, minorRadius);
 		double a = majorRadius + minorRadius;
 		double b = minorRadius;
-		BoundRegion3D boundReg = new CuboidBoundRegion(region, a, a, b, -a, -a, -b);
-		Vector3D offset = selData.getOffset();
-		boundReg = boundReg.createShifted(offset);
+		Selection sel = new Selection(selData.world(), Vector3D.ORIGIN, region, new Cuboid(a, a, b, -a, -a, -b));
 		switch(axis) {
-		case X -> boundReg = boundReg.createRotated(Axis.Y, 90, offset);
-		case Y -> boundReg = boundReg.createRotated(Axis.X, -90, offset);
+		case X -> sel = sel.createRotated(Axis.Y, 90);
+		case Y -> sel = sel.createRotated(Axis.X, -90);
 		case Z -> {}
 		};
-		return new Selection(selData.world(), boundReg, offset);
+		return sel.createShifted(selData.getOffset());
 	}
-	
 	
 }
