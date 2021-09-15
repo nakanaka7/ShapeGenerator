@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.command;
+package tokyo.nakanaka;
 
 import tokyo.nakanaka.annotation.PublicAPI;
 
