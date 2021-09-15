@@ -7,4 +7,4 @@ Public API definition:
   4. The methods which has "@PrivateAPI" annotation is not public API methods.
   5. (Note) Some methods have "@PublicAPI" annotations in order to distinguish them from private API 	methods, but this is not all the case. No "@PublicAPI" annotation methods in "@PublicAPI" class are 	always public API methods.
   
-Note: The package, class(including interface etc...), or methods of private API may be change without notice.
+Note: The packages, classes(including interfaces etc...), or methods of private API may change without notice.
