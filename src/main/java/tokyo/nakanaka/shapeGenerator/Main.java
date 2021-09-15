@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.List;
 
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
@@ -62,6 +63,16 @@ public class Main {
 	 * @param evt a click block event
 	 */
 	public void onClickBlockEvent(ClickBlockEvent evt) {
+		
+	}
+	
+	/**
+	 * experimental
+	 * Handles a click block event
+	 * @param evt a click block event
+	 */
+	@PrivateAPI
+	public void onClickBlockEventNew(ClickBlockEvent evt) {
 		this.sgEvtHandler.onClickBlockEvent(evt);
 	}
 		
