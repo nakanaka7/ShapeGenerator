@@ -5,7 +5,9 @@ import tokyo.nakanaka.shapeGenerator.math.region2D.RegularPolygon;
 
 /**
  * Represents a prism which base is regular polygon. The base is on x-y plane with its center the origin of the plane.
- * It extends to positive z
+ * It extends to positive z. The x axis always has one vertex of the base polygon, which is the necessary and sufficient information
+ * to decide other vertexes.
+ * 
  */
 @PublicAPI
 public class RegularPrism implements Region3D {
