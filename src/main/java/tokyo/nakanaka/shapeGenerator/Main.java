@@ -28,12 +28,12 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.LINE, new LineSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TRIANGLE, new TriangleSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.TETRAHEDRON, new TetrahedronSelectionShapeStrategy());
-		shapeStrtgRepo.register(SelectionShape.REGULAR_PRISM, new RegularPolygonSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.REGULAR_PRISM, new RegularPrismSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_SPHERE, new HollowSphereSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_CYLINDER, new HollowCylinderSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_CONE, new HollowConeSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_TORUS, new HollowTorusSelectionShapeStrategy());
-		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, new HollowRegularPolygonSelectionShapeStrategy());
+		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, new HollowRegularPrismSelectionShapeStrategy());
 		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
 		this.sgCmdHandler = new SgCommandHandler(playerDataRepo, shapeStrtgRepo, blockIDListFactory);
 		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
