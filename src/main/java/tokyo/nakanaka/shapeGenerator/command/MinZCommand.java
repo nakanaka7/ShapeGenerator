@@ -1,6 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.command;
 
-import tokyo.nakanaka.annotation.PublicAPI;
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
@@ -8,7 +8,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.LogicalConjunctRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.MinZRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
-@PublicAPI
+@PrivateAPI
 public class MinZCommand implements AdjustCommand {
 	private GenerateCommand originalCmd;
 	private GenerateCommand lastCmd;

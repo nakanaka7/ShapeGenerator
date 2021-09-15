@@ -1,9 +1,9 @@
 package tokyo.nakanaka.shapeGenerator.command;
 
 import tokyo.nakanaka.UndoableCommand;
-import tokyo.nakanaka.annotation.PublicAPI;
+import tokyo.nakanaka.annotation.PrivateAPI;
 
-@PublicAPI
+@PrivateAPI
 public class DeleteCommand implements UndoableCommand{
 	private GenerateCommand[] generateCmds;
 	
