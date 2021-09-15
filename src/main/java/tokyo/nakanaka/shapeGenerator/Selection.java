@@ -62,6 +62,11 @@ public class Selection {
 		return world;
 	}
 	
+	@PrivateAPI
+	public Vector3D getOffset() {
+		return offset;
+	}
+	
 	/**
 	 * Returns a block region made from this selection
 	 * @return block region made from this selection
@@ -82,12 +87,12 @@ public class Selection {
 		return bound;
 	}
 	
-	@PrivateAPI
-	public Vector3D getOffset() {
-		return offset;
-	}
-	
-	@PrivateAPI
+	/**
+	 * Create a selection which is shifted
+	 * @param displacement the displacement of shift
+	 * @return a selection which is shifted
+	 */
+	@PublicAPI
 	public Selection createShifted(Vector3D displacement) {
 		Vector3D newOffset = this.offset.add(displacement);
 		Region3D newRegion = Region3Ds.shift(this.region, displacement);
@@ -95,21 +100,36 @@ public class Selection {
 		return new Selection(this.world, newOffset, newRegion, newBound);
 	}
 	
-	@PrivateAPI
+	/**
+	 * Create a selection which is scaled
+	 * @param axis the axis for scaling
+	 * @param factor a scale factor
+	 * @return a selection which is scaled
+	 */
+	@PublicAPI
 	public Selection createScaled(Axis axis, double factor) {
 		BoundRegion3D newRegion = this.bound.createScaled(axis, factor, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
-	
-	
-	@PrivateAPI
+	/**
+	 * Create a selection which is mirrored
+	 * @param axis the axis for mirroring
+	 * @return a selection which is mirrored
+	 */
+	@PublicAPI
 	public Selection createMirroed(Axis axis) {
 		BoundRegion3D newRegion = this.bound.createMirrored(axis, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
-	@PrivateAPI
+	/**
+	 * Create a selection which is rotated about the axis which go throw the offset
+	 * @param axis x y, or z axis which is parallel to the rotating axis
+	 * @param degree a degree
+	 * @return a selection which is rotated about the axis which go throw the offset
+	 */
+	@PublicAPI
 	public Selection createRotated(Axis axis, double degree) {
 		BoundRegion3D newRegion = this.bound.createRotated(axis, degree, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
