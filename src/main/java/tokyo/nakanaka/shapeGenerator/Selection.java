@@ -16,12 +16,14 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 @PublicAPI
 public class Selection {
 	private World world;
-	private BoundRegion3D boundReg;
 	private Vector3D offset;
+	private Region3D region;
+	private BoundRegion3D boundReg;
 	
 	@PrivateAPI
 	public Selection(World world, BoundRegion3D boundReg, Vector3D offset) {
 		this.world = world;
+		this.region = boundReg.getRegion3D();
 		this.boundReg = boundReg;
 		this.offset = offset;
 	}
@@ -38,6 +40,7 @@ public class Selection {
 	public Selection(World world, Vector3D offset, Region3D region, Cuboid bound) {
 		this.world = world;
 		this.offset = offset;
+		this.region = region;
 		this.boundReg = new CuboidBoundRegion(region, bound.maxX(), bound.maxX(), bound.maxZ(), bound.minX(), bound.minY(), bound.minZ());
 	}
 	
@@ -56,7 +59,13 @@ public class Selection {
 	 */
 	@PrivateAPI
 	public BlockRegion3D createBlockRegion3D() {
-		return this.boundReg.toBlockRegion3D();
+		double ubx = this.boundReg.upperBoundX();
+		double uby = this.boundReg.upperBoundY();
+		double ubz = this.boundReg.upperBoundZ();
+		double lbx = this.boundReg.lowerBoundX();
+		double lby = this.boundReg.lowerBoundY();
+		double lbz = this.boundReg.lowerBoundZ();
+		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 	@PrivateAPI
