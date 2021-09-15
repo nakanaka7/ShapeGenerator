@@ -1,5 +1,9 @@
 package tokyo.nakanaka.shapeGenerator.math.region2D;
 
+/**
+ * Represents a hollow regular polygon on x-y coordinate. The center is (0,0). Either outer or inner polygon 
+ * has its one point on positive x axis, which is the necessary and sufficient information to decide other vertexes.
+ */
 public class HollowRegularPolygon implements Region2D {
 	private double outerRadius;
 	private double innerRadius;
@@ -9,6 +13,8 @@ public class HollowRegularPolygon implements Region2D {
 	 * @param outerRadius an outer radius
 	 * @param innerRadius an inner radius 
 	 * @param vertexNumber the vertex numbers
+	 * @throws if outerRadius is smaller than 0, innerRadius is smaller than 0, innerRadius is larger than outerRadius,
+	 * or vertexNumber is smaller than 3
 	 */
 	public HollowRegularPolygon(double outerRadius, double innerRadius, int vertexNumber) {
 		if(outerRadius < 0 || innerRadius < 0 || innerRadius > outerRadius || vertexNumber < 3) {

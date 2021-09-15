@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Axis;
 
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
@@ -13,7 +14,6 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinXCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinYCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinZCommand;
-import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**

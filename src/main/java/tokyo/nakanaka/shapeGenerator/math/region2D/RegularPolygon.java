@@ -5,9 +5,9 @@ import tokyo.nakanaka.math.PolarVector2D;
 import tokyo.nakanaka.math.Vector2D;
 
 /**
- * Represents RegularPolygon on x-y coordinate. The vertexes are on the circular line
- * which radius is 1 and the origin is (0,0). (1,0) has always the vertex, and the other vetexes'  
- * will be fixed.
+ * Represents a regular polygon on x-y coordinate. All the points in the boundary is included in this region.
+ * The center is (0,0). The polygon has its one point on positive x axis,
+ * which is the necessary and sufficient information to decide other vertexes.
  */
 @PublicAPI
 public class RegularPolygon implements Region2D {

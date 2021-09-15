@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Direction;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
@@ -13,7 +14,6 @@ import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
-import tokyo.nakanaka.shapeGenerator.command.UndoableCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**

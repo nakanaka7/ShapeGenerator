@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
