@@ -11,7 +11,7 @@ public class RotateCommand implements AdjustCommand{
 	
 	public RotateCommand(GenerateCommand originalCmd, Axis axis, double degree, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getRotatedSelection(axis, degree);
+		Selection sel = originalCmd.getSelection().createRotated(axis, degree);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	

@@ -11,7 +11,7 @@ public class MirrorCommand implements AdjustCommand {
 	
 	public MirrorCommand(GenerateCommand originalCmd, Axis axis, boolean physics) {
 		this.originalCmd = originalCmd;
-		Selection sel = originalCmd.getSelection().getMirroedSelection(axis);
+		Selection sel = originalCmd.getSelection().createMirroed(axis);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	

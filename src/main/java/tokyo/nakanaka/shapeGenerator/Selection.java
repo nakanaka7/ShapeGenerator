@@ -70,26 +70,26 @@ public class Selection {
 	}
 	
 	@PrivateAPI
-	public Selection shift(Vector3D displacement) {
+	public Selection createShifted(Vector3D displacement) {
 		BoundRegion3D region = this.boundReg.createShifted(displacement);
 		Vector3D offset = this.offset.add(displacement);
 		return new Selection(world, region, offset);
 	}
 	
 	@PrivateAPI
-	public Selection getScaledSelection(Axis axis, double factor) {
+	public Selection createScaled(Axis axis, double factor) {
 		BoundRegion3D newRegion = this.boundReg.createScaled(axis, factor, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
 	@PrivateAPI
-	public Selection getMirroedSelection(Axis axis) {
+	public Selection createMirroed(Axis axis) {
 		BoundRegion3D newRegion = this.boundReg.createMirrored(axis, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
 	@PrivateAPI
-	public Selection getRotatedSelection(Axis axis, double degree) {
+	public Selection createRotated(Axis axis, double degree) {
 		BoundRegion3D newRegion = this.boundReg.createRotated(axis, degree, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
