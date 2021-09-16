@@ -46,14 +46,12 @@ public class RedoCommandHandler implements SubCommandHandler{
 		}
 		if(totalNum == 0) {
 			player.print(LogColor.RED + "Nothing to redo");
-			player.print(usageMsg);
 			return;
 		}
 		player.print(LogColor.GOLD + "Redid " + totalNum + " command(s)");
 		if(totalNum < num) {
 			player.print(LogColor.RED + "Reached the end command");
 		}
-		player.print(usageMsg);
 	}
 
 	@Override

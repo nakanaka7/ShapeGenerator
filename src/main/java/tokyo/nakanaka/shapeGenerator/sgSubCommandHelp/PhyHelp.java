@@ -6,7 +6,7 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 
 public class PhyHelp implements CommandHelp {
-	private String usage = "/sg phy <true|false>";
+	private String usage = "/sg phy true|false";
 	private String description = "Toggle physics option for generating blocks";
 	
 	public String getUsage() {
@@ -25,7 +25,7 @@ public class PhyHelp implements CommandHelp {
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <true|false>: " + LogColor.RESET + "an option for physics");
+		lines.add(LogColor.GOLD + "  true|false: " + LogColor.RESET + "an option for physics");
 		return lines;
 	}
 

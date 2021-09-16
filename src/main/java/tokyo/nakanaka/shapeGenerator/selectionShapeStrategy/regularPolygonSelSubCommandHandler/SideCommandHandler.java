@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionDataFactory
 public class SideCommandHandler extends BaseSelSubCommandHandler<Integer> {
 
 	public SideCommandHandler(SelectionDataFactory selDataFactory) {
-		super("side", new String[] {"number"}, selDataFactory);
+		super("side", new String[] {"<number>"}, selDataFactory);
 	}
 
 	@Override

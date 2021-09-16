@@ -34,7 +34,7 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 		try {
 			value = this.parse(player, subArgs);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Usage: " + String.join(" ", this.subLabel, String.join(" ", this.subArgsUsage)));
+			player.print(LogColor.RED + "Usage: /sg sel " + this.subLabel + " " + String.join(" ", this.subArgsUsage));
 			return;
 		}
 		World evtWorld = player.getBlockPosition().world();

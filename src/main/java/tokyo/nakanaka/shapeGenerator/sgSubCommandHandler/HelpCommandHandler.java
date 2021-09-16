@@ -23,7 +23,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShiftHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.UndoHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.WandHelp;
 
 /**
  * Handles "/sg help" command
@@ -33,7 +32,6 @@ public class HelpCommandHandler implements SubCommandHandler {
 	
 	public HelpCommandHandler() {
 		this.cmdHelpMap.put("help", new HelpHelp());
-		this.cmdHelpMap.put("wand", new WandHelp());
 		this.cmdHelpMap.put("shape", new ShapeHelp());
 		this.cmdHelpMap.put("sel", new SelHelp());
 		this.cmdHelpMap.put("genr", new GenrHelp());
