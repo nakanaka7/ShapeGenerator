@@ -1,11 +1,13 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.PolarVector2D;
 import tokyo.nakanaka.math.Vector3D;
 
 /**
  * Represents a torus shape region, which center is the origin, and which axis is z.
  */
+@PublicAPI
 public class HollowTorus implements Region3D {
 	private double majorRadius;
 	private double outerMinorRadius;
