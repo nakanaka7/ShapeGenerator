@@ -6,7 +6,7 @@ import java.util.List;
 import tokyo.nakanaka.logger.LogColor;
 
 public class MirrorHelp implements CommandHelp {
-	private String usage = "/sg mirror <x|y|z>";
+	private String usage = "/sg mirror x|y|z";
 	private String description = "Mirror the generated blocks";
 	
 	public String getUsage() {
@@ -25,7 +25,7 @@ public class MirrorHelp implements CommandHelp {
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <x|y|z>: " + LogColor.RESET + "an axis to mirror");
+		lines.add(LogColor.GOLD + "  x|y|z: " + LogColor.RESET + "an axis to mirror");
 		return lines;
 	}
 	

@@ -1,11 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
 public class ShiftHelp implements CommandHelp {
-	private String usage = "/sg shift <direction> <length>";
+	private String usage = "/sg shift <direction> <distance>";
 	private String description = "Shift the generated blocks";
 	
 	public String getUsage() {
@@ -19,8 +20,14 @@ public class ShiftHelp implements CommandHelp {
 
 	@Override
 	public List<String> toMultipleLines() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> lines = new ArrayList<>();
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg shift] ---------------------");
+		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
+		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
+		lines.add(LogColor.GOLD + "Parameter: ");
+		lines.add(LogColor.GOLD + "  <direction>: " + LogColor.RESET + "the direction to shift");
+		lines.add(LogColor.GOLD + "  <distance>: " + LogColor.RESET + "distance of shift");
+		return lines;
 	}
 	
 }
