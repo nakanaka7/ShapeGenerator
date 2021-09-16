@@ -71,7 +71,7 @@ public class RotCommandHandler implements SubCommandHandler{
 		if(args.length == 1) {
 			return Arrays.asList("x", "y", "z");
 		}else if(args.length == 2) {
-			return Arrays.asList("0", "90", "-90", "180", "270");
+			return Arrays.asList("0.0", "90.0", "-90.0", "180.0", "270.0");
 		}else {
 			return new ArrayList<>();
 		}
