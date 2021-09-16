@@ -1,9 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.math.region2D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
+
 /**
  * Represents a hollow regular polygon on x-y coordinate. The center is (0,0). Either outer or inner polygon 
  * has its one point on positive x axis, which is the necessary and sufficient information to decide other vertexes.
  */
+@PublicAPI
 public class HollowRegularPolygon implements Region2D {
 	private double outerRadius;
 	private double innerRadius;

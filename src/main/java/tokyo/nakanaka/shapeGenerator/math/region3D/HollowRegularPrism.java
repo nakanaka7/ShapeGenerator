@@ -1,5 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
+import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.shapeGenerator.math.region2D.HollowRegularPolygon;
 
 /**
@@ -7,6 +8,7 @@ import tokyo.nakanaka.shapeGenerator.math.region2D.HollowRegularPolygon;
  * It extends to positive z. The x axis always has outer and inner vertexes of the base polygon, which is the necessary and sufficient information
  * to decide other vertexes.
  */
+@PublicAPI
 public class HollowRegularPrism implements Region3D {
 	private HollowRegularPolygon hrp;
 	private double height;
