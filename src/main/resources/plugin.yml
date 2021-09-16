@@ -3,4 +3,3 @@ name: ShapeGenerator
 version: 1.0.0
 commands:
   'sg':
-api-version: 1.16
