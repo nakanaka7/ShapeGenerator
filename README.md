@@ -1,6 +1,7 @@
 # ShapeGenerator
 Version: 1.0.0(Semantic Versioning 2.0.0)</br>
 Java Version: 16</br>
+Original Spigot Library: 1.16.5-R0.1-SNAPSHOT
 Public API Definition:</br>
   1. The package must be the exported one in module system.
   2. The class must be public.
