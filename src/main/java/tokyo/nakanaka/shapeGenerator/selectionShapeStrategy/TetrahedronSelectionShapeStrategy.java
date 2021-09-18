@@ -18,19 +18,23 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Tetrahedron;
 
 public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy {
-
+	private static final String POS1 = "pos1";
+	private static final String POS2 = "pos2";
+	private static final String POS3 = "pos3";
+	private static final String POS4 = "pos4";
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		return new SelectionData(world, "pos1", "pos1", "pos2", "pos3", "pos4");
+		return new SelectionData(world, POS1, POS1, POS2, POS3, POS4);
 	}
 	
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandler("pos1", this::newSelectionData));
-		map.put("pos2", new PosCommandHandler("pos2", this::newSelectionData));
-		map.put("pos3", new PosCommandHandler("pos3", this::newSelectionData));
-		map.put("pos4", new PosCommandHandler("pos4", this::newSelectionData));
+		map.put(POS1, new PosCommandHandler(POS1, this::newSelectionData));
+		map.put(POS2, new PosCommandHandler(POS2, this::newSelectionData));
+		map.put(POS3, new PosCommandHandler(POS3, this::newSelectionData));
+		map.put(POS4, new PosCommandHandler(POS4, this::newSelectionData));
 		return map;
 	}
 	
@@ -46,34 +50,34 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 	
 	@Override
 	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData("pos1", blockPos.toVector3D());
-		selData.setExtraData("pos2", null);
-		selData.setExtraData("pos3", null);
-		selData.setExtraData("pos4", null);
+		selData.setExtraData(POS1, blockPos.toVector3D());
+		selData.setExtraData(POS2, null);
+		selData.setExtraData(POS3, null);
+		selData.setExtraData(POS4, null);
 	}
 	
 	@Override
 	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		if(selData.getExtraData("pos1") == null) {
+		if(selData.getExtraData(POS1) == null) {
 			throw new IllegalStateException();
 		}
 		Vector3D pos = blockPos.toVector3D();
-		if(selData.getExtraData("pos2") == null) {
-			selData.setExtraData("pos2", pos);
-		}else if(selData.getExtraData("pos3") == null) {
-			selData.setExtraData("pos3", pos);
+		if(selData.getExtraData(POS2) == null) {
+			selData.setExtraData(POS2, pos);
+		}else if(selData.getExtraData(POS3) == null) {
+			selData.setExtraData(POS3, pos);
 		}else {
-			selData.setExtraData("pos4", pos);
+			selData.setExtraData(POS4, pos);
 		}
 	}
 	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		BoundRegion3D boundReg;
-		Vector3D pos1 = (Vector3D) selData.getExtraData("pos1");
-		Vector3D pos2 = (Vector3D) selData.getExtraData("pos2");
-		Vector3D pos3 = (Vector3D) selData.getExtraData("pos3");
-		Vector3D pos4 = (Vector3D) selData.getExtraData("pos4");
+		Vector3D pos1 = (Vector3D) selData.getExtraData(POS1);
+		Vector3D pos2 = (Vector3D) selData.getExtraData(POS2);
+		Vector3D pos3 = (Vector3D) selData.getExtraData(POS3);
+		Vector3D pos4 = (Vector3D) selData.getExtraData(POS4);
 		if(pos1 == null || pos2 == null || pos3 == null || pos4 == null) {
 			throw new IllegalStateException();
 		}
