@@ -16,17 +16,19 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
 
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
-
+	private static final String CENTER = "center";
+	private static final String RADIUS = "radius";
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		return new SelectionData(world, "center", "center", "radius");
+		return new SelectionData(world, CENTER, CENTER, RADIUS);
 	}
 	
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center", this::newSelectionData));
-		map.put("radius", new LengthCommandHandler("radius", this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
 		return map;
 	}
 	
@@ -58,8 +60,8 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
-		var center = (Vector3D)selData.getExtraData("center");
-		var radius = (Double)selData.getExtraData("radius");
+		var center = (Vector3D)selData.getExtraData(CENTER);
+		var radius = (Double)selData.getExtraData(RADIUS);
 		if(center == null || radius == null) {
 			throw new IllegalStateException();
 		}
