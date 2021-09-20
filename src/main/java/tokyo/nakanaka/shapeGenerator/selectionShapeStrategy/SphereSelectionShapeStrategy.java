@@ -12,7 +12,6 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
 
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
@@ -65,8 +64,7 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 		if(center == null || radius == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new Sphere(radius);
-		region = Region3Ds.shift(region, center);
+		Region3D region = new Sphere(radius).shift(center);
 		BoundRegion3D boundReg = new SphereBoundRegion(region, center, radius);
 		return new Selection(selData.world(), boundReg, selData.getOffset());
 	}
