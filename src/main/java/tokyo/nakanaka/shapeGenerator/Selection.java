@@ -96,7 +96,7 @@ public class Selection {
 	public Selection createShifted(Vector3D displacement) {
 		Vector3D newOffset = this.offset.add(displacement);
 		Region3D newRegion = Region3Ds.shift(this.region, displacement);
-		BoundRegion3D newBound = this.bound.createShifted(displacement);
+		BoundRegion3D newBound = this.bound.shift(displacement);
 		return new Selection(this.world, newOffset, newRegion, newBound);
 	}
 	
@@ -108,7 +108,7 @@ public class Selection {
 	 */
 	@PublicAPI
 	public Selection createScaled(Axis axis, double factor) {
-		BoundRegion3D newRegion = this.bound.createScaled(axis, factor, this.offset);
+		BoundRegion3D newRegion = this.bound.scale(axis, factor, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
@@ -119,7 +119,7 @@ public class Selection {
 	 */
 	@PublicAPI
 	public Selection createMirroed(Axis axis) {
-		BoundRegion3D newRegion = this.bound.createMirrored(axis, this.offset);
+		BoundRegion3D newRegion = this.bound.mirror(axis, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	
@@ -131,7 +131,7 @@ public class Selection {
 	 */
 	@PublicAPI
 	public Selection createRotated(Axis axis, double degree) {
-		BoundRegion3D newRegion = this.bound.createRotated(axis, degree, this.offset);
+		BoundRegion3D newRegion = this.bound.rotate(axis, degree, this.offset);
 		return new Selection(this.world, newRegion, this.offset);
 	}
 	

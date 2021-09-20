@@ -21,10 +21,10 @@ public interface BoundRegion3D {
 	
 	/**
 	 * Returns new bound region which is shifted  
-	 * @param displacement a displacement of shift
+	 * @param dis a displacement of shift
 	 * @return new bound region which is shifted
 	 */
-	BoundRegion3D createShifted(Vector3D displacement);
+	BoundRegion3D shift(Vector3D dis);
 	
 	/**
 	 * Returns new bound region which is scaled along the specified axis with specified factor
@@ -33,14 +33,14 @@ public interface BoundRegion3D {
 	 * @param offset the origin of the transform
 	 * @return new bound region which is scaled along the specified axis and factor
 	 */
-	BoundRegion3D createScaled(Axis axis, double factor, Vector3D offset);
+	BoundRegion3D scale(Axis axis, double factor, Vector3D offset);
 
 	/**
 	 * Returns new bound region which is mirrored about the specified axis 
 	 * @param offset the origin of the transform
 	 * @return new bound region which is mirrored about the specified axis
 	 */
-	BoundRegion3D createMirrored(Axis axis, Vector3D offset);
+	BoundRegion3D mirror(Axis axis, Vector3D offset);
 	
 	/**
 	 * Returns new bound region which is rotated about the specified axis by the given degree
@@ -49,7 +49,7 @@ public interface BoundRegion3D {
 	 * @param offset used with the x y, or z axis to specify the rotation axis
 	 * @return new bound region which is rotated about the specified axis by the given degree
 	 */
-	BoundRegion3D createRotated(Axis axis, double degree, Vector3D offset);
+	BoundRegion3D rotate(Axis axis, double degree, Vector3D offset);
 	
 	/**
 	 * Returns a block region from the bound region
