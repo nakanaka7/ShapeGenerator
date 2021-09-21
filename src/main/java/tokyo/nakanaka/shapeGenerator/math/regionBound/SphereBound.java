@@ -3,17 +3,10 @@ package tokyo.nakanaka.shapeGenerator.math.regionBound;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
 public class SphereBound implements RegionBound {
 	private Vector3D center;
 	private double radius;
-	
-	@Deprecated
-	public SphereBound(Region3D region, Vector3D center, double radius) {
-		this.center = center;
-		this.radius = radius;
-	}
 	
 	public SphereBound(Vector3D center, double radius) {
 		this.center = center;
