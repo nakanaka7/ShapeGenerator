@@ -64,6 +64,11 @@ public class Selection {
 		return offset;
 	}
 	
+	@PrivateAPI
+	public void setOffset(Vector3D offset) {
+		this.offset = offset;
+	}
+	
 	/**
 	 * Returns a block region made from this selection
 	 * @return block region made from this selection
