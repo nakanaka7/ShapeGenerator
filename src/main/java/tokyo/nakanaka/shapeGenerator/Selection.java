@@ -22,15 +22,6 @@ public class Selection {
 	private BoundRegion3D bound;
 	
 	@PrivateAPI
-	@Deprecated
-	public Selection(World world, BoundRegion3D boundReg, Vector3D offset) {
-		this.world = world;
-		this.region = boundReg.getRegion3D();
-		this.bound = boundReg;
-		this.offset = offset;
-	}
-	
-	@PrivateAPI
 	public Selection(World world, Vector3D offset, Region3D region, BoundRegion3D bound) {
 		this.world = world;
 		this.offset = offset;
@@ -111,11 +102,13 @@ public class Selection {
 	 * @param axis the axis for scaling
 	 * @param factor a scale factor
 	 * @return a selection which is scaled
+	 * @throws IllegalArgumentException if factor is zero
 	 */
 	@PublicAPI
 	public Selection createScaled(Axis axis, double factor) {
-		BoundRegion3D newRegion = this.bound.scale(axis, factor, this.offset);
-		return new Selection(this.world, newRegion, this.offset);
+		Region3D newRegion = this.region.scale(axis, factor, this.offset);
+		BoundRegion3D newBound = this.bound.scale(axis, factor, this.offset);
+		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
 	/**
@@ -125,8 +118,9 @@ public class Selection {
 	 */
 	@PublicAPI
 	public Selection createMirroed(Axis axis) {
-		BoundRegion3D newRegion = this.bound.mirror(axis, this.offset);
-		return new Selection(this.world, newRegion, this.offset);
+		Region3D newRegion = this.region.mirror(axis, this.offset);
+		BoundRegion3D newBound = this.bound.mirror(axis, this.offset);
+		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
 	/**
@@ -137,8 +131,9 @@ public class Selection {
 	 */
 	@PublicAPI
 	public Selection createRotated(Axis axis, double degree) {
-		BoundRegion3D newRegion = this.bound.rotate(axis, degree, this.offset);
-		return new Selection(this.world, newRegion, this.offset);
+		Region3D newRegion = this.region.rotate(axis, degree, this.offset);
+		BoundRegion3D newBound = this.bound.rotate(axis, degree, this.offset);
+		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
 }
