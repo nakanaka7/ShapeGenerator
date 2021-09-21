@@ -65,7 +65,7 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 			throw new IllegalStateException();
 		}
 		Region3D region = new Sphere(radius).shift(center);
-		BoundRegion3D bound = new SphereBoundRegion(region, center, radius);
+		BoundRegion3D bound = new SphereBoundRegion(radius).shift(center);
 		return new Selection(selData.world(), selData.getOffset(), region, bound);
 	}
 	
