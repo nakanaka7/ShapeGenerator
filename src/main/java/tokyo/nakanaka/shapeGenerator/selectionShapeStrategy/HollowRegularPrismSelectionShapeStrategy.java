@@ -99,7 +99,9 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 		//down(-y) -> first vertex(-z)
 		case DOWN -> sel = sel.createRotated(Axis.Z, -90).createRotated(Axis.X, 90);
 		}
-		return sel.createShifted(selData.getOffset());
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
 
 }

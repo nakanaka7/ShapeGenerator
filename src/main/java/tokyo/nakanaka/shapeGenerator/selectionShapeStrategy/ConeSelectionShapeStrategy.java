@@ -12,8 +12,9 @@ import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cone;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
@@ -91,7 +92,8 @@ public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
 			throw new IllegalStateException();
 		}
 		Region3D region = new Cone(radius, height);
-		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, new Cuboid(radius, radius, height, -radius, -radius, 0));
+		RegionBound bound = new CuboidBound(radius, radius, height, -radius, -radius, 0);
+		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
 		switch(dir) {
 		case NORTH -> sel = sel.createRotated(Axis.Y, 180);
 		case SOUTH -> {}
@@ -100,7 +102,9 @@ public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
 		case UP -> sel = sel.createRotated(Axis.X, -90);
 		case DOWN -> sel = sel.createRotated(Axis.X, 90);
 		}
-		return sel.createShifted(selData.getOffset());
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
-
+	
 }

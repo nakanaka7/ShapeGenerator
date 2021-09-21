@@ -104,7 +104,9 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		case Y -> sel = sel.createRotated(Axis.X, -90);
 		case Z -> {}
 		};
-		return sel.createShifted(selData.getOffset());
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
 	
 }

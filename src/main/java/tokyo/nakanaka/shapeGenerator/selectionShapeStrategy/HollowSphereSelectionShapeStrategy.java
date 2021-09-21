@@ -9,9 +9,10 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.HollowSphere;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
 
 public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
@@ -71,8 +72,11 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 			throw new IllegalStateException();
 		}
 		Region3D region = new HollowSphere(outerRadius, innerRadius);
-		var sel = new Selection(selData.world(), Vector3D.ZERO, region, new Cuboid(outerRadius, outerRadius, outerRadius, -outerRadius, -outerRadius, -outerRadius));
-		return sel.createShifted(selData.getOffset());
+		RegionBound bound = new SphereBound(outerRadius);
+		var sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
 
 }

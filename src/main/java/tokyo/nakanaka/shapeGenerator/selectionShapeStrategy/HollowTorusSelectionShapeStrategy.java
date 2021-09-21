@@ -76,13 +76,15 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 		Region3D region = new HollowTorus(majorRadius, outerMinorRadius, innerMinorRadius);
 		double a = majorRadius + outerMinorRadius;
 		double b = outerMinorRadius;
-		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, new Cuboid(a, a, b, -a, -a, -b));
+		var sel = new Selection(selData.world(), Vector3D.ZERO, region, new Cuboid(a, a, b, -a, -a, -b));
 		switch(axis) {
 		case X -> sel = sel.createRotated(Axis.Y, 90);
 		case Y -> sel = sel.createRotated(Axis.X, -90);
 		case Z -> {}
 		};
-		return sel.createShifted(selData.getOffset());
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
 
 }

@@ -11,9 +11,10 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.HollowCone;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
@@ -77,8 +78,9 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 		if(innerRadius >= outerRadius) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new HollowCone(outerRadius, innerRadius, height);	
-		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, new Cuboid(outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0));
+		Region3D region = new HollowCone(outerRadius, innerRadius, height);
+		RegionBound bound = new CuboidBound(outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0);
+		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
 		switch(dir) {
 		case NORTH -> sel = sel.createRotated(Axis.Y, 180);
 		case SOUTH -> {}
@@ -87,7 +89,9 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 		case UP -> sel = sel.createRotated(Axis.X, -90);
 		case DOWN -> sel = sel.createRotated(Axis.X, 90);
 		}
-		return sel.createShifted(selData.getOffset());
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
 	
 }
