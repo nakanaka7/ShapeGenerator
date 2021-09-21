@@ -10,6 +10,7 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
  */
 @PrivateAPI
 public interface BoundRegion3D {
+	@Deprecated
 	Region3D getRegion3D();
 	double upperBoundX();
 	double upperBoundY();
