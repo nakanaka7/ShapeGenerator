@@ -1,9 +1,11 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 
+@PrivateAPI
 public class RotatedRegion3D implements Region3D {
 	private Region3D original;
 	private Axis axis;
