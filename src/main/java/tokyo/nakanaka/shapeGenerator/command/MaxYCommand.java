@@ -26,7 +26,7 @@ public class MaxYCommand implements AdjustCommand {
 		double lbz = bound.lowerBoundZ();
 		Region3D maxYReg = new MaxYRegion3D(maxY);
 		Region3D newRegion = new LogicalConjunctRegion3D(region, maxYReg);
-		BoundRegion3D newBound = new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+		BoundRegion3D newBound = new CuboidBoundRegion(ubx, uby, ubz, lbx, lby, lbz);
 		Selection sel = new Selection(originalSel.world(), originalSel.getOffset(), newRegion, newBound);
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
