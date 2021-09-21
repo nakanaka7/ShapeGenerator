@@ -64,6 +64,11 @@ public class Selection {
 	}
 	
 	@PrivateAPI
+	public Region3D region() {
+		return region;
+	}
+	
+	@PrivateAPI
 	public Vector3D getOffset() {
 		return offset;
 	}
