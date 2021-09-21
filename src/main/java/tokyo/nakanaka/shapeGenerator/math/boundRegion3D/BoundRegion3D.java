@@ -3,15 +3,12 @@ package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
 /**
  * Represents a region which is bound by a larger region. The second region must hold all the points of the first region.
  */
 @PrivateAPI
 public interface BoundRegion3D {
-	@Deprecated
-	Region3D getRegion3D();
 	double upperBoundX();
 	double upperBoundY();
 	double upperBoundZ();

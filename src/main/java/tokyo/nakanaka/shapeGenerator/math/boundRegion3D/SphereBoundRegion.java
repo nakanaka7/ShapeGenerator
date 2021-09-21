@@ -18,11 +18,6 @@ public class SphereBoundRegion implements BoundRegion3D {
 	}
 	
 	@Override
-	public Region3D getRegion3D() {
-		return this.region;
-	}
-	
-	@Override
 	public double upperBoundX() {
 		return this.center.getX() + this.radius;
 	}
