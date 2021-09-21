@@ -1,7 +1,9 @@
 package tokyo.nakanaka.shapeGenerator.math.region3D;
 
 import tokyo.nakanaka.Axis;
+import tokyo.nakanaka.annotation.PrivateAPI;
 
+@PrivateAPI
 public class ScaledRegion3D implements Region3D {
 	private Region3D original;
 	private Axis axis;
