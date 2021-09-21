@@ -67,8 +67,8 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 		double lbx = Math.min(pos1.getX(), pos2.getX()) - thickness;
 		double lby = Math.min(pos1.getY(), pos2.getY()) - thickness;
 		double lbz = Math.min(pos1.getZ(), pos2.getZ()) - thickness;	
-		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		BoundRegion3D bound = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new Selection(selData.world(), selData.getOffset(), region, bound);
 	}
 	
 }
