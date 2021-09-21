@@ -5,8 +5,8 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.RegionBound;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
@@ -19,10 +19,10 @@ public class Selection {
 	private World world;
 	private Vector3D offset;
 	private Region3D region;
-	private BoundRegion3D bound;
+	private RegionBound bound;
 	
 	@PrivateAPI
-	public Selection(World world, Vector3D offset, Region3D region, BoundRegion3D bound) {
+	public Selection(World world, Vector3D offset, Region3D region, RegionBound bound) {
 		this.world = world;
 		this.offset = offset;
 		this.region = region;
@@ -42,7 +42,7 @@ public class Selection {
 		this.world = world;
 		this.offset = offset;
 		this.region = region;
-		this.bound = new CuboidBoundRegion(bound.maxX(), bound.maxY(), bound.maxZ(), bound.minX(), bound.minY(), bound.minZ());
+		this.bound = new CuboidBound(bound.maxX(), bound.maxY(), bound.maxZ(), bound.minX(), bound.minY(), bound.minZ());
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class Selection {
 	}
 	
 	@PrivateAPI
-	public BoundRegion3D getBoundRegion3D() {
+	public RegionBound getBoundRegion3D() {
 		return bound;
 	}
 	
@@ -93,7 +93,7 @@ public class Selection {
 	public Selection createShifted(Vector3D displacement) {
 		Vector3D newOffset = this.offset.add(displacement);
 		Region3D newRegion = Region3Ds.shift(this.region, displacement);
-		BoundRegion3D newBound = this.bound.shift(displacement);
+		RegionBound newBound = this.bound.shift(displacement);
 		return new Selection(this.world, newOffset, newRegion, newBound);
 	}
 	
@@ -107,7 +107,7 @@ public class Selection {
 	@PublicAPI
 	public Selection createScaled(Axis axis, double factor) {
 		Region3D newRegion = this.region.scale(axis, factor, this.offset);
-		BoundRegion3D newBound = this.bound.scale(axis, factor, this.offset);
+		RegionBound newBound = this.bound.scale(axis, factor, this.offset);
 		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
@@ -119,7 +119,7 @@ public class Selection {
 	@PublicAPI
 	public Selection createMirroed(Axis axis) {
 		Region3D newRegion = this.region.mirror(axis, this.offset);
-		BoundRegion3D newBound = this.bound.mirror(axis, this.offset);
+		RegionBound newBound = this.bound.mirror(axis, this.offset);
 		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
@@ -132,7 +132,7 @@ public class Selection {
 	@PublicAPI
 	public Selection createRotated(Axis axis, double degree) {
 		Region3D newRegion = this.region.rotate(axis, degree, this.offset);
-		BoundRegion3D newBound = this.bound.rotate(axis, degree, this.offset);
+		RegionBound newBound = this.bound.rotate(axis, degree, this.offset);
 		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	

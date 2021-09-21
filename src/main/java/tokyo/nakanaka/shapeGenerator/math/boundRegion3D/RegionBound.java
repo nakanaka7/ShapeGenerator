@@ -8,7 +8,7 @@ import tokyo.nakanaka.math.Vector3D;
  * Represents a region which is bound by a larger region. The second region must hold all the points of the first region.
  */
 @PrivateAPI
-public interface BoundRegion3D {
+public interface RegionBound {
 	double upperBoundX();
 	double upperBoundY();
 	double upperBoundZ();
@@ -21,7 +21,7 @@ public interface BoundRegion3D {
 	 * @param dis a displacement of shift
 	 * @return new bound region which is shifted
 	 */
-	BoundRegion3D shift(Vector3D dis);
+	RegionBound shift(Vector3D dis);
 	
 	/**
 	 * Returns new bound region which is scaled along the specified axis with specified factor
@@ -30,14 +30,14 @@ public interface BoundRegion3D {
 	 * @param offset the origin of the transform
 	 * @return new bound region which is scaled along the specified axis and factor
 	 */
-	BoundRegion3D scale(Axis axis, double factor, Vector3D offset);
+	RegionBound scale(Axis axis, double factor, Vector3D offset);
 
 	/**
 	 * Returns new bound region which is mirrored about the specified axis 
 	 * @param offset the origin of the transform
 	 * @return new bound region which is mirrored about the specified axis
 	 */
-	BoundRegion3D mirror(Axis axis, Vector3D offset);
+	RegionBound mirror(Axis axis, Vector3D offset);
 	
 	/**
 	 * Returns new bound region which is rotated about the specified axis by the given degree
@@ -46,6 +46,6 @@ public interface BoundRegion3D {
 	 * @param offset used with the x y, or z axis to specify the rotation axis
 	 * @return new bound region which is rotated about the specified axis by the given degree
 	 */
-	BoundRegion3D rotate(Axis axis, double degree, Vector3D offset);
+	RegionBound rotate(Axis axis, double degree, Vector3D offset);
 	
 }

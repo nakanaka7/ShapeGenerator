@@ -2,8 +2,8 @@ package tokyo.nakanaka.shapeGenerator.command;
 
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.shapeGenerator.Selection;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.RegionBound;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.region3D.LogicalConjunctRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.MinZRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
@@ -16,7 +16,7 @@ public class MinZCommand implements AdjustCommand {
 	public MinZCommand(GenerateCommand originalCmd, double minZ, boolean physics){
 		this.originalCmd = originalCmd;
 		Selection originalSel = originalCmd.getSelection();
-		BoundRegion3D bound = originalSel.getBoundRegion3D();
+		RegionBound bound = originalSel.getBoundRegion3D();
 		Region3D region = originalSel.region();
 		double ubx = bound.upperBoundX();
 		double uby = bound.upperBoundY();
@@ -26,7 +26,7 @@ public class MinZCommand implements AdjustCommand {
 		double lbz = minZ;
 		Region3D minZReg = new MinZRegion3D(minZ);
 		Region3D newRegion = new LogicalConjunctRegion3D(region, minZReg);
-		BoundRegion3D newBound = new CuboidBoundRegion(ubx, uby, ubz, lbx, lby, lbz);
+		RegionBound newBound = new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 		Selection sel = new Selection(originalSel.world(), originalSel.getOffset(), newRegion, newBound);	
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}

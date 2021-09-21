@@ -12,7 +12,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
+import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
 
@@ -87,7 +87,7 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX()) - thickness / 2;
 		double lby = min(pos1.getY(), pos2.getY(), pos3.getY()) - thickness / 2;
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ()) - thickness / 2;
-		var bound = new CuboidBoundRegion(ubx, uby, ubz, lbx, lby, lbz);
+		var bound = new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 		return new Selection(selData.world(), selData.getOffset(), region, bound);
 	}
 	
