@@ -1,16 +1,13 @@
 package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.*;
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
 public class CuboidBoundRegion implements BoundRegion3D {
-	@Deprecated
-	private Region3D region;
 	private double upperBoundX;
 	private double upperBoundY;
 	private double upperBoundZ;
@@ -18,18 +15,6 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	private double lowerBoundY;
 	private double lowerBoundZ;
 
-	@Deprecated
-	public CuboidBoundRegion(Region3D region, double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
-			double lowerBoundY, double lowerBoundZ) {
-		this.region = region;
-		this.upperBoundX = upperBoundX;
-		this.upperBoundY = upperBoundY;
-		this.upperBoundZ = upperBoundZ;
-		this.lowerBoundX = lowerBoundX;
-		this.lowerBoundY = lowerBoundY;
-		this.lowerBoundZ = lowerBoundZ;
-	}
-	
 	public CuboidBoundRegion(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
 			double lowerBoundY, double lowerBoundZ) {
 		this.upperBoundX = upperBoundX;
@@ -149,9 +134,6 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	
 	@Deprecated
 	public CuboidBoundRegion createTransformedRegion(LinearTransformation trans, Vector3D offset) {
-		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
-		newRegion = Region3Ds.linearTransform(newRegion, trans);
-		newRegion = Region3Ds.shift(newRegion, offset);
 		Vector3D pos1 = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
 		Vector3D pos2 = new Vector3D(this.upperBoundX, this.upperBoundY, this.lowerBoundZ);
 		Vector3D pos3 = new Vector3D(this.upperBoundX, this.lowerBoundY, this.upperBoundZ);
@@ -174,7 +156,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		double lbx = min(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
 		double lby = min(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
 		double lbz = min(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
-		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBoundRegion(ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 }
