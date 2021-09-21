@@ -17,11 +17,11 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.RegularPrism;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 public class RegularPrismSelectionShapeStrategy implements SelectionShapeStrategy {
-	private String CENTER = "center";
-	private String RADIUS = "radius";
-	private String SIDE = "side";
-	private String HEIGHT = "height";
-	private String DIRECTION = "direction";
+	private static final String CENTER = "center";
+	private static final String RADIUS = "radius";
+	private static final String SIDE = "side";
+	private static final String HEIGHT = "height";
+	private static final String DIRECTION = "direction";
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
@@ -94,7 +94,9 @@ public class RegularPrismSelectionShapeStrategy implements SelectionShapeStrateg
 		//down(-y) -> first vertex(-z)
 		case DOWN -> sel = sel.createRotated(Axis.Z, -90).createRotated(Axis.X, 90);
 		}
-		return sel.createShifted(selData.getOffset());
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
 	
 }

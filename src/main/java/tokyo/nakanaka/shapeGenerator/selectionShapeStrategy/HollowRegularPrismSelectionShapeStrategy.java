@@ -16,12 +16,12 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.HollowRegularPrism;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeStrategy {
-	private String CENTER = "center";
-	private String OUTER_RADIUS = "outer_radius";
-	private String INNER_RADIUS = "inner_radius";
-	private String SIDE = "side";
-	private String HEIGHT = "height";
-	private String DIRECTION = "direction";
+	private static final String CENTER = "center";
+	private static final String OUTER_RADIUS = "outer_radius";
+	private static final String INNER_RADIUS = "inner_radius";
+	private static final String SIDE = "side";
+	private static final String HEIGHT = "height";
+	private static final String DIRECTION = "direction";
 	
 	
 	@Override
@@ -99,7 +99,9 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 		//down(-y) -> first vertex(-z)
 		case DOWN -> sel = sel.createRotated(Axis.Z, -90).createRotated(Axis.X, 90);
 		}
-		return sel.createShifted(selData.getOffset());
+		sel = sel.createShifted(center);
+		sel.setOffset(selData.getOffset());
+		return sel;
 	}
 
 }

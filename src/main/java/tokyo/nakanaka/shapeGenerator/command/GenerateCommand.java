@@ -59,7 +59,7 @@ public class GenerateCommand implements UndoableCommand{
 	@PublicAPI
 	public void execute() {
 		World world = this.sel.world();
-		Set<BlockVector3D> vecSet = this.sel.getBoundRegion3D().toBlockRegion3D().asVectorSet();
+		Set<BlockVector3D> vecSet = this.sel.createBlockRegion3D().asVectorSet();
 		for(BlockVector3D v : vecSet) {
 			Block block = world.getBlock(v.getX(), v.getY(), v.getZ());
 			world.setBlock(v.getX(), v.getY(), v.getZ(), this.block, this.physics);
@@ -82,7 +82,7 @@ public class GenerateCommand implements UndoableCommand{
 	@PublicAPI
 	public void redo() {
 		World world = this.sel.world();
-		Set<BlockVector3D> vecSet = this.sel.getBoundRegion3D().toBlockRegion3D().asVectorSet();
+		Set<BlockVector3D> vecSet = this.sel.createBlockRegion3D().asVectorSet();
 		for(BlockVector3D v : vecSet) {
 			world.setBlock(v.getX(), v.getY(), v.getZ(), this.block, this.physics);
 		}

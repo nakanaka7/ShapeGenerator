@@ -5,11 +5,11 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 /**
  * Represents a selection
@@ -19,18 +19,10 @@ public class Selection {
 	private World world;
 	private Vector3D offset;
 	private Region3D region;
-	private BoundRegion3D bound;
+	private RegionBound bound;
 	
 	@PrivateAPI
-	public Selection(World world, BoundRegion3D boundReg, Vector3D offset) {
-		this.world = world;
-		this.region = boundReg.getRegion3D();
-		this.bound = boundReg;
-		this.offset = offset;
-	}
-	
-	@PrivateAPI
-	public Selection(World world, Vector3D offset, Region3D region, BoundRegion3D bound) {
+	public Selection(World world, Vector3D offset, Region3D region, RegionBound bound) {
 		this.world = world;
 		this.offset = offset;
 		this.region = region;
@@ -50,7 +42,7 @@ public class Selection {
 		this.world = world;
 		this.offset = offset;
 		this.region = region;
-		this.bound = new CuboidBoundRegion(region, bound.maxX(), bound.maxX(), bound.maxZ(), bound.minX(), bound.minY(), bound.minZ());
+		this.bound = new CuboidBound(bound.maxX(), bound.maxY(), bound.maxZ(), bound.minX(), bound.minY(), bound.minZ());
 	}
 	
 	/**
@@ -63,8 +55,18 @@ public class Selection {
 	}
 	
 	@PrivateAPI
+	public Region3D region() {
+		return region;
+	}
+	
+	@PrivateAPI
 	public Vector3D getOffset() {
 		return offset;
+	}
+	
+	@PrivateAPI
+	public void setOffset(Vector3D offset) {
+		this.offset = offset;
 	}
 	
 	/**
@@ -83,7 +85,7 @@ public class Selection {
 	}
 	
 	@PrivateAPI
-	public BoundRegion3D getBoundRegion3D() {
+	public RegionBound getBoundRegion3D() {
 		return bound;
 	}
 	
@@ -96,7 +98,7 @@ public class Selection {
 	public Selection createShifted(Vector3D displacement) {
 		Vector3D newOffset = this.offset.add(displacement);
 		Region3D newRegion = Region3Ds.shift(this.region, displacement);
-		BoundRegion3D newBound = this.bound.createShifted(displacement);
+		RegionBound newBound = this.bound.shift(displacement);
 		return new Selection(this.world, newOffset, newRegion, newBound);
 	}
 	
@@ -105,11 +107,13 @@ public class Selection {
 	 * @param axis the axis for scaling
 	 * @param factor a scale factor
 	 * @return a selection which is scaled
+	 * @throws IllegalArgumentException if factor is zero
 	 */
 	@PublicAPI
 	public Selection createScaled(Axis axis, double factor) {
-		BoundRegion3D newRegion = this.bound.createScaled(axis, factor, this.offset);
-		return new Selection(this.world, newRegion, this.offset);
+		Region3D newRegion = this.region.scale(axis, factor, this.offset);
+		RegionBound newBound = this.bound.scale(axis, factor, this.offset);
+		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
 	/**
@@ -119,8 +123,9 @@ public class Selection {
 	 */
 	@PublicAPI
 	public Selection createMirroed(Axis axis) {
-		BoundRegion3D newRegion = this.bound.createMirrored(axis, this.offset);
-		return new Selection(this.world, newRegion, this.offset);
+		Region3D newRegion = this.region.mirror(axis, this.offset);
+		RegionBound newBound = this.bound.mirror(axis, this.offset);
+		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
 	/**
@@ -131,8 +136,9 @@ public class Selection {
 	 */
 	@PublicAPI
 	public Selection createRotated(Axis axis, double degree) {
-		BoundRegion3D newRegion = this.bound.createRotated(axis, degree, this.offset);
-		return new Selection(this.world, newRegion, this.offset);
+		Region3D newRegion = this.region.rotate(axis, degree, this.offset);
+		RegionBound newBound = this.bound.rotate(axis, degree, this.offset);
+		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
 	
 }

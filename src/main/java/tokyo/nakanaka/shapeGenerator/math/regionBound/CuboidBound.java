@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
+package tokyo.nakanaka.shapeGenerator.math.regionBound;
 
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
@@ -6,12 +6,8 @@ import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalcula
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
-public class CuboidBoundRegion implements BoundRegion3D {
-	private Region3D region;
+public class CuboidBound implements RegionBound {
 	private double upperBoundX;
 	private double upperBoundY;
 	private double upperBoundZ;
@@ -19,20 +15,14 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	private double lowerBoundY;
 	private double lowerBoundZ;
 
-	public CuboidBoundRegion(Region3D region, double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
+	public CuboidBound(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
 			double lowerBoundY, double lowerBoundZ) {
-		this.region = region;
 		this.upperBoundX = upperBoundX;
 		this.upperBoundY = upperBoundY;
 		this.upperBoundZ = upperBoundZ;
 		this.lowerBoundX = lowerBoundX;
 		this.lowerBoundY = lowerBoundY;
 		this.lowerBoundZ = lowerBoundZ;
-	}
-	
-	@Override
-	public Region3D getRegion3D() {
-		return this.region;
 	}
 	
 	@Override
@@ -66,21 +56,18 @@ public class CuboidBoundRegion implements BoundRegion3D {
 	}
 
 	@Override
-	public CuboidBoundRegion createShifted(Vector3D displacement) {
-		Region3D region = Region3Ds.shift(this.region, displacement);
+	public CuboidBound shift(Vector3D displacement) {
 		double ubx = this.upperBoundX + displacement.getX();
 		double uby = this.upperBoundY + displacement.getY();
 		double ubz = this.upperBoundZ + displacement.getZ();
 		double lbx = this.lowerBoundX + displacement.getX();
 		double lby = this.lowerBoundY + displacement.getY();
 		double lbz = this.lowerBoundZ + displacement.getZ();
-		return new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 	@Override
-	public BoundRegion3D createScaled(Axis axis, double factor, Vector3D offset) {
-		LinearTransformation trans = LinearTransformation.ofScale(axis, factor);
-		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
+	public RegionBound scale(Axis axis, double factor, Vector3D offset) {
 		double ubx = this.upperBoundX;
 		double uby = this.upperBoundY;
 		double ubz = this.upperBoundZ;
@@ -103,13 +90,11 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		default:
 			throw new UnsupportedOperationException();
 		}
-		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 	@Override
-	public BoundRegion3D createMirrored(Axis axis, Vector3D offset) {
-		LinearTransformation trans = LinearTransformation.ofMirror(axis);
-		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
+	public RegionBound mirror(Axis axis, Vector3D offset) {
 		double ubx = this.upperBoundX;
 		double uby = this.upperBoundY;
 		double ubz = this.upperBoundZ;
@@ -132,26 +117,23 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		default:
 			throw new UnsupportedOperationException();
 		}
-		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
 	@Override
-	public BoundRegion3D createRotated(Axis axis, double degree, Vector3D offset) {
+	public RegionBound rotate(Axis axis, double degree, Vector3D offset) {
 		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
 		double cy = (this.upperBoundY + this.lowerBoundY) / 2.0;
 		double cz = (this.upperBoundZ + this.lowerBoundZ) / 2.0;
 		Vector3D center = new Vector3D(cx, cy, cz);
 		Vector3D maxPos = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
 		double radius = maxPos.negate(center).getAbsolute();
-		SphereBoundRegion spbound = new SphereBoundRegion(this.region, center, radius);
-		return spbound.createRotated(axis, degree, offset);
+		SphereBound spbound = new SphereBound(center, radius);
+		return spbound.rotate(axis, degree, offset);
 	}
 	
 	@Deprecated
-	public CuboidBoundRegion createTransformedRegion(LinearTransformation trans, Vector3D offset) {
-		Region3D newRegion = Region3Ds.shift(this.region, Vector3D.ORIGIN.negate(offset));
-		newRegion = Region3Ds.linearTransform(newRegion, trans);
-		newRegion = Region3Ds.shift(newRegion, offset);
+	public CuboidBound createTransformedRegion(LinearTransformation trans, Vector3D offset) {
 		Vector3D pos1 = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
 		Vector3D pos2 = new Vector3D(this.upperBoundX, this.upperBoundY, this.lowerBoundZ);
 		Vector3D pos3 = new Vector3D(this.upperBoundX, this.lowerBoundY, this.upperBoundZ);
@@ -174,18 +156,7 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		double lbx = min(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
 		double lby = min(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
 		double lbz = min(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
-		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
+		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
-	@Override
-	public BlockRegion3D toBlockRegion3D() {
-		int ubx = (int)Math.floor(this.upperBoundX);
-		int uby = (int)Math.floor(this.upperBoundY);
-		int ubz = (int)Math.floor(this.upperBoundZ);
-		int lbx = (int)Math.floor(this.lowerBoundX);
-		int lby = (int)Math.floor(this.lowerBoundY);
-		int lbz = (int)Math.floor(this.lowerBoundZ);
-		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
-	}
-
 }
