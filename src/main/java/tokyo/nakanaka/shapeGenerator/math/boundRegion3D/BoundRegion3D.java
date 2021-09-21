@@ -3,7 +3,6 @@ package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 
 /**
@@ -51,9 +50,4 @@ public interface BoundRegion3D {
 	 */
 	BoundRegion3D rotate(Axis axis, double degree, Vector3D offset);
 	
-	/**
-	 * Returns a block region from the bound region
-	 * @return a block region from the bound region
-	 */
-	BlockRegion3D toBlockRegion3D();
 }
