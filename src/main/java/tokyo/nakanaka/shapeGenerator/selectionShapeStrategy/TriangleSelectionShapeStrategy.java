@@ -12,9 +12,9 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 
 public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String POS1 = "pos1";

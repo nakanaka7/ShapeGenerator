@@ -9,10 +9,10 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.RegionBound;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBound;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
 
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 	private static final String CENTER = "center";

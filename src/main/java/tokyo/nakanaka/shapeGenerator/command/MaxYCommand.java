@@ -2,11 +2,11 @@ package tokyo.nakanaka.shapeGenerator.command;
 
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.shapeGenerator.Selection;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.RegionBound;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.region3D.LogicalConjunctRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.MaxYRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 @PrivateAPI
 public class MaxYCommand implements AdjustCommand {

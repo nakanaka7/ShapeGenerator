@@ -5,11 +5,11 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.RegionBound;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 /**
  * Represents a selection

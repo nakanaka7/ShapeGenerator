@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
+package tokyo.nakanaka.shapeGenerator.math.regionBound;
 
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
