@@ -1,12 +1,10 @@
 package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.*;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
@@ -177,15 +175,4 @@ public class CuboidBoundRegion implements BoundRegion3D {
 		return new CuboidBoundRegion(newRegion, ubx, uby, ubz, lbx, lby, lbz);
 	}
 	
-	@Override
-	public BlockRegion3D toBlockRegion3D() {
-		int ubx = (int)Math.floor(this.upperBoundX);
-		int uby = (int)Math.floor(this.upperBoundY);
-		int ubz = (int)Math.floor(this.upperBoundZ);
-		int lbx = (int)Math.floor(this.lowerBoundX);
-		int lby = (int)Math.floor(this.lowerBoundY);
-		int lbz = (int)Math.floor(this.lowerBoundZ);
-		return new BlockRegion3D(this.region, ubx, uby, ubz, lbx, lby, lbz);
-	}
-
 }

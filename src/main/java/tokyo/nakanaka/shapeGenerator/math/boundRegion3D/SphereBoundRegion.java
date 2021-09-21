@@ -3,7 +3,6 @@ package tokyo.nakanaka.shapeGenerator.math.boundRegion3D;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.BlockRegion3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
@@ -87,12 +86,4 @@ public class SphereBoundRegion implements BoundRegion3D {
 		return new SphereBoundRegion(newRegion, newCenter, this.radius);
 	}
 	
-	@Override
-	public BlockRegion3D toBlockRegion3D() {
-		double cx = this.center.getX();
-		double cy = this.center.getY();
-		double cz = this.center.getZ();
-		return new BlockRegion3D(this.region, cx + radius, cy + radius, cz + radius, cx - radius, cy - radius, cz - radius);
-	}
-
 }
