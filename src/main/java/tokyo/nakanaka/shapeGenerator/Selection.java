@@ -22,6 +22,7 @@ public class Selection {
 	private BoundRegion3D bound;
 	
 	@PrivateAPI
+	@Deprecated
 	public Selection(World world, BoundRegion3D boundReg, Vector3D offset) {
 		this.world = world;
 		this.region = boundReg.getRegion3D();
