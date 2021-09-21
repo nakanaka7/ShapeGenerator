@@ -42,7 +42,7 @@ public class Selection {
 		this.world = world;
 		this.offset = offset;
 		this.region = region;
-		this.bound = new CuboidBoundRegion(region, bound.maxX(), bound.maxY(), bound.maxZ(), bound.minX(), bound.minY(), bound.minZ());
+		this.bound = new CuboidBoundRegion(bound.maxX(), bound.maxY(), bound.maxZ(), bound.minX(), bound.minY(), bound.minZ());
 	}
 	
 	/**

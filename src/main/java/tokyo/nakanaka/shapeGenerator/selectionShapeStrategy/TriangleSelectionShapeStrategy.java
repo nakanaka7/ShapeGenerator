@@ -87,7 +87,7 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX()) - thickness / 2;
 		double lby = min(pos1.getY(), pos2.getY(), pos3.getY()) - thickness / 2;
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ()) - thickness / 2;
-		var bound = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
+		var bound = new CuboidBoundRegion(ubx, uby, ubz, lbx, lby, lbz);
 		return new Selection(selData.world(), selData.getOffset(), region, bound);
 	}
 	
