@@ -4,16 +4,24 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 
 public class SphereBoundRegion implements BoundRegion3D {
-	private Region3D region;
 	private Vector3D center;
 	private double radius;
 	
+	@Deprecated
 	public SphereBoundRegion(Region3D region, Vector3D center, double radius) {
-		this.region = region;
 		this.center = center;
+		this.radius = radius;
+	}
+	
+	public SphereBoundRegion(Vector3D center, double radius) {
+		this.center = center;
+		this.radius = radius;
+	}
+	
+	public SphereBoundRegion(double radius) {
+		this.center = Vector3D.ZERO;
 		this.radius = radius;
 	}
 	
@@ -48,10 +56,8 @@ public class SphereBoundRegion implements BoundRegion3D {
 	}
 	
 	@Override
-	public BoundRegion3D shift(Vector3D displacement) {
-		Region3D newRegion = Region3Ds.shift(this.region, displacement);
-		Vector3D newCenter = this.center.add(displacement);
-		return new SphereBoundRegion(newRegion, newCenter, this.radius);
+	public BoundRegion3D shift(Vector3D dis) {
+		return new SphereBoundRegion(this.center.add(dis), this.radius);
 	}
 
 	@Override
@@ -59,7 +65,7 @@ public class SphereBoundRegion implements BoundRegion3D {
 		double cx = this.center.getX();
 		double cy = this.center.getY();
 		double cz = this.center.getZ();
-		CuboidBoundRegion cubound = new CuboidBoundRegion(region, 
+		CuboidBoundRegion cubound = new CuboidBoundRegion( 
 				cx + radius, cy + radius, cz + radius,
 				cx - radius, cy - radius, cz - radius);
 		return cubound.scale(axis, factor, offset);
@@ -68,17 +74,15 @@ public class SphereBoundRegion implements BoundRegion3D {
 	@Override
 	public BoundRegion3D mirror(Axis axis, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofMirror(axis);
-		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
 		Vector3D newCenter = trans.apply(this.center.negate(offset)).add(offset);
-		return new SphereBoundRegion(newRegion, newCenter, this.radius);
+		return new SphereBoundRegion(newCenter, this.radius);
 	}
 	
 	@Override
 	public BoundRegion3D rotate(Axis axis, double degree, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofRotation(axis, degree);
-		Region3D newRegion = Region3Ds.linearTransform(this.region, trans, offset);
 		Vector3D newCenter = trans.apply(this.center.negate(offset)).add(offset);
-		return new SphereBoundRegion(newRegion, newCenter, this.radius);
+		return new SphereBoundRegion(newCenter, this.radius);
 	}
 	
 }
