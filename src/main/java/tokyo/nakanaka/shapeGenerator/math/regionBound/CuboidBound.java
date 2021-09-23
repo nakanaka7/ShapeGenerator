@@ -56,7 +56,7 @@ public class CuboidBound implements RegionBound {
 	}
 
 	@Override
-	public CuboidBound shift(Vector3D displacement) {
+	public CuboidBound createShifted(Vector3D displacement) {
 		double ubx = this.upperBoundX + displacement.getX();
 		double uby = this.upperBoundY + displacement.getY();
 		double ubz = this.upperBoundZ + displacement.getZ();
@@ -67,7 +67,7 @@ public class CuboidBound implements RegionBound {
 	}
 	
 	@Override
-	public RegionBound scale(Axis axis, double factor, Vector3D offset) {
+	public RegionBound createScaled(Axis axis, double factor, Vector3D offset) {
 		double ubx = this.upperBoundX;
 		double uby = this.upperBoundY;
 		double ubz = this.upperBoundZ;
@@ -94,7 +94,7 @@ public class CuboidBound implements RegionBound {
 	}
 	
 	@Override
-	public RegionBound mirror(Axis axis, Vector3D offset) {
+	public RegionBound createMirrored(Axis axis, Vector3D offset) {
 		double ubx = this.upperBoundX;
 		double uby = this.upperBoundY;
 		double ubz = this.upperBoundZ;
@@ -121,7 +121,7 @@ public class CuboidBound implements RegionBound {
 	}
 	
 	@Override
-	public RegionBound rotate(Axis axis, double degree, Vector3D offset) {
+	public RegionBound createRotated(Axis axis, double degree, Vector3D offset) {
 		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
 		double cy = (this.upperBoundY + this.lowerBoundY) / 2.0;
 		double cz = (this.upperBoundZ + this.lowerBoundZ) / 2.0;
@@ -129,7 +129,7 @@ public class CuboidBound implements RegionBound {
 		Vector3D maxPos = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
 		double radius = maxPos.negate(center).getAbsolute();
 		SphereBound spbound = new SphereBound(center, radius);
-		return spbound.rotate(axis, degree, offset);
+		return spbound.createRotated(axis, degree, offset);
 	}
 	
 	@Deprecated

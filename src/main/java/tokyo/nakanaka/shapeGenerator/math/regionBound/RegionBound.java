@@ -9,11 +9,35 @@ import tokyo.nakanaka.math.Vector3D;
  */
 @PrivateAPI
 public interface RegionBound {
+	/**
+	 * Returns the x coordinate of the upper bound about x direction
+	 * @return the x coordinate of the upper bound about x direction
+	 */
 	double upperBoundX();
+	/**
+	 * Returns the y coordinate of the upper bound about y direction
+	 * @return the y coordinate of the upper bound about y direction
+	 */
 	double upperBoundY();
+	/**
+	 * Returns the z coordinate of the upper bound about y direction
+	 * @return the z coordinate of the upper bound about y direction
+	 */
 	double upperBoundZ();
+	/**
+	 * Returns the x coordinate of the lower bound about x direction
+	 * @return the x coordinate of the lower bound about x direction
+	 */
 	double lowerBoundX();
+	/**
+	 * Returns the y coordinate of the lower bound about y direction
+	 * @return the y coordinate of the lower bound about y direction
+	 */
 	double lowerBoundY();
+	/**
+	 * Returns the z coordinate of the lower bound about z direction
+	 * @return the z coordinate of the lower bound about z direction
+	 */
 	double lowerBoundZ();
 	
 	/**
@@ -21,7 +45,7 @@ public interface RegionBound {
 	 * @param dis a displacement of shift
 	 * @return new bound which is shifted
 	 */
-	RegionBound shift(Vector3D dis);
+	RegionBound createShifted(Vector3D dis);
 	
 	/**
 	 * Returns new bound which is scaled along the specified axis with specified factor
@@ -30,14 +54,14 @@ public interface RegionBound {
 	 * @param offset the origin of the transform
 	 * @return new bound which is scaled along the specified axis and factor
 	 */
-	RegionBound scale(Axis axis, double factor, Vector3D offset);
+	RegionBound createScaled(Axis axis, double factor, Vector3D offset);
 
 	/**
 	 * Returns new bound which is mirrored about the specified axis 
 	 * @param offset the origin of the transform
 	 * @return new bound which is mirrored about the specified axis
 	 */
-	RegionBound mirror(Axis axis, Vector3D offset);
+	RegionBound createMirrored(Axis axis, Vector3D offset);
 	
 	/**
 	 * Returns new bound which is rotated about the specified axis by the given degree
@@ -46,6 +70,6 @@ public interface RegionBound {
 	 * @param offset used with the x y, or z axis to specify the rotation axis
 	 * @return new bound which is rotated about the specified axis by the given degree
 	 */
-	RegionBound rotate(Axis axis, double degree, Vector3D offset);
+	RegionBound createRotated(Axis axis, double degree, Vector3D offset);
 	
 }
