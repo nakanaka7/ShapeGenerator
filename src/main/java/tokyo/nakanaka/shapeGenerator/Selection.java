@@ -7,7 +7,6 @@ import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
@@ -97,7 +96,7 @@ public class Selection {
 	@PublicAPI
 	public Selection createShifted(Vector3D displacement) {
 		Vector3D newOffset = this.offset.add(displacement);
-		Region3D newRegion = Region3Ds.shift(this.region, displacement);
+		Region3D newRegion = this.region.createShifted(displacement);
 		RegionBound newBound = this.bound.createShifted(displacement);
 		return new Selection(this.world, newOffset, newRegion, newBound);
 	}
