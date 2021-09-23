@@ -59,7 +59,7 @@ public class Selection {
 	}
 	
 	@PrivateAPI
-	public Vector3D getOffset() {
+	public Vector3D offset() {
 		return offset;
 	}
 	

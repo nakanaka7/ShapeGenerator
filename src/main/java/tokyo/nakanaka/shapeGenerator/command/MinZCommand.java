@@ -27,7 +27,7 @@ public class MinZCommand implements AdjustCommand {
 		Region3D minZReg = new MinZRegion3D(minZ);
 		Region3D newRegion = new LogicalConjunctRegion3D(region, minZReg);
 		RegionBound newBound = new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
-		Selection sel = new Selection(originalSel.world(), originalSel.getOffset(), newRegion, newBound);	
+		Selection sel = new Selection(originalSel.world(), originalSel.offset(), newRegion, newBound);	
 		this.lastCmd = new GenerateCommand(sel, originalCmd.getBlock(), physics);
 	}
 	
