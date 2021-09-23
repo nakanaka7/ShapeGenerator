@@ -16,7 +16,7 @@ public class MaxXCommand implements AdjustCommand {
 	public MaxXCommand(GenerateCommand originalCmd, double maxX, boolean physics){
 		this.originalCmd = originalCmd;
 		Selection originalSel = originalCmd.getSelection();
-		RegionBound bound = originalSel.getBoundRegion3D();
+		RegionBound bound = originalSel.regionBound();
 		Region3D region = originalSel.region();
 		double ubx = maxX;
 		double uby = bound.upperBoundY();

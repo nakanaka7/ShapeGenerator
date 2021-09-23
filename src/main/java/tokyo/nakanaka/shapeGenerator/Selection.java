@@ -89,7 +89,7 @@ public class Selection {
 	}
 	
 	@PrivateAPI
-	public RegionBound getBoundRegion3D() {
+	public RegionBound regionBound() {
 		return bound;
 	}
 	
