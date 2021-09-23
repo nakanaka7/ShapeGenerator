@@ -48,8 +48,8 @@ public interface Region3D {
 		if(this instanceof AffineTransformedRegion3D affReg) {
 			Region3D newOriginal = affReg.originalRegion3D();
 			LinearTransformation newTrans = affReg.linearTransformation();
-			Vector3D newOffset = affReg.displacement().add(dis);
-			return new AffineTransformedRegion3D(newOriginal, newTrans, newOffset);
+			Vector3D newDis = affReg.displacement().add(dis);
+			return new AffineTransformedRegion3D(newOriginal, newTrans, newDis);
 		}else {
 			return new AffineTransformedRegion3D(this, LinearTransformation.IDENTITY, dis);
 		}
@@ -91,22 +91,33 @@ public interface Region3D {
 		return createLinearTransformed(trans, offset);
 	}
 	
-	default Region3D createLinearTransformed(LinearTransformation trans) {
-		if(this instanceof AffineTransformedRegion3D affReg) {
-			Vector3D offset = affReg.displacement();
-			if(offset.equals(Vector3D.ORIGIN)) {
-				Region3D newOriginal = affReg.originalRegion3D();
-				LinearTransformation newTrans = trans.multipy(affReg.linearTransformation());
-				return new AffineTransformedRegion3D(newOriginal, newTrans, Vector3D.ORIGIN);
-			}
-		}
-		return new AffineTransformedRegion3D(this, trans, Vector3D.ORIGIN);
-	}
-	
+	/**
+	 * Returns a region which is given by applying a linear transformation about an offset
+	 * @param trans a linear transformation which is applied to this region about the offset
+	 * @param offset an offset for the linear transformation. The offset point will be unchanged by the linear transformation.
+	 * @throws IllegalArgumentException if trans is a singular one
+	 * Returns a region which is given by applying a linear transformation about an offset
+	 */
 	default Region3D createLinearTransformed(LinearTransformation trans, Vector3D offset) {
 		Region3D region = this.createShifted(offset.multiply(-1));
 		region = region.createLinearTransformed(trans);
 		return region.createShifted(offset);
+	}
+	
+	/**
+	 * Returns a region which is given by applying a linear transformation about the origin
+	 * @param trans a linear transformation which is applied to this region
+	 * @throws IllegalArgumentException if trans is a singular one
+	 * Returns a region which is given by applying a linear transformation about the origin
+	 */
+	default Region3D createLinearTransformed(LinearTransformation trans) {
+		if(this instanceof AffineTransformedRegion3D affReg) {
+			LinearTransformation newTrans = trans.multipy(affReg.linearTransformation());
+			Vector3D newDis = trans.apply(affReg.displacement());
+			return new AffineTransformedRegion3D(affReg.originalRegion3D(), newTrans, newDis);
+		}else {
+			return new AffineTransformedRegion3D(this, trans, Vector3D.ORIGIN);
+		}
 	}
 	
 }
