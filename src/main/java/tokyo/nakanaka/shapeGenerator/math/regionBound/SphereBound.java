@@ -49,30 +49,30 @@ public class SphereBound implements RegionBound {
 	}
 	
 	@Override
-	public RegionBound shift(Vector3D dis) {
+	public RegionBound createShifted(Vector3D dis) {
 		return new SphereBound(this.center.add(dis), this.radius);
 	}
 
 	@Override
-	public RegionBound scale(Axis axis, double factor, Vector3D offset) {
+	public RegionBound createScaled(Axis axis, double factor, Vector3D offset) {
 		double cx = this.center.getX();
 		double cy = this.center.getY();
 		double cz = this.center.getZ();
 		CuboidBound cubound = new CuboidBound( 
 				cx + radius, cy + radius, cz + radius,
 				cx - radius, cy - radius, cz - radius);
-		return cubound.scale(axis, factor, offset);
+		return cubound.createScaled(axis, factor, offset);
 	}
 	
 	@Override
-	public RegionBound mirror(Axis axis, Vector3D offset) {
+	public RegionBound createMirrored(Axis axis, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofMirror(axis);
 		Vector3D newCenter = trans.apply(this.center.negate(offset)).add(offset);
 		return new SphereBound(newCenter, this.radius);
 	}
 	
 	@Override
-	public RegionBound rotate(Axis axis, double degree, Vector3D offset) {
+	public RegionBound createRotated(Axis axis, double degree, Vector3D offset) {
 		LinearTransformation trans = LinearTransformation.ofRotation(axis, degree);
 		Vector3D newCenter = trans.apply(this.center.negate(offset)).add(offset);
 		return new SphereBound(newCenter, this.radius);
