@@ -63,12 +63,6 @@ public class Selection {
 		return offset;
 	}
 	
-	@PrivateAPI
-	public void setOffset(Vector3D offset) {
-		this.offset = offset;
-	}
-	
-	
 	/**
 	 * Returns new selection with specified offset
 	 * @param offset new offset
