@@ -75,20 +75,18 @@ public class CuboidBound implements RegionBound {
 		double lby = this.lowerBoundY;
 		double lbz = this.lowerBoundZ;
 		switch(axis) {
-		case X:
+		case X -> {
 			ubx = factor * (ubx - offset.getX()) + offset.getX();
 			lbx = factor * (lbx - offset.getX()) + offset.getX();
-			break;
-		case Y:
+		}
+		case Y -> {
 			uby = factor * (uby - offset.getY()) + offset.getY();
 			lby = factor * (lby - offset.getY()) + offset.getY();	
-			break;
-		case Z:
+		}
+		case Z -> {
 			ubz = factor * (ubz - offset.getZ()) + offset.getZ();
 			lbz = factor * (lbz - offset.getZ()) + offset.getZ();
-			break;
-		default:
-			throw new UnsupportedOperationException();
+		}
 		}
 		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 	}
@@ -102,24 +100,28 @@ public class CuboidBound implements RegionBound {
 		double lby = this.lowerBoundY;
 		double lbz = this.lowerBoundZ;
 		switch(axis) {
-		case X:
-			lbx = - (ubx - offset.getX()) + offset.getX();
-			ubx = - (lbx - offset.getX()) + offset.getX();
-			break;
-		case Y:
-			lby = - (uby - offset.getY()) + offset.getY();
-			uby = - (lby - offset.getY()) + offset.getY();
-			break;
-		case Z:
-			lbz = - (ubz - offset.getZ()) + offset.getZ();
-			ubz = - (lbz - offset.getZ()) + offset.getZ();
-			break;
-		default:
-			throw new UnsupportedOperationException();
+		case X -> {
+			double u = ubx;
+			double l = lbx;
+			lbx = - (u - offset.getX()) + offset.getX();
+			ubx = - (l - offset.getX()) + offset.getX();
+		}
+		case Y -> {
+			double u = uby;
+			double l = lby;
+			lby = - (u - offset.getY()) + offset.getY();
+			uby = - (l - offset.getY()) + offset.getY();
+		}
+		case Z -> {
+			double u = ubz;
+			double l = lbz;
+			lbz = - (u - offset.getZ()) + offset.getZ();
+			ubz = - (l - offset.getZ()) + offset.getZ();
+		}
 		}
 		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
 	}
-	
+		
 	@Override
 	public RegionBound createRotated(Axis axis, double degree, Vector3D offset) {
 		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
