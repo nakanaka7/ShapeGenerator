@@ -19,7 +19,9 @@ public class AffineTransformedRegion3D implements Region3D{
 	 * @param original an original region
 	 * @param linearTrans a linear transformation of the affine transformation
 	 * @param dis a displacement of the affine transformation
+	 * @throws IllegalArgumentException if the linearTrnas is a singular one 
 	 */
+	
 	public AffineTransformedRegion3D(Region3D original, LinearTransformation linearTrans, Vector3D dis) {
 		this.original = original;
 		this.linearTrans = linearTrans;
@@ -56,7 +58,7 @@ public class AffineTransformedRegion3D implements Region3D{
 		Vector3D pos = new Vector3D(x, y, z);
 		pos = pos.negate(this.dis);
 		pos = this.invLinearTrans.apply(pos);
-		return this.original.contains(pos.getX(), pos.getY(), pos.getZ());
+		return this.original.contains(pos);
 	}
 
 }
