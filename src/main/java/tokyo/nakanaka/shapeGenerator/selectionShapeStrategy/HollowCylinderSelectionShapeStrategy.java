@@ -107,9 +107,7 @@ public class HollowCylinderSelectionShapeStrategy implements SelectionShapeStrat
 		case UP -> sel = sel.createRotated(Axis.X, -90);
 		case DOWN -> sel = sel.createRotated(Axis.X, 90);
 		}
-		sel = sel.createShifted(center);
-		sel.setOffset(selData.getOffset());
-		return sel;
+		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
 
 }

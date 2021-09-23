@@ -76,9 +76,7 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		Region3D region = new Diamond(width, height, length);
 		RegionBound bound = new CuboidBound(width/2, height/2, length/2, -width/2, -height/2, -length/2);
 		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
-		sel = sel.createShifted(center);
-		sel.setOffset(selData.getOffset());
-		return sel;
+		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
 	
 }

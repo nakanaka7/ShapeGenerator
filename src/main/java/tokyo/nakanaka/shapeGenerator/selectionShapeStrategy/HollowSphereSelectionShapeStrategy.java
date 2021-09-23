@@ -74,9 +74,7 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 		Region3D region = new HollowSphere(outerRadius, innerRadius);
 		RegionBound bound = new SphereBound(outerRadius);
 		var sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
-		sel = sel.createShifted(center);
-		sel.setOffset(selData.getOffset());
-		return sel;
+		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
 
 }
