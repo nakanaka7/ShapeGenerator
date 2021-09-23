@@ -68,6 +68,17 @@ public class Selection {
 		this.offset = offset;
 	}
 	
+	
+	/**
+	 * Returns new selection with specified offset
+	 * @param offset new offset
+	 * @return new selection with specified offset
+	 */
+	@PrivateAPI
+	public Selection withOffset(Vector3D offset) {
+		return new Selection(this.world, offset, this.region, this.bound);
+	}
+	
 	/**
 	 * Returns a block region made from this selection
 	 * @return block region made from this selection
