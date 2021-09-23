@@ -8,7 +8,7 @@ import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 
-public class LinearTransformedCuboidBound implements RegionBound {
+public class CuboidBoundNew implements RegionBound {
 	private Cuboid cuboid;
 	private LinearTransformation trans;
 	private Vector3D dis;
@@ -26,12 +26,21 @@ public class LinearTransformedCuboidBound implements RegionBound {
 	 * @param trans a linear transformation which is applied to the first cuboid. The origin of 3D space is unchanged.
 	 * @param dis a displacement for the last procedure.
 	 */
-	public LinearTransformedCuboidBound(Cuboid cuboid, LinearTransformation trans, Vector3D dis) {
+	public CuboidBoundNew(Cuboid cuboid, LinearTransformation trans, Vector3D dis) {
 		this.cuboid = cuboid;
 		this.trans = trans;
 		this.dis = dis;
 	}
 
+	public CuboidBoundNew(Cuboid cuboid) {
+		this(cuboid, LinearTransformation.IDENTITY, Vector3D.ZERO);
+	}
+	
+	public CuboidBoundNew(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
+			double lowerBoundY, double lowerBoundZ) {
+		this(new Cuboid(upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ));
+	}
+	
 	private void calcBounds() {
 		Vector3D pos1 = new Vector3D(cuboid.maxX(), cuboid.maxY(), cuboid.maxZ());
 		Vector3D pos2 = new Vector3D(cuboid.maxX(), cuboid.maxY(), cuboid.minZ());
@@ -107,7 +116,7 @@ public class LinearTransformedCuboidBound implements RegionBound {
 
 	@Override
 	public RegionBound createShifted(Vector3D dis) {
-		return new LinearTransformedCuboidBound(this.cuboid, this.trans, this.dis.add(dis));
+		return new CuboidBoundNew(this.cuboid, this.trans, this.dis.add(dis));
 	}
 
 	@Override
@@ -135,7 +144,7 @@ public class LinearTransformedCuboidBound implements RegionBound {
 		a = trans.multipy(a);
 		b = trans.apply(b);
 		b = b.add(offset);
-		return new LinearTransformedCuboidBound(this.cuboid, a, b);
+		return new CuboidBoundNew(this.cuboid, a, b);
 	}
 	
 }
