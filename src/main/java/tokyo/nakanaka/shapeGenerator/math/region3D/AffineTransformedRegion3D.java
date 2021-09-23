@@ -11,9 +11,16 @@ public class AffineTransformedRegion3D implements Region3D{
 	private Region3D original;
 	private LinearTransformation linearTrans;
 	private LinearTransformation invLinearTrans;
-	private Vector3D offset;
+	private Vector3D dis;
 	
-	public AffineTransformedRegion3D(Region3D original, LinearTransformation linearTrans, Vector3D offset) {
+	/**
+	 * Constructs a region given by applying an affine transformation to the original region.
+	 * This transformation is the combination of a linear transformation and a subsequent displacement.
+	 * @param original an original region
+	 * @param linearTrans a linear transformation of the affine transformation
+	 * @param dis a displacement of the affine transformation
+	 */
+	public AffineTransformedRegion3D(Region3D original, LinearTransformation linearTrans, Vector3D dis) {
 		this.original = original;
 		this.linearTrans = linearTrans;
 		try {
@@ -21,25 +28,33 @@ public class AffineTransformedRegion3D implements Region3D{
 		}catch(SingularOperatorException e) {
 			throw new IllegalArgumentException();
 		}
-		this.offset = offset;
+		this.dis = dis;
 	}
 
-	public Region3D getOriginalRegion3D() {
+	public Region3D originalRegion3D() {
 		return original;
 	}
 
-	public LinearTransformation getLinearTransformation() {
+	/**
+	 * Returns a linear transformation of the affine transformation
+	 * @return a linear transformation of the affine transformation
+	 */
+	public LinearTransformation linearTransformation() {
 		return linearTrans;
 	}
 
-	public Vector3D getOffset() {
-		return offset;
+	/**
+	 * Returns a displacement of the affine transformation
+	 * @return a displacement of the affine transformation
+	 */
+	public Vector3D displacement() {
+		return dis;
 	}
 
 	@Override
 	public boolean contains(double x, double y, double z) {
 		Vector3D pos = new Vector3D(x, y, z);
-		pos = pos.negate(this.offset);
+		pos = pos.negate(this.dis);
 		pos = this.invLinearTrans.apply(pos);
 		return this.original.contains(pos.getX(), pos.getY(), pos.getZ());
 	}

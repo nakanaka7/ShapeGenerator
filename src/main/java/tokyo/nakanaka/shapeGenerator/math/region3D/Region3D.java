@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator.math.region3D;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.annotation.PublicAPI;
+import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 
 /**
@@ -35,7 +36,7 @@ public interface Region3D {
 	 * @return a region which is given by shifting this region
 	 */
 	default Region3D createShifted(double dx, double dy, double dz) {
-		return new ShiftedRegion3D(this, dx, dy, dz);
+		return this.createShifted(new Vector3D(dx, dy, dz));
 	}
 	
 	/**
@@ -44,7 +45,14 @@ public interface Region3D {
 	 * @return a region which is given by shifting this region
 	 */
 	default Region3D createShifted(Vector3D dis) {
-		return this.createShifted(dis.getX(), dis.getY(), dis.getZ());
+		if(this instanceof AffineTransformedRegion3D affReg) {
+			Region3D newOriginal = affReg.originalRegion3D();
+			LinearTransformation newTrans = affReg.linearTransformation();
+			Vector3D newOffset = affReg.displacement().add(dis);
+			return new AffineTransformedRegion3D(newOriginal, newTrans, newOffset);
+		}else {
+			return new AffineTransformedRegion3D(this, LinearTransformation.IDENTITY, dis);
+		}
 	}
 	
 	/**
@@ -56,9 +64,8 @@ public interface Region3D {
 	 * @throws IllegalArgumentException if factor is zero
 	 */
 	default Region3D createScaled(Axis axis, double factor, Vector3D offset) {
-		Region3D a = this.createShifted(offset.multiply(-1));
-		Region3D b = new ScaledRegion3D(a, axis, factor);
-		return b.createShifted(offset);
+		LinearTransformation trans = LinearTransformation.ofScale(axis, factor);
+		return createLinearTransformed(trans, offset);
 	}
 	
 	/**
@@ -68,9 +75,8 @@ public interface Region3D {
 	 * @return a region which is given by mirroring this region
 	 */
 	default Region3D createMirrored(Axis axis, Vector3D offset) {
-		Region3D a = this.createShifted(offset.multiply(-1));
-		Region3D b = new MirroredRegion3D(a, axis);
-		return b.createShifted(offset);
+		LinearTransformation trans = LinearTransformation.ofMirror(axis);
+		return createLinearTransformed(trans, offset);
 	}
 	
 	/**
@@ -81,9 +87,26 @@ public interface Region3D {
 	 * @return a region which is given by rotating this region
 	 */
 	default Region3D createRotated(Axis axis, double degree, Vector3D offset) {
-		Region3D a = this.createShifted(offset.multiply(-1));
-		Region3D b = new RotatedRegion3D(a, axis, degree);
-		return b.createShifted(offset);
+		LinearTransformation trans = LinearTransformation.ofRotation(axis, degree);
+		return createLinearTransformed(trans, offset);
+	}
+	
+	default Region3D createLinearTransformed(LinearTransformation trans) {
+		if(this instanceof AffineTransformedRegion3D affReg) {
+			Vector3D offset = affReg.displacement();
+			if(offset.equals(Vector3D.ORIGIN)) {
+				Region3D newOriginal = affReg.originalRegion3D();
+				LinearTransformation newTrans = trans.multipy(affReg.linearTransformation());
+				return new AffineTransformedRegion3D(newOriginal, newTrans, Vector3D.ORIGIN);
+			}
+		}
+		return new AffineTransformedRegion3D(this, trans, Vector3D.ORIGIN);
+	}
+	
+	default Region3D createLinearTransformed(LinearTransformation trans, Vector3D offset) {
+		Region3D region = this.createShifted(offset.multiply(-1));
+		region = region.createLinearTransformed(trans);
+		return region.createShifted(offset);
 	}
 	
 }
