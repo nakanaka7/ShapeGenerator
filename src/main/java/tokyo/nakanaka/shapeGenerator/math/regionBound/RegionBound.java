@@ -9,11 +9,35 @@ import tokyo.nakanaka.math.Vector3D;
  */
 @PrivateAPI
 public interface RegionBound {
+	/**
+	 * Returns the x coordinate of the upper bound about x direction
+	 * @return the x coordinate of the upper bound about x direction
+	 */
 	double upperBoundX();
+	/**
+	 * Returns the y coordinate of the upper bound about y direction
+	 * @return the y coordinate of the upper bound about y direction
+	 */
 	double upperBoundY();
+	/**
+	 * Returns the z coordinate of the upper bound about y direction
+	 * @return the z coordinate of the upper bound about y direction
+	 */
 	double upperBoundZ();
+	/**
+	 * Returns the x coordinate of the lower bound about x direction
+	 * @return the x coordinate of the lower bound about x direction
+	 */
 	double lowerBoundX();
+	/**
+	 * Returns the y coordinate of the lower bound about y direction
+	 * @return the y coordinate of the lower bound about y direction
+	 */
 	double lowerBoundY();
+	/**
+	 * Returns the z coordinate of the lower bound about z direction
+	 * @return the z coordinate of the lower bound about z direction
+	 */
 	double lowerBoundZ();
 	
 	/**
