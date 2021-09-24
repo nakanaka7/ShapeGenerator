@@ -26,6 +26,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.VersionCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
 
 @PrivateAPI
@@ -34,6 +35,7 @@ class SgCommandHandler implements CommandHandler {
 	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
 	
 	{
+		this.sgSubCmdHandlerMap.put("version", new VersionCommandHandler());
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
