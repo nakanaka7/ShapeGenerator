@@ -82,9 +82,7 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 		case Y -> sel = sel.createRotated(Axis.X, -90);
 		case Z -> {}
 		};
-		sel = sel.createShifted(center);
-		sel.setOffset(selData.getOffset());
-		return sel;
+		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
 
 }

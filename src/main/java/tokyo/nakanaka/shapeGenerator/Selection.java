@@ -59,13 +59,18 @@ public class Selection {
 	}
 	
 	@PrivateAPI
-	public Vector3D getOffset() {
+	public Vector3D offset() {
 		return offset;
 	}
 	
+	/**
+	 * Returns new selection with specified offset
+	 * @param offset new offset
+	 * @return new selection with specified offset
+	 */
 	@PrivateAPI
-	public void setOffset(Vector3D offset) {
-		this.offset = offset;
+	public Selection withOffset(Vector3D offset) {
+		return new Selection(this.world, offset, this.region, this.bound);
 	}
 	
 	/**
@@ -84,7 +89,7 @@ public class Selection {
 	}
 	
 	@PrivateAPI
-	public RegionBound getBoundRegion3D() {
+	public RegionBound regionBound() {
 		return bound;
 	}
 	

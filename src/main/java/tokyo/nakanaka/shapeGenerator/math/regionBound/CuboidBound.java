@@ -6,157 +6,145 @@ import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalcula
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 
 public class CuboidBound implements RegionBound {
-	private double upperBoundX;
-	private double upperBoundY;
-	private double upperBoundZ;
-	private double lowerBoundX;
-	private double lowerBoundY;
-	private double lowerBoundZ;
+	private Cuboid cuboid;
+	private LinearTransformation trans;
+	private Vector3D dis;
+	private Double ubx;
+	private Double uby;
+	private Double ubz;
+	private Double lbx;
+	private Double lby;
+	private Double lbz;
+	
+	/**
+	 * Constructs the region bound by the following procedure. First, make a cuboid bound. 
+	 * Next, apply a linear transformation to the cuboid. Finally, displace it parallelly.
+	 * @param cuboid a cuboid for the first bound.
+	 * @param trans a linear transformation which is applied to the first cuboid. The origin of 3D space is unchanged.
+	 * @param dis a displacement for the last procedure.
+	 */
+	public CuboidBound(Cuboid cuboid, LinearTransformation trans, Vector3D dis) {
+		this.cuboid = cuboid;
+		this.trans = trans;
+		this.dis = dis;
+	}
 
+	public CuboidBound(Cuboid cuboid) {
+		this(cuboid, LinearTransformation.IDENTITY, Vector3D.ZERO);
+	}
+	
 	public CuboidBound(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
 			double lowerBoundY, double lowerBoundZ) {
-		this.upperBoundX = upperBoundX;
-		this.upperBoundY = upperBoundY;
-		this.upperBoundZ = upperBoundZ;
-		this.lowerBoundX = lowerBoundX;
-		this.lowerBoundY = lowerBoundY;
-		this.lowerBoundZ = lowerBoundZ;
+		this(new Cuboid(upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ));
+	}
+	
+	private void calcBounds() {
+		Vector3D pos1 = new Vector3D(cuboid.maxX(), cuboid.maxY(), cuboid.maxZ());
+		Vector3D pos2 = new Vector3D(cuboid.maxX(), cuboid.maxY(), cuboid.minZ());
+		Vector3D pos3 = new Vector3D(cuboid.maxX(), cuboid.minY(), cuboid.maxZ());
+		Vector3D pos4 = new Vector3D(cuboid.maxX(), cuboid.minY(), cuboid.minZ());
+		Vector3D pos5 = new Vector3D(cuboid.minX(), cuboid.maxY(), cuboid.maxZ());
+		Vector3D pos6 = new Vector3D(cuboid.minX(), cuboid.maxY(), cuboid.minZ());
+		Vector3D pos7 = new Vector3D(cuboid.minX(), cuboid.minY(), cuboid.maxZ());
+		Vector3D pos8 = new Vector3D(cuboid.minX(), cuboid.minY(), cuboid.minZ());
+		Vector3D q1 = trans.apply(pos1).add(dis);
+		Vector3D q2 = trans.apply(pos2).add(dis);
+		Vector3D q3 = trans.apply(pos3).add(dis);
+		Vector3D q4 = trans.apply(pos4).add(dis);
+		Vector3D q5 = trans.apply(pos5).add(dis);
+		Vector3D q6 = trans.apply(pos6).add(dis);
+		Vector3D q7 = trans.apply(pos7).add(dis);
+		Vector3D q8 = trans.apply(pos8).add(dis);
+		ubx = max(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
+		uby = max(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
+		ubz = max(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
+		lbx = min(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
+		lby = min(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
+		lbz = min(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
 	}
 	
 	@Override
 	public double upperBoundX() {
-		return upperBoundX;
-	}
-	
-	@Override
-	public double upperBoundY() {
-		return upperBoundY;
-	}
-	
-	@Override
-	public double upperBoundZ() {
-		return upperBoundZ;
-	}
-	
-	@Override
-	public double lowerBoundX() {
-		return lowerBoundX;
-	}
-	
-	@Override
-	public double lowerBoundY() {
-		return lowerBoundY;
-	}
-	
-	@Override
-	public double lowerBoundZ() {
-		return lowerBoundZ;
+		if(this.ubx == null) {
+			calcBounds();
+		}
+		return this.ubx;
 	}
 
 	@Override
-	public CuboidBound createShifted(Vector3D displacement) {
-		double ubx = this.upperBoundX + displacement.getX();
-		double uby = this.upperBoundY + displacement.getY();
-		double ubz = this.upperBoundZ + displacement.getZ();
-		double lbx = this.lowerBoundX + displacement.getX();
-		double lby = this.lowerBoundY + displacement.getY();
-		double lbz = this.lowerBoundZ + displacement.getZ();
-		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+	public double upperBoundY() {
+		if(this.uby == null) {
+			calcBounds();
+		}
+		return this.uby;
 	}
-	
+
+	@Override
+	public double upperBoundZ() {
+		if(this.ubz == null) {
+			calcBounds();
+		}
+		return this.ubz;
+	}
+
+	@Override
+	public double lowerBoundX() {
+		if(this.lbx == null) {
+			calcBounds();
+		}
+		return this.lbx;
+	}
+
+	@Override
+	public double lowerBoundY() {
+		if(this.lby == null) {
+			calcBounds();
+		}
+		return this.lby;
+	}
+
+	@Override
+	public double lowerBoundZ() {
+		if(this.lbz == null) {
+			calcBounds();
+		}
+		return this.lbz;
+	}
+
+	@Override
+	public RegionBound createShifted(Vector3D dis) {
+		return new CuboidBound(this.cuboid, this.trans, this.dis.add(dis));
+	}
+
 	@Override
 	public RegionBound createScaled(Axis axis, double factor, Vector3D offset) {
-		double ubx = this.upperBoundX;
-		double uby = this.upperBoundY;
-		double ubz = this.upperBoundZ;
-		double lbx = this.lowerBoundX;
-		double lby = this.lowerBoundY;
-		double lbz = this.lowerBoundZ;
-		switch(axis) {
-		case X:
-			ubx = factor * (ubx - offset.getX()) + offset.getX();
-			lbx = factor * (lbx - offset.getX()) + offset.getX();
-			break;
-		case Y:
-			uby = factor * (uby - offset.getY()) + offset.getY();
-			lby = factor * (lby - offset.getY()) + offset.getY();	
-			break;
-		case Z:
-			ubz = factor * (ubz - offset.getZ()) + offset.getZ();
-			lbz = factor * (lbz - offset.getZ()) + offset.getZ();
-			break;
-		default:
-			throw new UnsupportedOperationException();
-		}
-		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+		LinearTransformation trans = LinearTransformation.ofScale(axis, factor);
+		return this.createLinearTransformed(trans, offset);
 	}
-	
+
 	@Override
 	public RegionBound createMirrored(Axis axis, Vector3D offset) {
-		double ubx = this.upperBoundX;
-		double uby = this.upperBoundY;
-		double ubz = this.upperBoundZ;
-		double lbx = this.lowerBoundX;
-		double lby = this.lowerBoundY;
-		double lbz = this.lowerBoundZ;
-		switch(axis) {
-		case X:
-			lbx = - (ubx - offset.getX()) + offset.getX();
-			ubx = - (lbx - offset.getX()) + offset.getX();
-			break;
-		case Y:
-			lby = - (uby - offset.getY()) + offset.getY();
-			uby = - (lby - offset.getY()) + offset.getY();
-			break;
-		case Z:
-			lbz = - (ubz - offset.getZ()) + offset.getZ();
-			ubz = - (lbz - offset.getZ()) + offset.getZ();
-			break;
-		default:
-			throw new UnsupportedOperationException();
-		}
-		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+		LinearTransformation trans = LinearTransformation.ofMirror(axis);
+		return this.createLinearTransformed(trans, offset);
 	}
-	
+
 	@Override
 	public RegionBound createRotated(Axis axis, double degree, Vector3D offset) {
-		double cx = (this.upperBoundX + this.lowerBoundX) / 2.0;
-		double cy = (this.upperBoundY + this.lowerBoundY) / 2.0;
-		double cz = (this.upperBoundZ + this.lowerBoundZ) / 2.0;
-		Vector3D center = new Vector3D(cx, cy, cz);
-		Vector3D maxPos = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
-		double radius = maxPos.negate(center).getAbsolute();
-		SphereBound spbound = new SphereBound(center, radius);
-		return spbound.createRotated(axis, degree, offset);
+		LinearTransformation trans = LinearTransformation.ofRotation(axis, degree);
+		return this.createLinearTransformed(trans, offset);
 	}
 	
-	@Deprecated
-	public CuboidBound createTransformedRegion(LinearTransformation trans, Vector3D offset) {
-		Vector3D pos1 = new Vector3D(this.upperBoundX, this.upperBoundY, this.upperBoundZ);
-		Vector3D pos2 = new Vector3D(this.upperBoundX, this.upperBoundY, this.lowerBoundZ);
-		Vector3D pos3 = new Vector3D(this.upperBoundX, this.lowerBoundY, this.upperBoundZ);
-		Vector3D pos4 = new Vector3D(this.upperBoundX, this.lowerBoundY, this.lowerBoundZ);
-		Vector3D pos5 = new Vector3D(this.lowerBoundX, this.upperBoundY, this.upperBoundZ);
-		Vector3D pos6 = new Vector3D(this.lowerBoundX, this.upperBoundY, this.lowerBoundZ);
-		Vector3D pos7 = new Vector3D(this.lowerBoundX, this.lowerBoundY, this.upperBoundZ);
-		Vector3D pos8 = new Vector3D(this.lowerBoundX, this.lowerBoundY, this.lowerBoundZ);
-		Vector3D q1 = trans.apply(pos1.negate(offset)).add(offset);
-		Vector3D q2 = trans.apply(pos2.negate(offset)).add(offset);
-		Vector3D q3 = trans.apply(pos3.negate(offset)).add(offset);
-		Vector3D q4 = trans.apply(pos4.negate(offset)).add(offset);
-		Vector3D q5 = trans.apply(pos5.negate(offset)).add(offset);
-		Vector3D q6 = trans.apply(pos6.negate(offset)).add(offset);
-		Vector3D q7 = trans.apply(pos7.negate(offset)).add(offset);
-		Vector3D q8 = trans.apply(pos8.negate(offset)).add(offset);
-		double ubx = max(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
-		double uby = max(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
-		double ubz = max(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
-		double lbx = min(q1.getX(), q2.getX(), q3.getX(), q4.getX(), q5.getX(), q6.getX(), q7.getX(), q8.getX());
-		double lby = min(q1.getY(), q2.getY(), q3.getY(), q4.getY(), q5.getY(), q6.getY(), q7.getY(), q8.getY());
-		double lbz = min(q1.getZ(), q2.getZ(), q3.getZ(), q4.getZ(), q5.getZ(), q6.getZ(), q7.getZ(), q8.getZ());
-		return new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+	private RegionBound createLinearTransformed(LinearTransformation trans, Vector3D offset) {
+		LinearTransformation a = this.trans;
+		Vector3D b = this.dis;
+		b = b.negate(offset);
+		a = trans.multipy(a);
+		b = trans.apply(b);
+		b = b.add(offset);
+		return new CuboidBound(this.cuboid, a, b);
 	}
 	
 }
