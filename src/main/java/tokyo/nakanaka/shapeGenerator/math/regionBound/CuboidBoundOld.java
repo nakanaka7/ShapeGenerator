@@ -6,7 +6,7 @@ import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalcula
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
-
+@Deprecated
 public class CuboidBoundOld implements RegionBound {
 	private double upperBoundX;
 	private double upperBoundY;
