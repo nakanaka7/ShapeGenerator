@@ -9,16 +9,15 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.HollowSphere;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
 
 public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrategy {
-	private String CENTER = "center";
-	private String OUTER_RADIUS = "outer_radius";
-	private String INNER_RADIUS = "inner_radius";
+	private static final String CENTER = "center";
+	private static final String OUTER_RADIUS = "outer_radius";
+	private static final String INNER_RADIUS = "inner_radius";
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
@@ -60,7 +59,7 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 		selData.setExtraData(OUTER_RADIUS, outerRadius);
 		selData.setExtraData(INNER_RADIUS, outerRadius - 1);
 	}
-
+	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
@@ -73,9 +72,9 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 			throw new IllegalStateException();
 		}
 		Region3D region = new HollowSphere(outerRadius, innerRadius);
-		region = Region3Ds.shift(region, center);
-		BoundRegion3D boundReg = new SphereBoundRegion(region, center, outerRadius);
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		RegionBound bound = new SphereBound(outerRadius);
+		var sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
+		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
 
 }

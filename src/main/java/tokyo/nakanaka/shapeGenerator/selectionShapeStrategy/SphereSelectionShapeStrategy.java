@@ -9,24 +9,25 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.SphereBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3Ds;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
 
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
-
+	private static final String CENTER = "center";
+	private static final String RADIUS = "radius";
+	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		return new SelectionData(world, "center", "center", "radius");
+		return new SelectionData(world, CENTER, CENTER, RADIUS);
 	}
 	
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("center", new PosCommandHandler("center", this::newSelectionData));
-		map.put("radius", new LengthCommandHandler("radius", this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
 		return map;
 	}
 	
@@ -58,15 +59,14 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
-		var center = (Vector3D)selData.getExtraData("center");
-		var radius = (Double)selData.getExtraData("radius");
+		var center = (Vector3D)selData.getExtraData(CENTER);
+		var radius = (Double)selData.getExtraData(RADIUS);
 		if(center == null || radius == null) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new Sphere(radius);
-		region = Region3Ds.shift(region, center);
-		BoundRegion3D boundReg = new SphereBoundRegion(region, center, radius);
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		Region3D region = new Sphere(radius).createShifted(center);
+		RegionBound bound = new SphereBound(radius).createShifted(center);
+		return new Selection(selData.world(), selData.getOffset(), region, bound);
 	}
 	
 }

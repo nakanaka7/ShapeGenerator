@@ -55,7 +55,7 @@ public class MirrorCommandHandler implements SubCommandHandler {
 		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, playerData.getBlockPhysics());
 		mirrorCmd.execute();
 		undoManager.add(mirrorCmd);
-		player.print(LogColor.RED + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
+		player.print(LogColor.GOLD + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 	}
 	
 	@Override

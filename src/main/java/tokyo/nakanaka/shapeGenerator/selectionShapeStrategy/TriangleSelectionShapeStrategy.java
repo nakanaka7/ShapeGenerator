@@ -12,27 +12,30 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 
 public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
+	private static final String POS1 = "pos1";
+	private static final String POS2 = "pos2";
+	private static final String POS3 = "pos3";
+	private static final String THICKNESS = "thickness";
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		SelectionData selData = new SelectionData(world, "pos1", "pos1", "pos2", "pos3", "thickness");
-		selData.setExtraData("thickness", 1.0);
+		SelectionData selData = new SelectionData(world, POS1, POS1, POS2, POS3, THICKNESS);
+		selData.setExtraData(THICKNESS, 1.0);
 		return selData;
 	}
 	
 	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandler("pos1", this::newSelectionData));
-		map.put("pos2", new PosCommandHandler("pos2", this::newSelectionData));
-		map.put("pos3", new PosCommandHandler("pos3", this::newSelectionData));
-		map.put("thickness", new LengthCommandHandler("thickness", this::newSelectionData));
+		map.put(POS1, new PosCommandHandler(POS1, this::newSelectionData));
+		map.put(POS2, new PosCommandHandler(POS2, this::newSelectionData));
+		map.put(POS3, new PosCommandHandler(POS3, this::newSelectionData));
+		map.put(THICKNESS, new LengthCommandHandler(THICKNESS, this::newSelectionData));
 		return map;
 	}
 	
@@ -48,31 +51,30 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 	
 	@Override
 	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData("pos1", blockPos.toVector3D());
-		selData.setExtraData("pos2", null);
-		selData.setExtraData("pos3", null);
+		selData.setExtraData(POS1, blockPos.toVector3D());
+		selData.setExtraData(POS2, null);
+		selData.setExtraData(POS3, null);
 	}
 	
 	@Override
 	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		if(selData.getExtraData("pos1") == null) {
+		if(selData.getExtraData(POS1) == null) {
 			throw new IllegalStateException();
 		}
 		Vector3D pos = blockPos.toVector3D();
-		if(selData.getExtraData("pos2") == null) {
-			selData.setExtraData("pos2", pos);
+		if(selData.getExtraData(POS2) == null) {
+			selData.setExtraData(POS2, pos);
 		}else {
-			selData.setExtraData("pos3", pos);
+			selData.setExtraData(POS3, pos);
 		}
 	}
 	
 	@Override
 	public Selection buildSelection(SelectionData selData) {
-		BoundRegion3D boundReg;
-		Vector3D pos1 = (Vector3D) selData.getExtraData("pos1");
-		Vector3D pos2 = (Vector3D) selData.getExtraData("pos2");
-		Vector3D pos3 = (Vector3D) selData.getExtraData("pos3");
-		Double thickness = (Double) selData.getExtraData("thickness");
+		Vector3D pos1 = (Vector3D) selData.getExtraData(POS1);
+		Vector3D pos2 = (Vector3D) selData.getExtraData(POS2);
+		Vector3D pos3 = (Vector3D) selData.getExtraData(POS3);
+		Double thickness = (Double) selData.getExtraData(THICKNESS);
 		if(pos1 == null || pos2 == null || pos3 == null || thickness == null) {
 			throw new IllegalStateException();
 		}
@@ -85,8 +87,8 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		double lbx = min(pos1.getX(), pos2.getX(), pos3.getX()) - thickness / 2;
 		double lby = min(pos1.getY(), pos2.getY(), pos3.getY()) - thickness / 2;
 		double lbz = min(pos1.getZ(), pos2.getZ(), pos3.getZ()) - thickness / 2;
-		boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		var bound = new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+		return new Selection(selData.world(), selData.getOffset(), region, bound);
 	}
 	
 }

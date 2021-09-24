@@ -11,16 +11,16 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cone;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
-	private String CENTER = "center";
-	private String RADIUS = "radius";
-	private String HEIGHT = "height";
-	private String DIRECTION = "direction";
+	private static final String CENTER = "center";
+	private static final String RADIUS = "radius";
+	private static final String HEIGHT = "height";
+	private static final String DIRECTION = "direction";
 	
 	@Override
 	public SelectionData newSelectionData(World world) {
@@ -92,18 +92,17 @@ public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
 			throw new IllegalStateException();
 		}
 		Region3D region = new Cone(radius, height);
-		BoundRegion3D boundReg = new CuboidBoundRegion(region, radius, radius, height, -radius, -radius, 0);
-		Vector3D offset = selData.getOffset();
-		boundReg = boundReg.createShifted(offset);
+		RegionBound bound = new CuboidBound(radius, radius, height, -radius, -radius, 0);
+		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
 		switch(dir) {
-		case NORTH -> boundReg = boundReg.createRotated(Axis.Y, 180, offset);
+		case NORTH -> sel = sel.createRotated(Axis.Y, 180);
 		case SOUTH -> {}
-		case EAST -> boundReg = boundReg.createRotated(Axis.Y, 90, offset);
-		case WEST -> boundReg = boundReg.createRotated(Axis.Y, -90, offset);
-		case UP -> boundReg = boundReg.createRotated(Axis.X, -90, offset);
-		case DOWN -> boundReg = boundReg.createRotated(Axis.X, 90, offset);
-		};
-		return new Selection(selData.world(), boundReg, offset);
+		case EAST -> sel = sel.createRotated(Axis.Y, 90);
+		case WEST -> sel = sel.createRotated(Axis.Y, -90);
+		case UP -> sel = sel.createRotated(Axis.X, -90);
+		case DOWN -> sel = sel.createRotated(Axis.X, 90);
+		}
+		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
-
+	
 }

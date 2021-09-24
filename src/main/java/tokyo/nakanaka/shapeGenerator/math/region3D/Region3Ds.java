@@ -20,9 +20,9 @@ public class Region3Ds {
 	public static Region3D shift(Region3D original, Vector3D displacement) {
 		if(original instanceof AffineTransformedRegion3D) {
 			AffineTransformedRegion3D affReg = (AffineTransformedRegion3D) original;
-			Region3D newOriginal = affReg.getOriginalRegion3D();
-			LinearTransformation newTrans = affReg.getLinearTransformation();
-			Vector3D newOffset = affReg.getOffset().add(displacement);
+			Region3D newOriginal = affReg.originalRegion3D();
+			LinearTransformation newTrans = affReg.linearTransformation();
+			Vector3D newOffset = affReg.displacement().add(displacement);
 			return new AffineTransformedRegion3D(newOriginal, newTrans, newOffset);
 		}else {
 			return new AffineTransformedRegion3D(original, LinearTransformation.IDENTITY, displacement);
@@ -32,10 +32,10 @@ public class Region3Ds {
 	public static Region3D linearTransform(Region3D original, LinearTransformation trans) {
 		if(original instanceof AffineTransformedRegion3D) {
 			AffineTransformedRegion3D affReg = (AffineTransformedRegion3D) original;
-			Vector3D offset = affReg.getOffset();
+			Vector3D offset = affReg.displacement();
 			if(offset.equals(Vector3D.ORIGIN)) {
-				Region3D newOriginal = affReg.getOriginalRegion3D();
-				LinearTransformation newTrans = trans.multipy(affReg.getLinearTransformation());
+				Region3D newOriginal = affReg.originalRegion3D();
+				LinearTransformation newTrans = trans.multipy(affReg.linearTransformation());
 				return new AffineTransformedRegion3D(newOriginal, newTrans, Vector3D.ORIGIN);
 			}
 		}

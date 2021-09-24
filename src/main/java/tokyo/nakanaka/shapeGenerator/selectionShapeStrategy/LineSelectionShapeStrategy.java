@@ -9,10 +9,10 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.BoundRegion3D;
-import tokyo.nakanaka.shapeGenerator.math.boundRegion3D.CuboidBoundRegion;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Line;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 	
@@ -67,8 +67,8 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 		double lbx = Math.min(pos1.getX(), pos2.getX()) - thickness;
 		double lby = Math.min(pos1.getY(), pos2.getY()) - thickness;
 		double lbz = Math.min(pos1.getZ(), pos2.getZ()) - thickness;	
-		BoundRegion3D boundReg = new CuboidBoundRegion(region, ubx, uby, ubz, lbx, lby, lbz);
-		return new Selection(selData.world(), boundReg, selData.getOffset());
+		RegionBound bound = new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+		return new Selection(selData.world(), selData.getOffset(), region, bound);
 	}
 	
 }
