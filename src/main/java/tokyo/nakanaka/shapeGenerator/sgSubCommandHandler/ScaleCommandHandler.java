@@ -38,6 +38,10 @@ public class ScaleCommandHandler implements SubCommandHandler{
 			player.print(LogColor.RED + "Can not parse double");
 			return;
 		}
+		if(factor == 0) {
+			player.print(LogColor.RED + "The scale factor must not be zero");
+			return;
+		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
 		GenerateCommand originalCmd = null;
 		for(int i = undoManager.undoSize() - 1; i >= 0; --i) {
