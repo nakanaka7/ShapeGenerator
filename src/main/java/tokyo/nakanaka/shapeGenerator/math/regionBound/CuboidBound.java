@@ -8,7 +8,7 @@ import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 
-public class CuboidBoundNew implements RegionBound {
+public class CuboidBound implements RegionBound {
 	private Cuboid cuboid;
 	private LinearTransformation trans;
 	private Vector3D dis;
@@ -26,17 +26,17 @@ public class CuboidBoundNew implements RegionBound {
 	 * @param trans a linear transformation which is applied to the first cuboid. The origin of 3D space is unchanged.
 	 * @param dis a displacement for the last procedure.
 	 */
-	public CuboidBoundNew(Cuboid cuboid, LinearTransformation trans, Vector3D dis) {
+	public CuboidBound(Cuboid cuboid, LinearTransformation trans, Vector3D dis) {
 		this.cuboid = cuboid;
 		this.trans = trans;
 		this.dis = dis;
 	}
 
-	public CuboidBoundNew(Cuboid cuboid) {
+	public CuboidBound(Cuboid cuboid) {
 		this(cuboid, LinearTransformation.IDENTITY, Vector3D.ZERO);
 	}
 	
-	public CuboidBoundNew(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
+	public CuboidBound(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
 			double lowerBoundY, double lowerBoundZ) {
 		this(new Cuboid(upperBoundX, upperBoundY, upperBoundZ, lowerBoundX, lowerBoundY, lowerBoundZ));
 	}
@@ -116,7 +116,7 @@ public class CuboidBoundNew implements RegionBound {
 
 	@Override
 	public RegionBound createShifted(Vector3D dis) {
-		return new CuboidBoundNew(this.cuboid, this.trans, this.dis.add(dis));
+		return new CuboidBound(this.cuboid, this.trans, this.dis.add(dis));
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class CuboidBoundNew implements RegionBound {
 		a = trans.multipy(a);
 		b = trans.apply(b);
 		b = b.add(offset);
-		return new CuboidBoundNew(this.cuboid, a, b);
+		return new CuboidBound(this.cuboid, a, b);
 	}
 	
 }

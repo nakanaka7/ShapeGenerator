@@ -7,7 +7,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;
 import tokyo.nakanaka.math.Vector3D;
 
-public class CuboidBound implements RegionBound {
+public class CuboidBoundOld implements RegionBound {
 	private double upperBoundX;
 	private double upperBoundY;
 	private double upperBoundZ;
@@ -15,7 +15,7 @@ public class CuboidBound implements RegionBound {
 	private double lowerBoundY;
 	private double lowerBoundZ;
 
-	public CuboidBound(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
+	public CuboidBoundOld(double upperBoundX, double upperBoundY, double upperBoundZ, double lowerBoundX,
 			double lowerBoundY, double lowerBoundZ) {
 		this.upperBoundX = upperBoundX;
 		this.upperBoundY = upperBoundY;
