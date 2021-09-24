@@ -7,6 +7,7 @@ import java.util.Map;
 
 import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.SemVer;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
@@ -26,6 +27,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.VersionCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
 
 @PrivateAPI
@@ -47,8 +49,9 @@ class SgCommandHandler implements CommandHandler {
 		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
 	}
 	
-	SgCommandHandler(PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory) {
+	SgCommandHandler(SemVer semVer, PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory) {
 		this.playerDataRepository = playerDataRepository;
+		this.sgSubCmdHandlerMap.put("version", new VersionCommandHandler(semVer));
 		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(shapeStrtgRepo));
 		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(shapeStrtgRepo));
 		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
