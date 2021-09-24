@@ -2,6 +2,7 @@ package tokyo.nakanaka.shapeGenerator;
 
 import java.util.List;
 
+import tokyo.nakanaka.SemVer;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
@@ -35,7 +36,7 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_TORUS, new HollowTorusSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, new HollowRegularPrismSelectionShapeStrategy());
 		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
-		this.sgCmdHandler = new SgCommandHandler(playerDataRepo, shapeStrtgRepo, blockIDListFactory);
+		this.sgCmdHandler = new SgCommandHandler(new SemVer(1, 1, 0) , playerDataRepo, shapeStrtgRepo, blockIDListFactory);
 		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
 	}
 	
