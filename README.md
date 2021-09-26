@@ -1,5 +1,5 @@
 # ShapeGenerator
-Version: 1.1.0 (in Semantic Versioning 2.0.0)</br>
+Version: 1.2.0 (in Semantic Versioning 2.0.0)</br>
 Java Version: 16</br>
 Original Spigot Library: 1.16.5-R0.1-SNAPSHOT</br>
 Public API Definition:</br>
