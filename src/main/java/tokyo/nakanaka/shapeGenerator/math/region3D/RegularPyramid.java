@@ -37,7 +37,7 @@ public class RegularPyramid implements Region3D {
         if(z < 0 || this.height < z) {
             return false;
         }
-        if(z == height){
+        if(z == height && x == 0 && y == 0){
             return true;
         }
         double s = radius * (1 - z / height);
