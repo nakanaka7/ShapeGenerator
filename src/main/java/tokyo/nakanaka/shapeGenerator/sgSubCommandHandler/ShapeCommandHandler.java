@@ -1,17 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Handles "/sg shape" command
@@ -53,9 +53,9 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
-			case 1 -> List.of(SelectionShape.values()).stream()
+			case 1 -> Stream.of(this.shapeStrtgRepo.registeredShapes())
 					.map(s -> s.toString().toLowerCase())
-					.collect(Collectors.toList());
+					.toList();
 			default -> List.of();
 		};
 	}
