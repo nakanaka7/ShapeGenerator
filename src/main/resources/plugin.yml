@@ -1,6 +1,6 @@
 main: tokyo.nakanaka.shapeGenerator.bukkit.ShapeGeneratorPlugin
 name: ShapeGenerator
-version: 1.1.0
+version: 1.2.0
 commands:
   'sg':
 api-version: 1.16
