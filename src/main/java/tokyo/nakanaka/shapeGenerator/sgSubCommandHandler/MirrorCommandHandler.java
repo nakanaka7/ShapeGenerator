@@ -1,9 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
@@ -14,6 +10,9 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles "/sg mirror" command
@@ -60,11 +59,10 @@ public class MirrorCommandHandler implements SubCommandHandler {
 	
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return Arrays.asList("x", "y", "z");
-		}else {
-			return new ArrayList<>();
-		}
+		return switch(args.length) {
+			case 1 -> List.of("x", "y", "z");
+			default -> new ArrayList<>();
+		};
 	}
 	
 }

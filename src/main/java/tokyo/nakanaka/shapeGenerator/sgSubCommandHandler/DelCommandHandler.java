@@ -1,9 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
@@ -14,6 +10,9 @@ import tokyo.nakanaka.shapeGenerator.command.DeleteCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.DelHelp;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles "/sg del" command
@@ -74,10 +73,10 @@ public class DelCommandHandler implements SubCommandHandler {
 	
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-		}
-		return new ArrayList<>();
+		return switch(args.length) {
+			case 1 -> List.of("1", "2", "3", "4", "5", "6", "7", "8", "9");
+			default ->  List.of();
+		};
 	}
 	
 }

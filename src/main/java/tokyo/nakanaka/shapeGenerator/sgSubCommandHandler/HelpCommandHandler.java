@@ -1,29 +1,13 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.DelHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.HelpHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MaxHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MinHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.MirrorHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.PhyHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.RedoHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.RotHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ScaleHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShiftHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.UndoHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.VersionHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
+
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Handles "/sg help" command
@@ -72,11 +56,10 @@ public class HelpCommandHandler implements SubCommandHandler {
 
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return new ArrayList<>(this.cmdHelpMap.keySet());
-		}else {
-			return List.of();
-		}
+		return switch(args.length){
+			case 1 -> this.cmdHelpMap.keySet().stream().toList();
+			default -> List.of();
+		};
 	}
 
 }

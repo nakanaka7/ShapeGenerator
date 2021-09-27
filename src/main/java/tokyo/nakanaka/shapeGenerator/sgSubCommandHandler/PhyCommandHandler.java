@@ -36,11 +36,10 @@ public class PhyCommandHandler implements SubCommandHandler {
 
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return List.of("true", "false");
-		}else {
-			return List.of();
-		}
+		return switch(args.length) {
+			case 1 -> List.of("true", "false");
+			default -> List.of();
+		};
 	}
 
 }

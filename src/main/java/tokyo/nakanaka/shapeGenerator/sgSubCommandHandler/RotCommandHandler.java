@@ -1,9 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
@@ -14,6 +10,8 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.RotateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+
+import java.util.List;
 
 /**
  * Handles "/sg rot" command
@@ -63,18 +61,15 @@ public class RotCommandHandler implements SubCommandHandler{
 		rotateCmd.execute();
 		undoManager.add(rotateCmd);
 		player.print(LogColor.GOLD + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
-		return;
 	}
 
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return Arrays.asList("x", "y", "z");
-		}else if(args.length == 2) {
-			return Arrays.asList("0.0", "90.0", "-90.0", "180.0", "270.0");
-		}else {
-			return new ArrayList<>();
-		}
+		return switch(args.length) {
+			case 1 -> List.of("x", "y", "z");
+			case 2 -> List.of("0.0", "90.0", "-90.0", "180.0", "270.0");
+			default -> List.of();
+		};
 	}
 
 }
