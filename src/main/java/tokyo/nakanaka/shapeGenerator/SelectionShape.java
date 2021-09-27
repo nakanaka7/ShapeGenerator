@@ -23,7 +23,7 @@ public enum SelectionShape {
 	
 	private String name;
 	
-	private SelectionShape(String name) {
+	SelectionShape(String name) {
 		this.name = name;
 	}
 	
