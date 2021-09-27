@@ -14,6 +14,7 @@ public enum SelectionShape {
 	TRIANGLE("triangle"),
 	TETRAHEDRON("tetrahedron"),
 	REGULAR_PRISM("regular_prism"),
+	REGULAR_PYRAMID("regular_pyramid"),
 	HOLLOW_SPHERE("hollow_sphere"),
 	HOLLOW_CYLINDER("hollow_cylinder"),
 	HOLLOW_CONE("hollow_cone"),
