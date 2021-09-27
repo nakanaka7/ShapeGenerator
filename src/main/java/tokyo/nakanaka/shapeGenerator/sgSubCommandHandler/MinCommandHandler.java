@@ -2,18 +2,13 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.List;
 
-import org.bukkit.Axis;
-
+import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
-import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
-import tokyo.nakanaka.shapeGenerator.command.MinXCommand;
-import tokyo.nakanaka.shapeGenerator.command.MinYCommand;
-import tokyo.nakanaka.shapeGenerator.command.MinZCommand;
+import tokyo.nakanaka.shapeGenerator.command.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 /**
@@ -61,11 +56,7 @@ public class MinCommandHandler implements SubCommandHandler {
 			player.print(LogColor.RED + "Generate blocks first");
 			return;
 		}
-		UndoableCommand minCmd = switch(axis) {
-			case X -> new MinXCommand(originalCmd, coord, playerData.getBlockPhysics());
-			case Y -> new MinYCommand(originalCmd, coord, playerData.getBlockPhysics());
-			case Z -> new MinZCommand(originalCmd, coord, playerData.getBlockPhysics());
-		};
+		UndoableCommand minCmd = new MinCommand(originalCmd, axis, coord, playerData.getBlockPhysics());
 		minCmd.execute();
 		undoManager.add(minCmd);
 		player.print(LogColor.GOLD + "Set min" + axis.toString().toUpperCase() + " -> " + coord);
