@@ -7,8 +7,11 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Handles "/sg help" command
@@ -34,20 +37,35 @@ public class HelpCommandHandler implements SubCommandHandler {
 		this.cmdHelpMap.put("undo", new UndoHelp());
 		this.cmdHelpMap.put("redo", new RedoHelp());
 	}
-	
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 0) {
 			player.print("--- [" + cmdLogColor.main() + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
-				.map(s -> s.getValue())
-				.forEach(s -> player.print(cmdLogColor.main() + s.usage() + ": " + LogColor.RESET + s.description()));
+					.map(s -> s.getValue())
+					.forEach(s -> player.print(cmdLogColor.main() + s.usage() + ": " + LogColor.RESET + s.description()));
 			player.print(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 		}else if(args.length == 1) {
 			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
 			if(cmdHelp != null) {
-				cmdHelp.toMultipleLines().stream()
-					.forEach(s -> player.print(s));
+				if(cmdHelp instanceof BranchCommandHelp branchHelp){
+					List<String> lines = new ArrayList<>();
+					lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg " + args[0] + "] ---------------------");
+					lines.add(cmdLogColor.main() + "Description: " + LogColor.RESET + branchHelp.description());
+					lines.add(cmdLogColor.main() + "Usage: " + LogColor.RESET + "/sg " + args[0] + " " + String.join(" ", branchHelp.parameterUsages()));
+					if(branchHelp.parameterUsages().length != 0){
+						lines.add(cmdLogColor.main() + "Parameter: ");
+						for(int i = 0; i < branchHelp.parameterUsages().length; ++i){
+							lines.add("  " + cmdLogColor.main() + branchHelp.parameterUsages()[i] + ": "
+									+ LogColor.RESET + branchHelp.parameterDescriptions()[i]);
+						}
+					}
+					lines.forEach(player::print);
+				}else {
+					cmdHelp.toMultipleLines().stream()
+							.forEach(s -> player.print(s));
+				}
 			}else {
 				player.print(cmdLogColor.error() + "Unknown subcommand");
 			}
