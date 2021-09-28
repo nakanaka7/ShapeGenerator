@@ -22,7 +22,7 @@ public class HelpHelp implements CommandHelp {
 	@Override
 	public List<String> toMultipleLines(){
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg del] ---------------------");
+		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg help] ---------------------");
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
