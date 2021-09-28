@@ -29,15 +29,4 @@ public class MirrorHelp implements BranchCommandHelp {
 		return new String[]{"an axis to mirror"};
 	}
 
-	@Override
-	public List<String> toMultipleLines() {
-		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg mirror] ---------------------");
-		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
-		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
-		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  x|y|z: " + LogColor.RESET + "an axis to mirror");
-		return lines;
-	}
-	
 }

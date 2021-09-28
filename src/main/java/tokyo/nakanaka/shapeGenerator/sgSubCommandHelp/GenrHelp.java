@@ -29,15 +29,4 @@ public class GenrHelp implements BranchCommandHelp {
 		return new String[]{"the block to generate"};
 	}
 
-	@Override
-	public List<String> toMultipleLines(){
-		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg genr] ---------------------");
-		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
-		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
-		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <block>: " + LogColor.RESET + "the block to generate");
-		return lines;
-	}
-
 }

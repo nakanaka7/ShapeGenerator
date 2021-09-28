@@ -29,15 +29,4 @@ public class PhyHelp implements BranchCommandHelp {
 		return new String[]{"an option for physics"};
 	}
 
-	@Override
-	public List<String> toMultipleLines() {
-		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg phy] ---------------------");
-		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
-		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
-		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  true|false: " + LogColor.RESET + "an option for physics");
-		return lines;
-	}
-
 }

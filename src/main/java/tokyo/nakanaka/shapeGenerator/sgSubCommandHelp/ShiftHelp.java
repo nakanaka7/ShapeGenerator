@@ -29,16 +29,4 @@ public class ShiftHelp implements BranchCommandHelp {
 		return new String[]{"the direction to shift", "distance of shift"};
 	}
 
-	@Override
-	public List<String> toMultipleLines() {
-		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg shift] ---------------------");
-		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
-		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
-		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  <direction>: " + LogColor.RESET + "the direction to shift");
-		lines.add(LogColor.GOLD + "  <distance>: " + LogColor.RESET + "distance of shift");
-		return lines;
-	}
-	
 }

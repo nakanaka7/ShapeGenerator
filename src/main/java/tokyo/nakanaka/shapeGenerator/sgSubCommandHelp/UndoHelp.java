@@ -29,15 +29,4 @@ public class UndoHelp implements BranchCommandHelp {
 		return new String[]{"a number to undo generation(s)"};
 	}
 
-	@Override
-	public List<String> toMultipleLines() {
-		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg undo] ---------------------");
-		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
-		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
-		lines.add(LogColor.GOLD + "Parameter: ");
-		lines.add(LogColor.GOLD + "  [number]: " + LogColor.RESET + "a number to undo generation(s)");
-		return lines;
-	}
-	
 }

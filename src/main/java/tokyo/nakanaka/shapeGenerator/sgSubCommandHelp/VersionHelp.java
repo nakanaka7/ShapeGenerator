@@ -29,13 +29,4 @@ public class VersionHelp implements BranchCommandHelp {
 		return new String[]{};
 	}
 
-	@Override
-	public List<String> toMultipleLines() {
-		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg version] ---------------------");
-		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
-		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
-		return lines;
-	}
-
 }
