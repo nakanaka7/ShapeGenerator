@@ -8,10 +8,8 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Handles "/sg help" command
@@ -62,9 +60,8 @@ public class HelpCommandHandler implements SubCommandHandler {
 						}
 					}
 					lines.forEach(player::print);
-				}else {
-					cmdHelp.toMultipleLines().stream()
-							.forEach(s -> player.print(s));
+				}else if(cmdHelp instanceof  RootCommandHelp rootHelp){
+					rootHelp.toMultipleLines().forEach(player::print);
 				}
 			}else {
 				player.print(cmdLogColor.error() + "Unknown subcommand");
