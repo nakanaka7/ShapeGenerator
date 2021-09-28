@@ -7,6 +7,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
@@ -14,6 +15,7 @@ import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class OffsetCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
 	public OffsetCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
@@ -40,12 +42,12 @@ public class OffsetCommandHandler implements SubCommandHandler {
 				y = Double.parseDouble(args[1]);
 				z = Double.parseDouble(args[2]);
 			}catch(IllegalArgumentException e) {
-				player.print(LogColor.RED + "Usage: " + usage);
+				player.print(cmdLogColor.error() + "Usage: " + usage);
 				return;
 			}
 		}
 		default -> {
-			player.print(LogColor.RED + "Usage: " + usage);
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}	
 		}
