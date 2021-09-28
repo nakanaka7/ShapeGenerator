@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class SelHelp implements CommandHelp {
+public class SelHelp implements RootCommandHelp {
 	private String usage = "/sg sel <subcommand>";
 	private String description = "Specify the selection";
 

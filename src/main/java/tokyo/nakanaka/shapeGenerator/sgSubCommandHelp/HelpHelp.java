@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class HelpHelp implements CommandHelp {
+public class HelpHelp implements RootCommandHelp {
 	private String usage = "/sg help [subcommand]";
 	private String description = "Print the command help";
 
