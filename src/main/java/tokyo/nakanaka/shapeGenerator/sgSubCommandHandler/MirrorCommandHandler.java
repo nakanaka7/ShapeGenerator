@@ -10,6 +10,7 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +19,19 @@ import java.util.List;
  * Handles "/sg mirror" command
  */
 public class MirrorCommandHandler implements SubCommandHandler {
-	
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: /sg mirror <x|y|z>");
+			player.print(cmdLogColor.error() + "Usage: /sg mirror <x|y|z>");
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse axis");
+			player.print(cmdLogColor.error() + "Can not parse axis");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -48,13 +50,13 @@ public class MirrorCommandHandler implements SubCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}	
 		MirrorCommand mirrorCmd = new MirrorCommand(originalCmd, axis, playerData.getBlockPhysics());
 		mirrorCmd.execute();
 		undoManager.add(mirrorCmd);
-		player.print(LogColor.GOLD + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
+		player.print(cmdLogColor.main() + "Mirrored along the " + axis.toString().toLowerCase() + " axis");
 	}
 	
 	@Override

@@ -8,17 +8,19 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.WandHelp;
 
 /**
  * Handles "/sg wand" command
  */
 public class WandCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
-			player.print(LogColor.RED + "Usage: " + new WandHelp().getUsage());
+			player.print(cmdLogColor.error() + "Usage: " + new WandHelp().getUsage());
 			return;
 		}
 		Item item = new Item(new NamespacedID("minecraft", "blaze_rod"));

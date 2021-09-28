@@ -11,6 +11,7 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 
 import java.util.List;
 
@@ -18,11 +19,12 @@ import java.util.List;
  * Handles "/sg shift" command
  */
 public class ShiftCommandHandler implements SubCommandHandler{
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(LogColor.RED + "Usage: /sg shift <direction> <length>");
+			player.print(cmdLogColor.error() + "Usage: /sg shift <direction> <length>");
 			return;
 		}
 		Direction dir;
@@ -30,13 +32,13 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		try {
 			dir = Direction.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse direction");
+			player.print(cmdLogColor.error() + "Can not parse direction");
 			return;
 		}
 		try {
 			blocks = Double.parseDouble(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse integer");
+			player.print(cmdLogColor.error() + "Can not parse integer");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -55,7 +57,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}
 		double dx = dir.getX() * blocks;
@@ -65,7 +67,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		ShiftCommand shiftCmd = new ShiftCommand(originalCmd, displacement, playerData.getBlockPhysics());
 		shiftCmd.execute();
 		undoManager.add(shiftCmd);
-		player.print(LogColor.GOLD + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
+		player.print(cmdLogColor.main() + "Shifted block(s) " + blocks + " " + dir.toString().toLowerCase());
 	}
 	
 	@Override

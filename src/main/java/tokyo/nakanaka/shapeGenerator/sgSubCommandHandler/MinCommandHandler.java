@@ -10,31 +10,33 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 
 /**
  * Handles "sg min" subcommand
  */
 public class MinCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		//check args length
 		if(args.length != 2) {
-			player.print(LogColor.RED + "Usage: " + "min x|y|z <coordinate>");
+			player.print(cmdLogColor.error() + "Usage: " + "min x|y|z <coordinate>");
 			return;
 		}
 		Axis axis;
 		try {
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse axis");
+			player.print(cmdLogColor.error() + "Can not parse axis");
 			return;
 		}
 		double coord;
 		try {
 			coord = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse coordinate");
+			player.print(cmdLogColor.error() + "Can not parse coordinate");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -53,14 +55,13 @@ public class MinCommandHandler implements SubCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}
 		UndoableCommand minCmd = new MinCommand(originalCmd, axis, coord, playerData.getBlockPhysics());
 		minCmd.execute();
 		undoManager.add(minCmd);
-		player.print(LogColor.GOLD + "Set min" + axis.toString().toUpperCase() + " -> " + coord);
-		return;
+		player.print(cmdLogColor.main() + "Set min" + axis.toString().toUpperCase() + " -> " + coord);
 	}
 
 	@Override

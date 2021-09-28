@@ -5,6 +5,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 
 import java.util.List;
 
@@ -12,10 +13,11 @@ import java.util.List;
  * Handles "/sg redo" command
  */
 public class RedoCommandHandler implements SubCommandHandler{
-		
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		String usageMsg = LogColor.RED + "Usage: /sg redo [number]";
+		String usageMsg = cmdLogColor.error() + "Usage: /sg redo [number]";
 		if(args.length > 1) {
 			player.print(usageMsg);
 			return;
@@ -25,11 +27,11 @@ public class RedoCommandHandler implements SubCommandHandler{
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				player.print(LogColor.RED + "Can not parse the number");
+				player.print(cmdLogColor.error() + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				player.print(LogColor.RED + "The number must be larger than 0");
+				player.print(cmdLogColor.error() + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -43,12 +45,12 @@ public class RedoCommandHandler implements SubCommandHandler{
 			++totalNum;
 		}
 		if(totalNum == 0) {
-			player.print(LogColor.RED + "Nothing to redo");
+			player.print(cmdLogColor.error() + "Nothing to redo");
 			return;
 		}
-		player.print(LogColor.GOLD + "Redid " + totalNum + " command(s)");
+		player.print(cmdLogColor.main() + "Redid " + totalNum + " command(s)");
 		if(totalNum < num) {
-			player.print(LogColor.RED + "Reached the end command");
+			player.print(cmdLogColor.error() + "Reached the end command");
 		}
 	}
 

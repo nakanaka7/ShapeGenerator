@@ -6,16 +6,18 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.PhyHelp;
 
 /**
  * Handles "/sg phy" command
  */
 public class PhyCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		String usageMsg = LogColor.RED + "Usage: " + new PhyHelp().getUsage();
+		String usageMsg = cmdLogColor.error() + "Usage: " + new PhyHelp().getUsage();
 		if(args.length != 1) {
 			player.print(usageMsg);
 			return;
@@ -31,7 +33,7 @@ public class PhyCommandHandler implements SubCommandHandler {
 			return;
 		}
 		playerData.setBlockPhysics(physics);
-		player.print(LogColor.GOLD + "Set physics -> " + bool);
+		player.print(cmdLogColor.main() + "Set physics -> " + bool);
 	}
 
 	@Override

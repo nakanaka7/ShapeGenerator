@@ -13,15 +13,17 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
 
 /**
  * Handles "/sg genr" command
  */
 public class GenrCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	private BlockIDListFactory blockIDFactory;
-	
+
 	public GenrCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDFactory) {
 		this.shapeStrtgRepo = shapeStrtgRepo;
 		this.blockIDFactory = blockIDFactory;
@@ -30,14 +32,14 @@ public class GenrCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " +  new GenrHelp().getUsage());
+			player.print(cmdLogColor.error() + "Usage: " +  new GenrHelp().getUsage());
 			return;
 		}
 		Block block;
 		try {
 			block = Block.valueOf(args[0]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Invalid block specification");
+			player.print(cmdLogColor.error() + "Invalid block specification");
 			return;
 		}
 		Selection sel;
@@ -45,17 +47,17 @@ public class GenrCommandHandler implements SubCommandHandler {
 		try {
 			sel = shapeStrtg.buildSelection(playerData.getSelectionData());
 		}catch(IllegalStateException e) {
-			player.print(LogColor.RED + "Incomplete selection");
+			player.print(cmdLogColor.error() + "Incomplete selection");
 			return;
 		}
 		GenerateCommand generateCmd = new GenerateCommand(sel, block, playerData.getBlockPhysics());	
 		try {
 			generateCmd.execute();
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Unsettable block");
+			player.print(cmdLogColor.error() + "Unsettable block");
 			return;
 		}
-		player.print(LogColor.GOLD + "Generated block(s)");
+		player.print(cmdLogColor.main() + "Generated block(s)");
 		playerData.getUndoCommandManager().add(generateCmd);
 	}
 

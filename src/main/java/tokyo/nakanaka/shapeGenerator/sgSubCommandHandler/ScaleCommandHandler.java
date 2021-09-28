@@ -12,34 +12,36 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ScaleCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
 
 /**
  * Handles "/sg scale" command
  */
 public class ScaleCommandHandler implements SubCommandHandler{
-	
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
+			player.print(cmdLogColor.error() + "Usage: /sg scale <x|y|z> <factor>");
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse axis");
+			player.print(cmdLogColor.error() + "Can not parse axis");
 			return;
 		}
 		double factor;
 		try {
 			factor = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse double");
+			player.print(cmdLogColor.error() + "Can not parse double");
 			return;
 		}
 		if(factor == 0) {
-			player.print(LogColor.RED + "The scale factor must not be zero");
+			player.print(cmdLogColor.error() + "The scale factor must not be zero");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -58,14 +60,13 @@ public class ScaleCommandHandler implements SubCommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}
 		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, playerData.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
-		player.print(LogColor.GOLD + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
-		return;
+		player.print(cmdLogColor.main() + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
 	}
 	
 	@Override

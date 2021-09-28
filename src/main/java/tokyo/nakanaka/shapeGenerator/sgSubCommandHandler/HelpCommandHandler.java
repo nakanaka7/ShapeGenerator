@@ -13,6 +13,7 @@ import java.util.List;
  * Handles "/sg help" command
  */
 public class HelpCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 	
 	public HelpCommandHandler() {
@@ -36,21 +37,21 @@ public class HelpCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 0) {
-			player.print("--- [" + LogColor.GOLD + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
+			player.print("--- [" + cmdLogColor.main() + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
 				.map(s -> s.getValue())
 				.forEach(s -> player.print(s.toSingleLine()));
-			player.print(LogColor.GOLD + "Run \"/sg help <subcommand>\" for details");
+			player.print(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 		}else if(args.length == 1) {
 			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
 			if(cmdHelp != null) {
 				cmdHelp.toMultipleLines().stream()
 					.forEach(s -> player.print(s));
 			}else {
-				player.print(LogColor.RED + "Unknown subcommand");
+				player.print(cmdLogColor.error() + "Unknown subcommand");
 			}
 		}else {
-			player.print(LogColor.RED + "Usage: /sg help [subcommand]");
+			player.print(cmdLogColor.error() + "Usage: /sg help [subcommand]");
 		}
 	}
 
