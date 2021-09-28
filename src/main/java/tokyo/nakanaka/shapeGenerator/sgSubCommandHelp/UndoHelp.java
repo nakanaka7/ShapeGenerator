@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class UndoHelp implements CommandHelp {
 	private String usage = "/sg undo [number]";
 	private String description = "Undo block changing command(s)";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}

@@ -3,6 +3,12 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 import java.util.List;
 
 public interface CommandHelp {
+
+	/**
+	 * Returns a usage of the command
+	 * @return a usage of the command
+	 */
+	String getUsage();
 	/**
 	 * Return a single line which contains the information for the command.
 	 * This is used by HelpCommandHandler class

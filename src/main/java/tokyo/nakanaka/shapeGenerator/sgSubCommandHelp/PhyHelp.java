@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class PhyHelp implements CommandHelp {
 	private String usage = "/sg phy true|false";
 	private String description = "Toggle physics option for generating blocks";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}

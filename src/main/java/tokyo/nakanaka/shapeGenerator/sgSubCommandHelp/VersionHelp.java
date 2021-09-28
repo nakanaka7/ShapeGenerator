@@ -8,7 +8,12 @@ import tokyo.nakanaka.logger.LogColor;
 public class VersionHelp implements CommandHelp {
 	private String usage = "/sg version";
 	private String description = "Print the version";
-	
+
+	@Override
+	public String getUsage() {
+		return this.usage;
+	}
+
 	@Override
 	public String toSingleLine() {
 		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;

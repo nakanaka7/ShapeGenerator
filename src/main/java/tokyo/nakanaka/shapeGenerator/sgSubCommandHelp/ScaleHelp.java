@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class ScaleHelp implements CommandHelp {
 	private String usage = "/sg scale x|y|z <factor>";
 	private String description = "Change the scale of the generated block(s)";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}

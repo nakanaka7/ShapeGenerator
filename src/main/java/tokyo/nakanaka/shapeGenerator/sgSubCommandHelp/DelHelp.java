@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class DelHelp implements CommandHelp {
 	private String usage = "/sg del [number]";
 	private String description = "Delete the generated block(s)";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}

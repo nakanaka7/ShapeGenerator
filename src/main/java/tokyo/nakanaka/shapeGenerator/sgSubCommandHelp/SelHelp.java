@@ -9,10 +9,7 @@ public class SelHelp implements CommandHelp {
 	private String usage = "/sg sel <subcommand>";
 	private String description = "Specify the selection";
 
-	/**
-	 * Get the usage
-	 * @return the usage
-	 */
+	@Override
 	public String getUsage() {
 		return usage;
 	}

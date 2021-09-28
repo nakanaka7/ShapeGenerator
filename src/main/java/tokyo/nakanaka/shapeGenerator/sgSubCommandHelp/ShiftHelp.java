@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class ShiftHelp implements CommandHelp {
 	private String usage = "/sg shift <direction> <distance>";
 	private String description = "Shift the generated blocks";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}

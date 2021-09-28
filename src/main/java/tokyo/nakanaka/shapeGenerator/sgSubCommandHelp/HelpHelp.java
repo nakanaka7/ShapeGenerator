@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class HelpHelp implements CommandHelp {
 	private String usage = "/sg help [subcommand]";
 	private String description = "Print the command help";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}

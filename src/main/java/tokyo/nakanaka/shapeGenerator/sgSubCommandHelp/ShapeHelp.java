@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class ShapeHelp implements CommandHelp {
 	private String usage = "/sg shape <type>";
 	private String description = "Set selection shape";
-	
+
+	@Override
 	public String getUsage() {
 		return usage;
 	}

@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class RedoHelp implements CommandHelp {
 	private String usage = "/sg redo [number]";
 	private String description = "Redo block changing command(s)";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}

@@ -8,8 +8,12 @@ import tokyo.nakanaka.logger.LogColor;
 public class MaxHelp implements CommandHelp {
 	private String usage = "/sg max x|y|z <coordinate>";
 	private String description = "Set max coordinate of the generated blocks";
-	
-	
+
+	@Override
+	public String getUsage() {
+		return this.usage;
+	}
+
 	@Override
 	public String toSingleLine() {
 		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;

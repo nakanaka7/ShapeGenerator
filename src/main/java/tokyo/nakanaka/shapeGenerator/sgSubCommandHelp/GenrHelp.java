@@ -9,6 +9,7 @@ public class GenrHelp implements CommandHelp {
 	private String usage = "/sg genr <block>";
 	private String description = "Generate block(s) in the selection";
 
+	@Override
 	public String getUsage() {
 		return "/sg genr <block>";
 	}

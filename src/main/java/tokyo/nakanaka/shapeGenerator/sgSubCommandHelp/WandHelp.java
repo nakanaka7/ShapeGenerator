@@ -8,7 +8,8 @@ import tokyo.nakanaka.logger.LogColor;
 public class WandHelp implements CommandHelp {
 	private String usage = "/sg wand";
 	private String description = "Give a player a wand";
-	
+
+	@Override
 	public String getUsage() {
 		return this.usage;
 	}
