@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class WandHelp implements CommandHelp {
+public class WandHelp implements BranchCommandHelp {
 	private String usage = "/sg wand";
 	private String description = "Give a player a wand";
 
@@ -17,6 +17,16 @@ public class WandHelp implements CommandHelp {
 	@Override
 	public String description() {
 		return description;
+	}
+
+	@Override
+	public String[] parameterUsages(){
+		return new String[]{};
+	}
+
+	@Override
+	public String[] parameterDescriptions(){
+		return new String[]{};
 	}
 
 	@Override

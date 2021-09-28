@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class ShiftHelp implements CommandHelp {
+public class ShiftHelp implements BranchCommandHelp {
 	private String usage = "/sg shift <direction> <distance>";
 	private String description = "Shift the generated blocks";
 
@@ -17,6 +17,16 @@ public class ShiftHelp implements CommandHelp {
 	@Override
 	public String description() {
 		return description;
+	}
+
+	@Override
+	public String[] parameterUsages(){
+		return new String[]{"<direction>", "<distance>"};
+	}
+
+	@Override
+	public String[] parameterDescriptions(){
+		return new String[]{"the direction to shift", "distance of shift"};
 	}
 
 	@Override

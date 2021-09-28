@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class VersionHelp implements CommandHelp {
+public class VersionHelp implements BranchCommandHelp {
 	private String usage = "/sg version";
 	private String description = "Print the version";
 
@@ -17,6 +17,16 @@ public class VersionHelp implements CommandHelp {
 	@Override
 	public String description() {
 		return description;
+	}
+
+	@Override
+	public String[] parameterUsages(){
+		return new String[]{};
+	}
+
+	@Override
+	public String[] parameterDescriptions(){
+		return new String[]{};
 	}
 
 	@Override
