@@ -15,6 +15,11 @@ public class HelpHelp implements CommandHelp {
 	}
 
 	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
 	public String toSingleLine() {
 		return LogColor.GOLD + usage + ": " + LogColor.RESET + this.description;
 	}

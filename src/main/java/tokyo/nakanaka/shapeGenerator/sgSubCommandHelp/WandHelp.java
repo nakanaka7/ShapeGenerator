@@ -15,6 +15,11 @@ public class WandHelp implements CommandHelp {
 	}
 
 	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
 	public String toSingleLine() {
 		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;
 	}
