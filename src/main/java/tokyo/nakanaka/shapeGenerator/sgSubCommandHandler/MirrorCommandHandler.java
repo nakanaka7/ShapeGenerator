@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 
 import java.util.ArrayList;
 import java.util.List;

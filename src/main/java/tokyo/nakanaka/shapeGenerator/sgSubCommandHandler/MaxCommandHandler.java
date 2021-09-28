@@ -10,7 +10,7 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 
 /**
  * Handles "sg max" subcommand

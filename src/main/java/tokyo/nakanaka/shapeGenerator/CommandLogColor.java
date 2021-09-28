@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
+package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.logger.LogColor;

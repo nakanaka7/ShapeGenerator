@@ -7,7 +7,7 @@ import tokyo.nakanaka.SemVer;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 
 public class VersionCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
