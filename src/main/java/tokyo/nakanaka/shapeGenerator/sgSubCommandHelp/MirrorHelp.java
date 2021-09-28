@@ -10,12 +10,12 @@ public class MirrorHelp implements CommandHelp {
 	private String description = "Mirror the generated blocks";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return this.usage;
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 

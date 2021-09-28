@@ -10,12 +10,12 @@ public class PhyHelp implements CommandHelp {
 	private String description = "Toggle physics option for generating blocks";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return this.usage;
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 

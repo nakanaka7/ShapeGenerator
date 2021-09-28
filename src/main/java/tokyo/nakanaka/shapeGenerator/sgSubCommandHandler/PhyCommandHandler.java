@@ -17,7 +17,7 @@ public class PhyCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		String usageMsg = cmdLogColor.error() + "Usage: " + new PhyHelp().getUsage();
+		String usageMsg = cmdLogColor.error() + "Usage: " + new PhyHelp().usage();
 		if(args.length != 1) {
 			player.print(usageMsg);
 			return;

@@ -10,12 +10,12 @@ public class RedoHelp implements CommandHelp {
 	private String description = "Redo block changing command(s)";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return this.usage;
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 

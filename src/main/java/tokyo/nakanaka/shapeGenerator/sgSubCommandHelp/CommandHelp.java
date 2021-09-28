@@ -8,13 +8,13 @@ public interface CommandHelp {
 	 * Returns a usage of the command
 	 * @return a usage of the command
 	 */
-	String getUsage();
+	String usage();
 
 	/**
 	 * Returns a description of the command;
 	 * @return a description of the command;
 	 */
-	String getDescription();
+	String description();
 	/**
 	 * Return a single line which contains the information for the command.
 	 * This is used by HelpCommandHandler class

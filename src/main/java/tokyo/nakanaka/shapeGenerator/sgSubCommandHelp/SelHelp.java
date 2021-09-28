@@ -10,12 +10,12 @@ public class SelHelp implements CommandHelp {
 	private String description = "Specify the selection";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return usage;
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 

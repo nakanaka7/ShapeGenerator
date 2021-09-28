@@ -10,12 +10,12 @@ public class ShapeHelp implements CommandHelp {
 	private String description = "Set selection shape";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return usage;
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 

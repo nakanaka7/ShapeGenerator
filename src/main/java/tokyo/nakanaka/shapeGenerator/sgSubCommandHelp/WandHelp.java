@@ -10,12 +10,12 @@ public class WandHelp implements CommandHelp {
 	private String description = "Give a player a wand";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return this.usage;
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 

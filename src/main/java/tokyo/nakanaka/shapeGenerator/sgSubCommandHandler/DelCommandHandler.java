@@ -24,7 +24,7 @@ public class DelCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length > 1) {
-			player.print(cmdLogColor.error() + "Usage: " + new DelHelp().getUsage());
+			player.print(cmdLogColor.error() + "Usage: " + new DelHelp().usage());
 			return;
 		}
 		int num = 1;

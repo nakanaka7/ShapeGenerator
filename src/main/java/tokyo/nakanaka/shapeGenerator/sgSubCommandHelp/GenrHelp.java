@@ -10,12 +10,12 @@ public class GenrHelp implements CommandHelp {
 	private String description = "Generate block(s) in the selection";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return "/sg genr <block>";
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 

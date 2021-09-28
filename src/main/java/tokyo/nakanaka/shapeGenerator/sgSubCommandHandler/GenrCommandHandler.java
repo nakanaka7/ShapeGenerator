@@ -32,7 +32,7 @@ public class GenrCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: " +  new GenrHelp().getUsage());
+			player.print(cmdLogColor.error() + "Usage: " +  new GenrHelp().usage());
 			return;
 		}
 		Block block;

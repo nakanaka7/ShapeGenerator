@@ -10,12 +10,12 @@ public class ScaleHelp implements CommandHelp {
 	private String description = "Change the scale of the generated block(s)";
 
 	@Override
-	public String getUsage() {
+	public String usage() {
 		return this.usage;
 	}
 
 	@Override
-	public String getDescription() {
+	public String description() {
 		return description;
 	}
 
