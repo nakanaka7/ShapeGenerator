@@ -20,11 +20,6 @@ public class PhyHelp implements CommandHelp {
 	}
 
 	@Override
-	public String toSingleLine() {
-		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;
-	}
-
-	@Override
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
 		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg phy] ---------------------");

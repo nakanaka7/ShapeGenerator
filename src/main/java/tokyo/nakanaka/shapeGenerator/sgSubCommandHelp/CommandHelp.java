@@ -15,12 +15,7 @@ public interface CommandHelp {
 	 * @return a description of the command;
 	 */
 	String description();
-	/**
-	 * Return a single line which contains the information for the command.
-	 * This is used by HelpCommandHandler class
-	 * @return a single line which contains the information for the command
-	 */
-	String toSingleLine();
+
 	/**
 	 * Return multiple lines which contains the information for the command
 	 * This is used by HelpCommandHandler class

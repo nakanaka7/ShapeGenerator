@@ -41,7 +41,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 			player.print("--- [" + cmdLogColor.main() + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
 				.map(s -> s.getValue())
-				.forEach(s -> player.print(s.toSingleLine()));
+				.forEach(s -> player.print(cmdLogColor.main() + s.usage() + ": " + LogColor.RESET + s.description()));
 			player.print(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 		}else if(args.length == 1) {
 			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
