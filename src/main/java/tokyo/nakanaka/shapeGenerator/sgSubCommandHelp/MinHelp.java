@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class MinHelp implements CommandHelp {
+public class MinHelp implements BranchCommandHelp {
 	private String usage = "/sg min x|y|z <coordinate>";
 	private String description = "Set min coordinate of the generated blocks";
 
@@ -17,6 +17,16 @@ public class MinHelp implements CommandHelp {
 	@Override
 	public String description() {
 		return description;
+	}
+
+	@Override
+	public String[] parameterUsages(){
+		return new String[]{"x|y|z", "<coordinate>"};
+	}
+
+	@Override
+	public String[] parameterDescriptions(){
+		return new String[]{"axis", "minimum coordinate of the generation"};
 	}
 
 	@Override

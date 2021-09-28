@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class PhyHelp implements CommandHelp {
+public class PhyHelp implements BranchCommandHelp {
 	private String usage = "/sg phy true|false";
 	private String description = "Toggle physics option for generating blocks";
 
@@ -17,6 +17,16 @@ public class PhyHelp implements CommandHelp {
 	@Override
 	public String description() {
 		return description;
+	}
+
+	@Override
+	public String[] parameterUsages(){
+		return new String[]{"true|false"};
+	}
+
+	@Override
+	public String[] parameterDescriptions(){
+		return new String[]{"an option for physics"};
 	}
 
 	@Override

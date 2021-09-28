@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class ScaleHelp implements CommandHelp {
+public class ScaleHelp implements BranchCommandHelp {
 	private String usage = "/sg scale x|y|z <factor>";
 	private String description = "Change the scale of the generated block(s)";
 
@@ -17,6 +17,16 @@ public class ScaleHelp implements CommandHelp {
 	@Override
 	public String description() {
 		return description;
+	}
+
+	@Override
+	public String[] parameterUsages(){
+		return new String[]{"x|y|z", "<factor>"};
+	}
+
+	@Override
+	public String[] parameterDescriptions(){
+		return new String[]{"an axis for scaling", "a factor for scaling"};
 	}
 
 	@Override

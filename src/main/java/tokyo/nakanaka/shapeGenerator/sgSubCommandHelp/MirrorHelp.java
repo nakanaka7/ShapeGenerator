@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class MirrorHelp implements CommandHelp {
+public class MirrorHelp implements BranchCommandHelp {
 	private String usage = "/sg mirror x|y|z";
 	private String description = "Mirror the generated blocks";
 
@@ -17,6 +17,16 @@ public class MirrorHelp implements CommandHelp {
 	@Override
 	public String description() {
 		return description;
+	}
+
+	@Override
+	public String[] parameterUsages(){
+		return new String[]{"x|y|z"};
+	}
+
+	@Override
+	public String[] parameterDescriptions(){
+		return new String[]{"an axis to mirror"};
 	}
 
 	@Override
