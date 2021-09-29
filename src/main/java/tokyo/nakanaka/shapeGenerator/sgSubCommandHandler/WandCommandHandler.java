@@ -9,7 +9,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.WandHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "/sg wand" command
@@ -20,7 +20,7 @@ public class WandCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
-			player.print(cmdLogColor.error() + "Usage: " + new WandHelp().syntax());
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.WAND.syntax());
 			return;
 		}
 		Item item = new Item(new NamespacedID("minecraft", "blaze_rod"));
