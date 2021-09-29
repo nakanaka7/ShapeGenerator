@@ -10,7 +10,7 @@ public class MirrorHelp implements BranchCommandHelp {
 	private String description = "Mirror the generated blocks";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 
@@ -20,7 +20,7 @@ public class MirrorHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{"x|y|z"};
 	}
 

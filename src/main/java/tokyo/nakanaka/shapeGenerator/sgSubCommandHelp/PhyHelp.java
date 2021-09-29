@@ -10,7 +10,7 @@ public class PhyHelp implements BranchCommandHelp {
 	private String description = "Toggle physics option for generating blocks";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 
@@ -20,7 +20,7 @@ public class PhyHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{"true|false"};
 	}
 

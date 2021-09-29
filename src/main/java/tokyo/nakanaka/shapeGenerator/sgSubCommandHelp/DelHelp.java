@@ -10,7 +10,7 @@ public class DelHelp implements BranchCommandHelp {
 	private String description = "Delete the generated block(s)";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 
@@ -20,7 +20,7 @@ public class DelHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{"[number]"};
 	}
 

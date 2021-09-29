@@ -10,7 +10,7 @@ public class ShapeHelp implements BranchCommandHelp {
 	private String description = "Set selection shape";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return usage;
 	}
 
@@ -20,7 +20,7 @@ public class ShapeHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{"<type>"};
 	}
 

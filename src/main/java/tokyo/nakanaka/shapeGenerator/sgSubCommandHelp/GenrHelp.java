@@ -10,7 +10,7 @@ public class GenrHelp implements BranchCommandHelp {
 	private String description = "Generate block(s) in the selection";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return "/sg genr <block>";
 	}
 
@@ -20,7 +20,7 @@ public class GenrHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{"<block>"};
 	}
 

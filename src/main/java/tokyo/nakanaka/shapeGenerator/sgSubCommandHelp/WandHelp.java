@@ -10,7 +10,7 @@ public class WandHelp implements BranchCommandHelp {
 	private String description = "Give a player a wand";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 
@@ -20,7 +20,7 @@ public class WandHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{};
 	}
 

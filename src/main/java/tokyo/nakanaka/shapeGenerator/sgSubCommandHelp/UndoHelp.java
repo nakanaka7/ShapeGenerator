@@ -10,7 +10,7 @@ public class UndoHelp implements BranchCommandHelp {
 	private String description = "Undo block changing command(s)";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 
@@ -20,7 +20,7 @@ public class UndoHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{"[number]"};
 	}
 

@@ -10,7 +10,7 @@ public class ScaleHelp implements BranchCommandHelp {
 	private String description = "Change the scale of the generated block(s)";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 
@@ -20,7 +20,7 @@ public class ScaleHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{"x|y|z", "<factor>"};
 	}
 

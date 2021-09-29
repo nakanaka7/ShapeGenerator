@@ -10,7 +10,7 @@ public class VersionHelp implements BranchCommandHelp {
 	private String description = "Print the version";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 
@@ -20,7 +20,7 @@ public class VersionHelp implements BranchCommandHelp {
 	}
 
 	@Override
-	public String[] parameterUsages(){
+	public String[] parameterSyntaxes(){
 		return new String[]{};
 	}
 
