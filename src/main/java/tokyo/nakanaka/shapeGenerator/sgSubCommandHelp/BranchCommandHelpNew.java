@@ -1,8 +1,9 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class BranchCommandHelpNew {
+public class BranchCommandHelpNew implements BranchCommandHelp {
     private String[] heads;
     private String desc;
     private List<String> paramSyntaxList;
@@ -18,8 +19,8 @@ public class BranchCommandHelpNew {
     public static class Builder {
         private String[] heads;
         private String desc = "";
-        private List<String> paramSyntaxList = List.of();
-        private List<String> paramDescList = List.of();
+        private List<String> paramSyntaxList = new ArrayList<>();
+        private List<String> paramDescList = new ArrayList<>();
 
         /**
          * @param heads the command heads, which is fixed part of the command
@@ -76,6 +77,18 @@ public class BranchCommandHelpNew {
         String[] array = new String[this.paramSyntaxList.size()];
         for (int i = 0; i < this.paramSyntaxList.size(); ++i) {
             array[i] = this.paramSyntaxList.get(i);
+        }
+        return array;
+    }
+
+    /**
+     * Returns parameter descriptions
+     * @return parameter descriptions
+     */
+    public String[] parameterDescriptions() {
+        String[] array = new String[this.paramDescList.size()];
+        for (int i = 0; i < this.paramDescList.size(); ++i) {
+            array[i] = this.paramDescList.get(i);
         }
         return array;
     }
