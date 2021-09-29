@@ -42,7 +42,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 			player.print("--- [" + cmdLogColor.main() + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
 			this.cmdHelpMap.entrySet().stream()
 					.map(s -> s.getValue())
-					.forEach(s -> player.print(cmdLogColor.main() + s.usage() + ": " + LogColor.RESET + s.description()));
+					.forEach(s -> player.print(cmdLogColor.main() + s.syntax() + ": " + LogColor.RESET + s.description()));
 			player.print(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 		}else if(args.length == 1) {
 			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
@@ -51,11 +51,11 @@ public class HelpCommandHandler implements SubCommandHandler {
 					List<String> lines = new ArrayList<>();
 					lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg " + args[0] + "] ---------------------");
 					lines.add(cmdLogColor.main() + "Description: " + LogColor.RESET + branchHelp.description());
-					lines.add(cmdLogColor.main() + "Usage: " + LogColor.RESET + "/sg " + args[0] + " " + cmdLogColor.main() + String.join(" ", branchHelp.parameterUsages()));
-					if(branchHelp.parameterUsages().length != 0){
+					lines.add(cmdLogColor.main() + "Usage: " + LogColor.RESET + "/sg " + args[0] + " " + cmdLogColor.main() + String.join(" ", branchHelp.parameterSyntaxes()));
+					if(branchHelp.parameterSyntaxes().length != 0){
 						lines.add(cmdLogColor.main() + "Parameter: ");
-						for(int i = 0; i < branchHelp.parameterUsages().length; ++i){
-							lines.add("  " + cmdLogColor.main() + branchHelp.parameterUsages()[i] + ": "
+						for(int i = 0; i < branchHelp.parameterSyntaxes().length; ++i){
+							lines.add("  " + cmdLogColor.main() + branchHelp.parameterSyntaxes()[i] + ": "
 									+ LogColor.RESET + branchHelp.parameterDescriptions()[i]);
 						}
 					}
