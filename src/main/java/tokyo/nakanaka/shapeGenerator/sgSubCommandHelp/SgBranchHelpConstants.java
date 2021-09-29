@@ -4,6 +4,12 @@ public class SgBranchHelpConstants {
     private SgBranchHelpConstants() {
     }
 
+    public static final BranchCommandHelpNew HELP
+            = new BranchCommandHelpNew.Builder("/sg", "help")
+            .description("Print the command help")
+            .parameter("[subcommand]", "a subcommand to print the help")
+            .build();
+
     public static final BranchCommandHelpNew VERSION
             = new BranchCommandHelpNew.Builder("/sg", "version")
             .description("Print the version")
