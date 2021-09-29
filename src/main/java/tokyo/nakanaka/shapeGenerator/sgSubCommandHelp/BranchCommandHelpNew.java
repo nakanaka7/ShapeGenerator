@@ -3,7 +3,7 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BranchCommandHelpNew implements BranchCommandHelp {
+public class BranchCommandHelpNew implements CommandHelp {
     private String[] heads;
     private String desc;
     private List<String> paramSyntaxList;
