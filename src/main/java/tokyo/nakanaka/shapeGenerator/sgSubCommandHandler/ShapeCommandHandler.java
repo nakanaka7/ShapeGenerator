@@ -10,7 +10,6 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
 
 import java.util.List;
 import java.util.stream.Stream;
