@@ -5,7 +5,7 @@ public interface BranchCommandHelp extends CommandHelp{
      * Returns parameter usages
      * @return parameter usages
      */
-    String[] parameterUsages();
+    String[] parameterSyntaxes();
 
     /**
      * Returns parameter descriptions
