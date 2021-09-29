@@ -3,13 +3,13 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BranchCommandHelpNew implements CommandHelp {
+public class BranchCommandHelp implements CommandHelp {
     private String[] heads;
     private String desc;
     private List<String> paramSyntaxList;
     private List<String> paramDescList;
 
-    private BranchCommandHelpNew(String[] heads, String desc, List<String> paramSyntaxList, List<String> paramDescList) {
+    private BranchCommandHelp(String[] heads, String desc, List<String> paramSyntaxList, List<String> paramDescList) {
         this.heads = heads;
         this.desc = desc;
         this.paramSyntaxList = paramSyntaxList;
@@ -47,8 +47,8 @@ public class BranchCommandHelpNew implements CommandHelp {
             return  this;
         }
 
-        public BranchCommandHelpNew build() {
-            return new BranchCommandHelpNew(heads, desc, paramSyntaxList, paramDescList);
+        public BranchCommandHelp build() {
+            return new BranchCommandHelp(heads, desc, paramSyntaxList, paramDescList);
         }
 
     }

@@ -47,7 +47,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 		}else if(args.length == 1) {
 			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
 			if(cmdHelp != null) {
-				if(cmdHelp instanceof BranchCommandHelpNew branchHelp){
+				if(cmdHelp instanceof BranchCommandHelp branchHelp){
 					List<String> lines = new ArrayList<>();
 					lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg " + args[0] + "] ---------------------");
 					lines.add(cmdLogColor.main() + "Description: " + LogColor.RESET + branchHelp.description());
