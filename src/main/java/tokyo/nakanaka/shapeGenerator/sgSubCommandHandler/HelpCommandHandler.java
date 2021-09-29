@@ -51,7 +51,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 					List<String> lines = new ArrayList<>();
 					lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg " + args[0] + "] ---------------------");
 					lines.add(cmdLogColor.main() + "Description: " + LogColor.RESET + branchHelp.description());
-					lines.add(cmdLogColor.main() + "Usage: " + LogColor.RESET + "/sg " + args[0] + " " + String.join(" ", branchHelp.parameterUsages()));
+					lines.add(cmdLogColor.main() + "Usage: " + LogColor.RESET + "/sg " + args[0] + " " + cmdLogColor.main() + String.join(" ", branchHelp.parameterUsages()));
 					if(branchHelp.parameterUsages().length != 0){
 						lines.add(cmdLogColor.main() + "Parameter: ");
 						for(int i = 0; i < branchHelp.parameterUsages().length; ++i){
