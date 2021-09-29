@@ -5,7 +5,7 @@ import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
 
-public class SelHelp implements RootCommandHelp {
+public class SelHelp implements CommandHelp {
 	private String usage = "/sg sel <subcommand>";
 	private String description = "Specify the selection";
 
@@ -19,7 +19,11 @@ public class SelHelp implements RootCommandHelp {
 		return description;
 	}
 
-	@Override
+	/**
+	 * Return multiple lines which contains the information for the command
+	 * This is used by HelpCommandHandler class
+	 * @return multiple lines which contains the information for the command
+	 */
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
 		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg sel] ---------------------");
