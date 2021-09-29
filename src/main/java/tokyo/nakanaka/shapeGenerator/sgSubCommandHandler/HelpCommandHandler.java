@@ -19,21 +19,21 @@ public class HelpCommandHandler implements SubCommandHandler {
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 	
 	public HelpCommandHandler() {
-		this.cmdHelpMap.put("version", new VersionHelp());
-		this.cmdHelpMap.put("help", new HelpHelp());
-		this.cmdHelpMap.put("shape", new ShapeHelp());
+		this.cmdHelpMap.put("version", SgBranchHelpConstants.VERSION);
+		this.cmdHelpMap.put("help", SgBranchHelpConstants.HELP);
+		this.cmdHelpMap.put("shape", SgBranchHelpConstants.SHAPE);
 		this.cmdHelpMap.put("sel", new SelHelp());
-		this.cmdHelpMap.put("genr", new GenrHelp());
-		this.cmdHelpMap.put("phy", new PhyHelp());
-		this.cmdHelpMap.put("shift", new ShiftHelp());
-		this.cmdHelpMap.put("scale", new ScaleHelp());
-		this.cmdHelpMap.put("mirror", new MirrorHelp());
-		this.cmdHelpMap.put("rot", new RotHelp());
-		this.cmdHelpMap.put("max", new MaxHelp());
-		this.cmdHelpMap.put("min", new MinHelp());
-		this.cmdHelpMap.put("del", new DelHelp());
-		this.cmdHelpMap.put("undo", new UndoHelp());
-		this.cmdHelpMap.put("redo", new RedoHelp());
+		this.cmdHelpMap.put("genr", SgBranchHelpConstants.GENR);
+		this.cmdHelpMap.put("phy", SgBranchHelpConstants.PHY);
+		this.cmdHelpMap.put("shift", SgBranchHelpConstants.SHIFT);
+		this.cmdHelpMap.put("scale", SgBranchHelpConstants.SCALE);
+		this.cmdHelpMap.put("mirror", SgBranchHelpConstants.MIRROR);
+		this.cmdHelpMap.put("rot", SgBranchHelpConstants.ROT);
+		this.cmdHelpMap.put("max", SgBranchHelpConstants.MAX);
+		this.cmdHelpMap.put("min", SgBranchHelpConstants.MIN);
+		this.cmdHelpMap.put("del", SgBranchHelpConstants.DEL);
+		this.cmdHelpMap.put("undo", SgBranchHelpConstants.UNDO);
+		this.cmdHelpMap.put("redo", SgBranchHelpConstants.REDO);
 	}
 
 	@Override
