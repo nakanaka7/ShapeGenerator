@@ -10,7 +10,7 @@ public class SelHelp implements RootCommandHelp {
 	private String description = "Specify the selection";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return usage;
 	}
 
