@@ -13,6 +13,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ScaleCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "/sg scale" command
@@ -23,7 +24,7 @@ public class ScaleCommandHandler implements SubCommandHandler{
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: /sg scale <x|y|z> <factor>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.SCALE.syntax());
 			return;
 		}
 		Axis axis;

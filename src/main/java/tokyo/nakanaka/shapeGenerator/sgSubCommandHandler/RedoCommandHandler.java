@@ -6,6 +6,7 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class RedoCommandHandler implements SubCommandHandler{
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		String usageMsg = cmdLogColor.error() + "Usage: /sg redo [number]";
+		String usageMsg = cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.REDO.syntax();
 		if(args.length > 1) {
 			player.print(usageMsg);
 			return;

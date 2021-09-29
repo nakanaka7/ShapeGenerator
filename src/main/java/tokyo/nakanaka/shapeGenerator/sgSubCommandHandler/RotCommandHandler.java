@@ -11,6 +11,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.RotateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class RotCommandHandler implements SubCommandHandler{
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: /sg rot <x|y|z> <degree>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.ROT.syntax());
 			return;
 		}
 		Axis axis;

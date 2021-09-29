@@ -8,6 +8,7 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.PhyHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "/sg phy" command
@@ -17,7 +18,7 @@ public class PhyCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		String usageMsg = cmdLogColor.error() + "Usage: " + new PhyHelp().syntax();
+		String usageMsg = cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.PHY.syntax();
 		if(args.length != 1) {
 			player.print(usageMsg);
 			return;

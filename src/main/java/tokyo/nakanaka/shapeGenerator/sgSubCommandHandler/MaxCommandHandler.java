@@ -11,6 +11,7 @@ import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "sg max" subcommand
@@ -22,7 +23,7 @@ public class MaxCommandHandler implements SubCommandHandler {
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		//check args length
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + "max x|y|z <coordinate>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.MAX.syntax());
 			return;
 		}
 		Axis axis;

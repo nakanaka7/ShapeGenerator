@@ -9,6 +9,7 @@ import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: " + new ShapeHelp().syntax());
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.SHAPE.syntax());
 			return;
 		}
 		SelectionShape selShape;

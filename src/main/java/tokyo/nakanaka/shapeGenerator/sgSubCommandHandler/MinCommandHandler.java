@@ -11,6 +11,7 @@ import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "sg min" subcommand
@@ -22,7 +23,7 @@ public class MinCommandHandler implements SubCommandHandler {
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		//check args length
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + "min x|y|z <coordinate>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.MIN.syntax());
 			return;
 		}
 		Axis axis;

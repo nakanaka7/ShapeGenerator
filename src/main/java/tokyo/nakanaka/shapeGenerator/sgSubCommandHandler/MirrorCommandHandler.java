@@ -11,6 +11,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class MirrorCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: /sg mirror <x|y|z>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.MIRROR.syntax());
 			return;
 		}
 		Axis axis;

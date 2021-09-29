@@ -15,6 +15,7 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.GenrHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "/sg genr" command
@@ -32,7 +33,7 @@ public class GenrCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: " +  new GenrHelp().syntax());
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.GENR.syntax());
 			return;
 		}
 		Block block;
