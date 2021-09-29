@@ -8,7 +8,7 @@ public class BranchCommandHelpNew {
     private List<String> paramSyntaxList;
     private List<String> paramDescList;
 
-    public BranchCommandHelpNew(String[] heads, String desc, List<String> paramSyntaxList, List<String> paramDescList) {
+    private BranchCommandHelpNew(String[] heads, String desc, List<String> paramSyntaxList, List<String> paramDescList) {
         this.heads = heads;
         this.desc = desc;
         this.paramSyntaxList = paramSyntaxList;
