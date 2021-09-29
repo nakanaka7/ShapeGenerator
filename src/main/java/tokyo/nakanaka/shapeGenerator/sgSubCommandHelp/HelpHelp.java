@@ -10,7 +10,7 @@ public class HelpHelp implements RootCommandHelp {
 	private String description = "Print the command help";
 
 	@Override
-	public String usage() {
+	public String syntax() {
 		return this.usage;
 	}
 

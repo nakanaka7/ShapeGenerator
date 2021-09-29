@@ -20,7 +20,7 @@ public class WandCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
-			player.print(cmdLogColor.error() + "Usage: " + new WandHelp().usage());
+			player.print(cmdLogColor.error() + "Usage: " + new WandHelp().syntax());
 			return;
 		}
 		Item item = new Item(new NamespacedID("minecraft", "blaze_rod"));

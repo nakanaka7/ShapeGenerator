@@ -28,7 +28,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: " + new ShapeHelp().usage());
+			player.print(cmdLogColor.error() + "Usage: " + new ShapeHelp().syntax());
 			return;
 		}
 		SelectionShape selShape;
