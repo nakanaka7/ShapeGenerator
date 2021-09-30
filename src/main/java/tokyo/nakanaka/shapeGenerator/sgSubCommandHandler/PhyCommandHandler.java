@@ -6,16 +6,18 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.PhyHelp;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "/sg phy" command
  */
 public class PhyCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		String usageMsg = LogColor.RED + "Usage: " + new PhyHelp().getUsage();
+		String usageMsg = cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.PHY.syntax();
 		if(args.length != 1) {
 			player.print(usageMsg);
 			return;
@@ -31,16 +33,15 @@ public class PhyCommandHandler implements SubCommandHandler {
 			return;
 		}
 		playerData.setBlockPhysics(physics);
-		player.print(LogColor.GOLD + "Set physics -> " + bool);
+		player.print(cmdLogColor.main() + "Set physics -> " + bool);
 	}
 
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return List.of("true", "false");
-		}else {
-			return List.of();
-		}
+		return switch(args.length) {
+			case 1 -> List.of("true", "false");
+			default -> List.of();
+		};
 	}
 
 }

@@ -1,9 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
@@ -13,17 +9,22 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.DeleteCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.DelHelp;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles "/sg del" command
  */
 public class DelCommandHandler implements SubCommandHandler {
-	
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length > 1) {
-			player.print(LogColor.RED + "Usage: " + new DelHelp().getUsage());
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.DEL.syntax());
 			return;
 		}
 		int num = 1;
@@ -31,11 +32,11 @@ public class DelCommandHandler implements SubCommandHandler {
 			try {
 				num = Integer.parseInt(args[0]);
 			}catch(IllegalArgumentException e) {
-				player.print(LogColor.RED + "Can not parse the number");
+				player.print(cmdLogColor.error() + "Can not parse the number");
 				return;
 			}
 			if(num <= 0) {
-				player.print(LogColor.RED + "The number must be larger than 0");
+				player.print(cmdLogColor.error() + "The number must be larger than 0");
 				return;
 			}
 		}
@@ -62,22 +63,21 @@ public class DelCommandHandler implements SubCommandHandler {
 		deleteCmd.execute();
 		undoManager.add(deleteCmd);
 		if(delNum == 0) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}
-		player.print(LogColor.GOLD + "Deleted " + delNum + " generation(s)");
+		player.print(cmdLogColor.main() + "Deleted " + delNum + " generation(s)");
 		if(delNum < num) {
-			player.print(LogColor.RED + "reached the first generation");
+			player.print(cmdLogColor.error() + "reached the first generation");
 		}
-		return;
 	}
 	
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-		}
-		return new ArrayList<>();
+		return switch(args.length) {
+			case 1 -> List.of("1", "2", "3", "4", "5", "6", "7", "8", "9");
+			default ->  List.of();
+		};
 	}
 	
 }

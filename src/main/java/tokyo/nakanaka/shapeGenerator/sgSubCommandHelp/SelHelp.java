@@ -9,20 +9,21 @@ public class SelHelp implements CommandHelp {
 	private String usage = "/sg sel <subcommand>";
 	private String description = "Specify the selection";
 
-	/**
-	 * Get the usage
-	 * @return the usage
-	 */
-	public String getUsage() {
+	@Override
+	public String syntax() {
 		return usage;
 	}
 
 	@Override
-	public String toSingleLine() {
-		return LogColor.GOLD + this.usage + ": " + LogColor.RESET + this.description;
+	public String description() {
+		return description;
 	}
 
-	@Override
+	/**
+	 * Return multiple lines which contains the information for the command
+	 * This is used by HelpCommandHandler class
+	 * @return multiple lines which contains the information for the command
+	 */
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
 		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg sel] ---------------------");

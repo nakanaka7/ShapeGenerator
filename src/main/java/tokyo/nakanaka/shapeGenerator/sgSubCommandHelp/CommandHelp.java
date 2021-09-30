@@ -1,18 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
-import java.util.List;
-
 public interface CommandHelp {
+
 	/**
-	 * Return a single line which contains the information for the command.
-	 * This is used by HelpCommandHandler class
-	 * @return a single line which contains the information for the command
+	 * Returns a syntax of the command
+	 * @return a syntax of the command
 	 */
-	String toSingleLine();
+	String syntax();
+
 	/**
-	 * Return multiple lines which contains the information for the command
-	 * This is used by HelpCommandHandler class
-	 * @return multiple lines which contains the information for the command
+	 * Returns a description of the command;
+	 * @return a description of the command;
 	 */
-	List<String> toMultipleLines();
+	String description();
+
 }

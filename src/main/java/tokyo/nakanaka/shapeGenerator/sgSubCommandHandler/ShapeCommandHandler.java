@@ -8,7 +8,8 @@ import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ShapeHelp;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -17,6 +18,7 @@ import java.util.stream.Stream;
  * Handles "/sg shape" command
  */
 public class ShapeCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
 	public ShapeCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
@@ -26,18 +28,18 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
-			player.print(LogColor.RED + "Usage: " + new ShapeHelp().getUsage());
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.SHAPE.syntax());
 			return;
 		}
 		SelectionShape selShape;
 		try{
 			selShape = SelectionShape.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Invalid shape");
+			player.print(cmdLogColor.error() + "Invalid shape");
 			return;
 		}
 		if(!List.of(this.shapeStrtgRepo.registeredShapes()).contains(selShape)) {
-			player.print(LogColor.RED + "Unsupported shape");
+			player.print(cmdLogColor.error() + "Unsupported shape");
 			return;
 		}
 		SelectionShape original = playerData.getSelectionShape();
@@ -47,7 +49,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 			SelectionData selData = this.shapeStrtgRepo.get(selShape).newSelectionData(world);
 			playerData.setSelectionData(selData);
 		}
-		player.print(LogColor.GOLD + "Set the shape -> " + selShape);
+		player.print(cmdLogColor.main() + "Set the shape -> " + selShape);
 	}
 
 	@Override

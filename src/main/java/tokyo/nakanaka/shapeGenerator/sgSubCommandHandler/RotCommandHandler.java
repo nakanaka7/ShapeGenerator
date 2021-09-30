@@ -1,9 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
@@ -14,30 +10,35 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.RotateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+
+import java.util.List;
 
 /**
  * Handles "/sg rot" command
  */
 public class RotCommandHandler implements SubCommandHandler{
-			
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(LogColor.RED + "Usage: /sg rot <x|y|z> <degree>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.ROT.syntax());
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse axis");
+			player.print(cmdLogColor.error() + "Can not parse axis");
 			return;
 		}
 		double degree;
 		try {
 			degree = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse double");
+			player.print(cmdLogColor.error() + "Can not parse double");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -56,25 +57,22 @@ public class RotCommandHandler implements SubCommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}
 		RotateCommand rotateCmd = new RotateCommand(originalCmd, axis, degree, playerData.getBlockPhysics());
 		rotateCmd.execute();
 		undoManager.add(rotateCmd);
-		player.print(LogColor.GOLD + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
-		return;
+		player.print(cmdLogColor.main() + "Rotated " + degree + " degrees about the " + axis.toString().toLowerCase() + " axis");
 	}
 
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return Arrays.asList("x", "y", "z");
-		}else if(args.length == 2) {
-			return Arrays.asList("0.0", "90.0", "-90.0", "180.0", "270.0");
-		}else {
-			return new ArrayList<>();
-		}
+		return switch(args.length) {
+			case 1 -> List.of("x", "y", "z");
+			case 2 -> List.of("0.0", "90.0", "-90.0", "180.0", "270.0");
+			default -> List.of();
+		};
 	}
 
 }

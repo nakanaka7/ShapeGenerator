@@ -10,31 +10,34 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "sg max" subcommand
  */
 public class MaxCommandHandler implements SubCommandHandler {
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		//check args length
 		if(args.length != 2) {
-			player.print(LogColor.RED + "Usage: " + "max x|y|z <coordinate>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.MAX.syntax());
 			return;
 		}
 		Axis axis;
 		try {
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse axis");
+			player.print(cmdLogColor.error() + "Can not parse axis");
 			return;
 		}
 		double coord;
 		try {
 			coord = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse coordinate");
+			player.print(cmdLogColor.error() + "Can not parse coordinate");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -53,13 +56,13 @@ public class MaxCommandHandler implements SubCommandHandler {
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}
 		UndoableCommand maxCmd = new MaxCommand(originalCmd, axis, coord, playerData.getBlockPhysics());
 		maxCmd.execute();
 		undoManager.add(maxCmd);
-		player.print(LogColor.GOLD + "Set max" + axis.toString().toUpperCase() + " -> " + coord);
+		player.print(cmdLogColor.main() + "Set max" + axis.toString().toUpperCase() + " -> " + coord);
 	}
 
 	@Override

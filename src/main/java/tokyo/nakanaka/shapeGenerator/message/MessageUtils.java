@@ -10,10 +10,19 @@ import tokyo.nakanaka.shapeGenerator.SelectionShape;
 public class MessageUtils {
 	private MessageUtils() {	
 	}
-	
+
+	/**
+	 * Returns a String, "--- [(title)] ---------------------"
+	 * @param title a title
+	 * @return a String, "--- [(title)] ---------------------"
+	 */
+	public static String title(String title) {
+		return "--- [" + title + LogColor.RESET + "] ---------------------";
+	}
+
 	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + selShape.toString() + " Selection" + LogColor.RESET + "] ---------------------");
+		lines.add(title(LogColor.GOLD + selShape.toString() + " Selection"));
 		for(String label : selData.extraDataLabels()) {
 			String dataStr = "";
 			Object data = selData.getExtraData(label);

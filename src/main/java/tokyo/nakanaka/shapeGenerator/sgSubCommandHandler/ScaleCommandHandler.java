@@ -12,34 +12,37 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ScaleCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "/sg scale" command
  */
 public class ScaleCommandHandler implements SubCommandHandler{
-	
+	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(LogColor.RED + "Usage: /sg scale <x|y|z> <factor>");
+			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.SCALE.syntax());
 			return;
 		}
 		Axis axis;
 		try{
 			axis = Axis.valueOf(args[0].toUpperCase());
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse axis");
+			player.print(cmdLogColor.error() + "Can not parse axis");
 			return;
 		}
 		double factor;
 		try {
 			factor = Double.valueOf(args[1]);
 		}catch(IllegalArgumentException e) {
-			player.print(LogColor.RED + "Can not parse double");
+			player.print(cmdLogColor.error() + "Can not parse double");
 			return;
 		}
 		if(factor == 0) {
-			player.print(LogColor.RED + "The scale factor must not be zero");
+			player.print(cmdLogColor.error() + "The scale factor must not be zero");
 			return;
 		}
 		UndoCommandManager undoManager = playerData.getUndoCommandManager();
@@ -58,26 +61,23 @@ public class ScaleCommandHandler implements SubCommandHandler{
 			}
 		}
 		if(originalCmd == null) {
-			player.print(LogColor.RED + "Generate blocks first");
+			player.print(cmdLogColor.error() + "Generate blocks first");
 			return;
 		}
 		ScaleCommand scaleCmd = new ScaleCommand(originalCmd, axis, factor, playerData.getBlockPhysics());
 		scaleCmd.execute();
 		undoManager.add(scaleCmd);
-		player.print(LogColor.GOLD + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
-		return;
+		player.print(cmdLogColor.main() + "Scaled " + factor + " times along the " + axis.toString().toLowerCase() + " axis");
 	}
 	
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
-		if(args.length == 1) {
-			return List.of("x", "y", "z");
-		}else if(args.length == 2) {
-			return List.of("0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0",
+		return switch(args.length) {
+			case 1 -> List.of("x", "y", "z");
+			case 2 -> List.of("0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0",
 					"5.0", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0", "9.5");
-		}else {
-			return List.of();
-		}
+			default -> List.of();
+		};
 	}
 
 }
