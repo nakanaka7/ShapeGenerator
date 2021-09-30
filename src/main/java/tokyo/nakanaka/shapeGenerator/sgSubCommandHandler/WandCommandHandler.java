@@ -2,9 +2,7 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import java.util.List;
 
-import tokyo.nakanaka.Item;
-import tokyo.nakanaka.NamespacedID;
-import tokyo.nakanaka.Player;
+import tokyo.nakanaka.*;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
@@ -24,7 +22,9 @@ public class WandCommandHandler implements SubCommandHandler {
 			return;
 		}
 		Item item = new Item(new NamespacedID("minecraft", "blaze_rod"));
-		player.giveItem(item, 1);
+		Enchantment ench = new Enchantment(new NamespacedID("minecraft", "power"), 1);
+		ItemStackData itemStackData = new ItemStackData(item, 1, ench);
+		player.giveItem(itemStackData);
 	}
 
 	@Override
