@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 
 public class SelHelp implements CommandHelp {
 	private String usage = "/sg sel <subcommand>";
@@ -26,7 +27,7 @@ public class SelHelp implements CommandHelp {
 	 */
 	public List<String> toMultipleLines() {
 		List<String> lines = new ArrayList<>();
-		lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg sel] ---------------------");
+		lines.add(MessageUtils.title(LogColor.GOLD + "Help for " + LogColor.RESET + "/sg sel"));
 		lines.add(LogColor.GOLD + "Description: " + LogColor.RESET + this.description);
 		lines.add(LogColor.GOLD + "Usage: " + LogColor.RESET + this.usage);
 		lines.add(LogColor.GOLD + "Parameter: ");
