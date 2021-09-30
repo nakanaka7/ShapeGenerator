@@ -56,7 +56,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 						lines.add(cmdLogColor.main() + "Parameter: ");
 						for(int i = 0; i < branchHelp.parameterSyntaxes().length; ++i){
 							lines.add("  " + cmdLogColor.main() + branchHelp.parameterSyntaxes()[i] + ": "
-									+ LogColor.RESET + branchHelp.parameterDescriptions()[i]);
+									+ LogColor.RESET + branchHelp.parameterDescription(i));
 						}
 					}
 					lines.forEach(player::print);
