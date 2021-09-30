@@ -4,6 +4,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
 
@@ -39,7 +40,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 0) {
-			player.print("--- [" + cmdLogColor.main() + "Quick help for " + LogColor.RESET + "/sg] ---------------------");
+			player.print(MessageUtils.title(cmdLogColor.main() + "Quick help for " + LogColor.RESET + "/sg"));
 			this.cmdHelpMap.entrySet().stream()
 					.map(s -> s.getValue())
 					.forEach(s -> player.print(cmdLogColor.main() + s.syntax() + ": " + LogColor.RESET + s.description()));
@@ -49,7 +50,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 			if(cmdHelp != null) {
 				if(cmdHelp instanceof BranchCommandHelp branchHelp){
 					List<String> lines = new ArrayList<>();
-					lines.add("--- [" + LogColor.GOLD + "Help for " + LogColor.RESET + "/sg " + args[0] + "] ---------------------");
+					lines.add(MessageUtils.title(cmdLogColor.main() + "Help for " + LogColor.RESET + "/sg " + args[0]));
 					lines.add(cmdLogColor.main() + "Description: " + LogColor.RESET + branchHelp.description());
 					lines.add(cmdLogColor.main() + "Usage: " + LogColor.RESET + "/sg " + args[0] + " " + cmdLogColor.main() + String.join(" ", branchHelp.parameterSyntaxes()));
 					if(branchHelp.parameterSyntaxes().length != 0){
