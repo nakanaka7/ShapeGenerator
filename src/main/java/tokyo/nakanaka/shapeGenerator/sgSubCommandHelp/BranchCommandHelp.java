@@ -82,18 +82,6 @@ public class BranchCommandHelp implements CommandHelp {
     }
 
     /**
-     * Returns parameter descriptions
-     * @return parameter descriptions
-     */
-    public String[] parameterDescriptions() {
-        String[] array = new String[this.paramDescList.size()];
-        for (int i = 0; i < this.paramDescList.size(); ++i) {
-            array[i] = this.paramDescList.get(i);
-        }
-        return array;
-    }
-
-    /**
      * Returns the description of a parameter
      * @param index the index of a parameter
      * @return the description of a parameter
