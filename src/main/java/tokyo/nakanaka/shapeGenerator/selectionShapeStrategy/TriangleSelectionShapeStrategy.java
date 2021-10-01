@@ -64,8 +64,10 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		Vector3D pos = blockPos.toVector3D();
 		if(selData.getExtraData(POS2) == null) {
 			selData.setExtraData(POS2, pos);
-		}else {
+		}else if(selData.getExtraData(POS3) == null) {
 			selData.setExtraData(POS3, pos);
+		}else{
+			throw new IllegalStateException();
 		}
 	}
 	
