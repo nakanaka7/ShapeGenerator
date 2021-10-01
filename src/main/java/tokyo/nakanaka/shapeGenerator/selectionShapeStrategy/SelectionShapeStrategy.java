@@ -29,13 +29,17 @@ public interface SelectionShapeStrategy {
 	 * Returns a short description for left clicking block event
 	 * @return a short description for left clicking block event
 	 */
-	String leftClickDescription();
+	default String leftClickDescription(){
+		return "";
+	}
 	
 	/**
 	 * Returns a short description for right clicking block event
 	 * @return a short description for right clicking block event
 	 */
-	String rightClickDescription();
+	default String rightClickDescription(){
+		return "";
+	}
 	
 	/**
 	 * Update the selection data on left block click
