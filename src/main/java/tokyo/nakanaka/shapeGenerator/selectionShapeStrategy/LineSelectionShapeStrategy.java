@@ -51,13 +51,20 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData("pos2", blockPos.toVector3D());
 	}
-	
+
+	/**
+	 * @throws IllegalStateException if the pos1, pos2, or thickness is not specified,
+	 * or thickness is less than or equals to 0
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		Vector3D pos1 = (Vector3D) selData.getExtraData("pos1");
 		Vector3D pos2 = (Vector3D) selData.getExtraData("pos2");
 		Double thickness = (Double) selData.getExtraData("thickness");
 		if(pos1 == null || pos2 == null || thickness == null) {
+			throw new IllegalStateException();
+		}
+		if(thickness <= 0){
 			throw new IllegalStateException();
 		}
 		Region3D region = new Line(pos1.getX(), pos1.getY(), pos1.getZ(), pos2.getX(), pos2.getY(), pos2.getZ(), thickness);

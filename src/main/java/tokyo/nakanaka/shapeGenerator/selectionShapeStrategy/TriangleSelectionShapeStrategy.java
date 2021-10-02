@@ -70,7 +70,11 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 			throw new IllegalStateException();
 		}
 	}
-	
+
+	/**
+	 * @throws IllegalStateException if the pos1, pos2, pos3, or thickness is not specified,
+	 * or thickness is less than or equals to 0
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		Vector3D pos1 = (Vector3D) selData.getExtraData(POS1);
@@ -78,6 +82,9 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		Vector3D pos3 = (Vector3D) selData.getExtraData(POS3);
 		Double thickness = (Double) selData.getExtraData(THICKNESS);
 		if(pos1 == null || pos2 == null || pos3 == null || thickness == null) {
+			throw new IllegalStateException();
+		}
+		if(thickness <= 0) {
 			throw new IllegalStateException();
 		}
 		Region3D region = new Triangle(pos1.getX(), pos1.getY(), pos1.getZ(),
