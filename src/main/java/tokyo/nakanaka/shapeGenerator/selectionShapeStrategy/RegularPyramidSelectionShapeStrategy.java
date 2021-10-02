@@ -97,6 +97,10 @@ public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStra
         selData.setExtraData(HEIGHT, height);
     }
 
+    /**
+     * @throws IllegalStateException if the center, radius, side, height, or direction
+     * is not specified, or the radius <= 0, side < 3, or height <= 0
+     */
     @Override
     public Selection buildSelection(SelectionData selData) {
         var center = (Vector3D)selData.getExtraData(CENTER);
@@ -105,6 +109,9 @@ public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStra
         var height = (Double)selData.getExtraData(HEIGHT);
         var dir = (Direction)selData.getExtraData(DIRECTION);
         if(center == null || radius == null || side == null || height == null || dir == null) {
+            throw new IllegalStateException();
+        }
+        if(radius <= 0 || side < 3 || height <= 0) {
             throw new IllegalStateException();
         }
         Region3D region = new RegularPyramid(radius, side, height);
