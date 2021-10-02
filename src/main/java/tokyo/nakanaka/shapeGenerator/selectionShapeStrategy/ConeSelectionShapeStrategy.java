@@ -94,6 +94,11 @@ public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
 		selData.setExtraData(HEIGHT, height);
 	}
 
+	 /**
+	  * @param selData a selection data
+	  * @throws IllegalStateException if the center, radius, height or direction is not specified,
+	  * or the radius or height is less than or equals to 0
+	  */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
