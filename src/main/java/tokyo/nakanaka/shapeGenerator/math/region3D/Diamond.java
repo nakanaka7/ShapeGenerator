@@ -15,6 +15,7 @@ public class Diamond implements Region3D {
 	 * @param width the range along x axis of the diamond
 	 * @param height the range along y axis of the diamond
 	 * @param length the range along z axis of the diamond
+	 * @throws IllegalArgumentException if width, height, or length is less than or equals to 0
 	 */
 	public Diamond(double width, double height, double length) {
 		this.width = width;
