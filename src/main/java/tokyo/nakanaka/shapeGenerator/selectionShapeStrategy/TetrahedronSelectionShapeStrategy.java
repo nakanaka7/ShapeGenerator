@@ -71,7 +71,10 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 			throw new IllegalStateException();
 		}
 	}
-	
+
+	/**
+	 * @throws IllegalStateException if pos1, pos2, pos3 or pos4 is not specified
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		Vector3D pos1 = (Vector3D) selData.getExtraData(POS1);
