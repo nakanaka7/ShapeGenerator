@@ -99,6 +99,10 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 		selData.setExtraData(HEIGHT, height);
 	}
 
+	/**
+	 * @throws IllegalStateException if the center, outer radius or innter radius
+	 * is not specified, or inner radius >= outer radius
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
@@ -107,6 +111,9 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 		var height = (Double)selData.getExtraData(HEIGHT);
 		var dir = (Direction)selData.getExtraData(DIRECTION);
 		if(center == null || outerRadius == null || innerRadius == null || height == null || dir == null) {
+			throw new IllegalStateException();
+		}
+		if(outerRadius <= 0 || innerRadius <= 0){
 			throw new IllegalStateException();
 		}
 		if(innerRadius >= outerRadius) {
