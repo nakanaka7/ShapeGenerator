@@ -113,6 +113,9 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 		if(center == null || outerRadius == null || innerRadius == null || side == null || height == null || dir == null) {
 			throw new IllegalStateException();
 		}
+		if(outerRadius <= 0 || innerRadius <= 0 || side < 3 || height <= 0){
+			throw new IllegalStateException();
+		}
 		if(innerRadius >= outerRadius) {
 			throw new IllegalStateException();
 		}

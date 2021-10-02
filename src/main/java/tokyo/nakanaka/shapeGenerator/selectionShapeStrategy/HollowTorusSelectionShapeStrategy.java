@@ -94,6 +94,11 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 		selData.setExtraData(INNER_MINOR_RADIUS, minorRadius - 1);
 	}
 
+	/**
+	 * @throws IllegalStateException if center, major radius, outer minor radius,
+	 * inner minor radius, or axis is not specified, or major radius <= 0,
+	 * outer minor radius <= 0, inner minor radius <= 0, inner minor radius >= outer minor radius
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
@@ -102,6 +107,12 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 		var innerMinorRadius = (Double)selData.getExtraData(INNER_MINOR_RADIUS);
 		var axis = (Axis)selData.getExtraData(AXIS);
 		if(center == null || majorRadius == null || outerMinorRadius == null || innerMinorRadius == null || axis == null) {
+			throw new IllegalStateException();
+		}
+		if(majorRadius <= 0 || outerMinorRadius <= 0 || innerMinorRadius <= 0){
+			throw new IllegalStateException();
+		}
+		if(innerMinorRadius >= outerMinorRadius) {
 			throw new IllegalStateException();
 		}
 		Region3D region = new HollowTorus(majorRadius, outerMinorRadius, innerMinorRadius);

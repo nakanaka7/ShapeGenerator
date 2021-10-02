@@ -98,7 +98,7 @@ public class HollowCylinderSelectionShapeStrategy implements SelectionShapeStrat
 
 	/**
 	 * @throws IllegalStateException if the center, outer radius or innter radius
-	 * is not specified, or inner radius >= outer radius
+	 * is not specified, outer radius <= 0, inner radius <= 0, or inner radius >= outer radius
 	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
