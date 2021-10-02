@@ -54,12 +54,47 @@ public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStra
 
     @Override
     public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-
+        Direction dir = (Direction)selData.getExtraData(DIRECTION);
+        Vector3D pos = blockPos.toVector3D();
+        Vector3D center = switch (dir) {
+            case NORTH -> pos.add(new Vector3D(0, 0, 0.5));
+            case SOUTH -> pos.negate(new Vector3D(0, 0, 0.5));
+            case EAST -> pos.negate(new Vector3D(0.5, 0, 0));
+            case WEST -> pos.add(new Vector3D(0.5, 0, 0));
+            case UP -> pos.negate(new Vector3D(0, 0.5, 0));
+            case DOWN -> pos.add(new Vector3D(0, 0.5, 0));
+        };
+        selData.setExtraData(CENTER, center);
     }
 
     @Override
     public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-
+        var center = (Vector3D)selData.getExtraData(CENTER);
+        if(center == null) {
+            throw new IllegalStateException();
+        }
+        Vector3D pos = blockPos.toVector3D();
+        double dx = pos.getX() - center.getX();
+        double dy = pos.getY() - center.getY();
+        double dz = pos.getZ() - center.getZ();
+        double radius;
+        double height;
+        Direction dir = (Direction)selData.getExtraData(DIRECTION);
+        radius = switch(dir) {
+            case NORTH, SOUTH -> Math.max(Math.abs(dx), Math.abs(dy)) + 0.5;
+            case EAST, WEST -> Math.max(Math.abs(dy), Math.abs(dz)) + 0.5;
+            case UP, DOWN -> Math.max(Math.abs(dz), Math.abs(dx)) + 0.5;
+        };
+        selData.setExtraData(RADIUS, radius);
+        height = switch(dir) {
+            case NORTH -> Math.max(-dz + 0.5, 0);
+            case SOUTH -> Math.max(dz + 0.5, 0);
+            case EAST -> Math.max(dx + 0.5, 0);
+            case WEST -> Math.max(-dx + 0.5, 0);
+            case UP -> Math.max(dy + 0.5, 0);
+            case DOWN -> Math.max(-dy + 0.5, 0);
+        };
+        selData.setExtraData(HEIGHT, height);
     }
 
     @Override
