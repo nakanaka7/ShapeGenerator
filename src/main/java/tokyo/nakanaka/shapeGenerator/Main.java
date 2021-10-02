@@ -65,17 +65,8 @@ public class Main {
 	 * Handles a click block event
 	 * @param evt a click block event
 	 */
+
 	public void onClickBlockEvent(ClickBlockEvent evt) {
-		
-	}
-	
-	/**
-	 * experimental
-	 * Handles a click block event
-	 * @param evt a click block event
-	 */
-	@PrivateAPI
-	public void onClickBlockEventNew(ClickBlockEvent evt) {
 		this.sgEvtHandler.onClickBlockEvent(evt);
 	}
 		

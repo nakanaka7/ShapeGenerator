@@ -51,16 +51,14 @@ class SgEventHandler {
 		//update the selection builder
 		SelectionData selData = playerData.getSelectionData();
 		BlockVector3D v = new BlockVector3D(blockPos.x(), blockPos.y(), blockPos.z());
-		switch(evt.getHandType()) {
-			case LEFT_HAND -> shapeStrtg.onLeftClick(selData, v);
-			case RIGHT_HAND -> {
-				try{
-					shapeStrtg.onRightClick(selData, v);
-				}catch(IllegalStateException e) {
-					player.print(LogColor.RED + "Left click first");
-					return;
-				}
+		try{
+			switch(evt.getHandType()) {
+				case LEFT_HAND -> shapeStrtg.onLeftClick(selData, v);
+				case RIGHT_HAND -> shapeStrtg.onRightClick(selData, v);
 			}
+		}catch(IllegalStateException e) {
+			player.print(LogColor.RED + "Invalid Operation");
+			return;
 		}
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(selShape, selData);

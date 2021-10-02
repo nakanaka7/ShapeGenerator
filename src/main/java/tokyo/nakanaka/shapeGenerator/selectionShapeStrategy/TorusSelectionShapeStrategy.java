@@ -85,7 +85,11 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		selData.setExtraData(MAJOR_RADIUS, majorRadius);
 		selData.setExtraData(MINOR_RADIUS, minorRadius);
 	}
-	
+
+	/**
+	 * @throws IllegalStateException if the center, major radius, minor radius, or axis
+	 * is not specified, or major radius or minor radius is smaller than or equals to 0
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
@@ -93,6 +97,9 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		var minorRadius = (Double)selData.getExtraData(MINOR_RADIUS);
 		var axis = (Axis)selData.getExtraData(AXIS);
 		if(center == null || majorRadius == null || minorRadius == null || axis == null) {
+			throw new IllegalStateException();
+		}
+		if(majorRadius <= 0 || minorRadius <= 0) {
 			throw new IllegalStateException();
 		}
 		Region3D region = new Torus(majorRadius, minorRadius);

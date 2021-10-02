@@ -65,11 +65,16 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 			selData.setExtraData(POS2, pos);
 		}else if(selData.getExtraData(POS3) == null) {
 			selData.setExtraData(POS3, pos);
-		}else {
+		}else if(selData.getExtraData(POS4) == null) {
 			selData.setExtraData(POS4, pos);
+		}else{
+			throw new IllegalStateException();
 		}
 	}
-	
+
+	/**
+	 * @throws IllegalStateException if pos1, pos2, pos3 or pos4 is not specified
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		Vector3D pos1 = (Vector3D) selData.getExtraData(POS1);

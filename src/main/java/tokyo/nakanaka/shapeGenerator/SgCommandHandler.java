@@ -13,21 +13,7 @@ import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.DelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MaxCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MinCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.MirrorCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.PhyCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RedoCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.RotCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ScaleCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShiftCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.UndoCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.VersionCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 @PrivateAPI
@@ -37,6 +23,7 @@ class SgCommandHandler implements CommandHandler {
 	
 	{
 		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
+		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
 		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
 		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
 		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());

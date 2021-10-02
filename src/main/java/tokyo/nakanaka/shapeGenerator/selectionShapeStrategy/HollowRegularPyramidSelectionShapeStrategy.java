@@ -9,23 +9,23 @@ import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.RegularPyramid;
+import tokyo.nakanaka.shapeGenerator.math.region3D.HollowRegularPyramid;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStrategy {
+public class HollowRegularPyramidSelectionShapeStrategy implements  SelectionShapeStrategy {
     private static final String CENTER = "center";
-    private static final String RADIUS = "radius";
+    private static final String OUTER_RADIUS = "outer_radius";
+    private static final String INNER_RADIUS = "inner_radius";
     private static final String SIDE = "side";
     private static final String HEIGHT = "height";
     private static final String DIRECTION = "direction";
 
     @Override
     public SelectionData newSelectionData(World world) {
-        SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, SIDE, HEIGHT, DIRECTION);
+        SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, SIDE, HEIGHT, DIRECTION);
         selData.setExtraData(SIDE, 3);
         selData.setExtraData(DIRECTION, Direction.UP);
         return selData;
@@ -35,7 +35,8 @@ public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStra
     public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
         Map<String, SubCommandHandler> map = new HashMap<>();
         map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-        map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
+        map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, this::newSelectionData));
+        map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, this::newSelectionData));
         map.put(SIDE, new SideCommandHandler(this::newSelectionData));
         map.put(HEIGHT, new LengthCommandHandler(HEIGHT, this::newSelectionData));
         map.put(DIRECTION, new DirectionCommandHandler(this::newSelectionData));
@@ -77,15 +78,16 @@ public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStra
         double dx = pos.getX() - center.getX();
         double dy = pos.getY() - center.getY();
         double dz = pos.getZ() - center.getZ();
-        double radius;
+        double outerRadius;
         double height;
         Direction dir = (Direction)selData.getExtraData(DIRECTION);
-        radius = switch(dir) {
+        outerRadius = switch(dir) {
             case NORTH, SOUTH -> Math.max(Math.abs(dx), Math.abs(dy)) + 0.5;
             case EAST, WEST -> Math.max(Math.abs(dy), Math.abs(dz)) + 0.5;
             case UP, DOWN -> Math.max(Math.abs(dz), Math.abs(dx)) + 0.5;
         };
-        selData.setExtraData(RADIUS, radius);
+        selData.setExtraData(OUTER_RADIUS, outerRadius);
+        selData.setExtraData(INNER_RADIUS, outerRadius - 2);
         height = switch(dir) {
             case NORTH -> Math.max(-dz + 0.5, 0);
             case SOUTH -> Math.max(dz + 0.5, 0);
@@ -95,27 +97,33 @@ public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStra
             case DOWN -> Math.max(-dy + 0.5, 0);
         };
         selData.setExtraData(HEIGHT, height);
+
     }
 
     /**
-     * @throws IllegalStateException if the center, radius, side, height, or direction
-     * is not specified, or the radius <= 0, side < 3, or height <= 0
+     * @throws IllegalStateException if the center, outer radius, innter radius, side, height, direction
+     * is not specified, outer radius <= 0, inner radius <= 0, side <3, height <=0, or inner radius >= outer radius
      */
     @Override
     public Selection buildSelection(SelectionData selData) {
         var center = (Vector3D)selData.getExtraData(CENTER);
-        var radius = (Double)selData.getExtraData(RADIUS);
+        var outerRadius = (Double)selData.getExtraData(OUTER_RADIUS);
+        var innerRadius = (Double)selData.getExtraData(INNER_RADIUS);
         var side = (Integer)selData.getExtraData(SIDE);
         var height = (Double)selData.getExtraData(HEIGHT);
         var dir = (Direction)selData.getExtraData(DIRECTION);
-        if(center == null || radius == null || side == null || height == null || dir == null) {
+        if(center == null || outerRadius == null || innerRadius == null || side == null || height == null || dir == null) {
             throw new IllegalStateException();
         }
-        if(radius <= 0 || side < 3 || height <= 0) {
+        if(outerRadius <= 0 || innerRadius <= 0 || side < 3 || height <= 0){
             throw new IllegalStateException();
         }
-        Region3D region = new RegularPyramid(radius, side, height);
-        Selection sel = new Selection(selData.world(), Vector3D.ORIGIN, region, new Cuboid(radius, radius, height, -radius, -radius, 0));
+        if(innerRadius >= outerRadius) {
+            throw new IllegalStateException();
+        }
+        var region = new HollowRegularPyramid(outerRadius, innerRadius, side, height);
+        Cuboid bound = new Cuboid(outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0);
+        Selection sel = new Selection(selData.world(), Vector3D.ORIGIN, region, bound);
         switch(dir) {
             //north(-z) -> first vertex(-x)
             case NORTH -> sel = sel.createRotated(Axis.Y, 180);
@@ -131,5 +139,6 @@ public class RegularPyramidSelectionShapeStrategy implements  SelectionShapeStra
             case DOWN -> sel = sel.createRotated(Axis.Z, -90).createRotated(Axis.X, 90);
         }
         return sel.createShifted(center).withOffset(selData.getOffset());
+
     }
 }

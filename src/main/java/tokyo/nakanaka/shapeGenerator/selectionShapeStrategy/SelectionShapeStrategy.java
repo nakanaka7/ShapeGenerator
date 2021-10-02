@@ -29,18 +29,23 @@ public interface SelectionShapeStrategy {
 	 * Returns a short description for left clicking block event
 	 * @return a short description for left clicking block event
 	 */
-	String leftClickDescription();
+	default String leftClickDescription(){
+		return "";
+	}
 	
 	/**
 	 * Returns a short description for right clicking block event
 	 * @return a short description for right clicking block event
 	 */
-	String rightClickDescription();
+	default String rightClickDescription(){
+		return "";
+	}
 	
 	/**
 	 * Update the selection data on left block click
 	 * @param selData the selection data
 	 * @param blockPos the block position
+	 * @throws IllegalStateException if this click operation cannot be handled
 	 */
 	void onLeftClick(SelectionData selData, BlockVector3D blockPos);
 	
@@ -48,7 +53,7 @@ public interface SelectionShapeStrategy {
 	 * Update the selection data on right block click
 	 * @param selData the selection data
 	 * @param blockPos the block position
-	 * @throws IllegalStateException if left click needed first
+	 * @throws IllegalStateException if this click operation cannot be handled
 	 */
 	void onRightClick(SelectionData selData, BlockVector3D blockPos);
 	

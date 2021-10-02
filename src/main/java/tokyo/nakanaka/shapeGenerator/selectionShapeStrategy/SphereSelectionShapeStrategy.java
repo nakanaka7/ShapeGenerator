@@ -48,20 +48,27 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
 	
 	@Override
 	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		Vector3D center = (Vector3D) selData.getExtraData("center");
+		Vector3D center = (Vector3D) selData.getExtraData(CENTER);
 		if(center == null) {
 			throw new IllegalStateException();
 		}
 		Vector3D pos = blockPos.toVector3D();
 		Double radius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
-		selData.setExtraData("radius", radius);
+		selData.setExtraData(RADIUS, radius);
 	}
-	
+
+	/**
+	 * @throws IllegalStateException if the center or radius is not specified, or radius is smaller than
+	 * or equals to 0
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
 		var radius = (Double)selData.getExtraData(RADIUS);
 		if(center == null || radius == null) {
+			throw new IllegalStateException();
+		}
+		if(radius <= 0) {
 			throw new IllegalStateException();
 		}
 		Region3D region = new Sphere(radius).createShifted(center);
