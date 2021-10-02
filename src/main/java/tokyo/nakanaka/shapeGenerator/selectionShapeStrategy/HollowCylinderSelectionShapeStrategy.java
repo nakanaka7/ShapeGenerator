@@ -52,7 +52,17 @@ public class HollowCylinderSelectionShapeStrategy implements SelectionShapeStrat
 
 	@Override
 	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		selData.setExtraData(CENTER, blockPos.toVector3D());
+		Direction dir = (Direction)selData.getExtraData(DIRECTION);
+		Vector3D pos = blockPos.toVector3D();
+		Vector3D center = switch (dir) {
+			case NORTH -> pos.add(new Vector3D(0, 0, 0.5));
+			case SOUTH -> pos.negate(new Vector3D(0, 0, 0.5));
+			case EAST -> pos.negate(new Vector3D(0.5, 0, 0));
+			case WEST -> pos.add(new Vector3D(0.5, 0, 0));
+			case UP -> pos.negate(new Vector3D(0, 0.5, 0));
+			case DOWN -> pos.add(new Vector3D(0, 0.5, 0));
+		};
+		selData.setExtraData(CENTER, center);
 	}
 
 	@Override
@@ -62,25 +72,27 @@ public class HollowCylinderSelectionShapeStrategy implements SelectionShapeStrat
 			throw new IllegalStateException();
 		}
 		Vector3D pos = blockPos.toVector3D();
-		double dx = Math.abs(pos.getX() - center.getX());
-		double dy = Math.abs(pos.getY() - center.getY());
-		double dz = Math.abs(pos.getZ() - center.getZ());
+		double dx = pos.getX() - center.getX();
+		double dy = pos.getY() - center.getY();
+		double dz = pos.getZ() - center.getZ();
 		double outerRadius;
 		double height;
 		Direction dir = (Direction)selData.getExtraData(DIRECTION);
 		outerRadius = switch(dir) {
-		case NORTH, SOUTH -> Math.max(dx, dy);
-		case EAST, WEST -> Math.max(dy, dz);
-		case UP, DOWN -> Math.max(dz, dx);
-		};
-		
-		height = switch(dir) {
-		case NORTH, SOUTH -> height = dz + 0.5;
-		case EAST, WEST -> height = dx + 0.5;
-		case UP, DOWN -> height = dy + 0.5;
+			case NORTH, SOUTH -> Math.max(Math.abs(dx), Math.abs(dy)) + 0.5;
+			case EAST, WEST -> Math.max(Math.abs(dy), Math.abs(dz)) + 0.5;
+			case UP, DOWN -> Math.max(Math.abs(dz), Math.abs(dx)) + 0.5;
 		};
 		selData.setExtraData(OUTER_RADIUS, outerRadius);
-		selData.setExtraData(INNER_RADIUS, Math.abs(outerRadius - 1));
+		selData.setExtraData(INNER_RADIUS, outerRadius - 1);
+		height = switch(dir) {
+			case NORTH -> Math.max(-dz + 0.5, 0);
+			case SOUTH -> Math.max(dz + 0.5, 0);
+			case EAST -> Math.max(dx + 0.5, 0);
+			case WEST -> Math.max(-dx + 0.5, 0);
+			case UP -> Math.max(dy + 0.5, 0);
+			case DOWN -> Math.max(-dy + 0.5, 0);
+		};
 		selData.setExtraData(HEIGHT, height);
 	}
 

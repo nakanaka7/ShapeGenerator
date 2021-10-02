@@ -53,14 +53,45 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 
 	@Override
 	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
-		// TODO Auto-generated method stub
-		
+		selData.setExtraData(CENTER, blockPos.toVector3D());
 	}
 
 	@Override
 	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
-		// TODO Auto-generated method stub
-		
+		var center = (Vector3D)selData.getExtraData(CENTER);
+		if(center == null) {
+			throw new IllegalStateException();
+		}
+		Vector3D pos = blockPos.toVector3D();
+		double dx = 2 * Math.abs(pos.getX() - center.getX()) + 1;
+		double dy = 2 * Math.abs(pos.getY() - center.getY()) + 1;
+		double dz = 2 * Math.abs(pos.getZ() - center.getZ()) + 1;
+		double length;
+		double height;
+		Axis axis = (Axis)selData.getExtraData(AXIS);
+		switch(axis) {
+			case X -> {
+				length = Math.max(dy, dz);
+				height = dx;
+			}
+			case Y -> {
+				length = Math.max(dz, dx);
+				height = dy;
+			}
+			case Z -> {
+				length = Math.max(dx, dy);
+				height = dz;
+			}
+			default -> throw new IllegalArgumentException();
+		}
+		double minorRadius = height / 2;
+		double outerMajorRadius = length / 2 - minorRadius;
+		if(outerMajorRadius <= 0) {
+			throw new IllegalStateException();
+		}
+		selData.setExtraData(MAJOR_RADIUS, outerMajorRadius);
+		selData.setExtraData(OUTER_MINOR_RADIUS, minorRadius);
+		selData.setExtraData(INNER_MINOR_RADIUS, minorRadius - 1);
 	}
 
 	@Override
