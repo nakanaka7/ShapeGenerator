@@ -73,6 +73,9 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		if(center == null || width == null || height == null || length == null) {
 			throw new IllegalStateException();
 		}
+		if(width <= 0 || height <= 0 || length <= 0){
+			throw new IllegalStateException();
+		}
 		Region3D region = new Diamond(width, height, length);
 		RegionBound bound = new CuboidBound(width/2, height/2, length/2, -width/2, -height/2, -length/2);
 		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
