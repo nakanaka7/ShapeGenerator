@@ -102,6 +102,10 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 		selData.setExtraData(HEIGHT, height);
 	}
 
+	/**
+	 * @throws IllegalStateException if the center, outer radius, innter radius, side, height, direction
+	 * is not specified, outer radius <= 0, inner radius <= 0, side <3, height <=0, or inner radius >= outer radius
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
