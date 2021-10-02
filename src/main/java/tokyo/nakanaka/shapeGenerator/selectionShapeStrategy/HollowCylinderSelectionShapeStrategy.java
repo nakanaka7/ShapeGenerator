@@ -96,6 +96,10 @@ public class HollowCylinderSelectionShapeStrategy implements SelectionShapeStrat
 		selData.setExtraData(HEIGHT, height);
 	}
 
+	/**
+	 * @throws IllegalStateException if the center, outer radius or innter radius
+	 * is not specified, or inner radius >= outer radius
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);

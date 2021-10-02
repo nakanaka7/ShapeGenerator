@@ -59,7 +59,11 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 		selData.setExtraData(OUTER_RADIUS, outerRadius);
 		selData.setExtraData(INNER_RADIUS, outerRadius - 1);
 	}
-	
+
+	/**
+	 * @throws IllegalStateException if the center, outer radius or innter radius
+	 * is not specified, or inner radius >= outer radius
+	 */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
