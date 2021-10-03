@@ -8,7 +8,7 @@ import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 
 public class SelHelp implements CommandHelp {
-	private String usage = "/sg sel <subcommand>";
+	private String usage = "sel <subcommand>";
 	private String description = "Specify the selection";
 	private LogColor color = LogColor.GOLD;
 
