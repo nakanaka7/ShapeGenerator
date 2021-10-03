@@ -20,6 +20,12 @@ public class SgBranchHelpConstants {
             .description("Give a player a wand")
             .build();
 
+    public static final BranchCommandHelp WANDHELP
+            = new BranchCommandHelp.Builder("/sg", "wandhelp")
+            .description("Print wand help")
+            .parameter("<shape>", "a selection shape")
+            .build();
+
     public static final BranchCommandHelp SHAPE
             = new BranchCommandHelp.Builder("/sg", "shape")
             .description("Set selection shape")
