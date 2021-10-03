@@ -54,8 +54,11 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 		if(center == null) {
 			throw new IllegalStateException();
 		}
-		Vector3D pos = blockPos.toVector3D();
-		Double outerRadius = Math.floor(pos.negate(center).getAbsolute()) + 0.5;
+		Vector3D dp = blockPos.toVector3D().negate(center);
+		double abdx = Math.abs(dp.getX());
+		double abdy = Math.abs(dp.getY());
+		double abdz = Math.abs(dp.getZ());
+		double outerRadius = MaxMinCalculator.max(abdx, abdy, abdz) + 0.5;
 		selData.setExtraData(OUTER_RADIUS, outerRadius);
 		selData.setExtraData(INNER_RADIUS, outerRadius - 1);
 	}
