@@ -27,7 +27,7 @@ public class SelHelp implements CommandHelp {
 	 * This is used by HelpCommandHandler class
 	 * @return multiple lines which contains the information for the command
 	 */
-	public List<String> toMultipleLines() {
+	public List<String> toMultipleLines(SelectionShape shape) {
 		List<String> lines = new ArrayList<>();
 		lines.add(MessageUtils.title(color + "Help for " + LogColor.RESET + "/sg sel"));
 		lines.add(color + "Description: " + LogColor.RESET + this.description);
