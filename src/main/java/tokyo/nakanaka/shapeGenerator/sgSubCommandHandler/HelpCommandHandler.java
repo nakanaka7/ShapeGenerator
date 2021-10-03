@@ -62,7 +62,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 					}
 					lines.forEach(player::print);
 				}else if(cmdHelp instanceof  SelHelp selHelp){
-					selHelp.toMultipleLines().forEach(player::print);
+					selHelp.toMultipleLines(playerData.getSelectionShape()).forEach(player::print);
 				}
 			}else {
 				player.print(cmdLogColor.error() + "Unknown subcommand");
