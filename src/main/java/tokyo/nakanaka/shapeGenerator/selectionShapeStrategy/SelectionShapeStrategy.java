@@ -25,6 +25,10 @@ public interface SelectionShapeStrategy {
 	 */
 	Map<String, SubCommandHandler> selSubCommandHandlerMap();
 
+	default String clickDescription() {
+		return  "";
+	}
+
 	/**
 	 * Returns a short description for left clicking block event
 	 * @return a short description for left clicking block event
