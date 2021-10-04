@@ -31,7 +31,7 @@ public class SelHelp implements CommandHelp {
 		List<String> lines = new ArrayList<>();
 		lines.add(MessageUtils.title(color + "Help for " + LogColor.RESET + "/sg sel"));
 		lines.add(color + "Description: " + LogColor.RESET + this.description);
-		lines.add(color + "Usage: " + LogColor.RESET + "sel " + color + "<subcommand>");
+		lines.add(color + "Usage: " + LogColor.RESET + "/sg sel " + color + "<subcommand>");
 		lines.add(color + "Subcommand: ");
 		lines.add(color + "  offset [x] [y] [z]: " + LogColor.RESET + "set the offset of the selection");
 		lines.add(color + "  reset: " + LogColor.RESET + "reset the current selection");
