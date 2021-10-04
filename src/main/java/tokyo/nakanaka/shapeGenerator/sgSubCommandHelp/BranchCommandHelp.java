@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BranchCommandHelp implements CommandHelp {
-    private String[] heads;
+    private String label;
     private String desc;
     private List<String> paramSyntaxList;
     private List<String> paramDescList;
 
-    private BranchCommandHelp(String[] heads, String desc, List<String> paramSyntaxList, List<String> paramDescList) {
-        this.heads = heads;
+    private BranchCommandHelp(String label, String desc, List<String> paramSyntaxList, List<String> paramDescList) {
+        this.label = label;
         this.desc = desc;
         this.paramSyntaxList = paramSyntaxList;
         this.paramDescList = paramDescList;
     }
 
     public static class Builder {
-        private String[] heads;
+        private String label;
         private String desc = "";
         private List<String> paramSyntaxList = new ArrayList<>();
         private List<String> paramDescList = new ArrayList<>();
 
         /**
-         * @param heads the command heads, which is fixed part of the command
+         * @param label the command label
          */
-        public Builder(String... heads) {
-            this.heads = heads;
+        public Builder(String label) {
+            this.label = label;
         }
 
         /**
@@ -48,9 +48,14 @@ public class BranchCommandHelp implements CommandHelp {
         }
 
         public BranchCommandHelp build() {
-            return new BranchCommandHelp(heads, desc, paramSyntaxList, paramDescList);
+            return new BranchCommandHelp(label, desc, paramSyntaxList, paramDescList);
         }
 
+    }
+
+    @Override
+    public String label() {
+        return this.label;
     }
 
     /**
@@ -58,7 +63,7 @@ public class BranchCommandHelp implements CommandHelp {
      * @return the command syntax
      */
     public String syntax() {
-       String syntax = String.join(" ", this.heads);
+       String syntax = label;
        for(String paramSyntax : this.paramSyntaxList){
            syntax += " " + paramSyntax;
        }

@@ -24,7 +24,7 @@ public class RotCommandHandler implements SubCommandHandler{
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.ROT.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.ROT.syntax());
 			return;
 		}
 		Axis axis;
