@@ -22,27 +22,8 @@ class SgCommandHandler implements CommandHandler {
 	private Map<String, CommandExecutor> cmdExecutorMap = new HashMap<>();
 	private Map<String, TabCompleter> tabCompleterMap = new HashMap<>();
 
-	{
-		this.registerCommand(new HelpCommandHandler());
-		this.registerCommand(new WandCommandHandler());
-		this.registerCommand(new PhyCommandHandler());
-		this.registerCommand(new ShiftCommandHandler());
-		this.registerCommand(new ScaleCommandHandler());
-		this.registerCommand(new MirrorCommandHandler());
-		this.registerCommand(new RotCommandHandler());
-		this.registerCommand(new MaxCommandHandler());
-		this.registerCommand(new MinCommandHandler());
-		this.registerCommand(new DelCommandHandler());
-		this.registerCommand(new UndoCommandHandler());
-		this.registerCommand(new RedoCommandHandler());
-	}
-	
-	SgCommandHandler(SemVer semVer, PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory) {
+	SgCommandHandler(PlayerDataRepository playerDataRepository) {
 		this.playerDataRepository = playerDataRepository;
-		this.registerCommand(new VersionCommandHandler(semVer));
-		this.registerCommand(new ShapeCommandHandler(shapeStrtgRepo));
-		this.registerCommand(new SelCommandHandler(shapeStrtgRepo));
-		this.registerCommand(new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
 	}
 
 	public void registerCommand(SubCommandHandler cmdHandler) {
