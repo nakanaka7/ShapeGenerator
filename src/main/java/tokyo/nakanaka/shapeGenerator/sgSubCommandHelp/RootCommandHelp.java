@@ -4,6 +4,7 @@ public class RootCommandHelp implements CommandHelp {
     private String label;
     private String desc;
 
+    @Override
     public String label() {
         return this.label;
     }

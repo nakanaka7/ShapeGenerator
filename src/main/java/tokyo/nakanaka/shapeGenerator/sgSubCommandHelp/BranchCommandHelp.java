@@ -53,6 +53,11 @@ public class BranchCommandHelp implements CommandHelp {
 
     }
 
+    @Override
+    public String label() {
+        return this.label;
+    }
+
     /**
      * Returns the command syntax
      * @return the command syntax

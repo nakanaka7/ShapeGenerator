@@ -13,6 +13,11 @@ public class SelHelp implements CommandHelp {
 	private LogColor color = LogColor.GOLD;
 
 	@Override
+	public String label() {
+		return "sel";
+	}
+
+	@Override
 	public String syntax() {
 		return usage;
 	}
