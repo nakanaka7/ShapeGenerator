@@ -54,17 +54,13 @@ public class HelpCommandHandler implements SubCommandHandler {
 			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
 			if(cmdHelp != null) {
 				if(cmdHelp instanceof BranchCommandHelp branchHelp){
-					List<String> lines = new ArrayList<>();
-					lines.add(MessageUtils.title(cmdLogColor.main() + "Help for " + LogColor.RESET + "/sg " + args[0]));
-					lines.add(cmdLogColor.main() + "Description: " + LogColor.RESET + branchHelp.description());
-					lines.add(cmdLogColor.main() + "Usage: " + LogColor.RESET + "/sg " + args[0] + " " + cmdLogColor.main() + String.join(" ", branchHelp.parameterSyntaxes()));
-					if(branchHelp.parameterSyntaxes().length != 0){
-						lines.add(cmdLogColor.main() + "Parameter: ");
-						for(int i = 0; i < branchHelp.parameterSyntaxes().length; ++i){
-							lines.add("  " + cmdLogColor.main() + branchHelp.parameterSyntaxes()[i] + ": "
-									+ LogColor.RESET + branchHelp.parameterDescription(i));
-						}
+					var msgBuilder = new BranchHelpMessageCreator.Builder(cmdLogColor.main(), "/sg", args[0])
+							.description(branchHelp.description());
+					for(int i = 0; i < branchHelp.parameterSyntaxes().length; i++){
+						msgBuilder = msgBuilder.parameter(branchHelp.parameterSyntaxes()[i]
+								, branchHelp.parameterDescription(i));
 					}
+					List<String> lines = msgBuilder.build().toMessageLines();
 					lines.forEach(player::print);
 				}else if(cmdHelp instanceof  SelHelp selHelp){
 					selHelp.toMultipleLines(playerData.getSelectionShape()).forEach(player::print);
