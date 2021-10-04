@@ -18,6 +18,11 @@ public class ResetCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String label() {
+		return "reset";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg sel reset");
