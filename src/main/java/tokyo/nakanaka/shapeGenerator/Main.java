@@ -1,14 +1,14 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.List;
-
 import tokyo.nakanaka.SemVer;
-import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
+
+import java.util.List;
 
 /**
  * Main class for the project. 
@@ -19,6 +19,14 @@ public class Main {
 	private SgEventHandler sgEvtHandler;
 	
 	public Main(BlockIDListFactory blockIDListFactory) {
+		SelectionShapeStrategyRepository shapeStrtgRepo = prepareStrategyRepository();
+		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
+		this.sgCmdHandler = new SgCommandHandler(playerDataRepo);
+		this.registerCommands(shapeStrtgRepo, blockIDListFactory);
+		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
+	}
+
+	private static SelectionShapeStrategyRepository prepareStrategyRepository(){
 		SelectionShapeStrategyRepository shapeStrtgRepo = new SelectionShapeStrategyRepository();
 		shapeStrtgRepo.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
@@ -37,9 +45,26 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_TORUS, new HollowTorusSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, new HollowRegularPrismSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PYRAMID, new HollowRegularPyramidSelectionShapeStrategy());
-		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
-		this.sgCmdHandler = new SgCommandHandler(new SemVer(1, 2, 0) , playerDataRepo, shapeStrtgRepo, blockIDListFactory);
-		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
+		return shapeStrtgRepo;
+	}
+
+	private void registerCommands(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory){
+		this.sgCmdHandler.registerCommand(new HelpCommandHandler());
+		this.sgCmdHandler.registerCommand(new VersionCommandHandler(new SemVer(1, 2, 0)));
+		this.sgCmdHandler.registerCommand(new WandCommandHandler());
+		this.sgCmdHandler.registerCommand(new ShapeCommandHandler(shapeStrtgRepo));
+		this.sgCmdHandler.registerCommand(new SelCommandHandler(shapeStrtgRepo));
+		this.sgCmdHandler.registerCommand(new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
+		this.sgCmdHandler.registerCommand(new PhyCommandHandler());
+		this.sgCmdHandler.registerCommand(new ShiftCommandHandler());
+		this.sgCmdHandler.registerCommand(new ScaleCommandHandler());
+		this.sgCmdHandler.registerCommand(new MirrorCommandHandler());
+		this.sgCmdHandler.registerCommand(new RotCommandHandler());
+		this.sgCmdHandler.registerCommand(new MaxCommandHandler());
+		this.sgCmdHandler.registerCommand(new MinCommandHandler());
+		this.sgCmdHandler.registerCommand(new DelCommandHandler());
+		this.sgCmdHandler.registerCommand(new UndoCommandHandler());
+		this.sgCmdHandler.registerCommand(new RedoCommandHandler());
 	}
 	
 	/**
