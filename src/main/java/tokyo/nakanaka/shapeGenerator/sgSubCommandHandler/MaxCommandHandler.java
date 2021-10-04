@@ -23,7 +23,7 @@ public class MaxCommandHandler implements SubCommandHandler {
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		//check args length
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.MAX.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.MAX.syntax());
 			return;
 		}
 		Axis axis;

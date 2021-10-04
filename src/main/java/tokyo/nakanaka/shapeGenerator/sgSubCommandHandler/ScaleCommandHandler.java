@@ -24,7 +24,7 @@ public class ScaleCommandHandler implements SubCommandHandler{
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.SCALE.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.SCALE.syntax());
 			return;
 		}
 		Axis axis;

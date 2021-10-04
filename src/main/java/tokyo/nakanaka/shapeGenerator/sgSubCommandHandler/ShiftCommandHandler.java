@@ -25,7 +25,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.SHIFT.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.SHIFT.syntax());
 			return;
 		}
 		Direction dir;

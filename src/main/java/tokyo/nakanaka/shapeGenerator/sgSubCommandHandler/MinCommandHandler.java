@@ -23,7 +23,7 @@ public class MinCommandHandler implements SubCommandHandler {
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		//check args length
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + SgBranchHelpConstants.MIN.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.MIN.syntax());
 			return;
 		}
 		Axis axis;
