@@ -31,6 +31,11 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 	}
 
 	@Override
+	public String label(){
+		return this.subLabel;
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] subArgs) {
 		E value;
 		try {

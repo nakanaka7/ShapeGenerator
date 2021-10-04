@@ -17,6 +17,11 @@ public class RedoCommandHandler implements SubCommandHandler{
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
+	public String label() {
+		return "redo";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String usageMsg = cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.REDO.syntax();
 		if(args.length > 1) {

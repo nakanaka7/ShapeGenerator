@@ -35,6 +35,12 @@ public class HelpCommandHandler implements SubCommandHandler {
 		this.cmdHelpMap.put("redo", SgBranchHelpConstants.REDO);
 	}
 
+
+	@Override
+	public String label() {
+		return "help";
+	}
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 0) {

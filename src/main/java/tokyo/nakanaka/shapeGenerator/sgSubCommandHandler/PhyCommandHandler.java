@@ -16,6 +16,11 @@ public class PhyCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
+	public String label() {
+		return "phy";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String usageMsg = cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.PHY.syntax();
 		if(args.length != 1) {

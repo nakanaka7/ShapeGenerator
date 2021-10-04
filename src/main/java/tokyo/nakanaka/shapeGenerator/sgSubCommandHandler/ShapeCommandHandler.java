@@ -26,6 +26,11 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String label() {
+		return "shape";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 1) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.SHAPE.syntax());
