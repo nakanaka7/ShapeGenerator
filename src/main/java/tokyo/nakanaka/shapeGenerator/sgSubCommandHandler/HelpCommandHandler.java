@@ -17,24 +17,9 @@ public class HelpCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 
-	public HelpCommandHandler() {
-		this.cmdHelpMap.put("version", SgBranchHelpConstants.VERSION);
-		this.cmdHelpMap.put("help", SgBranchHelpConstants.HELP);
-		this.cmdHelpMap.put("shape", SgBranchHelpConstants.SHAPE);
-		this.cmdHelpMap.put("sel", new SelHelp());
-		this.cmdHelpMap.put("genr", SgBranchHelpConstants.GENR);
-		this.cmdHelpMap.put("phy", SgBranchHelpConstants.PHY);
-		this.cmdHelpMap.put("shift", SgBranchHelpConstants.SHIFT);
-		this.cmdHelpMap.put("scale", SgBranchHelpConstants.SCALE);
-		this.cmdHelpMap.put("mirror", SgBranchHelpConstants.MIRROR);
-		this.cmdHelpMap.put("rot", SgBranchHelpConstants.ROT);
-		this.cmdHelpMap.put("max", SgBranchHelpConstants.MAX);
-		this.cmdHelpMap.put("min", SgBranchHelpConstants.MIN);
-		this.cmdHelpMap.put("del", SgBranchHelpConstants.DEL);
-		this.cmdHelpMap.put("undo", SgBranchHelpConstants.UNDO);
-		this.cmdHelpMap.put("redo", SgBranchHelpConstants.REDO);
+	public void registerHelp(CommandHelp cmdHelp){
+		this.cmdHelpMap.put(cmdHelp.label(), cmdHelp);
 	}
-
 
 	@Override
 	public String label() {

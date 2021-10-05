@@ -7,6 +7,8 @@ import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
 
@@ -49,22 +51,38 @@ public class Main {
 	}
 
 	private void registerCommands(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory){
-		this.sgCmdHandler.registerCommand(new HelpCommandHandler());
+		HelpCommandHandler helpCmdHandler = new HelpCommandHandler();
+		this.sgCmdHandler.registerCommand(helpCmdHandler);
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.HELP);
 		this.sgCmdHandler.registerCommand(new VersionCommandHandler(new SemVer(1, 2, 0)));
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.VERSION);
 		this.sgCmdHandler.registerCommand(new WandCommandHandler());
 		this.sgCmdHandler.registerCommand(new ShapeCommandHandler(shapeStrtgRepo));
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.SHAPE);
 		this.sgCmdHandler.registerCommand(new SelCommandHandler(shapeStrtgRepo));
+		helpCmdHandler.registerHelp(new SelHelp());
 		this.sgCmdHandler.registerCommand(new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.GENR);
 		this.sgCmdHandler.registerCommand(new PhyCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.PHY);
 		this.sgCmdHandler.registerCommand(new ShiftCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.SHIFT);
 		this.sgCmdHandler.registerCommand(new ScaleCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.SCALE);
 		this.sgCmdHandler.registerCommand(new MirrorCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.MIRROR);
 		this.sgCmdHandler.registerCommand(new RotCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.ROT);
 		this.sgCmdHandler.registerCommand(new MaxCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.MAX);
 		this.sgCmdHandler.registerCommand(new MinCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.MIN);
 		this.sgCmdHandler.registerCommand(new DelCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.DEL);
 		this.sgCmdHandler.registerCommand(new UndoCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.UNDO);
 		this.sgCmdHandler.registerCommand(new RedoCommandHandler());
+		helpCmdHandler.registerHelp(SgBranchHelpConstants.REDO);
 	}
 	
 	/**
