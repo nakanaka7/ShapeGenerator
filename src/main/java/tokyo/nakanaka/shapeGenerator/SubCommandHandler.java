@@ -9,6 +9,7 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 @PrivateAPI
 public interface SubCommandHandler {
 	String label();
+	String description();
 	void onCommand(PlayerData playerData, Player player, String[] args);
 	List<String> onTabComplete(PlayerData playerData, Player player, String[] args);
 }

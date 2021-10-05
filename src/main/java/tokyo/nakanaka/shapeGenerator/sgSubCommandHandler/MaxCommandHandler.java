@@ -25,6 +25,11 @@ public class MaxCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String description() {
+		return "Set max coordinate of the generated blocks";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		//check args length
 		if(args.length != 2) {

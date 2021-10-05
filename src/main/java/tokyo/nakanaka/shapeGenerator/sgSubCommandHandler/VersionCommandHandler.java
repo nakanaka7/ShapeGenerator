@@ -27,6 +27,11 @@ public class VersionCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String description() {
+		return "Print the version";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String ver = major + "." + minor + "." + patch;
 		player.print(cmdLogColor.main() + "Version: " + ver);

@@ -22,6 +22,11 @@ public class UndoCommandHandler implements SubCommandHandler{
 	}
 
 	@Override
+	public String description() {
+		return "Undo block changing command(s)";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length > 1) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.UNDO.syntax());

@@ -28,6 +28,11 @@ public class OffsetCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String description() {
+		return "Set offset";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String usage = "/sg sel offset [x] [y] [z]";
 		//parse the arguments to a position

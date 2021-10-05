@@ -27,6 +27,11 @@ public class HelpCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String description() {
+		return "Print the command help";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 0) {
 			var msgBuilder = new RootHelpMessageCreator.Builder(cmdLogColor.main(), "/sg")

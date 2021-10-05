@@ -22,6 +22,11 @@ public class RedoCommandHandler implements SubCommandHandler{
 	}
 
 	@Override
+	public String description() {
+		return "Redo block changing command(s)";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		String usageMsg = cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.REDO.syntax();
 		if(args.length > 1) {

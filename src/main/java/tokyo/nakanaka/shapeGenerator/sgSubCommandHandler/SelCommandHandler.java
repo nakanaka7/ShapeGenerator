@@ -41,6 +41,11 @@ public class SelCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String description() {
+		return "Specify the selection";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		SelectionShape shape = playerData.getSelectionShape();
 		if(args.length == 0) {

@@ -31,6 +31,11 @@ public class WandHelpCommandHandler implements SubCommandHandler {
     }
 
     @Override
+    public String description() {
+        return "Print wand help";
+    }
+
+    @Override
     public void onCommand(PlayerData playerData, Player player, String[] args) {
         if(args.length != 1) {
             player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.WANDHELP.syntax());

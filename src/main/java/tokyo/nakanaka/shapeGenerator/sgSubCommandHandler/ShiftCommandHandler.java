@@ -28,6 +28,11 @@ public class ShiftCommandHandler implements SubCommandHandler{
 	}
 
 	@Override
+	public String description() {
+		return "Shift the generated blocks";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.SHIFT.syntax());

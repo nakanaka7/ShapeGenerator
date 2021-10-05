@@ -27,6 +27,11 @@ public class RotCommandHandler implements SubCommandHandler{
 	}
 
 	@Override
+	public String description() {
+		return "Rotate the generated block(s)";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 2) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.ROT.syntax());

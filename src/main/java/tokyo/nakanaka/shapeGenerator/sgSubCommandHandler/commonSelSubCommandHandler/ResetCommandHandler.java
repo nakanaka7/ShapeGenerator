@@ -23,6 +23,11 @@ public class ResetCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
+	public String description() {
+		return "Reset the selection";
+	}
+
+	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length != 0) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg sel reset");
