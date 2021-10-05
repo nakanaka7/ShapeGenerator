@@ -7,6 +7,8 @@ import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.BranchCommandHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
@@ -52,37 +54,38 @@ public class Main {
 
 	private void registerCommands(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory){
 		HelpCommandHandler helpCmdHandler = new HelpCommandHandler();
-		this.sgCmdHandler.registerCommand(helpCmdHandler);
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.HELP);
-		this.sgCmdHandler.registerCommand(new VersionCommandHandler(new SemVer(1, 2, 0)));
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.VERSION);
-		this.sgCmdHandler.registerCommand(new WandCommandHandler());
-		this.sgCmdHandler.registerCommand(new ShapeCommandHandler(shapeStrtgRepo));
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.SHAPE);
+		this.registerBranchCommand(helpCmdHandler, helpCmdHandler);
+		this.registerBranchCommand(helpCmdHandler, new VersionCommandHandler(new SemVer(1, 2, 0)));
+		this.registerBranchCommand(helpCmdHandler,new WandCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new ShapeCommandHandler(shapeStrtgRepo));
 		this.sgCmdHandler.registerCommand(new SelCommandHandler(shapeStrtgRepo));
 		helpCmdHandler.registerHelp(new SelHelp());
-		this.sgCmdHandler.registerCommand(new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.GENR);
-		this.sgCmdHandler.registerCommand(new PhyCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.PHY);
-		this.sgCmdHandler.registerCommand(new ShiftCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.SHIFT);
-		this.sgCmdHandler.registerCommand(new ScaleCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.SCALE);
-		this.sgCmdHandler.registerCommand(new MirrorCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.MIRROR);
-		this.sgCmdHandler.registerCommand(new RotCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.ROT);
-		this.sgCmdHandler.registerCommand(new MaxCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.MAX);
-		this.sgCmdHandler.registerCommand(new MinCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.MIN);
-		this.sgCmdHandler.registerCommand(new DelCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.DEL);
-		this.sgCmdHandler.registerCommand(new UndoCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.UNDO);
-		this.sgCmdHandler.registerCommand(new RedoCommandHandler());
-		helpCmdHandler.registerHelp(SgBranchHelpConstants.REDO);
+		this.registerBranchCommand(helpCmdHandler, new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
+		this.registerBranchCommand(helpCmdHandler, new PhyCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new ShiftCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new ScaleCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new MirrorCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new RotCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new MaxCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new MinCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new DelCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new UndoCommandHandler());
+		this.registerBranchCommand(helpCmdHandler, new RedoCommandHandler());
+	}
+
+	private void registerBranchCommand(HelpCommandHandler helpCmdHandler, BranchCommandHandler handler) {
+		this.sgCmdHandler.registerCommand(handler);
+		BranchCommandHelp cmdHelp = createBranchHelp(handler);
+		helpCmdHandler.registerHelp(cmdHelp);
+	}
+
+	private static BranchCommandHelp createBranchHelp(BranchCommandHandler handler){
+		var builder = new BranchCommandHelp.Builder(handler.label())
+				.description(handler.description());
+		for(ParameterUsage e : handler.parameterUsages()){
+			builder.parameter(e.syntax(), e.desc());
+		}
+		return builder.build();
 	}
 	
 	/**
