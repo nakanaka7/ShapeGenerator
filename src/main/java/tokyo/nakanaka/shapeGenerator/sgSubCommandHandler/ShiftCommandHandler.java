@@ -12,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
@@ -30,6 +31,12 @@ public class ShiftCommandHandler implements SubCommandHandler{
 	@Override
 	public String description() {
 		return "Shift the generated blocks";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var dir = new ParameterUsage("<direction>", "the direction to shift");
+		var dis = new ParameterUsage("<distance>", "distance of shift");
+		return new ParameterUsage[]{dir, dis};
 	}
 
 	@Override

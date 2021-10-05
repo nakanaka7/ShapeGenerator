@@ -11,6 +11,7 @@ import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
@@ -27,6 +28,12 @@ public class MinCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Set min coordinate of the generated blocks";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var xyz = new ParameterUsage("x|y|z", "axis");
+		var coord = new ParameterUsage("<coordinate>", "minimum coordinate of the generation");
+		return new ParameterUsage[]{xyz, coord};
 	}
 
 	@Override

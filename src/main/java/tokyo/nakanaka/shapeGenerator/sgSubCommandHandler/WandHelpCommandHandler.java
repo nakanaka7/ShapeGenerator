@@ -9,6 +9,7 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
@@ -33,6 +34,11 @@ public class WandHelpCommandHandler implements SubCommandHandler {
     @Override
     public String description() {
         return "Print wand help";
+    }
+
+    public ParameterUsage[] parameterUsages() {
+        var num = new ParameterUsage("<shape>", "Selection shape");
+        return new ParameterUsage[]{};
     }
 
     @Override

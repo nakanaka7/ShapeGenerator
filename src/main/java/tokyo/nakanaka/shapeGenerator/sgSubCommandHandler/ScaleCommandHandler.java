@@ -13,6 +13,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ScaleCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
@@ -29,6 +30,12 @@ public class ScaleCommandHandler implements SubCommandHandler{
 	@Override
 	public String description() {
 		return "Change the scale of the generated block(s)";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var xyz = new ParameterUsage("x|y|z", "an axis for scaling");
+		var fac = new ParameterUsage("<factor>", "a factor for scaling");
+		return new ParameterUsage[]{xyz, fac};
 	}
 
 	@Override

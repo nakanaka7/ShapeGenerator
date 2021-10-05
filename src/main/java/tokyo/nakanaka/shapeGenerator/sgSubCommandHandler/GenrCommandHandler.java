@@ -14,6 +14,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
@@ -37,6 +38,11 @@ public class GenrCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Generate block(s) in the selection";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var block = new ParameterUsage("<block>", "the block to generate");
+		return new ParameterUsage[]{block};
 	}
 
 	@Override

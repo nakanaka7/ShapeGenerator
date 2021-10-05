@@ -6,6 +6,7 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public class UndoCommandHandler implements SubCommandHandler{
 	@Override
 	public String description() {
 		return "Undo block changing command(s)";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var num = new ParameterUsage("[number]", "a number to undo generation(s)");
+		return new ParameterUsage[]{num};
 	}
 
 	@Override

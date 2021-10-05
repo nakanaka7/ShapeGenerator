@@ -11,6 +11,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.ArrayList;
@@ -30,6 +31,11 @@ public class MirrorCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Mirror the generated blocks";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var xyz = new ParameterUsage("x|y|z", "an axis to mirror");
+		return new ParameterUsage[]{xyz};
 	}
 
 	@Override

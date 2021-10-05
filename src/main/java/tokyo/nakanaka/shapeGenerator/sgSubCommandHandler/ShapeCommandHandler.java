@@ -9,6 +9,7 @@ import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
@@ -33,6 +34,11 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Set selection shape";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var type = new ParameterUsage("<type>", "a shape type");
+		return new ParameterUsage[]{type};
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import tokyo.nakanaka.shapeGenerator.command.DeleteCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.ArrayList;
@@ -29,6 +30,11 @@ public class DelCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Delete the generated block(s)";
+	}
+
+	public ParameterUsage[] parameterUsages() {
+		var num = new ParameterUsage("[number]", "a number to delete generation(s)");
+		return new ParameterUsage[]{num};
 	}
 
 	@Override

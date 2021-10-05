@@ -31,6 +31,11 @@ public class HelpCommandHandler implements SubCommandHandler {
 		return "Print the command help";
 	}
 
+	public ParameterUsage[] parameterUsages() {
+		var subcmd = new ParameterUsage("[subcommand]", "a subcommand to print the help");
+		return new ParameterUsage[]{subcmd};
+	}
+
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args) {
 		if(args.length == 0) {
