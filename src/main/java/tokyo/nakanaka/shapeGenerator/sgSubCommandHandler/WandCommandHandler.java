@@ -4,6 +4,7 @@ import java.util.List;
 
 import tokyo.nakanaka.*;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
@@ -13,7 +14,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 /**
  * Handles "/sg wand" command
  */
-public class WandCommandHandler implements SubCommandHandler {
+public class WandCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -26,6 +27,7 @@ public class WandCommandHandler implements SubCommandHandler {
 		return "Give a player a wand";
 	}
 
+	@Override
 	public ParameterUsage[] parameterUsages() {
 		return new ParameterUsage[]{};
 	}

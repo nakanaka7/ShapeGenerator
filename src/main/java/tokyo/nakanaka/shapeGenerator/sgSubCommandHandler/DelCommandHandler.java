@@ -3,6 +3,7 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Handles "/sg del" command
  */
-public class DelCommandHandler implements SubCommandHandler {
+public class DelCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -32,6 +33,7 @@ public class DelCommandHandler implements SubCommandHandler {
 		return "Delete the generated block(s)";
 	}
 
+	@Override
 	public ParameterUsage[] parameterUsages() {
 		var num = new ParameterUsage("[number]", "a number to delete generation(s)");
 		return new ParameterUsage[]{num};

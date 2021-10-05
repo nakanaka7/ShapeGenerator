@@ -6,6 +6,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.*;
@@ -17,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 /**
  * Handles "sg max" subcommand
  */
-public class MaxCommandHandler implements SubCommandHandler {
+public class MaxCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -30,6 +31,7 @@ public class MaxCommandHandler implements SubCommandHandler {
 		return "Set max coordinate of the generated blocks";
 	}
 
+	@Override
 	public ParameterUsage[] parameterUsages() {
 		var xyz = new ParameterUsage("x|y|z", "axis");
 		var coord = new ParameterUsage("<coordinate>", "maximum coordinate of the generation");

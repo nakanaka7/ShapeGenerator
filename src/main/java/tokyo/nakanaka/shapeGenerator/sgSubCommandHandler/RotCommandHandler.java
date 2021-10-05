@@ -4,6 +4,7 @@ import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Handles "/sg rot" command
  */
-public class RotCommandHandler implements SubCommandHandler{
+public class RotCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -32,6 +33,7 @@ public class RotCommandHandler implements SubCommandHandler{
 		return "Rotate the generated block(s)";
 	}
 
+	@Override
 	public ParameterUsage[] parameterUsages() {
 		var xyz = new ParameterUsage("x|y|z", "an axis for rotating");
 		var deg = new ParameterUsage("<degree>", "a degree for rotating");

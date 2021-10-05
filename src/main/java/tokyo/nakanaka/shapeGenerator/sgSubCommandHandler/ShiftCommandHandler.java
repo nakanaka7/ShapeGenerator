@@ -5,13 +5,13 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
+import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Handles "/sg shift" command
  */
-public class ShiftCommandHandler implements SubCommandHandler{
+public class ShiftCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -33,6 +33,7 @@ public class ShiftCommandHandler implements SubCommandHandler{
 		return "Shift the generated blocks";
 	}
 
+	@Override
 	public ParameterUsage[] parameterUsages() {
 		var dir = new ParameterUsage("<direction>", "the direction to shift");
 		var dis = new ParameterUsage("<distance>", "distance of shift");

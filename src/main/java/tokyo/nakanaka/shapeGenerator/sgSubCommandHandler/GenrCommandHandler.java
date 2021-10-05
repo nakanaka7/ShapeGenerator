@@ -6,21 +6,17 @@ import java.util.stream.Collectors;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.BlockIDListFactory;
-import tokyo.nakanaka.shapeGenerator.Selection;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 /**
  * Handles "/sg genr" command
  */
-public class GenrCommandHandler implements SubCommandHandler {
+public class GenrCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	private BlockIDListFactory blockIDFactory;
@@ -40,6 +36,7 @@ public class GenrCommandHandler implements SubCommandHandler {
 		return "Generate block(s) in the selection";
 	}
 
+	@Override
 	public ParameterUsage[] parameterUsages() {
 		var block = new ParameterUsage("<block>", "the block to generate");
 		return new ParameterUsage[]{block};

@@ -5,12 +5,13 @@ import java.util.List;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.SemVer;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 
-public class VersionCommandHandler implements SubCommandHandler {
+public class VersionCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private int major;
 	private int minor;
@@ -32,6 +33,7 @@ public class VersionCommandHandler implements SubCommandHandler {
 		return "Print the version";
 	}
 
+	@Override
 	public ParameterUsage[] parameterUsages() {
 		return new ParameterUsage[]{};
 	}
