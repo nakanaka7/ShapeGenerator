@@ -54,13 +54,14 @@ class SgCommandHandler implements CommandHandler {
 	 */
 	@Override
 	public void onCommand(CommandSender cmdSender, String[] args) {
+		CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 		if(!(cmdSender instanceof Player player)) {
-			cmdSender.print(LogColor.RED + "Player only command");
+			cmdSender.print(cmdLogColor.error() + "Player only command");
 			return;
 		}
 		if(args.length == 0) {
-			cmdSender.print(LogColor.RED + "Usage: /sg <subcommand>");
-			cmdSender.print(LogColor.RED + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
+			cmdSender.print(cmdLogColor.error() + "Usage: /sg <subcommand>");
+			cmdSender.print(cmdLogColor.error() + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
 			return;
 		}
 		String subLabel = args[0];
@@ -68,12 +69,12 @@ class SgCommandHandler implements CommandHandler {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		CommandExecutor sgSubCmdExecutor = this.cmdExecutorMap.get(subLabel);
 		if(sgSubCmdExecutor == null) {
-			cmdSender.print(LogColor.RED + "Unknown subcommand");
-			cmdSender.print(LogColor.RED + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
+			cmdSender.print(cmdLogColor.error() + "Unknown subcommand");
+			cmdSender.print(cmdLogColor.error() + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
 			return;
 		}
 		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
-		sgSubCmdExecutor.onCommand(playerData, player, subArgs);
+		sgSubCmdExecutor.onCommand(playerData, player, subArgs, cmdLogColor);
 	}
 
 	/**
