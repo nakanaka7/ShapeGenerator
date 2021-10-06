@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 /**
  * Handles "sg max" subcommand
  */
-public class MaxCommandHandler implements BranchCommandHandler {
+public class MaxCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -31,7 +31,6 @@ public class MaxCommandHandler implements BranchCommandHandler {
 		return "Set max coordinate of the generated blocks";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var xyz = new ParameterUsage("x|y|z", "axis");
 		var coord = new ParameterUsage("<coordinate>", "maximum coordinate of the generation");

@@ -6,6 +6,7 @@ import tokyo.nakanaka.UndoableCommand;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Handles "/sg mirror" command
  */
-public class MirrorCommandHandler implements BranchCommandHandler {
+public class MirrorCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -33,7 +34,6 @@ public class MirrorCommandHandler implements BranchCommandHandler {
 		return "Mirror the generated blocks";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var xyz = new ParameterUsage("x|y|z", "an axis to mirror");
 		return new ParameterUsage[]{xyz};

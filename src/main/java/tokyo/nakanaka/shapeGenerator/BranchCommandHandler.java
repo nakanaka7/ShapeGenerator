@@ -5,5 +5,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 
 @PrivateAPI
 public interface BranchCommandHandler extends SubCommandHandler {
-    ParameterUsage[] parameterUsages();
+    default ParameterUsage[] parameterUsages(){
+        return new ParameterUsage[]{};
+    }
 }

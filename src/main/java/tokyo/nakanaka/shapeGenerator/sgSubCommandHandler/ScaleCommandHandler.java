@@ -20,7 +20,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 /**
  * Handles "/sg scale" command
  */
-public class ScaleCommandHandler implements BranchCommandHandler {
+public class ScaleCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -33,7 +33,6 @@ public class ScaleCommandHandler implements BranchCommandHandler {
 		return "Change the scale of the generated block(s)";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var xyz = new ParameterUsage("x|y|z", "an axis for scaling");
 		var fac = new ParameterUsage("<factor>", "a factor for scaling");

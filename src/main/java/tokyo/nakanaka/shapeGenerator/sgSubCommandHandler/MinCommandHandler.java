@@ -18,7 +18,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 /**
  * Handles "sg min" subcommand
  */
-public class MinCommandHandler implements BranchCommandHandler {
+public class MinCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -31,7 +31,6 @@ public class MinCommandHandler implements BranchCommandHandler {
 		return "Set min coordinate of the generated blocks";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var xyz = new ParameterUsage("x|y|z", "axis");
 		var coord = new ParameterUsage("<coordinate>", "minimum coordinate of the generation");

@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Handles "/sg rot" command
  */
-public class RotCommandHandler implements BranchCommandHandler {
+public class RotCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -33,7 +33,6 @@ public class RotCommandHandler implements BranchCommandHandler {
 		return "Rotate the generated block(s)";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var xyz = new ParameterUsage("x|y|z", "an axis for rotating");
 		var deg = new ParameterUsage("<degree>", "a degree for rotating");

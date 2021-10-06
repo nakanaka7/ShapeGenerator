@@ -4,6 +4,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Handles "/sg undo" command
  */
-public class UndoCommandHandler implements BranchCommandHandler {
+public class UndoCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -27,7 +28,6 @@ public class UndoCommandHandler implements BranchCommandHandler {
 		return "Undo block changing command(s)";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var num = new ParameterUsage("[number]", "a number to undo generation(s)");
 		return new ParameterUsage[]{num};

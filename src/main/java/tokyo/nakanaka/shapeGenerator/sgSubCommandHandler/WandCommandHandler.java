@@ -14,7 +14,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 /**
  * Handles "/sg wand" command
  */
-public class WandCommandHandler implements BranchCommandHandler {
+public class WandCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -27,7 +27,6 @@ public class WandCommandHandler implements BranchCommandHandler {
 		return "Give a player a wand";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		return new ParameterUsage[]{};
 	}

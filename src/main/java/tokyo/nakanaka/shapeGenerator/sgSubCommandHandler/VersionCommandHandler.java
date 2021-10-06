@@ -11,7 +11,7 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 
-public class VersionCommandHandler implements BranchCommandHandler {
+public class VersionCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private int major;
 	private int minor;
@@ -33,7 +33,6 @@ public class VersionCommandHandler implements BranchCommandHandler {
 		return "Print the version";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		return new ParameterUsage[]{};
 	}

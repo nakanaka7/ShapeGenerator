@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 /**
  * Handles "/sg wandhelp"
  */
-public class WandHelpCommandHandler implements BranchCommandHandler {
+public class WandHelpCommandHandler implements SubCommandHandler {
     private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
     private SelectionShapeStrategyRepository strtgRepo;
 
@@ -33,7 +33,6 @@ public class WandHelpCommandHandler implements BranchCommandHandler {
         return "Print wand help";
     }
 
-    @Override
     public ParameterUsage[] parameterUsages() {
         var num = new ParameterUsage("<shape>", "Selection shape");
         return new ParameterUsage[]{};

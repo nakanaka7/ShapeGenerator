@@ -7,6 +7,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Handles "/sg shift" command
  */
-public class ShiftCommandHandler implements BranchCommandHandler {
+public class ShiftCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
@@ -33,7 +34,6 @@ public class ShiftCommandHandler implements BranchCommandHandler {
 		return "Shift the generated blocks";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var dir = new ParameterUsage("<direction>", "the direction to shift");
 		var dis = new ParameterUsage("<distance>", "distance of shift");

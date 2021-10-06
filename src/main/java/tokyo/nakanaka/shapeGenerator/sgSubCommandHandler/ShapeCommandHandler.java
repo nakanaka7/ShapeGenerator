@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 /**
  * Handles "/sg shape" command
  */
-public class ShapeCommandHandler implements BranchCommandHandler {
+public class ShapeCommandHandler implements SubCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
@@ -32,7 +32,6 @@ public class ShapeCommandHandler implements BranchCommandHandler {
 		return "Set selection shape";
 	}
 
-	@Override
 	public ParameterUsage[] parameterUsages() {
 		var type = new ParameterUsage("<type>", "a shape type");
 		return new ParameterUsage[]{type};
