@@ -1,12 +1,10 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import tokyo.nakanaka.SemVer;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
 
 import java.util.List;
 
@@ -21,8 +19,7 @@ public class Main {
 	public Main(BlockIDListFactory blockIDListFactory) {
 		SelectionShapeStrategyRepository shapeStrtgRepo = prepareStrategyRepository();
 		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
-		this.sgCmdHandler = new SgCommandHandler(playerDataRepo);
-		this.registerCommands(shapeStrtgRepo, blockIDListFactory);
+		this.sgCmdHandler = new SgCommandHandler(shapeStrtgRepo, blockIDListFactory, playerDataRepo);
 		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
 	}
 
@@ -46,30 +43,6 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, new HollowRegularPrismSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PYRAMID, new HollowRegularPyramidSelectionShapeStrategy());
 		return shapeStrtgRepo;
-	}
-
-	private void registerCommands(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory){
-		HelpCommandHandler helpCmdHandler = new HelpCommandHandler();
-		this.registerBranchCommand(helpCmdHandler);
-		this.registerBranchCommand(new VersionCommandHandler(new SemVer(1, 2, 0)));
-		this.registerBranchCommand(new WandCommandHandler());
-		this.registerBranchCommand(new ShapeCommandHandler(shapeStrtgRepo));
-		this.sgCmdHandler.registerCommand(new SelCommandHandler(shapeStrtgRepo));
-		this.registerBranchCommand(new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
-		this.registerBranchCommand(new PhyCommandHandler());
-		this.registerBranchCommand(new ShiftCommandHandler());
-		this.registerBranchCommand(new ScaleCommandHandler());
-		this.registerBranchCommand(new MirrorCommandHandler());
-		this.registerBranchCommand(new RotCommandHandler());
-		this.registerBranchCommand(new MaxCommandHandler());
-		this.registerBranchCommand(new MinCommandHandler());
-		this.registerBranchCommand(new DelCommandHandler());
-		this.registerBranchCommand(new UndoCommandHandler());
-		this.registerBranchCommand(new RedoCommandHandler());
-	}
-
-	private void registerBranchCommand(BranchCommandHandler handler) {
-		this.sgCmdHandler.registerCommand(handler);
 	}
 
 	/**
