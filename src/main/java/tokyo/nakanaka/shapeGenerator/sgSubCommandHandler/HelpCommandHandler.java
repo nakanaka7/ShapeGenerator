@@ -4,7 +4,6 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.BranchCommandHandler;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
 
@@ -17,6 +16,25 @@ import java.util.List;
 public class HelpCommandHandler implements BranchCommandHandler {
 	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
+
+	public HelpCommandHandler() {
+		registerHelp(SgBranchHelpConstants.HELP);
+		registerHelp(SgBranchHelpConstants.VERSION);
+		registerHelp(SgBranchHelpConstants.WAND);
+		registerHelp(SgBranchHelpConstants.SHAPE);
+		registerHelp(new SelHelp());
+		registerHelp(SgBranchHelpConstants.GENR);
+		registerHelp(SgBranchHelpConstants.PHY);
+		registerHelp(SgBranchHelpConstants.SHIFT);
+		registerHelp(SgBranchHelpConstants.SCALE);
+		registerHelp(SgBranchHelpConstants.MIRROR);
+		registerHelp(SgBranchHelpConstants.ROT);
+		registerHelp(SgBranchHelpConstants.MAX);
+		registerHelp(SgBranchHelpConstants.MIN);
+		registerHelp(SgBranchHelpConstants.DEL);
+		registerHelp(SgBranchHelpConstants.UNDO);
+		registerHelp(SgBranchHelpConstants.REDO);
+	}
 
 	public void registerHelp(CommandHelp cmdHelp){
 		this.cmdHelpMap.put(cmdHelp.label(), cmdHelp);
