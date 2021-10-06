@@ -20,7 +20,6 @@ import java.util.List;
  * Handles "/sg rot" command
  */
 public class RotCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public String label() {
@@ -39,7 +38,7 @@ public class RotCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length != 2) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.ROT.syntax());
 			return;

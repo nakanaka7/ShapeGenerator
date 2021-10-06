@@ -17,7 +17,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
  * Handles "/sg genr" command
  */
 public class GenrCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	private BlockIDListFactory blockIDFactory;
 
@@ -42,7 +41,7 @@ public class GenrCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length != 1) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.GENR.syntax());
 			return;

@@ -11,7 +11,6 @@ import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 
 public class VersionCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private int major;
 	private int minor;
 	private int patch;
@@ -37,7 +36,7 @@ public class VersionCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String ver = major + "." + minor + "." + patch;
 		player.print(cmdLogColor.main() + "Version: " + ver);
 	}

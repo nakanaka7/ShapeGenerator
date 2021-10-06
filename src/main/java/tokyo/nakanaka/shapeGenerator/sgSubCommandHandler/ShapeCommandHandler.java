@@ -15,7 +15,6 @@ import java.util.stream.Stream;
  * Handles "/sg shape" command
  */
 public class ShapeCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
 	public ShapeCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
@@ -38,7 +37,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length != 1) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.SHAPE.syntax());
 			return;

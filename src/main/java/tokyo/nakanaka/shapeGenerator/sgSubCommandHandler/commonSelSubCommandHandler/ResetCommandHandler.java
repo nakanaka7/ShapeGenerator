@@ -10,7 +10,6 @@ import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class ResetCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 
 	public ResetCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
@@ -28,7 +27,7 @@ public class ResetCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length != 0) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg sel reset");
 			return;

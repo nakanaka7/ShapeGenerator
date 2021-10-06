@@ -14,7 +14,6 @@ import java.util.List;
  * Handles "/sg help" command
  */
 public class HelpCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 
 	public HelpCommandHandler() {
@@ -56,7 +55,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length == 0) {
 			var msgBuilder = new RootHelpMessageCreator.Builder(cmdLogColor.main(), "/sg")
 					.description("The root command of ShapeGenerator");

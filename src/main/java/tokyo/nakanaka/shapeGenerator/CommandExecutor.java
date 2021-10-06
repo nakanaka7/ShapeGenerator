@@ -6,5 +6,5 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 @PrivateAPI
 public interface CommandExecutor {
-    void onCommand(PlayerData playerData, Player player, String[] args);
+    void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor);
 }

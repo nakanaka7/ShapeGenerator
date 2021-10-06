@@ -22,7 +22,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
  * Handles "/sg sel" command
  */
 public class SelCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private Map<String, SubCommandHandler> commonMap = new HashMap<>();
 	private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
 	
@@ -50,7 +49,7 @@ public class SelCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		SelectionShape shape = playerData.getSelectionShape();
 		if(args.length == 0) {
 			player.print(cmdLogColor.error() + "Usage:" + "/sg " + new SelHelp().syntax());
@@ -62,13 +61,13 @@ public class SelCommandHandler implements SubCommandHandler {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SubCommandHandler commonHandler = this.commonMap.get(subLabel);
 		if(commonHandler != null) {
-			commonHandler.onCommand(playerData, player, subArgs);
+			commonHandler.onCommand(playerData, player, subArgs, cmdLogColor);
 			return;
 		}
 		Map<String, SubCommandHandler> properMap = this.properMapMap.get(shape);
 		SubCommandHandler properHandler = properMap.get(subLabel);
 		if(properHandler != null) {
-			properHandler.onCommand(playerData, player, subArgs);
+			properHandler.onCommand(playerData, player, subArgs, cmdLogColor);
 			return;
 		}
 		player.print(cmdLogColor.error() + "Unkown subcommand");

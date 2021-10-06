@@ -16,7 +16,6 @@ import java.util.stream.Stream;
  * Handles "/sg wandhelp"
  */
 public class WandHelpCommandHandler implements SubCommandHandler {
-    private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
     private SelectionShapeStrategyRepository strtgRepo;
 
     public WandHelpCommandHandler(SelectionShapeStrategyRepository strtgRepo) {
@@ -39,7 +38,7 @@ public class WandHelpCommandHandler implements SubCommandHandler {
     }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args) {
+    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
         if(args.length != 1) {
             player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.WANDHELP.syntax());
             return;

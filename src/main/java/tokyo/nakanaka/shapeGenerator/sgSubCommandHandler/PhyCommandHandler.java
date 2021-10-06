@@ -14,7 +14,6 @@ import java.util.List;
  * Handles "/sg phy" command
  */
 public class PhyCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public String label() {
@@ -32,7 +31,7 @@ public class PhyCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usageMsg = cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.PHY.syntax();
 		if(args.length != 1) {
 			player.print(usageMsg);

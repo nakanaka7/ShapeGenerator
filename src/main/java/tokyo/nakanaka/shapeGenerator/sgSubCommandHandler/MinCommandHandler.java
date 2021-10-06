@@ -18,7 +18,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
  * Handles "sg min" subcommand
  */
 public class MinCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
 	public String label() {
@@ -37,7 +36,7 @@ public class MinCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		//check args length
 		if(args.length != 2) {
 			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.MIN.syntax());
