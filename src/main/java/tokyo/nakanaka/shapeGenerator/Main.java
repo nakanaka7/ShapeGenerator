@@ -13,6 +13,7 @@ import java.util.List;
  */
 @PublicAPI
 public class Main {
+	public static final String SG = "/sg";
 	private SgCommandHandler sgCmdHandler;
 	private SgEventHandler sgEvtHandler;
 	
