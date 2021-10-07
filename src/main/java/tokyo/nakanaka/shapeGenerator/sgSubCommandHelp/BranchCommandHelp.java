@@ -78,6 +78,7 @@ public class BranchCommandHelp implements CommandHelp {
         return this.desc;
     }
 
+    @Override
     public String[] parameterSyntaxes() {
         String[] array = new String[this.paramSyntaxList.size()];
         for (int i = 0; i < this.paramSyntaxList.size(); ++i) {

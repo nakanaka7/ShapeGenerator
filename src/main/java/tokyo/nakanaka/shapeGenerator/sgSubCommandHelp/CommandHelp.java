@@ -15,6 +15,12 @@ public interface CommandHelp {
 	String syntax();
 
 	/**
+	 * Returns parameter syntaxes
+	 * @return parameter syntaxes
+	 */
+	String[] parameterSyntaxes();
+
+	/**
 	 * Returns a description of the command;
 	 * @return a description of the command;
 	 */

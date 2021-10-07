@@ -27,6 +27,11 @@ public class SelHelp implements CommandHelp {
 		return description;
 	}
 
+	@Override
+	public String[] parameterSyntaxes() {
+		return new String[]{"<subcommand>"};
+	}
+
 	/**
 	 * Return multiple lines which contains the information for the command
 	 * This is used by HelpCommandHandler class
