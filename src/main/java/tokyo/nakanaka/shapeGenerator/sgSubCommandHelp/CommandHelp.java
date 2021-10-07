@@ -3,12 +3,6 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 public interface CommandHelp {
 
 	/**
-	 * Returns a syntax of the command
-	 * @return a syntax of the command
-	 */
-	String syntax();
-
-	/**
 	 * Returns parameter syntaxes
 	 * @return parameter syntaxes
 	 */

@@ -54,18 +54,6 @@ public class BranchCommandHelp implements CommandHelp {
     }
 
     /**
-     * Returns the command syntax
-     * @return the command syntax
-     */
-    public String syntax() {
-       String syntax = label;
-       for(String paramSyntax : this.paramSyntaxList){
-           syntax += " " + paramSyntax;
-       }
-       return syntax;
-    }
-
-    /**
      * Returns the description of this command
      * @return the description of this command
      */
