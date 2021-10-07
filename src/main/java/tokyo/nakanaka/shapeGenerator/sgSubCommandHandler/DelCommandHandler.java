@@ -16,17 +16,6 @@ import java.util.List;
  * Handles "/sg del" command
  */
 public class DelCommandHandler implements SubCommandHandler {
-
-	@Override
-	public String label() {
-		return "del";
-	}
-
-	@Override
-	public String description() {
-		return "Delete the generated block(s)";
-	}
-
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.DEL + " " + String.join(" ", SgSubcommandHelps.DEL.parameterSyntaxes());

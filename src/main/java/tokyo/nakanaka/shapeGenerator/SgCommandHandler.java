@@ -1,10 +1,5 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.SemVer;
@@ -14,7 +9,11 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @PrivateAPI
 class SgCommandHandler implements CommandHandler {
@@ -24,27 +23,27 @@ class SgCommandHandler implements CommandHandler {
 
 	SgCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory, PlayerDataRepository playerDataRepository) {
 		this.playerDataRepository = playerDataRepository;
-		this.registerCommand(new HelpCommandHandler());
-		this.registerCommand(new VersionCommandHandler(new SemVer(1, 2, 0)));
-		this.registerCommand(new WandCommandHandler());
-		this.registerCommand(new ShapeCommandHandler(shapeStrtgRepo));
-		this.registerCommand(new SelCommandHandler(shapeStrtgRepo));
-		this.registerCommand(new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
-		this.registerCommand(new PhyCommandHandler());
-		this.registerCommand(new ShiftCommandHandler());
-		this.registerCommand(new ScaleCommandHandler());
-		this.registerCommand(new MirrorCommandHandler());
-		this.registerCommand(new RotCommandHandler());
-		this.registerCommand(new MaxCommandHandler());
-		this.registerCommand(new MinCommandHandler());
-		this.registerCommand(new DelCommandHandler());
-		this.registerCommand(new UndoCommandHandler());
-		this.registerCommand(new RedoCommandHandler());
+		this.registerCommand(SgSublabel.HELP, new HelpCommandHandler());
+		this.registerCommand(SgSublabel.VERSION, new VersionCommandHandler(new SemVer(1, 2, 0)));
+		this.registerCommand(SgSublabel.WAND, new WandCommandHandler());
+		this.registerCommand(SgSublabel.SHAPE, new ShapeCommandHandler(shapeStrtgRepo));
+		this.registerCommand(SgSublabel.SEL, new SelCommandHandler(shapeStrtgRepo));
+		this.registerCommand(SgSublabel.GENR, new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
+		this.registerCommand(SgSublabel.PHY, new PhyCommandHandler());
+		this.registerCommand(SgSublabel.SHIFT, new ShiftCommandHandler());
+		this.registerCommand(SgSublabel.SCALE, new ScaleCommandHandler());
+		this.registerCommand(SgSublabel.MIRROR, new MirrorCommandHandler());
+		this.registerCommand(SgSublabel.ROT, new RotCommandHandler());
+		this.registerCommand(SgSublabel.MAX, new MaxCommandHandler());
+		this.registerCommand(SgSublabel.MIN, new MinCommandHandler());
+		this.registerCommand(SgSublabel.DEL, new DelCommandHandler());
+		this.registerCommand(SgSublabel.UNDO, new UndoCommandHandler());
+		this.registerCommand(SgSublabel.REDO, new RedoCommandHandler());
 	}
 
-	public void registerCommand(SubCommandHandler cmdHandler) {
-		this.cmdExecutorMap.put(cmdHandler.label(), cmdHandler::onCommand);
-		this.tabCompleterMap.put(cmdHandler.label(), cmdHandler::onTabComplete);
+	public void registerCommand(String label, SubCommandHandler cmdHandler) {
+		this.cmdExecutorMap.put(label, cmdHandler::onCommand);
+		this.tabCompleterMap.put(label, cmdHandler::onTabComplete);
 	}
 
 	/**

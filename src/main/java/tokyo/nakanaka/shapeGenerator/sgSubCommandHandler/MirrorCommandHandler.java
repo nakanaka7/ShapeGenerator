@@ -19,16 +19,6 @@ import java.util.List;
 public class MirrorCommandHandler implements SubCommandHandler {
 
 	@Override
-	public String label() {
-		return "mirror";
-	}
-
-	@Override
-	public String description() {
-		return "Mirror the generated blocks";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.MIRROR + " " + String.join(" ", SgSubcommandHelps.MIRROR.parameterSyntaxes());
 		if(args.length != 1) {

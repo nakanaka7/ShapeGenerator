@@ -19,16 +19,6 @@ import java.util.List;
 public class ShiftCommandHandler implements SubCommandHandler {
 
 	@Override
-	public String label() {
-		return "shift";
-	}
-
-	@Override
-	public String description() {
-		return "Shift the generated blocks";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.SHIFT + " " + String.join(" ", SgSubcommandHelps.SHIFT.parameterSyntaxes());
 		if(args.length != 2) {

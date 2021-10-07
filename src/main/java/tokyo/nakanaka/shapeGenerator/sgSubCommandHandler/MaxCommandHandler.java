@@ -18,16 +18,6 @@ import java.util.List;
 public class MaxCommandHandler implements SubCommandHandler {
 
 	@Override
-	public String label() {
-		return "max";
-	}
-
-	@Override
-	public String description() {
-		return "Set max coordinate of the generated blocks";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		//check args length
 		String usage = Main.SG + " " + SgSublabel.MAX + " " + String.join(" ", SgSubcommandHelps.MAX.parameterSyntaxes());

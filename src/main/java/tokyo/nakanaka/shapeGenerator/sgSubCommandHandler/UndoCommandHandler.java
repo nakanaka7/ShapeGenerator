@@ -13,16 +13,6 @@ import java.util.List;
 public class UndoCommandHandler implements SubCommandHandler {
 
 	@Override
-	public String label() {
-		return "undo";
-	}
-
-	@Override
-	public String description() {
-		return "Undo block changing command(s)";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.UNDO + " " + String.join(" ", SgSubcommandHelps.UNDO.parameterSyntaxes());
 		if(args.length > 1) {

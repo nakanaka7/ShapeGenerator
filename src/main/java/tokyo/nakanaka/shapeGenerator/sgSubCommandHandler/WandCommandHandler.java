@@ -14,17 +14,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
  * Handles "/sg wand" command
  */
 public class WandCommandHandler implements SubCommandHandler {
-
-	@Override
-	public String label() {
-		return "wand";
-	}
-
-	@Override
-	public String description() {
-		return "Give a player a wand";
-	}
-
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.WAND + " " + String.join(" ", SgSubcommandHelps.WAND.parameterSyntaxes());

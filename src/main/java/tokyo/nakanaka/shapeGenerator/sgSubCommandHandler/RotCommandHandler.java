@@ -18,16 +18,6 @@ import java.util.List;
 public class RotCommandHandler implements SubCommandHandler {
 
 	@Override
-	public String label() {
-		return "rot";
-	}
-
-	@Override
-	public String description() {
-		return "Rotate the generated block(s)";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.ROT + " " + String.join(" ", SgSubcommandHelps.ROT.parameterSyntaxes());
 		if(args.length != 2) {

@@ -24,16 +24,6 @@ public class GenrCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public String label() {
-		return "genr";
-	}
-
-	@Override
-	public String description() {
-		return "Generate block(s) in the selection";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.GENR + " " + String.join(" ", SgSubcommandHelps.GENR.parameterSyntaxes());
 		if(args.length != 1) {

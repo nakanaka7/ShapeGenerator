@@ -13,16 +13,6 @@ import java.util.List;
 public class RedoCommandHandler implements SubCommandHandler {
 
 	@Override
-	public String label() {
-		return "redo";
-	}
-
-	@Override
-	public String description() {
-		return "Redo block changing command(s)";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.REDO + " " + String.join(" ", SgSubcommandHelps.REDO.parameterSyntaxes());
 		String usageMsg = cmdLogColor.error() + "Usage: " + usage;

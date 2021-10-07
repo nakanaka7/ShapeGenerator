@@ -16,16 +16,6 @@ import java.util.List;
 public class PhyCommandHandler implements SubCommandHandler {
 
 	@Override
-	public String label() {
-		return "phy";
-	}
-
-	@Override
-	public String description() {
-		return "Toggle physics option for generating blocks";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.PHY + " " + String.join(" ", SgSubcommandHelps.PHY.parameterSyntaxes());
 		String usageMsg = cmdLogColor.error() + "Usage: " + usage;

@@ -40,16 +40,6 @@ public class HelpCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public String label() {
-		return "help";
-	}
-
-	@Override
-	public String description() {
-		return "Print the command help";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length == 0) {
 			String[] labels = new String[]{"/sg"};

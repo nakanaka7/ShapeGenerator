@@ -16,17 +16,6 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
  * Handles "/sg scale" command
  */
 public class ScaleCommandHandler implements SubCommandHandler {
-
-	@Override
-	public String label() {
-		return "scale";
-	}
-
-	@Override
-	public String description() {
-		return "Change the scale of the generated block(s)";
-	}
-
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.SCALE + " " + String.join(" ", SgSubcommandHelps.SCALE.parameterSyntaxes());

@@ -22,16 +22,6 @@ private SelectionShapeStrategyRepository shapeStrtgRepo;
 	}
 
 	@Override
-	public String label() {
-		return "offset";
-	}
-
-	@Override
-	public String description() {
-		return "Set offset";
-	}
-
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = "/sg sel offset [x] [y] [z]";
 		//parse the arguments to a position
