@@ -2,11 +2,10 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -38,7 +37,7 @@ public class ShapeCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-		String usage = Main.SG + " " + SgSublabel.SHAPE + " " + String.join(" ", SgBranchHelpConstants.SHAPE.parameterSyntaxes());
+		String usage = Main.SG + " " + SgSublabel.SHAPE + " " + String.join(" ", SgSubcommandHelps.SHAPE.parameterSyntaxes());
 		if(args.length != 1) {
 			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;

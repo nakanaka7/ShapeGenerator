@@ -21,22 +21,22 @@ public class HelpCommandHandler implements SubCommandHandler {
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 
 	public HelpCommandHandler() {
-		this.cmdHelpMap.put(HELP, SgBranchHelpConstants.HELP);
-		this.cmdHelpMap.put(VERSION, SgBranchHelpConstants.VERSION);
-		this.cmdHelpMap.put(WAND, SgBranchHelpConstants.WAND);
-		this.cmdHelpMap.put(SHAPE, SgBranchHelpConstants.SHAPE);
-		this.cmdHelpMap.put(SEL, new SelHelp());
-		this.cmdHelpMap.put(GENR, SgBranchHelpConstants.GENR);
-		this.cmdHelpMap.put(PHY, SgBranchHelpConstants.PHY);
-		this.cmdHelpMap.put(SHIFT, SgBranchHelpConstants.SHIFT);
-		this.cmdHelpMap.put(SCALE, SgBranchHelpConstants.SCALE);
-		this.cmdHelpMap.put(MIRROR, SgBranchHelpConstants.MIRROR);
-		this.cmdHelpMap.put(ROT, SgBranchHelpConstants.ROT);
-		this.cmdHelpMap.put(MAX, SgBranchHelpConstants.MAX);
-		this.cmdHelpMap.put(MIN, SgBranchHelpConstants.MIN);
-		this.cmdHelpMap.put(DEL, SgBranchHelpConstants.DEL);
-		this.cmdHelpMap.put(UNDO, SgBranchHelpConstants.UNDO);
-		this.cmdHelpMap.put(REDO, SgBranchHelpConstants.REDO);
+		this.cmdHelpMap.put(HELP, SgSubcommandHelps.HELP);
+		this.cmdHelpMap.put(VERSION, SgSubcommandHelps.VERSION);
+		this.cmdHelpMap.put(WAND, SgSubcommandHelps.WAND);
+		this.cmdHelpMap.put(SHAPE, SgSubcommandHelps.SHAPE);
+		this.cmdHelpMap.put(SEL, SgSubcommandHelps.SEL);
+		this.cmdHelpMap.put(GENR, SgSubcommandHelps.GENR);
+		this.cmdHelpMap.put(PHY, SgSubcommandHelps.PHY);
+		this.cmdHelpMap.put(SHIFT, SgSubcommandHelps.SHIFT);
+		this.cmdHelpMap.put(SCALE, SgSubcommandHelps.SCALE);
+		this.cmdHelpMap.put(MIRROR, SgSubcommandHelps.MIRROR);
+		this.cmdHelpMap.put(ROT, SgSubcommandHelps.ROT);
+		this.cmdHelpMap.put(MAX, SgSubcommandHelps.MAX);
+		this.cmdHelpMap.put(MIN, SgSubcommandHelps.MIN);
+		this.cmdHelpMap.put(DEL, SgSubcommandHelps.DEL);
+		this.cmdHelpMap.put(UNDO, SgSubcommandHelps.UNDO);
+		this.cmdHelpMap.put(REDO, SgSubcommandHelps.REDO);
 	}
 
 	@Override

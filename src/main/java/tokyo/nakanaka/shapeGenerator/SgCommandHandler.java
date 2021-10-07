@@ -14,7 +14,7 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 @PrivateAPI
 class SgCommandHandler implements CommandHandler {
@@ -61,7 +61,7 @@ class SgCommandHandler implements CommandHandler {
 		}
 		if(args.length == 0) {
 			cmdSender.print(cmdLogColor.error() + "Usage: /sg <subcommand>");
-			cmdSender.print(cmdLogColor.error() + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
+			cmdSender.print(cmdLogColor.error() + "Run \"" + SgSubcommandHelps.HELP.syntax() + "\" for help");
 			return;
 		}
 		String subLabel = args[0];
@@ -70,7 +70,7 @@ class SgCommandHandler implements CommandHandler {
 		CommandExecutor sgSubCmdExecutor = this.cmdExecutorMap.get(subLabel);
 		if(sgSubCmdExecutor == null) {
 			cmdSender.print(cmdLogColor.error() + "Unknown subcommand");
-			cmdSender.print(cmdLogColor.error() + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
+			cmdSender.print(cmdLogColor.error() + "Run \"" + SgSubcommandHelps.HELP.syntax() + "\" for help");
 			return;
 		}
 		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);

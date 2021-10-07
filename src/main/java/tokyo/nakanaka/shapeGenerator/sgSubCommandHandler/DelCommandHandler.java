@@ -8,7 +8,7 @@ import tokyo.nakanaka.shapeGenerator.command.DeleteCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class DelCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-		String usage = Main.SG + " " + SgSublabel.DEL + " " + String.join(" ", SgBranchHelpConstants.DEL.parameterSyntaxes());
+		String usage = Main.SG + " " + SgSublabel.DEL + " " + String.join(" ", SgSubcommandHelps.DEL.parameterSyntaxes());
 		if(args.length > 1) {
 			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;

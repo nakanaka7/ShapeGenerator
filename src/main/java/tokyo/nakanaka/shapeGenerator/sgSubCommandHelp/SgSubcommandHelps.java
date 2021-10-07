@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
-public class SgBranchHelpConstants {
-    private SgBranchHelpConstants() {
+public class SgSubcommandHelps {
+    private SgSubcommandHelps() {
     }
 
     public static final BranchCommandHelp HELP
@@ -31,6 +31,8 @@ public class SgBranchHelpConstants {
             .description("Set selection shape")
             .parameter("<type>", "a shape type")
             .build();
+
+    public static final SelHelp SEL = new SelHelp();
 
     public static final BranchCommandHelp GENR
             = new BranchCommandHelp.Builder("genr")

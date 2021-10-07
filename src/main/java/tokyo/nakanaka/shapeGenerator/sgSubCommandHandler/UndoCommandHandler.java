@@ -1,11 +1,10 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class UndoCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-		String usage = Main.SG + " " + SgSublabel.UNDO + " " + String.join(" ", SgBranchHelpConstants.UNDO.parameterSyntaxes());
+		String usage = Main.SG + " " + SgSublabel.UNDO + " " + String.join(" ", SgSubcommandHelps.UNDO.parameterSyntaxes());
 		if(args.length > 1) {
 			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;

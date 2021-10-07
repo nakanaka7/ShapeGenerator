@@ -1,13 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -40,7 +39,7 @@ public class WandHelpCommandHandler implements SubCommandHandler {
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
         if(args.length != 1) {
-            player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.WANDHELP.syntax());
+            player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgSubcommandHelps.WANDHELP.syntax());
             return;
         }
         SelectionShape shape;

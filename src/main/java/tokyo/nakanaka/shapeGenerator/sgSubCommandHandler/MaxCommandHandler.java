@@ -9,7 +9,7 @@ import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MaxCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class MaxCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		//check args length
-		String usage = Main.SG + " " + SgSublabel.MAX + " " + String.join(" ", SgBranchHelpConstants.MAX.parameterSyntaxes());
+		String usage = Main.SG + " " + SgSublabel.MAX + " " + String.join(" ", SgSubcommandHelps.MAX.parameterSyntaxes());
 		if(args.length != 2) {
 			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
