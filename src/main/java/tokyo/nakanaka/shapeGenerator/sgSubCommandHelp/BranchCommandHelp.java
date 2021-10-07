@@ -53,11 +53,6 @@ public class BranchCommandHelp implements CommandHelp {
 
     }
 
-    @Override
-    public String label() {
-        return this.label;
-    }
-
     /**
      * Returns the command syntax
      * @return the command syntax
@@ -78,13 +73,17 @@ public class BranchCommandHelp implements CommandHelp {
         return this.desc;
     }
 
+    public int parameterSize() {
+        return this.paramSyntaxList.size();
+    }
+
     @Override
     public String[] parameterSyntaxes() {
-        String[] array = new String[this.paramSyntaxList.size()];
-        for (int i = 0; i < this.paramSyntaxList.size(); ++i) {
-            array[i] = this.paramSyntaxList.get(i);
-        }
-        return array;
+        return this.paramSyntaxList.toArray(new String[this.paramSyntaxList.size()]);
+    }
+
+    public String[] parameterDescriptions(){
+        return this.paramDescList.toArray(new String[this.paramDescList.size()]);
     }
 
     /**
@@ -99,5 +98,6 @@ public class BranchCommandHelp implements CommandHelp {
         }
         return this.paramDescList.get(index);
     }
+
 
 }
