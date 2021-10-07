@@ -9,6 +9,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Handles "/sg help" command
@@ -55,8 +56,9 @@ public class HelpCommandHandler implements SubCommandHandler {
 		if(args.length == 0) {
 			var msgBuilder = new RootHelpMessageCreator.Builder(cmdLogColor.main(), "/sg")
 					.description("The root command of ShapeGenerator");
-			for (CommandHelp e : this.cmdHelpMap.values()){
-				msgBuilder = msgBuilder.subcommand(e.syntax(), e.description());
+			for (Map.Entry<String, CommandHelp> e : this.cmdHelpMap.entrySet()){
+				String subCmdSyntax = e.getKey() + " " + String.join(" ", e.getValue().parameterSyntaxes());
+				msgBuilder = msgBuilder.subcommand(subCmdSyntax , e.getValue().description());
 			}
 			List<String> lines = msgBuilder.build().toMessageLines();
 			lines.add(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
