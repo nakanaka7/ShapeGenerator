@@ -74,20 +74,27 @@ public class HelpCommandHandler implements SubCommandHandler {
 				return;
 			}
 			if(cmdHelp instanceof BranchCommandHelp branchHelp){
-				var msgBuilder = new BranchHelpMessageCreator.Builder(cmdLogColor.main(), "/sg", args[0])
-						.description(branchHelp.description());
-				for(int i = 0; i < branchHelp.parameterSyntaxes().length; i++){
-					msgBuilder = msgBuilder.parameter(branchHelp.parameterSyntaxes()[i]
-							, branchHelp.parameterDescription(i));
+				String[] labels = new String[]{"/sg", args[0]};
+				String desc = branchHelp.description();
+				List<SyntaxDesc> paramSyntaxDescs = new ArrayList<>();
+				for(int i = 0; i < branchHelp.parameterSize(); i++){
+					String paramSyntax = branchHelp.parameterSyntaxes()[i];
+					String paramDesc = branchHelp.parameterDescriptions()[i];
+					paramSyntaxDescs.add(new SyntaxDesc(paramSyntax, paramDesc));
 				}
-				List<String> lines = msgBuilder.build().toMessageLines();
+				List<String> lines = branchHelpMessage(cmdLogColor.main(), labels, desc, paramSyntaxDescs);
 				lines.forEach(player::print);
 			}else if(cmdHelp instanceof SelHelp selHelp){
+				String[] labels = new String[]{"/sg", SEL};
+				String desc = selHelp.description();
 				selHelp.toMultipleLines(playerData.getSelectionShape()).forEach(player::print);
 			}
 		}else {
 			player.print(cmdLogColor.error() + "Usage: /sg help [subcommand]");
 		}
+	}
+
+	private static record SyntaxDesc(String syntax, String desc) {
 	}
 
 	private static List<String> rootHelpMessage(LogColor mainColor, String[] labels, String desc, List<SyntaxDesc> subcmdSyntaxDescs) {
@@ -105,7 +112,20 @@ public class HelpCommandHandler implements SubCommandHandler {
 		return lines;
 	}
 
-	private static record SyntaxDesc(String syntax, String desc) {
+	private static List<String> branchHelpMessage(LogColor mainColor, String[] labels, String desc, List<SyntaxDesc> paramSyntaxDescs) {
+		List<String> lines = new ArrayList<>();
+		String head = String.join(" ", labels);
+		lines.add(MessageUtils.title(mainColor + "Help for " + LogColor.RESET + head));
+		lines.add(mainColor + "Description: " + LogColor.RESET + desc);
+		String paramUsage = String.join(" ", paramSyntaxDescs.stream().map(SyntaxDesc::syntax).toList());
+		lines.add(mainColor + "Usage: " + LogColor.RESET + head + " " + paramUsage);
+		if(paramSyntaxDescs.size() != 0){
+			lines.add(mainColor + "Parameter: ");
+			for(SyntaxDesc sd : paramSyntaxDescs){
+				lines.add("  " + mainColor + sd.syntax + ": " + LogColor.RESET + sd.desc);
+			}
+		}
+		return lines;
 	}
 
 	@Override
