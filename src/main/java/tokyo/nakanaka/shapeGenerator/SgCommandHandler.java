@@ -61,7 +61,7 @@ class SgCommandHandler implements CommandHandler {
 		}
 		if(args.length == 0) {
 			cmdSender.print(cmdLogColor.error() + "Usage: /sg <subcommand>");
-			cmdSender.print(cmdLogColor.error() + "Run \"" + SgSubcommandHelps.HELP.syntax() + "\" for help");
+			cmdSender.print(cmdLogColor.error() + "Run \"/sg help [subcommand]\" for help");
 			return;
 		}
 		String subLabel = args[0];
@@ -70,7 +70,7 @@ class SgCommandHandler implements CommandHandler {
 		CommandExecutor sgSubCmdExecutor = this.cmdExecutorMap.get(subLabel);
 		if(sgSubCmdExecutor == null) {
 			cmdSender.print(cmdLogColor.error() + "Unknown subcommand");
-			cmdSender.print(cmdLogColor.error() + "Run \"" + SgSubcommandHelps.HELP.syntax() + "\" for help");
+			cmdSender.print(cmdLogColor.error() + "Run \"/sg help [subcommand]\" for help");
 			return;
 		}
 		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
