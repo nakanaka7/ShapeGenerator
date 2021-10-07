@@ -22,26 +22,12 @@ public class SelCommandHandler implements SubCommandHandler {
 	private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
 	
 	public SelCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
-		this.register(new OffsetCommandHandler(shapeStrtgRepo));
-		this.register(new ResetCommandHandler(shapeStrtgRepo));
+		this.commonMap.put("offset", new OffsetCommandHandler(shapeStrtgRepo));
+		this.commonMap.put("reset", new ResetCommandHandler(shapeStrtgRepo));
 		for(SelectionShape selShape : shapeStrtgRepo.registeredShapes()) {
 			SelectionShapeStrategy selStrtg = shapeStrtgRepo.get(selShape);
 			this.properMapMap.put(selShape, selStrtg.selSubCommandHandlerMap());
 		}
-	}
-
-	public void register(SubCommandHandler handler){
-		this.commonMap.put(handler.label(), handler);
-	}
-
-	@Override
-	public String label() {
-		return "sel";
-	}
-
-	@Override
-	public String description() {
-		return "Specify the selection";
 	}
 
 	@Override
