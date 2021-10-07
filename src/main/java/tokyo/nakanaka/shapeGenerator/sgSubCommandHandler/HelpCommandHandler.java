@@ -54,13 +54,13 @@ public class HelpCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length == 0) {
-			var msgBuilder = new RootHelpMessageCreator.Builder(cmdLogColor.main(), "/sg")
-					.description("The root command of ShapeGenerator");
+			var msg = new RootHelpMessage("/sg");
+			msg.setDescription("The root command of ShapeGenerator");
 			for (Map.Entry<String, CommandHelp> e : this.cmdHelpMap.entrySet()){
 				String subCmdSyntax = e.getKey() + " " + String.join(" ", e.getValue().parameterSyntaxes());
-				msgBuilder = msgBuilder.subcommand(subCmdSyntax , e.getValue().description());
+				msg.addSubcommand(subCmdSyntax , e.getValue().description());
 			}
-			List<String> lines = msgBuilder.build().toMessageLines();
+			List<String> lines = msg.toLines(cmdLogColor.main());
 			lines.add(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 			lines.forEach(player::print);
 		}else if(args.length == 1) {
