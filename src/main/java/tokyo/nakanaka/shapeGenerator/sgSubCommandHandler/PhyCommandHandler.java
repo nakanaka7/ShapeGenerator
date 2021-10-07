@@ -6,7 +6,6 @@ import tokyo.nakanaka.shapeGenerator.Main;
 import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
@@ -24,11 +23,6 @@ public class PhyCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Toggle physics option for generating blocks";
-	}
-
-	public ParameterUsage[] parameterUsages() {
-		var tf = new ParameterUsage("true|false", "an option for physics");
-		return new ParameterUsage[]{tf};
 	}
 
 	@Override

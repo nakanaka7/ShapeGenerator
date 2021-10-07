@@ -8,7 +8,6 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.RotateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
@@ -26,12 +25,6 @@ public class RotCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Rotate the generated block(s)";
-	}
-
-	public ParameterUsage[] parameterUsages() {
-		var xyz = new ParameterUsage("x|y|z", "an axis for rotating");
-		var deg = new ParameterUsage("<degree>", "a degree for rotating");
-		return new ParameterUsage[]{xyz, deg};
 	}
 
 	@Override

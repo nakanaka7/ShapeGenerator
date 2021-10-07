@@ -4,11 +4,9 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.SemVer;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 
 public class VersionCommandHandler implements SubCommandHandler {
 	private int major;
@@ -29,10 +27,6 @@ public class VersionCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Print the version";
-	}
-
-	public ParameterUsage[] parameterUsages() {
-		return new ParameterUsage[]{};
 	}
 
 	@Override

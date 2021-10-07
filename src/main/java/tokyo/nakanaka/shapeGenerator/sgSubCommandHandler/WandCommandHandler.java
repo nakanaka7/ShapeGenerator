@@ -8,7 +8,6 @@ import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 /**
@@ -24,10 +23,6 @@ public class WandCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Give a player a wand";
-	}
-
-	public ParameterUsage[] parameterUsages() {
-		return new ParameterUsage[]{};
 	}
 
 	@Override

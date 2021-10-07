@@ -8,7 +8,6 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MaxCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
@@ -26,12 +25,6 @@ public class MaxCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Set max coordinate of the generated blocks";
-	}
-
-	public ParameterUsage[] parameterUsages() {
-		var xyz = new ParameterUsage("x|y|z", "axis");
-		var coord = new ParameterUsage("<coordinate>", "maximum coordinate of the generation");
-		return new ParameterUsage[]{xyz, coord};
 	}
 
 	@Override

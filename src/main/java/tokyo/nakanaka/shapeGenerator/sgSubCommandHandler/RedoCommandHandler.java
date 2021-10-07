@@ -3,7 +3,6 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
@@ -21,11 +20,6 @@ public class RedoCommandHandler implements SubCommandHandler {
 	@Override
 	public String description() {
 		return "Redo block changing command(s)";
-	}
-
-	public ParameterUsage[] parameterUsages() {
-		var num = new ParameterUsage("[number]", "a number to redo generation(s)");
-		return new ParameterUsage[]{num};
 	}
 
 	@Override

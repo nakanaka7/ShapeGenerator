@@ -5,8 +5,6 @@ import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -31,15 +29,10 @@ public class WandHelpCommandHandler implements SubCommandHandler {
         return "Print wand help";
     }
 
-    public ParameterUsage[] parameterUsages() {
-        var num = new ParameterUsage("<shape>", "Selection shape");
-        return new ParameterUsage[]{};
-    }
-
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
         if(args.length != 1) {
-            player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgSubcommandHelps.WANDHELP.syntax());
+            player.print(cmdLogColor.error() + "Usage: " + "/sg wandhelp");
             return;
         }
         SelectionShape shape;
