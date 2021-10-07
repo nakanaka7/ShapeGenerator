@@ -38,8 +38,9 @@ public class ShapeCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.SHAPE + " " + String.join(" ", SgBranchHelpConstants.SHAPE.parameterSyntaxes());
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.SHAPE.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		SelectionShape selShape;

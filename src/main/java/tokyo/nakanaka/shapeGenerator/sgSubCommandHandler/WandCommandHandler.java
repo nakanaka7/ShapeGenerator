@@ -4,6 +4,8 @@ import java.util.List;
 
 import tokyo.nakanaka.*;
 import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.Main;
+import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
@@ -31,8 +33,9 @@ public class WandCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.WAND + " " + String.join(" ", SgBranchHelpConstants.WAND.parameterSyntaxes());
 		if(args.length != 0) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.WAND.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		Item item = new Item(new NamespacedID("minecraft", "blaze_rod"));

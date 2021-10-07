@@ -1,18 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.List;
-
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
-import tokyo.nakanaka.shapeGenerator.command.*;
+import tokyo.nakanaka.shapeGenerator.*;
+import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
+import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
+import tokyo.nakanaka.shapeGenerator.command.MinCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+
+import java.util.List;
 
 /**
  * Handles "sg min" subcommand
@@ -38,8 +37,9 @@ public class MinCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		//check args length
+		String usage = Main.SG + " " + SgSublabel.MIN + " " + String.join(" ", SgBranchHelpConstants.MIN.parameterSyntaxes());
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.MIN.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		Axis axis;

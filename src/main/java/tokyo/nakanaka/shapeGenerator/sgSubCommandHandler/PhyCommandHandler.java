@@ -3,6 +3,8 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
+import tokyo.nakanaka.shapeGenerator.Main;
+import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.ParameterUsage;
@@ -32,7 +34,8 @@ public class PhyCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-		String usageMsg = cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.PHY.syntax();
+		String usage = Main.SG + " " + SgSublabel.PHY + " " + String.join(" ", SgBranchHelpConstants.PHY.parameterSyntaxes());
+		String usageMsg = cmdLogColor.error() + "Usage: " + usage;
 		if(args.length != 1) {
 			player.print(usageMsg);
 			return;
