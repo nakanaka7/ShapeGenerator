@@ -82,22 +82,12 @@ public class BranchCommandHelp implements CommandHelp {
         return this.paramSyntaxList.toArray(new String[this.paramSyntaxList.size()]);
     }
 
+    /**
+     * Returns the descriptions of parameters
+     * @return the descriptions of parameters
+     */
     public String[] parameterDescriptions(){
         return this.paramDescList.toArray(new String[this.paramDescList.size()]);
     }
-
-    /**
-     * Returns the description of a parameter
-     * @param index the index of a parameter
-     * @return the description of a parameter
-     * @throws IllegalArgumentException if the index is out of range
-     */
-    public String parameterDescription(int index) {
-        if(index < 0 || index >= this.paramDescList.size()) {
-            throw new IllegalArgumentException();
-        }
-        return this.paramDescList.get(index);
-    }
-
 
 }
