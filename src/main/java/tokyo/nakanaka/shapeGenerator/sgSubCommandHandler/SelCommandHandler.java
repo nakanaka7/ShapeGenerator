@@ -52,7 +52,7 @@ public class SelCommandHandler implements SubCommandHandler {
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		SelectionShape shape = playerData.getSelectionShape();
 		if(args.length == 0) {
-			player.print(cmdLogColor.error() + "Usage:" + "/sg " + new SelHelp().syntax());
+			player.print(cmdLogColor.error() + "Usage:" + "/sg sel <subcommand>");
 			player.print(cmdLogColor.error() + "See help");
 			return;
 		}
