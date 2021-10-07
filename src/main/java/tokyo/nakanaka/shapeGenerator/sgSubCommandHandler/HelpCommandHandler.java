@@ -1,12 +1,15 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
+import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import static tokyo.nakanaka.shapeGenerator.SgSublabel.*;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,13 +57,14 @@ public class HelpCommandHandler implements SubCommandHandler {
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		if(args.length == 0) {
-			var msg = new RootHelpMessage("/sg");
-			msg.setDescription("The root command of ShapeGenerator");
+			String[] labels = new String[]{"/sg"};
+			String desc = "The root command of ShapeGenerator";
+			List<SyntaxDesc> subcmdSyntaxDescs = new ArrayList<>();
 			for (Map.Entry<String, CommandHelp> e : this.cmdHelpMap.entrySet()){
 				String subCmdSyntax = e.getKey() + " " + String.join(" ", e.getValue().parameterSyntaxes());
-				msg.addSubcommand(subCmdSyntax , e.getValue().description());
+				subcmdSyntaxDescs.add(new SyntaxDesc(subCmdSyntax , e.getValue().description()));
 			}
-			List<String> lines = msg.toLines(cmdLogColor.main());
+			List<String> lines = rootHelpMessage(cmdLogColor.main(), labels, desc, subcmdSyntaxDescs);
 			lines.add(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 			lines.forEach(player::print);
 		}else if(args.length == 1) {
@@ -84,6 +88,24 @@ public class HelpCommandHandler implements SubCommandHandler {
 		}else {
 			player.print(cmdLogColor.error() + "Usage: /sg help [subcommand]");
 		}
+	}
+
+	private static List<String> rootHelpMessage(LogColor mainColor, String[] labels, String desc, List<SyntaxDesc> subcmdSyntaxDescs) {
+		List<String> lines = new ArrayList<>();
+		String head = String.join(" ", labels);
+		lines.add(MessageUtils.title(mainColor + "Help for " + LogColor.RESET + head));
+		lines.add(mainColor + "Description: " + LogColor.RESET + desc);
+		lines.add(mainColor + "Usage: " + LogColor.RESET + head + mainColor + " <subcommand>");
+		if(subcmdSyntaxDescs.size() != 0){
+			lines.add(mainColor + "Subcommand: ");
+			for(SyntaxDesc sd : subcmdSyntaxDescs){
+				lines.add("  " + mainColor + sd.syntax + ": " + LogColor.RESET + sd.desc);
+			}
+		}
+		return lines;
+	}
+
+	private static record SyntaxDesc(String syntax, String desc) {
 	}
 
 	@Override
