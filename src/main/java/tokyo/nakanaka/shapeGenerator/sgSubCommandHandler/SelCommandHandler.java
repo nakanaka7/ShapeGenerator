@@ -8,15 +8,13 @@ import java.util.stream.Collectors;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.OffsetCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.ResetCommandHandler;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 /**
  * Handles "/sg sel" command
@@ -50,9 +48,10 @@ public class SelCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.SEL + " " + String.join(" ", SgSubcommandHelps.SEL.parameterSyntaxes());
 		SelectionShape shape = playerData.getSelectionShape();
 		if(args.length == 0) {
-			player.print(cmdLogColor.error() + "Usage:" + "/sg sel <subcommand>");
+			player.print(cmdLogColor.error() + "Usage:" + usage);
 			player.print(cmdLogColor.error() + "See help");
 			return;
 		}
