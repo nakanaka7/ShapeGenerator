@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
-public class DiamondCommandHelp {
-    private DiamondCommandHelp(){
+public class DiamondCommandHelps {
+    private DiamondCommandHelps(){
     }
 
     public static final BranchCommandHelp CENTER

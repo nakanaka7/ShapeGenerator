@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
-public class SphereCommandHelp {
-    private SphereCommandHelp() {
+public class SphereCommandHelps {
+    private SphereCommandHelps() {
     }
 
     public static final BranchCommandHelp CENTER
