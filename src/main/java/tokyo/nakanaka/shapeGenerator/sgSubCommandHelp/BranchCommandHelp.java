@@ -4,20 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BranchCommandHelp implements CommandHelp {
+    private String label;
     private String desc;
     private List<String> paramSyntaxList;
     private List<String> paramDescList;
 
-    private BranchCommandHelp(String desc, List<String> paramSyntaxList, List<String> paramDescList) {
-        this.desc = desc;
-        this.paramSyntaxList = paramSyntaxList;
-        this.paramDescList = paramDescList;
+    private BranchCommandHelp(Builder builder) {
+        this.label = builder.label;
+        this.desc = builder.desc;
+        this.paramSyntaxList = builder.paramSyntaxList;
+        this.paramDescList = builder.paramDescList;
     }
 
     public static class Builder {
+        private String label = "";
         private String desc = "";
         private List<String> paramSyntaxList = new ArrayList<>();
         private List<String> paramDescList = new ArrayList<>();
+
+        public Builder(String label){
+            this.label = label;
+        }
+
+        public Builder(){
+            this("");
+        }
 
         /**
          * @param desc the description of the command
@@ -38,7 +49,7 @@ public class BranchCommandHelp implements CommandHelp {
         }
 
         public BranchCommandHelp build() {
-            return new BranchCommandHelp(desc, paramSyntaxList, paramDescList);
+            return new BranchCommandHelp(this);
         }
 
     }
