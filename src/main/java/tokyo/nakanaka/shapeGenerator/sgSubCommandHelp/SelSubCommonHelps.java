@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
-public class SelSubcommandHelps {
-    private SelSubcommandHelps(){
+public class SelSubCommonHelps {
+    private SelSubCommonHelps(){
     }
 
     public static final BranchCommandHelp OFFSET
