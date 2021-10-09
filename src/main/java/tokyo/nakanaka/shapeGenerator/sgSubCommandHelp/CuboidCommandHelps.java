@@ -1,6 +1,8 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
 public class CuboidCommandHelps {
+    private CuboidCommandHelps(){
+    }
 
     public static final BranchCommandHelp POS1
             = new BranchCommandHelp.Builder("pos1")
