@@ -20,4 +20,10 @@ public class LineCommandHelps {
             .parameter("[z]", "z-coordinate")
             .build();
 
+    public static final BranchCommandHelp THICKNESS
+            = new BranchCommandHelp.Builder("thickness")
+            .description("Set thickness")
+            .parameter("<thickness>", "thickness")
+            .build();
+
 }
