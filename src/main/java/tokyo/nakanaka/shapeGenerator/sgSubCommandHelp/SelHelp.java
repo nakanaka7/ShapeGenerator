@@ -22,7 +22,15 @@ public class SelHelp implements CommandHelp {
 		return new String[]{"<subcommand>"};
 	}
 
-
+	/**
+	 * Returns subcommand helps. The subcommands are independent of the selection shape
+	 * @return
+	 */
+	public BranchCommandHelp[] commonSubcommandHelps(){
+		return new BranchCommandHelp[]{
+				SelSubcommandHelps.OFFSET,
+				SelSubcommandHelps.RESET};
+	}
 
 	/**
 	 * Return multiple lines which contains the information for the command
