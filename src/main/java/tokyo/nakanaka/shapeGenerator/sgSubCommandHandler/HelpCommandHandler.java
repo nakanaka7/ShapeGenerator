@@ -3,16 +3,20 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import static tokyo.nakanaka.shapeGenerator.SgSublabel.*;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.BranchCommandHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static tokyo.nakanaka.shapeGenerator.SgSublabel.*;
 
 /**
  * Handles "/sg help" command
@@ -41,6 +45,7 @@ public class HelpCommandHandler implements SubCommandHandler {
 
 	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = "/sg help [subcommand]";
 		if(args.length == 0) {
 			String[] labels = new String[]{"/sg"};
 			String desc = "The root command of ShapeGenerator";
@@ -52,30 +57,36 @@ public class HelpCommandHandler implements SubCommandHandler {
 			List<String> lines = rootHelpMessage(cmdLogColor.main(), labels, desc, subcmdSyntaxDescs);
 			lines.add(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 			lines.forEach(player::print);
-		}else if(args.length == 1) {
-			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
-			if(cmdHelp == null) {
-				player.print(cmdLogColor.error() + "Unknown subcommand");
+			return;
+		}
+		CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
+		if(cmdHelp == null) {
+			player.print(cmdLogColor.error() + "Unknown subcommand");
+			return;
+		}
+		if(cmdHelp instanceof BranchCommandHelp branchHelp){
+			if(args.length != 1){
+				player.print(cmdLogColor.error() + "Usage: " + usage);
 				return;
 			}
-			if(cmdHelp instanceof BranchCommandHelp branchHelp){
-				String[] labels = new String[]{"/sg", args[0]};
-				String desc = branchHelp.description();
-				List<SyntaxDesc> paramSyntaxDescs = new ArrayList<>();
-				for(int i = 0; i < branchHelp.parameterSize(); i++){
-					String paramSyntax = branchHelp.parameterSyntaxes()[i];
-					String paramDesc = branchHelp.parameterDescriptions()[i];
-					paramSyntaxDescs.add(new SyntaxDesc(paramSyntax, paramDesc));
-				}
-				List<String> lines = branchHelpMessage(cmdLogColor.main(), labels, desc, paramSyntaxDescs);
-				lines.forEach(player::print);
-			}else if(cmdHelp instanceof SelHelp selHelp){
-				String[] labels = new String[]{"/sg", SEL};
-				String desc = selHelp.description();
-				selHelp.toMultipleLines(playerData.getSelectionShape()).forEach(player::print);
+			String[] labels = new String[]{"/sg", args[0]};
+			String desc = branchHelp.description();
+			List<SyntaxDesc> paramSyntaxDescs = new ArrayList<>();
+			for(int i = 0; i < branchHelp.parameterSize(); i++){
+				String paramSyntax = branchHelp.parameterSyntaxes()[i];
+				String paramDesc = branchHelp.parameterDescriptions()[i];
+				paramSyntaxDescs.add(new SyntaxDesc(paramSyntax, paramDesc));
 			}
-		}else {
-			player.print(cmdLogColor.error() + "Usage: /sg help [subcommand]");
+			List<String> lines = branchHelpMessage(cmdLogColor.main(), labels, desc, paramSyntaxDescs);
+			lines.forEach(player::print);
+		}else if(cmdHelp instanceof SelHelp selHelp){
+			if(args.length != 1){
+				player.print(cmdLogColor.error() + "Usage: " + usage);
+				return;
+			}
+			String[] labels = new String[]{"/sg", SEL};
+			String desc = selHelp.description();
+			selHelp.toMultipleLines(playerData.getSelectionShape()).forEach(player::print);
 		}
 	}
 
