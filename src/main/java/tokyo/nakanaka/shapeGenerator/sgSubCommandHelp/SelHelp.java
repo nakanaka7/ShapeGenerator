@@ -1,11 +1,11 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelHelp implements CommandHelp {
 	private String usage = "sel <subcommand>";
@@ -14,13 +14,15 @@ public class SelHelp implements CommandHelp {
 
 	@Override
 	public String description() {
-		return description;
+		return "Specify the selection";
 	}
 
 	@Override
 	public String[] parameterSyntaxes() {
 		return new String[]{"<subcommand>"};
 	}
+
+
 
 	/**
 	 * Return multiple lines which contains the information for the command
