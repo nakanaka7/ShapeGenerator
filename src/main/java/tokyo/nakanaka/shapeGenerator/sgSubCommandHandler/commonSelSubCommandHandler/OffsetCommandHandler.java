@@ -1,11 +1,8 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler;
 
-import java.util.List;
-
 import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
@@ -13,6 +10,8 @@ import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+
+import java.util.List;
 
 public class OffsetCommandHandler implements SubCommandHandler {
 private SelectionShapeStrategyRepository shapeStrtgRepo;
@@ -61,7 +60,7 @@ private SelectionShapeStrategyRepository shapeStrtgRepo;
 		SelectionData selData = playerData.getSelectionData();
 		selData.setCustomOffset(new Vector3D(x, y, z));
 		//print the selection message
-		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), selData);
+		List<String> lines = MessageUtils.selectionMessage(cmdLogColor.main(), playerData.getSelectionShape(), selData);
 		lines.stream().forEach(player::print);
 	}
 	
