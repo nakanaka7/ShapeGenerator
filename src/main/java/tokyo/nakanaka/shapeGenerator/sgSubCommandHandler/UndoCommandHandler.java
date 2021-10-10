@@ -1,25 +1,22 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 
 /**
  * Handles "/sg undo" command
  */
-public class UndoCommandHandler implements SubCommandHandler{
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+public class UndoCommandHandler implements SubCommandHandler {
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.UNDO + " " + String.join(" ", SgSubcommandHelps.UNDO.parameterSyntaxes());
 		if(args.length > 1) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.UNDO.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		int num = 1;

@@ -4,13 +4,11 @@ import java.util.List;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.SemVer;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 
 public class VersionCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private int major;
 	private int minor;
 	private int patch;
@@ -22,7 +20,7 @@ public class VersionCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String ver = major + "." + minor + "." + patch;
 		player.print(cmdLogColor.main() + "Version: " + ver);
 	}

@@ -1,24 +1,21 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 
 /**
  * Handles "/sg redo" command
  */
-public class RedoCommandHandler implements SubCommandHandler{
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+public class RedoCommandHandler implements SubCommandHandler {
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
-		String usageMsg = cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.REDO.syntax();
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.REDO + " " + String.join(" ", SgSubcommandHelps.REDO.parameterSyntaxes());
+		String usageMsg = cmdLogColor.error() + "Usage: " + usage;
 		if(args.length > 1) {
 			player.print(usageMsg);
 			return;

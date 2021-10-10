@@ -1,15 +1,10 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -18,7 +13,6 @@ import java.util.stream.Stream;
  * Handles "/sg wandhelp"
  */
 public class WandHelpCommandHandler implements SubCommandHandler {
-    private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
     private SelectionShapeStrategyRepository strtgRepo;
 
     public WandHelpCommandHandler(SelectionShapeStrategyRepository strtgRepo) {
@@ -26,9 +20,9 @@ public class WandHelpCommandHandler implements SubCommandHandler {
     }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args) {
+    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
         if(args.length != 1) {
-            player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.WANDHELP.syntax());
+            player.print(cmdLogColor.error() + "Usage: " + "/sg wandhelp");
             return;
         }
         SelectionShape shape;

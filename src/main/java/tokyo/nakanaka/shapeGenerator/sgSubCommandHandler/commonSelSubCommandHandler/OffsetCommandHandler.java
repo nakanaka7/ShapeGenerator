@@ -15,15 +15,14 @@ import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class OffsetCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
-	private SelectionShapeStrategyRepository shapeStrtgRepo;
+private SelectionShapeStrategyRepository shapeStrtgRepo;
 	
 	public OffsetCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
 		this.shapeStrtgRepo = shapeStrtgRepo;
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = "/sg sel offset [x] [y] [z]";
 		//parse the arguments to a position
 		double x;

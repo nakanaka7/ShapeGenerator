@@ -2,15 +2,12 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.DeleteCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +16,11 @@ import java.util.List;
  * Handles "/sg del" command
  */
 public class DelCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
-
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.DEL + " " + String.join(" ", SgSubcommandHelps.DEL.parameterSyntaxes());
 		if(args.length > 1) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.DEL.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		int num = 1;

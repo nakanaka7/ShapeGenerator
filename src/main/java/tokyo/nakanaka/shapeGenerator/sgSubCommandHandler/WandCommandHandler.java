@@ -3,22 +3,22 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import java.util.List;
 
 import tokyo.nakanaka.*;
-import tokyo.nakanaka.logger.LogColor;
+import tokyo.nakanaka.shapeGenerator.Main;
+import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 /**
  * Handles "/sg wand" command
  */
 public class WandCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
-
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.WAND + " " + String.join(" ", SgSubcommandHelps.WAND.parameterSyntaxes());
 		if(args.length != 0) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.WAND.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		Item item = new Item(new NamespacedID("minecraft", "blaze_rod"));

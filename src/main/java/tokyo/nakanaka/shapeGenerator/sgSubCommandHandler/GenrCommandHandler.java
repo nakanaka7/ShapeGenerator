@@ -1,26 +1,20 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.block.Block;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.BlockIDListFactory;
-import tokyo.nakanaka.shapeGenerator.Selection;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Handles "/sg genr" command
  */
 public class GenrCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	private BlockIDListFactory blockIDFactory;
 
@@ -30,9 +24,10 @@ public class GenrCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.GENR + " " + String.join(" ", SgSubcommandHelps.GENR.parameterSyntaxes());
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.GENR.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		Block block;

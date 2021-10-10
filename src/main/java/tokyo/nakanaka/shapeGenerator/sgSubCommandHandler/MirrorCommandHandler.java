@@ -3,15 +3,12 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +17,12 @@ import java.util.List;
  * Handles "/sg mirror" command
  */
 public class MirrorCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.MIRROR + " " + String.join(" ", SgSubcommandHelps.MIRROR.parameterSyntaxes());
 		if(args.length != 1) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.MIRROR.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		Axis axis;

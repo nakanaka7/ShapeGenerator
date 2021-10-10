@@ -3,29 +3,26 @@ package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 import tokyo.nakanaka.Direction;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.UndoableCommand;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.UndoCommandManager;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
 import java.util.List;
 
 /**
  * Handles "/sg shift" command
  */
-public class ShiftCommandHandler implements SubCommandHandler{
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
+public class ShiftCommandHandler implements SubCommandHandler {
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.SHIFT + " " + String.join(" ", SgSubcommandHelps.SHIFT.parameterSyntaxes());
 		if(args.length != 2) {
-			player.print(cmdLogColor.error() + "Usage: " + "/sg " + SgBranchHelpConstants.SHIFT.syntax());
+			player.print(cmdLogColor.error() + "Usage: " + usage);
 			return;
 		}
 		Direction dir;

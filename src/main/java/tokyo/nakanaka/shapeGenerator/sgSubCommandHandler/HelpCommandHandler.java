@@ -4,69 +4,134 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.BranchCommandHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.CommandHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import static tokyo.nakanaka.shapeGenerator.SgSublabel.*;
 
 /**
  * Handles "/sg help" command
  */
 public class HelpCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 
 	public HelpCommandHandler() {
-		this.cmdHelpMap.put("version", SgBranchHelpConstants.VERSION);
-		this.cmdHelpMap.put("help", SgBranchHelpConstants.HELP);
-		this.cmdHelpMap.put("shape", SgBranchHelpConstants.SHAPE);
-		this.cmdHelpMap.put("sel", new SelHelp());
-		this.cmdHelpMap.put("genr", SgBranchHelpConstants.GENR);
-		this.cmdHelpMap.put("phy", SgBranchHelpConstants.PHY);
-		this.cmdHelpMap.put("shift", SgBranchHelpConstants.SHIFT);
-		this.cmdHelpMap.put("scale", SgBranchHelpConstants.SCALE);
-		this.cmdHelpMap.put("mirror", SgBranchHelpConstants.MIRROR);
-		this.cmdHelpMap.put("rot", SgBranchHelpConstants.ROT);
-		this.cmdHelpMap.put("max", SgBranchHelpConstants.MAX);
-		this.cmdHelpMap.put("min", SgBranchHelpConstants.MIN);
-		this.cmdHelpMap.put("del", SgBranchHelpConstants.DEL);
-		this.cmdHelpMap.put("undo", SgBranchHelpConstants.UNDO);
-		this.cmdHelpMap.put("redo", SgBranchHelpConstants.REDO);
+		this.cmdHelpMap.put(HELP, SgSubcommandHelps.HELP);
+		this.cmdHelpMap.put(VERSION, SgSubcommandHelps.VERSION);
+		this.cmdHelpMap.put(WAND, SgSubcommandHelps.WAND);
+		this.cmdHelpMap.put(SHAPE, SgSubcommandHelps.SHAPE);
+		this.cmdHelpMap.put(SEL, SgSubcommandHelps.SEL);
+		this.cmdHelpMap.put(GENR, SgSubcommandHelps.GENR);
+		this.cmdHelpMap.put(PHY, SgSubcommandHelps.PHY);
+		this.cmdHelpMap.put(SHIFT, SgSubcommandHelps.SHIFT);
+		this.cmdHelpMap.put(SCALE, SgSubcommandHelps.SCALE);
+		this.cmdHelpMap.put(MIRROR, SgSubcommandHelps.MIRROR);
+		this.cmdHelpMap.put(ROT, SgSubcommandHelps.ROT);
+		this.cmdHelpMap.put(MAX, SgSubcommandHelps.MAX);
+		this.cmdHelpMap.put(MIN, SgSubcommandHelps.MIN);
+		this.cmdHelpMap.put(DEL, SgSubcommandHelps.DEL);
+		this.cmdHelpMap.put(UNDO, SgSubcommandHelps.UNDO);
+		this.cmdHelpMap.put(REDO, SgSubcommandHelps.REDO);
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = "/sg help [subcommand]";
 		if(args.length == 0) {
-			var msgBuilder = new RootHelpMessageCreator.Builder(cmdLogColor.main(), "/sg")
-					.description("The root command of ShapeGenerator");
-			for (CommandHelp e : this.cmdHelpMap.values()){
-				msgBuilder = msgBuilder.subcommand(e.syntax(), e.description());
+			String[] labels = new String[]{"/sg"};
+			String desc = "The root command of ShapeGenerator";
+			List<SyntaxDesc> subcmdSyntaxDescs = new ArrayList<>();
+			for (Map.Entry<String, CommandHelp> e : this.cmdHelpMap.entrySet()){
+				String subCmdSyntax = e.getKey() + " " + String.join(" ", e.getValue().parameterSyntaxes());
+				subcmdSyntaxDescs.add(new SyntaxDesc(subCmdSyntax , e.getValue().description()));
 			}
-			List<String> lines = msgBuilder.build().toMessageLines();
+			List<String> lines = rootHelpMessage(cmdLogColor.main(), labels, desc, subcmdSyntaxDescs);
 			lines.add(cmdLogColor.main() + "Run \"/sg help <subcommand>\" for details");
 			lines.forEach(player::print);
-		}else if(args.length == 1) {
-			CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
-			if(cmdHelp != null) {
-				if(cmdHelp instanceof BranchCommandHelp branchHelp){
-					var msgBuilder = new BranchHelpMessageCreator.Builder(cmdLogColor.main(), "/sg", args[0])
-							.description(branchHelp.description());
-					for(int i = 0; i < branchHelp.parameterSyntaxes().length; i++){
-						msgBuilder = msgBuilder.parameter(branchHelp.parameterSyntaxes()[i]
-								, branchHelp.parameterDescription(i));
-					}
-					List<String> lines = msgBuilder.build().toMessageLines();
-					lines.forEach(player::print);
-				}else if(cmdHelp instanceof  SelHelp selHelp){
-					selHelp.toMultipleLines(playerData.getSelectionShape()).forEach(player::print);
-				}
-			}else {
-				player.print(cmdLogColor.error() + "Unknown subcommand");
-			}
-		}else {
-			player.print(cmdLogColor.error() + "Usage: /sg help [subcommand]");
+			return;
 		}
+		CommandHelp cmdHelp = this.cmdHelpMap.get(args[0]);
+		if(cmdHelp == null) {
+			player.print(cmdLogColor.error() + "Unknown subcommand");
+			return;
+		}
+		if(cmdHelp instanceof BranchCommandHelp branchHelp){
+			if(args.length != 1){
+				player.print(cmdLogColor.error() + "Usage: " + usage);
+				return;
+			}
+			String[] labels = new String[]{"/sg", args[0]};
+			String desc = branchHelp.description();
+			List<SyntaxDesc> paramSyntaxDescs = new ArrayList<>();
+			for(int i = 0; i < branchHelp.parameterSize(); i++){
+				String paramSyntax = branchHelp.parameterSyntaxes()[i];
+				String paramDesc = branchHelp.parameterDescriptions()[i];
+				paramSyntaxDescs.add(new SyntaxDesc(paramSyntax, paramDesc));
+			}
+			List<String> lines = branchHelpMessage(cmdLogColor.main(), labels, desc, paramSyntaxDescs);
+			lines.forEach(player::print);
+		}else if(cmdHelp instanceof SelHelp selHelp){
+			if(args.length != 1){
+				player.print(cmdLogColor.error() + "Usage: " + usage);
+				return;
+			}
+			String[] labels = new String[]{"/sg", SEL};
+			String desc = selHelp.description();
+			List<SyntaxDesc> subcmdSyntaxDescs = new ArrayList<>();
+			for(BranchCommandHelp e : selHelp.commonSubcommandHelps()){
+				String subCmdSyntax = e.label() + " " + String.join(" ", e.parameterSyntaxes());
+				subcmdSyntaxDescs.add(new SyntaxDesc(subCmdSyntax, e.description()));
+			}
+			for(BranchCommandHelp e : selHelp.shapeSubcommandHelps(playerData.getSelectionShape())){
+				String subCmdSyntax = e.label() + " " + String.join(" ", e.parameterSyntaxes());
+				subcmdSyntaxDescs.add(new SyntaxDesc(subCmdSyntax, e.description()));
+			}
+			List<String> lines = rootHelpMessage(cmdLogColor.main(), labels, desc, subcmdSyntaxDescs);
+			lines.forEach(player::print);
+		}
+	}
+
+	private static record SyntaxDesc(String syntax, String desc) {
+	}
+
+	private static List<String> rootHelpMessage(LogColor mainColor, String[] labels, String desc, List<SyntaxDesc> subcmdSyntaxDescs) {
+		List<String> lines = new ArrayList<>();
+		String head = String.join(" ", labels);
+		lines.add(MessageUtils.title(mainColor + "Help for " + LogColor.RESET + head));
+		lines.add(mainColor + "Description: " + LogColor.RESET + desc);
+		lines.add(mainColor + "Usage: " + LogColor.RESET + head + mainColor + " <subcommand>");
+		if(subcmdSyntaxDescs.size() != 0){
+			lines.add(mainColor + "Subcommand: ");
+			for(SyntaxDesc sd : subcmdSyntaxDescs){
+				lines.add("  " + mainColor + sd.syntax + ": " + LogColor.RESET + sd.desc);
+			}
+		}
+		return lines;
+	}
+
+	private static List<String> branchHelpMessage(LogColor mainColor, String[] labels, String desc, List<SyntaxDesc> paramSyntaxDescs) {
+		List<String> lines = new ArrayList<>();
+		String head = String.join(" ", labels);
+		lines.add(MessageUtils.title(mainColor + "Help for " + LogColor.RESET + head));
+		lines.add(mainColor + "Description: " + LogColor.RESET + desc);
+		String paramUsage = String.join(" ", paramSyntaxDescs.stream().map(SyntaxDesc::syntax).toList());
+		lines.add(mainColor + "Usage: " + LogColor.RESET + head + " " + paramUsage);
+		if(paramSyntaxDescs.size() != 0){
+			lines.add(mainColor + "Parameter: ");
+			for(SyntaxDesc sd : paramSyntaxDescs){
+				lines.add("  " + mainColor + sd.syntax + ": " + LogColor.RESET + sd.desc);
+			}
+		}
+		return lines;
 	}
 
 	@Override

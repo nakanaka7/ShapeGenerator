@@ -15,7 +15,6 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
  * A base abstract class to handle "/sg sel" subcommand. E is object type for parsing.
  */
 public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private String subLabel;
 	private String[] subArgsUsage;
 	private SelectionDataFactory selDataFactory;
@@ -31,7 +30,7 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] subArgs) {
+	public void onCommand(PlayerData playerData, Player player, String[] subArgs, CommandLogColor cmdLogColor) {
 		E value;
 		try {
 			value = this.parse(player, subArgs);

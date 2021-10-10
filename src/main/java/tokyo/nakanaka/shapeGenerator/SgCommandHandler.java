@@ -1,10 +1,5 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import tokyo.nakanaka.CommandHandler;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.SemVer;
@@ -14,36 +9,43 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgBranchHelpConstants;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @PrivateAPI
 class SgCommandHandler implements CommandHandler {
 	private PlayerDataRepository playerDataRepository;
-	private Map<String, SubCommandHandler> sgSubCmdHandlerMap = new HashMap<>();
-	
-	{
-		this.sgSubCmdHandlerMap.put("help", new HelpCommandHandler());
-		this.sgSubCmdHandlerMap.put("wand", new WandCommandHandler());
-		this.sgSubCmdHandlerMap.put("phy", new PhyCommandHandler());
-		this.sgSubCmdHandlerMap.put("shift", new ShiftCommandHandler());
-		this.sgSubCmdHandlerMap.put("scale", new ScaleCommandHandler());
-		this.sgSubCmdHandlerMap.put("mirror", new MirrorCommandHandler());
-		this.sgSubCmdHandlerMap.put("rot", new RotCommandHandler());
-		this.sgSubCmdHandlerMap.put("max", new MaxCommandHandler());
-		this.sgSubCmdHandlerMap.put("min", new MinCommandHandler());
-		this.sgSubCmdHandlerMap.put("del", new DelCommandHandler());
-		this.sgSubCmdHandlerMap.put("undo", new UndoCommandHandler());
-		this.sgSubCmdHandlerMap.put("redo", new RedoCommandHandler());
-	}
-	
-	SgCommandHandler(SemVer semVer, PlayerDataRepository playerDataRepository, SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory) {
+	private Map<String, CommandExecutor> cmdExecutorMap = new HashMap<>();
+	private Map<String, TabCompleter> tabCompleterMap = new HashMap<>();
+
+	SgCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory, PlayerDataRepository playerDataRepository) {
 		this.playerDataRepository = playerDataRepository;
-		this.sgSubCmdHandlerMap.put("version", new VersionCommandHandler(semVer));
-		this.sgSubCmdHandlerMap.put("shape", new ShapeCommandHandler(shapeStrtgRepo));
-		this.sgSubCmdHandlerMap.put("sel", new SelCommandHandler(shapeStrtgRepo));
-		this.sgSubCmdHandlerMap.put("genr", new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
+		this.registerCommand(SgSublabel.HELP, new HelpCommandHandler());
+		this.registerCommand(SgSublabel.VERSION, new VersionCommandHandler(new SemVer(1, 2, 0)));
+		this.registerCommand(SgSublabel.WAND, new WandCommandHandler());
+		this.registerCommand(SgSublabel.SHAPE, new ShapeCommandHandler(shapeStrtgRepo));
+		this.registerCommand(SgSublabel.SEL, new SelCommandHandler(shapeStrtgRepo));
+		this.registerCommand(SgSublabel.GENR, new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
+		this.registerCommand(SgSublabel.PHY, new PhyCommandHandler());
+		this.registerCommand(SgSublabel.SHIFT, new ShiftCommandHandler());
+		this.registerCommand(SgSublabel.SCALE, new ScaleCommandHandler());
+		this.registerCommand(SgSublabel.MIRROR, new MirrorCommandHandler());
+		this.registerCommand(SgSublabel.ROT, new RotCommandHandler());
+		this.registerCommand(SgSublabel.MAX, new MaxCommandHandler());
+		this.registerCommand(SgSublabel.MIN, new MinCommandHandler());
+		this.registerCommand(SgSublabel.DEL, new DelCommandHandler());
+		this.registerCommand(SgSublabel.UNDO, new UndoCommandHandler());
+		this.registerCommand(SgSublabel.REDO, new RedoCommandHandler());
 	}
-	
+
+	public void registerCommand(String label, SubCommandHandler cmdHandler) {
+		this.cmdExecutorMap.put(label, cmdHandler::onCommand);
+		this.tabCompleterMap.put(label, cmdHandler::onTabComplete);
+	}
+
 	/**
 	 * Handles "/sg" command
 	 * @param cmdSender a command sender
@@ -51,26 +53,27 @@ class SgCommandHandler implements CommandHandler {
 	 */
 	@Override
 	public void onCommand(CommandSender cmdSender, String[] args) {
+		CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 		if(!(cmdSender instanceof Player player)) {
-			cmdSender.print(LogColor.RED + "Player only command");
+			cmdSender.print(cmdLogColor.error() + "Player only command");
 			return;
 		}
 		if(args.length == 0) {
-			cmdSender.print(LogColor.RED + "Usage: /sg <subcommand>");
-			cmdSender.print(LogColor.RED + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
+			cmdSender.print(cmdLogColor.error() + "Usage: /sg <subcommand>");
+			cmdSender.print(cmdLogColor.error() + "Run \"/sg help [subcommand]\" for help");
 			return;
 		}
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
-		if(sgSubCmdHandler == null) {
-			cmdSender.print(LogColor.RED + "Unknown subcommand");
-			cmdSender.print(LogColor.RED + "Run \"" + SgBranchHelpConstants.HELP.syntax() + "\" for help");
+		CommandExecutor sgSubCmdExecutor = this.cmdExecutorMap.get(subLabel);
+		if(sgSubCmdExecutor == null) {
+			cmdSender.print(cmdLogColor.error() + "Unknown subcommand");
+			cmdSender.print(cmdLogColor.error() + "Run \"/sg help [subcommand]\" for help");
 			return;
 		}
 		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
-		sgSubCmdHandler.onCommand(playerData, player, subArgs);
+		sgSubCmdExecutor.onCommand(playerData, player, subArgs, cmdLogColor);
 	}
 
 	/**
@@ -85,15 +88,15 @@ class SgCommandHandler implements CommandHandler {
 			return List.of();
 		}
 		if(args.length == 1) {
-			return 	new ArrayList<>(this.sgSubCmdHandlerMap.keySet());
-		}	
+			return 	new ArrayList<>(this.tabCompleterMap.keySet());
+		}
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		SubCommandHandler sgSubCmdHandler = this.sgSubCmdHandlerMap.get(subLabel);
-		if(sgSubCmdHandler != null) {
+		TabCompleter tabCompleter = this.tabCompleterMap.get(subLabel);
+		if(tabCompleter != null) {
 			PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
-			return sgSubCmdHandler.onTabComplete(playerData, player, subArgs);
+			return tabCompleter.onTabComplete(playerData, player, subArgs);
 		}
 		return List.of();
 	}

@@ -1,24 +1,30 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.List;
-
-import tokyo.nakanaka.SemVer;
-import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.*;
 
+import java.util.List;
+
 /**
  * Main class for the project. 
  */
 @PublicAPI
 public class Main {
+	public static final String SG = "/sg";
 	private SgCommandHandler sgCmdHandler;
 	private SgEventHandler sgEvtHandler;
 	
 	public Main(BlockIDListFactory blockIDListFactory) {
+		SelectionShapeStrategyRepository shapeStrtgRepo = prepareStrategyRepository();
+		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
+		this.sgCmdHandler = new SgCommandHandler(shapeStrtgRepo, blockIDListFactory, playerDataRepo);
+		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
+	}
+
+	private static SelectionShapeStrategyRepository prepareStrategyRepository(){
 		SelectionShapeStrategyRepository shapeStrtgRepo = new SelectionShapeStrategyRepository();
 		shapeStrtgRepo.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
@@ -37,11 +43,9 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_TORUS, new HollowTorusSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, new HollowRegularPrismSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PYRAMID, new HollowRegularPyramidSelectionShapeStrategy());
-		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
-		this.sgCmdHandler = new SgCommandHandler(new SemVer(1, 2, 0) , playerDataRepo, shapeStrtgRepo, blockIDListFactory);
-		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
+		return shapeStrtgRepo;
 	}
-	
+
 	/**
 	 * Handles "/sg" command
 	 * @param cmdSender a command sender

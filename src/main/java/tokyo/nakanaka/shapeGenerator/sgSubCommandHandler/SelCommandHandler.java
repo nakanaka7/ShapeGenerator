@@ -1,28 +1,23 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
 
+import tokyo.nakanaka.Player;
+import tokyo.nakanaka.shapeGenerator.*;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.OffsetCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.ResetCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import tokyo.nakanaka.Player;
-import tokyo.nakanaka.logger.LogColor;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.OffsetCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler.ResetCommandHandler;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SelHelp;
-
 /**
  * Handles "/sg sel" command
  */
 public class SelCommandHandler implements SubCommandHandler {
-	private static final CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private Map<String, SubCommandHandler> commonMap = new HashMap<>();
 	private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
 	
@@ -36,10 +31,11 @@ public class SelCommandHandler implements SubCommandHandler {
 	}
 
 	@Override
-	public void onCommand(PlayerData playerData, Player player, String[] args) {
+	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+		String usage = Main.SG + " " + SgSublabel.SEL + " " + String.join(" ", SgSubcommandHelps.SEL.parameterSyntaxes());
 		SelectionShape shape = playerData.getSelectionShape();
 		if(args.length == 0) {
-			player.print(cmdLogColor.error() + "Usage:" + "/sg " + new SelHelp().syntax());
+			player.print(cmdLogColor.error() + "Usage:" + usage);
 			player.print(cmdLogColor.error() + "See help");
 			return;
 		}
@@ -48,13 +44,13 @@ public class SelCommandHandler implements SubCommandHandler {
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
 		SubCommandHandler commonHandler = this.commonMap.get(subLabel);
 		if(commonHandler != null) {
-			commonHandler.onCommand(playerData, player, subArgs);
+			commonHandler.onCommand(playerData, player, subArgs, cmdLogColor);
 			return;
 		}
 		Map<String, SubCommandHandler> properMap = this.properMapMap.get(shape);
 		SubCommandHandler properHandler = properMap.get(subLabel);
 		if(properHandler != null) {
-			properHandler.onCommand(playerData, player, subArgs);
+			properHandler.onCommand(playerData, player, subArgs, cmdLogColor);
 			return;
 		}
 		player.print(cmdLogColor.error() + "Unkown subcommand");

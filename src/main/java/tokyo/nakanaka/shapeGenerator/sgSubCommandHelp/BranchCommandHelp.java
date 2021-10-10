@@ -9,24 +9,25 @@ public class BranchCommandHelp implements CommandHelp {
     private List<String> paramSyntaxList;
     private List<String> paramDescList;
 
-    private BranchCommandHelp(String label, String desc, List<String> paramSyntaxList, List<String> paramDescList) {
-        this.label = label;
-        this.desc = desc;
-        this.paramSyntaxList = paramSyntaxList;
-        this.paramDescList = paramDescList;
+    private BranchCommandHelp(Builder builder) {
+        this.label = builder.label;
+        this.desc = builder.desc;
+        this.paramSyntaxList = builder.paramSyntaxList;
+        this.paramDescList = builder.paramDescList;
     }
 
     public static class Builder {
-        private String label;
+        private String label = "";
         private String desc = "";
         private List<String> paramSyntaxList = new ArrayList<>();
         private List<String> paramDescList = new ArrayList<>();
 
-        /**
-         * @param label the command label
-         */
-        public Builder(String label) {
+        public Builder(String label){
             this.label = label;
+        }
+
+        public Builder(){
+            this("");
         }
 
         /**
@@ -48,26 +49,13 @@ public class BranchCommandHelp implements CommandHelp {
         }
 
         public BranchCommandHelp build() {
-            return new BranchCommandHelp(label, desc, paramSyntaxList, paramDescList);
+            return new BranchCommandHelp(this);
         }
 
     }
 
-    @Override
-    public String label() {
+    public String label(){
         return this.label;
-    }
-
-    /**
-     * Returns the command syntax
-     * @return the command syntax
-     */
-    public String syntax() {
-       String syntax = label;
-       for(String paramSyntax : this.paramSyntaxList){
-           syntax += " " + paramSyntax;
-       }
-       return syntax;
     }
 
     /**
@@ -78,25 +66,21 @@ public class BranchCommandHelp implements CommandHelp {
         return this.desc;
     }
 
+    public int parameterSize() {
+        return this.paramSyntaxList.size();
+    }
+
+    @Override
     public String[] parameterSyntaxes() {
-        String[] array = new String[this.paramSyntaxList.size()];
-        for (int i = 0; i < this.paramSyntaxList.size(); ++i) {
-            array[i] = this.paramSyntaxList.get(i);
-        }
-        return array;
+        return this.paramSyntaxList.toArray(new String[this.paramSyntaxList.size()]);
     }
 
     /**
-     * Returns the description of a parameter
-     * @param index the index of a parameter
-     * @return the description of a parameter
-     * @throws IllegalArgumentException if the index is out of range
+     * Returns the descriptions of parameters
+     * @return the descriptions of parameters
      */
-    public String parameterDescription(int index) {
-        if(index < 0 || index >= this.paramDescList.size()) {
-            throw new IllegalArgumentException();
-        }
-        return this.paramDescList.get(index);
+    public String[] parameterDescriptions(){
+        return this.paramDescList.toArray(new String[this.paramDescList.size()]);
     }
 
 }
