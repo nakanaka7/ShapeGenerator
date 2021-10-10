@@ -19,7 +19,7 @@ import java.util.Map;
 class SgCommandHandler implements CommandHandler {
 	private PlayerDataRepository playerDataRepository;
 	private Map<String, CommandExecutor> cmdExecutorMap = new HashMap<>();
-	private Map<String, TabCompleter> tabCompleterMap = new HashMap<>();
+	private Map<String, SgSubcommandTabCompleter> tabCompleterMap = new HashMap<>();
 
 	SgCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory, PlayerDataRepository playerDataRepository) {
 		this.playerDataRepository = playerDataRepository;
@@ -93,7 +93,7 @@ class SgCommandHandler implements CommandHandler {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		TabCompleter tabCompleter = this.tabCompleterMap.get(subLabel);
+		SgSubcommandTabCompleter tabCompleter = this.tabCompleterMap.get(subLabel);
 		if(tabCompleter != null) {
 			PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
 			return tabCompleter.onTabComplete(playerData, player, subArgs);

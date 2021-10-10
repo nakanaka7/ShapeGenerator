@@ -7,6 +7,6 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import java.util.List;
 
 @PrivateAPI
-public interface TabCompleter {
+public interface SgSubcommandTabCompleter {
     List<String> onTabComplete(PlayerData playerData, Player player, String[] args);
 }
