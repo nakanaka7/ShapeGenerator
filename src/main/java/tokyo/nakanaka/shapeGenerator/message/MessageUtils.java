@@ -20,28 +20,32 @@ public class MessageUtils {
 		return "--- [" + title + LogColor.RESET + "] ---------------------";
 	}
 
-	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
+	public static List<String> selectionMessage(LogColor mainColor, SelectionShape selShape, SelectionData selData) {
 		List<String> lines = new ArrayList<>();
 		String shape = selShape.name();
 		shape = shape.substring(0,1) + shape.substring(1).toLowerCase();
-		lines.add(title(LogColor.GOLD + shape + " Selection"));
+		lines.add(title(mainColor + shape + " Selection"));
 		for(String label : selData.extraDataLabels()) {
 			String dataStr = "";
 			Object data = selData.getExtraData(label);
 			if(data != null) {
 				dataStr = data.toString();
 			}
-			lines.add(LogColor.GOLD + label + ": " + LogColor.RESET + dataStr);
+			lines.add(mainColor + label + ": " + LogColor.RESET + dataStr);
 		}
 		String offsetStr;
 		if(selData.hasCustomOffset()) {
 			offsetStr = selData.getOffset().toString();
 		}else {
-			offsetStr = selData.defualtOffsetLabel() + LogColor.GOLD + " (default)";
+			offsetStr = selData.defualtOffsetLabel() + mainColor + " (default)";
 		}
-		lines.add(LogColor.GOLD + "offset: " + LogColor.RESET + offsetStr);
+		lines.add(mainColor + "offset: " + LogColor.RESET + offsetStr);
 		return lines;
 	}
-	
-	
+
+	@Deprecated
+	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
+		return selectionMessage(LogColor.GOLD, selShape, selData);
+	}
+
 }
