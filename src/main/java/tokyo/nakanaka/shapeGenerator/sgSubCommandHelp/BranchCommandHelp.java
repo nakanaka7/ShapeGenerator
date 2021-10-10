@@ -54,6 +54,10 @@ public class BranchCommandHelp implements CommandHelp {
 
     }
 
+    public String label(){
+        return this.label;
+    }
+
     /**
      * Returns the description of this command
      * @return the description of this command
