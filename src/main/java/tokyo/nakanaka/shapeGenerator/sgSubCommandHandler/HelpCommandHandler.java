@@ -86,7 +86,17 @@ public class HelpCommandHandler implements SubCommandHandler {
 			}
 			String[] labels = new String[]{"/sg", SEL};
 			String desc = selHelp.description();
-			selHelp.toMultipleLines(playerData.getSelectionShape()).forEach(player::print);
+			List<SyntaxDesc> subcmdSyntaxDescs = new ArrayList<>();
+			for(BranchCommandHelp e : selHelp.commonSubcommandHelps()){
+				String subCmdSyntax = e.label() + " " + String.join(" ", e.parameterSyntaxes());
+				subcmdSyntaxDescs.add(new SyntaxDesc(subCmdSyntax, e.description()));
+			}
+			for(BranchCommandHelp e : selHelp.shapeSubcommandHelps(playerData.getSelectionShape())){
+				String subCmdSyntax = e.label() + " " + String.join(" ", e.parameterSyntaxes());
+				subcmdSyntaxDescs.add(new SyntaxDesc(subCmdSyntax, e.description()));
+			}
+			List<String> lines = rootHelpMessage(cmdLogColor.main(), labels, desc, subcmdSyntaxDescs);
+			lines.forEach(player::print);
 		}
 	}
 
