@@ -43,9 +43,4 @@ public class MessageUtils {
 		return lines;
 	}
 
-	@Deprecated
-	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
-		return selectionMessage(LogColor.GOLD, selShape, selData);
-	}
-
 }
