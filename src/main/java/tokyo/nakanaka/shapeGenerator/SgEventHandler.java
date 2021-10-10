@@ -1,12 +1,6 @@
 package tokyo.nakanaka.shapeGenerator;
 
-import java.util.List;
-
-import tokyo.nakanaka.BlockPosition;
-import tokyo.nakanaka.Item;
-import tokyo.nakanaka.NamespacedID;
-import tokyo.nakanaka.Player;
-import tokyo.nakanaka.World;
+import tokyo.nakanaka.*;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.event.ClickBlockEvent;
 import tokyo.nakanaka.logger.LogColor;
@@ -15,6 +9,8 @@ import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+
+import java.util.List;
 
 @PrivateAPI
 class SgEventHandler {
@@ -61,7 +57,7 @@ class SgEventHandler {
 			return;
 		}
 		//print the selection message
-		List<String> lines = MessageUtils.selectionMessage(selShape, selData);
+		List<String> lines = MessageUtils.selectionMessage(LogColor.GOLD, selShape, selData);
 		lines.stream().forEach(player::print);
 	}
 	

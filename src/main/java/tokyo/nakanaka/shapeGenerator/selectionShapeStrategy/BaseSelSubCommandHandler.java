@@ -1,15 +1,14 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
-import java.util.List;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+
+import java.util.List;
 
 /**
  * A base abstract class to handle "/sg sel" subcommand. E is object type for parsing.
@@ -44,7 +43,7 @@ public abstract class BaseSelSubCommandHandler<E> implements SubCommandHandler {
 			playerData.setSelectionData(this.selDataFactory.newSelectionData(evtWorld));
 		}
 		playerData.getSelectionData().setExtraData(this.subLabel, value);
-		List<String> lines = MessageUtils.selectionMessage(playerData.getSelectionShape(), playerData.getSelectionData());
+		List<String> lines = MessageUtils.selectionMessage(cmdLogColor.main(), playerData.getSelectionShape(), playerData.getSelectionData());
 		lines.stream().forEach(player::print);
 	}
 	

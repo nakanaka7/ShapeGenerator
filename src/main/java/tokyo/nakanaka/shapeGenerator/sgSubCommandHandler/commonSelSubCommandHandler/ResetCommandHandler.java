@@ -1,13 +1,12 @@
 package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler;
 
-import java.util.List;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
-import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
+
+import java.util.List;
 
 public class ResetCommandHandler implements SubCommandHandler {
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
@@ -27,7 +26,7 @@ public class ResetCommandHandler implements SubCommandHandler {
 		SelectionData newSelData = this.shapeStrtgRepo.get(shape)
 				.newSelectionData(world);
 		playerData.setSelectionData(newSelData);
-		List<String> lines = MessageUtils.selectionMessage(shape, newSelData);
+		List<String> lines = MessageUtils.selectionMessage(cmdLogColor.main(), shape, newSelData);
 		for(String line : lines) {
 			player.print(line);
 		}
