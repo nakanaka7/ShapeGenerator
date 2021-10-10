@@ -1,11 +1,11 @@
 package tokyo.nakanaka.shapeGenerator.message;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessageUtils {
 	private MessageUtils() {	
@@ -22,7 +22,9 @@ public class MessageUtils {
 
 	public static List<String> selectionMessage(SelectionShape selShape, SelectionData selData) {
 		List<String> lines = new ArrayList<>();
-		lines.add(title(LogColor.GOLD + selShape.toString() + " Selection"));
+		String shape = selShape.name();
+		shape = shape.substring(0,1) + shape.substring(1).toLowerCase();
+		lines.add(title(LogColor.GOLD + shape + " Selection"));
 		for(String label : selData.extraDataLabels()) {
 			String dataStr = "";
 			Object data = selData.getExtraData(label);
