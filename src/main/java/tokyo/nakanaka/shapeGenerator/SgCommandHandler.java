@@ -18,7 +18,7 @@ import java.util.Map;
 @PrivateAPI
 class SgCommandHandler implements CommandHandler {
 	private PlayerDataRepository playerDataRepository;
-	private Map<String, CommandExecutor> cmdExecutorMap = new HashMap<>();
+	private Map<String, SgSubcommandExecutor> cmdExecutorMap = new HashMap<>();
 	private Map<String, SgSubcommandTabCompleter> tabCompleterMap = new HashMap<>();
 
 	SgCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory, PlayerDataRepository playerDataRepository) {
@@ -66,7 +66,7 @@ class SgCommandHandler implements CommandHandler {
 		String subLabel = args[0];
 		String[] subArgs = new String[args.length - 1];
 		System.arraycopy(args, 1, subArgs, 0, args.length - 1);
-		CommandExecutor sgSubCmdExecutor = this.cmdExecutorMap.get(subLabel);
+		SgSubcommandExecutor sgSubCmdExecutor = this.cmdExecutorMap.get(subLabel);
 		if(sgSubCmdExecutor == null) {
 			cmdSender.print(cmdLogColor.error() + "Unknown subcommand");
 			cmdSender.print(cmdLogColor.error() + "Run \"/sg help [subcommand]\" for help");

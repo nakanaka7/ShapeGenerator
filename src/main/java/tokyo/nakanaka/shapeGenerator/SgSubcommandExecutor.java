@@ -5,6 +5,6 @@ import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 @PrivateAPI
-public interface CommandExecutor {
+public interface SgSubcommandExecutor {
     void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor);
 }
