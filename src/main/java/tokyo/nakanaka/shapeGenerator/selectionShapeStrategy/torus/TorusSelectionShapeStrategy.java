@@ -1,7 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
-
-import java.util.HashMap;
-import java.util.Map;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.torus;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
@@ -13,6 +10,13 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.AxisCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 	private String CENTER = "center";

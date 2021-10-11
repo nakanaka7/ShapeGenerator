@@ -1,7 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
-
-import java.util.HashMap;
-import java.util.Map;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.sphere;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -13,8 +10,15 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Sphere;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
-public class SphereSelectionShapeStrategy implements SelectionShapeStrategy{
+import java.util.HashMap;
+import java.util.Map;
+
+public class SphereSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 	

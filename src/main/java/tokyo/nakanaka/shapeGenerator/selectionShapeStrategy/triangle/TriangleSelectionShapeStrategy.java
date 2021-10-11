@@ -1,10 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
-
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
-
-import java.util.HashMap;
-import java.util.Map;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.triangle;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -15,6 +9,15 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
+import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
 
 public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String POS1 = "pos1";

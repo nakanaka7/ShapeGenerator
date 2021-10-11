@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.hollowRegularPrism;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Direction;
@@ -10,12 +10,16 @@ import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.HollowRegularPyramid;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowRegularPyramidSelectionShapeStrategy implements  SelectionShapeStrategy {
+public class HollowRegularPyramidSelectionShapeStrategy implements SelectionShapeStrategy {
     private static final String CENTER = "center";
     private static final String OUTER_RADIUS = "outer_radius";
     private static final String INNER_RADIUS = "inner_radius";

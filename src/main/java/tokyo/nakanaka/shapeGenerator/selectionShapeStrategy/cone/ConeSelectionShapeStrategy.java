@@ -1,7 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
-
-import java.util.HashMap;
-import java.util.Map;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cone;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Direction;
@@ -11,23 +8,27 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
-import tokyo.nakanaka.shapeGenerator.math.region3D.HollowRegularPrism;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Cone;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
-public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeStrategy {
+import java.util.HashMap;
+import java.util.Map;
+
+public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
-	private static final String OUTER_RADIUS = "outer_radius";
-	private static final String INNER_RADIUS = "inner_radius";
-	private static final String SIDE = "side";
+	private static final String RADIUS = "radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 	
-	
 	@Override
 	public SelectionData newSelectionData(World world) {
-		SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, SIDE, HEIGHT, DIRECTION);
-		selData.setExtraData(SIDE, 3);
+		SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, HEIGHT, DIRECTION);
 		selData.setExtraData(DIRECTION, Direction.UP);
 		return selData;
 	}
@@ -36,9 +37,7 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
 		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, this::newSelectionData));
-		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, this::newSelectionData));
-		map.put(SIDE, new SideCommandHandler(this::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
 		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, this::newSelectionData));
 		map.put(DIRECTION, new DirectionCommandHandler(this::newSelectionData));
 		return map;
@@ -46,14 +45,12 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 
 	@Override
 	public String leftClickDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Set center";
 	}
 
 	@Override
 	public String rightClickDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Set radius and height";
 	}
 
 	@Override
@@ -81,16 +78,15 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 		double dx = pos.getX() - center.getX();
 		double dy = pos.getY() - center.getY();
 		double dz = pos.getZ() - center.getZ();
-		double outerRadius;
+		double radius;
 		double height;
 		Direction dir = (Direction)selData.getExtraData(DIRECTION);
-		outerRadius = switch(dir) {
+		radius = switch(dir) {
 			case NORTH, SOUTH -> Math.max(Math.abs(dx), Math.abs(dy)) + 0.5;
 			case EAST, WEST -> Math.max(Math.abs(dy), Math.abs(dz)) + 0.5;
 			case UP, DOWN -> Math.max(Math.abs(dz), Math.abs(dx)) + 0.5;
 		};
-		selData.setExtraData(OUTER_RADIUS, outerRadius);
-		selData.setExtraData(INNER_RADIUS, outerRadius - 2);
+		selData.setExtraData(RADIUS, radius);
 		height = switch(dir) {
 			case NORTH -> Math.max(-dz + 0.5, 0);
 			case SOUTH -> Math.max(dz + 0.5, 0);
@@ -102,45 +98,35 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 		selData.setExtraData(HEIGHT, height);
 	}
 
-	/**
-	 * @throws IllegalStateException if the center, outer radius, innter radius, side, height, direction
-	 * is not specified, outer radius <= 0, inner radius <= 0, side <3, height <=0, or inner radius >= outer radius
-	 */
+	 /**
+	  * @param selData a selection data
+	  * @throws IllegalStateException if the center, radius, height or direction is not specified,
+	  * or the radius or height is less than or equals to 0
+	  */
 	@Override
 	public Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
-		var outerRadius = (Double)selData.getExtraData(OUTER_RADIUS);
-		var innerRadius = (Double)selData.getExtraData(INNER_RADIUS);
-		var side = (Integer)selData.getExtraData(SIDE);
+		var radius = (Double)selData.getExtraData(RADIUS);
 		var height = (Double)selData.getExtraData(HEIGHT);
 		var dir = (Direction)selData.getExtraData(DIRECTION);
-		if(center == null || outerRadius == null || innerRadius == null || side == null || height == null || dir == null) {
+		if(center == null || radius == null || height == null || dir == null) {
 			throw new IllegalStateException();
 		}
-		if(outerRadius <= 0 || innerRadius <= 0 || side < 3 || height <= 0){
+		if(radius <= 0 || height <= 0) {
 			throw new IllegalStateException();
 		}
-		if(innerRadius >= outerRadius) {
-			throw new IllegalStateException();
-		}
-		var region = new HollowRegularPrism(outerRadius, innerRadius, side, height);
-		Cuboid bound = new Cuboid(outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0);
-		Selection sel = new Selection(selData.world(), Vector3D.ORIGIN, region, bound);
+		Region3D region = new Cone(radius, height);
+		RegionBound bound = new CuboidBound(radius, radius, height, -radius, -radius, 0);
+		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
 		switch(dir) {
-		//north(-z) -> first vertex(-x)
 		case NORTH -> sel = sel.createRotated(Axis.Y, 180);
-		//south(+z) -> first vertex(+x)
 		case SOUTH -> {}
-		//east(+x) -> first vertex(+y)
-		case EAST -> sel = sel.createRotated(Axis.Z, 90).createRotated(Axis.Y, 90);
-		//west(-x) -> first vertex(-y)
-		case WEST -> sel = sel.createRotated(Axis.Z, -90).createRotated(Axis.Y, -90);
-		//up(+y) -> first vertex(+z)
-		case UP -> sel = sel.createRotated(Axis.Z, -90).createRotated(Axis.X, -90);
-		//down(-y) -> first vertex(-z)
-		case DOWN -> sel = sel.createRotated(Axis.Z, -90).createRotated(Axis.X, 90);
+		case EAST -> sel = sel.createRotated(Axis.Y, 90);
+		case WEST -> sel = sel.createRotated(Axis.Y, -90);
+		case UP -> sel = sel.createRotated(Axis.X, -90);
+		case DOWN -> sel = sel.createRotated(Axis.X, 90);
 		}
 		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
-
+	
 }

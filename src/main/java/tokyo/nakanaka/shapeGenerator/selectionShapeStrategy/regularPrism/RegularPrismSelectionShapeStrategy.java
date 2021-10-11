@@ -1,7 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
-
-import java.util.HashMap;
-import java.util.Map;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPrism;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Direction;
@@ -14,7 +11,14 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.RegularPrism;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegularPrismSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
