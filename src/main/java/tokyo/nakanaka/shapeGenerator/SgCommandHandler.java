@@ -9,6 +9,9 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyTabCompleter;
 
@@ -40,6 +43,8 @@ class SgCommandHandler implements CommandHandler {
 		this.registerCommand(SgSublabel.MAX, new MaxCommandHandler());
 		this.registerCommand(SgSublabel.MIN, new MinCommandHandler());
 		this.registerCommand(SgSublabel.DEL, new DelCommandHandler());
+		this.cmdExecutorMap.put(SgSublabel.DEL, new DelCommandExecutor());
+		this.tabCompleterMap.put(SgSublabel.DEL, new DelTabCompleter());
 		this.registerCommand(SgSublabel.UNDO, new UndoCommandHandler());
 		this.registerCommand(SgSublabel.REDO, new RedoCommandHandler());
 	}
