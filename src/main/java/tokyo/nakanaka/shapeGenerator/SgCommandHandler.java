@@ -8,7 +8,10 @@ import tokyo.nakanaka.commandSender.CommandSender;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.max.MaxCommandExecutor;
@@ -29,6 +32,8 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.shift.ShiftCommandExecu
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.shift.ShiftTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.version.VersionCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.version.VersionTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.wand.WandCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.wand.WandTabCompleter;
 
@@ -46,7 +51,8 @@ class SgCommandHandler implements CommandHandler {
 	SgCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory, PlayerDataRepository playerDataRepository) {
 		this.playerDataRepository = playerDataRepository;
 		this.registerCommand(SgSublabel.HELP, new HelpCommandHandler());
-		this.registerCommand(SgSublabel.VERSION, new VersionCommandHandler(new SemVer(1, 2, 0)));
+		this.cmdExecutorMap.put(SgSublabel.VERSION, new VersionCommandExecutor(new SemVer(1, 2, 0)));
+		this.tabCompleterMap.put(SgSublabel.VERSION, new VersionTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.WAND, new WandCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.WAND, new WandTabCompleter());
 		this.registerCommand(SgSublabel.SHAPE, new ShapeCommandHandler(shapeStrtgRepo));
