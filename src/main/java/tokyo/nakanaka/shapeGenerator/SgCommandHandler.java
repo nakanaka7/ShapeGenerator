@@ -13,6 +13,8 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.redo.RedoCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.redo.RedoTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoTabCompleter;
 
@@ -47,7 +49,8 @@ class SgCommandHandler implements CommandHandler {
 		this.tabCompleterMap.put(SgSublabel.DEL, new DelTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.UNDO, new UndoCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.UNDO, new UndoTabCompleter());
-		this.registerCommand(SgSublabel.REDO, new RedoCommandHandler());
+		this.cmdExecutorMap.put(SgSublabel.REDO, new RedoCommandExecutor());
+		this.tabCompleterMap.put(SgSublabel.REDO, new RedoTabCompleter());
 	}
 
 	public void registerCommand(String label, SubCommandHandler cmdHandler) {
