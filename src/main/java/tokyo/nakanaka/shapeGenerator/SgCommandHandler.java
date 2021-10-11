@@ -9,11 +9,12 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.GenrCommandHandler;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.HelpCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.ShapeCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.help.HelpCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.help.HelpTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.max.MaxCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.max.MaxTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.min.MinCommandExecutor;
@@ -50,7 +51,8 @@ class SgCommandHandler implements CommandHandler {
 
 	SgCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo, BlockIDListFactory blockIDListFactory, PlayerDataRepository playerDataRepository) {
 		this.playerDataRepository = playerDataRepository;
-		this.registerCommand(SgSublabel.HELP, new HelpCommandHandler());
+		this.cmdExecutorMap.put(SgSublabel.HELP, new HelpCommandExecutor());
+		this.tabCompleterMap.put(SgSublabel.HELP, new HelpTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.VERSION, new VersionCommandExecutor(new SemVer(1, 2, 0)));
 		this.tabCompleterMap.put(SgSublabel.VERSION, new VersionTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.WAND, new WandCommandExecutor());
