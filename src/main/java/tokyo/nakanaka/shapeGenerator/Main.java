@@ -18,13 +18,6 @@ public class Main {
 	private SgEventHandler sgEvtHandler;
 	
 	public Main(BlockIDListFactory blockIDListFactory) {
-		SelectionShapeStrategyRepository shapeStrtgRepo = prepareStrategyRepository();
-		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
-		this.sgCmdHandler = new SgCommandHandler(shapeStrtgRepo, blockIDListFactory, playerDataRepo);
-		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
-	}
-
-	private static SelectionShapeStrategyRepository prepareStrategyRepository(){
 		SelectionShapeStrategyRepository shapeStrtgRepo = new SelectionShapeStrategyRepository();
 		shapeStrtgRepo.register(SelectionShape.CUBOID, new CuboidSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.DIAMOND, new DiamondSelectionShapeStrategy());
@@ -43,7 +36,9 @@ public class Main {
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_TORUS, new HollowTorusSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, new HollowRegularPrismSelectionShapeStrategy());
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PYRAMID, new HollowRegularPyramidSelectionShapeStrategy());
-		return shapeStrtgRepo;
+		var playerDataRepo = new PlayerDataRepository(shapeStrtgRepo);
+		this.sgCmdHandler = new SgCommandHandler(shapeStrtgRepo, blockIDListFactory, playerDataRepo);
+		this.sgEvtHandler = new SgEventHandler(playerDataRepo, shapeStrtgRepo);
 	}
 
 	/**
