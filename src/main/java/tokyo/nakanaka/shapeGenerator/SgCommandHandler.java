@@ -9,7 +9,8 @@ import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerDataRepository;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.*;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyTabCompleter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,8 @@ class SgCommandHandler implements CommandHandler {
 		this.registerCommand(SgSublabel.SHAPE, new ShapeCommandHandler(shapeStrtgRepo));
 		this.registerCommand(SgSublabel.SEL, new SelCommandHandler(shapeStrtgRepo));
 		this.registerCommand(SgSublabel.GENR, new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
-		this.registerCommand(SgSublabel.PHY, new PhyCommandHandler());
+		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor());
+		this.tabCompleterMap.put(SgSublabel.PHY, new PhyTabCompleter());
 		this.registerCommand(SgSublabel.SHIFT, new ShiftCommandHandler());
 		this.registerCommand(SgSublabel.SCALE, new ScaleCommandHandler());
 		this.registerCommand(SgSublabel.MIRROR, new MirrorCommandHandler());
