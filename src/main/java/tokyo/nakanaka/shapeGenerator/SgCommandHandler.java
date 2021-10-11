@@ -15,6 +15,8 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.max.MaxCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.max.MaxTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.min.MinCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.min.MinTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.mirror.MirrorCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.mirror.MirrorTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.phy.PhyTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.redo.RedoCommandExecutor;
@@ -51,7 +53,8 @@ class SgCommandHandler implements CommandHandler {
 		this.tabCompleterMap.put(SgSublabel.SHIFT, new ShiftTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.SCALE, new ScaleCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.SCALE, new ScaleTabCompleter());
-		this.registerCommand(SgSublabel.MIRROR, new MirrorCommandHandler());
+		this.cmdExecutorMap.put(SgSublabel.MIRROR, new MirrorCommandExecutor());
+		this.tabCompleterMap.put(SgSublabel.MIRROR, new MirrorTabCompleter());
 		this.registerCommand(SgSublabel.ROT, new RotCommandHandler());
 		this.cmdExecutorMap.put(SgSublabel.MAX, new MaxCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.MAX, new MaxTabCompleter());
