@@ -57,9 +57,15 @@ class SgCommandHandler implements CommandHandler {
 		this.tabCompleterMap.put(SgSublabel.VERSION, new VersionTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.WAND, new WandCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.WAND, new WandTabCompleter());
-		this.registerCommand(SgSublabel.SHAPE, new ShapeCommandHandler(shapeStrtgRepo));
-		this.registerCommand(SgSublabel.SEL, new SelCommandHandler(shapeStrtgRepo));
-		this.registerCommand(SgSublabel.GENR, new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
+		var shapeCmdHandler = new ShapeCommandHandler(shapeStrtgRepo);
+		this.cmdExecutorMap.put(SgSublabel.SHAPE, shapeCmdHandler::onCommand);
+		this.tabCompleterMap.put(SgSublabel.SHAPE, shapeCmdHandler::onTabComplete);
+		var selCmdHandler = new SelCommandHandler(shapeStrtgRepo);
+		this.cmdExecutorMap.put(SgSublabel.SEL, selCmdHandler::onCommand);
+		this.tabCompleterMap.put(SgSublabel.SEL, selCmdHandler::onTabComplete);
+		var genrCmdHandler = new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory);
+		this.cmdExecutorMap.put(SgSublabel.GENR, genrCmdHandler::onCommand);
+		this.tabCompleterMap.put(SgSublabel.GENR, genrCmdHandler::onTabComplete);
 		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.PHY, new PhyTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.SHIFT, new ShiftCommandExecutor());
@@ -80,11 +86,6 @@ class SgCommandHandler implements CommandHandler {
 		this.tabCompleterMap.put(SgSublabel.UNDO, new UndoTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.REDO, new RedoCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.REDO, new RedoTabCompleter());
-	}
-
-	public void registerCommand(String label, SubCommandHandler cmdHandler) {
-		this.cmdExecutorMap.put(label, cmdHandler::onCommand);
-		this.tabCompleterMap.put(label, cmdHandler::onTabComplete);
 	}
 
 	/**
