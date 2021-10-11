@@ -29,6 +29,8 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.shift.ShiftCommandExecu
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.shift.ShiftTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.wand.WandCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.wand.WandTabCompleter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +47,8 @@ class SgCommandHandler implements CommandHandler {
 		this.playerDataRepository = playerDataRepository;
 		this.registerCommand(SgSublabel.HELP, new HelpCommandHandler());
 		this.registerCommand(SgSublabel.VERSION, new VersionCommandHandler(new SemVer(1, 2, 0)));
-		this.registerCommand(SgSublabel.WAND, new WandCommandHandler());
+		this.cmdExecutorMap.put(SgSublabel.WAND, new WandCommandExecutor());
+		this.tabCompleterMap.put(SgSublabel.WAND, new WandTabCompleter());
 		this.registerCommand(SgSublabel.SHAPE, new ShapeCommandHandler(shapeStrtgRepo));
 		this.registerCommand(SgSublabel.SEL, new SelCommandHandler(shapeStrtgRepo));
 		this.registerCommand(SgSublabel.GENR, new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
