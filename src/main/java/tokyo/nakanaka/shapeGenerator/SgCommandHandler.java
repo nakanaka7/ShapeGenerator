@@ -21,6 +21,8 @@ import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.redo.RedoCommandExecuto
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.redo.RedoTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.scale.ScaleCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.scale.ScaleTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.shift.ShiftCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.shift.ShiftTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.undo.UndoTabCompleter;
 
@@ -45,7 +47,8 @@ class SgCommandHandler implements CommandHandler {
 		this.registerCommand(SgSublabel.GENR, new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory));
 		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.PHY, new PhyTabCompleter());
-		this.registerCommand(SgSublabel.SHIFT, new ShiftCommandHandler());
+		this.cmdExecutorMap.put(SgSublabel.SHIFT, new ShiftCommandExecutor());
+		this.tabCompleterMap.put(SgSublabel.SHIFT, new ShiftTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.SCALE, new ScaleCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.SCALE, new ScaleTabCompleter());
 		this.registerCommand(SgSublabel.MIRROR, new MirrorCommandHandler());
