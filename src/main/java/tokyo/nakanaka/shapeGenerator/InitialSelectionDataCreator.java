@@ -2,7 +2,7 @@ package tokyo.nakanaka.shapeGenerator;
 
 import tokyo.nakanaka.World;
 
-public interface InitialSelectionDataFactory {
+public interface InitialSelectionDataCreator {
     /**
      * Returns new selection data
      * @param world a world
