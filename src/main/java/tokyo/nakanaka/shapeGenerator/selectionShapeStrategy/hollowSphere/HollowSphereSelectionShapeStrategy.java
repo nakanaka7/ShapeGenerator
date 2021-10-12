@@ -22,8 +22,7 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 	private static final String CENTER = "center";
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS);
 	}

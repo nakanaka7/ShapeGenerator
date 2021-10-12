@@ -22,8 +22,7 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String WIDTH = "width";
 	private static final String HEIGHT = "height";
 	private static final String LENGTH = "length";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, WIDTH, HEIGHT, LENGTH);
 	}

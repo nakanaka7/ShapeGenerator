@@ -18,8 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, "pos1", "pos1", "pos2", "thickness");
 		selData.setExtraData("thickness", 1.0);

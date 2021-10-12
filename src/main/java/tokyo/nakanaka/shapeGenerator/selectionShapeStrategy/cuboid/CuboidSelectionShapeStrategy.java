@@ -16,8 +16,7 @@ import java.util.Map;
 public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, POS1, POS1, POS2);
 	}

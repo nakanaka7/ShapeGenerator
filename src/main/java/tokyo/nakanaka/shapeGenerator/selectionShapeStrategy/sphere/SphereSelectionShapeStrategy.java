@@ -21,8 +21,7 @@ import java.util.Map;
 public class SphereSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, RADIUS);
 	}

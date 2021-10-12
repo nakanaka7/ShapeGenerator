@@ -24,8 +24,7 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String POS2 = "pos2";
 	private static final String POS3 = "pos3";
 	private static final String THICKNESS = "thickness";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, POS1, POS1, POS2, POS3, THICKNESS);
 		selData.setExtraData(THICKNESS, 1.0);

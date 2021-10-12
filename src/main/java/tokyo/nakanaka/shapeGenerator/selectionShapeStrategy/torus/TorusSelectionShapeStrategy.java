@@ -23,8 +23,7 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 	private String MAJOR_RADIUS = "major_radius";
 	private String MINOR_RADIUS = "minor_radius";
 	private String AXIS = "axis";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, MINOR_RADIUS, AXIS);
 		selData.setExtraData(AXIS, Axis.Y);

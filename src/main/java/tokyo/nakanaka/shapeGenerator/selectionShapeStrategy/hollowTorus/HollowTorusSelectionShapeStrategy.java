@@ -24,8 +24,7 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 	private static final String OUTER_MINOR_RADIUS = "outer_minor_radius";
 	private static final String INNER_MINOR_RADIUS = "inner_minor_radius";
 	private static final String AXIS = "axis";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, OUTER_MINOR_RADIUS, INNER_MINOR_RADIUS, AXIS);
 		selData.setExtraData(AXIS, Axis.Y);

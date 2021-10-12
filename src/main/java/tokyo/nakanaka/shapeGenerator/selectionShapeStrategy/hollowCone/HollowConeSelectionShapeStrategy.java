@@ -26,8 +26,7 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 	private static final String INNER_RADIUS = "inner_radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
-	
-	@Override
+
 	public SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, HEIGHT, DIRECTION);
 		selData.setExtraData(DIRECTION, Direction.UP);

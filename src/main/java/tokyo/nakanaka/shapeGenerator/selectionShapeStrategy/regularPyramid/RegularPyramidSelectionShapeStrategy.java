@@ -27,7 +27,6 @@ public class RegularPyramidSelectionShapeStrategy implements SelectionShapeStrat
     private static final String HEIGHT = "height";
     private static final String DIRECTION = "direction";
 
-    @Override
     public SelectionData newSelectionData(World world) {
         SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, SIDE, HEIGHT, DIRECTION);
         selData.setExtraData(SIDE, 3);

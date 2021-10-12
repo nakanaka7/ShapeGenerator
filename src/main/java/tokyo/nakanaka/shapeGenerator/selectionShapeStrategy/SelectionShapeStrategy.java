@@ -1,24 +1,17 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
-import java.util.Map;
-
-import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 
+import java.util.Map;
+
 /**
  * Holds SelectionShape delegating methods
  */
 public interface SelectionShapeStrategy {
-	
-	/**
-	 * Returns new selection data
-	 * @param world a world of the selection data
-	 */
-	SelectionData newSelectionData(World world);
-	
+
 	/**
 	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
 	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
