@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.hollowRegularPrism;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.hollowRegularPyramid;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Direction;
