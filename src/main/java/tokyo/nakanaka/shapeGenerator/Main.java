@@ -70,13 +70,13 @@ import java.util.Map;
 public class Main {
 	public static final String SG = "/sg";
 	private PlayerDataRepository playerDataRepository;
+	private Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap = new HashMap<>();
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
 	private Map<String, SgSubcommandExecutor> cmdExecutorMap = new HashMap<>();
 	private Map<String, SgSubcommandTabCompleter> tabCompleterMap = new HashMap<>();
 
 	public Main(BlockIDListFactory blockIDListFactory) {
 		List<SelectionShape> shapeList = new ArrayList<>();
-		Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap = new HashMap<>();
 		SelectionShapeStrategyRepository shapeStrtgRepo = new SelectionShapeStrategyRepository();
 		this.shapeStrtgRepo = shapeStrtgRepo;
 		shapeList.add(SelectionShape.CUBOID);
@@ -256,7 +256,7 @@ public class Main {
 		//reset the selection builder if the world changes
 		World evtWorld = blockPos.world();
 		if(!evtWorld.equals(playerData.getSelectionData().world())) {
-			SelectionData newSelData = shapeStrtg.newSelectionData(evtWorld);
+			SelectionData newSelData = this.dataCreatorMap.get(selShape).newSelectionData(evtWorld);
 			playerData.setSelectionData(newSelData);
 		}
 		//update the selection builder
