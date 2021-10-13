@@ -4,7 +4,6 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ public class SelCommandHandler {
 	}
 
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-		String usage = Main.SG + " " + SgSublabel.SEL + " " + String.join(" ", SgSubcommandHelps.SEL.parameterSyntaxes());
+		String usage = Main.SG + " " + SgSublabel.SEL + " " + String.join(" ", SelConstants.HELP.parameterSyntaxes());
 		SelectionShape shape = playerData.getSelectionShape();
 		if(args.length == 0) {
 			player.print(cmdLogColor.error() + "Usage:" + usage);
