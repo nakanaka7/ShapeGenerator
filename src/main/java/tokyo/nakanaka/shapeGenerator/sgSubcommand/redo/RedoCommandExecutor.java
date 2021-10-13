@@ -3,13 +3,12 @@ package tokyo.nakanaka.shapeGenerator.sgSubcommand.redo;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 public class RedoCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-        String usage = Main.SG + " " + SgSublabel.REDO + " " + String.join(" ", SgSubcommandHelps.REDO.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.REDO + " " + String.join(" ", RedoConstants.HELP.parameterSyntaxes());
         String usageMsg = cmdLogColor.error() + "Usage: " + usage;
         if(args.length > 1) {
             player.print(usageMsg);
