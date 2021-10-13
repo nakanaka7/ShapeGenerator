@@ -3,7 +3,7 @@ package tokyo.nakanaka.shapeGenerator.sgSubcommand.redo;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 public class RedoCommandExecutor implements SgSubcommandExecutor {
 

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
+package tokyo.nakanaka.shapeGenerator.commandHelp;
 
 public class HollowSphereCommandHelps {
     private HollowSphereCommandHelps(){

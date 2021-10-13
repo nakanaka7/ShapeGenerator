@@ -1,8 +1,6 @@
-package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
+package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class LineCommandHelps {
-    private LineCommandHelps(){
-    }
+public class TriangleCommandHelps {
 
     public static final BranchCommandHelp POS1
             = new BranchCommandHelp.Builder("pos1")
@@ -15,6 +13,14 @@ public class LineCommandHelps {
     public static final BranchCommandHelp POS2
             = new BranchCommandHelp.Builder("pos2")
             .description("Set pos2 coordinate")
+            .parameter("[x]", "x-coordinate")
+            .parameter("[y]", "y-coordinate")
+            .parameter("[z]", "z-coordinate")
+            .build();
+
+    public static final BranchCommandHelp POS3
+            = new BranchCommandHelp.Builder("pos3")
+            .description("Set pos3 coordinate")
             .parameter("[x]", "x-coordinate")
             .parameter("[y]", "y-coordinate")
             .parameter("[z]", "z-coordinate")

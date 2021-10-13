@@ -1,6 +1,6 @@
 package tokyo.nakanaka.shapeGenerator.sgSubcommand.help;
 
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.BranchCommandHelp;
+import tokyo.nakanaka.shapeGenerator.commandHelp.BranchCommandHelp;
 
 public class HelpConstants {
     private HelpConstants(){

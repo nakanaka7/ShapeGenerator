@@ -8,7 +8,7 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MinCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 public class MinCommandExecutor implements SgSubcommandExecutor {
 

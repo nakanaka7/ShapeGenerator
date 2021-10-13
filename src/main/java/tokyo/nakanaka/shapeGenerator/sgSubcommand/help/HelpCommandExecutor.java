@@ -6,10 +6,10 @@ import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.SgSubcommandExecutor;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.BranchCommandHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.CommandHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SelHelp;
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.commandHelp.BranchCommandHelp;
+import tokyo.nakanaka.shapeGenerator.commandHelp.CommandHelp;
+import tokyo.nakanaka.shapeGenerator.commandHelp.SelHelp;
+import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

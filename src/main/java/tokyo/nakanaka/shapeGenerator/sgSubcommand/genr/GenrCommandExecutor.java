@@ -5,7 +5,7 @@ import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 import java.util.Map;
 

@@ -1,7 +1,7 @@
-package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
+package tokyo.nakanaka.shapeGenerator.commandHelp;
 
-public class RegularPyramidCommandHelps {
-    private RegularPyramidCommandHelps(){
+public class HollowRegularPrismCommandHelps {
+    private HollowRegularPrismCommandHelps(){
     }
 
     public static final BranchCommandHelp CENTER
@@ -12,9 +12,15 @@ public class RegularPyramidCommandHelps {
             .parameter("[z]", "z-coordinate")
             .build();
 
-    public static final BranchCommandHelp RADIUS
-            = new BranchCommandHelp.Builder("radius")
-            .description("Set radius of base regular polygon")
+    public static final BranchCommandHelp OUTER_RADIUS
+            = new BranchCommandHelp.Builder("outer_radius")
+            .description("Set outer radius of base regular polygon")
+            .parameter("<radius>", "radius")
+            .build();
+
+    public static final BranchCommandHelp INNER_RADIUS
+            = new BranchCommandHelp.Builder("inner_radius")
+            .description("Set inner radius of base regular polygon")
             .parameter("<radius>", "radius")
             .build();
 
@@ -35,6 +41,5 @@ public class RegularPyramidCommandHelps {
             .description("Set direction")
             .parameter("north|south|east|west|up|down", "direction")
             .build();
-
 
 }
