@@ -12,6 +12,7 @@ import tokyo.nakanaka.shapeGenerator.sgSubcommand.del.DelConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.max.MaxConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.min.MinConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.mirror.MirrorConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubcommand.phy.PhyConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
@@ -33,7 +34,7 @@ public class HelpCommandExecutor implements SgSubcommandExecutor {
         this.cmdHelpMap.put(SHAPE, SgSubcommandHelps.SHAPE);
         this.cmdHelpMap.put(SEL, SgSubcommandHelps.SEL);
         this.cmdHelpMap.put(GENR, SgSubcommandHelps.GENR);
-        this.cmdHelpMap.put(PHY, SgSubcommandHelps.PHY);
+        this.cmdHelpMap.put(PHY, PhyConstants.HELP);
         this.cmdHelpMap.put(SHIFT, SgSubcommandHelps.SHIFT);
         this.cmdHelpMap.put(SCALE, SgSubcommandHelps.SCALE);
         this.cmdHelpMap.put(MIRROR, MirrorConstants.HELP);

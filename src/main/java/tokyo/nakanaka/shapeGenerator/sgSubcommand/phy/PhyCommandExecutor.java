@@ -6,13 +6,12 @@ import tokyo.nakanaka.shapeGenerator.Main;
 import tokyo.nakanaka.shapeGenerator.SgSubcommandExecutor;
 import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 public class PhyCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-        String usage = Main.SG + " " + SgSublabel.PHY + " " + String.join(" ", SgSubcommandHelps.PHY.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.PHY + " " + String.join(" ", PhyConstants.HELP.parameterSyntaxes());
         String usageMsg = cmdLogColor.error() + "Usage: " + usage;
         if(args.length != 1) {
             player.print(usageMsg);
