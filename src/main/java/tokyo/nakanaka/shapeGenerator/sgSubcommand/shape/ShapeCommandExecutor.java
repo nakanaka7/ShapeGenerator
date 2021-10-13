@@ -4,7 +4,6 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 import java.util.Map;
 
@@ -17,7 +16,7 @@ public class ShapeCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-        String usage = Main.SG + " " + SgSublabel.SHAPE + " " + String.join(" ", SgSubcommandHelps.SHAPE.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.SHAPE + " " + String.join(" ", ShapeConstants.HELP.parameterSyntaxes());
         if(args.length != 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);
             return;
