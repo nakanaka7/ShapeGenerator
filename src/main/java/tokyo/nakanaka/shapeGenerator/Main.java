@@ -27,10 +27,11 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.sphere.SphereSelecti
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron.TetrahedronSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.torus.TorusSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.triangle.TriangleSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.genr.GenrCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.genr.GenrCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.genr.GenrTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.help.HelpCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.help.HelpTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.max.MaxCommandExecutor;
@@ -159,9 +160,8 @@ public class Main {
 		var selCmdHandler = new SelCommandHandler(shapeStrtgRepo);
 		this.cmdExecutorMap.put(SgSublabel.SEL, selCmdHandler::onCommand);
 		this.tabCompleterMap.put(SgSublabel.SEL, selCmdHandler::onTabComplete);
-		var genrCmdHandler = new GenrCommandHandler(shapeStrtgRepo, blockIDListFactory);
-		this.cmdExecutorMap.put(SgSublabel.GENR, genrCmdHandler::onCommand);
-		this.tabCompleterMap.put(SgSublabel.GENR, genrCmdHandler::onTabComplete);
+		this.cmdExecutorMap.put(SgSublabel.GENR, new GenrCommandExecutor(shapeStrtgRepo));
+		this.tabCompleterMap.put(SgSublabel.GENR, new GenrTabCompleter(blockIDListFactory));
 		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.PHY, new PhyTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.SHIFT, new ShiftCommandExecutor());
