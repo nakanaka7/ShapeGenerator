@@ -27,7 +27,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.sphere.SphereSelecti
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron.TetrahedronSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.torus.TorusSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.triangle.TriangleSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.SelCommandHandler;
+import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.sel.SelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.del.DelTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.genr.GenrCommandExecutor;
