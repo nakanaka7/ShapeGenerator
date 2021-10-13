@@ -5,14 +5,15 @@ import tokyo.nakanaka.block.Block;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
 
-public class GenrCommandExecutor implements SgSubcommandExecutor {
-    private SelectionShapeStrategyRepository shapeStrtgRepo;
+import java.util.Map;
 
-    public GenrCommandExecutor(SelectionShapeStrategyRepository shapeStrtgRepo) {
-        this.shapeStrtgRepo = shapeStrtgRepo;
+public class GenrCommandExecutor implements SgSubcommandExecutor {
+    private Map<SelectionShape, SelectionBuilder> selBuilderMap;
+
+    public GenrCommandExecutor(Map<SelectionShape, SelectionBuilder> selBuilderMap){
+        this.selBuilderMap = selBuilderMap;
     }
 
     @Override
@@ -30,9 +31,9 @@ public class GenrCommandExecutor implements SgSubcommandExecutor {
             return;
         }
         Selection sel;
-        SelectionShapeStrategy shapeStrtg = this.shapeStrtgRepo.get(playerData.getSelectionShape());
+        SelectionBuilder selBuilder = this.selBuilderMap.get(playerData.getSelectionShape());
         try {
-            sel = shapeStrtg.buildSelection(playerData.getSelectionData());
+            sel = selBuilder.buildSelection(playerData.getSelectionData());
         }catch(IllegalStateException e) {
             player.print(cmdLogColor.error() + "Incomplete selection");
             return;
