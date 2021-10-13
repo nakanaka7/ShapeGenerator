@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Handles "/sg sel" command
  */
-public class SelCommandHandler implements SubCommandHandler {
+public class SelCommandHandler {
 	private Map<String, SubCommandHandler> commonMap = new HashMap<>();
 	private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
 	
@@ -30,7 +30,6 @@ public class SelCommandHandler implements SubCommandHandler {
 		}
 	}
 
-	@Override
 	public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
 		String usage = Main.SG + " " + SgSublabel.SEL + " " + String.join(" ", SgSubcommandHelps.SEL.parameterSyntaxes());
 		SelectionShape shape = playerData.getSelectionShape();
@@ -57,7 +56,6 @@ public class SelCommandHandler implements SubCommandHandler {
 		player.print(cmdLogColor.error() + "See help");
 	}
 
-	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		SelectionShape shape = playerData.getSelectionShape();
 		Map<String, SubCommandHandler> properMap = this.properMapMap.get(shape);
