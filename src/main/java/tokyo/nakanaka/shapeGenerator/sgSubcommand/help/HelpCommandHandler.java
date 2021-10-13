@@ -8,7 +8,7 @@ import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.commandHelp.BranchCommandHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.CommandHelp;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SelHelp;
+import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 import java.util.ArrayList;

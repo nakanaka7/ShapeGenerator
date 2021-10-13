@@ -1,5 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.commandHelp;
 
+import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelHelp;
+
 public class SgSubcommandHelps {
     private SgSubcommandHelps() {
     }

@@ -1,6 +1,7 @@
-package tokyo.nakanaka.shapeGenerator.commandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubcommand.sel;
 
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.commandHelp.*;
 
 import java.util.HashMap;
 import java.util.Map;
