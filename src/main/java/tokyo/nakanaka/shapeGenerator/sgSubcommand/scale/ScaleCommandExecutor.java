@@ -8,13 +8,12 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.ScaleCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 public class ScaleCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-        String usage = Main.SG + " " + SgSublabel.SCALE + " " + String.join(" ", SgSubcommandHelps.SCALE.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.SCALE + " " + String.join(" ", ScaleConstants.HELP.parameterSyntaxes());
         if(args.length != 2) {
             player.print(cmdLogColor.error() + "Usage: " + usage);
             return;
