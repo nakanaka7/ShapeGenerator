@@ -6,7 +6,7 @@ import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
 
 public class GenrCommandExecutor implements SgSubcommandExecutor {
     private SelectionShapeStrategyRepository shapeStrtgRepo;

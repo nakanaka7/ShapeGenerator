@@ -8,7 +8,7 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.RotateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
 
 public class RotCommandExecutor implements SgSubcommandExecutor {
 

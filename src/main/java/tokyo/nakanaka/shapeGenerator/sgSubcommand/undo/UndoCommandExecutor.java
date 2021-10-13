@@ -3,7 +3,7 @@ package tokyo.nakanaka.shapeGenerator.sgSubcommand.undo;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
 
 public class UndoCommandExecutor implements SgSubcommandExecutor {
 

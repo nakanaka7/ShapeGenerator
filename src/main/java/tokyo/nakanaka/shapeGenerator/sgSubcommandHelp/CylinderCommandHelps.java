@@ -1,12 +1,12 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
 
-public class RegularPyramidCommandHelps {
-    private RegularPyramidCommandHelps(){
+public class CylinderCommandHelps {
+    private CylinderCommandHelps(){
     }
 
     public static final BranchCommandHelp CENTER
             = new BranchCommandHelp.Builder("center")
-            .description("Set center of base regular polygon")
+            .description("Set center of base disc")
             .parameter("[x]", "x-coordinate")
             .parameter("[y]", "y-coordinate")
             .parameter("[z]", "z-coordinate")
@@ -14,14 +14,8 @@ public class RegularPyramidCommandHelps {
 
     public static final BranchCommandHelp RADIUS
             = new BranchCommandHelp.Builder("radius")
-            .description("Set radius of base regular polygon")
+            .description("Set radius of base disc")
             .parameter("<radius>", "radius")
-            .build();
-
-    public static final BranchCommandHelp SIDE
-            = new BranchCommandHelp.Builder("side")
-            .description("Set side numbers of base regular polygon")
-            .parameter("<number>", "side number")
             .build();
 
     public static final BranchCommandHelp HEIGHT
@@ -35,6 +29,5 @@ public class RegularPyramidCommandHelps {
             .description("Set direction")
             .parameter("north|south|east|west|up|down", "direction")
             .build();
-
 
 }

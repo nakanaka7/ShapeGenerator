@@ -1,12 +1,12 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
 
-public class HollowRegularPrismCommandHelps {
-    private HollowRegularPrismCommandHelps(){
+public class HollowCylinderCommandHelps {
+    private HollowCylinderCommandHelps(){
     }
 
     public static final BranchCommandHelp CENTER
             = new BranchCommandHelp.Builder("center")
-            .description("Set center of base regular polygon")
+            .description("Set center of base disc")
             .parameter("[x]", "x-coordinate")
             .parameter("[y]", "y-coordinate")
             .parameter("[z]", "z-coordinate")
@@ -14,20 +14,14 @@ public class HollowRegularPrismCommandHelps {
 
     public static final BranchCommandHelp OUTER_RADIUS
             = new BranchCommandHelp.Builder("outer_radius")
-            .description("Set outer radius of base regular polygon")
-            .parameter("<radius>", "radius")
+            .description("Set outer radius of base disc")
+            .parameter("<outer_radius>", "outer radius of base disc")
             .build();
 
     public static final BranchCommandHelp INNER_RADIUS
             = new BranchCommandHelp.Builder("inner_radius")
-            .description("Set inner radius of base regular polygon")
-            .parameter("<radius>", "radius")
-            .build();
-
-    public static final BranchCommandHelp SIDE
-            = new BranchCommandHelp.Builder("side")
-            .description("Set side numbers of base regular polygon")
-            .parameter("<number>", "side number")
+            .description("Set inner radius of base disc")
+            .parameter("<inner_radius>", "inner radius of base disc")
             .build();
 
     public static final BranchCommandHelp HEIGHT

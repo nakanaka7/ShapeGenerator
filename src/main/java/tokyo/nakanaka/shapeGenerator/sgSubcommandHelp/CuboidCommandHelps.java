@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
 
 public class CuboidCommandHelps {
     private CuboidCommandHelps(){

@@ -6,7 +6,7 @@ import tokyo.nakanaka.shapeGenerator.Main;
 import tokyo.nakanaka.shapeGenerator.SgSubcommandExecutor;
 import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.sgSubCommandHelp.SgSubcommandHelps;
+import tokyo.nakanaka.shapeGenerator.sgSubcommandHelp.SgSubcommandHelps;
 
 public class PhyCommandExecutor implements SgSubcommandExecutor {
 

@@ -1,8 +1,7 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
 
-public class HollowRegularPyramidCommandHelps {
-
-    private HollowRegularPyramidCommandHelps(){
+public class HollowRegularPrismCommandHelps {
+    private HollowRegularPrismCommandHelps(){
     }
 
     public static final BranchCommandHelp CENTER

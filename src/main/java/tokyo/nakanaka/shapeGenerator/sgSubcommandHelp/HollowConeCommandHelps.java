@@ -1,7 +1,7 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHelp;
+package tokyo.nakanaka.shapeGenerator.sgSubcommandHelp;
 
-public class CylinderCommandHelps {
-    private CylinderCommandHelps(){
+public class HollowConeCommandHelps {
+    private HollowConeCommandHelps(){
     }
 
     public static final BranchCommandHelp CENTER
@@ -12,10 +12,16 @@ public class CylinderCommandHelps {
             .parameter("[z]", "z-coordinate")
             .build();
 
-    public static final BranchCommandHelp RADIUS
-            = new BranchCommandHelp.Builder("radius")
-            .description("Set radius of base disc")
-            .parameter("<radius>", "radius")
+    public static final BranchCommandHelp OUTER_RADIUS
+            = new BranchCommandHelp.Builder("outer_radius")
+            .description("Set outer radius of base disc")
+            .parameter("<outer_radius>", "outer radius of base disc")
+            .build();
+
+    public static final BranchCommandHelp INNER_RADIUS
+            = new BranchCommandHelp.Builder("inner_radius")
+            .description("Set inner radius of base disc")
+            .parameter("<inner_radius>", "inner radius of base disc")
             .build();
 
     public static final BranchCommandHelp HEIGHT
