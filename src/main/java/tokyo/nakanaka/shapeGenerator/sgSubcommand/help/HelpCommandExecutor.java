@@ -37,7 +37,7 @@ public class HelpCommandExecutor implements SgSubcommandExecutor {
         this.cmdHelpMap.put(ROT, SgSubcommandHelps.ROT);
         this.cmdHelpMap.put(MAX, SgSubcommandHelps.MAX);
         this.cmdHelpMap.put(MIN, SgSubcommandHelps.MIN);
-        this.cmdHelpMap.put(DEL, DelConstants.DEL_HELP);
+        this.cmdHelpMap.put(DEL, DelConstants.HELP);
         this.cmdHelpMap.put(UNDO, SgSubcommandHelps.UNDO);
         this.cmdHelpMap.put(REDO, SgSubcommandHelps.REDO);
     }

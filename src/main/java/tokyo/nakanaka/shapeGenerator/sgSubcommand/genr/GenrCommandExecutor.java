@@ -17,7 +17,7 @@ public class GenrCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-        String usage = Main.SG + " " + SgSublabel.GENR + " " + String.join(" ", GenrConstants.GENR_HELP.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.GENR + " " + String.join(" ", GenrConstants.HELP.parameterSyntaxes());
         if(args.length != 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);
             return;

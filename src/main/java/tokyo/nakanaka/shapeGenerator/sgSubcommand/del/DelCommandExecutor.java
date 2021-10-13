@@ -15,7 +15,7 @@ public class DelCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-        String usage = Main.SG + " " + SgSublabel.DEL + " " + String.join(" ", DelConstants.DEL_HELP.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.DEL + " " + String.join(" ", DelConstants.HELP.parameterSyntaxes());
         if(args.length > 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);
             return;
