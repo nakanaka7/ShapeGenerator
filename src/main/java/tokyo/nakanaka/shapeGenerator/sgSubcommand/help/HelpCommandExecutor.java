@@ -4,10 +4,10 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.logger.LogColor;
 import tokyo.nakanaka.shapeGenerator.CommandLogColor;
 import tokyo.nakanaka.shapeGenerator.SgSubcommandExecutor;
-import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
-import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.commandHelp.BranchCommandHelp;
 import tokyo.nakanaka.shapeGenerator.commandHelp.CommandHelp;
+import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
+import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.del.DelConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.genr.GenrConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.max.MaxConstants;
@@ -19,10 +19,10 @@ import tokyo.nakanaka.shapeGenerator.sgSubcommand.rot.RotConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.scale.ScaleConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelHelp;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.shape.ShapeConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.shift.ShiftConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.undo.UndoConstants;
+import tokyo.nakanaka.shapeGenerator.sgSubcommand.version.VersionConstants;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.wand.WandConstants;
 
 import java.util.ArrayList;
@@ -31,14 +31,13 @@ import java.util.List;
 import java.util.Map;
 
 import static tokyo.nakanaka.shapeGenerator.SgSublabel.*;
-import static tokyo.nakanaka.shapeGenerator.SgSublabel.REDO;
 
 public class HelpCommandExecutor implements SgSubcommandExecutor {
     private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 
     public HelpCommandExecutor() {
         this.cmdHelpMap.put(HELP, HelpConstants.HELP);
-        this.cmdHelpMap.put(VERSION, SgSubcommandHelps.VERSION);
+        this.cmdHelpMap.put(VERSION, VersionConstants.HELP);
         this.cmdHelpMap.put(WAND, WandConstants.HELP);
         this.cmdHelpMap.put(SHAPE, ShapeConstants.HELP);
         this.cmdHelpMap.put(SEL, SelConstants.HELP);
