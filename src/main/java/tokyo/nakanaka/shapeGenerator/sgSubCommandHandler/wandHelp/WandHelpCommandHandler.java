@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.wandHelp;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
