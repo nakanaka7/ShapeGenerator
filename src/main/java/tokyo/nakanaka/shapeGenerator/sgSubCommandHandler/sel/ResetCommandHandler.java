@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.commonSelSubCommandHandler;
+package tokyo.nakanaka.shapeGenerator.sgSubCommandHandler.sel;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
