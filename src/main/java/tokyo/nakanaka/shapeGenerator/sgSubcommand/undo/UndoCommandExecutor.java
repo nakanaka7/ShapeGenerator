@@ -3,13 +3,12 @@ package tokyo.nakanaka.shapeGenerator.sgSubcommand.undo;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 public class UndoCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
-        String usage = Main.SG + " " + SgSublabel.UNDO + " " + String.join(" ", SgSubcommandHelps.UNDO.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.UNDO + " " + String.join(" ", UndoConstants.HELP.parameterSyntaxes());
         if(args.length > 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);
             return;
