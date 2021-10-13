@@ -23,7 +23,7 @@ public class HelpCommandExecutor implements SgSubcommandExecutor {
     private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 
     public HelpCommandExecutor() {
-        this.cmdHelpMap.put(HELP, SgSubcommandHelps.HELP);
+        this.cmdHelpMap.put(HELP, HelpConstants.HELP);
         this.cmdHelpMap.put(VERSION, SgSubcommandHelps.VERSION);
         this.cmdHelpMap.put(WAND, SgSubcommandHelps.WAND);
         this.cmdHelpMap.put(SHAPE, SgSubcommandHelps.SHAPE);
