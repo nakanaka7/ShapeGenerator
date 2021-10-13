@@ -8,14 +8,13 @@ import tokyo.nakanaka.shapeGenerator.command.AdjustCommand;
 import tokyo.nakanaka.shapeGenerator.command.GenerateCommand;
 import tokyo.nakanaka.shapeGenerator.command.MaxCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.commandHelp.SgSubcommandHelps;
 
 public class MaxCommandExecutor implements SgSubcommandExecutor {
 
     @Override
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
         //check args length
-        String usage = Main.SG + " " + SgSublabel.MAX + " " + String.join(" ", SgSubcommandHelps.MAX.parameterSyntaxes());
+        String usage = Main.SG + " " + SgSublabel.MAX + " " + String.join(" ", MaxConstants.HELP.parameterSyntaxes());
         if(args.length != 2) {
             player.print(cmdLogColor.error() + "Usage: " + usage);
             return;
