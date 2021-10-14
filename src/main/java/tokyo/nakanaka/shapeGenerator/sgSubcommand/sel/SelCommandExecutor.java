@@ -22,6 +22,13 @@ public class SelCommandExecutor implements SgSubcommandExecutor {
         }
     }
 
+    public SelCommandExecutor(SelectionShapeStrategyRepository shapeStrtgRepo,
+                              Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap){
+        this.commonMap.put("offset", new OffsetCommandHandler(shapeStrtgRepo));
+        this.commonMap.put("reset", new ResetCommandHandler(shapeStrtgRepo));
+        this.properMapMap = properMapMap;
+    }
+
     public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
         String usage = Main.SG + " " + SgSublabel.SEL + " " + String.join(" ", SelConstants.HELP.parameterSyntaxes());
         SelectionShape shape = playerData.getSelectionShape();
