@@ -1,11 +1,11 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler;
 
-import java.util.List;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.BaseSelSubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionDataFactory;
+
+import java.util.List;
 
 public class SideCommandHandler extends BaseSelSubCommandHandler<Integer> {
 
@@ -24,7 +24,7 @@ public class SideCommandHandler extends BaseSelSubCommandHandler<Integer> {
 		}
 		return value;
 	}
-	
+
 	@Override
 	public List<String> onTabComplete(PlayerData playerData, Player player, String[] args) {
 		return switch(args.length) {
