@@ -27,7 +27,6 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.sphere.SphereSelecti
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.tetrahedron.TetrahedronSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.torus.TorusSelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.triangle.TriangleSelectionShapeStrategy;
-import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelCommandHandler;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.del.DelCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.del.DelTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.genr.GenrCommandExecutor;
@@ -48,6 +47,8 @@ import tokyo.nakanaka.shapeGenerator.sgSubcommand.rot.RotCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.rot.RotTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.scale.ScaleCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.scale.ScaleTabCompleter;
+import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelCommandExecutor;
+import tokyo.nakanaka.shapeGenerator.sgSubcommand.sel.SelTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.shape.ShapeCommandExecutor;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.shape.ShapeTabCompleter;
 import tokyo.nakanaka.shapeGenerator.sgSubcommand.shift.ShiftCommandExecutor;
@@ -193,9 +194,8 @@ public class Main {
 		this.tabCompleterMap.put(SgSublabel.WAND, new WandTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.SHAPE, new ShapeCommandExecutor(dataCreatorMap));
 		this.tabCompleterMap.put(SgSublabel.SHAPE, new ShapeTabCompleter(shapeList));
-		var selCmdHandler = new SelCommandHandler(shapeStrtgRepo);
-		this.cmdExecutorMap.put(SgSublabel.SEL, selCmdHandler::onCommand);
-		this.tabCompleterMap.put(SgSublabel.SEL, selCmdHandler::onTabComplete);
+		this.cmdExecutorMap.put(SgSublabel.SEL, new SelCommandExecutor(shapeStrtgRepo));
+		this.tabCompleterMap.put(SgSublabel.SEL, new SelTabCompleter(shapeStrtgRepo));
 		this.cmdExecutorMap.put(SgSublabel.GENR, new GenrCommandExecutor(selBuilderMap));
 		this.tabCompleterMap.put(SgSublabel.GENR, new GenrTabCompleter(blockIDListFactory));
 		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor());
