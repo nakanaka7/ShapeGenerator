@@ -19,10 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
-	private String CENTER = "center";
-	private String MAJOR_RADIUS = "major_radius";
-	private String MINOR_RADIUS = "minor_radius";
-	private String AXIS = "axis";
+	private static final String CENTER = "center";
+	private static final String MAJOR_RADIUS = "major_radius";
+	private static final String MINOR_RADIUS = "minor_radius";
+	private static final String AXIS = "axis";
 
 	public SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, MINOR_RADIUS, AXIS);
@@ -93,8 +93,7 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 	 * @throws IllegalStateException if the center, major radius, minor radius, or axis
 	 * is not specified, or major radius or minor radius is smaller than or equals to 0
 	 */
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
 		var majorRadius = (Double)selData.getExtraData(MAJOR_RADIUS);
 		var minorRadius = (Double)selData.getExtraData(MINOR_RADIUS);

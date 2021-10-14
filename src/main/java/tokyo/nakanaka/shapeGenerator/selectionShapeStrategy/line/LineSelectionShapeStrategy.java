@@ -58,8 +58,7 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 	 * @throws IllegalStateException if the pos1, pos2, or thickness is not specified,
 	 * or thickness is less than or equals to 0
 	 */
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+	public static Selection buildSelection(SelectionData selData) {
 		Vector3D pos1 = (Vector3D) selData.getExtraData("pos1");
 		Vector3D pos2 = (Vector3D) selData.getExtraData("pos2");
 		Double thickness = (Double) selData.getExtraData("thickness");

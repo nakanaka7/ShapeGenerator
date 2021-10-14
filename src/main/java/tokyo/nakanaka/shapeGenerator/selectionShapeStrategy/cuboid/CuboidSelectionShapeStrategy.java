@@ -48,9 +48,8 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
 	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData(POS2, blockPos.toVector3D());
 	}
-	
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+
+	public static Selection buildSelection(SelectionData selData) {
 		Vector3D pos1 = (Vector3D) selData.getExtraData(POS1);
 		Vector3D pos2 = (Vector3D) selData.getExtraData(POS2);
 		if(pos1 == null || pos2 == null) {

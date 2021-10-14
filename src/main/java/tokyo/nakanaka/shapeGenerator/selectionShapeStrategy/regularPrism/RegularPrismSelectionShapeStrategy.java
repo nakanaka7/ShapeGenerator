@@ -104,8 +104,7 @@ public class RegularPrismSelectionShapeStrategy implements SelectionShapeStrateg
 	 * @throws IllegalStateException if the center, radius, side, height, or direction
 	 * is not specified, or the radius <= 0, side < 3, or height <= 0
 	 */
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
 		var radius = (Double)selData.getExtraData(RADIUS);
 		var side = (Integer)selData.getExtraData(SIDE);

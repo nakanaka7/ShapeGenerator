@@ -102,8 +102,7 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 	 * inner minor radius, or axis is not specified, or major radius <= 0,
 	 * outer minor radius <= 0, inner minor radius <= 0, inner minor radius >= outer minor radius
 	 */
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
 		var majorRadius = (Double)selData.getExtraData(MAJOR_RADIUS);
 		var outerMinorRadius = (Double)selData.getExtraData(OUTER_MINOR_RADIUS);

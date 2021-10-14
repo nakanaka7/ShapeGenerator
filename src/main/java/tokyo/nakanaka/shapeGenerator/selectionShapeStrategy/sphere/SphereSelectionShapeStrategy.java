@@ -67,8 +67,7 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy {
 	 * @throws IllegalStateException if the center or radius is not specified, or radius is smaller than
 	 * or equals to 0
 	 */
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
 		var radius = (Double)selData.getExtraData(RADIUS);
 		if(center == null || radius == null) {

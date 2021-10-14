@@ -103,8 +103,7 @@ public class CylinderSelectionShapeStrategy implements SelectionShapeStrategy {
 	 * @throws IllegalStateException if the center, radius, height or direction is not specified,
 	 * or the radius or height is less than or equals to 0
 	 */
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
 		var radius = (Double)selData.getExtraData(RADIUS);
 		var height = (Double)selData.getExtraData(HEIGHT);

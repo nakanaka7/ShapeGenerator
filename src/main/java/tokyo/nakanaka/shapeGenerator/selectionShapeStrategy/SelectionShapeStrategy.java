@@ -2,7 +2,6 @@ package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
-import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 
@@ -54,12 +53,5 @@ public interface SelectionShapeStrategy {
 	 * @throws IllegalStateException if this click operation cannot be handled
 	 */
 	void onRightClick(SelectionData selData, BlockVector3D blockPos);
-	
-	/**
-	 * Returns a selection from the selection data
-	 * @param selData a selection data
-	 * @return a selection from the selection data
-	 */
-	Selection buildSelection(SelectionData selData);
-	
+
 }

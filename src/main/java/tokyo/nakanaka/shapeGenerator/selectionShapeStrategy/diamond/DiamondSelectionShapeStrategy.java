@@ -66,8 +66,7 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		selData.setExtraData(LENGTH, length);
 	}
 
-	@Override
-	public Selection buildSelection(SelectionData selData) {
+	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
 		var width = (Double)selData.getExtraData(WIDTH);
 		var height = (Double)selData.getExtraData(HEIGHT);
