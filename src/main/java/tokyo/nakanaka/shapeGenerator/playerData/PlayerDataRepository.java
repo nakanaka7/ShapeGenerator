@@ -1,14 +1,14 @@
 package tokyo.nakanaka.shapeGenerator.playerData;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
+import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class PlayerDataRepository {
 	private SelectionShapeStrategyRepository shapeStrtgRepo;
