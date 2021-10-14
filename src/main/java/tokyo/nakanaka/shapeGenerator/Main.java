@@ -85,103 +85,103 @@ public class Main {
 		shapeList.add(SelectionShape.CUBOID);
 		var cuboidStrtg = new CuboidSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.CUBOID, cuboidStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.CUBOID, cuboidStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.CUBOID, CuboidSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.CUBOID, cuboidStrtg);
 		//diamond
 		shapeList.add(SelectionShape.DIAMOND);
 		var diamondStrtg = new DiamondSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.DIAMOND, diamondStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.DIAMOND, diamondStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.DIAMOND, DiamondSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.DIAMOND, diamondStrtg);
 		//sphere
 		shapeList.add(SelectionShape.SPHERE);
 		var sphereStrtg = new SphereSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.SPHERE, sphereStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.SPHERE, sphereStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.SPHERE, SphereSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.SPHERE, sphereStrtg);
 		//cylinder
 		shapeList.add(SelectionShape.CYLINDER);
 		var cylinderStrtg = new CylinderSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.CYLINDER, cylinderStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.CYLINDER, cylinderStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.CYLINDER, CylinderSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.CYLINDER, cylinderStrtg);
 		//cone
 		shapeList.add(SelectionShape.CONE);
 		var coneStrtg = new ConeSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.CONE, coneStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.CONE, coneStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.CONE, ConeSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.CONE, coneStrtg);
 		//torus
 		shapeList.add(SelectionShape.TORUS);
 		var torusStrtg = new TorusSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.TORUS, torusStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.TORUS, torusStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.TORUS, TorusSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.TORUS, torusStrtg);
 		//line
 		shapeList.add(SelectionShape.LINE);
 		var lineStrtg = new LineSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.LINE, lineStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.LINE, lineStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.LINE, LineSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.LINE, lineStrtg);
 		//triangle
 		shapeList.add(SelectionShape.TRIANGLE);
 		var triangleStrtg = new TriangleSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.TRIANGLE, triangleStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.TRIANGLE, triangleStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.TRIANGLE, TriangleSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.TRIANGLE, triangleStrtg);
 		//tetrahedron
 		shapeList.add(SelectionShape.TETRAHEDRON);
 		var tetraStrtg = new TetrahedronSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.TETRAHEDRON, tetraStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.TETRAHEDRON, tetraStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.TETRAHEDRON, TetrahedronSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.TETRAHEDRON, tetraStrtg);
 		//regular prism
 		shapeList.add(SelectionShape.REGULAR_PRISM);
 		var regularPrismStrtg = new RegularPrismSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.REGULAR_PRISM, regularPrismStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.REGULAR_PRISM, regularPrismStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.REGULAR_PRISM, RegularPrismSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.REGULAR_PRISM, regularPrismStrtg);
 		//regular pyramid
 		shapeList.add(SelectionShape.REGULAR_PYRAMID);
 		var regularPyramidStrtg = new RegularPyramidSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.REGULAR_PYRAMID, regularPyramidStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.REGULAR_PYRAMID, regularPyramidStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.REGULAR_PYRAMID, RegularPyramidSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.REGULAR_PYRAMID, regularPyramidStrtg);
 		//hollow sphere
 		shapeList.add(SelectionShape.HOLLOW_SPHERE);
 		var hollowSphereStrtg = new HollowSphereSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.HOLLOW_SPHERE, hollowSphereStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.HOLLOW_SPHERE, hollowSphereStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.HOLLOW_SPHERE, HollowSphereSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_SPHERE, hollowSphereStrtg);
 		//hollow cylinder
 		shapeList.add(SelectionShape.HOLLOW_CYLINDER);
 		var hollowCylinderStrtg = new HollowCylinderSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.HOLLOW_CYLINDER, hollowCylinderStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.HOLLOW_CYLINDER, hollowCylinderStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.HOLLOW_CYLINDER, HollowCylinderSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_CYLINDER, hollowCylinderStrtg);
 		//hollow cone
 		shapeList.add(SelectionShape.HOLLOW_CONE);
 		var hollowConeStrtg = new HollowConeSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.HOLLOW_CONE, hollowConeStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.HOLLOW_CONE, hollowConeStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.HOLLOW_CONE, HollowConeSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_CONE, hollowConeStrtg);
 		//hollow torus
 		shapeList.add(SelectionShape.HOLLOW_TORUS);
 		var hollowTorusStrtg = new HollowTorusSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.HOLLOW_TORUS, hollowTorusStrtg::newSelectionData);
-		selBuilderMap.put(SelectionShape.HOLLOW_TORUS, hollowTorusStrtg::buildSelection);
+		selBuilderMap.put(SelectionShape.HOLLOW_TORUS, HollowTorusSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_TORUS, hollowTorusStrtg);
 		//hollow regular prism
 		shapeList.add(SelectionShape.HOLLOW_REGULAR_PRISM);
 		var hollowRegularPrism = new HollowRegularPrismSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.HOLLOW_REGULAR_PRISM, hollowRegularPrism::newSelectionData);
-		selBuilderMap.put(SelectionShape.HOLLOW_REGULAR_PRISM, hollowRegularPrism::buildSelection);
+		selBuilderMap.put(SelectionShape.HOLLOW_REGULAR_PRISM, HollowRegularPrismSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PRISM, hollowRegularPrism);
 		//hollow regular pyramid
 		shapeList.add(SelectionShape.HOLLOW_REGULAR_PYRAMID);
 		var hollowRegularPyramid = new HollowRegularPyramidSelectionShapeStrategy();
 		dataCreatorMap.put(SelectionShape.HOLLOW_REGULAR_PYRAMID, hollowRegularPyramid::newSelectionData);
-		selBuilderMap.put(SelectionShape.HOLLOW_REGULAR_PYRAMID, hollowRegularPyramid::buildSelection);
+		selBuilderMap.put(SelectionShape.HOLLOW_REGULAR_PYRAMID, HollowRegularPyramidSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PYRAMID, hollowRegularPyramid);
 		//
 		this.playerDataRepository = new PlayerDataRepository(shapeStrtgRepo);
