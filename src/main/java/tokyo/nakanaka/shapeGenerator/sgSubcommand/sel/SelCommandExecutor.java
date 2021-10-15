@@ -3,7 +3,6 @@ package tokyo.nakanaka.shapeGenerator.sgSubcommand.sel;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,15 +11,6 @@ public class SelCommandExecutor implements SgSubcommandExecutor {
 
     private Map<String, SubCommandHandler> commonMap = new HashMap<>();
     private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
-
-    public SelCommandExecutor(SelectionShapeStrategyRepository shapeStrtgRepo) {
-        this.commonMap.put("offset", new OffsetCommandHandler(shapeStrtgRepo));
-        this.commonMap.put("reset", new ResetCommandHandler(shapeStrtgRepo));
-        for(SelectionShape selShape : shapeStrtgRepo.registeredShapes()) {
-            SelectionShapeStrategy selStrtg = shapeStrtgRepo.get(selShape);
-            this.properMapMap.put(selShape, selStrtg.selSubCommandHandlerMap());
-        }
-    }
 
     public SelCommandExecutor(SelectionShapeStrategyRepository shapeStrtgRepo,
                               Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap){
