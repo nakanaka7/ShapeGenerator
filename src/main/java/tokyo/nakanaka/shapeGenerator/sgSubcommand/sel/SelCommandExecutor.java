@@ -12,10 +12,10 @@ public class SelCommandExecutor implements SgSubcommandExecutor {
     private Map<String, SubCommandHandler> commonMap = new HashMap<>();
     private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
 
-    public SelCommandExecutor(SelectionShapeStrategyRepository shapeStrtgRepo,
+    public SelCommandExecutor(Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap,
                               Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap){
-        this.commonMap.put("offset", new OffsetCommandHandler(shapeStrtgRepo));
-        this.commonMap.put("reset", new ResetCommandHandler(shapeStrtgRepo));
+        this.commonMap.put("offset", new OffsetCommandHandler(dataCreatorMap));
+        this.commonMap.put("reset", new ResetCommandHandler(dataCreatorMap));
         this.properMapMap = properMapMap;
     }
 

@@ -1,10 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.sgSubcommand.sel;
 
 import tokyo.nakanaka.Player;
-import tokyo.nakanaka.shapeGenerator.SelectionShape;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
-import tokyo.nakanaka.shapeGenerator.SgSubcommandTabCompleter;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 import java.util.ArrayList;
@@ -17,10 +14,10 @@ public class SelTabCompleter implements SgSubcommandTabCompleter {
     private Map<String, SubCommandHandler> commonMap = new HashMap<>();
     private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap;
 
-    public SelTabCompleter(SelectionShapeStrategyRepository shapeStrtgRepo,
+    public SelTabCompleter(Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap,
                            Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap  ) {
-        this.commonMap.put("offset", new OffsetCommandHandler(shapeStrtgRepo));
-        this.commonMap.put("reset", new ResetCommandHandler(shapeStrtgRepo));
+        this.commonMap.put("offset", new OffsetCommandHandler(dataCreatorMap));
+        this.commonMap.put("reset", new ResetCommandHandler(dataCreatorMap));
         this.properMapMap = properMapMap;
     }
 
