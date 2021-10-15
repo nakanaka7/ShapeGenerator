@@ -17,7 +17,7 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, POS1, POS1, POS2);
 	}
 
@@ -27,8 +27,8 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
 	 */
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
-		map.put(POS1, new PosCommandHandler(POS1, this::newSelectionData));
-		map.put(POS2, new PosCommandHandler(POS2, this::newSelectionData));
+		map.put(POS1, new PosCommandHandler(POS1, CuboidSelectionShapeStrategy::newSelectionData));
+		map.put(POS2, new PosCommandHandler(POS2, CuboidSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	
