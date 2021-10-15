@@ -1,6 +1,5 @@
 package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
-import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 
@@ -8,7 +7,6 @@ import tokyo.nakanaka.shapeGenerator.SelectionData;
  * Holds SelectionShape delegating methods
  */
 public interface SelectionShapeStrategy {
-	SelectionData newSelectionData(World world);
 
 	default String clickDescription() {
 		return  "";
