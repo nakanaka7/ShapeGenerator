@@ -4,20 +4,18 @@ import tokyo.nakanaka.BlockPosition;
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.CommandLogColor;
-import tokyo.nakanaka.shapeGenerator.SelectionData;
-import tokyo.nakanaka.shapeGenerator.SelectionShapeStrategyRepository;
-import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 import java.util.List;
+import java.util.Map;
 
 public class OffsetCommandHandler implements SubCommandHandler {
-private SelectionShapeStrategyRepository shapeStrtgRepo;
-	
-	public OffsetCommandHandler(SelectionShapeStrategyRepository shapeStrtgRepo) {
-		this.shapeStrtgRepo = shapeStrtgRepo;
+	private Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap;
+
+	public OffsetCommandHandler(Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap) {
+		this.dataCreatorMap = dataCreatorMap;
 	}
 
 	@Override
@@ -52,7 +50,7 @@ private SelectionShapeStrategyRepository shapeStrtgRepo;
 		//reset the selection data if the world changes
 		World evtWorld = pos.world();
 		if(!evtWorld.equals(playerData.getSelectionData().world())) {
-			SelectionData selData = this.shapeStrtgRepo
+			SelectionData selData = this.dataCreatorMap
 					.get(playerData.getSelectionShape())
 					.newSelectionData(evtWorld);
 			playerData.setSelectionData(selData);
