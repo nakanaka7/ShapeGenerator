@@ -86,7 +86,7 @@ public class Main {
 		//cuboid
 		shapeList.add(SelectionShape.CUBOID);
 		var cuboidStrtg = new CuboidSelectionShapeStrategy();
-		dataCreatorMap.put(SelectionShape.CUBOID, cuboidStrtg::newSelectionData);
+		dataCreatorMap.put(SelectionShape.CUBOID, CuboidSelectionShapeStrategy::newSelectionData);
 		properMapMap.put(SelectionShape.CUBOID, cuboidStrtg.selSubCommandHandlerMap());
 		selBuilderMap.put(SelectionShape.CUBOID, CuboidSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.CUBOID, cuboidStrtg);
@@ -203,7 +203,7 @@ public class Main {
 		selBuilderMap.put(SelectionShape.HOLLOW_REGULAR_PYRAMID, HollowRegularPyramidSelectionShapeStrategy::buildSelection);
 		shapeStrtgRepo.register(SelectionShape.HOLLOW_REGULAR_PYRAMID, hollowRegularPyramid);
 		//
-		this.playerDataRepository = new PlayerDataRepository(shapeStrtgRepo);
+		this.playerDataRepository = new PlayerDataRepository();
 		this.cmdExecutorMap.put(SgSublabel.HELP, new HelpCommandExecutor());
 		this.tabCompleterMap.put(SgSublabel.HELP, new HelpTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.VERSION, new VersionCommandExecutor(new SemVer(1, 2, 0)));
