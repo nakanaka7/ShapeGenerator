@@ -212,8 +212,8 @@ public class Main {
 		this.tabCompleterMap.put(SgSublabel.WAND, new WandTabCompleter());
 		this.cmdExecutorMap.put(SgSublabel.SHAPE, new ShapeCommandExecutor(dataCreatorMap));
 		this.tabCompleterMap.put(SgSublabel.SHAPE, new ShapeTabCompleter(shapeList));
-		this.cmdExecutorMap.put(SgSublabel.SEL, new SelCommandExecutor(shapeStrtgRepo, properMapMap));
-		this.tabCompleterMap.put(SgSublabel.SEL, new SelTabCompleter(shapeStrtgRepo, properMapMap));
+		this.cmdExecutorMap.put(SgSublabel.SEL, new SelCommandExecutor(dataCreatorMap, properMapMap));
+		this.tabCompleterMap.put(SgSublabel.SEL, new SelTabCompleter(dataCreatorMap, properMapMap));
 		this.cmdExecutorMap.put(SgSublabel.GENR, new GenrCommandExecutor(selBuilderMap));
 		this.tabCompleterMap.put(SgSublabel.GENR, new GenrTabCompleter(blockIDListFactory));
 		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor());
