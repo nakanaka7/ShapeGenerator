@@ -25,18 +25,18 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String POS3 = "pos3";
 	private static final String THICKNESS = "thickness";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, POS1, POS1, POS2, POS3, THICKNESS);
 		selData.setExtraData(THICKNESS, 1.0);
 		return selData;
 	}
 	
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(POS1, new PosCommandHandler(POS1, this::newSelectionData));
-		map.put(POS2, new PosCommandHandler(POS2, this::newSelectionData));
-		map.put(POS3, new PosCommandHandler(POS3, this::newSelectionData));
-		map.put(THICKNESS, new LengthCommandHandler(THICKNESS, this::newSelectionData));
+		map.put(POS1, new PosCommandHandler(POS1, TriangleSelectionShapeStrategy::newSelectionData));
+		map.put(POS2, new PosCommandHandler(POS2, TriangleSelectionShapeStrategy::newSelectionData));
+		map.put(POS3, new PosCommandHandler(POS3, TriangleSelectionShapeStrategy::newSelectionData));
+		map.put(THICKNESS, new LengthCommandHandler(THICKNESS, TriangleSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	

@@ -22,14 +22,14 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, RADIUS);
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, SphereSelectionShapeStrategy::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, SphereSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	

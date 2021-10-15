@@ -25,19 +25,19 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 	private static final String INNER_MINOR_RADIUS = "inner_minor_radius";
 	private static final String AXIS = "axis";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, OUTER_MINOR_RADIUS, INNER_MINOR_RADIUS, AXIS);
 		selData.setExtraData(AXIS, Axis.Y);
 		return selData;
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, this::newSelectionData));
-		map.put(OUTER_MINOR_RADIUS, new LengthCommandHandler(OUTER_MINOR_RADIUS, this::newSelectionData));
-		map.put(INNER_MINOR_RADIUS, new LengthCommandHandler(INNER_MINOR_RADIUS, this::newSelectionData));
-		map.put(AXIS, new AxisCommandHandler(this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, HollowTorusSelectionShapeStrategy::newSelectionData));
+		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, HollowTorusSelectionShapeStrategy::newSelectionData));
+		map.put(OUTER_MINOR_RADIUS, new LengthCommandHandler(OUTER_MINOR_RADIUS, HollowTorusSelectionShapeStrategy::newSelectionData));
+		map.put(INNER_MINOR_RADIUS, new LengthCommandHandler(INNER_MINOR_RADIUS, HollowTorusSelectionShapeStrategy::newSelectionData));
+		map.put(AXIS, new AxisCommandHandler(HollowTorusSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 

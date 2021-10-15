@@ -24,18 +24,18 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String MINOR_RADIUS = "minor_radius";
 	private static final String AXIS = "axis";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, MINOR_RADIUS, AXIS);
 		selData.setExtraData(AXIS, Axis.Y);
 		return selData;
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, this::newSelectionData));
-		map.put(MINOR_RADIUS, new LengthCommandHandler(MINOR_RADIUS, this::newSelectionData));
-		map.put(AXIS, new AxisCommandHandler(this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, TorusSelectionShapeStrategy::newSelectionData));
+		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, TorusSelectionShapeStrategy::newSelectionData));
+		map.put(MINOR_RADIUS, new LengthCommandHandler(MINOR_RADIUS, TorusSelectionShapeStrategy::newSelectionData));
+		map.put(AXIS, new AxisCommandHandler(TorusSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	

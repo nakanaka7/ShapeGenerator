@@ -23,15 +23,15 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS);
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, this::newSelectionData));
-		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, HollowSphereSelectionShapeStrategy::newSelectionData));
+		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowSphereSelectionShapeStrategy::newSelectionData));
+		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowSphereSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 

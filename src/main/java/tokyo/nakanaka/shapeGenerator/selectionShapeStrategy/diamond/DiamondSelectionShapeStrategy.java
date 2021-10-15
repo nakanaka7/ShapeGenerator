@@ -23,16 +23,16 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String HEIGHT = "height";
 	private static final String LENGTH = "length";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, WIDTH, HEIGHT, LENGTH);
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(WIDTH, new LengthCommandHandler(WIDTH, this::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, this::newSelectionData));
-		map.put(LENGTH, new LengthCommandHandler(LENGTH, this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, DiamondSelectionShapeStrategy::newSelectionData));
+		map.put(WIDTH, new LengthCommandHandler(WIDTH, DiamondSelectionShapeStrategy::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, DiamondSelectionShapeStrategy::newSelectionData));
+		map.put(LENGTH, new LengthCommandHandler(LENGTH, DiamondSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	

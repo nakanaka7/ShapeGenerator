@@ -26,18 +26,18 @@ public class CylinderSelectionShapeStrategy implements SelectionShapeStrategy {
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, HEIGHT, DIRECTION);
 		selData.setExtraData(DIRECTION, Direction.UP);
 		return selData;
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, this::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, CylinderSelectionShapeStrategy::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, CylinderSelectionShapeStrategy::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, CylinderSelectionShapeStrategy::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(CylinderSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 

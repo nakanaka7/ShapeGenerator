@@ -27,20 +27,20 @@ public class RegularPrismSelectionShapeStrategy implements SelectionShapeStrateg
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, SIDE, HEIGHT, DIRECTION);
 		selData.setExtraData(SIDE, 3);
 		selData.setExtraData(DIRECTION, Direction.UP);
 		return selData;
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(RADIUS, new LengthCommandHandler(RADIUS, this::newSelectionData));
-		map.put(SIDE, new SideCommandHandler(this::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, this::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, RegularPrismSelectionShapeStrategy::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, RegularPrismSelectionShapeStrategy::newSelectionData));
+		map.put(SIDE, new SideCommandHandler(RegularPrismSelectionShapeStrategy::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, RegularPrismSelectionShapeStrategy::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(RegularPrismSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	

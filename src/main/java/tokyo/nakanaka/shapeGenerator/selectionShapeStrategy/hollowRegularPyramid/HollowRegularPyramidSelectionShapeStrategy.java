@@ -27,21 +27,21 @@ public class HollowRegularPyramidSelectionShapeStrategy implements SelectionShap
     private static final String HEIGHT = "height";
     private static final String DIRECTION = "direction";
 
-    public SelectionData newSelectionData(World world) {
+    public static SelectionData newSelectionData(World world) {
         SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, SIDE, HEIGHT, DIRECTION);
         selData.setExtraData(SIDE, 3);
         selData.setExtraData(DIRECTION, Direction.UP);
         return selData;
     }
 
-    public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+    public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
         Map<String, SubCommandHandler> map = new HashMap<>();
-        map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-        map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, this::newSelectionData));
-        map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, this::newSelectionData));
-        map.put(SIDE, new SideCommandHandler(this::newSelectionData));
-        map.put(HEIGHT, new LengthCommandHandler(HEIGHT, this::newSelectionData));
-        map.put(DIRECTION, new DirectionCommandHandler(this::newSelectionData));
+        map.put(CENTER, new PosCommandHandler(CENTER, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
+        map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
+        map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
+        map.put(SIDE, new SideCommandHandler(HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
+        map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
+        map.put(DIRECTION, new DirectionCommandHandler(HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
         return map;
     }
 

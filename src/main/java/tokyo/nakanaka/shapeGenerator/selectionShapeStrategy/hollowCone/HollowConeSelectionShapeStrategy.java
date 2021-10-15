@@ -27,19 +27,19 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, HEIGHT, DIRECTION);
 		selData.setExtraData(DIRECTION, Direction.UP);
 		return selData;
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
-		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, this::newSelectionData));
-		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, this::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, this::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(this::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(HollowConeSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 

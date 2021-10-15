@@ -24,16 +24,16 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 	private static final String POS3 = "pos3";
 	private static final String POS4 = "pos4";
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, POS1, POS1, POS2, POS3, POS4);
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
-		map.put(POS1, new PosCommandHandler(POS1, this::newSelectionData));
-		map.put(POS2, new PosCommandHandler(POS2, this::newSelectionData));
-		map.put(POS3, new PosCommandHandler(POS3, this::newSelectionData));
-		map.put(POS4, new PosCommandHandler(POS4, this::newSelectionData));
+		map.put(POS1, new PosCommandHandler(POS1, TetrahedronSelectionShapeStrategy::newSelectionData));
+		map.put(POS2, new PosCommandHandler(POS2, TetrahedronSelectionShapeStrategy::newSelectionData));
+		map.put(POS3, new PosCommandHandler(POS3, TetrahedronSelectionShapeStrategy::newSelectionData));
+		map.put(POS4, new PosCommandHandler(POS4, TetrahedronSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	

@@ -19,17 +19,17 @@ import java.util.Map;
 
 public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 
-	public SelectionData newSelectionData(World world) {
+	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, "pos1", "pos1", "pos2", "thickness");
 		selData.setExtraData("thickness", 1.0);
 		return selData;
 	}
 
-	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
+	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandler("pos1", this::newSelectionData));
-		map.put("pos2", new PosCommandHandler("pos2", this::newSelectionData));
-		map.put("thickness", new LengthCommandHandler("thickness", this::newSelectionData));
+		map.put("pos1", new PosCommandHandler("pos1", LineSelectionShapeStrategy::newSelectionData));
+		map.put("pos2", new PosCommandHandler("pos2", LineSelectionShapeStrategy::newSelectionData));
+		map.put("thickness", new LengthCommandHandler("thickness", LineSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 	
