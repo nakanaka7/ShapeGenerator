@@ -24,8 +24,7 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 		selData.setExtraData("thickness", 1.0);
 		return selData;
 	}
-	
-	@Override
+
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
 		map.put("pos1", new PosCommandHandler("pos1", this::newSelectionData));

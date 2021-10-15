@@ -20,8 +20,11 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, POS1, POS1, POS2);
 	}
-	
-	@Override
+
+	/**
+	 * Returns a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
+	 * @return a map which key is "/sg sel" subcommand's subLabel and which value is SubCommandHandler object
+	 */
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
 		map.put(POS1, new PosCommandHandler(POS1, this::newSelectionData));

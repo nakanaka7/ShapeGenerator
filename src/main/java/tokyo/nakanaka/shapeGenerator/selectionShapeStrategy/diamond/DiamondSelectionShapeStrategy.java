@@ -26,8 +26,7 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 	public SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, WIDTH, HEIGHT, LENGTH);
 	}
-	
-	@Override
+
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
 		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));

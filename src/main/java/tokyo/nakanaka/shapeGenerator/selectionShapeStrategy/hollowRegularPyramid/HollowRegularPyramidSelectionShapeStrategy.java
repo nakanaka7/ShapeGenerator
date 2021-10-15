@@ -34,7 +34,6 @@ public class HollowRegularPyramidSelectionShapeStrategy implements SelectionShap
         return selData;
     }
 
-    @Override
     public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
         Map<String, SubCommandHandler> map = new HashMap<>();
         map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));

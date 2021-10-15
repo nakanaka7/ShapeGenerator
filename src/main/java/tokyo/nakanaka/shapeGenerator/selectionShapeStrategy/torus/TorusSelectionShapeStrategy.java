@@ -29,8 +29,7 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		selData.setExtraData(AXIS, Axis.Y);
 		return selData;
 	}
-	
-	@Override
+
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
 		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));

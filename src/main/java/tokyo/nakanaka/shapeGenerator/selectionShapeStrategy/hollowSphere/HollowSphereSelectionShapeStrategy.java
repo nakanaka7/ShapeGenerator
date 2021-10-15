@@ -27,7 +27,6 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 		return new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS);
 	}
 
-	@Override
 	public Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
 		map.put(CENTER, new PosCommandHandler(CENTER, this::newSelectionData));
