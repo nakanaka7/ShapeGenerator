@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionShape;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;

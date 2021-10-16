@@ -1,9 +1,9 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler;
+package tokyo.nakanaka.shapeGenerator.selectionShape.regularPolygonSelSubCommandHandler;
 
 import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.BaseSelSubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionDataFactory;
+import tokyo.nakanaka.shapeGenerator.selectionShape.BaseSelSubCommandHandler;
+import tokyo.nakanaka.shapeGenerator.selectionShape.SelectionDataFactory;
 
 import java.util.List;
 

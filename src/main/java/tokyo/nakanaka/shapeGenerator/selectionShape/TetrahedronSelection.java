@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
+package tokyo.nakanaka.shapeGenerator.selectionShape;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -13,8 +13,8 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Tetrahedron;
 import java.util.HashMap;
 import java.util.Map;
 
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
+import static tokyo.nakanaka.shapeGenerator.selectionShape.MaxMinCalculator.max;
+import static tokyo.nakanaka.shapeGenerator.selectionShape.MaxMinCalculator.min;
 
 public class TetrahedronSelection {
 	private static final String POS1 = "pos1";

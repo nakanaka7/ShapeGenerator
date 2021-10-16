@@ -4,7 +4,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.message.MessageUtils;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShape.SelectionShapeStrategy;
 
 import java.util.List;
 import java.util.stream.Stream;
