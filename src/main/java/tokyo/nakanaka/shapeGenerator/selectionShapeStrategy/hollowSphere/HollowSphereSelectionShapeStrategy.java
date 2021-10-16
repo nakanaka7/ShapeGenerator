@@ -45,13 +45,11 @@ public class HollowSphereSelectionShapeStrategy implements SelectionShapeStrateg
 		return "Set outer_radius, inner_radius";
 	}
 
-	@Override
-	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+	public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData(CENTER, blockPos.toVector3D());
 	}
 
-	@Override
-	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+	public static void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		Vector3D center = (Vector3D) selData.getExtraData(CENTER);
 		if(center == null) {
 			throw new IllegalStateException();

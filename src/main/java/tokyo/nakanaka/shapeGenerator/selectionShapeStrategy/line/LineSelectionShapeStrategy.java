@@ -42,14 +42,12 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 	public String rightClickDescription() {
 		return "Set pos2";
 	}
-	
-	@Override
-	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+
+	public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData("pos1", blockPos.toVector3D());
 	}
-	
-	@Override
-	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+
+	public static void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData("pos2", blockPos.toVector3D());
 	}
 

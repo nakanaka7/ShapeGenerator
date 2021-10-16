@@ -42,13 +42,24 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
 		return "Set pos2";
 	}
 
-	@Override
-	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+
+	/**
+	 * Update the selection data on left block click
+	 * @param selData the selection data
+	 * @param blockPos the block position
+	 * @throws IllegalStateException if this click operation cannot be handled
+	 */
+	public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData(POS1, blockPos.toVector3D());
 	}
-	
-	@Override
-	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+
+	/**
+	 * Update the selection data on right block click
+	 * @param selData the selection data
+	 * @param blockPos the block position
+	 * @throws IllegalStateException if this click operation cannot be handled
+	 */
+	public static void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData(POS2, blockPos.toVector3D());
 	}
 

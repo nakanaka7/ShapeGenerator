@@ -42,14 +42,12 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy {
 	public String rightClickDescription() {
 		return "Set radius by the center coordinates";
 	}
-	
-	@Override
-	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+
+	public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData("center", blockPos.toVector3D());
 	}
-	
-	@Override
-	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+
+	public static void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		Vector3D center = (Vector3D) selData.getExtraData(CENTER);
 		if(center == null) {
 			throw new IllegalStateException();

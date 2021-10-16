@@ -54,8 +54,7 @@ public class RegularPyramidSelectionShapeStrategy implements SelectionShapeStrat
         return null;
     }
 
-    @Override
-    public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+    public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
         Direction dir = (Direction)selData.getExtraData(DIRECTION);
         Vector3D pos = blockPos.toVector3D();
         Vector3D center = switch (dir) {
@@ -69,8 +68,7 @@ public class RegularPyramidSelectionShapeStrategy implements SelectionShapeStrat
         selData.setExtraData(CENTER, center);
     }
 
-    @Override
-    public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+    public static void onRightClick(SelectionData selData, BlockVector3D blockPos) {
         var center = (Vector3D)selData.getExtraData(CENTER);
         if(center == null) {
             throw new IllegalStateException();

@@ -49,16 +49,14 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 	public String rightClickDescription() {
 		return "Set pos2, pos3";
 	}
-	
-	@Override
-	public void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
+
+	public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
 		selData.setExtraData(POS1, blockPos.toVector3D());
 		selData.setExtraData(POS2, null);
 		selData.setExtraData(POS3, null);
 	}
-	
-	@Override
-	public void onRightClick(SelectionData selData, BlockVector3D blockPos) {
+
+	public static void onRightClick(SelectionData selData, BlockVector3D blockPos) {
 		if(selData.getExtraData(POS1) == null) {
 			throw new IllegalStateException();
 		}
