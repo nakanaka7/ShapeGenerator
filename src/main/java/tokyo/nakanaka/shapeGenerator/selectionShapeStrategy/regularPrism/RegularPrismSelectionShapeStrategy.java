@@ -14,18 +14,20 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.RegularPrism;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegularPrismSelectionShapeStrategy implements SelectionShapeStrategy {
+public class RegularPrismSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 	private static final String SIDE = "side";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
+
+	private RegularPrismSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, SIDE, HEIGHT, DIRECTION);
@@ -43,14 +45,12 @@ public class RegularPrismSelectionShapeStrategy implements SelectionShapeStrateg
 		map.put(DIRECTION, new DirectionCommandHandler(RegularPrismSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String leftClickDescription() {
 		return "Set center";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set radius by the center coordinates";
 	}
 

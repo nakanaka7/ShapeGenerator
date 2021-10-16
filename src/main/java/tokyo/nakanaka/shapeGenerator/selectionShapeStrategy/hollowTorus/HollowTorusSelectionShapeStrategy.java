@@ -13,17 +13,19 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.AxisCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy {
+public class HollowTorusSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String MAJOR_RADIUS = "major_radius";
 	private static final String OUTER_MINOR_RADIUS = "outer_minor_radius";
 	private static final String INNER_MINOR_RADIUS = "inner_minor_radius";
 	private static final String AXIS = "axis";
+
+	public HollowTorusSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, OUTER_MINOR_RADIUS, INNER_MINOR_RADIUS, AXIS);
@@ -41,14 +43,12 @@ public class HollowTorusSelectionShapeStrategy implements SelectionShapeStrategy
 		return map;
 	}
 
-	@Override
-	public String leftClickDescription() {
+	public static String leftClickDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}

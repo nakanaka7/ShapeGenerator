@@ -11,7 +11,6 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Triangle;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,11 +18,14 @@ import java.util.Map;
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
 
-public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
+public class TriangleSelectionShapeStrategy {
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 	private static final String POS3 = "pos3";
 	private static final String THICKNESS = "thickness";
+
+	public TriangleSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, POS1, POS1, POS2, POS3, THICKNESS);
@@ -39,14 +41,12 @@ public class TriangleSelectionShapeStrategy implements SelectionShapeStrategy {
 		map.put(THICKNESS, new LengthCommandHandler(THICKNESS, TriangleSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String leftClickDescription() {
 		return "Set pos1";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set pos2, pos3";
 	}
 

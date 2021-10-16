@@ -10,7 +10,6 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Tetrahedron;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,11 +17,14 @@ import java.util.Map;
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
 import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
 
-public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy {
+public class TetrahedronSelectionShapeStrategy {
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 	private static final String POS3 = "pos3";
 	private static final String POS4 = "pos4";
+
+	private TetrahedronSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, POS1, POS1, POS2, POS3, POS4);
@@ -36,14 +38,12 @@ public class TetrahedronSelectionShapeStrategy implements SelectionShapeStrategy
 		map.put(POS4, new PosCommandHandler(POS4, TetrahedronSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String leftClickDescription() {
 		return "Set pos1";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set pos2, pos3, pos4";
 	}
 

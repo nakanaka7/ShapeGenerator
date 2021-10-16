@@ -12,16 +12,18 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
+public class DiamondSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String WIDTH = "width";
 	private static final String HEIGHT = "height";
 	private static final String LENGTH = "length";
+
+	private DiamondSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, WIDTH, HEIGHT, LENGTH);
@@ -35,14 +37,12 @@ public class DiamondSelectionShapeStrategy implements SelectionShapeStrategy {
 		map.put(LENGTH, new LengthCommandHandler(LENGTH, DiamondSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String leftClickDescription() {
 		return "Set center";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set width, height, length";
 	}
 

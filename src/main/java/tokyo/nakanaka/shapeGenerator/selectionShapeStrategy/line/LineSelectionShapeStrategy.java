@@ -12,12 +12,13 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
+public class LineSelectionShapeStrategy {
+	private LineSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, "pos1", "pos1", "pos2", "thickness");
@@ -32,14 +33,12 @@ public class LineSelectionShapeStrategy implements SelectionShapeStrategy {
 		map.put("thickness", new LengthCommandHandler("thickness", LineSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String leftClickDescription() {
 		return "Set pos1";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set pos2";
 	}
 

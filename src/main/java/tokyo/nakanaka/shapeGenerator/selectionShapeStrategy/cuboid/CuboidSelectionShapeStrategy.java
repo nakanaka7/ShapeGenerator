@@ -8,12 +8,14 @@ import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
+public class CuboidSelectionShapeStrategy {
+	private CuboidSelectionShapeStrategy(){
+	}
+
 	private static final String POS1 = "pos1";
 	private static final String POS2 = "pos2";
 
@@ -31,17 +33,14 @@ public class CuboidSelectionShapeStrategy implements SelectionShapeStrategy {
 		map.put(POS2, new PosCommandHandler(POS2, CuboidSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String  leftClickDescription() {
 		return "Set pos1";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set pos2";
 	}
-
 
 	/**
 	 * Update the selection data on left block click

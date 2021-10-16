@@ -15,17 +15,19 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy {
+public class HollowConeSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
+
+	private HollowConeSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, HEIGHT, DIRECTION);
@@ -43,14 +45,12 @@ public class HollowConeSelectionShapeStrategy implements SelectionShapeStrategy 
 		return map;
 	}
 
-	@Override
-	public String leftClickDescription() {
+	public static String leftClickDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}

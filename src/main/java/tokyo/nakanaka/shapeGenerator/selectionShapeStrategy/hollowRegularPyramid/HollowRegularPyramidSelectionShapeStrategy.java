@@ -27,6 +27,9 @@ public class HollowRegularPyramidSelectionShapeStrategy implements SelectionShap
     private static final String HEIGHT = "height";
     private static final String DIRECTION = "direction";
 
+    public HollowRegularPyramidSelectionShapeStrategy(){
+    }
+
     public static SelectionData newSelectionData(World world) {
         SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, SIDE, HEIGHT, DIRECTION);
         selData.setExtraData(SIDE, 3);

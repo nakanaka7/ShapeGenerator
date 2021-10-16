@@ -13,14 +13,16 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SphereSelectionShapeStrategy implements SelectionShapeStrategy {
+public class SphereSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
+
+	private SphereSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		return new SelectionData(world, CENTER, CENTER, RADIUS);
@@ -32,14 +34,12 @@ public class SphereSelectionShapeStrategy implements SelectionShapeStrategy {
 		map.put(RADIUS, new LengthCommandHandler(RADIUS, SphereSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String leftClickDescription() {
 		return "Set center";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set radius by the center coordinates";
 	}
 

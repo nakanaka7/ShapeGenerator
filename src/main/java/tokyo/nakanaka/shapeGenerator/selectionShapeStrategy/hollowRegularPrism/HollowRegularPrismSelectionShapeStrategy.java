@@ -13,19 +13,21 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.HollowRegularPrism;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSubCommandHandler.SideCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeStrategy {
+public class HollowRegularPrismSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
 	private static final String SIDE = "side";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
+
+	private HollowRegularPrismSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, SIDE, HEIGHT, DIRECTION);
@@ -45,14 +47,12 @@ public class HollowRegularPrismSelectionShapeStrategy implements SelectionShapeS
 		return map;
 	}
 
-	@Override
-	public String leftClickDescription() {
+	public static String leftClickDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		// TODO Auto-generated method stub
 		return null;
 	}

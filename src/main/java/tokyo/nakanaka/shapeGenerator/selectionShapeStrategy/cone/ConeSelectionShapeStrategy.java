@@ -15,16 +15,18 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
+public class ConeSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
+
+	private ConeSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, HEIGHT, DIRECTION);
@@ -41,13 +43,11 @@ public class ConeSelectionShapeStrategy implements SelectionShapeStrategy {
 		return map;
 	}
 
-	@Override
-	public String leftClickDescription() {
+	public static String leftClickDescription() {
 		return "Set center";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set radius and height";
 	}
 

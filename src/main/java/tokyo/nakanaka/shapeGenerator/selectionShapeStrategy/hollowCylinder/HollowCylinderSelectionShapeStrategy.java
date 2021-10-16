@@ -14,17 +14,19 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowCylinderSelectionShapeStrategy implements SelectionShapeStrategy {
+public class HollowCylinderSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
+
+	private HollowCylinderSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, HEIGHT, DIRECTION);
@@ -42,13 +44,11 @@ public class HollowCylinderSelectionShapeStrategy implements SelectionShapeStrat
 		return map;
 	}
 
-	@Override
-	public String leftClickDescription() {
+	public static String leftClickDescription() {
 		return "Set center";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set outer_radius, inner_radius, and height";
 	}
 

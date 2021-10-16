@@ -13,16 +13,18 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.AxisCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
 import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
+public class TorusSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String MAJOR_RADIUS = "major_radius";
 	private static final String MINOR_RADIUS = "minor_radius";
 	private static final String AXIS = "axis";
+
+	private TorusSelectionShapeStrategy(){
+	}
 
 	public static SelectionData newSelectionData(World world) {
 		SelectionData selData = new SelectionData(world, CENTER, CENTER, MAJOR_RADIUS, MINOR_RADIUS, AXIS);
@@ -38,14 +40,12 @@ public class TorusSelectionShapeStrategy implements SelectionShapeStrategy {
 		map.put(AXIS, new AxisCommandHandler(TorusSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
-	
-	@Override
-	public String leftClickDescription() {
+
+	public static String leftClickDescription() {
 		return "Set center";
 	}
 
-	@Override
-	public String rightClickDescription() {
+	public static String rightClickDescription() {
 		return "Set major_radius, minor_radius";
 	}
 
