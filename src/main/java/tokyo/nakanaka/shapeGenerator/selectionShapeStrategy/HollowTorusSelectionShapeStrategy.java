@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.hollowTorus;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.World;
@@ -10,9 +10,6 @@ import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import tokyo.nakanaka.shapeGenerator.math.region3D.HollowTorus;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.AxisCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;

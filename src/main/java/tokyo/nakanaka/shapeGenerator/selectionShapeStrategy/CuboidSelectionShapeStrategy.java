@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboid;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.math.BlockVector3D;
@@ -7,7 +7,6 @@ import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;

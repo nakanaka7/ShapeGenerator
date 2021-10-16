@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cone;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Direction;
@@ -12,9 +12,6 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Cone;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
 
 import java.util.HashMap;
 import java.util.Map;

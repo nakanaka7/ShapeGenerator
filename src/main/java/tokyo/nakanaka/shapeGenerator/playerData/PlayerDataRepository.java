@@ -4,7 +4,7 @@ import tokyo.nakanaka.Player;
 import tokyo.nakanaka.World;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SelectionShape;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.cuboid.CuboidSelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.CuboidSelectionShapeStrategy;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.hollowCylinder;
+package tokyo.nakanaka.shapeGenerator.selectionShapeStrategy;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.Direction;
@@ -8,24 +8,22 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
-import tokyo.nakanaka.shapeGenerator.math.region3D.HollowCylinder;
+import tokyo.nakanaka.shapeGenerator.math.region3D.HollowCone;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.DirectionCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.LengthCommandHandler;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.PosCommandHandler;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
+import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowCylinderSelectionShapeStrategy {
+public class HollowConeSelectionShapeStrategy {
 	private static final String CENTER = "center";
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	private HollowCylinderSelectionShapeStrategy(){
+	private HollowConeSelectionShapeStrategy(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -36,20 +34,22 @@ public class HollowCylinderSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, HollowCylinderSelectionShapeStrategy::newSelectionData));
-		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowCylinderSelectionShapeStrategy::newSelectionData));
-		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowCylinderSelectionShapeStrategy::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowCylinderSelectionShapeStrategy::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(HollowCylinderSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(HollowConeSelectionShapeStrategy::newSelectionData));
 		return map;
 	}
 
 	public static String leftClickDescription() {
-		return "Set center";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public static String rightClickDescription() {
-		return "Set outer_radius, inner_radius, and height";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
@@ -98,7 +98,7 @@ public class HollowCylinderSelectionShapeStrategy {
 
 	/**
 	 * @throws IllegalStateException if the center, outer radius or innter radius
-	 * is not specified, outer radius <= 0, inner radius <= 0, or inner radius >= outer radius
+	 * is not specified, or inner radius >= outer radius
 	 */
 	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
@@ -109,11 +109,15 @@ public class HollowCylinderSelectionShapeStrategy {
 		if(center == null || outerRadius == null || innerRadius == null || height == null || dir == null) {
 			throw new IllegalStateException();
 		}
+		if(outerRadius <= 0 || innerRadius <= 0){
+			throw new IllegalStateException();
+		}
 		if(innerRadius >= outerRadius) {
 			throw new IllegalStateException();
 		}
-		Region3D region = new HollowCylinder(outerRadius, innerRadius, height);
-		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, new Cuboid(outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0));
+		Region3D region = new HollowCone(outerRadius, innerRadius, height);
+		RegionBound bound = new CuboidBound(outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0);
+		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
 		switch(dir) {
 		case NORTH -> sel = sel.createRotated(Axis.Y, 180);
 		case SOUTH -> {}
@@ -124,5 +128,5 @@ public class HollowCylinderSelectionShapeStrategy {
 		}
 		return sel.createShifted(center).withOffset(selData.getOffset());
 	}
-
+	
 }
