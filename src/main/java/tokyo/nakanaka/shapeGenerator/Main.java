@@ -307,7 +307,7 @@ public class Main {
 		}
 		//print the selection message
 		List<String> lines = MessageUtils.selectionMessage(LogColor.GOLD, selShape, selData);
-		lines.stream().forEach(player::print);
+		lines.forEach(player::print);
 	}
 		
 }
