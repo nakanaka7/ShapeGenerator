@@ -16,14 +16,14 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSub
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegularPrismSelectionShapeStrategy {
+public class RegularPrismSelection {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 	private static final String SIDE = "side";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	private RegularPrismSelectionShapeStrategy(){
+	private RegularPrismSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -35,11 +35,11 @@ public class RegularPrismSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, RegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(RADIUS, new LengthCommandHandler(RADIUS, RegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(SIDE, new SideCommandHandler(RegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, RegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(RegularPrismSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, RegularPrismSelection::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, RegularPrismSelection::newSelectionData));
+		map.put(SIDE, new SideCommandHandler(RegularPrismSelection::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, RegularPrismSelection::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(RegularPrismSelection::newSelectionData));
 		return map;
 	}
 

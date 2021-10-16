@@ -14,13 +14,13 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiamondSelectionShapeStrategy {
+public class DiamondSelection {
 	private static final String CENTER = "center";
 	private static final String WIDTH = "width";
 	private static final String HEIGHT = "height";
 	private static final String LENGTH = "length";
 
-	private DiamondSelectionShapeStrategy(){
+	private DiamondSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -29,10 +29,10 @@ public class DiamondSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, DiamondSelectionShapeStrategy::newSelectionData));
-		map.put(WIDTH, new LengthCommandHandler(WIDTH, DiamondSelectionShapeStrategy::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, DiamondSelectionShapeStrategy::newSelectionData));
-		map.put(LENGTH, new LengthCommandHandler(LENGTH, DiamondSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, DiamondSelection::newSelectionData));
+		map.put(WIDTH, new LengthCommandHandler(WIDTH, DiamondSelection::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, DiamondSelection::newSelectionData));
+		map.put(LENGTH, new LengthCommandHandler(LENGTH, DiamondSelection::newSelectionData));
 		return map;
 	}
 

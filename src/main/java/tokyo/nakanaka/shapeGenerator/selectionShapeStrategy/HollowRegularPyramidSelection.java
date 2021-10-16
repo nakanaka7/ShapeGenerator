@@ -15,7 +15,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSub
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowRegularPyramidSelectionShapeStrategy implements SelectionShapeStrategy {
+public class HollowRegularPyramidSelection implements SelectionShapeStrategy {
     private static final String CENTER = "center";
     private static final String OUTER_RADIUS = "outer_radius";
     private static final String INNER_RADIUS = "inner_radius";
@@ -23,7 +23,7 @@ public class HollowRegularPyramidSelectionShapeStrategy implements SelectionShap
     private static final String HEIGHT = "height";
     private static final String DIRECTION = "direction";
 
-    public HollowRegularPyramidSelectionShapeStrategy(){
+    public HollowRegularPyramidSelection(){
     }
 
     public static SelectionData newSelectionData(World world) {
@@ -35,12 +35,12 @@ public class HollowRegularPyramidSelectionShapeStrategy implements SelectionShap
 
     public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
         Map<String, SubCommandHandler> map = new HashMap<>();
-        map.put(CENTER, new PosCommandHandler(CENTER, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(SIDE, new SideCommandHandler(HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(DIRECTION, new DirectionCommandHandler(HollowRegularPyramidSelectionShapeStrategy::newSelectionData));
+        map.put(CENTER, new PosCommandHandler(CENTER, HollowRegularPyramidSelection::newSelectionData));
+        map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowRegularPyramidSelection::newSelectionData));
+        map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowRegularPyramidSelection::newSelectionData));
+        map.put(SIDE, new SideCommandHandler(HollowRegularPyramidSelection::newSelectionData));
+        map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowRegularPyramidSelection::newSelectionData));
+        map.put(DIRECTION, new DirectionCommandHandler(HollowRegularPyramidSelection::newSelectionData));
         return map;
     }
 

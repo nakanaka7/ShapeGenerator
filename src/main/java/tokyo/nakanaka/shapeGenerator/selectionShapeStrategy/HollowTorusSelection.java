@@ -14,14 +14,14 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowTorusSelectionShapeStrategy {
+public class HollowTorusSelection {
 	private static final String CENTER = "center";
 	private static final String MAJOR_RADIUS = "major_radius";
 	private static final String OUTER_MINOR_RADIUS = "outer_minor_radius";
 	private static final String INNER_MINOR_RADIUS = "inner_minor_radius";
 	private static final String AXIS = "axis";
 
-	public HollowTorusSelectionShapeStrategy(){
+	public HollowTorusSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -32,11 +32,11 @@ public class HollowTorusSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, HollowTorusSelectionShapeStrategy::newSelectionData));
-		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, HollowTorusSelectionShapeStrategy::newSelectionData));
-		map.put(OUTER_MINOR_RADIUS, new LengthCommandHandler(OUTER_MINOR_RADIUS, HollowTorusSelectionShapeStrategy::newSelectionData));
-		map.put(INNER_MINOR_RADIUS, new LengthCommandHandler(INNER_MINOR_RADIUS, HollowTorusSelectionShapeStrategy::newSelectionData));
-		map.put(AXIS, new AxisCommandHandler(HollowTorusSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, HollowTorusSelection::newSelectionData));
+		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, HollowTorusSelection::newSelectionData));
+		map.put(OUTER_MINOR_RADIUS, new LengthCommandHandler(OUTER_MINOR_RADIUS, HollowTorusSelection::newSelectionData));
+		map.put(INNER_MINOR_RADIUS, new LengthCommandHandler(INNER_MINOR_RADIUS, HollowTorusSelection::newSelectionData));
+		map.put(AXIS, new AxisCommandHandler(HollowTorusSelection::newSelectionData));
 		return map;
 	}
 

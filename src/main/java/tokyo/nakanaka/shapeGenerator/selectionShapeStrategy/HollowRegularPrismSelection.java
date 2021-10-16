@@ -15,7 +15,7 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSub
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowRegularPrismSelectionShapeStrategy {
+public class HollowRegularPrismSelection {
 	private static final String CENTER = "center";
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
@@ -23,7 +23,7 @@ public class HollowRegularPrismSelectionShapeStrategy {
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	private HollowRegularPrismSelectionShapeStrategy(){
+	private HollowRegularPrismSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -35,12 +35,12 @@ public class HollowRegularPrismSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, HollowRegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowRegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowRegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(SIDE, new SideCommandHandler(HollowRegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowRegularPrismSelectionShapeStrategy::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(HollowRegularPrismSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, HollowRegularPrismSelection::newSelectionData));
+		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowRegularPrismSelection::newSelectionData));
+		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowRegularPrismSelection::newSelectionData));
+		map.put(SIDE, new SideCommandHandler(HollowRegularPrismSelection::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowRegularPrismSelection::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(HollowRegularPrismSelection::newSelectionData));
 		return map;
 	}
 

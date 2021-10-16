@@ -16,14 +16,14 @@ import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.regularPolygonSelSub
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegularPyramidSelectionShapeStrategy {
+public class RegularPyramidSelection {
     private static final String CENTER = "center";
     private static final String RADIUS = "radius";
     private static final String SIDE = "side";
     private static final String HEIGHT = "height";
     private static final String DIRECTION = "direction";
 
-    private RegularPyramidSelectionShapeStrategy(){
+    private RegularPyramidSelection(){
     }
 
     public static SelectionData newSelectionData(World world) {
@@ -35,11 +35,11 @@ public class RegularPyramidSelectionShapeStrategy {
 
     public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
         Map<String, SubCommandHandler> map = new HashMap<>();
-        map.put(CENTER, new PosCommandHandler(CENTER, RegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(RADIUS, new LengthCommandHandler(RADIUS, RegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(SIDE, new SideCommandHandler(RegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(HEIGHT, new LengthCommandHandler(HEIGHT, RegularPyramidSelectionShapeStrategy::newSelectionData));
-        map.put(DIRECTION, new DirectionCommandHandler(RegularPyramidSelectionShapeStrategy::newSelectionData));
+        map.put(CENTER, new PosCommandHandler(CENTER, RegularPyramidSelection::newSelectionData));
+        map.put(RADIUS, new LengthCommandHandler(RADIUS, RegularPyramidSelection::newSelectionData));
+        map.put(SIDE, new SideCommandHandler(RegularPyramidSelection::newSelectionData));
+        map.put(HEIGHT, new LengthCommandHandler(HEIGHT, RegularPyramidSelection::newSelectionData));
+        map.put(DIRECTION, new DirectionCommandHandler(RegularPyramidSelection::newSelectionData));
         return map;
     }
 

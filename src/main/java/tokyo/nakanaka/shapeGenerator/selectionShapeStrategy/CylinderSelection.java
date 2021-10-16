@@ -16,13 +16,13 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CylinderSelectionShapeStrategy {
+public class CylinderSelection {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	private CylinderSelectionShapeStrategy(){
+	private CylinderSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -33,10 +33,10 @@ public class CylinderSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, CylinderSelectionShapeStrategy::newSelectionData));
-		map.put(RADIUS, new LengthCommandHandler(RADIUS, CylinderSelectionShapeStrategy::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, CylinderSelectionShapeStrategy::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(CylinderSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, CylinderSelection::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, CylinderSelection::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, CylinderSelection::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(CylinderSelection::newSelectionData));
 		return map;
 	}
 

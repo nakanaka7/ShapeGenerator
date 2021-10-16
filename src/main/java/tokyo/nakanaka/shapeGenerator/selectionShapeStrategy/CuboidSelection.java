@@ -11,8 +11,8 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CuboidSelectionShapeStrategy {
-	private CuboidSelectionShapeStrategy(){
+public class CuboidSelection {
+	private CuboidSelection(){
 	}
 
 	private static final String POS1 = "pos1";
@@ -28,8 +28,8 @@ public class CuboidSelectionShapeStrategy {
 	 */
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap(){
 		Map<String,  SubCommandHandler> map = new HashMap<>();
-		map.put(POS1, new PosCommandHandler(POS1, CuboidSelectionShapeStrategy::newSelectionData));
-		map.put(POS2, new PosCommandHandler(POS2, CuboidSelectionShapeStrategy::newSelectionData));
+		map.put(POS1, new PosCommandHandler(POS1, CuboidSelection::newSelectionData));
+		map.put(POS2, new PosCommandHandler(POS2, CuboidSelection::newSelectionData));
 		return map;
 	}
 

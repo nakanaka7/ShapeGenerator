@@ -14,13 +14,13 @@ import tokyo.nakanaka.shapeGenerator.math.region3D.Torus;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TorusSelectionShapeStrategy {
+public class TorusSelection {
 	private static final String CENTER = "center";
 	private static final String MAJOR_RADIUS = "major_radius";
 	private static final String MINOR_RADIUS = "minor_radius";
 	private static final String AXIS = "axis";
 
-	private TorusSelectionShapeStrategy(){
+	private TorusSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -31,10 +31,10 @@ public class TorusSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, TorusSelectionShapeStrategy::newSelectionData));
-		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, TorusSelectionShapeStrategy::newSelectionData));
-		map.put(MINOR_RADIUS, new LengthCommandHandler(MINOR_RADIUS, TorusSelectionShapeStrategy::newSelectionData));
-		map.put(AXIS, new AxisCommandHandler(TorusSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, TorusSelection::newSelectionData));
+		map.put(MAJOR_RADIUS, new LengthCommandHandler(MAJOR_RADIUS, TorusSelection::newSelectionData));
+		map.put(MINOR_RADIUS, new LengthCommandHandler(MINOR_RADIUS, TorusSelection::newSelectionData));
+		map.put(AXIS, new AxisCommandHandler(TorusSelection::newSelectionData));
 		return map;
 	}
 

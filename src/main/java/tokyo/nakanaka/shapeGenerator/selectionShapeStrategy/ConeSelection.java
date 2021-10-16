@@ -8,7 +8,7 @@ import tokyo.nakanaka.math.Vector3D;
 import tokyo.nakanaka.shapeGenerator.Selection;
 import tokyo.nakanaka.shapeGenerator.SelectionData;
 import tokyo.nakanaka.shapeGenerator.SubCommandHandler;
-import tokyo.nakanaka.shapeGenerator.math.region3D.HollowCone;
+import tokyo.nakanaka.shapeGenerator.math.region3D.Cone;
 import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
@@ -16,40 +16,36 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowConeSelectionShapeStrategy {
+public class ConeSelection {
 	private static final String CENTER = "center";
-	private static final String OUTER_RADIUS = "outer_radius";
-	private static final String INNER_RADIUS = "inner_radius";
+	private static final String RADIUS = "radius";
 	private static final String HEIGHT = "height";
 	private static final String DIRECTION = "direction";
 
-	private HollowConeSelectionShapeStrategy(){
+	private ConeSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
-		SelectionData selData = new SelectionData(world, CENTER, CENTER, OUTER_RADIUS, INNER_RADIUS, HEIGHT, DIRECTION);
+		SelectionData selData = new SelectionData(world, CENTER, CENTER, RADIUS, HEIGHT, DIRECTION);
 		selData.setExtraData(DIRECTION, Direction.UP);
 		return selData;
 	}
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, HollowConeSelectionShapeStrategy::newSelectionData));
-		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowConeSelectionShapeStrategy::newSelectionData));
-		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowConeSelectionShapeStrategy::newSelectionData));
-		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, HollowConeSelectionShapeStrategy::newSelectionData));
-		map.put(DIRECTION, new DirectionCommandHandler(HollowConeSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, ConeSelection::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, ConeSelection::newSelectionData));
+		map.put(HEIGHT, new LengthCommandHandler(HEIGHT, ConeSelection::newSelectionData));
+		map.put(DIRECTION, new DirectionCommandHandler(ConeSelection::newSelectionData));
 		return map;
 	}
 
 	public static String leftClickDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Set center";
 	}
 
 	public static String rightClickDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Set radius and height";
 	}
 
 	public static void onLeftClick(SelectionData selData, BlockVector3D blockPos) {
@@ -75,16 +71,15 @@ public class HollowConeSelectionShapeStrategy {
 		double dx = pos.getX() - center.getX();
 		double dy = pos.getY() - center.getY();
 		double dz = pos.getZ() - center.getZ();
-		double outerRadius;
+		double radius;
 		double height;
 		Direction dir = (Direction)selData.getExtraData(DIRECTION);
-		outerRadius = switch(dir) {
+		radius = switch(dir) {
 			case NORTH, SOUTH -> Math.max(Math.abs(dx), Math.abs(dy)) + 0.5;
 			case EAST, WEST -> Math.max(Math.abs(dy), Math.abs(dz)) + 0.5;
 			case UP, DOWN -> Math.max(Math.abs(dz), Math.abs(dx)) + 0.5;
 		};
-		selData.setExtraData(OUTER_RADIUS, outerRadius);
-		selData.setExtraData(INNER_RADIUS, outerRadius - 1);
+		selData.setExtraData(RADIUS, radius);
 		height = switch(dir) {
 			case NORTH -> Math.max(-dz + 0.5, 0);
 			case SOUTH -> Math.max(dz + 0.5, 0);
@@ -96,27 +91,24 @@ public class HollowConeSelectionShapeStrategy {
 		selData.setExtraData(HEIGHT, height);
 	}
 
-	/**
-	 * @throws IllegalStateException if the center, outer radius or innter radius
-	 * is not specified, or inner radius >= outer radius
-	 */
+	 /**
+	  * @param selData a selection data
+	  * @throws IllegalStateException if the center, radius, height or direction is not specified,
+	  * or the radius or height is less than or equals to 0
+	  */
 	public static Selection buildSelection(SelectionData selData) {
 		var center = (Vector3D)selData.getExtraData(CENTER);
-		var outerRadius = (Double)selData.getExtraData(OUTER_RADIUS);
-		var innerRadius = (Double)selData.getExtraData(INNER_RADIUS);
+		var radius = (Double)selData.getExtraData(RADIUS);
 		var height = (Double)selData.getExtraData(HEIGHT);
 		var dir = (Direction)selData.getExtraData(DIRECTION);
-		if(center == null || outerRadius == null || innerRadius == null || height == null || dir == null) {
+		if(center == null || radius == null || height == null || dir == null) {
 			throw new IllegalStateException();
 		}
-		if(outerRadius <= 0 || innerRadius <= 0){
+		if(radius <= 0 || height <= 0) {
 			throw new IllegalStateException();
 		}
-		if(innerRadius >= outerRadius) {
-			throw new IllegalStateException();
-		}
-		Region3D region = new HollowCone(outerRadius, innerRadius, height);
-		RegionBound bound = new CuboidBound(outerRadius, outerRadius, height, -outerRadius, -outerRadius, 0);
+		Region3D region = new Cone(radius, height);
+		RegionBound bound = new CuboidBound(radius, radius, height, -radius, -radius, 0);
 		Selection sel = new Selection(selData.world(), Vector3D.ZERO, region, bound);
 		switch(dir) {
 		case NORTH -> sel = sel.createRotated(Axis.Y, 180);

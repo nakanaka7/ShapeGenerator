@@ -14,11 +14,11 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SphereSelectionShapeStrategy {
+public class SphereSelection {
 	private static final String CENTER = "center";
 	private static final String RADIUS = "radius";
 
-	private SphereSelectionShapeStrategy(){
+	private SphereSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -27,8 +27,8 @@ public class SphereSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, SphereSelectionShapeStrategy::newSelectionData));
-		map.put(RADIUS, new LengthCommandHandler(RADIUS, SphereSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, SphereSelection::newSelectionData));
+		map.put(RADIUS, new LengthCommandHandler(RADIUS, SphereSelection::newSelectionData));
 		return map;
 	}
 

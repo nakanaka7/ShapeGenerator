@@ -14,12 +14,12 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.SphereBound;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HollowSphereSelectionShapeStrategy {
+public class HollowSphereSelection {
 	private static final String CENTER = "center";
 	private static final String OUTER_RADIUS = "outer_radius";
 	private static final String INNER_RADIUS = "inner_radius";
 
-	public HollowSphereSelectionShapeStrategy(){
+	public HollowSphereSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -28,9 +28,9 @@ public class HollowSphereSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put(CENTER, new PosCommandHandler(CENTER, HollowSphereSelectionShapeStrategy::newSelectionData));
-		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowSphereSelectionShapeStrategy::newSelectionData));
-		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowSphereSelectionShapeStrategy::newSelectionData));
+		map.put(CENTER, new PosCommandHandler(CENTER, HollowSphereSelection::newSelectionData));
+		map.put(OUTER_RADIUS, new LengthCommandHandler(OUTER_RADIUS, HollowSphereSelection::newSelectionData));
+		map.put(INNER_RADIUS, new LengthCommandHandler(INNER_RADIUS, HollowSphereSelection::newSelectionData));
 		return map;
 	}
 

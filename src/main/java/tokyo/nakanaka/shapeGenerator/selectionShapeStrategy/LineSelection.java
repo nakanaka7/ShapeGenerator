@@ -14,8 +14,8 @@ import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LineSelectionShapeStrategy {
-	private LineSelectionShapeStrategy(){
+public class LineSelection {
+	private LineSelection(){
 	}
 
 	public static SelectionData newSelectionData(World world) {
@@ -26,9 +26,9 @@ public class LineSelectionShapeStrategy {
 
 	public static Map<String, SubCommandHandler> selSubCommandHandlerMap() {
 		Map<String, SubCommandHandler> map = new HashMap<>();
-		map.put("pos1", new PosCommandHandler("pos1", LineSelectionShapeStrategy::newSelectionData));
-		map.put("pos2", new PosCommandHandler("pos2", LineSelectionShapeStrategy::newSelectionData));
-		map.put("thickness", new LengthCommandHandler("thickness", LineSelectionShapeStrategy::newSelectionData));
+		map.put("pos1", new PosCommandHandler("pos1", LineSelection::newSelectionData));
+		map.put("pos2", new PosCommandHandler("pos2", LineSelection::newSelectionData));
+		map.put("thickness", new LengthCommandHandler("thickness", LineSelection::newSelectionData));
 		return map;
 	}
 
