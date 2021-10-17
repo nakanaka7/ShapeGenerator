@@ -70,6 +70,7 @@ import java.util.Map;
 @PublicAPI
 public class Main {
 	public static final String SG = "/sg";
+	private CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 	private PlayerDataRepository playerDataRepository;
 	private Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap = new HashMap<>();
 	private Map<SelectionShape, LeftClickHandler> leftClickHandlerMap = new HashMap<>();
@@ -185,37 +186,37 @@ public class Main {
 		//
 		List<SelectionShape> selShapeList = dataCreatorMap.keySet().stream().toList();
 		this.playerDataRepository = new PlayerDataRepository();
-		this.cmdExecutorMap.put(SgSublabel.HELP, new HelpCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.HELP, new HelpCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.HELP, new HelpTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.VERSION, new VersionCommandExecutor(new SemVer(1, 2, 0)));
+		this.cmdExecutorMap.put(SgSublabel.VERSION, new VersionCommandExecutor(this.cmdLogColor, new SemVer(1, 2, 0)));
 		this.tabCompleterMap.put(SgSublabel.VERSION, new VersionTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.WAND, new WandCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.WAND, new WandCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.WAND, new WandTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.SHAPE, new ShapeCommandExecutor(dataCreatorMap));
+		this.cmdExecutorMap.put(SgSublabel.SHAPE, new ShapeCommandExecutor(this.cmdLogColor, dataCreatorMap));
 		this.tabCompleterMap.put(SgSublabel.SHAPE, new ShapeTabCompleter(selShapeList));
-		this.cmdExecutorMap.put(SgSublabel.SEL, new SelCommandExecutor(dataCreatorMap, properMapMap));
+		this.cmdExecutorMap.put(SgSublabel.SEL, new SelCommandExecutor(this.cmdLogColor, dataCreatorMap, properMapMap));
 		this.tabCompleterMap.put(SgSublabel.SEL, new SelTabCompleter(dataCreatorMap, properMapMap));
-		this.cmdExecutorMap.put(SgSublabel.GENR, new GenrCommandExecutor(selBuilderMap));
+		this.cmdExecutorMap.put(SgSublabel.GENR, new GenrCommandExecutor(this.cmdLogColor, selBuilderMap));
 		this.tabCompleterMap.put(SgSublabel.GENR, new GenrTabCompleter(blockIDListFactory));
-		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.PHY, new PhyCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.PHY, new PhyTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.SHIFT, new ShiftCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.SHIFT, new ShiftCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.SHIFT, new ShiftTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.SCALE, new ScaleCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.SCALE, new ScaleCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.SCALE, new ScaleTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.MIRROR, new MirrorCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.MIRROR, new MirrorCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.MIRROR, new MirrorTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.ROT, new RotCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.ROT, new RotCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.ROT, new RotTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.MAX, new MaxCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.MAX, new MaxCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.MAX, new MaxTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.MIN, new MinCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.MIN, new MinCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.MIN, new MinTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.DEL, new DelCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.DEL, new DelCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.DEL, new DelTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.UNDO, new UndoCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.UNDO, new UndoCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.UNDO, new UndoTabCompleter());
-		this.cmdExecutorMap.put(SgSublabel.REDO, new RedoCommandExecutor());
+		this.cmdExecutorMap.put(SgSublabel.REDO, new RedoCommandExecutor(this.cmdLogColor));
 		this.tabCompleterMap.put(SgSublabel.REDO, new RedoTabCompleter());
 	}
 
@@ -225,7 +226,6 @@ public class Main {
 	 * @param args arguments of the command line
 	 */
 	public void onSgCommand(CommandSender cmdSender, String[] args) {
-		CommandLogColor cmdLogColor = new CommandLogColor(LogColor.GOLD, LogColor.RED);
 		if(!(cmdSender instanceof Player player)) {
 			cmdSender.print(cmdLogColor.error() + "Player only command");
 			return;
@@ -245,7 +245,7 @@ public class Main {
 			return;
 		}
 		PlayerData playerData = this.playerDataRepository.preparePlayerData(player);
-		sgSubCmdExecutor.onCommand(playerData, player, subArgs, cmdLogColor);
+		sgSubCmdExecutor.onCommand(playerData, player, subArgs);
 	}
 
 	/**
