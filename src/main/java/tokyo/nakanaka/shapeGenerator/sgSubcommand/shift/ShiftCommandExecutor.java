@@ -11,9 +11,14 @@ import tokyo.nakanaka.shapeGenerator.command.ShiftCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class ShiftCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public ShiftCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.SHIFT + " " + String.join(" ", ShiftConstants.HELP.parameterSyntaxes());
         if(args.length != 2) {
             player.print(cmdLogColor.error() + "Usage: " + usage);

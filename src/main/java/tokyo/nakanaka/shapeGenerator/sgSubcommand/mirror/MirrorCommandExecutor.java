@@ -10,9 +10,14 @@ import tokyo.nakanaka.shapeGenerator.command.MirrorCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class MirrorCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public MirrorCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.MIRROR + " " + String.join(" ", MirrorConstants.HELP.parameterSyntaxes());
         if(args.length != 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);

@@ -9,14 +9,16 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import java.util.Map;
 
 public class GenrCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
     private Map<SelectionShape, SelectionBuilder> selBuilderMap;
 
-    public GenrCommandExecutor(Map<SelectionShape, SelectionBuilder> selBuilderMap){
+    public GenrCommandExecutor(CommandLogColor cmdLogColor, Map<SelectionShape, SelectionBuilder> selBuilderMap){
+        this.cmdLogColor = cmdLogColor;
         this.selBuilderMap = selBuilderMap;
     }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.GENR + " " + String.join(" ", GenrConstants.HELP.parameterSyntaxes());
         if(args.length != 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);

@@ -5,9 +5,14 @@ import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class UndoCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public UndoCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.UNDO + " " + String.join(" ", UndoConstants.HELP.parameterSyntaxes());
         if(args.length > 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);

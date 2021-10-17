@@ -10,9 +10,14 @@ import tokyo.nakanaka.shapeGenerator.command.MinCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class MinCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public MinCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         //check args length
         String usage = Main.SG + " " + SgSublabel.MIN + " " + String.join(" ", MinConstants.HELP.parameterSyntaxes());
         if(args.length != 2) {

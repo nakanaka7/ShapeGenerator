@@ -33,9 +33,11 @@ import java.util.Map;
 import static tokyo.nakanaka.shapeGenerator.SgSublabel.*;
 
 public class HelpCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
     private LinkedHashMap<String, CommandHelp> cmdHelpMap = new LinkedHashMap<>();
 
-    public HelpCommandExecutor() {
+    public HelpCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
         this.cmdHelpMap.put(HELP, HelpConstants.HELP);
         this.cmdHelpMap.put(VERSION, VersionConstants.HELP);
         this.cmdHelpMap.put(WAND, WandConstants.HELP);
@@ -55,7 +57,7 @@ public class HelpCommandExecutor implements SgSubcommandExecutor {
     }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = "/sg help [subcommand]";
         if(args.length == 0) {
             String[] labels = new String[]{"/sg"};

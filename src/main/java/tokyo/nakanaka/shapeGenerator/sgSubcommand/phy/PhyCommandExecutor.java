@@ -8,9 +8,14 @@ import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class PhyCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public PhyCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.PHY + " " + String.join(" ", PhyConstants.HELP.parameterSyntaxes());
         String usageMsg = cmdLogColor.error() + "Usage: " + usage;
         if(args.length != 1) {

@@ -8,18 +8,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SelCommandExecutor implements SgSubcommandExecutor {
-
+    private CommandLogColor cmdLogColor;
     private Map<String, SubCommandHandler> commonMap = new HashMap<>();
     private Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap = new HashMap<>();
 
-    public SelCommandExecutor(Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap,
-                              Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap){
+    public SelCommandExecutor(CommandLogColor cmdLogColor,
+            Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap,
+            Map<SelectionShape, Map<String, SubCommandHandler>> properMapMap){
+        this.cmdLogColor = cmdLogColor;
         this.commonMap.put("offset", new OffsetCommandHandler(dataCreatorMap));
         this.commonMap.put("reset", new ResetCommandHandler(dataCreatorMap));
         this.properMapMap = properMapMap;
     }
 
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.SEL + " " + String.join(" ", SelConstants.HELP.parameterSyntaxes());
         SelectionShape shape = playerData.getSelectionShape();
         if(args.length == 0) {

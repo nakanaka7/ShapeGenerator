@@ -8,14 +8,16 @@ import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 import java.util.Map;
 
 public class ShapeCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
     private Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap;
 
-    public ShapeCommandExecutor(Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap){
+    public ShapeCommandExecutor(CommandLogColor cmdLogColor, Map<SelectionShape, InitialSelectionDataCreator> dataCreatorMap){
+        this.cmdLogColor = cmdLogColor;
         this.dataCreatorMap = dataCreatorMap;
     }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.SHAPE + " " + String.join(" ", ShapeConstants.HELP.parameterSyntaxes());
         if(args.length != 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);

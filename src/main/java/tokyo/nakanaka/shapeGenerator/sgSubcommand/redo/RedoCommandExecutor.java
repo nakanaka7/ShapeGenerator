@@ -5,9 +5,14 @@ import tokyo.nakanaka.shapeGenerator.*;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class RedoCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public RedoCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.REDO + " " + String.join(" ", RedoConstants.HELP.parameterSyntaxes());
         String usageMsg = cmdLogColor.error() + "Usage: " + usage;
         if(args.length > 1) {

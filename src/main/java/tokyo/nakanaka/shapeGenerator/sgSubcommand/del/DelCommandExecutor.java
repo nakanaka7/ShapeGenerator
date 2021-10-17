@@ -12,9 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DelCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public DelCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.DEL + " " + String.join(" ", DelConstants.HELP.parameterSyntaxes());
         if(args.length > 1) {
             player.print(cmdLogColor.error() + "Usage: " + usage);

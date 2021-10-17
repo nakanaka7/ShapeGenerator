@@ -10,9 +10,14 @@ import tokyo.nakanaka.shapeGenerator.command.RotateCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class RotCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public RotCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.ROT + " " + String.join(" ", RotConstants.HELP.parameterSyntaxes());
         if(args.length != 2) {
             player.print(cmdLogColor.error() + "Usage: " + usage);

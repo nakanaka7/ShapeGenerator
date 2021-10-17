@@ -10,9 +10,14 @@ import tokyo.nakanaka.shapeGenerator.command.MaxCommand;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class MaxCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public MaxCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         //check args length
         String usage = Main.SG + " " + SgSublabel.MAX + " " + String.join(" ", MaxConstants.HELP.parameterSyntaxes());
         if(args.length != 2) {

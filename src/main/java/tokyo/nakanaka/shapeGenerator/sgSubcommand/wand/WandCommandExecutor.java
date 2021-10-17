@@ -8,9 +8,14 @@ import tokyo.nakanaka.shapeGenerator.SgSublabel;
 import tokyo.nakanaka.shapeGenerator.playerData.PlayerData;
 
 public class WandCommandExecutor implements SgSubcommandExecutor {
+    private CommandLogColor cmdLogColor;
+
+    public WandCommandExecutor(CommandLogColor cmdLogColor) {
+        this.cmdLogColor = cmdLogColor;
+    }
 
     @Override
-    public void onCommand(PlayerData playerData, Player player, String[] args, CommandLogColor cmdLogColor) {
+    public void onCommand(PlayerData playerData, Player player, String[] args) {
         String usage = Main.SG + " " + SgSublabel.WAND + " " + String.join(" ", WandConstants.HELP.parameterSyntaxes());
         if(args.length != 0) {
             player.print(cmdLogColor.error() + "Usage: " + usage);
