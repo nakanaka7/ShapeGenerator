@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import tokyo.nakanaka.annotation.PrivateAPI;
-import tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.SelectionShapeStrategy;
+import tokyo.nakanaka.shapeGenerator.selectionShape.SelectionShapeStrategy;
 
 /**
  * A repository of selection shape strategies
