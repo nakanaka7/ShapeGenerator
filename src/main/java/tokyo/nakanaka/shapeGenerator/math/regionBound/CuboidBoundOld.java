@@ -1,7 +1,7 @@
 package tokyo.nakanaka.shapeGenerator.math.regionBound;
 
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.max;
-import static tokyo.nakanaka.shapeGenerator.selectionShapeStrategy.MaxMinCalculator.min;
+import static tokyo.nakanaka.shapeGenerator.selectionShape.MaxMinCalculator.max;
+import static tokyo.nakanaka.shapeGenerator.selectionShape.MaxMinCalculator.min;
 
 import tokyo.nakanaka.Axis;
 import tokyo.nakanaka.math.LinearTransformation;

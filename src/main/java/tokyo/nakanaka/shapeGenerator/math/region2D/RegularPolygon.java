@@ -17,6 +17,7 @@ public class RegularPolygon implements Region2D {
 	/**
 	 * @param radius the radius of the regular polygon
 	 * @param vertexNumber the vertex numbers
+	 * @throws IllegalArgumentException if the radius is smaller than 0 or the vertex number is smaller than 3
 	 */
 	public RegularPolygon(double radius, int vertexNumber) {
 		if(radius < 0 || vertexNumber < 3) {

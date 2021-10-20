@@ -5,8 +5,7 @@ import tokyo.nakanaka.World;
 import tokyo.nakanaka.annotation.PrivateAPI;
 import tokyo.nakanaka.annotation.PublicAPI;
 import tokyo.nakanaka.math.Vector3D;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Cuboid;
-import tokyo.nakanaka.shapeGenerator.math.region3D.Region3D;
+import tokyo.nakanaka.shapeGenerator.math.region3D.*;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.CuboidBound;
 import tokyo.nakanaka.shapeGenerator.math.regionBound.RegionBound;
 
@@ -144,5 +143,53 @@ public class Selection {
 		RegionBound newBound = this.bound.createRotated(axis, degree, this.offset);
 		return new Selection(this.world, this.offset, newRegion, newBound);
 	}
-	
+
+	@PrivateAPI
+	public Selection createMaxLimited(Axis axis, double max){
+		Region3D newRegion = switch (axis){
+			case X -> new LogicalConjunctRegion3D(this.region, new MaxXRegion3D(max));
+			case Y -> new LogicalConjunctRegion3D(this.region, new MaxYRegion3D(max));
+			case Z -> new LogicalConjunctRegion3D(this.region, new MaxZRegion3D(max));
+		};
+		double ubx = this.bound.upperBoundX();
+		double uby = this.bound.upperBoundY();
+		double ubz = this.bound.upperBoundZ();
+		double lbx = this.bound.lowerBoundX();
+		double lby = this.bound.lowerBoundY();
+		double lbz = this.bound.lowerBoundZ();
+		if(axis == Axis.X){
+			ubx = max;
+		}else if(axis == Axis.Y){
+			uby = max;
+		}else if(axis == Axis.Z) {
+			ubz = max;
+		}
+		RegionBound newBound = new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+		return  new Selection(this.world, this.offset, newRegion, newBound);
+	}
+
+	@PrivateAPI
+	public Selection createMinLimited(Axis axis, double min){
+		Region3D newRegion = switch (axis){
+			case X -> new LogicalConjunctRegion3D(this.region, new MinXRegion3D(min));
+			case Y -> new LogicalConjunctRegion3D(this.region, new MinYRegion3D(min));
+			case Z -> new LogicalConjunctRegion3D(this.region, new MinZRegion3D(min));
+		};
+		double ubx = this.bound.upperBoundX();
+		double uby = this.bound.upperBoundY();
+		double ubz = this.bound.upperBoundZ();
+		double lbx = this.bound.lowerBoundX();
+		double lby = this.bound.lowerBoundY();
+		double lbz = this.bound.lowerBoundZ();
+		if(axis == Axis.X){
+			lbx = min;
+		}else if(axis == Axis.Y){
+			lby = min;
+		}else if(axis == Axis.Z) {
+			lbz = min;
+		}
+		RegionBound newBound = new CuboidBound(ubx, uby, ubz, lbx, lby, lbz);
+		return  new Selection(this.world, this.offset, newRegion, newBound);
+	}
+
 }

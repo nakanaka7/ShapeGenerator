@@ -14,15 +14,17 @@ public enum SelectionShape {
 	TRIANGLE("triangle"),
 	TETRAHEDRON("tetrahedron"),
 	REGULAR_PRISM("regular_prism"),
+	REGULAR_PYRAMID("regular_pyramid"),
 	HOLLOW_SPHERE("hollow_sphere"),
 	HOLLOW_CYLINDER("hollow_cylinder"),
 	HOLLOW_CONE("hollow_cone"),
 	HOLLOW_TORUS("hollow_torus"),
-	HOLLOW_REGULAR_PRISM("hollow_regular_prism");
-	
+	HOLLOW_REGULAR_PRISM("hollow_regular_prism"),
+	HOLLOW_REGULAR_PYRAMID("hollow_regular_pyramid");
+
 	private String name;
 	
-	private SelectionShape(String name) {
+	SelectionShape(String name) {
 		this.name = name;
 	}
 	
